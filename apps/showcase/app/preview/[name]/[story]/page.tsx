@@ -28,6 +28,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/atoms/tooltip/Tooltip";
+import { Hero231 } from "@/marketing/hero231/Hero231";
 import "../../../globals.css";
 
 function PreviewContent({ name, story }: { name: string; story: string }) {
@@ -171,6 +172,13 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
           </Tooltip>
         </TooltipProvider>
       );
+    case "hero231":
+      return (
+        <Hero231
+          title={alternate ? "A quieter way to introduce the room." : undefined}
+          kicker={alternate ? "Now booking spring" : undefined}
+        />
+      );
     default:
       return <Button>{name}</Button>;
   }
@@ -186,9 +194,10 @@ export default async function Preview({
   const { name, story } = await params;
   const query = await searchParams;
   const isDark = query.theme === "dark" || story === "ThemeComparison";
+  const isHero = name === "hero231";
   return (
     <main
-      className={`${isDark ? "dark" : ""} grid min-h-dvh place-items-center overflow-hidden bg-background p-6 text-foreground`}
+      className={`${isDark ? "dark" : ""} min-h-dvh overflow-auto bg-background text-foreground ${isHero ? "" : "grid place-items-center overflow-hidden p-6"}`}
     >
       <PreviewContent name={name} story={story} />
     </main>
