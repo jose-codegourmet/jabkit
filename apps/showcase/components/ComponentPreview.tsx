@@ -27,7 +27,7 @@ export function ComponentPreview({
         </button>
       </div>
       <div
-        className={`${dark ? "dark" : ""} aspect-[16/10] overflow-hidden bg-background`}
+        className={`${dark ? "dark" : ""} overflow-hidden bg-background ${name === "hero228" ? "min-h-[36rem]" : "aspect-[16/10]"}`}
       >
         <iframe
           title={`${name} ${story} preview`}

@@ -28,6 +28,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/atoms/tooltip/Tooltip";
+import { Hero228 } from "@/marketing/hero228/Hero228";
+import { hero228Mocks } from "@/marketing/hero228/Hero228.mocks";
 import "../../../globals.css";
 
 function PreviewContent({ name, story }: { name: string; story: string }) {
@@ -171,6 +173,14 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
           </Tooltip>
         </TooltipProvider>
       );
+    case "hero228":
+      return (
+        <div className="w-full">
+          <Hero228
+            {...(alternate ? hero228Mocks.studio : hero228Mocks.default)}
+          />
+        </div>
+      );
     default:
       return <Button>{name}</Button>;
   }
@@ -186,9 +196,10 @@ export default async function Preview({
   const { name, story } = await params;
   const query = await searchParams;
   const isDark = query.theme === "dark" || story === "ThemeComparison";
+  const isHero = name === "hero228";
   return (
     <main
-      className={`${isDark ? "dark" : ""} grid min-h-dvh place-items-center overflow-hidden bg-background p-6 text-foreground`}
+      className={`${isDark ? "dark" : ""} min-h-dvh bg-background text-foreground ${isHero ? "" : "grid place-items-center overflow-hidden p-6"}`}
     >
       <PreviewContent name={name} story={story} />
     </main>
