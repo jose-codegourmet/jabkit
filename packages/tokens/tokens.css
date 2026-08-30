@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --jk-background: oklch(0.985 0.002 250);
+  --jk-foreground: oklch(0.19 0.018 258);
+  --jk-card: oklch(1 0 0);
+  --jk-card-foreground: oklch(0.19 0.018 258);
+  --jk-popover: oklch(1 0 0);
+  --jk-popover-foreground: oklch(0.19 0.018 258);
+  --jk-primary: oklch(0.49 0.19 255);
+  --jk-primary-foreground: oklch(0.985 0.002 250);
+  --jk-secondary: oklch(0.94 0.015 250);
+  --jk-secondary-foreground: oklch(0.19 0.018 258);
+  --jk-accent: oklch(0.92 0.035 245);
+  --jk-accent-foreground: oklch(0.19 0.018 258);
+  --jk-muted: oklch(0.955 0.008 250);
+  --jk-muted-foreground: oklch(0.49 0.02 258);
+  --jk-destructive: oklch(0.58 0.22 28);
+  --jk-destructive-foreground: oklch(0.985 0.002 250);
+  --jk-success: oklch(0.62 0.16 158);
+  --jk-success-foreground: oklch(0.985 0.002 250);
+  --jk-warning: oklch(0.77 0.15 80);
+  --jk-warning-foreground: oklch(0.19 0.018 258);
+  --jk-border: oklch(0.89 0.012 250);
+  --jk-input: oklch(0.89 0.012 250);
+  --jk-ring: oklch(0.49 0.19 255);
+  --jk-chart-1: oklch(0.62 0.2 255);
+  --jk-chart-2: oklch(0.62 0.16 158);
+  --jk-chart-3: oklch(0.67 0.16 55);
+  --jk-chart-4: oklch(0.65 0.18 315);
+  --jk-chart-5: oklch(0.7 0.15 195);
+  --jk-radius: 0.875rem;
+}
+
+.dark {
+  --jk-background: oklch(0.15 0.018 258);
+  --jk-foreground: oklch(0.96 0.006 250);
+  --jk-card: oklch(0.2 0.02 258);
+  --jk-card-foreground: oklch(0.96 0.006 250);
+  --jk-popover: oklch(0.2 0.02 258);
+  --jk-popover-foreground: oklch(0.96 0.006 250);
+  --jk-primary: oklch(0.72 0.16 245);
+  --jk-primary-foreground: oklch(0.15 0.018 258);
+  --jk-secondary: oklch(0.27 0.02 258);
+  --jk-secondary-foreground: oklch(0.96 0.006 250);
+  --jk-accent: oklch(0.3 0.05 250);
+  --jk-accent-foreground: oklch(0.96 0.006 250);
+  --jk-muted: oklch(0.25 0.02 258);
+  --jk-muted-foreground: oklch(0.72 0.015 250);
+  --jk-destructive: oklch(0.7 0.2 28);
+  --jk-destructive-foreground: oklch(0.15 0.018 258);
+  --jk-success: oklch(0.72 0.16 158);
+  --jk-success-foreground: oklch(0.15 0.018 258);
+  --jk-warning: oklch(0.83 0.14 80);
+  --jk-warning-foreground: oklch(0.15 0.018 258);
+  --jk-border: oklch(1 0 0 / 13%);
+  --jk-input: oklch(1 0 0 / 18%);
+  --jk-ring: oklch(0.72 0.16 245);
+  --jk-chart-1: oklch(0.72 0.16 245);
+  --jk-chart-2: oklch(0.72 0.16 158);
+  --jk-chart-3: oklch(0.78 0.15 80);
+  --jk-chart-4: oklch(0.74 0.17 315);
+  --jk-chart-5: oklch(0.72 0.14 195);
+}
+
+@theme inline {
+  --color-background: var(--jk-background);
+  --color-foreground: var(--jk-foreground);
+  --color-card: var(--jk-card);
+  --color-card-foreground: var(--jk-card-foreground);
+  --color-popover: var(--jk-popover);
+  --color-popover-foreground: var(--jk-popover-foreground);
+  --color-primary: var(--jk-primary);
+  --color-primary-foreground: var(--jk-primary-foreground);
+  --color-secondary: var(--jk-secondary);
+  --color-secondary-foreground: var(--jk-secondary-foreground);
+  --color-accent: var(--jk-accent);
+  --color-accent-foreground: var(--jk-accent-foreground);
+  --color-muted: var(--jk-muted);
+  --color-muted-foreground: var(--jk-muted-foreground);
+  --color-destructive: var(--jk-destructive);
+  --color-destructive-foreground: var(--jk-destructive-foreground);
+  --color-success: var(--jk-success);
+  --color-success-foreground: var(--jk-success-foreground);
+  --color-warning: var(--jk-warning);
+  --color-warning-foreground: var(--jk-warning-foreground);
+  --color-border: var(--jk-border);
+  --color-input: var(--jk-input);
+  --color-ring: var(--jk-ring);
+  --color-chart-1: var(--jk-chart-1);
+  --color-chart-2: var(--jk-chart-2);
+  --color-chart-3: var(--jk-chart-3);
+  --color-chart-4: var(--jk-chart-4);
+  --color-chart-5: var(--jk-chart-5);
+  --radius: var(--jk-radius);
+}

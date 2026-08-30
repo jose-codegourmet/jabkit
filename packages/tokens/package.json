@@ -1,0 +1,18 @@
+{
+  "name": "@jabkit/tokens",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    "./tokens.css": "./tokens.css",
+    "./tokens": "./tokens.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^4.2.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.2.1"
+  }
+}

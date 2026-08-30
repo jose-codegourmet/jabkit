@@ -1,0 +1,7 @@
+{
+  "componentsDir": "src/components/jabkit",
+  "alias": "@/components/jabkit",
+  "registry": "http://localhost:3000",
+  "formatter": "biome",
+  "theme": { "mode": "class", "provider": "next-themes" }
+}

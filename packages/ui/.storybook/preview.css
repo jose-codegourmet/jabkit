@@ -1,0 +1,6 @@
+@import "@jabkit/tokens/tokens.css";
+
+body {
+  background: var(--jk-background);
+  color: var(--jk-foreground);
+}

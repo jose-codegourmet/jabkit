@@ -1,0 +1,10 @@
+node_modules
+.next
+.turbo
+.DS_Store
+dist
+coverage
+**/storybook-static
+apps/showcase/public/r/*.json
+apps/verify/src/components/jabkit
+.jabkit
