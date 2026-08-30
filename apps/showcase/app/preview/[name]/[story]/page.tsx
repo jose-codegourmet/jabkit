@@ -30,6 +30,7 @@ import {
 } from "@/atoms/tooltip/Tooltip";
 import { Hero228 } from "@/marketing/hero228/Hero228";
 import { hero228Mocks } from "@/marketing/hero228/Hero228.mocks";
+import { Hero231 } from "@/marketing/hero231/Hero231";
 import { registryEntry } from "../../../../lib/registry";
 import "../../../globals.css";
 
@@ -179,6 +180,17 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
         <div className="w-full">
           <Hero228
             {...(alternate ? hero228Mocks.studio : hero228Mocks.default)}
+          />
+        </div>
+      );
+    case "hero231":
+      return (
+        <div className="w-full">
+          <Hero231
+            title={
+              alternate ? "A quieter way to introduce the room." : undefined
+            }
+            kicker={alternate ? "Now booking spring" : undefined}
           />
         </div>
       );
