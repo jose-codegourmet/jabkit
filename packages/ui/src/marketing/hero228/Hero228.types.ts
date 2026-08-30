@@ -11,10 +11,8 @@ export interface Hero228Portrait {
   alt: string;
 }
 
-export interface Hero228Props extends Omit<
-  HTMLAttributes<HTMLElement>,
-  "title"
-> {
+export interface Hero228Props
+  extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   headline?: Hero228HeadlinePart[];
   description?: string;
   portraits?: Hero228Portrait[];

@@ -15,12 +15,20 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: { ...hero228Mocks.default },
-  render: () => <Hero228 {...hero228Mocks.default} />,
+  render: () => (
+    <div className="bg-background text-foreground">
+      <Hero228 {...hero228Mocks.default} />
+    </div>
+  ),
 };
 
 export const Variants: Story = {
   args: { ...hero228Mocks.studio },
-  render: () => <Hero228 {...hero228Mocks.studio} />,
+  render: () => (
+    <div className="bg-background text-foreground">
+      <Hero228 {...hero228Mocks.studio} />
+    </div>
+  ),
 };
 
 export const ThemeComparison: Story = {

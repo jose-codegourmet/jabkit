@@ -52,7 +52,12 @@ const DEFAULT_PORTRAITS: Hero228Portrait[] = [
   },
 ];
 
-const TICK_COUNT = 52;
+const TICK_IDLE =
+  "repeating-linear-gradient(to right, var(--jk-border) 0 1px, transparent 1px 6px)";
+const TICK_ACTIVE =
+  "repeating-linear-gradient(to right, var(--jk-foreground) 0 1px, transparent 1px 6px)";
+const TICK_MAJOR =
+  "repeating-linear-gradient(to right, var(--jk-border) 0 1px, transparent 1px 30px)";
 const FALLBACK_TONES = [
   "from-primary/45 via-muted to-accent",
   "from-chart-2/45 via-muted to-secondary",
@@ -114,9 +119,7 @@ export function Hero228({
   const [hovered, setHovered] = useState(false);
   const [stopped, setStopped] = useState(false);
   const [nameVisible, setNameVisible] = useState(true);
-  const [displayedName, setDisplayedName] = useState(
-    portraits[0]?.name ?? "",
-  );
+  const [displayedName, setDisplayedName] = useState(portraits[0]?.name ?? "");
   const swipe = useRef<{ x: number; pointerId: number } | null>(null);
   const count = portraits.length;
   const current = portraits[index];
@@ -125,11 +128,11 @@ export function Hero228({
 
   useEffect(() => {
     if (!playing) return;
-    const timer = window.setTimeout(() => {
+    const timer = window.setInterval(() => {
       setIndex((value) => wrapIndex(value + 1, count));
     }, interval);
-    return () => window.clearTimeout(timer);
-  }, [playing, interval, count, index]);
+    return () => window.clearInterval(timer);
+  }, [playing, interval, count]);
 
   useEffect(() => {
     const nextName = current?.name ?? "";
@@ -150,7 +153,7 @@ export function Hero228({
     setIndex(wrapIndex(next, count));
   };
 
-  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+  const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (count < 2) return;
     if (event.key === "ArrowRight") {
       event.preventDefault();
@@ -170,11 +173,11 @@ export function Hero228({
     }
   };
 
-  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+  const onPointerDown = (event: PointerEvent<HTMLElement>) => {
     swipe.current = { x: event.clientX, pointerId: event.pointerId };
   };
 
-  const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
+  const onPointerUp = (event: PointerEvent<HTMLElement>) => {
     if (!swipe.current || swipe.current.pointerId !== event.pointerId) return;
     const delta = event.clientX - swipe.current.x;
     swipe.current = null;
@@ -228,11 +231,9 @@ export function Hero228({
         </p>
       </div>
 
-      <div
-        role="region"
+      <section
         aria-roledescription="carousel"
         aria-label="Portrait carousel"
-        tabIndex={0}
         onKeyDown={onKeyDown}
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
@@ -254,14 +255,13 @@ export function Hero228({
               <button
                 key={`${portrait.name}-${offset}`}
                 type="button"
-                tabIndex={-1}
                 aria-label={`Show ${portrait.name}`}
                 aria-current={active ? "true" : undefined}
                 onClick={() => {
                   if (!active) goTo(index + offset);
                 }}
                 className={cn(
-                  "absolute aspect-[3/4] w-[42%] max-w-56 overflow-hidden rounded-[--radius] border border-border bg-muted shadow-[0_24px_48px_-28px_color-mix(in_oklab,var(--jk-foreground),transparent_45%)] transition-[transform,opacity] duration-500 ease-out motion-reduce:duration-150",
+                  "absolute aspect-[3/4] w-[42%] max-w-56 overflow-hidden rounded-[--radius] border border-border bg-muted shadow-[0_24px_48px_-28px_color-mix(in_oklab,var(--jk-foreground),transparent_45%)] transition-[transform,opacity] duration-500 ease-out motion-reduce:duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                   slotClass(offset, reducedMotion),
                 )}
               >
@@ -287,24 +287,22 @@ export function Hero228({
         </div>
 
         <div className="relative mx-auto mt-8 max-w-lg sm:mt-10">
-          <div
-            aria-hidden="true"
-            className="flex h-8 items-end justify-center gap-[3px]"
-          >
-            {Array.from({ length: TICK_COUNT }, (_, tick) => {
-              const filled = tick / (TICK_COUNT - 1) <= (index + 1) / count;
-              const major = tick % 5 === 0;
-              return (
-                <span
-                  key={tick}
-                  className={cn(
-                    "w-px rounded-full transition-colors duration-500",
-                    filled ? "bg-foreground" : "bg-border",
-                    major ? "h-4" : "h-2.5",
-                  )}
-                />
-              );
-            })}
+          <div aria-hidden="true" className="relative h-8">
+            <div
+              className="absolute inset-x-0 bottom-0 h-2.5"
+              style={{ backgroundImage: TICK_IDLE }}
+            />
+            <div
+              className="absolute inset-x-0 bottom-0 h-4 opacity-70"
+              style={{ backgroundImage: TICK_MAJOR }}
+            />
+            <div
+              className="absolute inset-x-0 bottom-0 h-2.5 overflow-hidden transition-[width] duration-500"
+              style={{
+                width: `${((index + 1) / count) * 100}%`,
+                backgroundImage: TICK_ACTIVE,
+              }}
+            />
           </div>
           {playing ? (
             <div
@@ -330,7 +328,7 @@ export function Hero228({
             {displayedName}
           </p>
         </div>
-      </div>
+      </section>
     </section>
   );
 }
