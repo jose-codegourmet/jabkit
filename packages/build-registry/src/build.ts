@@ -118,6 +118,7 @@ const index = components.map(
     addedAt,
     dependencies,
     a11y,
+    preview,
   }) => ({
     name,
     displayName,
@@ -127,6 +128,7 @@ const index = components.map(
     addedAt,
     dependencies,
     a11y,
+    ...(preview ? { preview } : {}),
   }),
 );
 await writeFile(

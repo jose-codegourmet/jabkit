@@ -30,6 +30,7 @@ import {
 } from "@/atoms/tooltip/Tooltip";
 import { Hero228 } from "@/marketing/hero228/Hero228";
 import { hero228Mocks } from "@/marketing/hero228/Hero228.mocks";
+import { registryEntry } from "../../../../lib/registry";
 import "../../../globals.css";
 
 function PreviewContent({ name, story }: { name: string; story: string }) {
@@ -195,11 +196,12 @@ export default async function Preview({
 }) {
   const { name, story } = await params;
   const query = await searchParams;
+  const entry = await registryEntry(name);
+  const fit = entry?.preview?.layout === "fit";
   const isDark = query.theme === "dark" || story === "ThemeComparison";
-  const isHero = name === "hero228";
   return (
     <main
-      className={`${isDark ? "dark" : ""} min-h-dvh bg-background text-foreground ${isHero ? "" : "grid place-items-center overflow-hidden p-6"}`}
+      className={`${isDark ? "dark" : ""} min-h-dvh bg-background text-foreground ${fit ? "" : "grid place-items-center overflow-hidden p-6"}`}
     >
       <PreviewContent name={name} story={story} />
     </main>

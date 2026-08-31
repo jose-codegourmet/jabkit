@@ -4,13 +4,21 @@ import { useState } from "react";
 
 export function SourceViewer({
   files,
+  embedded = false,
 }: {
   files: Array<{ path: string; content: string }>;
+  embedded?: boolean;
 }) {
   const [active, setActive] = useState(0);
   if (!files.length) return null;
   return (
-    <section className="overflow-hidden rounded-[--radius] border border-border bg-card">
+    <section
+      className={
+        embedded
+          ? "overflow-hidden"
+          : "overflow-hidden rounded-[--radius] border border-border bg-card"
+      }
+    >
       <div className="flex overflow-x-auto border-b border-border">
         {files.map((file, index) => (
           <button

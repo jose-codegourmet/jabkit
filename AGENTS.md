@@ -11,3 +11,7 @@ JabKit is a source-distributed React component library. Every component must be 
 - Stories are the source for component examples. Generated registry JSON is never edited by hand.
 - MCP tools are read-only. The CLI writes source files.
 - An installed component is pristine before any requested local edits are applied.
+
+## Adding a component
+
+Before creating or modifying a component, read [docs/adding-a-component.md](docs/adding-a-component.md) and follow every step in it. This is mandatory, not advisory. The checklist ends with `pnpm check`, which must pass before the work is considered done.
