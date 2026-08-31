@@ -1,6 +1,11 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
+export type ComponentPreviewMeta = {
+  layout: "fit" | "center";
+  width?: number;
+  height?: number;
+};
 export type RegistryIndexItem = {
   name: string;
   displayName: string;
@@ -10,6 +15,7 @@ export type RegistryIndexItem = {
   addedAt: string;
   dependencies: string[];
   a11y: { keyboardNav: boolean; reducedMotion: boolean };
+  preview?: ComponentPreviewMeta;
 };
 export type RegistryEntry = RegistryIndexItem & {
   version: string;
