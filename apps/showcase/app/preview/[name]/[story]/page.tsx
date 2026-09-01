@@ -221,7 +221,6 @@ export default async function Preview({
   const entry = await registryEntry(name);
   const fit = entry?.preview?.layout === "fit";
   const isDark = query.theme === "dark" || story === "ThemeComparison";
-  const isHero = name === "hero231";
   return (
     <main
       className={`${isDark ? "dark" : ""} min-h-dvh bg-background text-foreground ${fit ? "" : "grid place-items-center overflow-hidden p-6"}`}

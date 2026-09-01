@@ -118,7 +118,7 @@ export function Hero146({
 
   React.useEffect(() => {
     const video = videoRef.current;
-    if (!video || showingEmbed) return;
+    if (!video || !videoSrc || showingEmbed) return;
     if (autoplay && mounted && !reducedMotion) {
       video.muted = true;
       void video.play().then(
