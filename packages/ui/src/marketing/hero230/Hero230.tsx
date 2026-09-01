@@ -179,16 +179,19 @@ function LogoMarquee({
   logos: Hero230Logo[];
   animate: boolean;
 }) {
-  const copies = [
-    { suffix: "lead", items: logos },
-    { suffix: "loop", items: logos },
-  ] as const;
+  const copies = animate
+    ? ([
+        { suffix: "lead", items: logos },
+        { suffix: "loop", items: logos },
+      ] as const)
+    : ([{ suffix: "lead", items: logos }] as const);
   return (
-    <div
-      className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,var(--jk-foreground)_12%,var(--jk-foreground)_88%,transparent)]"
-      aria-hidden={animate}
-    >
+    <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,var(--jk-foreground)_12%,var(--jk-foreground)_88%,transparent)]">
+      <p className="sr-only">
+        Partner marks: {logos.map((logo) => logo.name).join(", ")}
+      </p>
       <div
+        aria-hidden="true"
         className={cn(
           "flex w-max items-center gap-12 py-2",
           animate && "jk-hero230-marquee",
@@ -222,6 +225,8 @@ function FilmstripCard({
     <button
       type="button"
       onClick={onSelect}
+      tabIndex={active ? 0 : -1}
+      aria-hidden={active ? undefined : true}
       aria-label={slide.caption ? `Show ${slide.caption}` : slide.alt}
       aria-current={active ? "true" : undefined}
       className={cn(
@@ -233,8 +238,9 @@ function FilmstripCard({
     >
       <img
         src={slide.src}
-        alt={slide.alt}
-        className="size-full object-cover transition-transform duration-500 ease-out group-hover/card:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover/card:scale-100"
+        alt=""
+        draggable={false}
+        className="pointer-events-none size-full object-cover transition-transform duration-500 ease-out group-hover/card:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover/card:scale-100"
       />
     </button>
   );
@@ -258,10 +264,14 @@ export function Hero230({
   const reducedMotion = usePrefersReducedMotion();
   const [mounted, setMounted] = useState(false);
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [hovering, setHovering] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [userCaption, setUserCaption] = useState<string | null>(null);
   const swipe = useRef<{ x: number; pointerId: number } | null>(null);
+  const swiped = useRef(false);
   const count = slides.length;
   const current = slides[active];
+  const paused = hovering || focused;
 
   useEffect(() => {
     setMounted(true);
@@ -276,35 +286,53 @@ export function Hero230({
   }, [autoplay, autoplayMs, count, mounted, paused, reducedMotion]);
 
   const goTo = useCallback(
-    (next: number) => {
+    (next: number, fromUser = false) => {
       if (!count) return;
-      setActive(wrapIndex(next, count));
+      const index = wrapIndex(next, count);
+      setActive(index);
+      if (fromUser) {
+        const slide = slides[index];
+        setUserCaption(slide?.caption ?? slide?.alt ?? null);
+      }
     },
-    [count],
+    [count, slides],
+  );
+
+  const selectSlide = useCallback(
+    (index: number) => {
+      if (swiped.current) {
+        swiped.current = false;
+        return;
+      }
+      goTo(index, true);
+    },
+    [goTo],
   );
 
   const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (count < 2) return;
     if (event.key === "ArrowRight") {
       event.preventDefault();
-      goTo(active + 1);
+      goTo(active + 1, true);
     }
     if (event.key === "ArrowLeft") {
       event.preventDefault();
-      goTo(active - 1);
+      goTo(active - 1, true);
     }
     if (event.key === "Home") {
       event.preventDefault();
-      goTo(0);
+      goTo(0, true);
     }
     if (event.key === "End") {
       event.preventDefault();
-      goTo(count - 1);
+      goTo(count - 1, true);
     }
   };
 
   const onPointerDown = (event: PointerEvent<HTMLElement>) => {
+    swiped.current = false;
     swipe.current = { x: event.clientX, pointerId: event.pointerId };
+    event.currentTarget.setPointerCapture(event.pointerId);
   };
 
   const onPointerUp = (event: PointerEvent<HTMLElement>) => {
@@ -312,7 +340,8 @@ export function Hero230({
     const delta = event.clientX - swipe.current.x;
     swipe.current = null;
     if (Math.abs(delta) < 40 || count < 2) return;
-    goTo(delta < 0 ? active + 1 : active - 1);
+    swiped.current = true;
+    goTo(delta < 0 ? active + 1 : active - 1, true);
   };
 
   return (
@@ -385,12 +414,12 @@ export function Hero230({
           onPointerCancel={() => {
             swipe.current = null;
           }}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocus={() => setPaused(true)}
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+          onFocus={() => setFocused(true)}
           onBlur={(event) => {
             if (!event.currentTarget.contains(event.relatedTarget)) {
-              setPaused(false);
+              setFocused(false);
             }
           }}
           className="relative mx-auto mt-12 w-full max-w-6xl outline-none sm:mt-16"
@@ -412,17 +441,19 @@ export function Hero230({
                   key={`${slide.src}-${slide.alt}`}
                   slide={slide}
                   active={index === active}
-                  onSelect={() => goTo(index)}
+                  onSelect={() => selectSlide(index)}
                 />
               ))}
             </div>
           </div>
           {current?.caption ? (
-            <p
-              aria-live="polite"
-              className="mt-2 text-center text-sm font-medium text-muted-foreground"
-            >
+            <p className="mt-2 text-center text-sm font-medium text-muted-foreground">
               {current.caption}
+            </p>
+          ) : null}
+          {userCaption ? (
+            <p className="sr-only" aria-live="polite">
+              {userCaption}
             </p>
           ) : null}
           {count > 1 ? (
@@ -434,7 +465,7 @@ export function Hero230({
                   aria-label={`Show slide ${index + 1}`}
                   aria-controls={carouselId}
                   aria-current={index === active ? "true" : undefined}
-                  onClick={() => goTo(index)}
+                  onClick={() => selectSlide(index)}
                   className={cn(
                     "size-2.5 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                     index === active

@@ -14,18 +14,22 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { title: hero230Mocks.title },
+  args: { ...hero230Mocks },
   render: () => (
     <Hero230
       kicker={hero230Mocks.kicker}
       title={hero230Mocks.title}
       description={hero230Mocks.description}
+      primaryAction={hero230Mocks.primaryAction}
+      secondaryAction={hero230Mocks.secondaryAction}
+      logos={hero230Mocks.logos}
+      slides={hero230Mocks.slides}
     />
   ),
 };
 
 export const Variants: Story = {
-  args: { title: hero230EditorialMocks.title },
+  args: { ...hero230EditorialMocks },
   render: () => (
     <Hero230
       kicker={hero230EditorialMocks.kicker}
@@ -33,15 +37,17 @@ export const Variants: Story = {
       description={hero230EditorialMocks.description}
       primaryAction={hero230EditorialMocks.primaryAction}
       secondaryAction={hero230EditorialMocks.secondaryAction}
+      logos={hero230EditorialMocks.logos}
+      slides={hero230EditorialMocks.slides}
       autoplay={hero230EditorialMocks.autoplay}
     />
   ),
 };
 
 export const ThemeComparison: Story = {
-  args: { title: hero230Mocks.title },
+  args: { ...hero230Mocks },
   render: () => (
-    <div className="grid gap-px overflow-hidden border-border bg-border lg:grid-cols-2">
+    <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border lg:grid-cols-2">
       <div className="bg-background">
         <Hero230 title="Light mode launch" />
       </div>
