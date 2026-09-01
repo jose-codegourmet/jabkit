@@ -211,7 +211,7 @@ export function Hero146({
             <div className="relative mt-9 inline-flex">
               <span
                 aria-hidden="true"
-                className="jk-hero146-ping pointer-events-none absolute inset-0 rounded-full bg-foreground/20"
+                className="jk-hero146-ping pointer-events-none absolute -inset-2 rounded-full border border-foreground/35"
               />
               <HeroAction action={action} />
             </div>
@@ -219,7 +219,7 @@ export function Hero146({
         </div>
       </div>
 
-      <div className="relative mx-auto max-w-5xl px-5 pt-8 sm:px-8 sm:pt-10">
+      <div className="relative mx-auto max-w-5xl px-5 pt-8 pb-16 sm:px-8 sm:pt-10 sm:pb-20">
         {caption ? (
           <p className="mb-5 text-center text-sm text-muted-foreground sm:text-base">
             {caption}{" "}
@@ -231,12 +231,7 @@ export function Hero146({
           </p>
         ) : null}
 
-        <div
-          className={cn(
-            "relative overflow-hidden rounded-[calc(var(--radius)+0.2rem)] border border-border bg-card shadow-[0_28px_60px_-36px_color-mix(in_oklab,var(--jk-foreground),transparent_50%)]",
-            "[mask-image:linear-gradient(to_bottom,var(--jk-foreground)_72%,transparent)]",
-          )}
-        >
+        <div className="relative overflow-hidden rounded-[calc(var(--radius)+0.2rem)] border border-border bg-card shadow-[0_28px_60px_-36px_color-mix(in_oklab,var(--jk-foreground),transparent_50%)]">
           <div className="relative aspect-video overflow-hidden bg-muted">
             {showingEmbed && embedSrc ? (
               <iframe
@@ -350,6 +345,10 @@ export function Hero146({
           ) : null}
         </div>
       </div>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(to_top,var(--jk-background),transparent)]"
+      />
     </section>
   );
 }
