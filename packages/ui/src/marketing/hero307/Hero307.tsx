@@ -544,7 +544,7 @@ export function Hero307({
       onPointerMove={onPointerMove}
       onPointerLeave={() => setTilt({ x: 0, y: 0 })}
       className={cn(
-        "relative isolate min-h-dvh overflow-hidden bg-background text-foreground",
+        "relative isolate h-dvh overflow-hidden bg-background text-foreground",
         className,
       )}
     >

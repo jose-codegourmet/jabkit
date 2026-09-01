@@ -200,6 +200,18 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
         </div>
       );
     case "hero307":
+      if (story === "ThemeComparison") {
+        return (
+          <div className="grid gap-px overflow-hidden border-border bg-border lg:grid-cols-2">
+            <div className="bg-background">
+              <Hero307 title="Light mode console" />
+            </div>
+            <div className="dark bg-background">
+              <Hero307 title="Dark mode console" />
+            </div>
+          </div>
+        );
+      }
       return (
         <div className="w-full">
           <Hero307 {...(alternate ? hero307EditorialMocks : hero307Mocks)} />
