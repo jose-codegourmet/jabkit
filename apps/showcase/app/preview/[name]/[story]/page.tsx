@@ -31,6 +31,11 @@ import {
 import { Hero228 } from "@/marketing/hero228/Hero228";
 import { hero228Mocks } from "@/marketing/hero228/Hero228.mocks";
 import { Hero231 } from "@/marketing/hero231/Hero231";
+import { Hero307 } from "@/marketing/hero307/Hero307";
+import {
+  hero307EditorialMocks,
+  hero307Mocks,
+} from "@/marketing/hero307/Hero307.mocks";
 import { registryEntry } from "../../../../lib/registry";
 import "../../../globals.css";
 
@@ -191,6 +196,14 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
               alternate ? "A quieter way to introduce the room." : undefined
             }
             kicker={alternate ? "Now booking spring" : undefined}
+          />
+        </div>
+      );
+    case "hero307":
+      return (
+        <div className="w-full">
+          <Hero307
+            {...(alternate ? hero307EditorialMocks : hero307Mocks)}
           />
         </div>
       );
