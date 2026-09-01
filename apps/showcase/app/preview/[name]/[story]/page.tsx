@@ -28,6 +28,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/atoms/tooltip/Tooltip";
+import { HeroSection5 } from "@/marketing/hero-section-5/HeroSection5";
+import { heroSection5EditorialMocks } from "@/marketing/hero-section-5/HeroSection5.mocks";
 import { Hero228 } from "@/marketing/hero228/Hero228";
 import { hero228Mocks } from "@/marketing/hero228/Hero228.mocks";
 import { Hero231 } from "@/marketing/hero231/Hero231";
@@ -192,6 +194,26 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
             }
             kicker={alternate ? "Now booking spring" : undefined}
           />
+        </div>
+      );
+    case "hero-section-5":
+      return (
+        <div className="w-full">
+          {alternate ? (
+            <HeroSection5
+              brand={heroSection5EditorialMocks.brand}
+              navItems={heroSection5EditorialMocks.navItems}
+              headerAction={heroSection5EditorialMocks.headerAction}
+              kicker={heroSection5EditorialMocks.kicker}
+              title={heroSection5EditorialMocks.title}
+              description={heroSection5EditorialMocks.description}
+              primaryAction={heroSection5EditorialMocks.primaryAction}
+              secondaryAction={heroSection5EditorialMocks.secondaryAction}
+              video={heroSection5EditorialMocks.video}
+            />
+          ) : (
+            <HeroSection5 />
+          )}
         </div>
       );
     default:
