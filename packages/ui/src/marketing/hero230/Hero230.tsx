@@ -332,7 +332,6 @@ export function Hero230({
   const onPointerDown = (event: PointerEvent<HTMLElement>) => {
     swiped.current = false;
     swipe.current = { x: event.clientX, pointerId: event.pointerId };
-    event.currentTarget.setPointerCapture(event.pointerId);
   };
 
   const onPointerUp = (event: PointerEvent<HTMLElement>) => {
