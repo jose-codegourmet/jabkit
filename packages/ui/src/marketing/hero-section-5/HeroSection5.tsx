@@ -272,7 +272,7 @@ export function HeroSection5({
             />
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-t from-background via-background/55 to-background/25"
+              className="absolute inset-0 bg-gradient-to-t from-background from-10% via-background/80 to-background/50 dark:via-background/55 dark:to-background/25"
             />
             <header className="absolute inset-x-0 top-0 z-20 flex items-center justify-between gap-3 px-4 py-4 sm:px-6 lg:px-8 lg:py-6">
               <a
