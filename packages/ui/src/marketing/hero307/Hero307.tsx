@@ -192,7 +192,7 @@ function BarChart({ bars }: { bars: Hero307Bar[] }) {
         {bars.map((bar) => (
           <div
             key={bar.label}
-            className="group flex min-w-0 flex-1 flex-col items-center gap-1"
+            className="flex min-w-0 flex-1 flex-col items-center gap-1"
           >
             <div
               className="w-full rounded-t-sm bg-chart-1/70 transition-colors hover:bg-chart-1"
@@ -288,7 +288,7 @@ function ActivityFeed({ items }: { items: Hero307Activity[] }) {
                 <span className="text-muted-foreground">{item.action}</span>
               </p>
               <p className="mt-0.5 font-mono text-[10px] text-muted-foreground">
-                {item.time} ago
+                {/^\d/.test(item.time) ? `${item.time} ago` : item.time}
               </p>
             </div>
           </li>
@@ -298,7 +298,15 @@ function ActivityFeed({ items }: { items: Hero307Activity[] }) {
   );
 }
 
-function Sidebar({ brand, nav }: { brand: string; nav: Hero307NavItem[] }) {
+function Sidebar({
+  brand,
+  nav,
+  activePanel,
+}: {
+  brand: string;
+  nav: Hero307NavItem[];
+  activePanel: Hero307Panel;
+}) {
   return (
     <aside className="hidden w-40 shrink-0 flex-col border-r border-border bg-muted/40 p-3 sm:flex">
       <div className="flex items-center gap-2 px-1">
@@ -313,19 +321,26 @@ function Sidebar({ brand, nav }: { brand: string; nav: Hero307NavItem[] }) {
         </p>
       </div>
       <nav className="mt-5 space-y-1" aria-label="Preview navigation">
-        {nav.map((item, index) => (
-          <div
-            key={item.label}
-            className={cn(
-              "rounded-md px-2 py-1.5 font-mono text-[11px]",
-              index === 0
-                ? "bg-background text-foreground shadow-[0_0_0_1px_var(--jk-border)]"
-                : "text-muted-foreground",
-            )}
-          >
-            {item.label}
-          </div>
-        ))}
+        {nav.map((item, index) => {
+          const matchesPanel = item.label.toLowerCase() === activePanel;
+          const selected =
+            matchesPanel ||
+            (index === 0 &&
+              !nav.some((entry) => entry.label.toLowerCase() === activePanel));
+          return (
+            <div
+              key={item.label}
+              className={cn(
+                "rounded-md px-2 py-1.5 font-mono text-[11px]",
+                selected
+                  ? "bg-background text-foreground shadow-[0_0_0_1px_var(--jk-border)]"
+                  : "text-muted-foreground",
+              )}
+            >
+              {item.label}
+            </div>
+          );
+        })}
       </nav>
     </aside>
   );
@@ -344,6 +359,36 @@ function DashboardPreview({
   tilt: { x: number; y: number };
   reducedMotion: boolean;
 }) {
+  const tabPrefix = React.useId();
+  const panelId = `${tabPrefix}-panel`;
+
+  const movePanel = (next: Hero307Panel) => {
+    onPanelChange(next);
+    requestAnimationFrame(() => {
+      document.getElementById(`${tabPrefix}-${next}`)?.focus();
+    });
+  };
+
+  const onTabListKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    const index = panels.findIndex((item) => item.id === panel);
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      event.preventDefault();
+      movePanel(panels[(index + 1) % panels.length].id);
+    }
+    if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      event.preventDefault();
+      movePanel(panels[(index - 1 + panels.length) % panels.length].id);
+    }
+    if (event.key === "Home") {
+      event.preventDefault();
+      movePanel(panels[0].id);
+    }
+    if (event.key === "End") {
+      event.preventDefault();
+      movePanel(panels[panels.length - 1].id);
+    }
+  };
+
   return (
     <section
       className="relative mx-auto w-full max-w-5xl [perspective:1400px]"
@@ -365,22 +410,30 @@ function DashboardPreview({
         }
       >
         <div className="flex min-h-[28rem] bg-background">
-          <Sidebar brand={dashboard.brand} nav={dashboard.nav} />
+          <Sidebar
+            brand={dashboard.brand}
+            nav={dashboard.nav}
+            activePanel={panel}
+          />
           <div className="min-w-0 flex-1">
             <div className="flex items-center justify-between gap-3 border-b border-border px-3 py-2.5 sm:px-4">
               <div
                 className="flex gap-1"
                 role="tablist"
                 aria-label="Preview panels"
+                onKeyDown={onTabListKeyDown}
               >
                 {panels.map((item) => {
                   const selected = panel === item.id;
                   return (
                     <button
                       key={item.id}
+                      id={`${tabPrefix}-${item.id}`}
                       type="button"
                       role="tab"
                       aria-selected={selected}
+                      aria-controls={panelId}
+                      tabIndex={selected ? 0 : -1}
                       onClick={() => onPanelChange(item.id)}
                       className={cn(
                         "rounded-md px-2.5 py-1 font-mono text-[11px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
@@ -404,7 +457,12 @@ function DashboardPreview({
                 </span>
               </div>
             </div>
-            <div className="space-y-3 p-3 sm:p-4">
+            <div
+              id={panelId}
+              role="tabpanel"
+              aria-labelledby={`${tabPrefix}-${panel}`}
+              className="space-y-3 p-3 sm:p-4"
+            >
               {panel === "overview" ? (
                 <>
                   <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">

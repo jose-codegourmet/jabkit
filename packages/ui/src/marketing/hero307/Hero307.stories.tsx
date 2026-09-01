@@ -20,6 +20,9 @@ export const Default: Story = {
       kicker={hero307Mocks.kicker}
       title={hero307Mocks.title}
       description={hero307Mocks.description}
+      primaryAction={hero307Mocks.primaryAction}
+      secondaryAction={hero307Mocks.secondaryAction}
+      dashboard={hero307Mocks.dashboard}
     />
   ),
 };
