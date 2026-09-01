@@ -30,6 +30,8 @@ import {
 } from "@/atoms/tooltip/Tooltip";
 import { HeroSection5 } from "@/marketing/hero-section-5/HeroSection5";
 import { heroSection5EditorialMocks } from "@/marketing/hero-section-5/HeroSection5.mocks";
+import { Hero146 } from "@/marketing/hero146/Hero146";
+import { hero146Mocks } from "@/marketing/hero146/Hero146.mocks";
 import { Hero228 } from "@/marketing/hero228/Hero228";
 import { hero228Mocks } from "@/marketing/hero228/Hero228.mocks";
 import { Hero230 } from "@/marketing/hero230/Hero230";
@@ -181,6 +183,14 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
             <TooltipContent>Helpful context</TooltipContent>
           </Tooltip>
         </TooltipProvider>
+      );
+    case "hero146":
+      return (
+        <div className="w-full">
+          <Hero146
+            {...(alternate ? hero146Mocks.alternate : hero146Mocks.default)}
+          />
+        </div>
       );
     case "hero228":
       return (
