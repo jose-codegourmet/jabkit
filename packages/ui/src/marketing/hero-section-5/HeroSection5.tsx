@@ -211,7 +211,7 @@ export function HeroSection5({
         .then(() => setPlaying(true))
         .catch(() => setPlaying(false));
     };
-    play();
+    if (video.src) play();
   }, [shouldPlay, video.src]);
 
   const togglePlayback = () => {
@@ -401,10 +401,7 @@ export function HeroSection5({
             <p className="mb-3 text-center text-xs font-medium tracking-[0.14em] text-muted-foreground uppercase">
               Trusted by teams in the field
             </p>
-            <LogoMarquee
-              logos={logos}
-              animate={mounted && !reducedMotion}
-            />
+            <LogoMarquee logos={logos} animate={mounted && !reducedMotion} />
           </div>
         ) : null}
       </div>
