@@ -7,11 +7,10 @@ JabKit is a React component library distributed as source. Browse components in 
 ```bash
 nvm use
 pnpm install
-pnpm registry:build
 pnpm dev
 ```
 
-Use `pnpm check` for the local quality gate.
+Registry JSON under `apps/showcase/public/r/` is committed. After adding or changing a component, run `pnpm registry:build` and commit its output. Use `pnpm check` for the local quality gate.
 
 ## Implementation status
 

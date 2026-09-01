@@ -1,0 +1,47 @@
+{
+  "name": "skeleton",
+  "displayName": "Skeleton",
+  "version": "1.0.0",
+  "addedAt": "2026-08-30",
+  "description": "Accessible Skeleton primitive adapted from shadcn/ui.",
+  "tags": [
+    "skeleton",
+    "primitive",
+    "accessible"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "skeleton/Skeleton.tsx",
+      "type": "component",
+      "content": "import { cn } from \"@/lib/cn\";\n\nfunction Skeleton({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={cn(\"animate-pulse rounded-md bg-muted\", className)}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n"
+    },
+    {
+      "path": "skeleton/Skeleton.types.ts",
+      "type": "types",
+      "content": "export type SkeletonProps = Record<string, unknown>;\n"
+    },
+    {
+      "path": "skeleton/index.ts",
+      "type": "index",
+      "content": "export { Skeleton } from \"./Skeleton\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"dark bg-background p-6\">\n      <Skeleton />\n    </div>"
+    }
+  ]
+}

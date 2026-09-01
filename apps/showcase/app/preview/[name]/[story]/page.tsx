@@ -40,6 +40,11 @@ import {
   hero230Mocks,
 } from "@/marketing/hero230/Hero230.mocks";
 import { Hero231 } from "@/marketing/hero231/Hero231";
+import { Hero307 } from "@/marketing/hero307/Hero307";
+import {
+  hero307EditorialMocks,
+  hero307Mocks,
+} from "@/marketing/hero307/Hero307.mocks";
 import { registryEntry } from "../../../../lib/registry";
 import "../../../globals.css";
 
@@ -215,6 +220,24 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
             }
             kicker={alternate ? "Now booking spring" : undefined}
           />
+        </div>
+      );
+    case "hero307":
+      if (story === "ThemeComparison") {
+        return (
+          <div className="grid gap-px overflow-hidden border-border bg-border lg:grid-cols-2">
+            <div className="bg-background">
+              <Hero307 title="Light mode console" />
+            </div>
+            <div className="dark bg-background">
+              <Hero307 title="Dark mode console" />
+            </div>
+          </div>
+        );
+      }
+      return (
+        <div className="w-full">
+          <Hero307 {...(alternate ? hero307EditorialMocks : hero307Mocks)} />
         </div>
       );
     case "hero-section-5":
