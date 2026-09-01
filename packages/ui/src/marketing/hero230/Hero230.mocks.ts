@@ -1,8 +1,4 @@
-import type {
-  Hero230Logo,
-  Hero230Props,
-  Hero230Slide,
-} from "./Hero230.types";
+import type { Hero230Logo, Hero230Props, Hero230Slide } from "./Hero230.types";
 
 export const hero230Slides: Hero230Slide[] = [
   {

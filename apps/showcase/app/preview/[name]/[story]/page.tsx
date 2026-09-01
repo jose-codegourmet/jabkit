@@ -191,9 +191,7 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
     case "hero230":
       return (
         <div className="w-full">
-          <Hero230
-            {...(alternate ? hero230EditorialMocks : hero230Mocks)}
-          />
+          <Hero230 {...(alternate ? hero230EditorialMocks : hero230Mocks)} />
         </div>
       );
     case "hero231":
