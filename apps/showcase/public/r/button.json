@@ -1,0 +1,52 @@
+{
+  "name": "button",
+  "displayName": "Button",
+  "version": "1.0.0",
+  "addedAt": "2026-08-30",
+  "description": "A semantic, accessible action button with primary, secondary, ghost, and destructive treatments.",
+  "tags": [
+    "button",
+    "cta",
+    "action",
+    "submit",
+    "form",
+    "link"
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "button/Button.tsx",
+      "type": "component",
+      "content": "import { Slot } from \"@radix-ui/react-slot\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { ButtonProps } from \"./Button.types\";\n\nconst styles = {\n  primary:\n    \"bg-primary text-primary-foreground shadow-[0_10px_24px_-14px_color-mix(in_oklab,var(--jk-primary),transparent_25%)] hover:brightness-110\",\n  secondary:\n    \"bg-secondary text-secondary-foreground border border-border hover:bg-accent\",\n  ghost: \"text-foreground hover:bg-accent\",\n  destructive:\n    \"bg-destructive text-destructive-foreground hover:brightness-110\",\n};\n\nconst sizes = {\n  sm: \"h-9 px-3 text-sm\",\n  md: \"h-11 px-4 text-sm\",\n  lg: \"h-12 px-5 text-base\",\n};\n\nexport function Button({\n  className,\n  variant = \"primary\",\n  size = \"md\",\n  asChild = false,\n  type,\n  ...props\n}: ButtonProps) {\n  const Component = asChild ? Slot : \"button\";\n  return (\n    <Component\n      className={cn(\n        \"inline-flex shrink-0 items-center justify-center rounded-[--radius] font-medium whitespace-nowrap transition-[transform,background-color,color,filter,box-shadow] duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 active:translate-y-px\",\n        styles[variant],\n        sizes[size],\n        className,\n      )}\n      type={asChild ? undefined : (type ?? \"button\")}\n      {...props}\n    />\n  );\n}\n"
+    },
+    {
+      "path": "button/Button.types.ts",
+      "type": "types",
+      "content": "import type { ButtonHTMLAttributes, ReactNode } from \"react\";\n\nexport type ButtonVariant = \"primary\" | \"secondary\" | \"ghost\" | \"destructive\";\nexport type ButtonSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {\n  variant?: ButtonVariant;\n  size?: ButtonSize;\n  asChild?: boolean;\n  children: ReactNode;\n}\n"
+    },
+    {
+      "path": "button/index.ts",
+      "type": "index",
+      "content": "export { Button } from \"./Button\";\nexport type { ButtonProps, ButtonSize, ButtonVariant } from \"./Button.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"flex flex-wrap gap-3 bg-background p-8 text-foreground\">\n      <Button>Continue</Button>\n      <Button variant=\"secondary\">Save draft</Button>\n      <Button variant=\"ghost\">Learn more</Button>\n      <Button variant=\"destructive\">Remove</Button>\n    </div>"
+    }
+  ]
+}

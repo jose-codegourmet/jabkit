@@ -28,8 +28,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/atoms/tooltip/Tooltip";
+import { HeroSection5 } from "@/marketing/hero-section-5/HeroSection5";
+import { heroSection5EditorialMocks } from "@/marketing/hero-section-5/HeroSection5.mocks";
+import { Hero146 } from "@/marketing/hero146/Hero146";
+import { hero146Mocks } from "@/marketing/hero146/Hero146.mocks";
 import { Hero228 } from "@/marketing/hero228/Hero228";
 import { hero228Mocks } from "@/marketing/hero228/Hero228.mocks";
+import { Hero230 } from "@/marketing/hero230/Hero230";
+import {
+  hero230EditorialMocks,
+  hero230Mocks,
+} from "@/marketing/hero230/Hero230.mocks";
 import { Hero231 } from "@/marketing/hero231/Hero231";
 import { Hero307 } from "@/marketing/hero307/Hero307";
 import {
@@ -180,12 +189,26 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
           </Tooltip>
         </TooltipProvider>
       );
+    case "hero146":
+      return (
+        <div className="w-full">
+          <Hero146
+            {...(alternate ? hero146Mocks.alternate : hero146Mocks.default)}
+          />
+        </div>
+      );
     case "hero228":
       return (
         <div className="w-full">
           <Hero228
             {...(alternate ? hero228Mocks.studio : hero228Mocks.default)}
           />
+        </div>
+      );
+    case "hero230":
+      return (
+        <div className="w-full">
+          <Hero230 {...(alternate ? hero230EditorialMocks : hero230Mocks)} />
         </div>
       );
     case "hero231":
@@ -217,6 +240,26 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
           <Hero307 {...(alternate ? hero307EditorialMocks : hero307Mocks)} />
         </div>
       );
+    case "hero-section-5":
+      return (
+        <div className="w-full">
+          {alternate ? (
+            <HeroSection5
+              brand={heroSection5EditorialMocks.brand}
+              navItems={heroSection5EditorialMocks.navItems}
+              headerAction={heroSection5EditorialMocks.headerAction}
+              kicker={heroSection5EditorialMocks.kicker}
+              title={heroSection5EditorialMocks.title}
+              description={heroSection5EditorialMocks.description}
+              primaryAction={heroSection5EditorialMocks.primaryAction}
+              secondaryAction={heroSection5EditorialMocks.secondaryAction}
+              video={heroSection5EditorialMocks.video}
+            />
+          ) : (
+            <HeroSection5 />
+          )}
+        </div>
+      );
     default:
       return <Button>{name}</Button>;
   }
@@ -233,7 +276,7 @@ export default async function Preview({
   const query = await searchParams;
   const entry = await registryEntry(name);
   const fit = entry?.preview?.layout === "fit";
-  const isDark = query.theme === "dark";
+  const isDark = query.theme === "dark" || story === "ThemeComparison";
   return (
     <main
       className={`${isDark ? "dark" : ""} min-h-dvh bg-background text-foreground ${fit ? "" : "grid place-items-center overflow-hidden p-6"}`}

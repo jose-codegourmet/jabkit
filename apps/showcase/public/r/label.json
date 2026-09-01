@@ -1,0 +1,47 @@
+{
+  "name": "label",
+  "displayName": "Label",
+  "version": "1.0.0",
+  "addedAt": "2026-08-30",
+  "description": "Accessible Label primitive adapted from shadcn/ui.",
+  "tags": [
+    "label",
+    "primitive",
+    "accessible"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "label/Label.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport type * as React from \"react\";\n\nimport { cn } from \"@/lib/cn\";\n\nfunction Label({ className, ...props }: React.ComponentProps<\"label\">) {\n  return (\n    // biome-ignore lint/a11y/noLabelWithoutControl: Consumers provide the associated control.\n    <label\n      data-slot=\"label\"\n      className={cn(\n        \"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Label };\n"
+    },
+    {
+      "path": "label/Label.types.ts",
+      "type": "types",
+      "content": "export type LabelProps = Record<string, unknown>;\n"
+    },
+    {
+      "path": "label/index.ts",
+      "type": "index",
+      "content": "export { Label } from \"./Label\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"dark bg-background p-6\">\n      <Label />\n    </div>"
+    }
+  ]
+}

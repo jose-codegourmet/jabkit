@@ -205,7 +205,7 @@ pnpm registry:build
 
 - Scans `packages/ui/src/{atoms|marketing|dashboard}/`.
 - Writes `apps/showcase/public/r/{name}.json` and `apps/showcase/public/r/index.json`.
-- Those JSON files are **gitignored**. Rebuild locally before `pnpm dev`.
+- Those JSON files are **committed**. Rebuild and include them in the same change as the component.
 - **Never** edit generated registry JSON by hand. Stories are the source of examples.
 
 Shared `@/lib/*` imports are auto-bundled into the registry entry as `"lib"` files.
@@ -218,7 +218,7 @@ Required gate before the work is done:
 pnpm check
 ```
 
-That runs lint, typecheck, convention checks, and a registry build.
+That runs lint, typecheck, convention checks, and a registry rebuild that fails if `public/r/` is out of date.
 
 Optional visual checks:
 
@@ -239,7 +239,7 @@ pnpm dev         # showcase; confirm /{category}/{name} and the preview iframe i
 | `story title does not match category` | Set `title: "Atoms/Name"` (or Marketing / Dashboard) |
 | `stories need render functions and ThemeComparison` | Add `render:` to each story and export `ThemeComparison` |
 | Showcase preview shows a Button with the new name | Add the missing `case` in `preview/[name]/[story]/page.tsx` |
-| Showcase 404 / empty catalogue | Run `pnpm registry:build` (JSON under `public/r/` is gitignored) |
+| Showcase 404 / empty catalogue | Run `pnpm registry:build` and commit `apps/showcase/public/r/` |
 
 ## MCP and CLI notes
 

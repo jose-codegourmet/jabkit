@@ -27,9 +27,16 @@ export type RegistryEntry = RegistryIndexItem & {
 };
 const registryPath = path.join(process.cwd(), "public/r");
 export async function registryIndex(): Promise<RegistryIndexItem[]> {
-  return JSON.parse(
-    await readFile(path.join(registryPath, "index.json"), "utf8"),
-  );
+  try {
+    return JSON.parse(
+      await readFile(path.join(registryPath, "index.json"), "utf8"),
+    );
+  } catch (error) {
+    throw new Error(
+      "Registry index missing at public/r/index.json — run pnpm registry:build",
+      { cause: error },
+    );
+  }
 }
 export async function registryEntry(
   name: string,

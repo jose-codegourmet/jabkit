@@ -1,0 +1,383 @@
+[
+  {
+    "name": "avatar",
+    "displayName": "Avatar",
+    "category": "atoms",
+    "description": "Accessible Avatar primitive adapted from shadcn/ui.",
+    "tags": [
+      "avatar",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
+    "name": "badge",
+    "displayName": "Badge",
+    "category": "atoms",
+    "description": "Accessible Badge primitive adapted from shadcn/ui.",
+    "tags": [
+      "badge",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
+    "name": "button",
+    "displayName": "Button",
+    "category": "atoms",
+    "description": "A semantic, accessible action button with primary, secondary, ghost, and destructive treatments.",
+    "tags": [
+      "button",
+      "cta",
+      "action",
+      "submit",
+      "form",
+      "link"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [
+      "@radix-ui/react-slot"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
+    "name": "checkbox",
+    "displayName": "Checkbox",
+    "category": "atoms",
+    "description": "Accessible Checkbox primitive adapted from shadcn/ui.",
+    "tags": [
+      "checkbox",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
+    "name": "dialog",
+    "displayName": "Dialog",
+    "category": "atoms",
+    "description": "Accessible Dialog primitive adapted from shadcn/ui.",
+    "tags": [
+      "dialog",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
+    "name": "dropdown-menu",
+    "displayName": "DropdownMenu",
+    "category": "atoms",
+    "description": "Accessible DropdownMenu primitive adapted from shadcn/ui.",
+    "tags": [
+      "dropdown-menu",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
+    "name": "input",
+    "displayName": "Input",
+    "category": "atoms",
+    "description": "Accessible Input primitive adapted from shadcn/ui.",
+    "tags": [
+      "input",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
+    "name": "label",
+    "displayName": "Label",
+    "category": "atoms",
+    "description": "Accessible Label primitive adapted from shadcn/ui.",
+    "tags": [
+      "label",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
+    "name": "separator",
+    "displayName": "Separator",
+    "category": "atoms",
+    "description": "Accessible Separator primitive adapted from shadcn/ui.",
+    "tags": [
+      "separator",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
+    "name": "skeleton",
+    "displayName": "Skeleton",
+    "category": "atoms",
+    "description": "Accessible Skeleton primitive adapted from shadcn/ui.",
+    "tags": [
+      "skeleton",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
+    "name": "switch",
+    "displayName": "Switch",
+    "category": "atoms",
+    "description": "Accessible Switch primitive adapted from shadcn/ui.",
+    "tags": [
+      "switch",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
+    "name": "textarea",
+    "displayName": "Textarea",
+    "category": "atoms",
+    "description": "Accessible Textarea primitive adapted from shadcn/ui.",
+    "tags": [
+      "textarea",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
+    "name": "tooltip",
+    "displayName": "Tooltip",
+    "category": "atoms",
+    "description": "Accessible Tooltip primitive adapted from shadcn/ui.",
+    "tags": [
+      "tooltip",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
+    "name": "hero-section-5",
+    "displayName": "HeroSection5",
+    "category": "marketing",
+    "description": "Cinematic marketing hero with a framed looping video panel, bottom-left offer, a light header, and a logo marquee.",
+    "tags": [
+      "hero",
+      "marketing",
+      "video",
+      "marquee",
+      "cta",
+      "landing"
+    ],
+    "addedAt": "2026-09-01",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "name": "hero146",
+    "displayName": "Hero146",
+    "category": "marketing",
+    "description": "Centered AI-agents hero on a square grid wash, with a gradient headline, metallic get-started pill, and a framed video teaser that exposes a play bar and optional presentation embed.",
+    "tags": [
+      "hero",
+      "marketing",
+      "video",
+      "cta",
+      "agents",
+      "landing",
+      "grid"
+    ],
+    "addedAt": "2026-09-01",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "name": "hero228",
+    "displayName": "Hero228",
+    "category": "marketing",
+    "description": "Centered marketing hero with a mixed serif headline, muted supporting copy, and an autoplay fan carousel of portraits with animated tick bars and name crossfades.",
+    "tags": [
+      "hero",
+      "marketing",
+      "carousel",
+      "portraits",
+      "autoplay",
+      "landing",
+      "editorial"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "name": "hero230",
+    "displayName": "Hero230",
+    "category": "marketing",
+    "description": "Centered marketing hero with a pill kicker, dual pill CTAs, an auto-scrolling logo ticker, and an autoplay filmstrip of raised image cards.",
+    "tags": [
+      "hero",
+      "marketing",
+      "carousel",
+      "marquee",
+      "filmstrip",
+      "cta",
+      "logos",
+      "landing"
+    ],
+    "addedAt": "2026-09-01",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "name": "hero231",
+    "displayName": "Hero231",
+    "category": "marketing",
+    "description": "Split marketing hero with left-aligned copy and dual CTAs, a faded logo marquee, and a 3D coverflow of portrait cards.",
+    "tags": [
+      "hero",
+      "marketing",
+      "carousel",
+      "marquee",
+      "cta",
+      "portraits"
+    ],
+    "addedAt": "2026-08-30",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "name": "hero307",
+    "displayName": "Hero307",
+    "category": "marketing",
+    "description": "Fullscreen marketing hero with an oversized headline, paired CTAs, and a CSS-built admin dashboard that tilts in a 3D perspective scene.",
+    "tags": [
+      "hero",
+      "marketing",
+      "dashboard-preview",
+      "3d",
+      "cta",
+      "fullscreen",
+      "landing"
+    ],
+    "addedAt": "2026-09-01",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  }
+]

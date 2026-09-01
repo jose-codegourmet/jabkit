@@ -1,0 +1,47 @@
+{
+  "name": "textarea",
+  "displayName": "Textarea",
+  "version": "1.0.0",
+  "addedAt": "2026-08-30",
+  "description": "Accessible Textarea primitive adapted from shadcn/ui.",
+  "tags": [
+    "textarea",
+    "primitive",
+    "accessible"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "textarea/Textarea.tsx",
+      "type": "component",
+      "content": "import type * as React from \"react\";\n\nimport { cn } from \"@/lib/cn\";\n\nfunction Textarea({ className, ...props }: React.ComponentProps<\"textarea\">) {\n  return (\n    <textarea\n      data-slot=\"textarea\"\n      className={cn(\n        \"flex field-sizing-content min-h-16 w-full rounded-lg border border-input bg-transparent px-2.5 py-2 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Textarea };\n"
+    },
+    {
+      "path": "textarea/Textarea.types.ts",
+      "type": "types",
+      "content": "export type TextareaProps = Record<string, unknown>;\n"
+    },
+    {
+      "path": "textarea/index.ts",
+      "type": "index",
+      "content": "export { Textarea } from \"./Textarea\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"dark bg-background p-6\">\n      <Textarea />\n    </div>"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ JabKit is a source-distributed React component library. Every component must be 
 - Atoms may depend on other atoms through declared `registryDependencies`. Atoms never depend on marketing or dashboard. Marketing and dashboard never depend on each other.
 - Every component has a typed prop file, metadata, at least two stories, and a `ThemeComparison` story.
 - Stories are the source for component examples. Generated registry JSON is never edited by hand.
+- `apps/showcase/public/r/*.json` is generated and committed. Run `pnpm registry:build` and commit its output with every component add or change.
 - MCP tools are read-only. The CLI writes source files.
 - An installed component is pristine before any requested local edits are applied.
 

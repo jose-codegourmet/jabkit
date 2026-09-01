@@ -17,7 +17,8 @@
     "typecheck": "turbo run typecheck",
     "check:conventions": "tsx scripts/check-conventions.ts",
     "registry:build": "pnpm --filter @jabkit/build-registry build",
-    "check": "pnpm lint && pnpm typecheck && pnpm check:conventions && pnpm registry:build"
+    "registry:verify": "pnpm registry:build && git diff --exit-code -- apps/showcase/public/r",
+    "check": "pnpm lint && pnpm typecheck && pnpm check:conventions && pnpm registry:verify"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.15",
