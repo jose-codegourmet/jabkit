@@ -133,7 +133,9 @@ function MetricCard({ metric }: { metric: Hero307Metric }) {
         {metric.label}
       </p>
       <div className="mt-2 flex items-end justify-between gap-2">
-        <p className="text-lg font-semibold tracking-[-0.03em]">{metric.value}</p>
+        <p className="text-lg font-semibold tracking-[-0.03em]">
+          {metric.value}
+        </p>
         <p
           className={cn(
             "font-mono text-[10px]",
@@ -164,11 +166,7 @@ function AreaChart({ values }: { values: number[] }) {
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="var(--jk-chart-1)" stopOpacity="0.4" />
-            <stop
-              offset="100%"
-              stopColor="var(--jk-chart-1)"
-              stopOpacity="0"
-            />
+            <stop offset="100%" stopColor="var(--jk-chart-1)" stopOpacity="0" />
           </linearGradient>
         </defs>
         <path d={area} fill={`url(#${gradientId})`} />
@@ -190,10 +188,7 @@ function BarChart({ bars }: { bars: Hero307Bar[] }) {
       <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
         Weekly volume
       </p>
-      <div
-        className="mt-3 flex h-24 items-end gap-1.5"
-        aria-hidden="true"
-      >
+      <div className="mt-3 flex h-24 items-end gap-1.5" aria-hidden="true">
         {bars.map((bar) => (
           <div
             key={bar.label}
@@ -253,7 +248,10 @@ function DataTable({ rows }: { rows: Hero307Row[] }) {
         </thead>
         <tbody>
           {rows.map((row) => (
-            <tr key={`${row.product}-${row.amount}`} className="border-b border-border last:border-0">
+            <tr
+              key={`${row.product}-${row.amount}`}
+              className="border-b border-border last:border-0"
+            >
               <td className="px-3 py-2 font-medium">{row.product}</td>
               <td className="px-3 py-2">
                 <span className="rounded-full border border-border bg-muted px-2 py-0.5 font-mono text-[10px]">
@@ -300,13 +298,7 @@ function ActivityFeed({ items }: { items: Hero307Activity[] }) {
   );
 }
 
-function Sidebar({
-  brand,
-  nav,
-}: {
-  brand: string;
-  nav: Hero307NavItem[];
-}) {
+function Sidebar({ brand, nav }: { brand: string; nav: Hero307NavItem[] }) {
   return (
     <aside className="hidden w-40 shrink-0 flex-col border-r border-border bg-muted/40 p-3 sm:flex">
       <div className="flex items-center gap-2 px-1">
@@ -353,7 +345,7 @@ function DashboardPreview({
   reducedMotion: boolean;
 }) {
   return (
-    <div
+    <section
       className="relative mx-auto w-full max-w-5xl [perspective:1400px]"
       aria-label="Dashboard preview"
     >
@@ -456,7 +448,7 @@ function DashboardPreview({
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
