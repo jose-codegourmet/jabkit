@@ -28,6 +28,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/atoms/tooltip/Tooltip";
+import { CaseStudies11 } from "@/marketing/case-studies11/CaseStudies11";
+import { caseStudies11Mocks } from "@/marketing/case-studies11/CaseStudies11.mocks";
 import { CaseStudies13 } from "@/marketing/case-studies13/CaseStudies13";
 import {
   caseStudies13EditorialMocks,
@@ -197,6 +199,16 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
             <TooltipContent>Helpful context</TooltipContent>
           </Tooltip>
         </TooltipProvider>
+      );
+    case "case-studies11":
+      return (
+        <div className="w-full">
+          <CaseStudies11
+            {...(alternate
+              ? caseStudies11Mocks.alternate
+              : caseStudies11Mocks.default)}
+          />
+        </div>
       );
     case "case-studies13":
       if (story === "ThemeComparison") {
