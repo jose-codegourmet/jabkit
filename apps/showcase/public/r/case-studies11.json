@@ -1,0 +1,60 @@
+{
+  "name": "case-studies11",
+  "displayName": "CaseStudies11",
+  "version": "1.0.0",
+  "addedAt": "2026-09-03",
+  "description": "Centered case-study section with a three-column grid of portrait poster cards — full-bleed photography, a bottom gradient, company mark, and title.",
+  "tags": [
+    "case-studies",
+    "marketing",
+    "grid",
+    "cards",
+    "gallery",
+    "landing",
+    "testimonials"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "case-studies11/CaseStudies11.tsx",
+      "type": "component",
+      "content": "import { useId } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  CaseStudies11Props,\n  CaseStudies11Study,\n} from \"./CaseStudies11.types\";\n\nconst DEFAULT_TITLE = \"Work that changed the room\";\nconst DEFAULT_DESCRIPTION =\n  \"Three featured stories. Poster-like plates with the company mark and the outcome — no carousel, no extra copy on the cards.\";\n\nconst DEFAULT_STUDIES: CaseStudies11Study[] = [\n  {\n    company: \"Harbor\",\n    title: \"Night docks that stay on the clock\",\n    image:\n      \"https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&h=1200&q=80\",\n    imageAlt: \"Shipping containers stacked along a lit harbor dock\",\n    href: \"#harbor\",\n  },\n  {\n    company: \"Northline\",\n    title: \"A quieter console for the lab floor\",\n    image:\n      \"https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&h=1200&q=80\",\n    imageAlt: \"Researcher reviewing data on a laptop in a bright lab\",\n    href: \"#northline\",\n  },\n  {\n    company: \"Fieldwork\",\n    title: \"From brief to built in one studio\",\n    image:\n      \"https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&h=1200&q=80\",\n    imageAlt: \"Sunlit studio desks with plants and open laptops\",\n    href: \"#fieldwork\",\n  },\n];\n\nfunction CompanyMark({ study }: { study: CaseStudies11Study }) {\n  if (study.logoSrc) {\n    return (\n      <img\n        src={study.logoSrc}\n        alt={study.logoAlt ?? study.company}\n        className=\"h-7 w-auto max-w-32 object-contain\"\n      />\n    );\n  }\n\n  return (\n    <span className=\"flex items-center gap-2\">\n      <span\n        aria-hidden=\"true\"\n        className=\"grid size-7 place-items-center rounded-md border border-foreground/20 bg-foreground/10 font-mono text-[11px] font-semibold tracking-tight\"\n      >\n        {study.company.slice(0, 1)}\n      </span>\n      <span className=\"text-sm font-semibold tracking-[-0.03em]\">\n        {study.company}\n      </span>\n    </span>\n  );\n}\n\nfunction CaseStudyCard({ study }: { study: CaseStudies11Study }) {\n  const label = `${study.company}: ${study.title}`;\n  const className =\n    \"group relative block aspect-[3/4] overflow-hidden rounded-[calc(var(--radius)+0.15rem)] border border-border bg-muted shadow-[0_28px_56px_-36px_color-mix(in_oklab,var(--jk-foreground),transparent_50%)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\";\n\n  const body = (\n    <>\n      <img\n        src={study.image}\n        alt={study.imageAlt}\n        className=\"absolute inset-0 size-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100\"\n      />\n      <div\n        aria-hidden=\"true\"\n        className=\"dark pointer-events-none absolute inset-0 bg-gradient-to-t from-background from-[12%] via-background/70 to-transparent\"\n      />\n      <div className=\"dark absolute inset-x-0 bottom-0 z-10 flex flex-col items-start gap-3 p-5 text-foreground sm:p-6\">\n        <CompanyMark study={study} />\n        <p className=\"text-lg leading-snug font-semibold tracking-[-0.035em] text-balance sm:text-xl\">\n          {study.title}\n        </p>\n      </div>\n    </>\n  );\n\n  if (study.href) {\n    return (\n      <a href={study.href} aria-label={label} className={className}>\n        {body}\n      </a>\n    );\n  }\n\n  return <article className={className}>{body}</article>;\n}\n\nexport function CaseStudies11({\n  className,\n  title = DEFAULT_TITLE,\n  description = DEFAULT_DESCRIPTION,\n  studies = DEFAULT_STUDIES,\n  ...props\n}: CaseStudies11Props) {\n  const headingId = useId();\n  const featured = studies.slice(0, 3);\n\n  return (\n    <section\n      data-slot=\"case-studies11\"\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24\">\n        <header className=\"mx-auto max-w-2xl text-center\">\n          <h2\n            id={headingId}\n            className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl lg:text-5xl\"\n          >\n            {title}\n          </h2>\n          {description ? (\n            <p className=\"mt-4 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8\">\n              {description}\n            </p>\n          ) : null}\n        </header>\n\n        {featured.length ? (\n          <ul className=\"mt-12 grid list-none gap-5 p-0 sm:mt-16 md:grid-cols-3 md:gap-6\">\n            {featured.map((study) => (\n              <li key={`${study.company}-${study.title}`}>\n                <CaseStudyCard study={study} />\n              </li>\n            ))}\n          </ul>\n        ) : null}\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "case-studies11/CaseStudies11.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface CaseStudies11Study {\n  company: string;\n  title: string;\n  image: string;\n  imageAlt: string;\n  href?: string;\n  logoSrc?: string;\n  logoAlt?: string;\n}\n\nexport interface CaseStudies11Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  title?: string;\n  description?: string;\n  studies?: CaseStudies11Study[];\n}\n"
+    },
+    {
+      "path": "case-studies11/index.ts",
+      "type": "index",
+      "content": "export { CaseStudies11 } from \"./CaseStudies11\";\nexport type {\n  CaseStudies11Props,\n  CaseStudies11Study,\n} from \"./CaseStudies11.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <CaseStudies11 {...caseStudies11Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <CaseStudies11 {...caseStudies11Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
