@@ -40,7 +40,7 @@
     {
       "path": "compare5/index.ts",
       "type": "index",
-      "content": "export { Compare5 } from \"./Compare5\";\nexport type {\n  Compare5Action,\n  Compare5Option,\n  Compare5Props,\n} from \"./Compare5.types\";\n"
+      "content": "export { Compare5 } from \"./Compare5\";\nexport type * from \"./Compare5.types\";\n"
     },
     {
       "path": "lib/cn.ts",
