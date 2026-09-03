@@ -226,6 +226,32 @@
     }
   },
   {
+    "name": "case-studies13",
+    "displayName": "CaseStudies13",
+    "category": "marketing",
+    "description": "Four-column case-study grid with cover photographs, large outcome metrics, category badges, and short client stories.",
+    "tags": [
+      "case-studies",
+      "marketing",
+      "portfolio",
+      "metrics",
+      "grid",
+      "proof",
+      "landing"
+    ],
+    "addedAt": "2026-09-03",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 980
+    }
+  },
+  {
     "name": "hero-section-5",
     "displayName": "HeroSection5",
     "category": "marketing",
