@@ -280,6 +280,31 @@
     }
   },
   {
+    "name": "compare5",
+    "displayName": "Compare5",
+    "category": "marketing",
+    "description": "Centered old-versus-new marketing compare with two tall photo cards, bottom scrims, outline actions, and a circular OR chip in the gutter.",
+    "tags": [
+      "compare",
+      "marketing",
+      "cards",
+      "cta",
+      "landing",
+      "photography"
+    ],
+    "addedAt": "2026-09-03",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 980
+    }
+  },
+  {
     "name": "hero-section-5",
     "displayName": "HeroSection5",
     "category": "marketing",

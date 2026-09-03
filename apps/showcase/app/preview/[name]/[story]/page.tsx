@@ -35,6 +35,8 @@ import {
 } from "@/marketing/case-studies13/CaseStudies13.mocks";
 import { CodeExample14 } from "@/marketing/code-example14/CodeExample14";
 import { codeExample14Mocks } from "@/marketing/code-example14/CodeExample14.mocks";
+import { Compare5 } from "@/marketing/compare5/Compare5";
+import { compare5Mocks } from "@/marketing/compare5/Compare5.mocks";
 import { HeroSection5 } from "@/marketing/hero-section-5/HeroSection5";
 import { heroSection5EditorialMocks } from "@/marketing/hero-section-5/HeroSection5.mocks";
 import { Hero146 } from "@/marketing/hero146/Hero146";
@@ -235,6 +237,26 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
             {...(alternate
               ? codeExample14Mocks.alternate
               : codeExample14Mocks.default)}
+          />
+        </div>
+      );
+    case "compare5":
+      if (story === "ThemeComparison") {
+        return (
+          <div className="grid gap-px overflow-hidden border-border bg-border lg:grid-cols-2">
+            <div className="bg-background">
+              <Compare5 {...compare5Mocks.default} />
+            </div>
+            <div className="dark bg-background">
+              <Compare5 {...compare5Mocks.default} />
+            </div>
+          </div>
+        );
+      }
+      return (
+        <div className="w-full">
+          <Compare5
+            {...(alternate ? compare5Mocks.alternate : compare5Mocks.default)}
           />
         </div>
       );
