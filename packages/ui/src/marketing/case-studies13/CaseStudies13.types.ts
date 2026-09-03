@@ -24,6 +24,6 @@ export interface CaseStudies13Props
   extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   title?: string;
   description?: string;
-  allWork?: CaseStudies13Link;
+  allWork?: CaseStudies13Link | null;
   studies?: CaseStudies13Study[];
 }
