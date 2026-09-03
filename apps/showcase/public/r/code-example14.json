@@ -43,7 +43,7 @@
     {
       "path": "code-example14/index.ts",
       "type": "index",
-      "content": "export { CodeExample14 } from \"./CodeExample14\";\nexport type {\n  CodeExample14Action,\n  CodeExample14Icon,\n  CodeExample14Item,\n  CodeExample14Props,\n} from \"./CodeExample14.types\";\n"
+      "content": "export { CodeExample14 } from \"./CodeExample14\";\nexport type { CodeExample14Props } from \"./CodeExample14.types\";\n"
     },
     {
       "path": "lib/cn.ts",
