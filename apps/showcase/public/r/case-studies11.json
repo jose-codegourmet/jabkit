@@ -39,7 +39,7 @@
     {
       "path": "case-studies11/index.ts",
       "type": "index",
-      "content": "export { CaseStudies11 } from \"./CaseStudies11\";\nexport type {\n  CaseStudies11Props,\n  CaseStudies11Study,\n} from \"./CaseStudies11.types\";\n"
+      "content": "export { CaseStudies11 } from \"./CaseStudies11\";\nexport type * from \"./CaseStudies11.types\";\n"
     },
     {
       "path": "lib/cn.ts",
