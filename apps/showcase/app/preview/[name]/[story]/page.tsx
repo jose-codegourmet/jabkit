@@ -28,6 +28,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/atoms/tooltip/Tooltip";
+import { CaseStudies13 } from "@/marketing/case-studies13/CaseStudies13";
+import {
+  caseStudies13EditorialMocks,
+  caseStudies13Mocks,
+} from "@/marketing/case-studies13/CaseStudies13.mocks";
 import { CodeExample14 } from "@/marketing/code-example14/CodeExample14";
 import { codeExample14Mocks } from "@/marketing/code-example14/CodeExample14.mocks";
 import { HeroSection5 } from "@/marketing/hero-section-5/HeroSection5";
@@ -190,6 +195,26 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
             <TooltipContent>Helpful context</TooltipContent>
           </Tooltip>
         </TooltipProvider>
+      );
+    case "case-studies13":
+      if (story === "ThemeComparison") {
+        return (
+          <div className="grid gap-px overflow-hidden border-border bg-border lg:grid-cols-2">
+            <div className="bg-background">
+              <CaseStudies13 {...caseStudies13Mocks} />
+            </div>
+            <div className="dark bg-background">
+              <CaseStudies13 {...caseStudies13Mocks} />
+            </div>
+          </div>
+        );
+      }
+      return (
+        <div className="w-full">
+          <CaseStudies13
+            {...(alternate ? caseStudies13EditorialMocks : caseStudies13Mocks)}
+          />
+        </div>
       );
     case "code-example14":
       if (story === "ThemeComparison") {
