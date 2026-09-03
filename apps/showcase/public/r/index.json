@@ -252,6 +252,85 @@
     }
   },
   {
+    "name": "case-studies13",
+    "displayName": "CaseStudies13",
+    "category": "marketing",
+    "description": "Four-column case-study grid with cover photographs, large outcome metrics, category badges, and short client stories.",
+    "tags": [
+      "case-studies",
+      "marketing",
+      "portfolio",
+      "metrics",
+      "grid",
+      "proof",
+      "landing"
+    ],
+    "addedAt": "2026-09-03",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 980
+    }
+  },
+  {
+    "name": "code-example14",
+    "displayName": "CodeExample14",
+    "category": "marketing",
+    "description": "File-ops marketing section with a dotted radial wash, dual CTAs, accordion rows for create/update/delete, and a synced TypeScript snippet with copy.",
+    "tags": [
+      "code",
+      "example",
+      "marketing",
+      "accordion",
+      "docs",
+      "sdk",
+      "cta",
+      "files",
+      "landing"
+    ],
+    "addedAt": "2026-09-03",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "name": "compare5",
+    "displayName": "Compare5",
+    "category": "marketing",
+    "description": "Centered old-versus-new marketing compare with two tall photo cards, bottom scrims, outline actions, and a circular OR chip in the gutter.",
+    "tags": [
+      "compare",
+      "marketing",
+      "cards",
+      "cta",
+      "landing",
+      "photography"
+    ],
+    "addedAt": "2026-09-03",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 980
+    }
+  },
+  {
     "name": "hero-section-5",
     "displayName": "HeroSection5",
     "category": "marketing",

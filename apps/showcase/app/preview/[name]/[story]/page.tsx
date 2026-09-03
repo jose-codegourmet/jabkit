@@ -30,6 +30,15 @@ import {
 } from "@/atoms/tooltip/Tooltip";
 import { CaseStudies11 } from "@/marketing/case-studies11/CaseStudies11";
 import { caseStudies11Mocks } from "@/marketing/case-studies11/CaseStudies11.mocks";
+import { CaseStudies13 } from "@/marketing/case-studies13/CaseStudies13";
+import {
+  caseStudies13EditorialMocks,
+  caseStudies13Mocks,
+} from "@/marketing/case-studies13/CaseStudies13.mocks";
+import { CodeExample14 } from "@/marketing/code-example14/CodeExample14";
+import { codeExample14Mocks } from "@/marketing/code-example14/CodeExample14.mocks";
+import { Compare5 } from "@/marketing/compare5/Compare5";
+import { compare5Mocks } from "@/marketing/compare5/Compare5.mocks";
 import { HeroSection5 } from "@/marketing/hero-section-5/HeroSection5";
 import { heroSection5EditorialMocks } from "@/marketing/hero-section-5/HeroSection5.mocks";
 import { Hero146 } from "@/marketing/hero146/Hero146";
@@ -198,6 +207,68 @@ function PreviewContent({ name, story }: { name: string; story: string }) {
             {...(alternate
               ? caseStudies11Mocks.alternate
               : caseStudies11Mocks.default)}
+          />
+        </div>
+      );
+    case "case-studies13":
+      if (story === "ThemeComparison") {
+        return (
+          <div className="grid gap-px overflow-hidden border-border bg-border lg:grid-cols-2">
+            <div className="bg-background">
+              <CaseStudies13 {...caseStudies13Mocks} />
+            </div>
+            <div className="dark bg-background">
+              <CaseStudies13 {...caseStudies13Mocks} />
+            </div>
+          </div>
+        );
+      }
+      return (
+        <div className="w-full">
+          <CaseStudies13
+            {...(alternate ? caseStudies13EditorialMocks : caseStudies13Mocks)}
+          />
+        </div>
+      );
+    case "code-example14":
+      if (story === "ThemeComparison") {
+        return (
+          <div className="grid gap-px overflow-hidden border-border bg-border lg:grid-cols-2">
+            <div className="bg-background">
+              <CodeExample14 {...codeExample14Mocks.default} />
+            </div>
+            <div className="dark bg-background">
+              <CodeExample14 {...codeExample14Mocks.default} />
+            </div>
+          </div>
+        );
+      }
+      return (
+        <div className="w-full">
+          <CodeExample14
+            {...(alternate
+              ? codeExample14Mocks.alternate
+              : codeExample14Mocks.default)}
+          />
+        </div>
+      );
+    case "compare5":
+      if (story === "ThemeComparison") {
+        return (
+          <div className="grid gap-px overflow-hidden border-border bg-border lg:grid-cols-2">
+            <div className="bg-background">
+              <Compare5 {...compare5Mocks.default} />
+            </div>
+            <div className="dark bg-background">
+              <Compare5 {...compare5Mocks.default} />
+            </div>
+          </div>
+        );
+      }
+      return (
+        <div className="w-full">
+          <Compare5
+            {...(alternate ? compare5Mocks.alternate : compare5Mocks.default)}
           />
         </div>
       );
