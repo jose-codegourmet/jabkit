@@ -8,11 +8,7 @@ import {
 import { useId, useState } from "react";
 import { Button } from "@/atoms/button";
 import { cn } from "@/lib/cn";
-import type {
-  Team14Action,
-  Team14Member,
-  Team14Props,
-} from "./Team14.types";
+import type { Team14Action, Team14Member, Team14Props } from "./Team14.types";
 
 const DEFAULT_TITLE = "We're hiring";
 const DEFAULT_DESCRIPTION =
