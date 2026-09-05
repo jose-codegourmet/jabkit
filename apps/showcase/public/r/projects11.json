@@ -1,0 +1,61 @@
+{
+  "name": "projects11",
+  "displayName": "Projects11",
+  "version": "1.0.0",
+  "addedAt": "2026-09-05",
+  "description": "Masonry project photo wall in CSS columns — twelve unframed images that rise into view on scroll and lift with a brightness overlay on hover.",
+  "tags": [
+    "projects",
+    "gallery",
+    "marketing",
+    "masonry",
+    "portfolio",
+    "photography",
+    "hover",
+    "landing"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 1600
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "projects11/Projects11.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { useEffect, useRef } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  Projects11Aspect,\n  Projects11Image,\n  Projects11Props,\n} from \"./Projects11.types\";\n\nconst DEFAULT_LABEL = \"Selected projects\";\n\nconst DEFAULT_IMAGES: Projects11Image[] = [\n  {\n    src: \"/assets/d3f9bde61c9a29e7.webp\",\n    alt: \"Empty office corridor with glass rooms and daylight\",\n    aspect: \"landscape\",\n    href: \"#corridor\",\n  },\n  {\n    src: \"/assets/462c849dc9a41e59.webp\",\n    alt: \"Sunlit studio desks with plants and open notebooks\",\n    aspect: \"tall\",\n    href: \"#studio\",\n  },\n  {\n    src: \"/assets/6cc11e462a9aaded.webp\",\n    alt: \"Arc floor lamp lighting a quiet corner\",\n    aspect: \"square\",\n    href: \"#lamp\",\n  },\n  {\n    src: \"/assets/97c532d558fa4fbc.webp\",\n    alt: \"Concrete structure photographed from the ground\",\n    aspect: \"portrait\",\n    href: \"#concrete\",\n  },\n  {\n    src: \"/assets/462a1be29787cd8e.webp\",\n    alt: \"Low oak lounge chair on a pale floor\",\n    aspect: \"landscape\",\n    href: \"#lounge\",\n  },\n  {\n    src: \"/assets/488fa5330da1224c.webp\",\n    alt: \"Sculptural stone side table in a sunlit room\",\n    aspect: \"tall\",\n    href: \"#stone\",\n  },\n  {\n    src: \"/assets/7cb36691e11ed9af.webp\",\n    alt: \"Linen daybed against a plaster wall\",\n    aspect: \"portrait\",\n    href: \"#daybed\",\n  },\n  {\n    src: \"/assets/4f6410f5452c0ba5.webp\",\n    alt: \"Hand-thrown ceramic pendant light\",\n    aspect: \"square\",\n    href: \"#pendant\",\n  },\n  {\n    src: \"/assets/d7eddb427ba6f203.webp\",\n    alt: \"Shipping containers stacked along a lit harbor dock\",\n    aspect: \"tall\",\n    href: \"#harbor\",\n  },\n  {\n    src: \"/assets/4cc437eeea3384d1.webp\",\n    alt: \"Researcher reviewing data on a laptop in a bright lab\",\n    aspect: \"landscape\",\n    href: \"#lab\",\n  },\n  {\n    src: \"/assets/dd6c26bc44cd7218.webp\",\n    alt: \"Glass office atrium with warm interior lighting\",\n    aspect: \"portrait\",\n    href: \"#atrium\",\n  },\n  {\n    src: \"/assets/672651fa6e0f526b.webp\",\n    alt: \"Architectural concrete stairwell with a skylight\",\n    aspect: \"square\",\n    href: \"#stair\",\n  },\n];\n\nconst FALLBACK_ASPECT: Projects11Aspect[] = [\n  \"landscape\",\n  \"tall\",\n  \"square\",\n  \"portrait\",\n  \"landscape\",\n  \"tall\",\n  \"portrait\",\n  \"square\",\n  \"tall\",\n  \"landscape\",\n  \"portrait\",\n  \"square\",\n];\n\nconst ASPECT_CLASS: Record<Projects11Aspect, string> = {\n  landscape: \"aspect-[4/3]\",\n  portrait: \"aspect-[3/4]\",\n  square: \"aspect-square\",\n  tall: \"aspect-[2/3]\",\n};\n\nfunction MasonryPhoto({\n  image,\n  index,\n}: {\n  image: Projects11Image;\n  index: number;\n}) {\n  const ref = useRef<HTMLDivElement>(null);\n  const aspect =\n    image.aspect ?? FALLBACK_ASPECT[index % FALLBACK_ASPECT.length];\n\n  useEffect(() => {\n    const node = ref.current;\n    if (!node) return;\n    if (window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n\n    const observer = new IntersectionObserver(\n      (entries) => {\n        if (entries[0]?.isIntersecting) {\n          node.dataset.inview = \"true\";\n          observer.disconnect();\n        }\n      },\n      { threshold: 0.12, rootMargin: \"0px 0px -6% 0px\" },\n    );\n\n    observer.observe(node);\n    return () => observer.disconnect();\n  }, []);\n\n  const body = (\n    <>\n      <img\n        src={image.src}\n        alt={image.alt}\n        className={cn(\n          \"w-full object-cover transition-[transform,filter] duration-500 ease-out\",\n          \"group-hover:scale-[1.04] group-hover:brightness-110\",\n          \"motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-hover:brightness-100\",\n          ASPECT_CLASS[aspect],\n        )}\n      />\n      <span\n        aria-hidden=\"true\"\n        className=\"pointer-events-none absolute inset-0 bg-foreground/0 transition-colors duration-500 ease-out group-hover:bg-foreground/35 motion-reduce:transition-none motion-reduce:group-hover:bg-foreground/0\"\n      />\n    </>\n  );\n\n  const frameClass = cn(\n    \"group relative block overflow-hidden bg-muted\",\n    \"outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n  );\n\n  return (\n    <div\n      ref={ref}\n      className=\"jk-projects11-item mb-4 break-inside-avoid\"\n      style={{ animationDelay: `${Math.min(index, 11) * 70}ms` }}\n    >\n      {image.href ? (\n        <a href={image.href} className={frameClass}>\n          {body}\n        </a>\n      ) : (\n        <div className={frameClass}>{body}</div>\n      )}\n    </div>\n  );\n}\n\nexport function Projects11({\n  className,\n  label = DEFAULT_LABEL,\n  images = DEFAULT_IMAGES,\n  ...props\n}: Projects11Props) {\n  return (\n    <section\n      data-slot=\"projects11\"\n      aria-label={label}\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <style href=\"jk-projects11\" precedence=\"default\">{`\n        @keyframes jk-projects11-rise {\n          from { opacity: 0; transform: translateY(1.25rem); }\n          to { opacity: 1; transform: none; }\n        }\n        .jk-projects11-item {\n          animation: jk-projects11-rise 0.75s ease-out both;\n          animation-play-state: paused;\n        }\n        .jk-projects11-item[data-inview=\"true\"] {\n          animation-play-state: running;\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-projects11-item {\n            animation: none;\n          }\n        }\n      `}</style>\n\n      <div className=\"mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24\">\n        <div className=\"columns-1 gap-4 sm:columns-2 lg:columns-3\">\n          {images.map((image, index) => (\n            <MasonryPhoto key={image.src} image={image} index={index} />\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "projects11/Projects11.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type Projects11Aspect = \"landscape\" | \"portrait\" | \"square\" | \"tall\";\n\nexport interface Projects11Image {\n  src: string;\n  alt: string;\n  aspect?: Projects11Aspect;\n  href?: string;\n}\n\nexport interface Projects11Props extends HTMLAttributes<HTMLElement> {\n  label?: string;\n  images?: Projects11Image[];\n}\n"
+    },
+    {
+      "path": "projects11/index.ts",
+      "type": "index",
+      "content": "export { Projects11 } from \"./Projects11\";\nexport type * from \"./Projects11.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Projects11\n        label={projects11Mocks.label}\n        images={projects11Mocks.images}\n      />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Projects11\n        label={projects11AlternateMocks.label}\n        images={projects11AlternateMocks.images}\n      />\n    </div>"
+    }
+  ]
+}
