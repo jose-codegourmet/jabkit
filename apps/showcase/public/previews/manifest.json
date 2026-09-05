@@ -1957,6 +1957,47 @@
           "format": "webp"
         }
       ]
+    },
+    "projects16": {
+      "sourceHash": "3086468d37f844ad107c2d5e5de4750c6ec6dadc0a21b5b4ccce045bf4a476b8",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "projects16.Default.dark.webp",
+          "bytes": 49262,
+          "width": 960,
+          "height": 1051,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "projects16.Variants.dark.webp",
+          "bytes": 40748,
+          "width": 960,
+          "height": 987,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "projects16.ThemeComparison.dark.webp",
+          "bytes": 68758,
+          "width": 960,
+          "height": 933,
+          "format": "webp"
+        }
+      ]
     }
   }
 }

@@ -2,10 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 // biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.
 import * as React from "react";
 import { Projects16 } from "./Projects16";
-import {
-  projects16AlternateMocks,
-  projects16Mocks,
-} from "./Projects16.mocks";
+import { projects16AlternateMocks, projects16Mocks } from "./Projects16.mocks";
 
 const meta = {
   title: "Marketing/Projects16",
