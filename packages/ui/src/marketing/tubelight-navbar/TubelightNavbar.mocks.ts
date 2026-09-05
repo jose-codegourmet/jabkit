@@ -1,31 +1,21 @@
-import {
-  BookOpenIcon,
-  BriefcaseIcon,
-  CameraIcon,
-  FileTextIcon,
-  HomeIcon,
-  MailIcon,
-  SparklesIcon,
-  UserIcon,
-} from "lucide-react";
 import type { TubelightNavbarProps } from "./TubelightNavbar.types";
 
 export const tubelightNavbarMocks = {
   default: {
     items: [
-      { name: "Home", href: "#home", icon: HomeIcon },
-      { name: "About", href: "#about", icon: UserIcon },
-      { name: "Projects", href: "#projects", icon: BriefcaseIcon },
-      { name: "Notes", href: "#notes", icon: FileTextIcon },
+      { name: "Home", href: "#home", icon: "home" },
+      { name: "About", href: "#about", icon: "user" },
+      { name: "Projects", href: "#projects", icon: "briefcase" },
+      { name: "Notes", href: "#notes", icon: "file-text" },
     ],
     defaultActiveName: "Home",
   },
   alternate: {
     items: [
-      { name: "Studio", href: "#studio", icon: SparklesIcon },
-      { name: "Work", href: "#work", icon: CameraIcon },
-      { name: "Journal", href: "#journal", icon: BookOpenIcon },
-      { name: "Contact", href: "#contact", icon: MailIcon },
+      { name: "Studio", href: "#studio", icon: "sparkles" },
+      { name: "Work", href: "#work", icon: "camera" },
+      { name: "Journal", href: "#journal", icon: "book-open" },
+      { name: "Contact", href: "#contact", icon: "mail" },
     ],
     defaultActiveName: "Work",
   },

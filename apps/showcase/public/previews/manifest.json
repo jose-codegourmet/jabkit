@@ -2121,6 +2121,47 @@
           "format": "webp"
         }
       ]
+    },
+    "tubelight-navbar": {
+      "sourceHash": "8653c3fa80c5fb75be0311679344cd65985a51b954fbc283110411311f692928",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "tubelight-navbar.Default.dark.webp",
+          "bytes": 1412,
+          "width": 960,
+          "height": 280,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "tubelight-navbar.Variants.dark.webp",
+          "bytes": 1480,
+          "width": 960,
+          "height": 280,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "tubelight-navbar.ThemeComparison.dark.webp",
+          "bytes": 2244,
+          "width": 960,
+          "height": 280,
+          "format": "webp"
+        }
+      ]
     }
   }
 }

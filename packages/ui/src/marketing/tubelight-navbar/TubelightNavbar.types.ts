@@ -1,10 +1,20 @@
 import type { LucideIcon } from "lucide-react";
 import type { HTMLAttributes } from "react";
 
+export type TubelightNavbarIconName =
+  | "home"
+  | "user"
+  | "briefcase"
+  | "file-text"
+  | "sparkles"
+  | "camera"
+  | "book-open"
+  | "mail";
+
 export interface TubelightNavbarItem {
   name: string;
   href: string;
-  icon: LucideIcon;
+  icon: LucideIcon | TubelightNavbarIconName;
 }
 
 export interface TubelightNavbarProps

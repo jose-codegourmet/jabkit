@@ -1,24 +1,46 @@
 "use client";
 
 import {
+  BookOpenIcon,
   BriefcaseIcon,
+  CameraIcon,
   FileTextIcon,
   HomeIcon,
+  type LucideIcon,
+  MailIcon,
+  SparklesIcon,
   UserIcon,
 } from "lucide-react";
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 import type {
+  TubelightNavbarIconName,
   TubelightNavbarItem,
   TubelightNavbarProps,
 } from "./TubelightNavbar.types";
 
+const namedIcons: Record<TubelightNavbarIconName, LucideIcon> = {
+  home: HomeIcon,
+  user: UserIcon,
+  briefcase: BriefcaseIcon,
+  "file-text": FileTextIcon,
+  sparkles: SparklesIcon,
+  camera: CameraIcon,
+  "book-open": BookOpenIcon,
+  mail: MailIcon,
+};
+
 const defaultItems: TubelightNavbarItem[] = [
-  { name: "Home", href: "#home", icon: HomeIcon },
-  { name: "About", href: "#about", icon: UserIcon },
-  { name: "Projects", href: "#projects", icon: BriefcaseIcon },
-  { name: "Notes", href: "#notes", icon: FileTextIcon },
+  { name: "Home", href: "#home", icon: "home" },
+  { name: "About", href: "#about", icon: "user" },
+  { name: "Projects", href: "#projects", icon: "briefcase" },
+  { name: "Notes", href: "#notes", icon: "file-text" },
 ];
+
+function resolveIcon(icon: TubelightNavbarItem["icon"]): LucideIcon {
+  if (typeof icon === "string") return namedIcons[icon];
+  return icon;
+}
 
 export function TubelightNavbar({
   className,
@@ -45,29 +67,33 @@ export function TubelightNavbar({
     onActiveChange?.(name);
   };
 
-  const updateIndicator = useCallback(() => {
+  useLayoutEffect(() => {
     const root = listRef.current;
     if (!root) return;
-    const active = root.querySelector<HTMLElement>("[data-active=true]");
-    if (!active) return;
-    setIndicator({
-      left: active.offsetLeft,
-      width: active.offsetWidth,
-      ready: true,
-    });
-  }, []);
 
-  useLayoutEffect(() => {
-    updateIndicator();
-    const root = listRef.current;
-    if (!root || typeof ResizeObserver === "undefined") return;
-    const observer = new ResizeObserver(() => updateIndicator());
+    const measure = () => {
+      const activeItem = items.find((item) => item.name === activeName);
+      if (!activeItem) return;
+      const active = root.querySelector<HTMLElement>(
+        `[data-nav-item="${CSS.escape(activeItem.name)}"]`,
+      );
+      if (!active) return;
+      setIndicator({
+        left: active.offsetLeft,
+        width: active.offsetWidth,
+        ready: true,
+      });
+    };
+
+    measure();
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(measure);
     observer.observe(root);
     for (const child of root.children) {
       if (child instanceof HTMLElement) observer.observe(child);
     }
     return () => observer.disconnect();
-  }, [activeName, items, updateIndicator]);
+  }, [activeName, items]);
 
   return (
     <header
@@ -97,7 +123,7 @@ export function TubelightNavbar({
             style={{ left: indicator.left, width: indicator.width }}
           />
           {items.map((item) => {
-            const Icon = item.icon;
+            const Icon = resolveIcon(item.icon);
             const isActive = item.name === activeName;
             return (
               <a
@@ -111,6 +137,7 @@ export function TubelightNavbar({
                     : "text-muted-foreground hover:text-foreground",
                 )}
                 data-active={isActive ? "true" : undefined}
+                data-nav-item={item.name}
                 href={item.href}
                 key={item.name}
                 onClick={() => setActive(item.name)}
