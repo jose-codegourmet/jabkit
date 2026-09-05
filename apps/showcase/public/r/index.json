@@ -700,5 +700,30 @@
       "width": 1440,
       "height": 900
     }
+  },
+  {
+    "name": "login4",
+    "displayName": "Login4",
+    "category": "dashboard",
+    "description": "Centered borderless login with email, password, and full-width Google, Facebook, and GitHub buttons.",
+    "tags": [
+      "auth",
+      "dashboard",
+      "form",
+      "login",
+      "oauth",
+      "social"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
   }
 ]
