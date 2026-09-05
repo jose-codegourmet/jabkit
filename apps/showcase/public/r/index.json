@@ -563,5 +563,33 @@
       "width": 1440,
       "height": 900
     }
+  },
+  {
+    "name": "chart-group14",
+    "displayName": "ChartGroup14",
+    "category": "dashboard",
+    "description": "Analytics bento dashboard with date presets, a custom range calendar, KPI cards, a revenue area chart, traffic donut, top pages, and active people.",
+    "tags": [
+      "dashboard",
+      "charts",
+      "analytics",
+      "bento",
+      "kpi",
+      "date-range",
+      "donut"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1180
+    }
   }
 ]
