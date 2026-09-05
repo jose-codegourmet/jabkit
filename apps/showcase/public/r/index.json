@@ -1003,6 +1003,32 @@
     }
   },
   {
+    "name": "projects16",
+    "displayName": "Projects16",
+    "category": "marketing",
+    "description": "Editorial project gallery with a medium-weight heading, a two-column staggered 4:3 and 4:5 photo grid, and a link action beneath a short paragraph.",
+    "tags": [
+      "projects",
+      "gallery",
+      "marketing",
+      "portfolio",
+      "photography",
+      "editorial",
+      "landing"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1400
+    }
+  },
+  {
     "name": "team11",
     "displayName": "Team11",
     "category": "marketing",
