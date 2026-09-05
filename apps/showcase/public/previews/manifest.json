@@ -2080,6 +2080,47 @@
           "format": "webp"
         }
       ]
+    },
+    "projects13": {
+      "sourceHash": "86ad52ecaca7aedc0be328fdf1c8e2960c200aeab2438494593d53b12f57c6ea",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "projects13.Default.dark.webp",
+          "bytes": 32700,
+          "width": 960,
+          "height": 733,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "projects13.Variants.dark.webp",
+          "bytes": 26860,
+          "width": 960,
+          "height": 733,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "projects13.ThemeComparison.dark.webp",
+          "bytes": 66862,
+          "width": 960,
+          "height": 1011,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
