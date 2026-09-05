@@ -1,0 +1,62 @@
+{
+  "name": "awards6",
+  "displayName": "Awards6",
+  "version": "1.0.0",
+  "addedAt": "2026-09-05",
+  "description": "Milestones ledger with a display heading, labeled columns, and separator rows for title, type, and year.",
+  "tags": [
+    "awards",
+    "milestones",
+    "marketing",
+    "timeline",
+    "achievements",
+    "landing",
+    "grid"
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "separator"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 980
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "awards6/Awards6.tsx",
+      "type": "component",
+      "content": "import { useId } from \"react\";\nimport { Separator } from \"@/atoms/separator\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  Awards6ColumnLabels,\n  Awards6Item,\n  Awards6Props,\n} from \"./Awards6.types\";\n\nconst DEFAULT_TITLE = \"Milestones\";\nconst DEFAULT_SUBTITLE = \"& Achievements.\";\n\nconst DEFAULT_COLUMN_LABELS: Awards6ColumnLabels = {\n  milestone: \"Milestone\",\n  type: \"Type\",\n  year: \"Year\",\n};\n\nconst DEFAULT_ITEMS: Awards6Item[] = [\n  {\n    title: \"Opened the studio with four desks and one printer\",\n    type: \"Founding\",\n    year: \"2018\",\n  },\n  {\n    title: \"Harbor grocery rebuild named Site of the Day\",\n    type: \"Recognition\",\n    year: \"2021\",\n  },\n  {\n    title: \"Season book for Lumen lighting, two inks only\",\n    type: \"Publication\",\n    year: \"2022\",\n  },\n  {\n    title: \"Northline console shipped as a live sales demo\",\n    type: \"Product\",\n    year: \"2023\",\n  },\n  {\n    title: \"Civic wayfinding system adopted across three halls\",\n    type: \"Public work\",\n    year: \"2024\",\n  },\n  {\n    title: \"Studio award for identity that holds at postage size\",\n    type: \"Identity\",\n    year: \"2025\",\n  },\n];\n\nfunction padIndex(index: number) {\n  return String(index + 1).padStart(2, \"0\");\n}\n\nexport function Awards6({\n  className,\n  title = DEFAULT_TITLE,\n  subtitle = DEFAULT_SUBTITLE,\n  columnLabels = DEFAULT_COLUMN_LABELS,\n  items = DEFAULT_ITEMS,\n  ...props\n}: Awards6Props) {\n  const headingId = useId();\n  const labels = { ...DEFAULT_COLUMN_LABELS, ...columnLabels };\n\n  return (\n    <section\n      data-slot=\"awards6\"\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24\">\n        <header className=\"grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4\">\n          <div className=\"hidden lg:block\" aria-hidden=\"true\" />\n          <div className=\"md:col-span-3\">\n            <h2\n              id={headingId}\n              className=\"text-5xl font-semibold tracking-[-0.07em] text-balance sm:text-7xl lg:text-8xl\"\n            >\n              {title}\n            </h2>\n            {subtitle ? (\n              <p className=\"mt-2 text-2xl font-medium tracking-[-0.04em] text-muted-foreground sm:text-3xl lg:text-4xl\">\n                {subtitle}\n              </p>\n            ) : null}\n          </div>\n        </header>\n\n        <div className=\"mt-12 sm:mt-16\">\n          <div\n            className=\"hidden grid-cols-3 items-end pb-3 text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase md:grid lg:grid-cols-4\"\n            aria-hidden=\"true\"\n          >\n            <span className=\"hidden lg:block\" />\n            <span className=\"md:col-span-2\">{labels.milestone}</span>\n            <div className=\"flex items-baseline justify-between gap-4\">\n              <span>{labels.type}</span>\n              <span>{labels.year}</span>\n            </div>\n          </div>\n          <Separator className=\"hidden md:block\" />\n\n          <ol className=\"m-0 list-none p-0\">\n            {items.map((item, index) => (\n              <li key={`${item.year}-${item.title}`}>\n                {index > 0 ? <Separator /> : null}\n                <article className=\"grid grid-cols-1 items-baseline gap-2 py-5 md:grid-cols-3 md:gap-6 lg:grid-cols-4\">\n                  <span className=\"hidden font-mono text-sm text-muted-foreground tabular-nums lg:block\">\n                    {padIndex(index)}\n                  </span>\n                  <h3 className=\"text-base font-semibold tracking-[-0.03em] text-balance md:col-span-2 sm:text-lg\">\n                    {item.title}\n                  </h3>\n                  <div className=\"flex items-baseline justify-between gap-4 text-sm\">\n                    <span className=\"text-muted-foreground\">{item.type}</span>\n                    <span className=\"font-mono tabular-nums text-foreground\">\n                      {item.year}\n                    </span>\n                  </div>\n                </article>\n              </li>\n            ))}\n          </ol>\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "awards6/Awards6.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface Awards6Item {\n  title: string;\n  type: string;\n  year: string;\n}\n\nexport interface Awards6ColumnLabels {\n  milestone: string;\n  type: string;\n  year: string;\n}\n\nexport interface Awards6Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  title?: string;\n  subtitle?: string;\n  columnLabels?: Awards6ColumnLabels;\n  items?: Awards6Item[];\n}\n"
+    },
+    {
+      "path": "awards6/index.ts",
+      "type": "index",
+      "content": "export { Awards6 } from \"./Awards6\";\nexport type * from \"./Awards6.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Awards6 {...awards6Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Awards6 {...awards6Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
