@@ -1834,6 +1834,47 @@
           "format": "webp"
         }
       ]
+    },
+    "verify-email1": {
+      "sourceHash": "07fb322cd316f5570b6a3319889af3d74d5e54eaedb6035d79e6c288a2311a58",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "verify-email1.Default.dark.webp",
+          "bytes": 5310,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "verify-email1.Variants.dark.webp",
+          "bytes": 5804,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "verify-email1.ThemeComparison.dark.webp",
+          "bytes": 9260,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
     }
   }
 }

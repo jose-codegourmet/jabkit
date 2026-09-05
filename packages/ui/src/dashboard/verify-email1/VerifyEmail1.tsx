@@ -55,7 +55,9 @@ function Brand({
         ) : (
           <BrandMark name={logo.name} />
         ))}
-      <span className="text-sm font-medium tracking-[-0.01em]">{logo.name}</span>
+      <span className="text-sm font-medium tracking-[-0.01em]">
+        {logo.name}
+      </span>
     </>
   );
 
