@@ -1916,6 +1916,47 @@
           "format": "webp"
         }
       ]
+    },
+    "product-quick-view4": {
+      "sourceHash": "5c091f48a3864777310200cba7d21e24276de1d8159a63dfe7d8258d0584e0a1",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "product-quick-view4.Default.dark.webp",
+          "bytes": 30328,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "product-quick-view4.Variants.dark.webp",
+          "bytes": 20144,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "product-quick-view4.ThemeComparison.dark.webp",
+          "bytes": 42664,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
