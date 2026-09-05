@@ -1,0 +1,60 @@
+{
+  "name": "team11",
+  "displayName": "Team11",
+  "version": "1.0.0",
+  "addedAt": "2026-09-05",
+  "description": "Bordered team header above a dense member grid that reveals a highlighted bio card on hover and keyboard focus from medium screens up.",
+  "tags": [
+    "team",
+    "marketing",
+    "grid",
+    "hover",
+    "portraits",
+    "bios",
+    "landing"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 1100
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "team11/Team11.tsx",
+      "type": "component",
+      "content": "import { useId } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { Team11Member, Team11Props } from \"./Team11.types\";\n\nconst DEFAULT_TITLE = \"The people behind the work\";\nconst DEFAULT_DESCRIPTION =\n  \"A dense roster for a studio that ships every week. Hover a name on larger screens to read a short bio without the grid shifting.\";\n\nconst DEFAULT_MEMBERS: Team11Member[] = [\n  {\n    src: \"/assets/bd48582e630a15fa.webp\",\n    alt: \"Portrait of Amara Cole\",\n    name: \"Amara Cole\",\n    role: \"Design director\",\n    bio: \"Sets the crop, the type, and the argument for leaving a layout alone when it already reads.\",\n  },\n  {\n    src: \"/assets/2a364f729e4f7c09.webp\",\n    alt: \"Portrait of Julian Hart\",\n    name: \"Julian Hart\",\n    role: \"Product engineer\",\n    bio: \"Builds the parts that have to survive a Thursday ship without a product tour.\",\n  },\n  {\n    src: \"/assets/d111cc60a8f2bf68.webp\",\n    alt: \"Portrait of Priya Nair\",\n    name: \"Priya Nair\",\n    role: \"Brand lead\",\n    bio: \"Keeps photography, wordmark, and color on the same desk so the page does not get translated twice.\",\n  },\n  {\n    src: \"/assets/040bd026249d7af9.webp\",\n    alt: \"Portrait of Eli Voss\",\n    name: \"Eli Voss\",\n    role: \"Studio producer\",\n    bio: \"Runs the calendar, the reviews, and the quiet hour before a launch.\",\n  },\n  {\n    src: \"/assets/45dad0903fef5d02.webp\",\n    alt: \"Portrait of Ines Calder\",\n    name: \"Ines Calder\",\n    role: \"Research lead\",\n    bio: \"Talks to operators, writes the brief in plain language, and cuts anything that needs a legend.\",\n  },\n  {\n    src: \"/assets/1391b53bc91d2127.webp\",\n    alt: \"Portrait of Rowan Hale\",\n    name: \"Rowan Hale\",\n    role: \"Frontend\",\n    bio: \"Turns tokens and type into pages that still hold together at 375 pixels.\",\n  },\n  {\n    src: \"/assets/fc2d8371236ac90c.webp\",\n    alt: \"Portrait of Lena Ortiz\",\n    name: \"Lena Ortiz\",\n    role: \"Creative director\",\n    bio: \"Holds the first sentence and the last crop. If either slips, the rest of the page follows.\",\n  },\n  {\n    src: \"/assets/8c18989537b833e8.webp\",\n    alt: \"Portrait of Malik Adeyemi\",\n    name: \"Malik Adeyemi\",\n    role: \"Engineering\",\n    bio: \"Owns the install path, the registry shape, and the parts that fail loudly instead of quietly.\",\n  },\n  {\n    src: \"/assets/4132445424a19cc6.webp\",\n    alt: \"Portrait of Hana Iwasaki\",\n    name: \"Hana Iwasaki\",\n    role: \"Art director\",\n    bio: \"Lights portraits, edits color, and refuses stock that looks like a template.\",\n  },\n  {\n    src: \"/assets/2bd1b12951fdbdb5.webp\",\n    alt: \"Portrait of Owen Briggs\",\n    name: \"Owen Briggs\",\n    role: \"Producer\",\n    bio: \"Keeps print proofs, asset hashes, and Friday handoffs on one list.\",\n  },\n  {\n    src: \"/assets/8e9489842d5e2cdf.webp\",\n    alt: \"Portrait of Noor Elamin\",\n    name: \"Noor Elamin\",\n    role: \"Ops\",\n    bio: \"Pays vendors, books the table, and notices when a file still has a placeholder name.\",\n  },\n  {\n    src: \"/assets/9b8fa9955b8bd54f.webp\",\n    alt: \"Portrait of Mira Solano\",\n    name: \"Mira Solano\",\n    role: \"Copy\",\n    bio: \"Writes the line that can survive a quiet room, then cuts the rest.\",\n  },\n];\n\nfunction MemberCell({\n  member,\n  highlighted,\n}: {\n  member: Team11Member;\n  highlighted: boolean;\n}) {\n  return (\n    <li\n      className={cn(\n        \"group relative z-0 min-h-[5.75rem] border-b border-r border-border\",\n        \"md:hover:z-20 md:focus-within:z-20\",\n        highlighted && \"z-20\",\n      )}\n    >\n      <button\n        type=\"button\"\n        aria-label={`${member.name}, ${member.role}. ${member.bio}`}\n        className=\"relative w-full px-4 py-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"\n      >\n        <span\n          className={cn(\n            \"flex min-w-0 items-center gap-3\",\n            \"md:transition-opacity md:duration-200 md:ease-out md:motion-reduce:transition-none\",\n            highlighted\n              ? \"md:opacity-0\"\n              : \"md:group-hover:opacity-0 md:group-focus-within:opacity-0\",\n          )}\n        >\n          <img\n            src={member.src}\n            alt=\"\"\n            className=\"size-12 shrink-0 rounded-[calc(var(--radius)-0.35rem)] bg-muted object-cover object-top\"\n          />\n          <span className=\"min-w-0\">\n            <span className=\"block truncate text-sm font-medium tracking-[-0.02em]\">\n              {member.name}\n            </span>\n            <span className=\"block truncate text-sm text-muted-foreground\">\n              {member.role}\n            </span>\n          </span>\n        </span>\n\n        <span\n          aria-hidden=\"true\"\n          className={cn(\n            \"pointer-events-none absolute top-1/2 left-1/2 z-10 hidden w-[min(19rem,calc(100%+2.5rem))] -translate-x-1/2 -translate-y-1/2 md:block\",\n            \"md:transition-opacity md:duration-200 md:ease-out md:motion-reduce:transition-none\",\n            highlighted\n              ? \"md:pointer-events-auto md:opacity-100\"\n              : \"md:opacity-0 md:group-hover:pointer-events-auto md:group-hover:opacity-100 md:group-focus-within:pointer-events-auto md:group-focus-within:opacity-100\",\n          )}\n        >\n          <span className=\"block overflow-hidden rounded-[--radius] border border-border bg-card text-card-foreground shadow-lg\">\n            <span className=\"block h-1 w-full bg-[linear-gradient(90deg,var(--color-chart-1),var(--color-chart-2),var(--color-chart-3),var(--color-chart-4),var(--color-chart-5))]\" />\n            <span className=\"flex gap-3 p-4\">\n              <img\n                src={member.src}\n                alt=\"\"\n                className=\"size-16 shrink-0 rounded-[calc(var(--radius)-0.25rem)] bg-muted object-cover object-top\"\n              />\n              <span className=\"min-w-0\">\n                <span className=\"block text-sm font-medium tracking-[-0.02em]\">\n                  {member.name}\n                </span>\n                <span className=\"block text-sm text-muted-foreground\">\n                  {member.role}\n                </span>\n                <span className=\"mt-2 block text-sm leading-5 text-muted-foreground\">\n                  {member.bio}\n                </span>\n              </span>\n            </span>\n          </span>\n        </span>\n      </button>\n    </li>\n  );\n}\n\nexport function Team11({\n  className,\n  title = DEFAULT_TITLE,\n  description = DEFAULT_DESCRIPTION,\n  members = DEFAULT_MEMBERS,\n  highlightedName,\n  ...props\n}: Team11Props) {\n  const headingId = useId();\n\n  return (\n    <section\n      data-slot=\"team11\"\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24\">\n        <header className=\"rounded-[calc(var(--radius)+0.2rem)] border border-border px-6 py-8 sm:px-8 sm:py-10 lg:px-10\">\n          <h2\n            id={headingId}\n            className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl lg:text-5xl\"\n          >\n            {title}\n          </h2>\n          {description ? (\n            <p className=\"mt-4 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8\">\n              {description}\n            </p>\n          ) : null}\n        </header>\n\n        {members.length > 0 ? (\n          <ul\n            className=\"mt-8 grid list-none grid-cols-2 border-t border-l border-border p-0 sm:grid-cols-3 lg:grid-cols-4\"\n            aria-label=\"Team members\"\n          >\n            {members.map((member) => (\n              <MemberCell\n                key={`${member.name}-${member.src}`}\n                member={member}\n                highlighted={highlightedName === member.name}\n              />\n            ))}\n          </ul>\n        ) : null}\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "team11/Team11.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface Team11Member {\n  src: string;\n  alt: string;\n  name: string;\n  role: string;\n  bio: string;\n}\n\nexport interface Team11Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  title?: string;\n  description?: string;\n  members?: Team11Member[];\n  /** Freezes the hover bio card on a named member for previews and demos. */\n  highlightedName?: string;\n}\n"
+    },
+    {
+      "path": "team11/index.ts",
+      "type": "index",
+      "content": "export { Team11 } from \"./Team11\";\nexport type * from \"./Team11.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Team11 {...team11Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Team11 {...team11Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
