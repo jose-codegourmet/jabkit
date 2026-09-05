@@ -1,0 +1,64 @@
+{
+  "name": "team14",
+  "displayName": "Team14",
+  "version": "1.0.0",
+  "addedAt": "2026-09-05",
+  "description": "Split hiring section with a bordered statement panel, ghost CTA, and a row of tall member portraits that becomes a looping carousel on small screens.",
+  "tags": [
+    "team",
+    "marketing",
+    "hiring",
+    "portraits",
+    "carousel",
+    "cta",
+    "landing"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "team14/Team14.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  ChevronLeftIcon,\n  ChevronRightIcon,\n  CornerDownRightIcon,\n} from \"lucide-react\";\nimport { useId, useState } from \"react\";\nimport { Button } from \"@/atoms/button\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  Team14Action,\n  Team14Member,\n  Team14Props,\n} from \"./Team14.types\";\n\nconst DEFAULT_TITLE = \"We're hiring\";\nconst DEFAULT_DESCRIPTION =\n  \"The studio is small on purpose. We need another pair of hands who can sit with a brief, argue for the quieter layout, and still ship on Thursday.\";\nconst DEFAULT_ACTION: Team14Action = {\n  label: \"Join the team\",\n  href: \"#careers\",\n};\nconst DEFAULT_MEMBERS: Team14Member[] = [\n  {\n    src: \"/assets/bd48582e630a15fa.webp\",\n    alt: \"Portrait of Amara Cole\",\n    name: \"Amara Cole\",\n    role: \"Design director\",\n  },\n  {\n    src: \"/assets/8e9489842d5e2cdf.webp\",\n    alt: \"Portrait of Julian Hart\",\n    name: \"Julian Hart\",\n    role: \"Product engineer\",\n  },\n  {\n    src: \"/assets/4132445424a19cc6.webp\",\n    alt: \"Portrait of Priya Nair\",\n    name: \"Priya Nair\",\n    role: \"Brand lead\",\n  },\n];\n\nfunction HireAction({ action }: { action: Team14Action }) {\n  const className =\n    \"h-11 w-fit gap-2 px-0 text-base font-medium hover:bg-transparent\";\n  const label = (\n    <>\n      <span>{action.label}</span>\n      <CornerDownRightIcon\n        aria-hidden=\"true\"\n        className=\"size-4 stroke-[1.75] text-primary\"\n      />\n    </>\n  );\n\n  if (action.href) {\n    return (\n      <Button variant=\"ghost\" size=\"md\" className={className} asChild>\n        <a href={action.href}>{label}</a>\n      </Button>\n    );\n  }\n\n  return (\n    <Button\n      variant=\"ghost\"\n      size=\"md\"\n      className={className}\n      onClick={action.onClick}\n    >\n      {label}\n    </Button>\n  );\n}\n\nfunction MemberCard({ member }: { member: Team14Member }) {\n  return (\n    <article className=\"flex h-full min-w-0 flex-col\">\n      <figure className=\"overflow-hidden rounded-[--radius] bg-muted\">\n        <img\n          src={member.src}\n          alt={member.alt}\n          className=\"aspect-[3/4] w-full object-cover object-top\"\n        />\n      </figure>\n      <h3 className=\"mt-4 text-base font-medium tracking-[-0.02em]\">\n        {member.name}\n      </h3>\n      <p className=\"mt-0.5 text-sm text-muted-foreground\">{member.role}</p>\n    </article>\n  );\n}\n\nfunction MemberCarousel({ members }: { members: Team14Member[] }) {\n  const carouselId = useId();\n  const [active, setActive] = useState(0);\n  const count = members.length;\n\n  if (count === 0) return null;\n\n  const go = (direction: -1 | 1) => {\n    setActive((current) => (current + direction + count) % count);\n  };\n\n  return (\n    <div className=\"min-w-0 flex-1\">\n      <div className=\"hidden h-full gap-6 lg:grid lg:grid-cols-3\">\n        {members.map((member) => (\n          <MemberCard key={`${member.name}-${member.src}`} member={member} />\n        ))}\n      </div>\n\n      <section\n        id={carouselId}\n        aria-roledescription=\"carousel\"\n        aria-label=\"Team members\"\n        className=\"lg:hidden\"\n      >\n        <div className=\"overflow-hidden\">\n          <div\n            className=\"flex transition-transform duration-500 ease-out motion-reduce:transition-none\"\n            style={{ transform: `translateX(-${active * 100}%)` }}\n          >\n            {members.map((member) => (\n              <div\n                key={`${member.name}-${member.src}`}\n                className=\"w-full shrink-0 pr-0\"\n                aria-hidden={members[active] !== member}\n              >\n                <MemberCard member={member} />\n              </div>\n            ))}\n          </div>\n        </div>\n        {count > 1 ? (\n          <div className=\"mt-5 flex items-center gap-2\">\n            <Button\n              type=\"button\"\n              variant=\"ghost\"\n              size=\"sm\"\n              aria-label=\"Previous team member\"\n              aria-controls={carouselId}\n              className=\"size-9 border border-border p-0\"\n              onClick={() => go(-1)}\n            >\n              <ChevronLeftIcon aria-hidden=\"true\" className=\"size-4\" />\n            </Button>\n            <Button\n              type=\"button\"\n              variant=\"ghost\"\n              size=\"sm\"\n              aria-label=\"Next team member\"\n              aria-controls={carouselId}\n              className=\"size-9 border border-border p-0\"\n              onClick={() => go(1)}\n            >\n              <ChevronRightIcon aria-hidden=\"true\" className=\"size-4\" />\n            </Button>\n            <p className=\"sr-only\" aria-live=\"polite\">\n              {members[active].name}, {active + 1} of {count}\n            </p>\n          </div>\n        ) : null}\n      </section>\n    </div>\n  );\n}\n\nexport function Team14({\n  className,\n  title = DEFAULT_TITLE,\n  description = DEFAULT_DESCRIPTION,\n  action = DEFAULT_ACTION,\n  members = DEFAULT_MEMBERS,\n  ...props\n}: Team14Props) {\n  const headingId = useId();\n\n  return (\n    <section\n      data-slot=\"team14\"\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24\">\n        <div className=\"flex flex-col gap-8 lg:flex-row lg:items-stretch lg:gap-10\">\n          <div className=\"flex min-h-[22rem] flex-col justify-between gap-10 rounded-[calc(var(--radius)+0.35rem)] border border-border p-8 sm:p-10 lg:w-[22rem] lg:shrink-0 xl:w-[24rem]\">\n            <div>\n              <h2\n                id={headingId}\n                className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl lg:text-5xl\"\n              >\n                {title}\n              </h2>\n              {description ? (\n                <p className=\"mt-4 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8\">\n                  {description}\n                </p>\n              ) : null}\n            </div>\n            {action ? <HireAction action={action} /> : null}\n          </div>\n          <MemberCarousel members={members} />\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "team14/Team14.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, MouseEventHandler } from \"react\";\n\nexport interface Team14Member {\n  src: string;\n  alt: string;\n  name: string;\n  role: string;\n}\n\nexport interface Team14Action {\n  label: string;\n  href?: string;\n  onClick?: MouseEventHandler<HTMLButtonElement>;\n}\n\nexport interface Team14Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  title?: string;\n  description?: string;\n  action?: Team14Action;\n  members?: Team14Member[];\n}\n"
+    },
+    {
+      "path": "team14/index.ts",
+      "type": "index",
+      "content": "export { Team14 } from \"./Team14\";\nexport type * from \"./Team14.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Team14 {...team14Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Team14 {...team14Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
