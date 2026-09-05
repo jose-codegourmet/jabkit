@@ -30,6 +30,7 @@ for (const category of categories) {
     for (const required of [
       `${name}.tsx`,
       `${name}.stories.tsx`,
+      `${name}.preview.tsx`,
       `${name}.types.ts`,
       `${name}.meta.ts`,
       "index.ts",

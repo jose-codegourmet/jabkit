@@ -1,6 +1,7 @@
 "use client";
 
 import { CheckIcon, CopyIcon } from "@radix-ui/react-icons";
+import { DEFAULT_SITE_DOMAIN } from "common/base";
 import { useState } from "react";
 
 function useCopyFeedback() {
@@ -16,7 +17,7 @@ function useCopyFeedback() {
 export function CopyPromptButton({ name }: { name: string }) {
   const prompt = useCopyFeedback();
   const skill = useCopyFeedback();
-  const standalonePrompt = `Add the JabKit component "${name}" to this project.\n\n1. Fetch https://jabkit.dev/r/${name}.json\n2. Recursively fetch registryDependencies.\n3. Write files[] to src/components/jabkit/, preserving their paths.\n4. Install dependencies, apply light cssVars under :root and dark cssVars under .dark.\n5. Run a type check.`;
+  const standalonePrompt = `Add the JabKit component "${name}" to this project.\n\n1. Fetch https://${DEFAULT_SITE_DOMAIN}/r/${name}.json\n2. Recursively fetch registryDependencies.\n3. Write files[] to src/components/jabkit/, preserving their paths.\n4. Install dependencies, apply light cssVars under :root and dark cssVars under .dark.\n5. Run a type check.`;
   const skillCommand = `/jabkit-component ${name}`;
 
   return (

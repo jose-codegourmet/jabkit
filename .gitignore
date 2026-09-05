@@ -1,6 +1,7 @@
 node_modules
 .next
 .turbo
+apps/showcase/lib/preview-manifest.generated.ts
 .DS_Store
 dist
 coverage
