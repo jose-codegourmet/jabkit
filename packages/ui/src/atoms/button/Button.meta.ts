@@ -11,4 +11,8 @@ export default {
   dependencies: ["@radix-ui/react-slot"],
   registryDependencies: [],
   a11y: { keyboardNav: true, reducedMotion: true },
+  preview: {
+    layout: "center",
+    capture: { themes: ["light", "dark"] },
+  },
 } satisfies ComponentMeta;

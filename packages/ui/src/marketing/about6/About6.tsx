@@ -13,17 +13,17 @@ const DEFAULT_STORY: About6Story = {
     "We started as a four-person studio shipping interfaces for operators who live in the product all day. The brief is still the same: quiet rooms, honest photography, and software that does not need a tour guide.",
   images: [
     {
-      src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&h=1200&q=80",
+      src: "/assets/0641888d44065d35.webp",
       alt: "Team gathered around a table reviewing work together",
       aspectClassName: "aspect-[3/4]",
     },
     {
-      src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&h=900&q=80",
+      src: "/assets/02e3cd676d6ef884.webp",
       alt: "Sunlit studio desks with plants and open notebooks",
       aspectClassName: "aspect-square",
     },
     {
-      src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&h=1200&q=80",
+      src: "/assets/db313298612159bc.webp",
       alt: "Two colleagues talking through a plan in a meeting room",
       aspectClassName: "aspect-[3/4]",
     },
@@ -38,17 +38,17 @@ const DEFAULT_WORKPLACE: About6Workplace = {
   ],
   images: [
     {
-      src: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&h=675&q=80",
+      src: "/assets/d3f9bde61c9a29e7.webp",
       alt: "Empty office corridor with glass rooms and daylight",
       aspectClassName: "aspect-[4/3]",
     },
     {
-      src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&h=1200&q=80",
+      src: "/assets/b7aa48391ad153f6.webp",
       alt: "Workshop around a long table with laptops open",
       aspectClassName: "aspect-[3/4]",
     },
     {
-      src: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&h=900&q=80",
+      src: "/assets/00679b56fa2127c9.webp",
       alt: "Cafe-style workplace seating with a laptop and coffee",
       aspectClassName: "aspect-square",
     },

@@ -17,7 +17,7 @@ const defaultStudies: CaseStudies13Study[] = [
   {
     href: "#northline",
     image: {
-      src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&h=900&q=80",
+      src: "/assets/e8b49d7b4617a825.webp",
       alt: "Sunlit studio desks with plants and open notebooks",
     },
     metric: "3.8×",
@@ -30,7 +30,7 @@ const defaultStudies: CaseStudies13Study[] = [
   {
     href: "#harbor",
     image: {
-      src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&h=900&q=80",
+      src: "/assets/1ab3b7a7ea329629.webp",
       alt: "Laptop showing charts on a wooden desk",
     },
     metric: "41%",
@@ -43,7 +43,7 @@ const defaultStudies: CaseStudies13Study[] = [
   {
     href: "#lumen",
     image: {
-      src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&h=900&q=80",
+      src: "/assets/55f54dbff1523af3.webp",
       alt: "Collaborative workshop around a table",
     },
     metric: "12w",
@@ -56,7 +56,7 @@ const defaultStudies: CaseStudies13Study[] = [
   {
     href: "#orbit",
     image: {
-      src: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&h=900&q=80",
+      src: "/assets/ce3d6a8dc5cff4d8.webp",
       alt: "Quiet desk with a laptop and coffee",
     },
     metric: "2.1M",

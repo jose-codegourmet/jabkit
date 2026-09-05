@@ -13,24 +13,21 @@ const DEFAULT_STUDIES: CaseStudies11Study[] = [
   {
     company: "Harbor",
     title: "Night docks that stay on the clock",
-    image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&h=1200&q=80",
+    image: "/assets/d7eddb427ba6f203.webp",
     imageAlt: "Shipping containers stacked along a lit harbor dock",
     href: "#harbor",
   },
   {
     company: "Northline",
     title: "A quieter console for the lab floor",
-    image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&h=1200&q=80",
+    image: "/assets/4cc437eeea3384d1.webp",
     imageAlt: "Researcher reviewing data on a laptop in a bright lab",
     href: "#northline",
   },
   {
     company: "Fieldwork",
     title: "From brief to built in one studio",
-    image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&h=1200&q=80",
+    image: "/assets/462c849dc9a41e59.webp",
     imageAlt: "Sunlit studio desks with plants and open laptops",
     href: "#fieldwork",
   },

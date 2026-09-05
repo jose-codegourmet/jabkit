@@ -62,7 +62,7 @@ const defaultSections: Content3Section[] = [
       {
         type: "figure",
         figure: {
-          src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&h=1000&q=80",
+          src: "/assets/3a3bdafcc198e463.webp",
           alt: "Team reviewing work together around a table",
           caption: "Keep the demo on one screen the whole room can see.",
         },

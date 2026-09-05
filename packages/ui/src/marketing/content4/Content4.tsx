@@ -34,8 +34,7 @@ const defaultAuthor: Content4Author = {
   name: "Mira Solano",
   role: "Editor, Northline Journal",
   date: "12 March 2026",
-  avatarSrc:
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&h=160&q=80",
+  avatarSrc: "/assets/4132445424a19cc6.webp",
   avatarAlt: "Portrait of Mira Solano",
   fallback: "MS",
 };
@@ -64,7 +63,7 @@ const defaultBlocks: Content4Block[] = [
   {
     type: "image",
     id: "studio-desks",
-    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&h=1000&q=80",
+    src: "/assets/8b10f8ca8e999989.webp",
     alt: "Sunlit studio desks with plants and open notebooks",
     caption: "The brief should look like a room you can walk into.",
   },
@@ -96,7 +95,7 @@ const defaultBlocks: Content4Block[] = [
   {
     type: "image",
     id: "desk-charts",
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&h=1000&q=80",
+    src: "/assets/1543ba72d246c0c3.webp",
     alt: "Laptop showing charts on a wooden desk",
     caption: "A figure should support a heading, not replace it.",
   },

@@ -24,7 +24,7 @@ const defaults = {
   description:
     "A single mosaic for the objections a buyer actually has. Imagery, a hard number, a clear seat price, and the crew already on the floor.",
   heroImage: {
-    src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&h=1600&q=80",
+    src: "/assets/e9bbbe08553b17ce.webp",
     alt: "Product team gathered around a table reviewing work",
     caption: "Standup on the studio floor",
   },
@@ -51,29 +51,29 @@ const defaults = {
     extraCount: "18",
     people: [
       {
-        src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=160&h=160&q=80",
+        src: "/assets/bd48582e630a15fa.webp",
         alt: "Portrait of Ines Calder",
         fallback: "IC",
       },
       {
-        src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&h=160&q=80",
+        src: "/assets/8e9489842d5e2cdf.webp",
         alt: "Portrait of Rowan Hale",
         fallback: "RH",
       },
       {
-        src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&h=160&q=80",
+        src: "/assets/4132445424a19cc6.webp",
         alt: "Portrait of Priya Nair",
         fallback: "PN",
       },
       {
-        src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=160&h=160&q=80",
+        src: "/assets/8c18989537b833e8.webp",
         alt: "Portrait of Eli Voss",
         fallback: "EV",
       },
     ],
   },
   supportingImage: {
-    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&h=900&q=80",
+    src: "/assets/e8b49d7b4617a825.webp",
     alt: "Sunlit studio desks with plants and open notebooks",
     caption: "Desk side of the same thread",
   },

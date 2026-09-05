@@ -20,6 +20,9 @@
     "keyboardNav": true,
     "reducedMotion": true
   },
+  "preview": {
+    "layout": "center"
+  },
   "category": "atoms",
   "files": [
     {

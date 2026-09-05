@@ -12,8 +12,7 @@ const defaults = {
   action: { label: "Get started", href: "#start" },
   caption: "Build your first agent in",
   captionHighlight: "under 8 minutes",
-  videoPoster:
-    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&h=900&q=80",
+  videoPoster: "/assets/ee004332d5917332.webp",
   videoLabel: "Product walkthrough",
   autoplay: true,
 } as const;

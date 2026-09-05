@@ -94,7 +94,7 @@ const DEFAULT_PEOPLE: ChartGroup14Person[] = [
     role: "On call",
     lastActive: "2m ago",
     initials: "AC",
-    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&h=160&q=80",
+    src: "/assets/4132445424a19cc6.webp",
   },
   {
     id: "julian",
@@ -102,7 +102,7 @@ const DEFAULT_PEOPLE: ChartGroup14Person[] = [
     role: "Reviewing",
     lastActive: "11m ago",
     initials: "JV",
-    src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&h=160&q=80",
+    src: "/assets/8e9489842d5e2cdf.webp",
   },
   {
     id: "nori",
@@ -110,7 +110,7 @@ const DEFAULT_PEOPLE: ChartGroup14Person[] = [
     role: "Shipping",
     lastActive: "24m ago",
     initials: "NH",
-    src: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=160&h=160&q=80",
+    src: "/assets/9b8fa9955b8bd54f.webp",
   },
   {
     id: "ines",
@@ -125,7 +125,7 @@ const DEFAULT_PEOPLE: ChartGroup14Person[] = [
     role: "On call",
     lastActive: "3h ago",
     initials: "RL",
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=160&h=160&q=80",
+    src: "/assets/8c18989537b833e8.webp",
   },
 ];
 

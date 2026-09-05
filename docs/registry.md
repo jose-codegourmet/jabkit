@@ -32,6 +32,8 @@ export interface ComponentMeta {
 
 `cssVars`, if present, must include both `light` and `dark` maps or the build throws. No current component sets `cssVars`. Field meanings live in [adding-a-component.md](adding-a-component.md); do not duplicate that table here.
 
+`ComponentPreviewMeta` may include build-only `capture` metadata: story names, themes, a viewport override, and an extra wait time for the preview capture pipeline. It remains in `{Name}.meta.ts`, but `build.ts` strips it from both `{name}.json` and `index.json` so consumer registry JSON never exposes capture-only settings. See [previews.md](previews.md).
+
 `dependencies` are npm packages the consumer must install (for example `@radix-ui/react-slot`). `registryDependencies` are other JabKit component `name` values. Both the CLI and `get_install_plan` walk `registryDependencies` depth-first before writing files.
 
 ## Files written into a registry entry
@@ -85,7 +87,7 @@ Each `pnpm registry:build` (`pnpm --filter @jabkit/build-registry build` → `ts
 
 1. `rm -rf apps/showcase/public/r` then recreates it. Stray files never survive a rebuild.
 2. Writes `apps/showcase/public/r/{name}.json` — the full `RegistryComponent` (`ComponentMeta` plus `category`, `files`, `examples`).
-3. Writes `apps/showcase/public/r/index.json` — a projection that keeps `name`, `displayName`, `category`, `description`, `tags`, `addedAt`, `dependencies`, `a11y`, and `preview` when present. It does **not** include `version`, `registryDependencies`, `cssVars`, `files`, or `examples`.
+3. Writes `apps/showcase/public/r/index.json` — a projection that keeps `name`, `displayName`, `category`, `description`, `tags`, `addedAt`, `dependencies`, `a11y`, and `preview` when present. It does **not** include `version`, `registryDependencies`, `cssVars`, `files`, `examples`, or `preview.capture`.
 4. Writes `apps/showcase/lib/preview-manifest.generated.ts`.
 
 `apps/showcase/lib/registry.ts` is the only runtime reader inside the monorepo. `registryIndex()` throws with "run pnpm registry:build" if `index.json` is missing. `registryEntry(name)` returns `null` on a missing file.
@@ -97,6 +99,6 @@ Each `pnpm registry:build` (`pnpm --filter @jabkit/build-registry build` → `ts
 | `pnpm check:conventions` | Folder names, required files (including `{Name}.preview.tsx`), no hardcoded Tailwind colors in `{Name}.tsx`, no `from "../"` in `{Name}.tsx`, re-export-only `index.ts`, story title matches category, `ThemeComparison` and `render:` present. Must run from the repo root. |
 | `pnpm registry:build` | JSON and preview manifest regenerate. |
 | `pnpm registry:verify` | Rebuild, then `git diff --exit-code -- apps/showcase/public/r`. This is why generated JSON is committed. |
-| `pnpm check` | Lint, typecheck, conventions, and `registry:verify`. |
+| `pnpm check` | Lint, typecheck, conventions, `registry:verify`, and committed preview-asset verification. |
 
 Never hand-edit generated registry JSON. Change the component, the stories, or the meta, then rebuild.

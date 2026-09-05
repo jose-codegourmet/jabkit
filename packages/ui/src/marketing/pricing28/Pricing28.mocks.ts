@@ -2,22 +2,22 @@ import type { Pricing28Plan, Pricing28Props } from "./Pricing28.types";
 
 const people = [
   {
-    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&h=160&q=80",
+    src: "/assets/4132445424a19cc6.webp",
     alt: "Portrait of a studio lead",
     fallback: "AL",
   },
   {
-    src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&h=160&q=80",
+    src: "/assets/8e9489842d5e2cdf.webp",
     alt: "Portrait of a product operator",
     fallback: "JN",
   },
   {
-    src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&h=160&q=80",
+    src: "/assets/60599cf2ed9c77bc.webp",
     alt: "Portrait of an editor",
     fallback: "MS",
   },
   {
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=160&h=160&q=80",
+    src: "/assets/8c18989537b833e8.webp",
     alt: "Portrait of a field lead",
     fallback: "RK",
   },

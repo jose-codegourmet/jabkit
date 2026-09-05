@@ -17,19 +17,19 @@ const defaultProviders: Login4Provider[] = [
     id: "google",
     label: "Log in with Google",
     href: "#google",
-    iconSrc: "https://cdn.simpleicons.org/google",
+    iconSrc: "/assets/6f2cfdbd3438a4a5.webp",
   },
   {
     id: "facebook",
     label: "Log in with Facebook",
     href: "#facebook",
-    iconSrc: "https://cdn.simpleicons.org/facebook",
+    iconSrc: "/assets/e1639f9fd2040338.webp",
   },
   {
     id: "github",
     label: "Log in with GitHub",
     href: "#github",
-    iconSrc: "https://cdn.simpleicons.org/github",
+    iconSrc: "/assets/e44cf7114e4655ad.webp",
     invertOnDark: true,
   },
 ];

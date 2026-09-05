@@ -3,6 +3,7 @@ import path from "node:path";
 import type {
   ComponentCategory,
   ComponentMeta,
+  ComponentPreviewMeta,
   RegistryComponent,
   RegistryFile,
 } from "./index";
@@ -17,6 +18,12 @@ const previewManifestPath = path.join(
 );
 const categories: ComponentCategory[] = ["atoms", "marketing", "dashboard"];
 const previewManifestEntries: string[] = [];
+
+function registryPreview(preview?: ComponentPreviewMeta) {
+  if (!preview) return undefined;
+  const { capture: _capture, ...registryPreview } = preview;
+  return registryPreview;
+}
 
 async function componentExamples(stories: string) {
   const pattern =
@@ -106,6 +113,7 @@ async function buildComponent(category: ComponentCategory, folder: string) {
   }
   const component: RegistryComponent = {
     ...meta,
+    ...(meta.preview ? { preview: registryPreview(meta.preview) } : {}),
     category,
     files,
     examples: await componentExamples(stories),
@@ -149,7 +157,7 @@ const index = components.map(
     addedAt,
     dependencies,
     a11y,
-    ...(preview ? { preview } : {}),
+    ...(preview ? { preview: registryPreview(preview) } : {}),
   }),
 );
 await writeFile(

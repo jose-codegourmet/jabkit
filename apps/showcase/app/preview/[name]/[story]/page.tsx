@@ -25,6 +25,8 @@ export default async function Preview({
 
   return (
     <main
+      data-preview-stories={Object.keys(previews).join(",")}
+      data-preview-ready=""
       className={`${isDark ? "dark" : ""} min-h-dvh bg-background text-foreground ${fit ? "" : "grid place-items-center overflow-hidden p-6"}`}
     >
       {render()}

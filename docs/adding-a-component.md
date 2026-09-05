@@ -228,7 +228,15 @@ pnpm registry:build
 
 Shared `@/lib/*` imports are auto-bundled into the registry entry as `"lib"` files.
 
-## 6. Validate
+## 6. Generate preview assets
+
+```bash
+pnpm previews:build -- --name {name}
+```
+
+Commit the resulting files under `apps/showcase/public/previews/`. The capture pipeline creates a dark WebP for every preview story; Button also receives light captures for the home theme-proof strip. See [previews.md](previews.md).
+
+## 7. Validate
 
 Required gate before the work is done:
 
@@ -236,7 +244,7 @@ Required gate before the work is done:
 pnpm check
 ```
 
-That runs lint, typecheck, convention checks, and a registry rebuild that fails if `public/r/` is out of date.
+That runs lint, typecheck, convention checks, a registry rebuild that fails if `public/r/` is out of date, and preview-asset verification.
 
 Optional visual checks:
 
@@ -258,6 +266,7 @@ pnpm dev         # showcase; confirm /{category}/{name} and the preview iframe i
 | `stories need render functions and ThemeComparison` | Add `render:` to each story and export `ThemeComparison` |
 | Showcase preview 404s | Add `{Name}.preview.tsx` and run `pnpm registry:build` so the preview manifest includes the name |
 | Showcase 404 / empty catalogue | Run `pnpm registry:build` and commit `apps/showcase/public/r/` |
+| Missing or stale preview WebP | Run `pnpm previews:build -- --name {name}` and commit the output |
 
 ## MCP and CLI notes
 

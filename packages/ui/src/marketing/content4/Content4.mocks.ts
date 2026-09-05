@@ -8,8 +8,7 @@ export const content4Author: Content4Author = {
   name: "Mira Solano",
   role: "Editor, Northline Journal",
   date: "12 March 2026",
-  avatarSrc:
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&h=160&q=80",
+  avatarSrc: "/assets/4132445424a19cc6.webp",
   avatarAlt: "Portrait of Mira Solano",
   fallback: "MS",
 };
@@ -38,7 +37,7 @@ export const content4Blocks: Content4Block[] = [
   {
     type: "image",
     id: "studio-desks",
-    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&h=1000&q=80",
+    src: "/assets/8b10f8ca8e999989.webp",
     alt: "Sunlit studio desks with plants and open notebooks",
     caption: "The brief should look like a room you can walk into.",
   },
@@ -70,7 +69,7 @@ export const content4Blocks: Content4Block[] = [
   {
     type: "image",
     id: "desk-charts",
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&h=1000&q=80",
+    src: "/assets/1543ba72d246c0c3.webp",
     alt: "Laptop showing charts on a wooden desk",
     caption: "A figure should support a heading, not replace it.",
   },
@@ -115,8 +114,7 @@ export const content4Mocks = {
       name: "Eli Navarro",
       role: "Staff writer, Harbor Notes",
       date: "4 April 2026",
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&h=160&q=80",
+      avatarSrc: "/assets/8e9489842d5e2cdf.webp",
       avatarAlt: "Portrait of Eli Navarro",
       fallback: "EN",
     },
@@ -141,7 +139,7 @@ export const content4Mocks = {
       {
         type: "image",
         id: "workshop-table",
-        src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&h=1000&q=80",
+        src: "/assets/3a3bdafcc198e463.webp",
         alt: "Collaborative workshop around a table",
         caption: "Handoff happens in the room, then lives on this page.",
       },

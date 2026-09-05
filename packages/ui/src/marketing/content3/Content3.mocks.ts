@@ -30,7 +30,7 @@ export const content3DefaultSections: Content3Section[] = [
       {
         type: "figure",
         figure: {
-          src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&h=1000&q=80",
+          src: "/assets/3a3bdafcc198e463.webp",
           alt: "Team reviewing work together around a table",
           caption: "Keep the demo on one screen the whole room can see.",
         },
@@ -126,7 +126,7 @@ export const content3AlternateSections: Content3Section[] = [
       {
         type: "figure",
         figure: {
-          src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&h=1000&q=80",
+          src: "/assets/0bdb49061c1b95c2.webp",
           alt: "Laptop and notebook on a clean workstation",
           caption: "One proof shot per step is enough.",
         },

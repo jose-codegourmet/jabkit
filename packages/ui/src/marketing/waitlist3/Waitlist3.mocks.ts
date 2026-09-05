@@ -12,22 +12,22 @@ export const waitlist3Mocks = {
     submitLabel: "Join the waitlist",
     people: [
       {
-        src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=160&h=160&q=80",
+        src: "/assets/bd48582e630a15fa.webp",
         alt: "Portrait of Ines Calder",
         fallback: "IC",
       },
       {
-        src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&h=160&q=80",
+        src: "/assets/8e9489842d5e2cdf.webp",
         alt: "Portrait of Rowan Hale",
         fallback: "RH",
       },
       {
-        src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&h=160&q=80",
+        src: "/assets/4132445424a19cc6.webp",
         alt: "Portrait of Priya Nair",
         fallback: "PN",
       },
       {
-        src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=160&h=160&q=80",
+        src: "/assets/8c18989537b833e8.webp",
         alt: "Portrait of Eli Voss",
         fallback: "EV",
       },
@@ -35,7 +35,7 @@ export const waitlist3Mocks = {
     socialProof: "2,400 operators already in line",
     copyright: "© 2026 Northline. Seats open in that order.",
     photo: {
-      src: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&h=2000&q=80",
+      src: "/assets/2c2fae7d2bbfbdb2.webp",
       alt: "Sunlit glass meeting room looking onto a quiet studio floor",
     },
   },
@@ -50,17 +50,17 @@ export const waitlist3Mocks = {
     submitLabel: "Request a seat",
     people: [
       {
-        src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=160&h=160&q=80",
+        src: "/assets/7f349b80885c2b4d.webp",
         alt: "Portrait of Amara Cole",
         fallback: "AC",
       },
       {
-        src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=160&h=160&q=80",
+        src: "/assets/167acbe9e3afc083.webp",
         alt: "Portrait of Julian Hart",
         fallback: "JH",
       },
       {
-        src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=160&h=160&q=80",
+        src: "/assets/ea07d2da071b9238.webp",
         alt: "Portrait of Noor Elamin",
         fallback: "NE",
       },
@@ -68,7 +68,7 @@ export const waitlist3Mocks = {
     socialProof: "890 site leads waiting with you",
     copyright: "© 2026 Harbor Field. Built for the yard, not the slide.",
     photo: {
-      src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&h=2000&q=80",
+      src: "/assets/1b9ee8cc56aea60c.webp",
       alt: "Construction site with scaffolding against a bright sky",
     },
   },

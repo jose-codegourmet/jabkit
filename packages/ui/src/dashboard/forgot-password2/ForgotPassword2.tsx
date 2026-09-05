@@ -25,8 +25,7 @@ const defaults = {
   sentTitle: "Check your inbox",
   sentDescription:
     "If that address is on file, a reset link is on the way. It expires in 30 minutes.",
-  imageSrc:
-    "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&h=2000&q=80",
+  imageSrc: "/assets/2c2fae7d2bbfbdb2.webp",
   imageAlt: "Sunlit studio desks beside a tall window",
 } as const;
 
