@@ -1,0 +1,139 @@
+"use client";
+
+import {
+  BriefcaseIcon,
+  FileTextIcon,
+  HomeIcon,
+  UserIcon,
+} from "lucide-react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { cn } from "@/lib/cn";
+import type {
+  TubelightNavbarItem,
+  TubelightNavbarProps,
+} from "./TubelightNavbar.types";
+
+const defaultItems: TubelightNavbarItem[] = [
+  { name: "Home", href: "#home", icon: HomeIcon },
+  { name: "About", href: "#about", icon: UserIcon },
+  { name: "Projects", href: "#projects", icon: BriefcaseIcon },
+  { name: "Notes", href: "#notes", icon: FileTextIcon },
+];
+
+export function TubelightNavbar({
+  className,
+  items = defaultItems,
+  activeName: activeNameProp,
+  defaultActiveName,
+  onActiveChange,
+  ...props
+}: TubelightNavbarProps) {
+  const listRef = useRef<HTMLDivElement>(null);
+  const [uncontrolledActive, setUncontrolledActive] = useState(
+    defaultActiveName ?? items[0]?.name ?? "",
+  );
+  const [indicator, setIndicator] = useState({
+    left: 0,
+    width: 0,
+    ready: false,
+  });
+
+  const activeName = activeNameProp ?? uncontrolledActive;
+
+  const setActive = (name: string) => {
+    if (activeNameProp === undefined) setUncontrolledActive(name);
+    onActiveChange?.(name);
+  };
+
+  const updateIndicator = useCallback(() => {
+    const root = listRef.current;
+    if (!root) return;
+    const active = root.querySelector<HTMLElement>("[data-active=true]");
+    if (!active) return;
+    setIndicator({
+      left: active.offsetLeft,
+      width: active.offsetWidth,
+      ready: true,
+    });
+  }, []);
+
+  useLayoutEffect(() => {
+    updateIndicator();
+    const root = listRef.current;
+    if (!root || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(() => updateIndicator());
+    observer.observe(root);
+    for (const child of root.children) {
+      if (child instanceof HTMLElement) observer.observe(child);
+    }
+    return () => observer.disconnect();
+  }, [activeName, items, updateIndicator]);
+
+  return (
+    <header
+      className={cn(
+        "relative flex w-full justify-center bg-background px-4 py-6 text-foreground",
+        className,
+      )}
+      data-slot="tubelight-navbar"
+      {...props}
+    >
+      <nav aria-label="Primary" className="relative">
+        <div
+          className={cn(
+            "relative isolate flex items-center gap-1 rounded-full border border-border",
+            "bg-background/75 p-1 shadow-[0_18px_40px_-28px_color-mix(in_oklab,var(--jk-foreground),transparent_72%)]",
+            "backdrop-blur-lg supports-[backdrop-filter]:bg-background/55",
+          )}
+          ref={listRef}
+        >
+          <span
+            aria-hidden="true"
+            className={cn(
+              "absolute top-1 bottom-1 rounded-full bg-muted",
+              indicator.ready &&
+                "transition-[left,width] duration-300 ease-out motion-reduce:transition-none",
+            )}
+            style={{ left: indicator.left, width: indicator.width }}
+          />
+          {items.map((item) => {
+            const Icon = item.icon;
+            const isActive = item.name === activeName;
+            return (
+              <a
+                aria-current={isActive ? "page" : undefined}
+                className={cn(
+                  "relative z-10 inline-flex items-center justify-center rounded-full px-5 py-2 text-sm font-medium outline-none",
+                  "transition-colors duration-200 motion-reduce:transition-none",
+                  "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                  isActive
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+                data-active={isActive ? "true" : undefined}
+                href={item.href}
+                key={item.name}
+                onClick={() => setActive(item.name)}
+              >
+                <span className="hidden md:inline">{item.name}</span>
+                <span className="inline-flex md:hidden">
+                  <Icon aria-hidden="true" className="size-[18px]" />
+                  <span className="sr-only">{item.name}</span>
+                </span>
+                {isActive ? (
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -top-2 left-1/2 h-1 w-8 -translate-x-1/2 rounded-full bg-primary shadow-[0_0_16px_2px_color-mix(in_oklab,var(--jk-primary),transparent_35%)]"
+                  >
+                    <span className="absolute -top-2 left-1/2 h-6 w-12 -translate-x-1/2 rounded-full bg-primary/30 blur-md motion-reduce:hidden" />
+                    <span className="absolute -top-1 left-1/2 h-4 w-8 -translate-x-1/2 rounded-full bg-primary/25 blur-sm motion-reduce:hidden" />
+                  </span>
+                ) : null}
+              </a>
+            );
+          })}
+        </div>
+      </nav>
+    </header>
+  );
+}
