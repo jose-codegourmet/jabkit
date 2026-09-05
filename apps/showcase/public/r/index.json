@@ -781,6 +781,33 @@
     }
   },
   {
+    "name": "application-shell13",
+    "displayName": "ApplicationShell13",
+    "category": "dashboard",
+    "description": "Top navigation dashboard shell with search, org and user menus, dropdown nav groups, a mobile drawer, and a bottom bar.",
+    "tags": [
+      "dashboard",
+      "application-shell",
+      "navigation",
+      "header",
+      "dropdown",
+      "search",
+      "organization",
+      "mobile"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
     "name": "chart-group14",
     "displayName": "ChartGroup14",
     "category": "dashboard",
