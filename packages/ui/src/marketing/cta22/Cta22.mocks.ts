@@ -21,8 +21,7 @@ export const cta22Mocks = {
     description:
       "Capture briefs, markups, and sign-off from the jobsite. Same workspace as the desk, without the laptop.",
     storeLinks: defaultStoreLinks,
-    phoneImageSrc:
-      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=720&h=1280&q=80",
+    phoneImageSrc: "/assets/8853774f028d7a82.webp",
     phoneImageAlt: "Harbor field app on a smartphone",
     newsletterTitle: "Field notes, once a week",
     newsletterDescription:
@@ -49,8 +48,7 @@ export const cta22Mocks = {
         label: "Google Play",
       },
     ],
-    phoneImageSrc:
-      "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=720&h=1280&q=80",
+    phoneImageSrc: "/assets/0ea25dc8a5d8c81b.webp",
     phoneImageAlt: "Smartphone showing a jobsite punch list",
     newsletterTitle: "Ops digest for site leads",
     newsletterDescription:

@@ -27,27 +27,27 @@ const DEFAULT_DESCRIPTION =
 const DEFAULT_PORTRAITS: Hero228Portrait[] = [
   {
     name: "Amara Cole",
-    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=720&h=960&q=80",
+    src: "/assets/fc2d8371236ac90c.webp",
     alt: "Portrait of Amara Cole",
   },
   {
     name: "Julian Voss",
-    src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=720&h=960&q=80",
+    src: "/assets/2a364f729e4f7c09.webp",
     alt: "Portrait of Julian Voss",
   },
   {
     name: "Noor Elahi",
-    src: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=720&h=960&q=80",
+    src: "/assets/45dad0903fef5d02.webp",
     alt: "Portrait of Noor Elahi",
   },
   {
     name: "Mateo Ruiz",
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=720&h=960&q=80",
+    src: "/assets/2bd1b12951fdbdb5.webp",
     alt: "Portrait of Mateo Ruiz",
   },
   {
     name: "Iris Chen",
-    src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=720&h=960&q=80",
+    src: "/assets/d111cc60a8f2bf68.webp",
     alt: "Portrait of Iris Chen",
   },
 ];

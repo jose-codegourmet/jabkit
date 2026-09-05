@@ -75,8 +75,7 @@ const defaultNavItems: EcommerceNavbar2NavItem[] = [
     ],
     featured: {
       href: "#spring-drop",
-      imageSrc:
-        "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=720&h=900&q=80",
+      imageSrc: "/assets/e5ee9abd8e719085.webp",
       imageAlt: "Model walking in a wool coat with a leather tote",
       title: "Spring drop",
       description: "Wool coats and field bags, in store this week.",

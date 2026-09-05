@@ -20,8 +20,7 @@ export const heroSection5NavItems: HeroSection5NavItem[] = [
 
 export const heroSection5Video: HeroSection5Video = {
   src: "https://videos.pexels.com/video-files/3129957/3129957-hd_1280_720_25fps.mp4",
-  poster:
-    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+  poster: "/assets/83a0defb9dfb1866.webp",
   label: "Abstract particle field drifting through a dark research lab",
 };
 
@@ -83,8 +82,7 @@ export const heroSection5EditorialMocks: typeof heroSection5Mocks = {
   secondaryAction: { label: "Read the method", href: "#method" },
   video: {
     src: "https://videos.pexels.com/video-files/3141210/3141210-hd_1280_720_25fps.mp4",
-    poster:
-      "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=80",
+    poster: "/assets/617d80e6008f2b88.webp",
     label: "Soft nebula light moving across a dark field",
   },
 };

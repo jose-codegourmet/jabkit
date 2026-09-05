@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ScaledFrame } from "../../components/ScaledFrame";
+import { PreviewImage } from "../../components/PreviewImage";
 import { SiteHeader } from "../../components/SiteHeader";
 import { registryIndex } from "../../lib/registry";
 
@@ -127,22 +127,10 @@ export default async function ComponentsPage({
                 className="group bg-background p-4 focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <div className="aspect-[16/10] overflow-hidden rounded-[--radius] border border-border bg-card">
-                  {item.preview?.layout === "fit" ? (
-                    <ScaledFrame
-                      src={`/preview/${item.name}/Default`}
-                      title={`${item.displayName} preview`}
-                      viewportWidth={item.preview.width ?? 1440}
-                      viewportHeight={item.preview.height ?? 900}
-                    />
-                  ) : (
-                    <iframe
-                      title={`${item.displayName} preview`}
-                      aria-hidden="true"
-                      className="h-full w-full scale-[1.01] border-0"
-                      src={`/preview/${item.name}/Default`}
-                      loading="lazy"
-                    />
-                  )}
+                  <PreviewImage
+                    name={item.name}
+                    displayName={item.displayName}
+                  />
                 </div>
                 <div className="pt-4">
                   <p className="font-mono text-[11px] text-primary uppercase">

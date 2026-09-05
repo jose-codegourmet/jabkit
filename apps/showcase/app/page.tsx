@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { InstallCommand } from "../components/InstallCommand";
-import { ScaledFrame } from "../components/ScaledFrame";
+import { PreviewImage } from "../components/PreviewImage";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { type RegistryIndexItem, registryIndex } from "../lib/registry";
@@ -122,13 +122,10 @@ export default async function Home() {
                     </span>
                   </div>
                   <div className="aspect-[16/10] overflow-hidden bg-muted/30">
-                    <ScaledFrame
-                      src={`/preview/${heroItem.name}/Default`}
-                      title={`${heroItem.displayName} preview`}
-                      viewportWidth={heroItem.preview?.width ?? 1440}
-                      viewportHeight={heroItem.preview?.height ?? 900}
+                    <PreviewImage
+                      name={heroItem.name}
+                      displayName={heroItem.displayName}
                       loading="eager"
-                      className="h-full"
                     />
                   </div>
                 </Link>
@@ -243,13 +240,9 @@ export default async function Home() {
                       }`}
                     >
                       <div className="aspect-[16/10] overflow-hidden bg-muted/30">
-                        <ScaledFrame
-                          src={`/preview/${item.name}/Default`}
-                          title={`${item.displayName} preview`}
-                          viewportWidth={item.preview?.width ?? 1440}
-                          viewportHeight={item.preview?.height ?? 900}
-                          loading="lazy"
-                          className="h-full"
+                        <PreviewImage
+                          name={item.name}
+                          displayName={item.displayName}
                         />
                       </div>
                       <div className="flex items-start justify-between gap-3 p-4">
@@ -393,12 +386,10 @@ curl -X POST /mcp \\
                     </span>
                   </div>
                   <div className="h-[280px] overflow-hidden bg-muted/30 sm:h-[320px]">
-                    <iframe
-                      title={`${themeProof.displayName} ${label} preview`}
-                      aria-hidden="true"
-                      className="h-full w-full border-0"
-                      src={`/preview/${themeProof.name}/Default?theme=${theme}`}
-                      loading="lazy"
+                    <PreviewImage
+                      name={themeProof.name}
+                      displayName={`${themeProof.displayName} ${label}`}
+                      theme={theme}
                     />
                   </div>
                 </div>

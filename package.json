@@ -18,13 +18,18 @@
     "check:conventions": "tsx scripts/check-conventions.ts",
     "registry:build": "pnpm --filter @jabkit/build-registry build",
     "registry:verify": "pnpm registry:build && git diff --exit-code -- apps/showcase/public/r",
-    "check": "pnpm lint && pnpm typecheck && pnpm check:conventions && pnpm registry:verify"
+    "assets:vendor": "tsx scripts/vendor-remote-assets.ts",
+    "previews:build": "tsx scripts/build-preview-assets.ts",
+    "previews:verify": "tsx scripts/verify-preview-assets.ts",
+    "check": "pnpm lint && pnpm typecheck && pnpm check:conventions && pnpm registry:verify && pnpm previews:verify"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.15",
     "@commitlint/cli": "^20.4.1",
     "@commitlint/config-conventional": "^20.4.1",
     "husky": "^9.1.7",
+    "playwright": "^1.51.1",
+    "sharp": "^0.35.4",
     "tsx": "^4.21.0",
     "turbo": "^2.8.12",
     "typescript": "^5.9.3"

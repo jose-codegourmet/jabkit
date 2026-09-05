@@ -23,7 +23,7 @@ const DEFAULT_ITEMS: Gallery31Item[] = [
     href: "#oak-lounge",
     span: "wide",
     image: {
-      src: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1600&h=1200&q=80",
+      src: "/assets/462a1be29787cd8e.webp",
       alt: "Low oak lounge chair on a pale floor",
     },
   },
@@ -32,7 +32,7 @@ const DEFAULT_ITEMS: Gallery31Item[] = [
     price: "$480",
     href: "#arc-lamp",
     image: {
-      src: "https://images.unsplash.com/photo-1507473887601-a6dd6838aaf2?auto=format&fit=crop&w=900&h=1200&q=80",
+      src: "/assets/6cc11e462a9aaded.webp",
       alt: "Arc floor lamp lighting a quiet corner",
     },
   },
@@ -42,7 +42,7 @@ const DEFAULT_ITEMS: Gallery31Item[] = [
     href: "#stone-table",
     span: "tall",
     image: {
-      src: "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&w=900&h=1400&q=80",
+      src: "/assets/488fa5330da1224c.webp",
       alt: "Sculptural stone side table in a sunlit room",
     },
   },
@@ -51,7 +51,7 @@ const DEFAULT_ITEMS: Gallery31Item[] = [
     price: "$2,180",
     href: "#linen-daybed",
     image: {
-      src: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&h=900&q=80",
+      src: "/assets/7cb36691e11ed9af.webp",
       alt: "Linen daybed against a plaster wall",
     },
   },
@@ -61,7 +61,7 @@ const DEFAULT_ITEMS: Gallery31Item[] = [
     href: "#ceramic-pendant",
     span: "wide",
     image: {
-      src: "https://images.unsplash.com/photo-1540932239986-30128078f57c?auto=format&fit=crop&w=1600&h=900&q=80",
+      src: "/assets/4f6410f5452c0ba5.webp",
       alt: "Hand-thrown ceramic pendant light",
     },
   },

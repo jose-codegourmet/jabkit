@@ -92,8 +92,7 @@ const defaultOrganizations: ApplicationShell13Organization[] = [
 const defaultUser: ApplicationShell13User = {
   name: "Amara Cole",
   email: "amara@harbor.studio",
-  image:
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=96&h=96&q=80",
+  image: "/assets/2d2e13918d75791c.webp",
 };
 
 const defaultBottomNav: ApplicationShell13BottomNavItem[] = [

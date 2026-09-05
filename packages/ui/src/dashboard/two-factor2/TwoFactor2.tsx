@@ -22,8 +22,7 @@ const defaults = {
   resendPrompt: "Lost your device?",
   resendLabel: "Use a backup code",
   resendHref: "#backup",
-  imageSrc:
-    "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&h=2000&q=80",
+  imageSrc: "/assets/6746a1f6081b08db.webp",
   imageAlt: "Open-plan studio with long desks and pendant lights",
 } as const;
 

@@ -38,15 +38,15 @@ const DEFAULT_ACTION: Cta28Action = {
 
 const DEFAULT_PHOTOS: Cta28Photo[] = [
   {
-    src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&h=1500&q=80",
+    src: "/assets/f3a024ac28ac96a1.webp",
     alt: "Operators gathered around a long table during a planning session",
   },
   {
-    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&h=1000&q=80",
+    src: "/assets/0d5b296cb8b10e6a.webp",
     alt: "Bright open studio with a communal work table",
   },
   {
-    src: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&h=900&q=80",
+    src: "/assets/ff0adba6f88d3473.webp",
     alt: "Close crop of a laptop and notes on a desk",
   },
 ];

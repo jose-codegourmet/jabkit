@@ -10,8 +10,7 @@ export const hero146Mocks = {
     captionHighlight: "under 8 minutes",
     videoSrc:
       "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    videoPoster:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&h=900&q=80",
+    videoPoster: "/assets/ee004332d5917332.webp",
     videoLabel: "Product walkthrough of an agent canvas",
     embedSrc: "https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ",
     embedTitle: "Agent walkthrough presentation",
@@ -26,8 +25,7 @@ export const hero146Mocks = {
     captionHighlight: "one afternoon",
     videoSrc:
       "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    videoPoster:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&h=900&q=80",
+    videoPoster: "/assets/1a3c84c318076e07.webp",
     videoLabel: "Desk-side agent demo",
     autoplay: false,
   },

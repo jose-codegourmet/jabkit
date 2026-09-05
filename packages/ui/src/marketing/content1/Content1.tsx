@@ -34,7 +34,7 @@ const DEFAULT_SECTIONS: Content1Section[] = [
       {
         type: "image",
         image: {
-          src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&h=1000&q=80",
+          src: "/assets/8b10f8ca8e999989.webp",
           alt: "Sunlit studio desks with plants, notebooks, and open laptops",
           caption: "The floor after standup: one canvas, no extra tabs.",
         },
@@ -99,7 +99,7 @@ const DEFAULT_SECTIONS: Content1Section[] = [
       {
         type: "image",
         image: {
-          src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&h=1000&q=80",
+          src: "/assets/3a3bdafcc198e463.webp",
           alt: "Team gathered around a table reviewing work together",
           caption:
             "Friday review: read the note out loud, then close the loop.",

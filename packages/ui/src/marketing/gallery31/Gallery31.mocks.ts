@@ -7,7 +7,7 @@ const defaultItems: Gallery31Item[] = [
     href: "#oak-lounge",
     span: "wide",
     image: {
-      src: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1600&h=1200&q=80",
+      src: "/assets/462a1be29787cd8e.webp",
       alt: "Low oak lounge chair on a pale floor",
     },
   },
@@ -16,7 +16,7 @@ const defaultItems: Gallery31Item[] = [
     price: "$480",
     href: "#arc-lamp",
     image: {
-      src: "https://images.unsplash.com/photo-1507473887601-a6dd6838aaf2?auto=format&fit=crop&w=900&h=1200&q=80",
+      src: "/assets/6cc11e462a9aaded.webp",
       alt: "Arc floor lamp lighting a quiet corner",
     },
   },
@@ -26,7 +26,7 @@ const defaultItems: Gallery31Item[] = [
     href: "#stone-table",
     span: "tall",
     image: {
-      src: "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&w=900&h=1400&q=80",
+      src: "/assets/488fa5330da1224c.webp",
       alt: "Sculptural stone side table in a sunlit room",
     },
   },
@@ -35,7 +35,7 @@ const defaultItems: Gallery31Item[] = [
     price: "$2,180",
     href: "#linen-daybed",
     image: {
-      src: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&h=900&q=80",
+      src: "/assets/7cb36691e11ed9af.webp",
       alt: "Linen daybed against a plaster wall",
     },
   },
@@ -45,7 +45,7 @@ const defaultItems: Gallery31Item[] = [
     href: "#ceramic-pendant",
     span: "wide",
     image: {
-      src: "https://images.unsplash.com/photo-1540932239986-30128078f57c?auto=format&fit=crop&w=1600&h=900&q=80",
+      src: "/assets/4f6410f5452c0ba5.webp",
       alt: "Hand-thrown ceramic pendant light",
     },
   },
@@ -58,7 +58,7 @@ const alternateItems: Gallery31Item[] = [
     href: "#walnut-desk",
     span: "wide",
     image: {
-      src: "https://images.unsplash.com/photo-1518455027359-f3f8164ba55c?auto=format&fit=crop&w=1600&h=1200&q=80",
+      src: "/assets/21aecf698128f57b.webp",
       alt: "Walnut writing desk with a single drawer",
     },
   },
@@ -67,7 +67,7 @@ const alternateItems: Gallery31Item[] = [
     price: "$220",
     href: "#paper-shade",
     image: {
-      src: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=900&h=1200&q=80",
+      src: "/assets/e40131b7fd7bf05b.webp",
       alt: "Folded paper pendant shade",
     },
   },
@@ -77,7 +77,7 @@ const alternateItems: Gallery31Item[] = [
     href: "#wool-lounge",
     span: "tall",
     image: {
-      src: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&h=1400&q=80",
+      src: "/assets/d35b71081ab5deef.webp",
       alt: "Wool-upholstered lounge in a pale room",
     },
   },
@@ -86,7 +86,7 @@ const alternateItems: Gallery31Item[] = [
     price: "$175",
     href: "#ash-stool",
     image: {
-      src: "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&h=1200&q=80",
+      src: "/assets/46d405deede5a407.webp",
       alt: "Turned ash stool on a timber floor",
     },
   },
@@ -96,7 +96,7 @@ const alternateItems: Gallery31Item[] = [
     href: "#brass-sconce",
     span: "wide",
     image: {
-      src: "https://images.unsplash.com/photo-1513519245088-0e12902e35a6?auto=format&fit=crop&w=1600&h=900&q=80",
+      src: "/assets/66859c6f46cc742b.webp",
       alt: "Brass wall sconce on plaster",
     },
   },

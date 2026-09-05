@@ -2,15 +2,15 @@ import type { Cta28Photo, Cta28Props } from "./Cta28.types";
 
 export const cta28Photos: Cta28Photo[] = [
   {
-    src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&h=1500&q=80",
+    src: "/assets/f3a024ac28ac96a1.webp",
     alt: "Operators gathered around a long table during a planning session",
   },
   {
-    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&h=1000&q=80",
+    src: "/assets/0d5b296cb8b10e6a.webp",
     alt: "Bright open studio with a communal work table",
   },
   {
-    src: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&h=900&q=80",
+    src: "/assets/ff0adba6f88d3473.webp",
     alt: "Close crop of a laptop and notes on a desk",
   },
 ];
@@ -44,15 +44,15 @@ export const cta28Mocks = {
     action: { label: "Book a walkthrough", href: "#walkthrough" },
     photos: [
       {
-        src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&h=1500&q=80",
+        src: "/assets/eb82a2f4ff6dfc76.webp",
         alt: "Two colleagues reviewing a plan on a tablet",
       },
       {
-        src: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&h=1000&q=80",
+        src: "/assets/646c53d80dffa006.webp",
         alt: "Glass-walled meeting room in a quiet office",
       },
       {
-        src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&h=900&q=80",
+        src: "/assets/67dbd1c3b703196d.webp",
         alt: "Team collaborating around laptops",
       },
     ],

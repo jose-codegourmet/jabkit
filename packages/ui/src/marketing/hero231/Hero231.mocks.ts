@@ -6,31 +6,31 @@ import type {
 
 export const hero231Portraits: Hero231Portrait[] = [
   {
-    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=480&h=640&q=80",
+    src: "/assets/c21dbcfeac157c9b.webp",
     alt: "Portrait of Amara Cole",
     name: "Amara Cole",
     role: "Creative director",
   },
   {
-    src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=480&h=640&q=80",
+    src: "/assets/1391b53bc91d2127.webp",
     alt: "Portrait of Julian Hart",
     name: "Julian Hart",
     role: "Design lead",
   },
   {
-    src: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=480&h=640&q=80",
+    src: "/assets/c65cd8af6df1b122.webp",
     alt: "Portrait of Noor Elamin",
     name: "Noor Elamin",
     role: "Brand strategist",
   },
   {
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=480&h=640&q=80",
+    src: "/assets/040bd026249d7af9.webp",
     alt: "Portrait of Mateo Ruiz",
     name: "Mateo Ruiz",
     role: "Art director",
   },
   {
-    src: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=480&h=640&q=80",
+    src: "/assets/7b4e1076c576b862.webp",
     alt: "Portrait of Sable Wren",
     name: "Sable Wren",
     role: "Producer",

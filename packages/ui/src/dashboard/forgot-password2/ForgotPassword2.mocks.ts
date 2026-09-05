@@ -9,8 +9,7 @@ export const forgotPassword2Mocks = {
     emailLabel: "Email",
     emailPlaceholder: "you@northline.app",
     submitLabel: "Send reset link",
-    imageSrc:
-      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&h=2000&q=80",
+    imageSrc: "/assets/2c2fae7d2bbfbdb2.webp",
     imageAlt: "Sunlit studio desks beside a tall window",
   },
   alternate: {
@@ -25,8 +24,7 @@ export const forgotPassword2Mocks = {
     sentTitle: "Link on the way",
     sentDescription:
       "Open the message from Harbor and follow the link before it expires.",
-    imageSrc:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&h=2000&q=80",
+    imageSrc: "/assets/e9d88fab9e45c86f.webp",
     imageAlt: "Glass office tower photographed from street level",
   },
 } satisfies Record<string, ForgotPassword2Props>;

@@ -12,22 +12,19 @@ export const about11Mocks = {
       {
         name: "Amara Cole",
         role: "Creative director",
-        image:
-          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=720&h=960&q=80",
+        image: "/assets/fc2d8371236ac90c.webp",
         imageAlt: "Portrait of Amara Cole",
       },
       {
         name: "Julian Voss",
         role: "Design lead",
-        image:
-          "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=720&h=960&q=80",
+        image: "/assets/2a364f729e4f7c09.webp",
         imageAlt: "Portrait of Julian Voss",
       },
       {
         name: "Noor Elahi",
         role: "Producer",
-        image:
-          "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=720&h=960&q=80",
+        image: "/assets/45dad0903fef5d02.webp",
         imageAlt: "Portrait of Noor Elahi",
       },
     ],
@@ -82,8 +79,7 @@ export const about11Mocks = {
     quote: {
       text: "Make the work feel like it was always supposed to live here.",
       attribution: "Studio note, pinned above the printer",
-      image:
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1800&h=900&q=80",
+      image: "/assets/6ab18a652c6b3562.webp",
       imageAlt: "Sunlit studio desks with plants and open laptops",
     },
     motivations: [
@@ -91,16 +87,14 @@ export const about11Mocks = {
         title: "Why we still print",
         description:
           "A screen can lie about scale. Paper cannot. We still make proofs you can hold so the type, the crop, and the color have to survive in a room with windows.",
-        image:
-          "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1400&h=900&q=80",
+        image: "/assets/c8ed8f9471a82715.webp",
         imageAlt: "Hands marking a printed layout on a wooden table",
       },
       {
         title: "Why we keep the crew small",
         description:
           "Fewer seats at the table means the brief does not get translated three times. The person who heard the problem is still in the file when it ships.",
-        image:
-          "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&h=900&q=80",
+        image: "/assets/b4bdf0047c9613f6.webp",
         imageAlt: "Small team talking around a conference table",
       },
     ],
@@ -116,22 +110,19 @@ export const about11Mocks = {
       {
         name: "Iris Chen",
         role: "Partner",
-        image:
-          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=720&h=960&q=80",
+        image: "/assets/d111cc60a8f2bf68.webp",
         imageAlt: "Portrait of Iris Chen",
       },
       {
         name: "Mateo Ruiz",
         role: "Type",
-        image:
-          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=720&h=960&q=80",
+        image: "/assets/2bd1b12951fdbdb5.webp",
         imageAlt: "Portrait of Mateo Ruiz",
       },
       {
         name: "Samira Ott",
         role: "Image",
-        image:
-          "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=720&h=960&q=80",
+        image: "/assets/cd01783ad0367a47.webp",
         imageAlt: "Portrait of Samira Ott",
       },
     ],
@@ -180,8 +171,7 @@ export const about11Mocks = {
     quote: {
       text: "If it needs a paragraph to explain the layout, the layout is not done.",
       attribution: "Iris, on the studio wall",
-      image:
-        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&h=900&q=80",
+      image: "/assets/ae58c412be22e34e.webp",
       imageAlt: "Empty modern office with a long wooden table",
     },
     motivations: [
@@ -189,16 +179,14 @@ export const about11Mocks = {
         title: "Slow enough to see",
         description:
           "We leave extra days between rounds so the work can be looked at in the morning, not only at midnight.",
-        image:
-          "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=1400&h=900&q=80",
+        image: "/assets/14573d2d5a225d90.webp",
         imageAlt: "Laptop and notebook on a sunlit desk",
       },
       {
         title: "Built to be handed on",
         description:
           "The files should make sense to a stranger. If they do not, we have not finished the job.",
-        image:
-          "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&h=900&q=80",
+        image: "/assets/161a5edc1845a242.webp",
         imageAlt: "Team working together at laptops in an open office",
       },
     ],

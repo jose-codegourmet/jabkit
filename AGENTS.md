@@ -21,6 +21,7 @@ Code wins when docs disagree. [docs/README.md](docs/README.md) is the index. Gen
 | Color, token, or dark mode | [docs/theming.md](docs/theming.md) |
 | Registry JSON, metadata, or builder | [docs/registry.md](docs/registry.md) |
 | Showcase routes, previews, samples | [docs/showcase.md](docs/showcase.md) |
+| Preview capture pipeline, hosted assets, catalogue images | [docs/previews.md](docs/previews.md) |
 | Consumer install (`init` / `add`) | [docs/cli.md](docs/cli.md) |
 | Catalogue HTTP tools | [docs/mcp.md](docs/mcp.md) |
 | Whole-system map | [docs/architecture.md](docs/architecture.md) |
@@ -31,6 +32,8 @@ Code wins when docs disagree. [docs/README.md](docs/README.md) is the index. Gen
 - Categories are `atoms`, `marketing`, and `dashboard`.
 - Atoms may depend on other atoms through `registryDependencies`. Atoms never depend on marketing or dashboard. Marketing and dashboard never depend on each other.
 - Every component has `{Name}.types.ts`, `{Name}.meta.ts`, `{Name}.preview.tsx`, at least two stories, and a `ThemeComparison` story.
+- Every component has a committed preview image. Run `pnpm previews:build -- --name {name}` after adding or changing a component and commit `apps/showcase/public/previews/`. A missing or stale asset fails `pnpm check`.
+- Remote media in `packages/ui` is self-hosted under `/assets/...`. Do not add third-party image URLs to component source or mocks; run `pnpm assets:vendor`.
 - Stories are the source of registry examples. Generated registry JSON is never edited by hand.
 - `apps/showcase/public/r/*.json` is generated and committed. Run `pnpm registry:build` and commit its output with every component add or change.
 - Catalogue HTTP tools are read-only. The CLI writes source files into **consumer** projects, not into `packages/ui`.
@@ -52,7 +55,7 @@ Run from the **repo root** (`scripts/check-conventions.ts` uses `process.cwd()`)
 pnpm check
 ```
 
-That is `lint` (Biome) + `typecheck` (Turbo) + `check:conventions` + `registry:verify` (rebuild + `git diff --exit-code` on `apps/showcase/public/r`). There is no CI. This local gate is the gate.
+That is `lint` (Biome) + `typecheck` (Turbo) + `check:conventions` + `registry:verify` (rebuild + `git diff --exit-code` on `apps/showcase/public/r`) + `previews:verify` (hash and file verification for `apps/showcase/public/previews/`). There is no CI. This local gate is the gate.
 
 Also: `pnpm registry:build`, `pnpm storybook`, `pnpm dev`.
 
@@ -68,6 +71,7 @@ Ship doc updates in the same PR as the behavior they describe.
 | Showcase routes or previews | `docs/showcase.md` |
 | CLI flags or install writes | `docs/cli.md` |
 | `/mcp` tools | `docs/mcp.md` |
+| Preview capture pipeline, hosted assets, catalogue images | `docs/previews.md` |
 | Workspace layout or generated artifacts | `docs/architecture.md` and `docs/README.md` |
 
 ## Working rules

@@ -38,8 +38,7 @@ const defaultSecondaryAction: HeroSection5Action = {
 
 const defaultVideo: HeroSection5Video = {
   src: "https://videos.pexels.com/video-files/3129957/3129957-hd_1280_720_25fps.mp4",
-  poster:
-    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+  poster: "/assets/83a0defb9dfb1866.webp",
   label: "Abstract particle field drifting through a dark research lab",
 };
 

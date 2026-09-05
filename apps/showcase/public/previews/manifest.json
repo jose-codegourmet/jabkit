@@ -1,0 +1,1704 @@
+{
+  "pipelineVersion": 1,
+  "components": {
+    "avatar": {
+      "sourceHash": "9cd590d91a91cea4953e8ad3d0f50a7d221002c1fa031e93feb0b4ea36047d0d",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "avatar.Default.dark.webp",
+          "bytes": 1388,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "avatar.Variants.dark.webp",
+          "bytes": 1388,
+          "width": 800,
+          "height": 480
+        }
+      ]
+    },
+    "badge": {
+      "sourceHash": "37513cc505cadfdb4af3e987061ae522d3be72b23d358d53de07de9f97c14d68",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "badge.Default.dark.webp",
+          "bytes": 1216,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "badge.Variants.dark.webp",
+          "bytes": 1114,
+          "width": 800,
+          "height": 480
+        }
+      ]
+    },
+    "button": {
+      "sourceHash": "de2f31e06d0a8ecd8a5d29ec0fec0e41f6f4cf02df18c96bab69c5819c1968d5",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "light",
+          "file": "button.Default.light.webp",
+          "bytes": 2076,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "button.Default.dark.webp",
+          "bytes": 2004,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "light",
+          "file": "button.Variants.light.webp",
+          "bytes": 1638,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "button.Variants.dark.webp",
+          "bytes": 1624,
+          "width": 800,
+          "height": 480
+        }
+      ]
+    },
+    "checkbox": {
+      "sourceHash": "bf9c5c521f958ea6f2b85898fedb4e44a79a475d353eff92a1cae4e1714d3eab",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "checkbox.Default.dark.webp",
+          "bytes": 1674,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "checkbox.Variants.dark.webp",
+          "bytes": 1794,
+          "width": 800,
+          "height": 480
+        }
+      ]
+    },
+    "dialog": {
+      "sourceHash": "97084cbac3f2c7ddb0e29099744bb4b68f8814a6ebbf0ca25d49da35f9392622",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "dialog.Default.dark.webp",
+          "bytes": 1062,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "dialog.Variants.dark.webp",
+          "bytes": 1062,
+          "width": 800,
+          "height": 480
+        }
+      ]
+    },
+    "dropdown-menu": {
+      "sourceHash": "b1b4fb53bfd90972e9148070fd9b793aae726dffd9e97fdf303ab065717dd9c0",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "dropdown-menu.Default.dark.webp",
+          "bytes": 2772,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "dropdown-menu.Variants.dark.webp",
+          "bytes": 2772,
+          "width": 800,
+          "height": 480
+        }
+      ]
+    },
+    "input": {
+      "sourceHash": "55710de11c1e723a134801416614fe0141c1e97c125ddf2683919589f65ea951",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "input.Default.dark.webp",
+          "bytes": 1650,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "input.Variants.dark.webp",
+          "bytes": 1764,
+          "width": 800,
+          "height": 480
+        }
+      ]
+    },
+    "label": {
+      "sourceHash": "158672b4a1818482cb0a49ffe59b1169ea4583d4443d492d7a2f58a6dcf8e277",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "label.Default.dark.webp",
+          "bytes": 1702,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "label.Variants.dark.webp",
+          "bytes": 1702,
+          "width": 800,
+          "height": 480
+        }
+      ]
+    },
+    "separator": {
+      "sourceHash": "e4ae0f0db4ebfd55e00ad3282d3a6a03d56bd10f0e03748d910560100355a1d6",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "separator.Default.dark.webp",
+          "bytes": 4470,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "separator.Variants.dark.webp",
+          "bytes": 4360,
+          "width": 800,
+          "height": 480
+        }
+      ]
+    },
+    "skeleton": {
+      "sourceHash": "bcccd3a80d2c874067968f834f8c332af4abf6d108e9124351d5cb136984997d",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "skeleton.Default.dark.webp",
+          "bytes": 928,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "skeleton.Variants.dark.webp",
+          "bytes": 928,
+          "width": 800,
+          "height": 480
+        }
+      ]
+    },
+    "switch": {
+      "sourceHash": "5cd213b0052f63531252336a3fcfc15efa933b61a4715fb80e5e9b868a5708a8",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "switch.Default.dark.webp",
+          "bytes": 1378,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "switch.Variants.dark.webp",
+          "bytes": 1522,
+          "width": 800,
+          "height": 480
+        }
+      ]
+    },
+    "textarea": {
+      "sourceHash": "ba7dc76759cbaab78a1c3714149d68129afaf0a35d926b400e80ccf6e7c44f30",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "textarea.Default.dark.webp",
+          "bytes": 1580,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "textarea.Variants.dark.webp",
+          "bytes": 2600,
+          "width": 800,
+          "height": 480
+        }
+      ]
+    },
+    "tooltip": {
+      "sourceHash": "4c6b869fff9baaebf937005d1c075526d41cd765ac7b19ab2fd9d8214971a665",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "tooltip.Default.dark.webp",
+          "bytes": 2022,
+          "width": 800,
+          "height": 480
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "tooltip.Variants.dark.webp",
+          "bytes": 2022,
+          "width": 800,
+          "height": 480
+        }
+      ]
+    },
+    "about11": {
+      "sourceHash": "acfac0cf8a8fdd119a7dd6871773b700569a9425feecd1e60a2878a0651e0be2",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "about11.Default.dark.webp",
+          "bytes": 76818,
+          "width": 960,
+          "height": 2245
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "about11.Variants.dark.webp",
+          "bytes": 82278,
+          "width": 960,
+          "height": 2179
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "about11.ThemeComparison.dark.webp",
+          "bytes": 118584,
+          "width": 960,
+          "height": 2057
+        }
+      ]
+    },
+    "about14": {
+      "sourceHash": "c9258ce9598329af00c7cbc7b817eece7e95f4b9aae0e986346961b7f4ad5242",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "about14.Default.dark.webp",
+          "bytes": 28184,
+          "width": 960,
+          "height": 701
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "about14.Variants.dark.webp",
+          "bytes": 36292,
+          "width": 960,
+          "height": 691
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "about14.ThemeComparison.dark.webp",
+          "bytes": 46814,
+          "width": 960,
+          "height": 739
+        }
+      ]
+    },
+    "about6": {
+      "sourceHash": "da30f8653d1735466a093b84b61d5c7b504689891d66641df296556396368fb0",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "about6.Default.dark.webp",
+          "bytes": 50200,
+          "width": 960,
+          "height": 800
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "about6.Variants.dark.webp",
+          "bytes": 49658,
+          "width": 960,
+          "height": 800
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "about6.ThemeComparison.dark.webp",
+          "bytes": 59730,
+          "width": 960,
+          "height": 800
+        }
+      ]
+    },
+    "about8": {
+      "sourceHash": "bf6f06a1ed78391250384cd32d35f13370b6944d8b0afa1d834375546e7a4ed1",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "about8.Default.dark.webp",
+          "bytes": 82028,
+          "width": 960,
+          "height": 1566
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "about8.Variants.dark.webp",
+          "bytes": 67938,
+          "width": 960,
+          "height": 1545
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "about8.ThemeComparison.dark.webp",
+          "bytes": 128330,
+          "width": 960,
+          "height": 1498
+        }
+      ]
+    },
+    "awards6": {
+      "sourceHash": "3ed3267da0b81813d18ef272d55006bb08feaf4ce8b0392ecbf35dce1aa3faf6",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "awards6.Default.dark.webp",
+          "bytes": 16640,
+          "width": 960,
+          "height": 653
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "awards6.Variants.dark.webp",
+          "bytes": 12924,
+          "width": 960,
+          "height": 653
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "awards6.ThemeComparison.dark.webp",
+          "bytes": 31514,
+          "width": 960,
+          "height": 677
+        }
+      ]
+    },
+    "bento19": {
+      "sourceHash": "379e8940f060aa959400bf5489dbd6d447be40bafe49d280ae19cae16643ff52",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "bento19.Default.dark.webp",
+          "bytes": 31256,
+          "width": 960,
+          "height": 911
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "bento19.Variants.dark.webp",
+          "bytes": 27652,
+          "width": 960,
+          "height": 893
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "bento19.ThemeComparison.dark.webp",
+          "bytes": 53186,
+          "width": 960,
+          "height": 808
+        }
+      ]
+    },
+    "case-studies11": {
+      "sourceHash": "00198147d08e755bb00432c69c053ea958e481f76a0638750a97b2dd74fb25bc",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "case-studies11.Default.dark.webp",
+          "bytes": 30492,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "case-studies11.Variants.dark.webp",
+          "bytes": 24454,
+          "width": 960,
+          "height": 600
+        }
+      ]
+    },
+    "case-studies13": {
+      "sourceHash": "72b1095f382a9caea01cc8100540b9b97ca11fd18945565e3bb6262d036deae8",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "case-studies13.Default.dark.webp",
+          "bytes": 36150,
+          "width": 960,
+          "height": 653
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "case-studies13.Variants.dark.webp",
+          "bytes": 39180,
+          "width": 960,
+          "height": 653
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "case-studies13.ThemeComparison.dark.webp",
+          "bytes": 55852,
+          "width": 960,
+          "height": 695
+        }
+      ]
+    },
+    "code-example14": {
+      "sourceHash": "fd39e08c573fa4c7f5d56ec844e3effaaee5bda46fc7acaf220a816f5b20a929",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "code-example14.Default.dark.webp",
+          "bytes": 23070,
+          "width": 960,
+          "height": 617
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "code-example14.Variants.dark.webp",
+          "bytes": 22586,
+          "width": 960,
+          "height": 617
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "code-example14.ThemeComparison.dark.webp",
+          "bytes": 40858,
+          "width": 960,
+          "height": 617
+        }
+      ]
+    },
+    "compare5": {
+      "sourceHash": "26ce98ec491ce505c24afad34a4a99d22d4e1c4827d0de5da2fcfbe6f4a9d914",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "compare5.Default.dark.webp",
+          "bytes": 25102,
+          "width": 960,
+          "height": 667
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "compare5.Variants.dark.webp",
+          "bytes": 26628,
+          "width": 960,
+          "height": 667
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "compare5.ThemeComparison.dark.webp",
+          "bytes": 41118,
+          "width": 960,
+          "height": 667
+        }
+      ]
+    },
+    "content1": {
+      "sourceHash": "6d0aae75d69c1c49703d7978879e690a0824a90c06294c05f22f8c769957fc5f",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "content1.Default.dark.webp",
+          "bytes": 78490,
+          "width": 960,
+          "height": 1977
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "content1.Variants.dark.webp",
+          "bytes": 77270,
+          "width": 960,
+          "height": 1261
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "content1.ThemeComparison.dark.webp",
+          "bytes": 114822,
+          "width": 960,
+          "height": 2053
+        }
+      ]
+    },
+    "content2": {
+      "sourceHash": "77b0b0e9b0f0bca48e42169453c4ae76cadd8796605095a770b722bbfa62458c",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "content2.Default.dark.webp",
+          "bytes": 24494,
+          "width": 960,
+          "height": 733
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "content2.Variants.dark.webp",
+          "bytes": 25166,
+          "width": 960,
+          "height": 733
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "content2.ThemeComparison.dark.webp",
+          "bytes": 48794,
+          "width": 960,
+          "height": 925
+        }
+      ]
+    },
+    "content3": {
+      "sourceHash": "d45127dcd9a50c9d5d56326aa068fd41fa9365ddd8904d352111157932a91aca",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "content3.Default.dark.webp",
+          "bytes": 66472,
+          "width": 960,
+          "height": 1722
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "content3.Variants.dark.webp",
+          "bytes": 61832,
+          "width": 960,
+          "height": 1738
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "content3.ThemeComparison.dark.webp",
+          "bytes": 105544,
+          "width": 960,
+          "height": 1950
+        }
+      ]
+    },
+    "content4": {
+      "sourceHash": "ffe292ea5a29542accda24635bb90ebaf409cb2ea54314c1cb417faaa60316c0",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "content4.Default.dark.webp",
+          "bytes": 80568,
+          "width": 960,
+          "height": 1756
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "content4.Variants.dark.webp",
+          "bytes": 46012,
+          "width": 960,
+          "height": 1067
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "content4.ThemeComparison.dark.webp",
+          "bytes": 130660,
+          "width": 960,
+          "height": 2199
+        }
+      ]
+    },
+    "cta22": {
+      "sourceHash": "0d646750c606a96a202edd34ef43f68171f96e7d14409c22dc5b9e02f5eaac76",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "cta22.Default.dark.webp",
+          "bytes": 17350,
+          "width": 960,
+          "height": 520
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "cta22.Variants.dark.webp",
+          "bytes": 15064,
+          "width": 960,
+          "height": 520
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "cta22.ThemeComparison.dark.webp",
+          "bytes": 30470,
+          "width": 960,
+          "height": 520
+        }
+      ]
+    },
+    "cta28": {
+      "sourceHash": "a3694525826d542f7c44b505708e5f6d78a1e24fa2355911270bf74b80f6d115",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "cta28.Default.dark.webp",
+          "bytes": 23488,
+          "width": 960,
+          "height": 528
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "cta28.Variants.dark.webp",
+          "bytes": 27352,
+          "width": 960,
+          "height": 528
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "cta28.ThemeComparison.dark.webp",
+          "bytes": 42518,
+          "width": 960,
+          "height": 656
+        }
+      ]
+    },
+    "ecommerce-hero8": {
+      "sourceHash": "906711ac8fc3e3b3fe529f7e2a6374e9f81b094bf91d9757732889b5686ba6c9",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "ecommerce-hero8.Default.dark.webp",
+          "bytes": 28230,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "ecommerce-hero8.Variants.dark.webp",
+          "bytes": 17610,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "ecommerce-hero8.ThemeComparison.dark.webp",
+          "bytes": 47444,
+          "width": 960,
+          "height": 600
+        }
+      ]
+    },
+    "ecommerce-navbar2": {
+      "sourceHash": "7dadbe3ad0d1c7b595b5fc3bc95ed8afc9eb5cc3a13292cc4117ad9a6031d7f3",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "ecommerce-navbar2.Default.dark.webp",
+          "bytes": 2878,
+          "width": 960,
+          "height": 280
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "ecommerce-navbar2.Variants.dark.webp",
+          "bytes": 2510,
+          "width": 960,
+          "height": 280
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "ecommerce-navbar2.ThemeComparison.dark.webp",
+          "bytes": 4518,
+          "width": 960,
+          "height": 280
+        }
+      ]
+    },
+    "faq12": {
+      "sourceHash": "e1ffa318e10df9aef99e4342a66df96f3bf1d4f1d8b64b88bcab94b3365efa50",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "faq12.Default.dark.webp",
+          "bytes": 29168,
+          "width": 960,
+          "height": 1062
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "faq12.Variants.dark.webp",
+          "bytes": 19202,
+          "width": 960,
+          "height": 853
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "faq12.ThemeComparison.dark.webp",
+          "bytes": 57058,
+          "width": 960,
+          "height": 1142
+        }
+      ]
+    },
+    "feature261": {
+      "sourceHash": "f5a9371f4858363dadd444a9a0fc5c2d857a509dff90d69234ff7f002d71da25",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "feature261.Default.dark.webp",
+          "bytes": 44872,
+          "width": 960,
+          "height": 925
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "feature261.Variants.dark.webp",
+          "bytes": 59684,
+          "width": 960,
+          "height": 893
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "feature261.ThemeComparison.dark.webp",
+          "bytes": 66588,
+          "width": 960,
+          "height": 796
+        }
+      ]
+    },
+    "gallery31": {
+      "sourceHash": "b2f5a6b65e27120a3b711e5ec42775d9f0d24aaad870b6bb7beba4d8ba953995",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "gallery31.Default.dark.webp",
+          "bytes": 26628,
+          "width": 960,
+          "height": 679
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "gallery31.Variants.dark.webp",
+          "bytes": 26216,
+          "width": 960,
+          "height": 679
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "gallery31.ThemeComparison.dark.webp",
+          "bytes": 40990,
+          "width": 960,
+          "height": 679
+        }
+      ]
+    },
+    "hero-section-5": {
+      "sourceHash": "4e3b56c01c8baaed60a677d40ec20ccf3f9e9559f0a66b4802b4cdbe2c11fa0c",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "hero-section-5.Default.dark.webp",
+          "bytes": 21462,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "hero-section-5.Variants.dark.webp",
+          "bytes": 19890,
+          "width": 960,
+          "height": 600
+        }
+      ]
+    },
+    "hero146": {
+      "sourceHash": "138213e1a1ba1b6aec451bcce48dd13910b250ce36a9dcafd649970c992c0045",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "hero146.Default.dark.webp",
+          "bytes": 35818,
+          "width": 960,
+          "height": 844
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "hero146.Variants.dark.webp",
+          "bytes": 32962,
+          "width": 960,
+          "height": 844
+        }
+      ]
+    },
+    "hero228": {
+      "sourceHash": "33fc769403be76b6aa81d1d29b7583d25f57bc7264096974b346116c70182bd6",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "hero228.Default.dark.webp",
+          "bytes": 13650,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "hero228.Variants.dark.webp",
+          "bytes": 12316,
+          "width": 960,
+          "height": 600
+        }
+      ]
+    },
+    "hero230": {
+      "sourceHash": "1267c9d52341e1f8bf24a0feea0b7ef4d5a5f5541d78134546436c53e9106f3b",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "hero230.Default.dark.webp",
+          "bytes": 24230,
+          "width": 960,
+          "height": 762
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "hero230.Variants.dark.webp",
+          "bytes": 25982,
+          "width": 960,
+          "height": 762
+        }
+      ]
+    },
+    "hero231": {
+      "sourceHash": "a1e8a8a132e42eb97c5975264d2c27b626414964eb56c78d69db392605f93aea",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "hero231.Default.dark.webp",
+          "bytes": 15272,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "hero231.Variants.dark.webp",
+          "bytes": 14622,
+          "width": 960,
+          "height": 600
+        }
+      ]
+    },
+    "hero307": {
+      "sourceHash": "4a9d42d710725a7c5d298254fc581efc0a23397724d2b798be7b731385a0d3c7",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "hero307.Default.dark.webp",
+          "bytes": 22568,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "hero307.Variants.dark.webp",
+          "bytes": 21414,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "hero307.ThemeComparison.dark.webp",
+          "bytes": 36066,
+          "width": 960,
+          "height": 600
+        }
+      ]
+    },
+    "pricing28": {
+      "sourceHash": "b6aba66e79672ad8d5e67f1a8f7f4ddb6f5a8806eccf141b291953fde3d5b07f",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "pricing28.Default.dark.webp",
+          "bytes": 26672,
+          "width": 960,
+          "height": 753
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "pricing28.Variants.dark.webp",
+          "bytes": 25670,
+          "width": 960,
+          "height": 753
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "pricing28.ThemeComparison.dark.webp",
+          "bytes": 51936,
+          "width": 960,
+          "height": 881
+        }
+      ]
+    },
+    "waitlist3": {
+      "sourceHash": "d8eec906d27d221be7618915f8a80b934ac6a2271b38db68770c74db66533d00",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "waitlist3.Default.dark.webp",
+          "bytes": 33198,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "waitlist3.Variants.dark.webp",
+          "bytes": 31024,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "waitlist3.ThemeComparison.dark.webp",
+          "bytes": 45512,
+          "width": 960,
+          "height": 600
+        }
+      ]
+    },
+    "application-shell1": {
+      "sourceHash": "80ee1a8beedf727d8f3ef49c269482ba191fd6b7b7736ff49545abc0db04d845",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "application-shell1.Default.dark.webp",
+          "bytes": 6824,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "application-shell1.Variants.dark.webp",
+          "bytes": 3452,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "application-shell1.ThemeComparison.dark.webp",
+          "bytes": 11794,
+          "width": 960,
+          "height": 600
+        }
+      ]
+    },
+    "application-shell13": {
+      "sourceHash": "647c7d222a3161492e2946c119f67b63f5b38e10d401eb076adf025f9df4e75e",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "application-shell13.Default.dark.webp",
+          "bytes": 6540,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "application-shell13.Variants.dark.webp",
+          "bytes": 4636,
+          "width": 960,
+          "height": 600
+        }
+      ]
+    },
+    "chart-group14": {
+      "sourceHash": "900c28107cf9ca374ed672fd28f1e45e26a9d74ea91f59d1364eecdd3319ef78",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "chart-group14.Default.dark.webp",
+          "bytes": 24138,
+          "width": 960,
+          "height": 787
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "chart-group14.Variants.dark.webp",
+          "bytes": 22860,
+          "width": 960,
+          "height": 787
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "chart-group14.ThemeComparison.dark.webp",
+          "bytes": 43280,
+          "width": 960,
+          "height": 787
+        }
+      ]
+    },
+    "forgot-password2": {
+      "sourceHash": "4ac66152b821c333e7b6b2a82d6b2e7d661343dbe9b05b99a41d19700bcfc1e4",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "forgot-password2.Default.dark.webp",
+          "bytes": 29858,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "forgot-password2.Variants.dark.webp",
+          "bytes": 47934,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "forgot-password2.ThemeComparison.dark.webp",
+          "bytes": 38876,
+          "width": 960,
+          "height": 600
+        }
+      ]
+    },
+    "login4": {
+      "sourceHash": "f0f60961162dbeff2bbc64be2916630e2d89f25e03b4c500648680357304a912",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "login4.Default.dark.webp",
+          "bytes": 6428,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "login4.Variants.dark.webp",
+          "bytes": 6700,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "login4.ThemeComparison.dark.webp",
+          "bytes": 11580,
+          "width": 960,
+          "height": 600
+        }
+      ]
+    },
+    "two-factor2": {
+      "sourceHash": "7b084a52215e72aa90b4ff92badf77a3e8d7686df8913349fc59de646ba5c3d6",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "two-factor2.Default.dark.webp",
+          "bytes": 23812,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "two-factor2.Variants.dark.webp",
+          "bytes": 31832,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "two-factor2.ThemeComparison.dark.webp",
+          "bytes": 34766,
+          "width": 960,
+          "height": 600
+        }
+      ]
+    },
+    "two-factor5": {
+      "sourceHash": "639513ef507d70fd09739a877ee3f00fe757fef696432436286c99c7edb3be35",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "two-factor5.Default.dark.webp",
+          "bytes": 5770,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "two-factor5.Variants.dark.webp",
+          "bytes": 6624,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "two-factor5.ThemeComparison.dark.webp",
+          "bytes": 10360,
+          "width": 960,
+          "height": 600
+        }
+      ]
+    }
+  }
+}

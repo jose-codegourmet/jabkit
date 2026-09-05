@@ -39,6 +39,7 @@ Everything under `apps/showcase/app/` and `apps/showcase/components/` is site ch
 3. The module's default export is `Record<string, () => ReactNode>` (see `apps/showcase/lib/preview.ts`). The route uses `previews[story] ?? previews.Default`. Missing render → `notFound()`.
 4. `entry?.preview?.layout === "fit"` drops the centered padding and lets the block fill the frame; otherwise the route is `grid place-items-center`.
 5. Theme on this route is independent of the showcase `ThemeProvider`. See [theming.md](theming.md).
+6. The route-owned `<main>` exposes `data-preview-stories` (the actual default-export keys) and `data-preview-ready`. The capture pipeline reads these attributes instead of inferring story names from an HTTP response.
 
 Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 
@@ -53,13 +54,11 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 - New-tab link uses the same URL.
 - Iframe is `aria-hidden`.
 
-`apps/showcase/components/ScaledFrame.tsx` (home, catalogue tiles for `layout: "fit"`):
+`ScaledFrame.tsx` no longer exists. The home page and `/components` use the server-rendered `PreviewImage` component, which reads the committed preview manifest and renders a dark WebP instead of an iframe. Button's home theme-proof strip selects its corresponding light or dark capture.
 
-- Renders an iframe at a fixed `viewportWidth` × `viewportHeight` (defaults 1440 × 900 from meta, or those numbers when meta omits them).
-- `ResizeObserver` sets `transform: scale(...)` with origin top-left so the full-bleed block shrinks into the tile.
-- Also `aria-hidden`.
+`apps/showcase/public/previews/` contains the generated WebPs and `manifest.json`; `apps/showcase/public/assets/` contains re-hosted component images and `sources.json`. Both directories are committed generated artifacts. See [previews.md](previews.md).
 
-Non-fit catalogue tiles use a plain iframe at `/preview/{name}/Default` with no `theme` param.
+`ComponentPreview.tsx` is deliberately unchanged and remains a live iframe surface on the component detail page, retaining its device sizing, local theme toggle, and new-tab link.
 
 ## Component detail surfaces
 

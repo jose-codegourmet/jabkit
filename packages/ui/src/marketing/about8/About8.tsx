@@ -30,15 +30,15 @@ const DEFAULT_MISSION: About8Mission = {
 
 const DEFAULT_GALLERY: About8Image[] = [
   {
-    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&h=1200&q=80",
+    src: "/assets/7292f284c2f30594.webp",
     alt: "Glass office towers against a clear sky",
   },
   {
-    src: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&h=1200&q=80",
+    src: "/assets/6c0006cce3d4fa6c.webp",
     alt: "Two colleagues reviewing a screen together",
   },
   {
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&h=1200&q=80",
+    src: "/assets/e89d407a6298dce2.webp",
     alt: "Laptop showing charts on a wooden desk",
   },
 ];
@@ -54,7 +54,7 @@ const DEFAULT_TEAM: About8Team = {
   description:
     "The first six people still own incidents, partner reviews, and the weekly journal walkthrough. We hire people who can read a ledger as fluently as a pull request.",
   image: {
-    src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&h=900&q=80",
+    src: "/assets/9beb102cf6681c6c.webp",
     alt: "Collaborative workshop around a table",
   },
 };

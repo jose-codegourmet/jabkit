@@ -11,8 +11,7 @@ const defaultLeft: Compare5Option = {
   title: "The old stack",
   description:
     "Status lives in inboxes, slides, and a spreadsheet someone last touched on Thursday.",
-  imageSrc:
-    "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=1400&h=1800&q=80",
+  imageSrc: "/assets/1bf986d4f35769a9.webp",
   imageAlt: "Paper notes and a crowded analog desk",
   action: { label: "Keep the current process", href: "#legacy" },
   accent: true,
@@ -22,8 +21,7 @@ const defaultRight: Compare5Option = {
   title: "The new stack",
   description:
     "One canvas for the brief, the handoff, and the record — so the work stays in view.",
-  imageSrc:
-    "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&h=1800&q=80",
+  imageSrc: "/assets/1a2d35c6581e840f.webp",
   imageAlt: "Bright open studio with a long communal table",
   action: { label: "See the new way", href: "#modern" },
 };

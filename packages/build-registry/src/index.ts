@@ -1,10 +1,18 @@
 export type ComponentCategory = "atoms" | "marketing" | "dashboard";
 
+export interface ComponentCaptureMeta {
+  stories?: string[];
+  themes?: Array<"light" | "dark">;
+  viewport?: { width: number; height: number };
+  waitMs?: number;
+}
+
 export interface ComponentPreviewMeta {
   /** "fit" renders at a fixed viewport and scales down; "center" centres the component in the frame. */
   layout: "fit" | "center";
   width?: number;
   height?: number;
+  capture?: ComponentCaptureMeta;
 }
 
 export interface ComponentMeta {

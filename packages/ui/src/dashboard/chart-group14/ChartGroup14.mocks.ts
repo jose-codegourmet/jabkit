@@ -75,7 +75,7 @@ export const chartGroup14People: ChartGroup14Person[] = [
     role: "On call",
     lastActive: "2m ago",
     initials: "AC",
-    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&h=160&q=80",
+    src: "/assets/4132445424a19cc6.webp",
   },
   {
     id: "julian",
@@ -83,7 +83,7 @@ export const chartGroup14People: ChartGroup14Person[] = [
     role: "Reviewing",
     lastActive: "11m ago",
     initials: "JV",
-    src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&h=160&q=80",
+    src: "/assets/8e9489842d5e2cdf.webp",
   },
   {
     id: "nori",
@@ -91,7 +91,7 @@ export const chartGroup14People: ChartGroup14Person[] = [
     role: "Shipping",
     lastActive: "24m ago",
     initials: "NH",
-    src: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=160&h=160&q=80",
+    src: "/assets/9b8fa9955b8bd54f.webp",
   },
   {
     id: "ines",
@@ -106,7 +106,7 @@ export const chartGroup14People: ChartGroup14Person[] = [
     role: "On call",
     lastActive: "3h ago",
     initials: "RL",
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=160&h=160&q=80",
+    src: "/assets/8c18989537b833e8.webp",
   },
 ];
 
@@ -156,7 +156,7 @@ export const chartGroup14Mocks = {
         role: "Packing",
         lastActive: "4m ago",
         initials: "MP",
-        src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=160&h=160&q=80",
+        src: "/assets/bd48582e630a15fa.webp",
       },
       {
         id: "otto",
@@ -171,7 +171,7 @@ export const chartGroup14Mocks = {
         role: "Merch",
         lastActive: "41m ago",
         initials: "SI",
-        src: "https://images.unsplash.com/photo-1547425260-459bc24e8ba0?auto=format&fit=crop&w=160&h=160&q=80",
+        src: "/assets/8d9df3eb6166e07f.webp",
       },
       {
         id: "leo",
