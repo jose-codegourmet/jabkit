@@ -226,6 +226,32 @@
     }
   },
   {
+    "name": "about14",
+    "displayName": "About14",
+    "category": "marketing",
+    "description": "Six-column about block with a large headline, full-width hero image, labeled intro, inline avatar profile, and a philosophy statement.",
+    "tags": [
+      "about",
+      "marketing",
+      "story",
+      "portrait",
+      "photography",
+      "grid",
+      "landing"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 980
+    }
+  },
+  {
     "name": "case-studies11",
     "displayName": "CaseStudies11",
     "category": "marketing",
