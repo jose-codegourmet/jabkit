@@ -917,6 +917,34 @@
     }
   },
   {
+    "name": "pricing28",
+    "displayName": "Pricing28",
+    "category": "marketing",
+    "description": "Four-plan pricing section with avatar social proof, monthly/yearly billing tabs, tooltips, and grouped feature lists.",
+    "tags": [
+      "pricing",
+      "marketing",
+      "plans",
+      "billing",
+      "tabs",
+      "avatars",
+      "landing"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1100
+    }
+  },
+  {
     "name": "application-shell1",
     "displayName": "ApplicationShell1",
     "category": "dashboard",
