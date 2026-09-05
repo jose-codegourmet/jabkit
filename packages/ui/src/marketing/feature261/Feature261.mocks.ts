@@ -77,7 +77,8 @@ export const feature261Mocks = {
     pricing: {
       amount: "$36",
       period: "/ crew / month",
-      caption: "Unlimited photos, punch lists, and sign-off from the field app.",
+      caption:
+        "Unlimited photos, punch lists, and sign-off from the field app.",
       ctaLabel: "Start a crew",
       href: "#crew",
     },

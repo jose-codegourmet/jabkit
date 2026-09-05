@@ -36,7 +36,8 @@ const defaults = {
   pricing: {
     amount: "$48",
     period: "/ seat / month",
-    caption: "Includes reviews, markup, and field capture. No per-project fees.",
+    caption:
+      "Includes reviews, markup, and field capture. No per-project fees.",
     ctaLabel: "See plans",
     href: "#plans",
   },
@@ -109,7 +110,9 @@ function ImageTile({
         alt={tile.alt}
         className={cn(
           "h-full w-full object-cover",
-          priority ? "min-h-[18rem] sm:min-h-[24rem] lg:min-h-0" : "min-h-[14rem]",
+          priority
+            ? "min-h-[18rem] sm:min-h-[24rem] lg:min-h-0"
+            : "min-h-[14rem]",
         )}
       />
       {tile.caption ? (
