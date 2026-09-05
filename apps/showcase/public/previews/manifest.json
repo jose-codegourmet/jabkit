@@ -1755,6 +1755,44 @@
           "height": 600
         }
       ]
+    },
+    "team14": {
+      "sourceHash": "c09607d30bc1cd16663393d756a64171ee20805b560d51bd3b9df99ab8ca37c6",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "team14.Default.dark.webp",
+          "bytes": 15700,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "team14.Variants.dark.webp",
+          "bytes": 17908,
+          "width": 960,
+          "height": 600
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "team14.ThemeComparison.dark.webp",
+          "bytes": 19446,
+          "width": 960,
+          "height": 600
+        }
+      ]
     }
   }
 }
