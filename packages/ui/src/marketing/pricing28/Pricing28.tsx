@@ -10,12 +10,7 @@ import {
   UsersIcon,
   ZapIcon,
 } from "lucide-react";
-import {
-  type ComponentType,
-  type KeyboardEvent,
-  useId,
-  useState,
-} from "react";
+import { type ComponentType, type KeyboardEvent, useId, useState } from "react";
 import {
   Avatar,
   AvatarFallback,
@@ -65,7 +60,9 @@ function PlanTagline({
 }) {
   if (!tooltip) {
     return (
-      <p className="mt-2 text-sm text-muted-foreground text-pretty">{tagline}</p>
+      <p className="mt-2 text-sm text-muted-foreground text-pretty">
+        {tagline}
+      </p>
     );
   }
 
@@ -98,8 +95,7 @@ function PlanCard({
   interval: Pricing28Interval;
 }) {
   const price = interval === "yearly" ? plan.yearlyPrice : plan.monthlyPrice;
-  const period =
-    interval === "yearly" ? plan.yearlyPeriod : plan.monthlyPeriod;
+  const period = interval === "yearly" ? plan.yearlyPeriod : plan.monthlyPeriod;
   const variant = plan.ctaVariant ?? (plan.popular ? "primary" : "secondary");
 
   return (
@@ -202,7 +198,8 @@ export function Pricing28({
     if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
       event.preventDefault();
       const delta = event.key === "ArrowRight" ? 1 : -1;
-      const next = INTERVALS[(index + delta + INTERVALS.length) % INTERVALS.length];
+      const next =
+        INTERVALS[(index + delta + INTERVALS.length) % INTERVALS.length];
       setInterval(next);
       document.getElementById(`${tabPrefix}-${next}`)?.focus();
     }
