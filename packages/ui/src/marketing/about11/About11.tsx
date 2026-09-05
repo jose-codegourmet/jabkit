@@ -162,7 +162,9 @@ function MemberPlate({
         />
       </div>
       <figcaption className="mt-3 space-y-0.5">
-        <p className="text-sm font-semibold tracking-[-0.02em]">{member.name}</p>
+        <p className="text-sm font-semibold tracking-[-0.02em]">
+          {member.name}
+        </p>
         <p className="text-sm text-muted-foreground">{member.role}</p>
       </figcaption>
     </figure>
