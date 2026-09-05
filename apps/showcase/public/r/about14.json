@@ -1,0 +1,62 @@
+{
+  "name": "about14",
+  "displayName": "About14",
+  "version": "1.0.0",
+  "addedAt": "2026-09-05",
+  "description": "Six-column about block with a large headline, full-width hero image, labeled intro, inline avatar profile, and a philosophy statement.",
+  "tags": [
+    "about",
+    "marketing",
+    "story",
+    "portrait",
+    "photography",
+    "grid",
+    "landing"
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "avatar"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 980
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "about14/About14.tsx",
+      "type": "component",
+      "content": "import { useId } from \"react\";\nimport { Avatar, AvatarFallback, AvatarImage } from \"@/atoms/avatar/Avatar\";\nimport { cn } from \"@/lib/cn\";\nimport type { About14Props } from \"./About14.types\";\n\nconst defaults = {\n  title: \"About Us\",\n  label: \"The studio\",\n  intro:\n    \"We design product sites and brand systems for teams that need the work to read clearly on first pass, then hold up in the room.\",\n  profile: {\n    src: \"https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=160&h=160&q=80\",\n    alt: \"Portrait of Mira Solano\",\n    name: \"Mira Solano\",\n    role: \"Founding designer\",\n    fallback: \"MS\",\n  },\n  philosophy:\n    \"Photography first, copy second, and a grid that stays honest when the page gets quiet.\",\n  image: {\n    src: \"https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&h=900&q=80\",\n    alt: \"Sunlit studio with long work tables and plants\",\n  },\n} as const;\n\nexport function About14({\n  className,\n  title = defaults.title,\n  label = defaults.label,\n  intro = defaults.intro,\n  profile = defaults.profile,\n  philosophy = defaults.philosophy,\n  image = defaults.image,\n  ...props\n}: About14Props) {\n  const headingId = useId();\n\n  return (\n    <section\n      data-slot=\"about14\"\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24 lg:px-10\">\n        <div className=\"grid grid-cols-1 gap-y-10 lg:grid-cols-6 lg:gap-x-8 lg:gap-y-14\">\n          <h2\n            id={headingId}\n            className=\"text-4xl font-semibold tracking-[-0.05em] text-balance sm:text-5xl lg:col-span-6 lg:text-6xl\"\n          >\n            {title}\n          </h2>\n\n          {image ? (\n            <div className=\"overflow-hidden rounded-[--radius] bg-muted lg:col-span-6\">\n              <img\n                src={image.src}\n                alt={image.alt}\n                className=\"h-[22rem] w-full object-cover sm:h-[28rem] lg:h-[32rem]\"\n              />\n            </div>\n          ) : null}\n\n          {label ? (\n            <p className=\"text-sm font-medium text-muted-foreground lg:col-span-1 lg:pt-1\">\n              {label}\n            </p>\n          ) : null}\n\n          <div className=\"flex flex-col gap-6 lg:col-span-2 lg:px-2\">\n            {intro ? (\n              <p className=\"text-base leading-7 text-muted-foreground\">\n                {intro}\n              </p>\n            ) : null}\n            {profile ? (\n              <div className=\"flex items-center gap-3\">\n                <Avatar size=\"lg\">\n                  <AvatarImage src={profile.src} alt={profile.alt} />\n                  <AvatarFallback>{profile.fallback}</AvatarFallback>\n                </Avatar>\n                <div className=\"min-w-0\">\n                  <p className=\"text-sm font-semibold tracking-[-0.02em]\">\n                    {profile.name}\n                  </p>\n                  <p className=\"text-sm text-muted-foreground\">\n                    {profile.role}\n                  </p>\n                </div>\n              </div>\n            ) : null}\n          </div>\n\n          {philosophy ? (\n            <p className=\"text-2xl font-semibold tracking-[-0.04em] text-balance sm:text-3xl lg:col-span-3 lg:px-2 lg:text-4xl\">\n              {philosophy}\n            </p>\n          ) : null}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "about14/About14.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface About14Image {\n  src: string;\n  alt: string;\n}\n\nexport interface About14Profile {\n  src: string;\n  alt: string;\n  name: string;\n  role: string;\n  fallback: string;\n}\n\nexport interface About14Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  title?: string;\n  label?: string;\n  intro?: string;\n  profile?: About14Profile;\n  philosophy?: string;\n  image?: About14Image;\n}\n"
+    },
+    {
+      "path": "about14/index.ts",
+      "type": "index",
+      "content": "export { About14 } from \"./About14\";\nexport type * from \"./About14.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <About14 {...about14Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <About14 {...about14Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
