@@ -279,6 +279,32 @@
     }
   },
   {
+    "name": "about6",
+    "displayName": "About6",
+    "category": "marketing",
+    "description": "Two-column about section with story copy, a staggered workplace photo grid, and an offset second column of images and paragraphs.",
+    "tags": [
+      "about",
+      "marketing",
+      "story",
+      "photos",
+      "team",
+      "workplace",
+      "landing"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1200
+    }
+  },
+  {
     "name": "case-studies11",
     "displayName": "CaseStudies11",
     "category": "marketing",
