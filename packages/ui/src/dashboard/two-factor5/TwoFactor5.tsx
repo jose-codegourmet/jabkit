@@ -72,7 +72,7 @@ export function TwoFactor5({
       incoming.split("").forEach((digit, offset) => {
         if (index + offset < length) next[index + offset] = digit;
       });
-      const filled = writeDigits(next);
+      writeDigits(next);
       const lastFilled = Math.min(index + incoming.length, length) - 1;
       focusDigit(Math.max(0, lastFilled));
       return;
@@ -173,10 +173,8 @@ export function TwoFactor5({
             <form onSubmit={handleSubmit} className="mt-8 grid gap-5">
               <div className="grid gap-2">
                 <Label htmlFor={`${digitId}-0`}>{codeLabel}</Label>
-                <div
-                  className="flex gap-2"
-                  role="group"
-                  aria-labelledby={headingId}
+                <fieldset
+                  className="m-0 flex gap-2 border-0 p-0"
                   aria-describedby={instructionId}
                 >
                   {digits.map((digit, index) => (
@@ -198,7 +196,7 @@ export function TwoFactor5({
                       className="h-12 w-full min-w-0 rounded-[--radius] px-0 text-center text-lg font-medium tabular-nums"
                     />
                   ))}
-                </div>
+                </fieldset>
               </div>
               <Button type="submit" size="lg" className="w-full">
                 {submitLabel}
