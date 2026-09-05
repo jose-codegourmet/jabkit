@@ -18,6 +18,9 @@ export function SiteHeader() {
           <Link href="/components" className="hover:text-foreground">
             Components
           </Link>
+          <Link href="/samples" className="hover:text-foreground">
+            Samples
+          </Link>
           <a href="#how-it-works" className="hover:text-foreground">
             How it works
           </a>

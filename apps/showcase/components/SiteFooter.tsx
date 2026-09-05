@@ -20,6 +20,12 @@ export function SiteFooter() {
           >
             Components
           </Link>
+          <Link
+            href="/samples"
+            className="inline-flex min-h-11 items-center hover:text-foreground"
+          >
+            Samples
+          </Link>
           <a
             href="#how-it-works"
             className="inline-flex min-h-11 items-center hover:text-foreground"
