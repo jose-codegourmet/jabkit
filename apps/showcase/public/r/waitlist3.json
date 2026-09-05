@@ -1,0 +1,68 @@
+{
+  "name": "waitlist3",
+  "displayName": "Waitlist3",
+  "version": "1.0.0",
+  "addedAt": "2026-09-05",
+  "description": "Split coming-soon waitlist with a company mark, launch badge, email form, overlapping avatars, copyright, and a full-height photo.",
+  "tags": [
+    "waitlist",
+    "marketing",
+    "form",
+    "coming-soon",
+    "split",
+    "photography",
+    "landing"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "avatar",
+    "badge",
+    "button",
+    "input",
+    "label"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "waitlist3/Waitlist3.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ArrowRightIcon } from \"lucide-react\";\nimport { type FormEvent, useId } from \"react\";\nimport {\n  Avatar,\n  AvatarFallback,\n  AvatarGroup,\n  AvatarImage,\n} from \"@/atoms/avatar/Avatar\";\nimport { Badge } from \"@/atoms/badge\";\nimport { Button } from \"@/atoms/button\";\nimport { Input } from \"@/atoms/input\";\nimport { Label } from \"@/atoms/label\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  Waitlist3Logo,\n  Waitlist3Person,\n  Waitlist3Photo,\n  Waitlist3Props,\n} from \"./Waitlist3.types\";\n\nconst defaults = {\n  logo: { name: \"Northline\", href: \"#home\" } satisfies Waitlist3Logo,\n  badge: \"Opening this fall\",\n  title: \"Get a desk before the room fills.\",\n  description:\n    \"One email when operator seats open. No drip, no product tour — just the date and a link to claim a workspace.\",\n  emailLabel: \"Work email\",\n  emailPlaceholder: \"you@studio.work\",\n  submitLabel: \"Join the waitlist\",\n  people: [\n    {\n      src: \"https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=160&h=160&q=80\",\n      alt: \"Portrait of Ines Calder\",\n      fallback: \"IC\",\n    },\n    {\n      src: \"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&h=160&q=80\",\n      alt: \"Portrait of Rowan Hale\",\n      fallback: \"RH\",\n    },\n    {\n      src: \"https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&h=160&q=80\",\n      alt: \"Portrait of Priya Nair\",\n      fallback: \"PN\",\n    },\n    {\n      src: \"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=160&h=160&q=80\",\n      alt: \"Portrait of Eli Voss\",\n      fallback: \"EV\",\n    },\n  ] satisfies Waitlist3Person[],\n  socialProof: \"2,400 operators already in line\",\n  copyright: \"© 2026 Northline. Seats open in that order.\",\n  photo: {\n    src: \"https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&h=2000&q=80\",\n    alt: \"Sunlit glass meeting room looking onto a quiet studio floor\",\n  } satisfies Waitlist3Photo,\n};\n\nfunction BrandMark({ logo }: { logo: Waitlist3Logo }) {\n  const mark = logo.src ? (\n    <img src={logo.src} alt=\"\" className=\"size-7 object-contain\" />\n  ) : (\n    <span\n      aria-hidden=\"true\"\n      className=\"grid size-7 place-items-center rounded-[calc(var(--radius)-0.1rem)] bg-foreground text-[0.7rem] font-semibold tracking-tight text-background\"\n    >\n      {logo.name.slice(0, 1)}\n    </span>\n  );\n\n  const label = (\n    <span className=\"flex items-center gap-2.5 text-sm font-semibold tracking-tight\">\n      {mark}\n      <span>{logo.name}</span>\n    </span>\n  );\n\n  if (logo.href) {\n    return (\n      <a\n        href={logo.href}\n        className=\"inline-flex w-fit text-foreground transition-opacity hover:opacity-80\"\n      >\n        {label}\n      </a>\n    );\n  }\n\n  return label;\n}\n\nexport function Waitlist3({\n  className,\n  logo = defaults.logo,\n  badge = defaults.badge,\n  title = defaults.title,\n  description = defaults.description,\n  emailLabel = defaults.emailLabel,\n  emailPlaceholder = defaults.emailPlaceholder,\n  submitLabel = defaults.submitLabel,\n  people = defaults.people,\n  socialProof = defaults.socialProof,\n  copyright = defaults.copyright,\n  photo = defaults.photo,\n  onSubscribe,\n  onSubmit,\n  ...props\n}: Waitlist3Props) {\n  const headingId = useId();\n  const emailId = useId();\n\n  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {\n    onSubmit?.(event);\n    if (event.defaultPrevented) return;\n    event.preventDefault();\n    const email = String(\n      new FormData(event.currentTarget).get(\"email\") ?? \"\",\n    ).trim();\n    onSubscribe?.(email);\n  };\n\n  return (\n    <section\n      data-slot=\"waitlist3\"\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"grid min-h-dvh lg:grid-cols-2\">\n        <div className=\"flex flex-col justify-between gap-12 px-6 py-8 sm:px-10 sm:py-12 lg:px-14 lg:py-14 xl:px-16\">\n          <BrandMark logo={logo} />\n\n          <div className=\"mx-auto w-full max-w-md space-y-7 lg:mx-0\">\n            {badge ? (\n              <Badge variant=\"outline\" className=\"h-7 px-3 text-[0.7rem]\">\n                {badge}\n              </Badge>\n            ) : null}\n\n            <header className=\"space-y-3\">\n              <h1\n                id={headingId}\n                className=\"text-4xl font-semibold tracking-[-0.05em] text-balance sm:text-5xl\"\n              >\n                {title}\n              </h1>\n              {description ? (\n                <p className=\"text-base leading-7 text-muted-foreground sm:text-[1.05rem] sm:leading-8\">\n                  {description}\n                </p>\n              ) : null}\n            </header>\n\n            <form\n              className=\"flex flex-col gap-3 sm:flex-row sm:items-stretch\"\n              onSubmit={handleSubmit}\n            >\n              <div className=\"min-w-0 flex-1\">\n                <Label htmlFor={emailId} className=\"sr-only\">\n                  {emailLabel}\n                </Label>\n                <Input\n                  id={emailId}\n                  name=\"email\"\n                  type=\"email\"\n                  required\n                  autoComplete=\"email\"\n                  placeholder={emailPlaceholder}\n                  className=\"h-12 rounded-[--radius] bg-background\"\n                />\n              </div>\n              <Button\n                type=\"submit\"\n                variant=\"primary\"\n                size=\"lg\"\n                className=\"h-12 gap-2 sm:px-5\"\n              >\n                {submitLabel}\n                <ArrowRightIcon aria-hidden=\"true\" className=\"size-4\" />\n              </Button>\n            </form>\n\n            {people.length > 0 || socialProof ? (\n              <div className=\"flex flex-wrap items-center gap-3\">\n                {people.length > 0 ? (\n                  <AvatarGroup>\n                    {people.map((person) => (\n                      <Avatar key={person.fallback} size=\"sm\">\n                        <AvatarImage src={person.src} alt={person.alt} />\n                        <AvatarFallback>{person.fallback}</AvatarFallback>\n                      </Avatar>\n                    ))}\n                  </AvatarGroup>\n                ) : null}\n                {socialProof ? (\n                  <p className=\"text-sm text-muted-foreground\">{socialProof}</p>\n                ) : null}\n              </div>\n            ) : null}\n          </div>\n\n          {copyright ? (\n            <p className=\"text-xs tracking-wide text-muted-foreground\">\n              {copyright}\n            </p>\n          ) : null}\n        </div>\n\n        <figure className=\"relative min-h-[18rem] overflow-hidden bg-muted lg:min-h-dvh\">\n          <img\n            src={photo.src}\n            alt={photo.alt}\n            className=\"absolute inset-0 size-full object-cover\"\n          />\n        </figure>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "waitlist3/Waitlist3.types.ts",
+      "type": "types",
+      "content": "import type { FormEventHandler, HTMLAttributes } from \"react\";\n\nexport interface Waitlist3Logo {\n  name: string;\n  href?: string;\n  src?: string;\n  alt?: string;\n}\n\nexport interface Waitlist3Person {\n  src: string;\n  alt: string;\n  fallback: string;\n}\n\nexport interface Waitlist3Photo {\n  src: string;\n  alt: string;\n}\n\nexport interface Waitlist3Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\" | \"onSubmit\"> {\n  logo?: Waitlist3Logo;\n  badge?: string;\n  title?: string;\n  description?: string;\n  emailLabel?: string;\n  emailPlaceholder?: string;\n  submitLabel?: string;\n  people?: Waitlist3Person[];\n  socialProof?: string;\n  copyright?: string;\n  photo?: Waitlist3Photo;\n  onSubscribe?: (email: string) => void;\n  onSubmit?: FormEventHandler<HTMLFormElement>;\n}\n"
+    },
+    {
+      "path": "waitlist3/index.ts",
+      "type": "index",
+      "content": "export { Waitlist3 } from \"./Waitlist3\";\nexport type * from \"./Waitlist3.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Waitlist3 {...waitlist3Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Waitlist3 {...waitlist3Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
