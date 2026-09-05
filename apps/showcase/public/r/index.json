@@ -410,6 +410,33 @@
     }
   },
   {
+    "name": "cta28",
+    "displayName": "Cta28",
+    "category": "marketing",
+    "description": "Dark enterprise CTA with a serif headline, two-column icon capability grid, wide action, and a layered photo collage on extra-wide layouts.",
+    "tags": [
+      "cta",
+      "marketing",
+      "enterprise",
+      "photography",
+      "landing",
+      "split"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1600,
+      "height": 880
+    }
+  },
+  {
     "name": "hero-section-5",
     "displayName": "HeroSection5",
     "category": "marketing",

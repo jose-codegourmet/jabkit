@@ -1,0 +1,63 @@
+{
+  "name": "cta28",
+  "displayName": "Cta28",
+  "version": "1.0.0",
+  "addedAt": "2026-09-05",
+  "description": "Dark enterprise CTA with a serif headline, two-column icon capability grid, wide action, and a layered photo collage on extra-wide layouts.",
+  "tags": [
+    "cta",
+    "marketing",
+    "enterprise",
+    "photography",
+    "landing",
+    "split"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1600,
+    "height": 880
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "cta28/Cta28.tsx",
+      "type": "component",
+      "content": "import {\n  ArrowRightIcon,\n  GaugeIcon,\n  LockIcon,\n  ShieldCheckIcon,\n  SparklesIcon,\n  UsersIcon,\n  WorkflowIcon,\n} from \"lucide-react\";\nimport { useId } from \"react\";\nimport { Button } from \"@/atoms/button\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  Cta28Action,\n  Cta28Feature,\n  Cta28FeatureIcon,\n  Cta28Photo,\n  Cta28Props,\n} from \"./Cta28.types\";\n\nconst DEFAULT_TITLE = \"Run the next quarter\\nfrom one room.\";\nconst DEFAULT_DESCRIPTION =\n  \"Keep briefs, handoffs, and the live record in the same canvas so operators walk in already knowing the next move.\";\n\nconst DEFAULT_FEATURES: Cta28Feature[] = [\n  { icon: \"shield\", label: \"Policy-aware workflows\" },\n  { icon: \"workflow\", label: \"Shared operator canvas\" },\n  { icon: \"users\", label: \"Shift-proof handoffs\" },\n  { icon: \"gauge\", label: \"Status without a scavenger hunt\" },\n  { icon: \"lock\", label: \"Role-based access\" },\n  { icon: \"sparkles\", label: \"Audit-ready history\" },\n];\n\nconst DEFAULT_ACTION: Cta28Action = {\n  label: \"Start a workspace\",\n  href: \"#start\",\n};\n\nconst DEFAULT_PHOTOS: Cta28Photo[] = [\n  {\n    src: \"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&h=1500&q=80\",\n    alt: \"Operators gathered around a long table during a planning session\",\n  },\n  {\n    src: \"https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&h=1000&q=80\",\n    alt: \"Bright open studio with a communal work table\",\n  },\n  {\n    src: \"https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&h=900&q=80\",\n    alt: \"Close crop of a laptop and notes on a desk\",\n  },\n];\n\nconst FEATURE_ICONS: Record<Cta28FeatureIcon, typeof ShieldCheckIcon> = {\n  shield: ShieldCheckIcon,\n  workflow: WorkflowIcon,\n  users: UsersIcon,\n  gauge: GaugeIcon,\n  lock: LockIcon,\n  sparkles: SparklesIcon,\n};\n\nfunction FeatureGlyph({ name }: { name?: Cta28FeatureIcon }) {\n  const Icon = FEATURE_ICONS[name ?? \"sparkles\"];\n  return <Icon aria-hidden=\"true\" className=\"size-4 shrink-0 stroke-[1.75]\" />;\n}\n\nfunction CtaAction({ action }: { action: Cta28Action }) {\n  const className =\n    \"h-12 w-full justify-between gap-4 rounded-[--radius] bg-foreground px-5 text-background shadow-[0_18px_40px_-22px_color-mix(in_oklab,var(--jk-foreground),transparent_30%)] hover:brightness-110\";\n\n  const label = (\n    <>\n      <span>{action.label}</span>\n      <ArrowRightIcon aria-hidden=\"true\" className=\"size-4 stroke-[1.75]\" />\n    </>\n  );\n\n  if (action.href) {\n    return (\n      <Button variant=\"primary\" size=\"lg\" className={className} asChild>\n        <a href={action.href}>{label}</a>\n      </Button>\n    );\n  }\n\n  return (\n    <Button\n      variant=\"primary\"\n      size=\"lg\"\n      className={className}\n      onClick={action.onClick}\n    >\n      {label}\n    </Button>\n  );\n}\n\nconst PHOTO_FRAMES = [\n  \"absolute top-[8%] right-[4%] z-20 h-[72%] w-[58%] rotate-[2deg]\",\n  \"absolute bottom-[6%] left-[2%] z-30 h-[46%] w-[52%] -rotate-[4deg]\",\n  \"absolute top-[4%] left-[10%] z-10 h-[38%] w-[36%] rotate-[-7deg] opacity-70\",\n] as const;\n\nfunction PhotoCollage({ photos }: { photos: Cta28Photo[] }) {\n  if (photos.length === 0) return null;\n\n  return (\n    <div\n      aria-hidden=\"true\"\n      className=\"relative hidden min-h-[28rem] overflow-hidden xl:block\"\n    >\n      <div className=\"absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,color-mix(in_oklab,var(--jk-muted)_55%,transparent),transparent_68%)]\" />\n      {photos.slice(0, PHOTO_FRAMES.length).map((photo, index) => (\n        <figure\n          key={photo.src}\n          className={cn(\n            \"overflow-hidden rounded-[calc(var(--radius)+0.15rem)] border border-border/60 shadow-[0_28px_56px_-28px_color-mix(in_oklab,var(--jk-foreground),transparent_45%)]\",\n            PHOTO_FRAMES[index],\n          )}\n        >\n          <img src={photo.src} alt=\"\" className=\"size-full object-cover\" />\n        </figure>\n      ))}\n    </div>\n  );\n}\n\nexport function Cta28({\n  className,\n  title = DEFAULT_TITLE,\n  description = DEFAULT_DESCRIPTION,\n  features = DEFAULT_FEATURES,\n  action = DEFAULT_ACTION,\n  photos = DEFAULT_PHOTOS,\n  ...props\n}: Cta28Props) {\n  const headingId = useId();\n  const titleLines = title.split(\"\\n\").filter((line) => line.length > 0);\n\n  return (\n    <section\n      data-slot=\"cta28\"\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto max-w-[90rem] px-5 py-12 sm:px-8 sm:py-16 lg:px-10\">\n        <div className=\"dark overflow-hidden rounded-[calc(var(--radius)+0.65rem)] border border-border bg-background text-foreground shadow-[0_32px_72px_-40px_color-mix(in_oklab,var(--jk-foreground),transparent_55%)]\">\n          <div className=\"grid xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]\">\n            <div className=\"flex flex-col justify-center gap-8 px-6 py-10 sm:px-10 sm:py-14 lg:px-14 lg:py-16\">\n              <header className=\"max-w-xl\">\n                <h2\n                  id={headingId}\n                  className=\"font-serif text-4xl leading-[1.12] font-normal tracking-[-0.03em] text-balance sm:text-5xl lg:text-6xl\"\n                >\n                  {titleLines.map((line) => (\n                    <span key={line} className=\"block\">\n                      {line}\n                    </span>\n                  ))}\n                </h2>\n                {description ? (\n                  <p className=\"mt-5 max-w-lg text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8\">\n                    {description}\n                  </p>\n                ) : null}\n              </header>\n\n              {features.length > 0 ? (\n                <ul className=\"grid max-w-xl grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2\">\n                  {features.map((feature) => (\n                    <li\n                      key={feature.label}\n                      className=\"flex items-start gap-2.5 text-sm leading-6 text-foreground sm:text-[0.95rem]\"\n                    >\n                      <span className=\"mt-0.5 grid size-6 shrink-0 place-items-center text-foreground\">\n                        <FeatureGlyph name={feature.icon} />\n                      </span>\n                      <span>{feature.label}</span>\n                    </li>\n                  ))}\n                </ul>\n              ) : null}\n\n              <div className=\"max-w-xl\">\n                <CtaAction action={action} />\n              </div>\n            </div>\n\n            <PhotoCollage photos={photos} />\n          </div>\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "cta28/Cta28.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, MouseEventHandler } from \"react\";\n\nexport type Cta28FeatureIcon =\n  | \"shield\"\n  | \"workflow\"\n  | \"users\"\n  | \"gauge\"\n  | \"lock\"\n  | \"sparkles\";\n\nexport interface Cta28Feature {\n  label: string;\n  icon?: Cta28FeatureIcon;\n}\n\nexport interface Cta28Photo {\n  src: string;\n  alt: string;\n}\n\nexport interface Cta28Action {\n  label: string;\n  href?: string;\n  onClick?: MouseEventHandler<HTMLButtonElement>;\n}\n\nexport interface Cta28Props extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  title?: string;\n  description?: string;\n  features?: Cta28Feature[];\n  action?: Cta28Action;\n  photos?: Cta28Photo[];\n}\n"
+    },
+    {
+      "path": "cta28/index.ts",
+      "type": "index",
+      "content": "export { Cta28 } from \"./Cta28\";\nexport type * from \"./Cta28.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Cta28 {...cta28Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Cta28 {...cta28Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
