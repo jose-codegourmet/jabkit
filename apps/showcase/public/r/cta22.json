@@ -1,0 +1,66 @@
+{
+  "name": "cta22",
+  "displayName": "Cta22",
+  "version": "1.0.0",
+  "addedAt": "2026-09-05",
+  "description": "Marketing CTA with a dark app-download panel, store badges, overlapping phone imagery, and a muted newsletter form in a three-column grid.",
+  "tags": [
+    "cta",
+    "marketing",
+    "download",
+    "newsletter",
+    "app-store",
+    "form",
+    "landing"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "input",
+    "label"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 780
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "cta22/Cta22.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ArrowRightIcon } from \"lucide-react\";\nimport { type FormEvent, useId } from \"react\";\nimport { Button } from \"@/atoms/button\";\nimport { Input } from \"@/atoms/input\";\nimport { Label } from \"@/atoms/label\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  Cta22Props,\n  Cta22StoreLink,\n  Cta22StorePlatform,\n} from \"./Cta22.types\";\n\nconst defaults = {\n  title: \"Take Harbor into the field.\",\n  description:\n    \"Capture briefs, markups, and sign-off from the jobsite. Same workspace as the desk, without the laptop.\",\n  storeLinks: [\n    {\n      platform: \"app-store\" as const,\n      href: \"#app-store\",\n      caption: \"Download on the\",\n      label: \"App Store\",\n    },\n    {\n      platform: \"play\" as const,\n      href: \"#play\",\n      caption: \"Get it on\",\n      label: \"Google Play\",\n    },\n  ],\n  phoneImageSrc:\n    \"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=720&h=1280&q=80\",\n  phoneImageAlt: \"Harbor field app on a smartphone\",\n  newsletterTitle: \"Field notes, once a week\",\n  newsletterDescription:\n    \"Release notes, site templates, and one workflow worth stealing. Unsubscribe any time.\",\n  emailLabel: \"Work email\",\n  emailPlaceholder: \"you@studio.work\",\n  subscribeLabel: \"Subscribe\",\n};\n\nfunction AppleMark({ className }: { className?: string }) {\n  return (\n    <svg\n      aria-hidden=\"true\"\n      viewBox=\"0 0 24 24\"\n      className={className}\n      fill=\"currentColor\"\n    >\n      <path d=\"M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 6.9 1.2 9.2.8 1.1 1.7 2.3 2.9 2.3 1.2 0 1.6-.7 3-.7s1.7.7 3 .7 2-.1 2.9-2.2c1.1-1.5 1.5-3 1.5-3.1-.1 0-2.8-1.1-2.8-4.3ZM14.7 6.3c.6-.8 1.1-1.8.9-2.9-1 .1-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.8 1.1.1 2.2-.5 2.9-1.4Z\" />\n    </svg>\n  );\n}\n\nfunction PlayMark({ className }: { className?: string }) {\n  return (\n    <svg\n      aria-hidden=\"true\"\n      viewBox=\"0 0 24 24\"\n      className={className}\n      fill=\"currentColor\"\n    >\n      <path d=\"M4.2 3.4c-.5.3-.7.7-.7 1.4v14.4c0 .7.2 1.1.7 1.4l12.8-8.6L4.2 3.4Zm14.4 7.4-2.6-1.7-2.9 2 2.9 2 2.6-1.8c.8-.5.8-1.3 0-1.5ZM12.1 12.1 8.6 9.7 5.4 7.5l6.7 4.6Zm0-.2 6.7 4.6-3.2-2.2-3.5-2.4Z\" />\n    </svg>\n  );\n}\n\nfunction StoreMark({\n  platform,\n  className,\n}: {\n  platform: Cta22StorePlatform;\n  className?: string;\n}) {\n  if (platform === \"play\") return <PlayMark className={className} />;\n  return <AppleMark className={className} />;\n}\n\nfunction StoreBadge({ link }: { link: Cta22StoreLink }) {\n  return (\n    <Button\n      variant=\"secondary\"\n      size=\"md\"\n      asChild\n      className=\"h-auto justify-start gap-3 rounded-[calc(var(--radius)+0.15rem)] border-transparent bg-background px-3.5 py-2 text-foreground shadow-[0_12px_24px_-18px_color-mix(in_oklab,var(--jk-foreground),transparent_55%)] hover:bg-background hover:brightness-110\"\n    >\n      <a href={link.href}>\n        <StoreMark platform={link.platform} className=\"size-7 shrink-0\" />\n        <span className=\"flex min-w-0 flex-col items-start leading-tight\">\n          <span className=\"text-[10px] font-medium tracking-wide text-muted-foreground\">\n            {link.caption}\n          </span>\n          <span className=\"text-sm font-semibold tracking-tight\">\n            {link.label}\n          </span>\n        </span>\n      </a>\n    </Button>\n  );\n}\n\nexport function Cta22({\n  className,\n  title = defaults.title,\n  description = defaults.description,\n  storeLinks = defaults.storeLinks,\n  phoneImageSrc = defaults.phoneImageSrc,\n  phoneImageAlt = defaults.phoneImageAlt,\n  newsletterTitle = defaults.newsletterTitle,\n  newsletterDescription = defaults.newsletterDescription,\n  emailLabel = defaults.emailLabel,\n  emailPlaceholder = defaults.emailPlaceholder,\n  subscribeLabel = defaults.subscribeLabel,\n  onSubscribe,\n  onSubmit,\n  ...props\n}: Cta22Props) {\n  const headingId = useId();\n  const newsletterId = useId();\n  const emailId = useId();\n\n  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {\n    onSubmit?.(event);\n    if (event.defaultPrevented) return;\n    event.preventDefault();\n    const email = String(\n      new FormData(event.currentTarget).get(\"email\") ?? \"\",\n    ).trim();\n    onSubscribe?.(email);\n  };\n\n  return (\n    <section\n      data-slot=\"cta22\"\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24\">\n        <div className=\"flex flex-col gap-4 sm:flex-row sm:items-stretch lg:grid lg:grid-cols-3 lg:gap-5\">\n          <div className=\"dark relative isolate min-h-[22rem] overflow-hidden rounded-[calc(var(--radius)+0.7rem)] bg-background text-foreground sm:min-w-0 sm:flex-1 lg:col-span-2\">\n            <div className=\"grid h-full md:grid-cols-[minmax(0,1.05fr)_minmax(12rem,0.95fr)]\">\n              <div className=\"flex flex-col justify-center gap-6 px-6 py-8 sm:px-8 sm:py-10 lg:px-10\">\n                <div className=\"max-w-md space-y-3\">\n                  <h2\n                    id={headingId}\n                    className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl\"\n                  >\n                    {title}\n                  </h2>\n                  <p className=\"text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7\">\n                    {description}\n                  </p>\n                </div>\n                <div className=\"flex flex-wrap gap-3\">\n                  {storeLinks.map((link) => (\n                    <StoreBadge\n                      key={`${link.platform}-${link.label}`}\n                      link={link}\n                    />\n                  ))}\n                </div>\n              </div>\n\n              <div className=\"relative hidden min-h-[18rem] md:block\">\n                <div\n                  aria-hidden=\"true\"\n                  className=\"absolute inset-x-6 bottom-0 top-12 rounded-t-[1.75rem] bg-muted\"\n                />\n                <img\n                  src={phoneImageSrc}\n                  alt={phoneImageAlt}\n                  className=\"absolute inset-x-10 bottom-0 top-6 z-10 mx-auto w-[min(100%,14rem)] rounded-t-[1.6rem] object-cover object-top shadow-[0_28px_48px_-28px_color-mix(in_oklab,var(--jk-foreground),transparent_40%)]\"\n                />\n              </div>\n            </div>\n          </div>\n\n          <aside\n            aria-labelledby={newsletterId}\n            className=\"hidden min-h-[22rem] flex-col justify-between rounded-[calc(var(--radius)+0.7rem)] bg-muted px-6 py-8 text-foreground sm:flex sm:w-[min(100%,20.5rem)] sm:shrink-0 lg:w-auto lg:min-h-0\"\n          >\n            <div className=\"space-y-3\">\n              <h3\n                id={newsletterId}\n                className=\"text-2xl font-semibold tracking-[-0.04em] text-balance\"\n              >\n                {newsletterTitle}\n              </h3>\n              <p className=\"text-sm leading-6 text-muted-foreground\">\n                {newsletterDescription}\n              </p>\n            </div>\n\n            <form className=\"mt-8 flex flex-col gap-3\" onSubmit={handleSubmit}>\n              <div className=\"grid gap-2\">\n                <Label htmlFor={emailId}>{emailLabel}</Label>\n                <Input\n                  id={emailId}\n                  name=\"email\"\n                  type=\"email\"\n                  required\n                  autoComplete=\"email\"\n                  placeholder={emailPlaceholder}\n                  className=\"h-11 rounded-[--radius] bg-background\"\n                />\n              </div>\n              <Button\n                type=\"submit\"\n                variant=\"primary\"\n                size=\"lg\"\n                className=\"w-full gap-2\"\n              >\n                {subscribeLabel}\n                <ArrowRightIcon className=\"size-4\" aria-hidden=\"true\" />\n              </Button>\n            </form>\n          </aside>\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "cta22/Cta22.types.ts",
+      "type": "types",
+      "content": "import type { FormEventHandler, HTMLAttributes } from \"react\";\n\nexport type Cta22StorePlatform = \"app-store\" | \"play\";\n\nexport interface Cta22StoreLink {\n  platform: Cta22StorePlatform;\n  href: string;\n  caption: string;\n  label: string;\n}\n\nexport interface Cta22Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\" | \"onSubmit\"> {\n  title?: string;\n  description?: string;\n  storeLinks?: Cta22StoreLink[];\n  phoneImageSrc?: string;\n  phoneImageAlt?: string;\n  newsletterTitle?: string;\n  newsletterDescription?: string;\n  emailLabel?: string;\n  emailPlaceholder?: string;\n  subscribeLabel?: string;\n  onSubscribe?: (email: string) => void;\n  onSubmit?: FormEventHandler<HTMLFormElement>;\n}\n"
+    },
+    {
+      "path": "cta22/index.ts",
+      "type": "index",
+      "content": "export { Cta22 } from \"./Cta22\";\nexport type {\n  Cta22Props,\n  Cta22StoreLink,\n  Cta22StorePlatform,\n} from \"./Cta22.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Cta22 {...cta22Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Cta22 {...cta22Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
