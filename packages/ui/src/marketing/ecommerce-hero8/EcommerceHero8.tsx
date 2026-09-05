@@ -1,17 +1,74 @@
 "use client";
 
-// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.
 import * as React from "react";
 import { Button } from "@/atoms/button";
 import { cn } from "@/lib/cn";
-import { ecommerceHero8Slides } from "./EcommerceHero8.mocks";
 import type {
   EcommerceHero8Props,
   EcommerceHero8Slide,
 } from "./EcommerceHero8.types";
 
+const defaultSlides: EcommerceHero8Slide[] = [
+  {
+    title: "The autumn atelier",
+    description:
+      "Tailored wools, long coats, and quiet hardware — a collection cut for evenings that start after the studio lights go out.",
+    ctaLabel: "Shop the look",
+    ctaHref: "#atelier",
+    backgroundSrc:
+      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&h=1280&q=80",
+    backgroundAlt: "Model in a structured coat walking through a city street",
+    productSrc:
+      "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?auto=format&fit=crop&w=640&h=640&q=80",
+    productAlt: "Camel wool overcoat on a hanger",
+    productName: "Camel overcoat",
+  },
+  {
+    title: "Linen in motion",
+    description:
+      "Washeddowns and open weaves for warmer rooms. Light on the body, sharp at the shoulder, made to be worn hard.",
+    ctaLabel: "Shop linen",
+    ctaHref: "#linen",
+    backgroundSrc:
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1920&h=1280&q=80",
+    backgroundAlt: "Model in a pale knit set against a pink backdrop",
+    productSrc:
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=640&h=640&q=80",
+    productAlt: "Folded white linen shirt",
+    productName: "Open linen shirt",
+  },
+  {
+    title: "Night tailoring",
+    description:
+      "Black, ink, and a single gold note. Pieces that hold a silhouette under gallery light and late tables.",
+    ctaLabel: "Shop evening",
+    ctaHref: "#evening",
+    backgroundSrc:
+      "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1920&h=1280&q=80",
+    backgroundAlt: "Shopper in a black coat carrying bags on a city sidewalk",
+    productSrc:
+      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=640&h=640&q=80",
+    productAlt: "Black bomber jacket on a studio background",
+    productName: "Ink bomber",
+  },
+  {
+    title: "Studio knits",
+    description:
+      "Heavy gauges and fine merino for the in-between season. Layer them, live in them, forget they are new.",
+    ctaLabel: "Shop knits",
+    ctaHref: "#knits",
+    backgroundSrc:
+      "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1920&h=1280&q=80",
+    backgroundAlt: "Model reclining in a striped knit and wide trousers",
+    productSrc:
+      "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=640&h=640&q=80",
+    productAlt: "Cream knit sweater laid flat",
+    productName: "Studio crew",
+  },
+];
+
 const defaults = {
-  slides: ecommerceHero8Slides,
+  slides: defaultSlides,
   autoplay: true,
   autoplayMs: 5200,
 } as const;
@@ -39,18 +96,23 @@ function ProductRail({
   onSelect: (index: number) => void;
   railId: string;
 }) {
+  const railRef = React.useRef<HTMLDivElement | null>(null);
   const itemRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
 
   React.useEffect(() => {
-    itemRefs.current[active]?.scrollIntoView({
+    const rail = railRef.current;
+    const item = itemRefs.current[active];
+    if (!rail || !item) return;
+    const left = item.offsetLeft - rail.clientWidth / 2 + item.offsetWidth / 2;
+    rail.scrollTo({
+      left: Math.max(0, left),
       behavior: "smooth",
-      inline: "center",
-      block: "nearest",
     });
   }, [active]);
 
   return (
     <div
+      ref={railRef}
       className="flex gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       role="tablist"
       aria-label="Featured products"
@@ -139,7 +201,10 @@ export function EcommerceHero8({
 
   return (
     <section
-      className={cn("relative overflow-hidden bg-muted text-foreground", className)}
+      className={cn(
+        "relative overflow-hidden bg-muted text-foreground",
+        className,
+      )}
       aria-labelledby={headingId}
       data-slot="ecommerce-hero8"
     >
@@ -155,7 +220,7 @@ export function EcommerceHero8({
           .jk-ecommerce-hero8-enter { animation: none; }
         }
       `}</style>
-      <div
+      <section
         id={carouselId}
         aria-roledescription="carousel"
         aria-label="Collection stories"
@@ -243,7 +308,7 @@ export function EcommerceHero8({
             railId={carouselId}
           />
         </div>
-      </div>
+      </section>
     </section>
   );
 }

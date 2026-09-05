@@ -598,6 +598,32 @@
     }
   },
   {
+    "name": "ecommerce-hero8",
+    "displayName": "EcommerceHero8",
+    "category": "marketing",
+    "description": "Full-viewport fashion hero with synced autoplay campaign slides and a product thumbnail rail.",
+    "tags": [
+      "hero",
+      "marketing",
+      "ecommerce",
+      "carousel",
+      "autoplay",
+      "fashion",
+      "cta"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
     "name": "faq12",
     "displayName": "Faq12",
     "category": "marketing",

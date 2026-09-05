@@ -15,12 +15,22 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: { ...ecommerceHero8Mocks.default },
-  render: () => <EcommerceHero8 {...ecommerceHero8Mocks.default} />,
+  render: () => (
+    <EcommerceHero8
+      slides={ecommerceHero8Mocks.default.slides}
+      autoplay={ecommerceHero8Mocks.default.autoplay}
+    />
+  ),
 };
 
 export const Variants: Story = {
   args: { ...ecommerceHero8Mocks.alternate },
-  render: () => <EcommerceHero8 {...ecommerceHero8Mocks.alternate} />,
+  render: () => (
+    <EcommerceHero8
+      slides={ecommerceHero8Mocks.alternate.slides}
+      autoplay={ecommerceHero8Mocks.alternate.autoplay}
+    />
+  ),
 };
 
 export const ThemeComparison: Story = {

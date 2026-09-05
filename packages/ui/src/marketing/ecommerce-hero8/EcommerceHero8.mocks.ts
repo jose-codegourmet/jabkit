@@ -1,4 +1,7 @@
-import type { EcommerceHero8Props, EcommerceHero8Slide } from "./EcommerceHero8.types";
+import type {
+  EcommerceHero8Props,
+  EcommerceHero8Slide,
+} from "./EcommerceHero8.types";
 
 export const ecommerceHero8Slides: EcommerceHero8Slide[] = [
   {
