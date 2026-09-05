@@ -1030,6 +1030,32 @@
     }
   },
   {
+    "name": "projects13",
+    "displayName": "Projects13",
+    "category": "marketing",
+    "description": "Editorial project index: numbered rows with title, launch date, large description, and a small thumbnail, separated by hairline borders.",
+    "tags": [
+      "projects",
+      "list",
+      "marketing",
+      "portfolio",
+      "index",
+      "editorial",
+      "landing"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1100
+    }
+  },
+  {
     "name": "projects16",
     "displayName": "Projects16",
     "category": "marketing",
