@@ -5,6 +5,13 @@ export interface ComponentCaptureMeta {
   themes?: Array<"light" | "dark">;
   viewport?: { width: number; height: number };
   waitMs?: number;
+  /** Still WebP is the default. GIF is only for motion a still cannot show. */
+  format?: "still" | "gif";
+  /** Stories encoded as GIF when `format` is `"gif"`. Defaults to `["Default"]`. */
+  gifStories?: string[];
+  gifFrames?: number;
+  gifIntervalMs?: number;
+  gifDelayMs?: number;
 }
 
 export interface ComponentPreviewMeta {

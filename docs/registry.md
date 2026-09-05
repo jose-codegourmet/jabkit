@@ -32,7 +32,7 @@ export interface ComponentMeta {
 
 `cssVars`, if present, must include both `light` and `dark` maps or the build throws. No current component sets `cssVars`. Field meanings live in [adding-a-component.md](adding-a-component.md); do not duplicate that table here.
 
-`ComponentPreviewMeta` may include build-only `capture` metadata: story names, themes, a viewport override, and an extra wait time for the preview capture pipeline. It remains in `{Name}.meta.ts`, but `build.ts` strips it from both `{name}.json` and `index.json` so consumer registry JSON never exposes capture-only settings. See [previews.md](previews.md).
+`ComponentPreviewMeta` may include build-only `capture` metadata: story names, themes, a viewport override, an extra wait time, and optional GIF settings (`format`, `gifStories`, `gifFrames`, `gifIntervalMs`, `gifDelayMs`) for the preview capture pipeline. It remains in `{Name}.meta.ts`, but `build.ts` strips it from both `{name}.json` and `index.json` so consumer registry JSON never exposes capture-only settings. See [previews.md](previews.md).
 
 `dependencies` are npm packages the consumer must install (for example `@radix-ui/react-slot`). `registryDependencies` are other JabKit component `name` values. Both the CLI and `get_install_plan` walk `registryDependencies` depth-first before writing files.
 

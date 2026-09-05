@@ -9,15 +9,22 @@ export const uiRoot = path.join(root, "packages/ui/src");
 export const registryRoot = path.join(root, "apps/showcase/public/r");
 export const previewsRoot = path.join(root, "apps/showcase/public/previews");
 export const assetsRoot = path.join(root, "apps/showcase/public/assets");
+export const requiredMarketingStories = ["Default", "Variants"] as const;
 
 export type Category = "atoms" | "marketing" | "dashboard";
 export type Theme = "light" | "dark";
+export type PreviewFormat = "webp" | "gif";
 
 export type CaptureMeta = {
   stories?: string[];
   themes?: Theme[];
   viewport?: { width: number; height: number };
   waitMs?: number;
+  format?: "still" | "gif";
+  gifStories?: string[];
+  gifFrames?: number;
+  gifIntervalMs?: number;
+  gifDelayMs?: number;
 };
 
 export type PreviewMeta = {
@@ -41,7 +48,21 @@ export type PreviewAsset = {
   bytes: number;
   width: number;
   height: number;
+  format?: PreviewFormat;
 };
+
+export function isGifStory(capture: CaptureMeta | undefined, story: string) {
+  if (capture?.format !== "gif") return false;
+  return (capture.gifStories ?? ["Default"]).includes(story);
+}
+
+export function gifCaptureOptions(capture?: CaptureMeta) {
+  return {
+    frames: capture?.gifFrames ?? 4,
+    intervalMs: capture?.gifIntervalMs ?? 700,
+    delayMs: capture?.gifDelayMs ?? 400,
+  };
+}
 
 export type PreviewManifestEntry = {
   sourceHash: string;

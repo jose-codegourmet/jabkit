@@ -8,12 +8,17 @@ type PreviewAsset = {
   file: string;
   width: number;
   height: number;
+  format?: "webp" | "gif";
 };
 type PreviewManifest = {
   components: Record<string, { assets: PreviewAsset[] }>;
 };
 
-async function previewAsset(name: string, story: string, theme: Theme) {
+function assetFormat(asset: PreviewAsset) {
+  return asset.format ?? (asset.file.endsWith(".gif") ? "gif" : "webp");
+}
+
+async function previewAssets(name: string, story: string, theme: Theme) {
   try {
     const manifest = JSON.parse(
       await readFile(
@@ -21,11 +26,13 @@ async function previewAsset(name: string, story: string, theme: Theme) {
         "utf8",
       ),
     ) as PreviewManifest;
-    return manifest.components[name]?.assets.find(
-      (asset) => asset.story === story && asset.theme === theme,
+    return (
+      manifest.components[name]?.assets.filter(
+        (asset) => asset.story === story && asset.theme === theme,
+      ) ?? []
     );
   } catch {
-    return undefined;
+    return [];
   }
 }
 
@@ -42,23 +49,37 @@ export async function PreviewImage({
   theme?: Theme;
   loading?: "eager" | "lazy";
 }) {
-  const asset = await previewAsset(name, story, theme);
-  if (!asset) {
+  const assets = await previewAssets(name, story, theme);
+  const still = assets.find((asset) => assetFormat(asset) === "webp");
+  const gif = assets.find((asset) => assetFormat(asset) === "gif");
+  const fallback = still ?? gif;
+  if (!fallback) {
     return (
       <div className="grid h-full w-full place-items-center bg-muted p-4 text-center text-sm text-muted-foreground">
         Preview unavailable
       </div>
     );
   }
-  return (
+  const image = (
     <img
-      src={`/previews/${asset.file}`}
+      src={`/previews/${fallback.file}`}
       alt={displayName}
-      width={asset.width}
-      height={asset.height}
+      width={fallback.width}
+      height={fallback.height}
       loading={loading}
       decoding="async"
       className="h-full w-full object-cover object-top"
     />
+  );
+  if (!gif || !still) return image;
+  return (
+    <picture>
+      <source
+        srcSet={`/previews/${gif.file}`}
+        type="image/gif"
+        media="(prefers-reduced-motion: no-preference)"
+      />
+      {image}
+    </picture>
   );
 }
