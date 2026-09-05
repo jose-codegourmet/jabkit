@@ -1297,6 +1297,33 @@
     }
   },
   {
+    "name": "todo9",
+    "displayName": "Todo9",
+    "category": "dashboard",
+    "description": "Searchable todo list with tag filters, per-task tag editing, and keyboard-friendly reorder.",
+    "tags": [
+      "dashboard",
+      "todo",
+      "tasks",
+      "tags",
+      "search",
+      "list"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
     "name": "two-factor2",
     "displayName": "TwoFactor2",
     "category": "dashboard",
