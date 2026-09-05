@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState, type MouseEvent } from "react";
+import { type MouseEvent, useId, useState } from "react";
 import { Badge } from "@/atoms/badge";
 import { cn } from "@/lib/cn";
 import type {
@@ -101,7 +101,6 @@ function nearestEdge(
 function ProductTile({ item }: { item: Gallery31Item }) {
   const [edge, setEdge] = useState<Edge>("bottom");
   const [active, setActive] = useState(false);
-  const span = item.span ?? "default";
 
   const show = () => setActive(true);
   const hide = () => setActive(false);
