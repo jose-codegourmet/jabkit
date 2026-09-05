@@ -45,7 +45,7 @@
     {
       "path": "cta22/index.ts",
       "type": "index",
-      "content": "export { Cta22 } from \"./Cta22\";\nexport type {\n  Cta22Props,\n  Cta22StoreLink,\n  Cta22StorePlatform,\n} from \"./Cta22.types\";\n"
+      "content": "export { Cta22 } from \"./Cta22\";\nexport type * from \"./Cta22.types\";\n"
     },
     {
       "path": "lib/cn.ts",
