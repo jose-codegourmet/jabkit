@@ -2,6 +2,11 @@
 
 @source "../../../packages/ui/src";
 
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
 * {
   border-color: var(--jk-border);
 }
@@ -48,6 +53,13 @@ body {
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+  @supports (animation-timeline: view()) {
+    .reveal-on-scroll {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 26%;
     }
   }
 }
