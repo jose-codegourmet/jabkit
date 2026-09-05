@@ -100,8 +100,7 @@ export function ForgotPassword2({
   imageSrc = defaults.imageSrc,
   imageAlt = defaults.imageAlt,
   defaultSent = false,
-  onSubmit,
-  onReset,
+  onSendLink,
   ...props
 }: ForgotPassword2Props) {
   const headingId = React.useId();
@@ -114,7 +113,7 @@ export function ForgotPassword2({
     const value = new FormData(event.currentTarget).get("email");
     const nextEmail = typeof value === "string" ? value.trim() : "";
     if (!nextEmail) return;
-    onSubmit?.(nextEmail);
+    onSendLink?.(nextEmail);
     setEmail(nextEmail);
     setSent(true);
   };
@@ -122,7 +121,6 @@ export function ForgotPassword2({
   const handleReset: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     setSent(false);
-    onReset?.(event);
   };
 
   return (

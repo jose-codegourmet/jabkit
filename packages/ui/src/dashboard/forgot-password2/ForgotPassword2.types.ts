@@ -1,4 +1,4 @@
-import type { FormEventHandler, HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 
 export interface ForgotPassword2Logo {
   name: string;
@@ -22,6 +22,5 @@ export interface ForgotPassword2Props
   imageSrc?: string;
   imageAlt?: string;
   defaultSent?: boolean;
-  onSubmit?: (email: string) => void;
-  onReset?: FormEventHandler<HTMLFormElement>;
+  onSendLink?: (email: string) => void;
 }
