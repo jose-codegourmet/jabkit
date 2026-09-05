@@ -971,6 +971,34 @@
     }
   },
   {
+    "name": "waitlist3",
+    "displayName": "Waitlist3",
+    "category": "marketing",
+    "description": "Split coming-soon waitlist with a company mark, launch badge, email form, overlapping avatars, copyright, and a full-height photo.",
+    "tags": [
+      "waitlist",
+      "marketing",
+      "form",
+      "coming-soon",
+      "split",
+      "photography",
+      "landing"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
     "name": "application-shell1",
     "displayName": "ApplicationShell1",
     "category": "dashboard",
