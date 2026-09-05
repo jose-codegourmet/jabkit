@@ -1,9 +1,5 @@
 import { useId } from "react";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/atoms/avatar/Avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/atoms/avatar/Avatar";
 import { cn } from "@/lib/cn";
 import type { About14Props } from "./About14.types";
 
@@ -87,7 +83,9 @@ export function About14({
                   <p className="text-sm font-semibold tracking-[-0.02em]">
                     {profile.name}
                   </p>
-                  <p className="text-sm text-muted-foreground">{profile.role}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {profile.role}
+                  </p>
                 </div>
               </div>
             ) : null}
