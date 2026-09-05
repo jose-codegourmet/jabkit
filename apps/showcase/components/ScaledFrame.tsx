@@ -9,6 +9,7 @@ export function ScaledFrame({
   viewportHeight,
   maxScale = 1,
   className = "",
+  loading = "lazy",
 }: {
   src: string;
   title: string;
@@ -16,6 +17,7 @@ export function ScaledFrame({
   viewportHeight: number;
   maxScale?: number;
   className?: string;
+  loading?: "lazy" | "eager";
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
@@ -43,7 +45,7 @@ export function ScaledFrame({
         title={title}
         aria-hidden="true"
         src={src}
-        loading="lazy"
+        loading={loading}
         className="absolute left-0 top-0 border-0"
         style={{
           width: viewportWidth,
