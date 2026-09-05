@@ -1,0 +1,64 @@
+{
+  "name": "verify-email1",
+  "displayName": "VerifyEmail1",
+  "version": "1.0.0",
+  "addedAt": "2026-09-05",
+  "description": "Centered email verification card with a six-digit code, destination address, and a resend link under the panel.",
+  "tags": [
+    "auth",
+    "dashboard",
+    "email",
+    "form",
+    "otp",
+    "verification",
+    "verify-email"
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "button",
+    "input",
+    "label"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "dashboard",
+  "files": [
+    {
+      "path": "verify-email1/VerifyEmail1.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button } from \"@/atoms/button\";\nimport { Input } from \"@/atoms/input\";\nimport { Label } from \"@/atoms/label\";\nimport { cn } from \"@/lib/cn\";\nimport type { VerifyEmail1Logo, VerifyEmail1Props } from \"./VerifyEmail1.types\";\n\nconst defaultLogo: VerifyEmail1Logo = {\n  name: \"Northline\",\n  href: \"#home\",\n};\n\nconst defaults = {\n  title: \"Verify your email\",\n  description: \"Enter the 6-digit code we sent to\",\n  email: \"you@northline.app\",\n  codeLabel: \"Verification code\",\n  codeLength: 6,\n  submitLabel: \"Verify email\",\n  resendPrompt: \"Didn't get a code?\",\n  resendLabel: \"Resend\",\n  resendHref: \"#resend\",\n} as const;\n\nfunction BrandMark({ name }: { name: string }) {\n  const initial = name.trim().charAt(0).toUpperCase() || \"N\";\n  return (\n    <span\n      aria-hidden=\"true\"\n      className=\"grid size-8 shrink-0 place-items-center rounded-[calc(var(--radius)-2px)] bg-foreground text-sm font-semibold text-background\"\n    >\n      {initial}\n    </span>\n  );\n}\n\nfunction Brand({\n  logo,\n  logoMark,\n}: {\n  logo: VerifyEmail1Logo;\n  logoMark?: React.ReactNode;\n}) {\n  const content = (\n    <>\n      {logoMark ??\n        (logo.src ? (\n          <img\n            src={logo.src}\n            alt=\"\"\n            className=\"size-8 rounded-[calc(var(--radius)-2px)] object-cover\"\n          />\n        ) : (\n          <BrandMark name={logo.name} />\n        ))}\n      <span className=\"text-sm font-medium tracking-[-0.01em]\">{logo.name}</span>\n    </>\n  );\n\n  if (logo.href) {\n    return (\n      <a\n        href={logo.href}\n        className=\"inline-flex items-center gap-2.5 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-muted\"\n      >\n        {content}\n      </a>\n    );\n  }\n\n  return (\n    <div className=\"inline-flex items-center gap-2.5 text-foreground\">\n      {content}\n    </div>\n  );\n}\n\nfunction digitsFromCode(code: string | undefined, length: number) {\n  const cleaned = (code ?? \"\").replace(/\\D/g, \"\").slice(0, length);\n  return Array.from({ length }, (_, index) => cleaned[index] ?? \"\");\n}\n\nexport function VerifyEmail1({\n  className,\n  logo = defaultLogo,\n  logoMark,\n  title = defaults.title,\n  description = defaults.description,\n  email = defaults.email,\n  codeLabel = defaults.codeLabel,\n  codeLength = defaults.codeLength,\n  defaultCode,\n  submitLabel = defaults.submitLabel,\n  resendPrompt = defaults.resendPrompt,\n  resendLabel = defaults.resendLabel,\n  resendHref = defaults.resendHref,\n  onVerify,\n  onResend,\n  ...props\n}: VerifyEmail1Props) {\n  const headingId = React.useId();\n  const codeLabelId = React.useId();\n  const length = Math.max(4, Math.min(8, Math.trunc(codeLength) || 6));\n  const groupSize = Math.ceil(length / 2);\n  const [digits, setDigits] = React.useState(() =>\n    digitsFromCode(defaultCode, length),\n  );\n  const inputRefs = React.useRef<Array<HTMLInputElement | null>>([]);\n\n  const focusAt = (index: number) => {\n    const next = Math.max(0, Math.min(length - 1, index));\n    inputRefs.current[next]?.focus();\n    inputRefs.current[next]?.select();\n  };\n\n  const writeDigits = (next: string[], focusIndex?: number) => {\n    setDigits(next);\n    if (focusIndex != null) {\n      queueMicrotask(() => focusAt(focusIndex));\n    }\n  };\n\n  const handleChange = (index: number, raw: string) => {\n    const cleaned = raw.replace(/\\D/g, \"\");\n    if (!cleaned) {\n      writeDigits(digits.map((digit, i) => (i === index ? \"\" : digit)));\n      return;\n    }\n\n    const next = [...digits];\n    const chars = cleaned.slice(0, length - index).split(\"\");\n    chars.forEach((char, offset) => {\n      next[index + offset] = char;\n    });\n    writeDigits(next, index + chars.length);\n  };\n\n  const handleKeyDown = (\n    index: number,\n    event: React.KeyboardEvent<HTMLInputElement>,\n  ) => {\n    if (event.key === \"Backspace\" && !digits[index] && index > 0) {\n      event.preventDefault();\n      const next = [...digits];\n      next[index - 1] = \"\";\n      writeDigits(next, index - 1);\n    }\n    if (event.key === \"ArrowLeft\") {\n      event.preventDefault();\n      focusAt(index - 1);\n    }\n    if (event.key === \"ArrowRight\") {\n      event.preventDefault();\n      focusAt(index + 1);\n    }\n  };\n\n  const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {\n    event.preventDefault();\n    writeDigits(digitsFromCode(event.clipboardData.getData(\"text\"), length), 0);\n  };\n\n  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {\n    event.preventDefault();\n    const code = digits.join(\"\");\n    if (code.length !== length) return;\n    onVerify?.(code);\n  };\n\n  const renderSlot = (index: number) => {\n    const slotId = `otp-${codeLabelId}-${index}`;\n    return (\n      <Input\n        key={slotId}\n        ref={(node) => {\n          inputRefs.current[index] = node;\n        }}\n        id={index === 0 ? slotId : undefined}\n        name={index === 0 ? \"code\" : undefined}\n        type=\"text\"\n        inputMode=\"numeric\"\n        autoComplete={index === 0 ? \"one-time-code\" : \"off\"}\n        maxLength={index === 0 ? length : 1}\n        aria-label={`Digit ${index + 1} of ${length}`}\n        value={digits[index]}\n        onChange={(event) => handleChange(index, event.currentTarget.value)}\n        onKeyDown={(event) => handleKeyDown(index, event)}\n        onPaste={handlePaste}\n        className=\"size-11 shrink-0 p-0 text-center text-lg font-semibold tabular-nums\"\n      />\n    );\n  };\n\n  return (\n    <section\n      data-slot=\"verify-email1\"\n      aria-labelledby={headingId}\n      className={cn(\n        \"flex min-h-[100dvh] flex-col items-center justify-center bg-muted px-6 py-12 text-foreground\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"flex w-full max-w-sm flex-col items-center\">\n        <Brand logo={logo} logoMark={logoMark} />\n\n        <div className=\"mt-8 w-full rounded-[--radius] border border-border bg-card p-6 shadow-sm sm:p-8\">\n          <h1\n            id={headingId}\n            className=\"text-center text-2xl font-semibold tracking-[-0.03em] text-balance\"\n          >\n            {title}\n          </h1>\n          <p className=\"mt-3 text-center text-sm leading-6 text-muted-foreground\">\n            {description}{\" \"}\n            <span className=\"font-medium text-foreground\">{email}</span>\n          </p>\n\n          <form onSubmit={handleSubmit} className=\"mt-8 grid gap-5\">\n            <fieldset className=\"m-0 grid min-w-0 gap-2 border-0 p-0\">\n              <Label\n                id={codeLabelId}\n                htmlFor={`otp-${codeLabelId}-0`}\n                className=\"sr-only\"\n              >\n                {codeLabel}\n              </Label>\n              <div className=\"flex items-center justify-center gap-2\">\n                {Array.from({ length: groupSize }, (_, index) =>\n                  renderSlot(index),\n                )}\n                <span\n                  aria-hidden=\"true\"\n                  className=\"h-px w-3 shrink-0 bg-border\"\n                />\n                {Array.from({ length: length - groupSize }, (_, offset) =>\n                  renderSlot(groupSize + offset),\n                )}\n              </div>\n            </fieldset>\n            <Button type=\"submit\" size=\"lg\" className=\"w-full\">\n              {submitLabel}\n            </Button>\n          </form>\n        </div>\n\n        <p className=\"mt-6 text-center text-sm text-muted-foreground\">\n          {resendPrompt}{\" \"}\n          <a\n            href={resendHref}\n            onClick={onResend}\n            className=\"font-medium text-foreground underline underline-offset-4 hover:text-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-muted\"\n          >\n            {resendLabel}\n          </a>\n        </p>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "verify-email1/VerifyEmail1.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport interface VerifyEmail1Logo {\n  name: string;\n  href?: string;\n  src?: string;\n  alt?: string;\n}\n\nexport interface VerifyEmail1Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  logo?: VerifyEmail1Logo;\n  logoMark?: ReactNode;\n  title?: string;\n  description?: string;\n  email?: string;\n  codeLabel?: string;\n  codeLength?: number;\n  defaultCode?: string;\n  submitLabel?: string;\n  resendPrompt?: string;\n  resendLabel?: string;\n  resendHref?: string;\n  onVerify?: (code: string) => void;\n  onResend?: () => void;\n}\n"
+    },
+    {
+      "path": "verify-email1/index.ts",
+      "type": "index",
+      "content": "export { VerifyEmail1 } from \"./VerifyEmail1\";\nexport type { VerifyEmail1Props } from \"./VerifyEmail1.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <VerifyEmail1 {...verifyEmail1Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <VerifyEmail1 {...verifyEmail1Mocks.alternate} />\n    </div>"
+    }
+  ]
+}

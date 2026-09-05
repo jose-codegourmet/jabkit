@@ -1240,5 +1240,31 @@
       "width": 1440,
       "height": 900
     }
+  },
+  {
+    "name": "verify-email1",
+    "displayName": "VerifyEmail1",
+    "category": "dashboard",
+    "description": "Centered email verification card with a six-digit code, destination address, and a resend link under the panel.",
+    "tags": [
+      "auth",
+      "dashboard",
+      "email",
+      "form",
+      "otp",
+      "verification",
+      "verify-email"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
   }
 ]
