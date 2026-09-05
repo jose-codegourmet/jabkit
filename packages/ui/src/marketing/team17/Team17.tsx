@@ -120,7 +120,9 @@ function CultureBand({ culture }: { culture: Team17Culture }) {
 
   return (
     <div className="grid gap-4 border-t border-border py-10 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-8 lg:py-12">
-      <h3 className="text-sm font-medium tracking-[-0.01em]">{culture.title}</h3>
+      <h3 className="text-sm font-medium tracking-[-0.01em]">
+        {culture.title}
+      </h3>
       <div className="grid gap-6 sm:grid-cols-2 sm:gap-8">
         {culture.paragraphs.map((paragraph) => (
           <p
