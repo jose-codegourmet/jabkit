@@ -331,6 +331,32 @@
     }
   },
   {
+    "name": "content2",
+    "displayName": "Content2",
+    "category": "marketing",
+    "description": "Content-hub explainer with a labeled intro, icon type grid, create and manage how-to panels, and an inline tip alert.",
+    "tags": [
+      "content",
+      "marketing",
+      "grid",
+      "onboarding",
+      "cms",
+      "docs",
+      "landing"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1100
+    }
+  },
+  {
     "name": "hero-section-5",
     "displayName": "HeroSection5",
     "category": "marketing",
