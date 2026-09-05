@@ -70,7 +70,11 @@ function PlusField({ className }: { className?: string }) {
         className,
       )}
     >
-      <svg className="size-full" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        aria-hidden="true"
+        className="size-full"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <defs>
           <pattern
             id={patternId}
@@ -167,9 +171,8 @@ export function About8({
       ) : null}
 
       {gallery.length ? (
-        <div
+        <section
           id={galleryId}
-          role="region"
           aria-roledescription="carousel"
           aria-label="Company stills"
           className="mx-auto max-w-6xl px-5 pb-6 sm:px-8 lg:px-10"
@@ -190,7 +193,7 @@ export function About8({
               </li>
             ))}
           </ul>
-        </div>
+        </section>
       ) : null}
 
       {product ? (

@@ -26,7 +26,8 @@ export interface About8Team {
   image: About8Image;
 }
 
-export interface About8Props extends Omit<HTMLAttributes<HTMLElement>, "title"> {
+export interface About8Props
+  extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   title?: string;
   description?: string;
   stats?: About8Stat[];
