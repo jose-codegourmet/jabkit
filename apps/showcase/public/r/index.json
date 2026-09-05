@@ -438,6 +438,34 @@
     }
   },
   {
+    "name": "cta22",
+    "displayName": "Cta22",
+    "category": "marketing",
+    "description": "Marketing CTA with a dark app-download panel, store badges, overlapping phone imagery, and a muted newsletter form in a three-column grid.",
+    "tags": [
+      "cta",
+      "marketing",
+      "download",
+      "newsletter",
+      "app-store",
+      "form",
+      "landing"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 780
+    }
+  },
+  {
     "name": "cta28",
     "displayName": "Cta28",
     "category": "marketing",
