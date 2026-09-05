@@ -1,0 +1,62 @@
+{
+  "name": "tubelight-navbar",
+  "displayName": "TubelightNavbar",
+  "version": "1.0.0",
+  "addedAt": "2026-09-05",
+  "description": "Floating pill navigation with a sliding active highlight and a primary-token tubelight glow on the current item.",
+  "tags": [
+    "navbar",
+    "marketing",
+    "navigation",
+    "header",
+    "pill",
+    "tabs",
+    "mobile"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 420
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "tubelight-navbar/TubelightNavbar.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  BookOpenIcon,\n  BriefcaseIcon,\n  CameraIcon,\n  FileTextIcon,\n  HomeIcon,\n  type LucideIcon,\n  MailIcon,\n  SparklesIcon,\n  UserIcon,\n} from \"lucide-react\";\nimport { useLayoutEffect, useRef, useState } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  TubelightNavbarIconName,\n  TubelightNavbarItem,\n  TubelightNavbarProps,\n} from \"./TubelightNavbar.types\";\n\nconst namedIcons: Record<TubelightNavbarIconName, LucideIcon> = {\n  home: HomeIcon,\n  user: UserIcon,\n  briefcase: BriefcaseIcon,\n  \"file-text\": FileTextIcon,\n  sparkles: SparklesIcon,\n  camera: CameraIcon,\n  \"book-open\": BookOpenIcon,\n  mail: MailIcon,\n};\n\nconst defaultItems: TubelightNavbarItem[] = [\n  { name: \"Home\", href: \"#home\", icon: \"home\" },\n  { name: \"About\", href: \"#about\", icon: \"user\" },\n  { name: \"Projects\", href: \"#projects\", icon: \"briefcase\" },\n  { name: \"Notes\", href: \"#notes\", icon: \"file-text\" },\n];\n\nfunction resolveIcon(icon: TubelightNavbarItem[\"icon\"]): LucideIcon {\n  if (typeof icon === \"string\") return namedIcons[icon];\n  return icon;\n}\n\nexport function TubelightNavbar({\n  className,\n  items = defaultItems,\n  activeName: activeNameProp,\n  defaultActiveName,\n  onActiveChange,\n  ...props\n}: TubelightNavbarProps) {\n  const listRef = useRef<HTMLDivElement>(null);\n  const [uncontrolledActive, setUncontrolledActive] = useState(\n    defaultActiveName ?? items[0]?.name ?? \"\",\n  );\n  const [indicator, setIndicator] = useState({\n    left: 0,\n    width: 0,\n    ready: false,\n  });\n\n  const activeName = activeNameProp ?? uncontrolledActive;\n\n  const setActive = (name: string) => {\n    if (activeNameProp === undefined) setUncontrolledActive(name);\n    onActiveChange?.(name);\n  };\n\n  useLayoutEffect(() => {\n    const root = listRef.current;\n    if (!root) return;\n\n    const measure = () => {\n      const activeItem = items.find((item) => item.name === activeName);\n      if (!activeItem) return;\n      const active = root.querySelector<HTMLElement>(\n        `[data-nav-item=\"${CSS.escape(activeItem.name)}\"]`,\n      );\n      if (!active) return;\n      setIndicator({\n        left: active.offsetLeft,\n        width: active.offsetWidth,\n        ready: true,\n      });\n    };\n\n    measure();\n    if (typeof ResizeObserver === \"undefined\") return;\n    const observer = new ResizeObserver(measure);\n    observer.observe(root);\n    for (const child of root.children) {\n      if (child instanceof HTMLElement) observer.observe(child);\n    }\n    return () => observer.disconnect();\n  }, [activeName, items]);\n\n  return (\n    <header\n      className={cn(\n        \"relative flex w-full justify-center bg-background px-4 py-6 text-foreground\",\n        className,\n      )}\n      data-slot=\"tubelight-navbar\"\n      {...props}\n    >\n      <nav aria-label=\"Primary\" className=\"relative\">\n        <div\n          className={cn(\n            \"relative isolate flex items-center gap-1 rounded-full border border-border\",\n            \"bg-background/75 p-1 shadow-[0_18px_40px_-28px_color-mix(in_oklab,var(--jk-foreground),transparent_72%)]\",\n            \"backdrop-blur-lg supports-[backdrop-filter]:bg-background/55\",\n          )}\n          ref={listRef}\n        >\n          <span\n            aria-hidden=\"true\"\n            className={cn(\n              \"absolute top-1 bottom-1 rounded-full bg-muted\",\n              indicator.ready &&\n                \"transition-[left,width] duration-300 ease-out motion-reduce:transition-none\",\n            )}\n            style={{ left: indicator.left, width: indicator.width }}\n          />\n          {items.map((item) => {\n            const Icon = resolveIcon(item.icon);\n            const isActive = item.name === activeName;\n            return (\n              <a\n                aria-current={isActive ? \"page\" : undefined}\n                className={cn(\n                  \"relative z-10 inline-flex items-center justify-center rounded-full px-5 py-2 text-sm font-medium outline-none\",\n                  \"transition-colors duration-200 motion-reduce:transition-none\",\n                  \"focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n                  isActive\n                    ? \"text-primary\"\n                    : \"text-muted-foreground hover:text-foreground\",\n                )}\n                data-active={isActive ? \"true\" : undefined}\n                data-nav-item={item.name}\n                href={item.href}\n                key={item.name}\n                onClick={() => setActive(item.name)}\n              >\n                <span className=\"hidden md:inline\">{item.name}</span>\n                <span className=\"inline-flex md:hidden\">\n                  <Icon aria-hidden=\"true\" className=\"size-[18px]\" />\n                  <span className=\"sr-only\">{item.name}</span>\n                </span>\n                {isActive ? (\n                  <span\n                    aria-hidden=\"true\"\n                    className=\"pointer-events-none absolute -top-2 left-1/2 h-1 w-8 -translate-x-1/2 rounded-full bg-primary shadow-[0_0_16px_2px_color-mix(in_oklab,var(--jk-primary),transparent_35%)]\"\n                  >\n                    <span className=\"absolute -top-2 left-1/2 h-6 w-12 -translate-x-1/2 rounded-full bg-primary/30 blur-md motion-reduce:hidden\" />\n                    <span className=\"absolute -top-1 left-1/2 h-4 w-8 -translate-x-1/2 rounded-full bg-primary/25 blur-sm motion-reduce:hidden\" />\n                  </span>\n                ) : null}\n              </a>\n            );\n          })}\n        </div>\n      </nav>\n    </header>\n  );\n}\n"
+    },
+    {
+      "path": "tubelight-navbar/TubelightNavbar.types.ts",
+      "type": "types",
+      "content": "import type { LucideIcon } from \"lucide-react\";\nimport type { HTMLAttributes } from \"react\";\n\nexport type TubelightNavbarIconName =\n  | \"home\"\n  | \"user\"\n  | \"briefcase\"\n  | \"file-text\"\n  | \"sparkles\"\n  | \"camera\"\n  | \"book-open\"\n  | \"mail\";\n\nexport interface TubelightNavbarItem {\n  name: string;\n  href: string;\n  icon: LucideIcon | TubelightNavbarIconName;\n}\n\nexport interface TubelightNavbarProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"onChange\"> {\n  items?: TubelightNavbarItem[];\n  activeName?: string;\n  defaultActiveName?: string;\n  onActiveChange?: (name: string) => void;\n}\n"
+    },
+    {
+      "path": "tubelight-navbar/index.ts",
+      "type": "index",
+      "content": "export { TubelightNavbar } from \"./TubelightNavbar\";\nexport type * from \"./TubelightNavbar.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"min-h-80 bg-background text-foreground\">\n      <TubelightNavbar {...tubelightNavbarMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"min-h-80 bg-background text-foreground\">\n      <TubelightNavbar {...tubelightNavbarMocks.alternate} />\n    </div>"
+    }
+  ]
+}
