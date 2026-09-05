@@ -101,7 +101,8 @@ const DEFAULT_SECTIONS: Content1Section[] = [
         image: {
           src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&h=1000&q=80",
           alt: "Team gathered around a table reviewing work together",
-          caption: "Friday review: read the note out loud, then close the loop.",
+          caption:
+            "Friday review: read the note out loud, then close the loop.",
         },
       },
     ],
@@ -459,7 +460,10 @@ export function Content1({
                   </h3>
                   <div className="mt-5 grid gap-5 sm:mt-6 sm:gap-6">
                     {section.blocks.map((block, index) =>
-                      renderBlock(block, `${section.id}-${block.type}-${index}`),
+                      renderBlock(
+                        block,
+                        `${section.id}-${block.type}-${index}`,
+                      ),
                     )}
                   </div>
                 </section>
