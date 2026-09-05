@@ -1157,5 +1157,31 @@
       "width": 1440,
       "height": 900
     }
+  },
+  {
+    "name": "two-factor5",
+    "displayName": "TwoFactor5",
+    "category": "dashboard",
+    "description": "Two-column authenticator pairing card with a scannable QR plate and a six-digit verification form.",
+    "tags": [
+      "auth",
+      "authenticator",
+      "dashboard",
+      "form",
+      "otp",
+      "qr",
+      "two-factor"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
   }
 ]
