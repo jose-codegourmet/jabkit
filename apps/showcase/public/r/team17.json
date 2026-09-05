@@ -1,0 +1,60 @@
+{
+  "name": "team17",
+  "displayName": "Team17",
+  "version": "1.0.0",
+  "addedAt": "2026-09-05",
+  "description": "Documentary team block with a 3:4 portrait grid, flowing alumni and collaborator name lists, and a two-column culture band.",
+  "tags": [
+    "team",
+    "marketing",
+    "portraits",
+    "alumni",
+    "collaborators",
+    "culture",
+    "landing"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 1800
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "team17/Team17.tsx",
+      "type": "component",
+      "content": "import { useId } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  Team17Culture,\n  Team17Member,\n  Team17NamedList,\n  Team17Props,\n} from \"./Team17.types\";\n\nconst DEFAULT_TITLE = \"The people in the room\";\nconst DEFAULT_DESCRIPTION =\n  \"Harbor keeps a small table on purpose. These portraits are who sits here now. The lists below are who taught the craft and who still joins when a brief needs extra hands.\";\n\nconst DEFAULT_MEMBERS: Team17Member[] = [\n  {\n    src: \"/assets/bd48582e630a15fa.webp\",\n    alt: \"Portrait of Amara Cole\",\n    name: \"Amara Cole\",\n    role: \"Design director\",\n  },\n  {\n    src: \"/assets/2a364f729e4f7c09.webp\",\n    alt: \"Portrait of Julian Hart\",\n    name: \"Julian Hart\",\n    role: \"Product engineer\",\n  },\n  {\n    src: \"/assets/d111cc60a8f2bf68.webp\",\n    alt: \"Portrait of Priya Nair\",\n    name: \"Priya Nair\",\n    role: \"Brand lead\",\n  },\n  {\n    src: \"/assets/040bd026249d7af9.webp\",\n    alt: \"Portrait of Eli Voss\",\n    name: \"Eli Voss\",\n    role: \"Studio producer\",\n  },\n  {\n    src: \"/assets/45dad0903fef5d02.webp\",\n    alt: \"Portrait of Ines Calder\",\n    name: \"Ines Calder\",\n    role: \"Research lead\",\n  },\n  {\n    src: \"/assets/1391b53bc91d2127.webp\",\n    alt: \"Portrait of Rowan Hale\",\n    name: \"Rowan Hale\",\n    role: \"Frontend\",\n  },\n];\n\nconst DEFAULT_ALUMNI: Team17NamedList = {\n  label: \"Alumni\",\n  names: [\n    \"Noor Elamin\",\n    \"Mira Solano\",\n    \"Theo Brant\",\n    \"Leah Okonkwo\",\n    \"Soren Vale\",\n  ],\n};\n\nconst DEFAULT_COLLABORATORS: Team17NamedList = {\n  label: \"Collaborators\",\n  names: [\n    \"Fieldwork Press\",\n    \"Northline Type\",\n    \"Kite Photo\",\n    \"Velvet Rail\",\n    \"Lumen Studio\",\n  ],\n};\n\nconst DEFAULT_CULTURE: Team17Culture = {\n  title: \"How we work\",\n  paragraphs: [\n    \"We start with photographs and a sentence that can survive a quiet room. Type, crop, and product live on the same desk so the page does not get translated three times before it ships.\",\n    \"Reviews are short and in person when we can manage it. If a layout needs a tour to make sense, it is not ready. We keep the crew small so the person who heard the brief is still in the file on Thursday.\",\n  ],\n};\n\nfunction MemberCard({ member }: { member: Team17Member }) {\n  return (\n    <article className=\"min-w-0\">\n      <figure className=\"overflow-hidden rounded-[--radius] bg-muted\">\n        <img\n          src={member.src}\n          alt={member.alt}\n          className=\"aspect-[3/4] w-full object-cover object-top\"\n        />\n      </figure>\n      <h3 className=\"mt-3 text-base font-medium tracking-[-0.02em]\">\n        {member.name}\n      </h3>\n      <p className=\"mt-0.5 text-sm text-muted-foreground\">{member.role}</p>\n    </article>\n  );\n}\n\nfunction NamedList({ list }: { list: Team17NamedList }) {\n  if (list.names.length === 0) return null;\n\n  return (\n    <div className=\"grid gap-3 border-t border-border py-8 sm:grid-cols-[10rem_minmax(0,1fr)] sm:items-baseline sm:gap-8\">\n      <h3 className=\"text-sm font-medium tracking-[-0.01em]\">{list.label}</h3>\n      <ul className=\"flex flex-wrap gap-x-5 gap-y-2\">\n        {list.names.map((name) => (\n          <li key={name} className=\"text-base text-muted-foreground\">\n            {name}\n          </li>\n        ))}\n      </ul>\n    </div>\n  );\n}\n\nfunction CultureBand({ culture }: { culture: Team17Culture }) {\n  if (culture.paragraphs.length === 0) return null;\n\n  return (\n    <div className=\"grid gap-4 border-t border-border py-10 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-8 lg:py-12\">\n      <h3 className=\"text-sm font-medium tracking-[-0.01em]\">\n        {culture.title}\n      </h3>\n      <div className=\"grid gap-6 sm:grid-cols-2 sm:gap-8\">\n        {culture.paragraphs.map((paragraph) => (\n          <p\n            key={paragraph}\n            className=\"text-base leading-7 text-muted-foreground\"\n          >\n            {paragraph}\n          </p>\n        ))}\n      </div>\n    </div>\n  );\n}\n\nexport function Team17({\n  className,\n  title = DEFAULT_TITLE,\n  description = DEFAULT_DESCRIPTION,\n  members = DEFAULT_MEMBERS,\n  alumni = DEFAULT_ALUMNI,\n  collaborators = DEFAULT_COLLABORATORS,\n  culture = DEFAULT_CULTURE,\n  ...props\n}: Team17Props) {\n  const headingId = useId();\n\n  return (\n    <section\n      data-slot=\"team17\"\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24\">\n        <header className=\"max-w-2xl\">\n          <h2\n            id={headingId}\n            className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl lg:text-5xl\"\n          >\n            {title}\n          </h2>\n          {description ? (\n            <p className=\"mt-4 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8\">\n              {description}\n            </p>\n          ) : null}\n        </header>\n\n        {members.length > 0 ? (\n          <div className=\"mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:mt-16 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-12\">\n            {members.map((member) => (\n              <MemberCard\n                key={`${member.name}-${member.src}`}\n                member={member}\n              />\n            ))}\n          </div>\n        ) : null}\n\n        <div className=\"mt-14 sm:mt-16\">\n          {alumni ? <NamedList list={alumni} /> : null}\n          {collaborators ? <NamedList list={collaborators} /> : null}\n          {culture ? <CultureBand culture={culture} /> : null}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "team17/Team17.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface Team17Member {\n  src: string;\n  alt: string;\n  name: string;\n  role: string;\n}\n\nexport interface Team17NamedList {\n  label: string;\n  names: string[];\n}\n\nexport interface Team17Culture {\n  title: string;\n  paragraphs: string[];\n}\n\nexport interface Team17Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  title?: string;\n  description?: string;\n  members?: Team17Member[];\n  alumni?: Team17NamedList;\n  collaborators?: Team17NamedList;\n  culture?: Team17Culture;\n}\n"
+    },
+    {
+      "path": "team17/index.ts",
+      "type": "index",
+      "content": "export { Team17 } from \"./Team17\";\nexport type * from \"./Team17.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Team17 {...team17Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Team17 {...team17Mocks.alternate} />\n    </div>"
+    }
+  ]
+}

@@ -1002,6 +1002,32 @@
     }
   },
   {
+    "name": "team17",
+    "displayName": "Team17",
+    "category": "marketing",
+    "description": "Documentary team block with a 3:4 portrait grid, flowing alumni and collaborator name lists, and a two-column culture band.",
+    "tags": [
+      "team",
+      "marketing",
+      "portraits",
+      "alumni",
+      "collaborators",
+      "culture",
+      "landing"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1800
+    }
+  },
+  {
     "name": "waitlist3",
     "displayName": "Waitlist3",
     "category": "marketing",
