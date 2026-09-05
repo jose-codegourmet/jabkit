@@ -54,7 +54,7 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 - New-tab link uses the same URL.
 - Iframe is `aria-hidden`.
 
-`ScaledFrame.tsx` no longer exists. The home page and `/components` use the server-rendered `PreviewImage` component, which reads the committed preview manifest and renders a dark WebP instead of an iframe. Button's home theme-proof strip selects its corresponding light or dark capture.
+`ScaledFrame.tsx` no longer exists. The home page and `/components` use the server-rendered `PreviewImage` component, which reads the committed preview manifest and renders a local `/previews/{file}` still WebP (or GIF when `preview.capture.format` is `"gif"`) instead of an iframe. Reduced-motion visitors receive the still. Button's home theme-proof strip selects its corresponding light or dark capture.
 
 `apps/showcase/public/previews/` contains the generated WebPs and `manifest.json`; `apps/showcase/public/assets/` contains re-hosted component images and `sources.json`. Both directories are committed generated artifacts. See [previews.md](previews.md).
 

@@ -234,7 +234,7 @@ Shared `@/lib/*` imports are auto-bundled into the registry entry as `"lib"` fil
 pnpm previews:build -- --name {name}
 ```
 
-Commit the resulting files under `apps/showcase/public/previews/`. The capture pipeline creates a dark WebP for every preview story; Button also receives light captures for the home theme-proof strip. See [previews.md](previews.md).
+Commit the resulting files under `apps/showcase/public/previews/`. The capture pipeline creates a dark still WebP for every preview story; Button also receives light captures for the home theme-proof strip. Marketing autoplay or marquee blocks may also commit a Default GIF. See [previews.md](previews.md).
 
 ## 7. Validate
 
@@ -266,7 +266,7 @@ pnpm dev         # showcase; confirm /{category}/{name} and the preview iframe i
 | `stories need render functions and ThemeComparison` | Add `render:` to each story and export `ThemeComparison` |
 | Showcase preview 404s | Add `{Name}.preview.tsx` and run `pnpm registry:build` so the preview manifest includes the name |
 | Showcase 404 / empty catalogue | Run `pnpm registry:build` and commit `apps/showcase/public/r/` |
-| Missing or stale preview WebP | Run `pnpm previews:build -- --name {name}` and commit the output |
+| Missing or stale preview WebP / GIF | Run `pnpm previews:build -- --name {name}` and commit the output |
 
 ## MCP and CLI notes
 

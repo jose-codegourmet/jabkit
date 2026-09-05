@@ -1,13 +1,18 @@
 import { spawn } from "node:child_process";
 import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { chromium } from "playwright";
+import { chromium, type Page } from "playwright";
 import sharp from "sharp";
+import { encodePreviewGif } from "./encode-preview-gif";
 import {
   assetsRoot,
+  type CaptureMeta,
   captureViewport,
   componentCaptureMeta,
   componentSourceHash,
+  gifCaptureOptions,
+  isGifStory,
+  type PreviewAsset,
   type PreviewAssetsManifest,
   type PreviewManifestEntry,
   pipelineVersion,
@@ -27,9 +32,11 @@ const blockedHosts = new Set([
   "api.qrserver.com",
 ]);
 const maxPreviewBytes = 150 * 1024;
+const maxGifBytes = 400 * 1024;
 
 type Options = {
   name?: string;
+  category?: RegistryIndexItem["category"];
   changed: boolean;
   dev: boolean;
 };
@@ -46,6 +53,16 @@ function parseOptions(): Options {
       if (!name || name.startsWith("--"))
         throw new Error("--name requires a registry name");
       options.name = name;
+      index += 1;
+    } else if (argument === "--category") {
+      const category = process.argv[index + 1];
+      if (
+        category !== "atoms" &&
+        category !== "marketing" &&
+        category !== "dashboard"
+      )
+        throw new Error("--category must be atoms, marketing, or dashboard");
+      options.category = category;
       index += 1;
     } else if (argument.startsWith("--")) {
       throw new Error(`Unknown option: ${argument}`);
@@ -157,6 +174,131 @@ function captureError(name: string, story: string, message: string) {
   return new Error(`${name}/${story}: ${message}`);
 }
 
+async function waitForPreviewPaint(page: Page) {
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    await Promise.all(
+      [...document.images].map((image) =>
+        image.decode().catch(() => undefined),
+      ),
+    );
+  });
+}
+
+async function openPreview(
+  page: Page,
+  baseUrl: string,
+  name: string,
+  story: string,
+  theme: Theme,
+  viewport: { width: number; height: number },
+  reducedMotion: "reduce" | "no-preference",
+) {
+  await page.emulateMedia({ reducedMotion });
+  await page.setViewportSize(viewport);
+  await page.goto(previewUrl(baseUrl, name, story, theme), {
+    waitUntil: "domcontentloaded",
+  });
+  const frame = page.locator("main[data-preview-ready]");
+  await frame.waitFor({ state: "attached" });
+  await frame.waitFor({ state: "visible" });
+  if ((await frame.getAttribute("data-preview-ready")) === null)
+    throw captureError(name, story, "missing data-preview-ready");
+  return frame;
+}
+
+async function captureStillAsset(
+  page: Page,
+  baseUrl: string,
+  item: RegistryIndexItem,
+  story: string,
+  theme: Theme,
+  viewport: { width: number; height: number },
+  capture: CaptureMeta | undefined,
+): Promise<PreviewAsset> {
+  const frame = await openPreview(
+    page,
+    baseUrl,
+    item.name,
+    story,
+    theme,
+    viewport,
+    "reduce",
+  );
+  await page.addStyleTag({
+    content:
+      "*, *::before, *::after { animation: none !important; transition: none !important; }",
+  });
+  await waitForPreviewPaint(page);
+  if (capture?.waitMs) await page.waitForTimeout(capture.waitMs);
+  const png = await frame.screenshot({ type: "png" });
+  const encoded = await sharp(png)
+    .resize({ width: 960, withoutEnlargement: true })
+    .webp({ quality: 78 })
+    .toBuffer({ resolveWithObject: true });
+  const file = `${item.name}.${story}.${theme}.webp`;
+  await mkdir(previewsRoot, { recursive: true });
+  await writeFile(path.join(previewsRoot, file), encoded.data);
+  if (encoded.info.size > maxPreviewBytes)
+    console.warn(
+      `Preview exceeds 150 KB: ${item.name}/${story}/${theme} (${encoded.info.size} bytes)`,
+    );
+  return {
+    story,
+    theme,
+    file,
+    bytes: encoded.info.size,
+    width: encoded.info.width,
+    height: encoded.info.height,
+    format: "webp",
+  };
+}
+
+async function captureGifAsset(
+  page: Page,
+  baseUrl: string,
+  item: RegistryIndexItem,
+  story: string,
+  theme: Theme,
+  viewport: { width: number; height: number },
+  capture: CaptureMeta | undefined,
+): Promise<PreviewAsset> {
+  const options = gifCaptureOptions(capture);
+  const frame = await openPreview(
+    page,
+    baseUrl,
+    item.name,
+    story,
+    theme,
+    viewport,
+    "no-preference",
+  );
+  await waitForPreviewPaint(page);
+  if (capture?.waitMs) await page.waitForTimeout(capture.waitMs);
+  const frames: Buffer[] = [];
+  for (let index = 0; index < options.frames; index += 1) {
+    if (index > 0) await page.waitForTimeout(options.intervalMs);
+    frames.push(await frame.screenshot({ type: "png" }));
+  }
+  const encoded = await encodePreviewGif(frames, options.delayMs);
+  const file = `${item.name}.${story}.${theme}.gif`;
+  await mkdir(previewsRoot, { recursive: true });
+  await writeFile(path.join(previewsRoot, file), encoded.data);
+  if (encoded.data.byteLength > maxGifBytes)
+    console.warn(
+      `GIF exceeds 400 KB: ${item.name}/${story}/${theme} (${encoded.data.byteLength} bytes)`,
+    );
+  return {
+    story,
+    theme,
+    file,
+    bytes: encoded.data.byteLength,
+    width: encoded.width,
+    height: encoded.height,
+    format: "gif",
+  };
+}
+
 const options = parseOptions();
 await run("pnpm", ["registry:build"]);
 if (!process.env.PREVIEW_BASE_URL && !options.dev)
@@ -167,9 +309,13 @@ const registry = JSON.parse(
 ) as RegistryIndexItem[];
 const selected = options.name
   ? registry.filter((item) => item.name === options.name)
-  : registry;
+  : options.category
+    ? registry.filter((item) => item.category === options.category)
+    : registry;
 if (options.name && selected.length === 0)
   throw new Error(`Unknown registry component: ${options.name}`);
+if (options.category && selected.length === 0)
+  throw new Error(`No registry components in category: ${options.category}`);
 
 const baseUrl = (
   process.env.PREVIEW_BASE_URL ?? "http://127.0.0.1:3210"
@@ -178,7 +324,8 @@ const server = process.env.PREVIEW_BASE_URL
   ? undefined
   : startServer(options.dev, 3210);
 const manifest = await readManifest();
-const nextComponents = options.name ? { ...manifest.components } : {};
+const nextComponents =
+  options.name || options.category ? { ...manifest.components } : {};
 
 let browser: Awaited<ReturnType<typeof chromium.launch>> | undefined;
 try {
@@ -267,51 +414,32 @@ try {
       for (const theme of themes) {
         current = { name: item.name, story };
         networkError = undefined;
-        await page.setViewportSize(viewport);
-        await page.goto(previewUrl(baseUrl, item.name, story, theme), {
-          waitUntil: "domcontentloaded",
-        });
-        const frame = page.locator("main[data-preview-ready]");
-        await frame.waitFor({ state: "attached" });
-        await frame.waitFor({ state: "visible" });
-        if (networkError) throw new Error(networkError);
-        if ((await frame.getAttribute("data-preview-ready")) === null)
-          throw captureError(item.name, story, "missing data-preview-ready");
-        await page.addStyleTag({
-          content:
-            "*, *::before, *::after { animation: none !important; transition: none !important; }",
-        });
-        await page.evaluate(async () => {
-          await document.fonts.ready;
-          await Promise.all(
-            [...document.images].map((image) =>
-              image.decode().catch(() => undefined),
+        if (isGifStory(capture, story)) {
+          assets.push(
+            await captureGifAsset(
+              page,
+              baseUrl,
+              item,
+              story,
+              theme,
+              viewport,
+              capture,
             ),
           );
-        });
-        if (capture?.waitMs) await page.waitForTimeout(capture.waitMs);
+          if (networkError) throw new Error(networkError);
+        }
+        assets.push(
+          await captureStillAsset(
+            page,
+            baseUrl,
+            item,
+            story,
+            theme,
+            viewport,
+            capture,
+          ),
+        );
         if (networkError) throw new Error(networkError);
-
-        const png = await frame.screenshot({ type: "png" });
-        const encoded = await sharp(png)
-          .resize({ width: 960, withoutEnlargement: true })
-          .webp({ quality: 78 })
-          .toBuffer({ resolveWithObject: true });
-        const file = `${item.name}.${story}.${theme}.webp`;
-        await mkdir(previewsRoot, { recursive: true });
-        await writeFile(path.join(previewsRoot, file), encoded.data);
-        assets.push({
-          story,
-          theme,
-          file,
-          bytes: encoded.info.size,
-          width: encoded.info.width,
-          height: encoded.info.height,
-        });
-        if (encoded.info.size > maxPreviewBytes)
-          console.warn(
-            `Preview exceeds 150 KB: ${item.name}/${story}/${theme} (${encoded.info.size} bytes)`,
-          );
       }
     }
     nextComponents[item.name] = {

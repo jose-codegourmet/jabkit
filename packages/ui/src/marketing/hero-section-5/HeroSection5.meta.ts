@@ -11,5 +11,15 @@ export default {
   dependencies: [],
   registryDependencies: ["button"],
   a11y: { keyboardNav: true, reducedMotion: true },
-  preview: { layout: "fit", width: 1440, height: 900 },
+  preview: {
+    layout: "fit",
+    width: 1440,
+    height: 900,
+    capture: {
+      format: "gif",
+      gifFrames: 6,
+      gifIntervalMs: 400,
+      gifDelayMs: 200,
+    },
+  },
 } satisfies ComponentMeta;
