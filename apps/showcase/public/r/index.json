@@ -618,5 +618,31 @@
       "width": 1440,
       "height": 1180
     }
+  },
+  {
+    "name": "forgot-password2",
+    "displayName": "ForgotPassword2",
+    "category": "dashboard",
+    "description": "Split password-recovery screen with a left-aligned email form and a full-height photograph on large screens.",
+    "tags": [
+      "auth",
+      "dashboard",
+      "forgot-password",
+      "form",
+      "login",
+      "recovery",
+      "split"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
   }
 ]
