@@ -109,8 +109,8 @@ async function waitForServer(
 ) {
   let lastError: unknown;
   for (let attempt = 0; attempt < 120; attempt += 1) {
-    if (server?.exitCode !== null)
-      throw new Error(`Showcase server exited with ${server?.exitCode}`);
+    if (server && server.exitCode !== null)
+      throw new Error(`Showcase server exited with ${server.exitCode}`);
     try {
       const response = await fetch(baseUrl);
       if (response.ok) return;

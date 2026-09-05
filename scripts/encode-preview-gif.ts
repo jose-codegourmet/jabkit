@@ -1,5 +1,9 @@
-import { applyPalette, GIFEncoder, quantize } from "gifenc";
+import { createRequire } from "node:module";
 import sharp from "sharp";
+
+const { GIFEncoder, applyPalette, quantize } = createRequire(import.meta.url)(
+  "gifenc",
+) as typeof import("gifenc");
 
 const gifWidth = 640;
 
