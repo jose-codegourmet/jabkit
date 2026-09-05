@@ -248,6 +248,23 @@ function AlertBlock({ alert }: { alert: Content3Alert }) {
   );
 }
 
+function blockKey(sectionId: string, block: Content3Block) {
+  switch (block.type) {
+    case "paragraph":
+      return `${sectionId}-paragraph-${block.text}`;
+    case "heading":
+      return `${sectionId}-heading-${block.text}`;
+    case "list":
+      return `${sectionId}-list-${block.items.join("|")}`;
+    case "figure":
+      return `${sectionId}-figure-${block.figure.src}`;
+    case "table":
+      return `${sectionId}-table-${block.table.caption ?? block.table.columns.join("|")}`;
+    case "alert":
+      return `${sectionId}-alert-${block.alert.title}`;
+  }
+}
+
 function Block({ block }: { block: Content3Block }) {
   switch (block.type) {
     case "paragraph":
@@ -296,8 +313,9 @@ export function Content3({
   const [activeId, setActiveId] = useState(sections[0]?.id);
 
   useEffect(() => {
+    const idFor = (id: string) => `${instanceId}-${id}`;
     const nodes = sections
-      .map((section) => document.getElementById(sectionDomId(section.id)))
+      .map((section) => document.getElementById(idFor(section.id)))
       .filter((node): node is HTMLElement => Boolean(node));
     if (!nodes.length) return;
 
@@ -306,7 +324,7 @@ export function Content3({
       (entries) => {
         for (const entry of entries) {
           const sectionId = sections.find(
-            (section) => sectionDomId(section.id) === entry.target.id,
+            (section) => idFor(section.id) === entry.target.id,
           )?.id;
           if (!sectionId) continue;
           ratios.set(
@@ -351,7 +369,7 @@ export function Content3({
                 const last = index === breadcrumbs.length - 1;
                 return (
                   <li
-                    key={`${crumb.label}-${index}`}
+                    key={crumb.href ?? crumb.label}
                     className="flex items-center gap-1.5"
                   >
                     {index > 0 ? <Chevron className="opacity-60" /> : null}
@@ -448,11 +466,8 @@ export function Content3({
                   {section.title}
                 </h2>
                 <div className="mt-5 flex flex-col gap-5 sm:mt-6 sm:gap-6">
-                  {section.blocks.map((block, index) => (
-                    <Block
-                      key={`${section.id}-${block.type}-${index}`}
-                      block={block}
-                    />
+                  {section.blocks.map((block) => (
+                    <Block key={blockKey(section.id, block)} block={block} />
                   ))}
                 </div>
               </section>
