@@ -1,0 +1,60 @@
+{
+  "name": "about8",
+  "displayName": "About8",
+  "version": "1.0.0",
+  "addedAt": "2026-09-05",
+  "description": "Fintech about section with a plus-sign field, bordered stats, mission copy, a snap image carousel, a right-aligned product note, and a founding-team plate.",
+  "tags": [
+    "about",
+    "marketing",
+    "stats",
+    "carousel",
+    "fintech",
+    "team",
+    "landing"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 1800
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "about8/About8.tsx",
+      "type": "component",
+      "content": "import { useId } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  About8Image,\n  About8Mission,\n  About8Product,\n  About8Props,\n  About8Stat,\n  About8Team,\n} from \"./About8.types\";\n\nconst DEFAULT_TITLE = \"Infrastructure for money that has to settle.\";\nconst DEFAULT_DESCRIPTION =\n  \"We build the rails teams use when a ledger cannot be approximate — clearing, reconciliation, and the audit trail that follows every transfer.\";\n\nconst DEFAULT_STATS: About8Stat[] = [\n  { value: \"48B\", label: \"Annual volume\" },\n  { value: \"12ms\", label: \"Median settle\" },\n  { value: \"99.99%\", label: \"Uptime SLO\" },\n  { value: \"40+\", label: \"Markets live\" },\n];\n\nconst DEFAULT_MISSION: About8Mission = {\n  title: \"Keep every transfer accountable.\",\n  paragraphs: [\n    \"Finance teams should not wait overnight for a number they already posted. We treat settlement as a product surface: readable, timed, and owned by the same API that moved the funds.\",\n    \"That means idempotent writes, a journal you can query, and operators who can explain a mismatch without opening a war room.\",\n  ],\n};\n\nconst DEFAULT_GALLERY: About8Image[] = [\n  {\n    src: \"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&h=1200&q=80\",\n    alt: \"Glass office towers against a clear sky\",\n  },\n  {\n    src: \"https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&h=1200&q=80\",\n    alt: \"Two colleagues reviewing a screen together\",\n  },\n  {\n    src: \"https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&h=1200&q=80\",\n    alt: \"Laptop showing charts on a wooden desk\",\n  },\n];\n\nconst DEFAULT_PRODUCT: About8Product = {\n  title: \"LedgerKit is the control plane.\",\n  description:\n    \"One contract for authorizations, postings, and statements. Partners integrate once, then route payouts, collections, and FX through the same numbered events.\",\n};\n\nconst DEFAULT_TEAM: About8Team = {\n  title: \"Founding operators, still on the floor.\",\n  description:\n    \"The first six people still own incidents, partner reviews, and the weekly journal walkthrough. We hire people who can read a ledger as fluently as a pull request.\",\n  image: {\n    src: \"https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&h=900&q=80\",\n    alt: \"Collaborative workshop around a table\",\n  },\n};\n\nfunction PlusField({ className }: { className?: string }) {\n  const patternId = useId();\n\n  return (\n    <div\n      aria-hidden=\"true\"\n      className={cn(\n        \"pointer-events-none absolute inset-0 text-border [mask-image:radial-gradient(ellipse_at_center,var(--jk-foreground)_12%,transparent_72%)]\",\n        className,\n      )}\n    >\n      <svg className=\"size-full\" xmlns=\"http://www.w3.org/2000/svg\">\n        <defs>\n          <pattern\n            id={patternId}\n            width=\"28\"\n            height=\"28\"\n            patternUnits=\"userSpaceOnUse\"\n          >\n            <path\n              d=\"M14 9v10M9 14h10\"\n              fill=\"none\"\n              stroke=\"currentColor\"\n              strokeWidth=\"1\"\n            />\n          </pattern>\n        </defs>\n        <rect width=\"100%\" height=\"100%\" fill={`url(#${patternId})`} />\n      </svg>\n    </div>\n  );\n}\n\nfunction StatCell({ stat }: { stat: About8Stat }) {\n  return (\n    <div className=\"flex flex-col gap-2 px-5 py-6 sm:px-8 sm:py-8\">\n      <p className=\"text-4xl font-semibold tracking-[-0.06em] tabular-nums sm:text-5xl lg:text-6xl\">\n        {stat.value}\n      </p>\n      <p className=\"font-mono text-[11px] tracking-[0.16em] text-muted-foreground uppercase\">\n        {stat.label}\n      </p>\n    </div>\n  );\n}\n\nexport function About8({\n  className,\n  title = DEFAULT_TITLE,\n  description = DEFAULT_DESCRIPTION,\n  stats = DEFAULT_STATS,\n  mission = DEFAULT_MISSION,\n  gallery = DEFAULT_GALLERY,\n  product = DEFAULT_PRODUCT,\n  team = DEFAULT_TEAM,\n  ...props\n}: About8Props) {\n  const headingId = useId();\n  const galleryId = useId();\n\n  return (\n    <section\n      data-slot=\"about8\"\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"relative isolate overflow-hidden\">\n        <PlusField />\n        <div className=\"relative mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28 lg:px-10 lg:py-32\">\n          <h2\n            id={headingId}\n            className=\"max-w-3xl text-4xl font-semibold tracking-[-0.06em] text-balance sm:text-5xl lg:text-6xl\"\n          >\n            {title}\n          </h2>\n          {description ? (\n            <p className=\"mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8\">\n              {description}\n            </p>\n          ) : null}\n        </div>\n      </div>\n\n      {stats.length ? (\n        <div className=\"border-y border-border\">\n          <div className=\"mx-auto grid max-w-6xl grid-cols-2 divide-x divide-y divide-border lg:grid-cols-4 lg:divide-y-0\">\n            {stats.map((stat) => (\n              <StatCell key={stat.label} stat={stat} />\n            ))}\n          </div>\n        </div>\n      ) : null}\n\n      {mission ? (\n        <div className=\"mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10\">\n          <h3 className=\"text-2xl font-semibold tracking-[-0.04em] text-balance sm:text-3xl\">\n            {mission.title}\n          </h3>\n          <div className=\"mt-6 space-y-4 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8\">\n            {mission.paragraphs.map((paragraph) => (\n              <p key={paragraph}>{paragraph}</p>\n            ))}\n          </div>\n        </div>\n      ) : null}\n\n      {gallery.length ? (\n        <div\n          id={galleryId}\n          role=\"region\"\n          aria-roledescription=\"carousel\"\n          aria-label=\"Company stills\"\n          className=\"mx-auto max-w-6xl px-5 pb-6 sm:px-8 lg:px-10\"\n        >\n          <ul className=\"flex list-none snap-x snap-mandatory gap-4 overflow-x-auto p-0 pb-4 [scrollbar-width:thin]\">\n            {gallery.map((image) => (\n              <li\n                key={image.src}\n                className=\"w-[82vw] shrink-0 snap-center sm:w-[46vw] lg:w-[22.5rem]\"\n              >\n                <figure className=\"overflow-hidden rounded-[calc(var(--radius)+0.35rem)] border border-border bg-muted\">\n                  <img\n                    src={image.src}\n                    alt={image.alt}\n                    className=\"aspect-[3/4] size-full object-cover\"\n                  />\n                </figure>\n              </li>\n            ))}\n          </ul>\n        </div>\n      ) : null}\n\n      {product ? (\n        <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10\">\n          <div className=\"ml-auto max-w-xl text-left lg:text-right\">\n            <h3 className=\"text-2xl font-semibold tracking-[-0.04em] text-balance sm:text-3xl\">\n              {product.title}\n            </h3>\n            <p className=\"mt-4 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8\">\n              {product.description}\n            </p>\n          </div>\n        </div>\n      ) : null}\n\n      {team ? (\n        <div className=\"border-t border-border\">\n          <div className=\"mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-2 lg:items-center lg:gap-14 lg:px-10\">\n            <figure className=\"order-1 overflow-hidden rounded-[calc(var(--radius)+0.35rem)] border border-border bg-muted lg:order-2\">\n              <img\n                src={team.image.src}\n                alt={team.image.alt}\n                className=\"aspect-[16/11] size-full object-cover\"\n              />\n            </figure>\n            <div className=\"order-2 lg:order-1\">\n              <h3 className=\"text-2xl font-semibold tracking-[-0.04em] text-balance sm:text-3xl\">\n                {team.title}\n              </h3>\n              <p className=\"mt-4 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8\">\n                {team.description}\n              </p>\n            </div>\n          </div>\n        </div>\n      ) : null}\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "about8/About8.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface About8Stat {\n  value: string;\n  label: string;\n}\n\nexport interface About8Image {\n  src: string;\n  alt: string;\n}\n\nexport interface About8Mission {\n  title: string;\n  paragraphs: string[];\n}\n\nexport interface About8Product {\n  title: string;\n  description: string;\n}\n\nexport interface About8Team {\n  title: string;\n  description: string;\n  image: About8Image;\n}\n\nexport interface About8Props extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  title?: string;\n  description?: string;\n  stats?: About8Stat[];\n  mission?: About8Mission;\n  gallery?: About8Image[];\n  product?: About8Product;\n  team?: About8Team;\n}\n"
+    },
+    {
+      "path": "about8/index.ts",
+      "type": "index",
+      "content": "export { About8 } from \"./About8\";\nexport type * from \"./About8.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <About8 {...about8Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <About8 {...about8Mocks.alternate} />\n    </div>"
+    }
+  ]
+}

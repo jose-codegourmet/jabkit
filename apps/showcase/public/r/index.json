@@ -305,6 +305,32 @@
     }
   },
   {
+    "name": "about8",
+    "displayName": "About8",
+    "category": "marketing",
+    "description": "Fintech about section with a plus-sign field, bordered stats, mission copy, a snap image carousel, a right-aligned product note, and a founding-team plate.",
+    "tags": [
+      "about",
+      "marketing",
+      "stats",
+      "carousel",
+      "fintech",
+      "team",
+      "landing"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1800
+    }
+  },
+  {
     "name": "case-studies11",
     "displayName": "CaseStudies11",
     "category": "marketing",
