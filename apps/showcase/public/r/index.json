@@ -331,6 +331,32 @@
     }
   },
   {
+    "name": "content1",
+    "displayName": "Content1",
+    "category": "marketing",
+    "description": "Long-form marketing article with a sticky in-page outline, scroll-linked active sections, and rich body blocks for images, lists, tables, and callouts.",
+    "tags": [
+      "content",
+      "marketing",
+      "article",
+      "outline",
+      "story",
+      "docs",
+      "landing"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1600
+    }
+  },
+  {
     "name": "content2",
     "displayName": "Content2",
     "category": "marketing",
