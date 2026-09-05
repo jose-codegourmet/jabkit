@@ -196,39 +196,38 @@ export function TwoFactor2({
             </p>
 
             <form onSubmit={handleSubmit} className="mt-8 grid gap-5">
-              <div className="grid gap-2">
+              <fieldset className="m-0 grid min-w-0 gap-2 border-0 p-0">
                 <Label id={codeLabelId} htmlFor={`otp-${codeLabelId}-0`}>
                   {codeLabel}
                 </Label>
-                <div
-                  role="group"
-                  aria-labelledby={codeLabelId}
-                  className="flex max-w-xs gap-2"
-                >
-                  {digits.map((digit, index) => (
-                    <Input
-                      key={`${codeLabelId}-${index}`}
-                      ref={(node) => {
-                        inputRefs.current[index] = node;
-                      }}
-                      id={index === 0 ? `otp-${codeLabelId}-0` : undefined}
-                      name={index === 0 ? "code" : undefined}
-                      type="text"
-                      inputMode="numeric"
-                      autoComplete={index === 0 ? "one-time-code" : "off"}
-                      maxLength={index === 0 ? length : 1}
-                      aria-label={`Digit ${index + 1} of ${length}`}
-                      value={digit}
-                      onChange={(event) =>
-                        handleChange(index, event.currentTarget.value)
-                      }
-                      onKeyDown={(event) => handleKeyDown(index, event)}
-                      onPaste={handlePaste}
-                      className="size-11 shrink-0 p-0 text-center text-lg font-semibold tabular-nums"
-                    />
-                  ))}
+                <div className="flex max-w-xs gap-2">
+                  {digits.map((digit, index) => {
+                    const slotId = `otp-${codeLabelId}-${index}`;
+                    return (
+                      <Input
+                        key={slotId}
+                        ref={(node) => {
+                          inputRefs.current[index] = node;
+                        }}
+                        id={index === 0 ? slotId : undefined}
+                        name={index === 0 ? "code" : undefined}
+                        type="text"
+                        inputMode="numeric"
+                        autoComplete={index === 0 ? "one-time-code" : "off"}
+                        maxLength={index === 0 ? length : 1}
+                        aria-label={`Digit ${index + 1} of ${length}`}
+                        value={digit}
+                        onChange={(event) =>
+                          handleChange(index, event.currentTarget.value)
+                        }
+                        onKeyDown={(event) => handleKeyDown(index, event)}
+                        onPaste={handlePaste}
+                        className="size-11 shrink-0 p-0 text-center text-lg font-semibold tabular-nums"
+                      />
+                    );
+                  })}
                 </div>
-              </div>
+              </fieldset>
               <Button type="submit" size="lg" className="w-full max-w-xs">
                 {submitLabel}
               </Button>
