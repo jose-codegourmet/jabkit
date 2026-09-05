@@ -1130,5 +1130,32 @@
       "width": 1440,
       "height": 900
     }
+  },
+  {
+    "name": "two-factor2",
+    "displayName": "TwoFactor2",
+    "category": "dashboard",
+    "description": "Split two-factor screen with a compact six-digit code form and a full-height photograph on large screens.",
+    "tags": [
+      "auth",
+      "dashboard",
+      "form",
+      "login",
+      "otp",
+      "split",
+      "two-factor",
+      "verification"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
   }
 ]
