@@ -493,6 +493,34 @@
     }
   },
   {
+    "name": "faq12",
+    "displayName": "Faq12",
+    "category": "marketing",
+    "description": "Documentation-style FAQ with a category sidebar, per-topic accordions, and scroll-synced active highlighting.",
+    "tags": [
+      "faq",
+      "marketing",
+      "accordion",
+      "sidebar",
+      "docs",
+      "help",
+      "landing"
+    ],
+    "addedAt": "2026-09-05",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1280
+    }
+  },
+  {
     "name": "hero-section-5",
     "displayName": "HeroSection5",
     "category": "marketing",
