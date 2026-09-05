@@ -4,6 +4,8 @@ Mandatory checklist for adding or substantially modifying a JabKit component. Fo
 
 Reference implementation: `packages/ui/src/atoms/button/`.
 
+Why these rules exist: [design-system.md](design-system.md). What the registry build does with the files: [registry.md](registry.md).
+
 ## 1. Pick category and name
 
 Categories: `atoms`, `marketing`, `dashboard`.
@@ -21,6 +23,7 @@ Path shape:
 packages/ui/src/{category}/{kebab-name}/
   {Name}.tsx
   {Name}.stories.tsx
+  {Name}.preview.tsx
   {Name}.types.ts
   {Name}.meta.ts
   index.ts
@@ -135,12 +138,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: { ...exampleMocks.default },
-  render: () => <Example {...exampleMocks.default} />,
+  render: () => (
+    <Example {...exampleMocks.default} />
+  ),
 };
 
 export const Variants: Story = {
   args: { ...exampleMocks.alternate },
-  render: () => <Example {...exampleMocks.alternate} />,
+  render: () => (
+    <Example {...exampleMocks.alternate} />
+  ),
 };
 
 export const ThemeComparison: Story = {
@@ -163,7 +170,26 @@ Story requirements:
 - `title` must match the category: `"Atoms/..."`, `"Marketing/..."`, or `"Dashboard/..."`.
 - At least two stories **plus** `ThemeComparison`.
 - Every story used as an example must have a `render:` function. The registry builder extracts example JSX from `render: () => (...)`.
+- That extractor only matches a **parenthesized multi-line** `render`. A single-line `render: () => <X />` is skipped and can mislabel the next story's code as this story's example. See [registry.md](registry.md).
 - `ThemeComparison` is excluded from registry examples but is required for light/dark coverage.
+
+### `{Name}.preview.tsx`
+
+Required. The showcase iframe route dynamically imports this module; `scripts/check-conventions.ts` fails the folder if it is missing. Default-export a `Record<string, () => ReactNode>` keyed by story name. Reference: `packages/ui/src/atoms/button/Button.preview.tsx`.
+
+```tsx
+// biome-ignore lint/correctness/noUnusedImports: packages/ui uses the classic JSX runtime.
+import * as React from "react";
+import { Example } from "./Example";
+import { exampleMocks } from "./Example.mocks";
+
+export default {
+  Default: () => <Example {...exampleMocks.default} />,
+  Variants: () => <Example {...exampleMocks.alternate} />,
+};
+```
+
+The registry build records the file in `apps/showcase/lib/preview-manifest.generated.ts` (gitignored). It is **not** copied into registry JSON.
 
 ### `index.ts`
 
@@ -183,19 +209,11 @@ export type { ExampleProps } from "./Example.types";
 
 ## 4. Register the showcase preview
 
-The showcase iframe route uses a hardcoded switch. Without a new case, the preview silently falls back to a `Button`.
+Author `{Name}.preview.tsx` (see above) and run `pnpm registry:build`. That regenerates `apps/showcase/lib/preview-manifest.generated.ts`, which `apps/showcase/app/preview/[name]/[story]/page.tsx` reads.
 
-Edit `apps/showcase/app/preview/[name]/[story]/page.tsx`:
+A missing preview module fails `pnpm check` (`missing {Name}.preview.tsx`). A name that is not in the generated manifest 404s — it does **not** fall back to `Button`. Do not edit the preview route to add a switch case.
 
-1. Import the component (and mocks if needed).
-2. Add a `case "<name>":` that renders the default story when `story !== "Variants"` and an alternate when `story === "Variants"`.
-
-```tsx
-case "example":
-  return (
-    <Example {...(alternate ? exampleMocks.alternate : exampleMocks.default)} />
-  );
-```
+Details: [showcase.md](showcase.md).
 
 ## 5. Build the registry
 
@@ -232,17 +250,17 @@ pnpm dev         # showcase; confirm /{category}/{name} and the preview iframe i
 | Checker message | Fix |
 | --- | --- |
 | `folder must be kebab-case` | Rename the folder to kebab-case |
-| `missing {Name}.tsx` (or stories / types / meta / index) | Add the missing required file with the PascalCase prefix |
+| `missing {Name}.tsx` (or stories / preview / types / meta / index) | Add the missing required file with the PascalCase prefix |
 | `contains a hardcoded Tailwind color` | Replace `bg-white`, `text-gray-*`, etc. with semantic tokens |
 | `import escapes component folder` | Remove `from "../"`; use `@/lib/*` or same-folder imports |
 | `index.ts must contain re-exports only` | Keep only `export` lines in `index.ts` |
 | `story title does not match category` | Set `title: "Atoms/Name"` (or Marketing / Dashboard) |
 | `stories need render functions and ThemeComparison` | Add `render:` to each story and export `ThemeComparison` |
-| Showcase preview shows a Button with the new name | Add the missing `case` in `preview/[name]/[story]/page.tsx` |
+| Showcase preview 404s | Add `{Name}.preview.tsx` and run `pnpm registry:build` so the preview manifest includes the name |
 | Showcase 404 / empty catalogue | Run `pnpm registry:build` and commit `apps/showcase/public/r/` |
 
 ## MCP and CLI notes
 
-- MCP tools against the registry are **read-only**.
-- The CLI (`jabkit add`) writes source into **consumer** projects from registry JSON. It does not scaffold library components in this monorepo.
+- Catalogue HTTP tools against the registry are **read-only**. See [mcp.md](mcp.md).
+- The CLI writes source into **consumer** projects from registry JSON. It does not scaffold library components in this monorepo. See [cli.md](cli.md).
 - An installed component in a consumer project must stay pristine before any requested local edits are applied.
