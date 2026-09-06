@@ -83,7 +83,7 @@
     {
       "path": "otp-dialog/index.ts",
       "type": "index",
-      "content": "export { OtpDialog } from \"./OtpDialog\";\nexport type {\n  OtpDialogPresentation,\n  OtpDialogProps,\n  OtpDialogStatus,\n  OtpDialogVerifyPayload,\n} from \"./OtpDialog.types\";\n"
+      "content": "export { OtpDialog } from \"./OtpDialog\";\nexport type * from \"./OtpDialog.types\";\n"
     },
     {
       "path": "lib/cn.ts",
