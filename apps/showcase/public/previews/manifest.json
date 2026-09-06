@@ -2326,6 +2326,47 @@
           "format": "webp"
         }
       ]
+    },
+    "ember-footer-cta": {
+      "sourceHash": "49da006ff2045518153b288b6a1b55e1b9fd76d2a32c8705e6fcd9ea8af53346",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "ember-footer-cta.Default.dark.webp",
+          "bytes": 7812,
+          "width": 960,
+          "height": 520,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "ember-footer-cta.Variants.dark.webp",
+          "bytes": 8984,
+          "width": 960,
+          "height": 520,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "ember-footer-cta.ThemeComparison.dark.webp",
+          "bytes": 13620,
+          "width": 960,
+          "height": 520,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
