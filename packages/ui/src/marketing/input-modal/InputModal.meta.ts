@@ -1,0 +1,72 @@
+import type { ComponentMeta } from "@jabkit/build-registry";
+
+export default {
+  name: "input-modal",
+  displayName: "InputModal",
+  version: "1.0.0",
+  addedAt: "2026-09-06",
+  description:
+    "Marketing dialog for turning a file, URL, or saved source into a voiced audio show, with format and voice controls.",
+  sectionCategory: "form",
+  purpose:
+    "Captures a source and generation settings in a focused overlay so a landing page can start an audio-show conversion without leaving the page.",
+  bestFor: [
+    "product landing CTAs",
+    "content-to-audio tools",
+    "waitlist or demo conversion overlays",
+  ],
+  avoidFor: [
+    "multi-step checkout",
+    "dense application settings that belong in a full page",
+  ],
+  tone: ["clean", "professional", "modern"],
+  industries: ["media", "technology"],
+  contentDensity: "high",
+  visualWeight: "high",
+  layout: {
+    type: "overlay",
+    alignment: "center",
+    columns: 1,
+  },
+  slots: [
+    "headline",
+    "description",
+    "sourceTabs",
+    "fileDrop",
+    "urlField",
+    "savedSources",
+    "formatControls",
+    "voiceControls",
+    "generateCTA",
+  ],
+  capabilities: {
+    supportsImage: true,
+    supportsVideo: false,
+    supportsForm: true,
+    supportsCTA: true,
+    supportsDarkMode: true,
+  },
+  recommendedAfter: ["hero", "features"],
+  recommendedBefore: ["testimonials", "cta"],
+  tags: [
+    "modal",
+    "dialog",
+    "form",
+    "marketing",
+    "upload",
+    "audio",
+    "podcast",
+    "conversion",
+  ],
+  dependencies: ["lucide-react"],
+  registryDependencies: [
+    "avatar",
+    "badge",
+    "button",
+    "dialog",
+    "input",
+    "label",
+  ],
+  a11y: { keyboardNav: true, reducedMotion: true },
+  preview: { layout: "fit", width: 1440, height: 900 },
+} satisfies ComponentMeta;
