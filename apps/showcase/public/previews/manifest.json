@@ -2367,6 +2367,47 @@
           "format": "webp"
         }
       ]
+    },
+    "footer-column": {
+      "sourceHash": "bea7a6b9fe041036ca4916c18805c2bd2789e0467309aa05044afdd55e90b0f7",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "footer-column.Default.dark.webp",
+          "bytes": 9814,
+          "width": 960,
+          "height": 547,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "footer-column.Variants.dark.webp",
+          "bytes": 8316,
+          "width": 960,
+          "height": 547,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "footer-column.ThemeComparison.dark.webp",
+          "bytes": 18454,
+          "width": 960,
+          "height": 547,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
