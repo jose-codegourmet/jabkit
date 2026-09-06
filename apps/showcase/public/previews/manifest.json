@@ -3015,6 +3015,47 @@
           "format": "webp"
         }
       ]
+    },
+    "otp-dialog": {
+      "sourceHash": "3045f16ae55807b5ac83e986072cbb72c9181d9fdd1d378fe8ea20dfd957d0a0",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "otp-dialog.Default.dark.webp",
+          "bytes": 5074,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "otp-dialog.Variants.dark.webp",
+          "bytes": 6496,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "otp-dialog.ThemeComparison.dark.webp",
+          "bytes": 7944,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
