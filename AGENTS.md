@@ -55,7 +55,7 @@ Run from the **repo root** (`scripts/check-conventions.ts` uses `process.cwd()`)
 pnpm check
 ```
 
-That is `lint` (Biome) + `typecheck` (Turbo) + `check:conventions` + `registry:verify` (rebuild + `git diff --exit-code` on `apps/showcase/public/r`) + `previews:verify` (hash and file verification for `apps/showcase/public/previews/`). This local gate is the correctness gate. CI (`.github/workflows/publish-cli.yml`) only publishes `@jabkit/cli` when its version is not already on npm. See [cli.md](docs/cli.md).
+That is `lint` (Biome) + `typecheck` (Turbo) + `check:conventions` + `registry:verify` (rebuild + `git diff --exit-code` on `apps/showcase/public/r`) + `previews:verify` (hash and file verification for `apps/showcase/public/previews/`). This local gate is the correctness gate. CI (`.github/workflows/publish-cli.yml`) publishes `@jabkit/cli` only when you run the workflow by hand and its version is not already on npm. See [cli.md](docs/cli.md).
 
 Also: `pnpm registry:build`, `pnpm storybook`, `pnpm dev`.
 

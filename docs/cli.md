@@ -104,15 +104,15 @@ To use it you still need a running showcase that serves `/r/*.json`.
 
 New components do not require a CLI republish. The CLI fetches whatever the live registry serves.
 
-A new CLI version publishes when `packages/cli/package.json` `version` is not already on npm and that change lands on `main`. `.github/workflows/publish-cli.yml` checks `npm view @jabkit/cli@$VERSION`, then typechecks, builds, and runs `npm publish` from `packages/cli` via trusted publishing (OIDC). There is no `NPM_TOKEN`. The workflow does not run `pnpm check`.
+Pushing components to `main` does not publish npm. A CLI release is manual: GitHub → Actions → **Publish CLI** → **Run workflow** (same button on GitHub mobile). The workflow publishes the version on the branch you pick (usually `main`). It checks `npm view @jabkit/cli@$VERSION`, then typechecks, builds, and runs `npm publish` from `packages/cli` via trusted publishing (OIDC). There is no `NPM_TOKEN`. The workflow does not run `pnpm check`. If that version is already on npm, it exits without publishing.
 
-To release:
+To cut a new CLI version first:
 
 ```bash
 pnpm release:cli patch   # or minor / major
 ```
 
-That is `npm version --no-git-tag-version` inside `packages/cli` only. Commit the version bump and push to `main`.
+That is `npm version --no-git-tag-version` inside `packages/cli` only. Commit, push to `main`, then run the workflow. Running it without a version bump does nothing useful.
 
 GitHub cannot do the first publish. Trusted publishing is attached on an existing package, so `0.1.0` must be published from a laptop after `npm login`. The workflow also must not set `registry-url` / `NODE_AUTH_TOKEN`; a static token blocks the OIDC handshake and npm returns `E404`.
 
