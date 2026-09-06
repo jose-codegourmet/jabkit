@@ -2687,6 +2687,47 @@
           "format": "webp"
         }
       ]
+    },
+    "holo-card": {
+      "sourceHash": "a81992fbbd16baf549f488fea67b18a192a97793aa006d7d4b72b019c381b864",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "holo-card.Default.dark.webp",
+          "bytes": 9366,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "holo-card.Variants.dark.webp",
+          "bytes": 12378,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "holo-card.ThemeComparison.dark.webp",
+          "bytes": 17498,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
