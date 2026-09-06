@@ -1,0 +1,114 @@
+{
+  "name": "sticky-content-wrapper",
+  "displayName": "StickyContentWrapper",
+  "version": "1.0.0",
+  "addedAt": "2026-09-06",
+  "description": "Split-screen marketing tour that pins a viewport while copy steps through headings, lists, and a CTA and the paired image scales and swaps.",
+  "sectionCategory": "features",
+  "purpose": "Keeps one product claim on screen while proof, rooms, or steps change beside it, without leaving semantic tokens.",
+  "bestFor": [
+    "product tours on landing pages",
+    "lookbook or residence stories",
+    "feature walkthroughs with a still per beat"
+  ],
+  "avoidFor": [
+    "short pages with a single image",
+    "forms or dense docs where pinning would hide the next section"
+  ],
+  "tone": [
+    "editorial",
+    "premium",
+    "confident"
+  ],
+  "industries": [
+    "ecommerce",
+    "real-estate",
+    "media"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "high",
+  "layout": {
+    "type": "split",
+    "alignment": "left",
+    "columns": 2
+  },
+  "slots": [
+    "headline",
+    "bodyContent",
+    "list",
+    "cta",
+    "featureVisuals"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "logos"
+  ],
+  "recommendedBefore": [
+    "gallery",
+    "testimonials",
+    "cta"
+  ],
+  "tags": [
+    "sticky",
+    "scroll",
+    "split",
+    "marketing",
+    "features",
+    "image",
+    "cta",
+    "landing"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "sticky-content-wrapper/StickyContentWrapper.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ArrowUpRight } from \"lucide-react\";\nimport { useEffect, useId, useRef, useState, useSyncExternalStore } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  StickyContentItem,\n  StickyContentWrapperProps,\n} from \"./StickyContentWrapper.types\";\n\nconst DEFAULT_ITEMS: StickyContentItem[] = [\n  {\n    id: \"rooms\",\n    heading: \"Rooms that hold a brief\",\n    body: \"Keep the claim on screen while the proof changes beside it. One surface, four rooms, no extra chrome.\",\n    points: [\n      \"Open plan with a quiet wall\",\n      \"Daylight as the primary lamp\",\n      \"Materials named, not guessed\",\n    ],\n    cta: { href: \"#floor-plan\", label: \"See the floor\" },\n    imageSrc: \"/assets/462a1be29787cd8e.webp\",\n    imageAlt: \"Low oak lounge chair on a pale floor\",\n  },\n  {\n    id: \"light\",\n    heading: \"Light as a product\",\n    body: \"The lamp is not decoration. It sets the tempo of the room and the photograph that sits next to the copy.\",\n    points: [\n      \"Arc that clears a reading chair\",\n      \"Warm falloff, no glare on copy\",\n      \"Still when motion is reduced\",\n    ],\n    cta: { href: \"#lighting\", label: \"Read the spec\" },\n    imageSrc: \"/assets/6cc11e462a9aaded.webp\",\n    imageAlt: \"Arc floor lamp lighting a quiet corner\",\n  },\n  {\n    id: \"stone\",\n    heading: \"Weight you can place\",\n    body: \"A table that does not move when the layout does. Pair the still object with a line of copy that can change.\",\n    points: [\n      \"Sculpted stone, one piece\",\n      \"Height set for a laptop and a cup\",\n      \"Sits in sun without bleaching\",\n    ],\n    cta: { href: \"#tables\", label: \"View the table\" },\n    imageSrc: \"/assets/488fa5330da1224c.webp\",\n    imageAlt: \"Sculptural stone side table in a sunlit room\",\n  },\n  {\n    id: \"rest\",\n    heading: \"A pause that looks finished\",\n    body: \"The daybed is the last frame. Copy, list, and CTA stay in the same column so the image can scale and swap.\",\n    points: [\n      \"Linen that reads in light and dark\",\n      \"Plaster wall as a quiet ground\",\n      \"Caption lives in the copy, not on the photo\",\n    ],\n    cta: { href: \"#daybed\", label: \"See the finish\" },\n    imageSrc: \"/assets/7cb36691e11ed9af.webp\",\n    imageAlt: \"Linen daybed against a plaster wall\",\n  },\n];\n\nfunction subscribeReducedMotion(onChange: () => void) {\n  const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n  media.addEventListener(\"change\", onChange);\n  return () => media.removeEventListener(\"change\", onChange);\n}\n\nfunction getReducedMotion() {\n  return window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;\n}\n\nfunction useReducedMotion() {\n  return useSyncExternalStore(\n    subscribeReducedMotion,\n    getReducedMotion,\n    () => false,\n  );\n}\n\nfunction panelState(index: number, active: number) {\n  if (index === active) return \"active\";\n  if (index < active) return \"exit\";\n  return \"enter\";\n}\n\nfunction CopyBlock({\n  item,\n  headingId,\n}: {\n  item: StickyContentItem;\n  headingId?: string;\n}) {\n  return (\n    <div className=\"flex max-w-xl flex-col\">\n      <h3\n        className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl lg:text-5xl\"\n        id={headingId}\n      >\n        {item.heading}\n      </h3>\n      <p className=\"mt-4 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8\">\n        {item.body}\n      </p>\n      {item.points && item.points.length > 0 ? (\n        <ul className=\"mt-6 space-y-2 text-sm leading-6 text-foreground sm:text-base\">\n          {item.points.map((point) => (\n            <li className=\"flex gap-3\" key={point}>\n              <span\n                aria-hidden=\"true\"\n                className=\"mt-2 size-1 shrink-0 rounded-full bg-primary\"\n              />\n              <span>{point}</span>\n            </li>\n          ))}\n        </ul>\n      ) : null}\n      {item.cta ? (\n        <a\n          className=\"group mt-8 inline-flex w-fit items-center gap-2 text-sm font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"\n          href={item.cta.href}\n        >\n          <span className=\"relative after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-right after:scale-x-0 after:bg-foreground after:transition-transform after:duration-300 group-hover:after:origin-left group-hover:after:scale-x-100 group-focus-visible:after:origin-left group-focus-visible:after:scale-x-100\">\n            {item.cta.label}\n          </span>\n          <ArrowUpRight\n            aria-hidden=\"true\"\n            className=\"size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-focus-visible:-translate-y-0.5 group-focus-visible:translate-x-0.5\"\n          />\n        </a>\n      ) : null}\n    </div>\n  );\n}\n\nfunction MediaFrame({\n  item,\n  state,\n  scaleMedia,\n}: {\n  item: StickyContentItem;\n  state: \"enter\" | \"active\" | \"exit\";\n  scaleMedia: boolean;\n}) {\n  return (\n    <div\n      className=\"jk-sticky-media absolute inset-0 overflow-hidden\"\n      data-scale={scaleMedia ? \"on\" : \"off\"}\n      data-state={state}\n    >\n      <img\n        alt={item.imageAlt}\n        className=\"size-full object-cover\"\n        src={item.imageSrc}\n      />\n    </div>\n  );\n}\n\nfunction StaticTour({\n  items,\n  mediaSide,\n  headingId,\n}: {\n  items: StickyContentItem[];\n  mediaSide: \"start\" | \"end\";\n  headingId: string;\n}) {\n  return (\n    <div className=\"mx-auto flex max-w-6xl flex-col gap-16 px-5 py-16 sm:px-8 sm:py-20 lg:gap-24 lg:px-10 lg:py-24\">\n      {items.map((item, index) => (\n        <article\n          className={cn(\n            \"grid items-center gap-8 lg:grid-cols-2 lg:gap-14\",\n            mediaSide === \"start\" && \"lg:[&>*:first-child]:order-2\",\n          )}\n          key={item.id}\n        >\n          <CopyBlock\n            headingId={index === 0 ? headingId : undefined}\n            item={item}\n          />\n          <div className=\"aspect-[4/5] overflow-hidden rounded-[calc(var(--radius)+0.5rem)] border border-border bg-card sm:aspect-[5/4]\">\n            <img\n              alt={item.imageAlt}\n              className=\"size-full object-cover\"\n              src={item.imageSrc}\n            />\n          </div>\n        </article>\n      ))}\n    </div>\n  );\n}\n\nexport function StickyContentWrapper({\n  className,\n  items,\n  mediaSide = \"end\",\n  scaleMedia = true,\n  snap = true,\n  ...props\n}: StickyContentWrapperProps) {\n  const headingId = useId();\n  const beats = items && items.length > 0 ? items : DEFAULT_ITEMS;\n  const reduceMotion = useReducedMotion();\n  const [active, setActive] = useState(0);\n  const sliceRefs = useRef<Array<HTMLDivElement | null>>([]);\n\n  useEffect(() => {\n    if (reduceMotion) return;\n    const nodes = sliceRefs.current.filter((node): node is HTMLDivElement =>\n      Boolean(node),\n    );\n    if (nodes.length === 0) return;\n\n    const visible = new Set<number>();\n    const observer = new IntersectionObserver(\n      (entries) => {\n        for (const entry of entries) {\n          const index = Number(entry.target.getAttribute(\"data-step\"));\n          if (Number.isNaN(index)) continue;\n          if (entry.isIntersecting) visible.add(index);\n          else visible.delete(index);\n        }\n        const next = [...visible].sort((a, b) => a - b).at(-1);\n        if (next !== undefined) setActive(next);\n      },\n      { rootMargin: \"-32% 0px -32% 0px\", threshold: 0 },\n    );\n\n    for (const node of nodes) observer.observe(node);\n    return () => observer.disconnect();\n  }, [beats.length, reduceMotion]);\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-slot=\"sticky-content-wrapper\"\n      {...props}\n    >\n      <style href=\"jk-sticky-content-wrapper\" precedence=\"default\">{`\n        .jk-sticky-copy,\n        .jk-sticky-media {\n          transition:\n            opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),\n            transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);\n        }\n        .jk-sticky-copy[data-state=\"enter\"] {\n          opacity: 0;\n          transform: translateY(1.25rem);\n          pointer-events: none;\n        }\n        .jk-sticky-copy[data-state=\"active\"] {\n          opacity: 1;\n          transform: translateY(0);\n        }\n        .jk-sticky-copy[data-state=\"exit\"] {\n          opacity: 0;\n          transform: translateY(-1.25rem);\n          pointer-events: none;\n        }\n        .jk-sticky-media[data-state=\"enter\"] {\n          opacity: 0;\n        }\n        .jk-sticky-media[data-state=\"active\"] {\n          opacity: 1;\n        }\n        .jk-sticky-media[data-state=\"exit\"] {\n          opacity: 0;\n        }\n        .jk-sticky-media[data-scale=\"on\"][data-state=\"enter\"] img {\n          transform: scale(1.22);\n        }\n        .jk-sticky-media[data-scale=\"on\"][data-state=\"active\"] img {\n          transform: scale(1.06);\n        }\n        .jk-sticky-media[data-scale=\"on\"][data-state=\"exit\"] img {\n          transform: scale(1);\n        }\n        .jk-sticky-media img {\n          transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-sticky-copy,\n          .jk-sticky-media,\n          .jk-sticky-media img {\n            transition: none;\n            transform: none !important;\n          }\n        }\n      `}</style>\n      {reduceMotion ? (\n        <StaticTour\n          headingId={headingId}\n          items={beats}\n          mediaSide={mediaSide}\n        />\n      ) : (\n        <div\n          className=\"relative\"\n          style={{ height: `${beats.length * 100}dvh` }}\n        >\n          <div className=\"sticky top-0 flex h-[100dvh] items-stretch overflow-hidden\">\n            <div\n              className={cn(\n                \"mx-auto flex h-full w-full max-w-6xl flex-col px-5 py-8 sm:px-8 lg:flex-row lg:items-stretch lg:gap-16 lg:px-10 lg:py-0\",\n                mediaSide === \"start\" && \"lg:flex-row-reverse\",\n              )}\n            >\n              <div className=\"relative h-[42%] min-h-[12rem] flex-1 lg:h-full lg:w-[42%] lg:flex-none\">\n                {beats.map((item, index) => {\n                  const state = panelState(index, active);\n                  return (\n                    <div\n                      className=\"jk-sticky-copy absolute inset-0 flex items-center\"\n                      data-state={state}\n                      inert={state !== \"active\" ? true : undefined}\n                      key={item.id}\n                    >\n                      <CopyBlock\n                        headingId={index === 0 ? headingId : undefined}\n                        item={item}\n                      />\n                    </div>\n                  );\n                })}\n              </div>\n              <div className=\"relative mt-4 min-h-0 flex-[0.95] overflow-hidden rounded-[calc(var(--radius)+0.65rem)] border border-border bg-card lg:mt-0 lg:h-[min(72vh,40rem)] lg:w-1/2 lg:flex-none lg:self-center\">\n                {beats.map((item, index) => (\n                  <MediaFrame\n                    item={item}\n                    key={item.id}\n                    scaleMedia={scaleMedia}\n                    state={panelState(index, active)}\n                  />\n                ))}\n              </div>\n            </div>\n          </div>\n          <div aria-hidden=\"true\" className=\"pointer-events-none absolute inset-0\">\n            {beats.map((item, index) => (\n              <div\n                className={cn(\"h-[100dvh]\", snap && \"snap-start\")}\n                data-step={index}\n                key={`${item.id}-step`}\n                ref={(node) => {\n                  sliceRefs.current[index] = node;\n                }}\n              />\n            ))}\n          </div>\n        </div>\n      )}\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "sticky-content-wrapper/StickyContentWrapper.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface StickyContentLink {\n  href: string;\n  label: string;\n}\n\nexport interface StickyContentItem {\n  id: string;\n  heading: string;\n  body: string;\n  points?: string[];\n  cta?: StickyContentLink;\n  imageSrc: string;\n  imageAlt: string;\n}\n\nexport interface StickyContentWrapperProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  items?: StickyContentItem[];\n  mediaSide?: \"start\" | \"end\";\n  scaleMedia?: boolean;\n  snap?: boolean;\n}\n"
+    },
+    {
+      "path": "sticky-content-wrapper/index.ts",
+      "type": "index",
+      "content": "export { StickyContentWrapper } from \"./StickyContentWrapper\";\nexport type * from \"./StickyContentWrapper.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <StickyContentWrapper {...stickyContentWrapperMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <StickyContentWrapper {...stickyContentWrapperMocks.alternate} />\n    </div>"
+    }
+  ]
+}
