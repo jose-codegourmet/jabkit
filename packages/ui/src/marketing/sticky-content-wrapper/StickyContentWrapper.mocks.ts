@@ -69,10 +69,7 @@ export const stickyContentWrapperMocks = {
         id: "desk",
         heading: "A desk that keeps the page",
         body: "Image first on wide screens. Copy still steps through as you scroll, with a shorter pair for a product row.",
-        points: [
-          "Walnut with one drawer",
-          "Cable path hidden in the rail",
-        ],
+        points: ["Walnut with one drawer", "Cable path hidden in the rail"],
         cta: { href: "#desk", label: "Open the desk" },
         imageSrc: "/assets/21aecf698128f57b.webp",
         imageAlt: "Walnut writing desk with a single drawer",
@@ -81,10 +78,7 @@ export const stickyContentWrapperMocks = {
         id: "shade",
         heading: "Paper that holds the lamp",
         body: "The paired still swaps without a carousel. Same tokens, same column math, fewer beats.",
-        points: [
-          "Folded shade, even glow",
-          "Works over a desk or a table",
-        ],
+        points: ["Folded shade, even glow", "Works over a desk or a table"],
         cta: { href: "#shade", label: "See the shade" },
         imageSrc: "/assets/e40131b7fd7bf05b.webp",
         imageAlt: "Folded paper pendant shade",

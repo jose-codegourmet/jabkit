@@ -1,9 +1,8 @@
-// biome-ignore lint/correctness/noUnusedImports: packages/ui uses the classic JSX runtime.
-import * as React from "react";
+import type { ReactNode } from "react";
 import { StickyContentWrapper } from "./StickyContentWrapper";
 import { stickyContentWrapperMocks } from "./StickyContentWrapper.mocks";
 
-const Frame = ({ children }: { children: React.ReactNode }) => (
+const Frame = ({ children }: { children: ReactNode }) => (
   <div className="h-[56rem] overflow-hidden">{children}</div>
 );
 

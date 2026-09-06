@@ -1,7 +1,13 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
-import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { cn } from "@/lib/cn";
 import type {
   StickyContentItem,
@@ -212,9 +218,10 @@ export function StickyContentWrapper({
 
   useEffect(() => {
     if (reduceMotion) return;
-    const nodes = sliceRefs.current.filter((node): node is HTMLDivElement =>
-      Boolean(node),
-    );
+    const stepCount = beats.length;
+    const nodes = sliceRefs.current
+      .slice(0, stepCount)
+      .filter((node): node is HTMLDivElement => Boolean(node));
     if (nodes.length === 0) return;
 
     const visible = new Set<number>();
@@ -295,11 +302,7 @@ export function StickyContentWrapper({
         }
       `}</style>
       {reduceMotion ? (
-        <StaticTour
-          headingId={headingId}
-          items={beats}
-          mediaSide={mediaSide}
-        />
+        <StaticTour headingId={headingId} items={beats} mediaSide={mediaSide} />
       ) : (
         <div
           className="relative"
@@ -342,7 +345,10 @@ export function StickyContentWrapper({
               </div>
             </div>
           </div>
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+          >
             {beats.map((item, index) => (
               <div
                 className={cn("h-[100dvh]", snap && "snap-start")}
