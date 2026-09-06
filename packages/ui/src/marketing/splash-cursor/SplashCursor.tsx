@@ -150,7 +150,8 @@ export function SplashCursor({
 
     const paintStatic = () => {
       const colors = readPalette(root, palette);
-      const accent = colors[0] || tokenValue(root, "--jk-primary") || "currentColor";
+      const accent =
+        colors[0] || tokenValue(root, "--jk-primary") || "currentColor";
       const second = colors[2] || colors[1] || accent;
       ctx.clearRect(0, 0, width, height);
       const marks = [
