@@ -2851,6 +2851,47 @@
           "format": "webp"
         }
       ]
+    },
+    "tilted-card": {
+      "sourceHash": "33e8191f62e92c3bc73b341a0ea86e2cd8f612744e5c7dced9312dab7119a47e",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "tilted-card.Default.dark.webp",
+          "bytes": 10376,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "tilted-card.Variants.dark.webp",
+          "bytes": 16512,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "tilted-card.ThemeComparison.dark.webp",
+          "bytes": 19580,
+          "width": 960,
+          "height": 622,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
