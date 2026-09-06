@@ -1242,6 +1242,32 @@
     }
   },
   {
+    "name": "splash-cursor",
+    "displayName": "SplashCursor",
+    "category": "marketing",
+    "description": "Marketing canvas that trails ink splashes behind the pointer, mixing semantic token colors and staying still when motion is reduced.",
+    "tags": [
+      "marketing",
+      "animation",
+      "canvas",
+      "cursor",
+      "splash",
+      "hero",
+      "interactive"
+    ],
+    "addedAt": "2026-09-06",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 720
+    }
+  },
+  {
     "name": "split-text",
     "displayName": "SplitText",
     "category": "marketing",
