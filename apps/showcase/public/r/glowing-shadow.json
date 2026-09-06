@@ -1,0 +1,109 @@
+{
+  "name": "glowing-shadow",
+  "displayName": "GlowingShadow",
+  "version": "1.0.0",
+  "addedAt": "2026-09-06",
+  "description": "Marketing block with a rotating, color-cycling token glow behind display type. Hover brightens blur, opacity, and scale.",
+  "sectionCategory": "features",
+  "purpose": "Puts a kinetic light field behind a wordmark or short claim so a landing moment feels lit without leaving semantic tokens.",
+  "bestFor": [
+    "product launches",
+    "creative studio landings",
+    "feature moments that need a glow without extra chrome"
+  ],
+  "avoidFor": [
+    "dense documentation",
+    "forms or task UI where a spinning field would compete with controls"
+  ],
+  "tone": [
+    "experimental",
+    "modern",
+    "confident"
+  ],
+  "industries": [
+    "technology",
+    "media",
+    "ecommerce"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "high",
+  "layout": {
+    "type": "stack",
+    "alignment": "center",
+    "columns": 3
+  },
+  "slots": [
+    "headline",
+    "content",
+    "featureVisuals"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "logos"
+  ],
+  "recommendedBefore": [
+    "pricing",
+    "cta",
+    "testimonials"
+  ],
+  "tags": [
+    "glow",
+    "shadow",
+    "conic",
+    "marketing",
+    "hover",
+    "landing",
+    "interactive"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "glowing-shadow/GlowingShadow.tsx",
+      "type": "component",
+      "content": "import { type ReactNode, useId } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  GlowingShadowProps,\n  GlowingShadowTile,\n} from \"./GlowingShadow.types\";\n\nconst DEFAULT_EYEBROW = \"Light field\";\nconst DEFAULT_HEADING = \"A shadow that keeps cycling.\";\nconst DEFAULT_DESCRIPTION =\n  \"Token color spins behind the type. Hover brightens the field. Quiet when motion is reduced.\";\nconst DEFAULT_LABEL = \"Glowing Shadow\";\nconst DEFAULT_DURATION = 9;\n\nfunction GlowFrame({\n  duration,\n  compact,\n  children,\n}: {\n  duration: number;\n  compact?: boolean;\n  children: ReactNode;\n}) {\n  return (\n    <div\n      className={cn(\n        \"jk-glowing-shadow-stage relative isolate grid w-full place-items-center overflow-hidden\",\n        compact\n          ? \"min-h-[16rem] px-4 py-10\"\n          : \"min-h-[22rem] px-6 py-16 sm:min-h-[26rem] sm:px-10 sm:py-20\",\n      )}\n      data-slot=\"glowing-shadow-stage\"\n      style={{ [\"--jk-glow-duration\" as string]: `${duration}s` }}\n    >\n      <div\n        aria-hidden=\"true\"\n        className=\"jk-glowing-shadow-aura-wrap pointer-events-none absolute inset-[-18%] rounded-[calc(var(--radius)+2.5rem)]\"\n      >\n        <div className=\"jk-glowing-shadow-aura size-full rounded-[inherit]\" />\n      </div>\n      <div className=\"relative z-10 grid place-items-center text-center\">\n        {children}\n      </div>\n    </div>\n  );\n}\n\nfunction TileCopy({ tile }: { tile: GlowingShadowTile }) {\n  return (\n    <>\n      <p className=\"text-3xl font-semibold tracking-tighter text-balance sm:text-4xl\">\n        {tile.label}\n      </p>\n      {tile.caption ? (\n        <p className=\"mt-3 max-w-[18rem] text-sm leading-6 text-muted-foreground\">\n          {tile.caption}\n        </p>\n      ) : null}\n    </>\n  );\n}\n\nexport function GlowingShadow({\n  className,\n  eyebrow = DEFAULT_EYEBROW,\n  heading = DEFAULT_HEADING,\n  description = DEFAULT_DESCRIPTION,\n  label = DEFAULT_LABEL,\n  caption,\n  tiles,\n  duration = DEFAULT_DURATION,\n  children,\n  ...props\n}: GlowingShadowProps) {\n  const headingId = useId();\n  const faces =\n    tiles && tiles.length > 0 ? tiles : [{ id: \"featured\", label, caption }];\n  const custom = Boolean(children) && faces.length === 1;\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-slot=\"glowing-shadow\"\n      {...props}\n    >\n      <style href=\"jk-glowing-shadow\" precedence=\"default\">{`\n        .jk-glowing-shadow-aura-wrap {\n          opacity: 0.62;\n          filter: blur(22px);\n          transform: scale(1);\n        }\n        .jk-glowing-shadow-aura {\n          background: conic-gradient(\n            from 0deg,\n            color-mix(in oklab, var(--jk-chart-1), transparent 8%),\n            color-mix(in oklab, var(--jk-chart-5), transparent 4%),\n            color-mix(in oklab, var(--jk-chart-2), transparent 10%),\n            color-mix(in oklab, var(--jk-primary), transparent 12%),\n            color-mix(in oklab, var(--jk-chart-4), transparent 6%),\n            color-mix(in oklab, var(--jk-chart-3), transparent 10%),\n            color-mix(in oklab, var(--jk-chart-1), transparent 8%)\n          );\n        }\n        .dark .jk-glowing-shadow-aura-wrap {\n          opacity: 0.78;\n          filter: blur(26px);\n        }\n        @keyframes jk-glowing-shadow-spin {\n          to { transform: rotate(1turn); }\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-glowing-shadow-aura-wrap {\n            transition: filter 420ms ease, opacity 420ms ease, transform 420ms ease;\n          }\n          .jk-glowing-shadow-aura {\n            animation: jk-glowing-shadow-spin var(--jk-glow-duration, 9s) linear infinite;\n          }\n          .jk-glowing-shadow-stage:hover .jk-glowing-shadow-aura-wrap {\n            opacity: 0.96;\n            filter: blur(34px);\n            transform: scale(1.12);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-glowing-shadow-aura {\n            animation: none;\n          }\n          .jk-glowing-shadow-aura-wrap {\n            transition: none;\n          }\n        }\n      `}</style>\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24\">\n        <header className=\"mx-auto mb-10 max-w-2xl text-center sm:mb-14\">\n          {eyebrow ? (\n            <p className=\"mb-3 text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase\">\n              {eyebrow}\n            </p>\n          ) : null}\n          <h2\n            className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl lg:text-5xl\"\n            id={headingId}\n          >\n            {heading}\n          </h2>\n          {description ? (\n            <p className=\"mt-3 text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7\">\n              {description}\n            </p>\n          ) : null}\n        </header>\n        <div\n          className={cn(\n            \"grid items-stretch justify-items-center gap-8\",\n            faces.length > 1 ? \"md:grid-cols-3\" : \"grid-cols-1\",\n          )}\n        >\n          {faces.map((face) => (\n            <GlowFrame\n              compact={faces.length > 1}\n              duration={duration}\n              key={face.id}\n            >\n              {custom ? (\n                children\n              ) : faces.length === 1 ? (\n                <>\n                  <p className=\"pointer-events-none text-5xl leading-[1.05] font-semibold tracking-tighter text-balance sm:text-7xl lg:text-8xl\">\n                    {face.label}\n                  </p>\n                  {face.caption ? (\n                    <p className=\"mt-5 max-w-md text-sm leading-6 text-muted-foreground sm:text-base\">\n                      {face.caption}\n                    </p>\n                  ) : null}\n                </>\n              ) : (\n                <TileCopy tile={face} />\n              )}\n            </GlowFrame>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "glowing-shadow/GlowingShadow.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport interface GlowingShadowTile {\n  id: string;\n  label: string;\n  caption?: string;\n}\n\nexport interface GlowingShadowProps extends HTMLAttributes<HTMLElement> {\n  eyebrow?: string;\n  heading?: string;\n  description?: string;\n  label?: string;\n  caption?: string;\n  tiles?: GlowingShadowTile[];\n  duration?: number;\n  children?: ReactNode;\n}\n"
+    },
+    {
+      "path": "glowing-shadow/index.ts",
+      "type": "index",
+      "content": "export { GlowingShadow } from \"./GlowingShadow\";\nexport type * from \"./GlowingShadow.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <GlowingShadow {...glowingShadowMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <GlowingShadow {...glowingShadowMocks.alternate} />\n    </div>"
+    }
+  ]
+}
