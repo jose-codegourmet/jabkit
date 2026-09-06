@@ -4,6 +4,47 @@
   "version": "1.0.0",
   "addedAt": "2026-09-05",
   "description": "Collapsible application shell with grouped sidebar navigation, nested submenus, user footer, and a breadcrumb header.",
+  "sectionCategory": "application-shell",
+  "purpose": "Provides persistent hierarchical navigation and page context for a multi-area desktop application.",
+  "bestFor": [
+    "multi-page SaaS products",
+    "administration tools",
+    "business dashboards"
+  ],
+  "avoidFor": [
+    "single-purpose forms",
+    "marketing landing pages"
+  ],
+  "tone": [
+    "professional",
+    "structured",
+    "technical"
+  ],
+  "industries": [
+    "SaaS",
+    "enterprise software"
+  ],
+  "contentDensity": "high",
+  "visualWeight": "high",
+  "layout": {
+    "type": "sidebar",
+    "alignment": "left"
+  },
+  "slots": [
+    "brand",
+    "primaryNavigation",
+    "utilityNavigation",
+    "accountMenu",
+    "pageHeader",
+    "pageContent"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
   "tags": [
     "dashboard",
     "shell",

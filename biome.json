@@ -5,6 +5,7 @@
       "**",
       "!**/.next",
       "!**/.turbo",
+      "!**/dist",
       "!**/node_modules",
       "!**/storybook-static",
       "!apps/showcase/public/r",

@@ -7,6 +7,30 @@ export default {
   addedAt: "2026-09-06",
   description:
     "Calendar event manager with month, week, day, and list views, search, and tag filters.",
+  sectionCategory: "calendar",
+  purpose:
+    "Supports finding, filtering, creating, and editing events across multiple calendar views.",
+  bestFor: [
+    "scheduling products",
+    "booking workflows",
+    "date-driven dashboards",
+  ],
+  tone: ["professional", "structured"],
+  contentDensity: "high",
+  visualWeight: "high",
+  layout: {
+    type: "grid",
+    alignment: "left",
+    columns: 7,
+  },
+  slots: ["calendarHeader", "dateControls", "calendarGrid", "events"],
+  capabilities: {
+    supportsImage: false,
+    supportsVideo: false,
+    supportsForm: true,
+    supportsCTA: false,
+    supportsDarkMode: true,
+  },
   tags: [
     "dashboard",
     "calendar",

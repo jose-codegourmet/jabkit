@@ -4,6 +4,46 @@
   "version": "1.0.0",
   "addedAt": "2026-09-03",
   "description": "Centered old-versus-new marketing compare with two tall photo cards, bottom scrims, outline actions, and a circular OR chip in the gutter.",
+  "sectionCategory": "comparison",
+  "purpose": "Frames a binary choice or transformation with equal visual weight and explicit paths into each option.",
+  "bestFor": [
+    "before-and-after narratives",
+    "alternative selection",
+    "product positioning"
+  ],
+  "tone": [
+    "bold",
+    "editorial"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "high",
+  "layout": {
+    "type": "split",
+    "alignment": "center",
+    "columns": 2
+  },
+  "slots": [
+    "headline",
+    "leftOption",
+    "rightOption",
+    "optionMedia",
+    "optionCTA"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "features",
+    "content"
+  ],
+  "recommendedBefore": [
+    "pricing",
+    "cta"
+  ],
   "tags": [
     "compare",
     "marketing",

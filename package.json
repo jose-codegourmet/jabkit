@@ -21,7 +21,8 @@
     "assets:vendor": "tsx scripts/vendor-remote-assets.ts",
     "previews:build": "tsx scripts/build-preview-assets.ts",
     "previews:verify": "tsx scripts/verify-preview-assets.ts",
-    "check": "pnpm lint && pnpm typecheck && pnpm check:conventions && pnpm registry:verify && pnpm previews:verify"
+    "check": "pnpm lint && pnpm typecheck && pnpm check:conventions && pnpm registry:verify && pnpm previews:verify",
+    "release:cli": "pnpm --filter @jabkit/cli exec npm version --no-git-tag-version"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.15",

@@ -4,6 +4,48 @@
   "version": "1.0.0",
   "addedAt": "2026-09-05",
   "description": "Top navigation dashboard shell with search, org and user menus, dropdown nav groups, a mobile drawer, and a bottom bar.",
+  "sectionCategory": "application-shell",
+  "purpose": "Frames a responsive business application with global search, organization controls, and adaptive navigation.",
+  "bestFor": [
+    "multi-page SaaS products",
+    "administration tools",
+    "business dashboards"
+  ],
+  "avoidFor": [
+    "single-purpose forms",
+    "marketing landing pages"
+  ],
+  "tone": [
+    "professional",
+    "structured",
+    "technical"
+  ],
+  "industries": [
+    "SaaS",
+    "enterprise software"
+  ],
+  "contentDensity": "high",
+  "visualWeight": "high",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "brand",
+    "topNavigation",
+    "search",
+    "organizationMenu",
+    "accountMenu",
+    "mobileNavigation",
+    "pageContent"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
   "tags": [
     "dashboard",
     "application-shell",

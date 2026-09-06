@@ -7,6 +7,28 @@ export default {
   addedAt: "2026-09-05",
   description:
     "Two-column about section with story copy, a staggered workplace photo grid, and an offset second column of images and paragraphs.",
+  sectionCategory: "about",
+  purpose:
+    "Humanizes a company with a readable narrative and candid workplace imagery.",
+  bestFor: ["company story pages", "brand-led homepages", "culture sections"],
+  tone: ["editorial", "premium", "human"],
+  contentDensity: "high",
+  visualWeight: "high",
+  layout: {
+    type: "split",
+    alignment: "mixed",
+    columns: 2,
+  },
+  slots: ["headline", "storyParagraphs", "workplaceImages"],
+  capabilities: {
+    supportsImage: true,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: false,
+    supportsDarkMode: true,
+  },
+  recommendedAfter: ["hero", "logos"],
+  recommendedBefore: ["team", "case-studies", "cta"],
   tags: [
     "about",
     "marketing",

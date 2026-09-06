@@ -4,6 +4,34 @@
     "displayName": "Avatar",
     "category": "atoms",
     "description": "Accessible Avatar primitive adapted from shadcn/ui.",
+    "sectionCategory": "identity",
+    "purpose": "Represents a person or organization in compact identity contexts, with a fallback when no image is available.",
+    "bestFor": [
+      "user profiles",
+      "author bylines",
+      "member lists"
+    ],
+    "tone": [
+      "neutral",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "center"
+    },
+    "slots": [
+      "image",
+      "fallback"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "avatar",
       "primitive",
@@ -21,6 +49,33 @@
     "displayName": "Badge",
     "category": "atoms",
     "description": "Accessible Badge primitive adapted from shadcn/ui.",
+    "sectionCategory": "status",
+    "purpose": "Labels status, category, or short supporting information without competing with primary content.",
+    "bestFor": [
+      "status labels",
+      "categories",
+      "compact metadata"
+    ],
+    "tone": [
+      "clean",
+      "neutral"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "center"
+    },
+    "slots": [
+      "label"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "badge",
       "primitive",
@@ -38,6 +93,35 @@
     "displayName": "Button",
     "category": "atoms",
     "description": "A semantic, accessible action button with primary, secondary, ghost, and destructive treatments.",
+    "sectionCategory": "action",
+    "purpose": "Provides a consistent hierarchy for primary, secondary, quiet, and destructive actions.",
+    "bestFor": [
+      "form submission",
+      "primary and secondary actions",
+      "destructive confirmations"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "center"
+    },
+    "slots": [
+      "actionLabel",
+      "leadingIcon",
+      "trailingIcon"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
     "tags": [
       "button",
       "cta",
@@ -63,6 +147,37 @@
     "displayName": "CalendarWithLocalisation",
     "category": "atoms",
     "description": "Two-month appointment calendar with a language switcher that localizes copy, weekdays, and month titles.",
+    "sectionCategory": "calendar",
+    "purpose": "Lets users choose an appointment range while demonstrating locale-sensitive dates and interface copy.",
+    "bestFor": [
+      "scheduling products",
+      "booking workflows",
+      "date-driven dashboards"
+    ],
+    "tone": [
+      "professional",
+      "structured"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "grid",
+      "alignment": "left",
+      "columns": 2
+    },
+    "slots": [
+      "localeSelector",
+      "instructions",
+      "calendarMonths",
+      "selectedRange"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "calendar",
       "locale",
@@ -89,6 +204,35 @@
     "displayName": "Checkbox",
     "category": "atoms",
     "description": "Accessible Checkbox primitive adapted from shadcn/ui.",
+    "sectionCategory": "form",
+    "purpose": "Captures an independent binary choice or supports multi-select groups in forms and filters.",
+    "bestFor": [
+      "forms",
+      "settings",
+      "data entry"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "label",
+      "control",
+      "supportingText"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "checkbox",
       "primitive",
@@ -106,6 +250,37 @@
     "displayName": "Dialog",
     "category": "atoms",
     "description": "Accessible Dialog primitive adapted from shadcn/ui.",
+    "sectionCategory": "overlay",
+    "purpose": "Moves a focused task or decision into a modal layer while preserving the surrounding page context.",
+    "bestFor": [
+      "focused workflows",
+      "confirmations",
+      "quick views"
+    ],
+    "tone": [
+      "professional",
+      "focused"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "overlay",
+      "alignment": "center"
+    },
+    "slots": [
+      "trigger",
+      "title",
+      "description",
+      "content",
+      "actions"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "dialog",
       "primitive",
@@ -123,6 +298,35 @@
     "displayName": "DropdownMenu",
     "category": "atoms",
     "description": "Accessible DropdownMenu primitive adapted from shadcn/ui.",
+    "sectionCategory": "navigation",
+    "purpose": "Keeps secondary actions compact until a user requests them from a trigger.",
+    "bestFor": [
+      "compact action menus",
+      "contextual navigation",
+      "account controls"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "low",
+    "layout": {
+      "type": "overlay",
+      "alignment": "left"
+    },
+    "slots": [
+      "trigger",
+      "menuItems",
+      "groups"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "dropdown-menu",
       "primitive",
@@ -140,6 +344,35 @@
     "displayName": "Input",
     "category": "atoms",
     "description": "Accessible Input primitive adapted from shadcn/ui.",
+    "sectionCategory": "form",
+    "purpose": "Collects a short, single-line value with consistent states across forms.",
+    "bestFor": [
+      "forms",
+      "settings",
+      "data entry"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "label",
+      "control",
+      "supportingText"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "input",
       "primitive",
@@ -157,6 +390,35 @@
     "displayName": "Label",
     "category": "atoms",
     "description": "Accessible Label primitive adapted from shadcn/ui.",
+    "sectionCategory": "form",
+    "purpose": "Associates concise instructions with a form control so its purpose remains clear and accessible.",
+    "bestFor": [
+      "forms",
+      "settings",
+      "data entry"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "label",
+      "control",
+      "supportingText"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "label",
       "primitive",
@@ -174,6 +436,33 @@
     "displayName": "Separator",
     "category": "atoms",
     "description": "Accessible Separator primitive adapted from shadcn/ui.",
+    "sectionCategory": "content",
+    "purpose": "Creates a subtle semantic boundary between adjacent content groups.",
+    "bestFor": [
+      "documentation",
+      "editorial resources",
+      "educational pages"
+    ],
+    "tone": [
+      "editorial",
+      "informative",
+      "structured"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "full-width"
+    },
+    "slots": [
+      "divider"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "separator",
       "primitive",
@@ -191,6 +480,34 @@
     "displayName": "Skeleton",
     "category": "atoms",
     "description": "Accessible Skeleton primitive adapted from shadcn/ui.",
+    "sectionCategory": "feedback",
+    "purpose": "Preserves layout and communicates loading while content is not yet available.",
+    "bestFor": [
+      "loading states",
+      "contextual help",
+      "progressive disclosure"
+    ],
+    "tone": [
+      "subtle",
+      "clean"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "overlay",
+      "alignment": "center"
+    },
+    "slots": [
+      "trigger",
+      "feedbackContent"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "skeleton",
       "primitive",
@@ -208,6 +525,35 @@
     "displayName": "Switch",
     "category": "atoms",
     "description": "Accessible Switch primitive adapted from shadcn/ui.",
+    "sectionCategory": "form",
+    "purpose": "Lets users immediately toggle a persistent setting between on and off states.",
+    "bestFor": [
+      "forms",
+      "settings",
+      "data entry"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "label",
+      "control",
+      "supportingText"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "switch",
       "primitive",
@@ -225,6 +571,35 @@
     "displayName": "Textarea",
     "category": "atoms",
     "description": "Accessible Textarea primitive adapted from shadcn/ui.",
+    "sectionCategory": "form",
+    "purpose": "Collects longer free-form responses such as messages, notes, or descriptions.",
+    "bestFor": [
+      "forms",
+      "settings",
+      "data entry"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "label",
+      "control",
+      "supportingText"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "textarea",
       "primitive",
@@ -242,6 +617,34 @@
     "displayName": "Tooltip",
     "category": "atoms",
     "description": "Accessible Tooltip primitive adapted from shadcn/ui.",
+    "sectionCategory": "feedback",
+    "purpose": "Reveals brief contextual help for an unfamiliar control without adding permanent visual noise.",
+    "bestFor": [
+      "loading states",
+      "contextual help",
+      "progressive disclosure"
+    ],
+    "tone": [
+      "subtle",
+      "clean"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "overlay",
+      "alignment": "center"
+    },
+    "slots": [
+      "trigger",
+      "feedbackContent"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "tooltip",
       "primitive",
@@ -259,6 +662,53 @@
     "displayName": "About11",
     "category": "marketing",
     "description": "Creative-studio about block with staggered team photos, a process grid, logo marquee, honors table, quote overlay, and two motivation plates.",
+    "sectionCategory": "about",
+    "purpose": "Tells a layered studio story through people, process, recognition, clients, and values in one immersive editorial sequence.",
+    "bestFor": [
+      "company story pages",
+      "brand-led homepages",
+      "culture sections"
+    ],
+    "tone": [
+      "editorial",
+      "premium",
+      "human"
+    ],
+    "industries": [
+      "creative agencies",
+      "design studios"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "stack",
+      "alignment": "mixed"
+    },
+    "slots": [
+      "headline",
+      "teamImages",
+      "processSteps",
+      "clientLogos",
+      "awards",
+      "quote",
+      "values"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "logos"
+    ],
+    "recommendedBefore": [
+      "team",
+      "case-studies",
+      "cta"
+    ],
     "tags": [
       "about",
       "marketing",
@@ -286,6 +736,48 @@
     "displayName": "About14",
     "category": "marketing",
     "description": "Six-column about block with a large headline, full-width hero image, labeled intro, inline avatar profile, and a philosophy statement.",
+    "sectionCategory": "about",
+    "purpose": "Introduces an organization through a strong visual manifesto, founder identity, and concise philosophy.",
+    "bestFor": [
+      "company story pages",
+      "brand-led homepages",
+      "culture sections"
+    ],
+    "tone": [
+      "editorial",
+      "premium",
+      "human"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "grid",
+      "alignment": "mixed",
+      "columns": 6
+    },
+    "slots": [
+      "headline",
+      "heroImage",
+      "introduction",
+      "profile",
+      "philosophy"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "logos"
+    ],
+    "recommendedBefore": [
+      "team",
+      "case-studies",
+      "cta"
+    ],
     "tags": [
       "about",
       "marketing",
@@ -312,6 +804,46 @@
     "displayName": "About6",
     "category": "marketing",
     "description": "Two-column about section with story copy, a staggered workplace photo grid, and an offset second column of images and paragraphs.",
+    "sectionCategory": "about",
+    "purpose": "Humanizes a company with a readable narrative and candid workplace imagery.",
+    "bestFor": [
+      "company story pages",
+      "brand-led homepages",
+      "culture sections"
+    ],
+    "tone": [
+      "editorial",
+      "premium",
+      "human"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "split",
+      "alignment": "mixed",
+      "columns": 2
+    },
+    "slots": [
+      "headline",
+      "storyParagraphs",
+      "workplaceImages"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "logos"
+    ],
+    "recommendedBefore": [
+      "team",
+      "case-studies",
+      "cta"
+    ],
     "tags": [
       "about",
       "marketing",
@@ -338,6 +870,52 @@
     "displayName": "About8",
     "category": "marketing",
     "description": "Fintech about section with a plus-sign field, bordered stats, mission copy, a snap image carousel, a right-aligned product note, and a founding-team plate.",
+    "sectionCategory": "about",
+    "purpose": "Builds institutional credibility by combining mission, scale metrics, product imagery, and founding-team context.",
+    "bestFor": [
+      "company story pages",
+      "brand-led homepages",
+      "culture sections"
+    ],
+    "tone": [
+      "editorial",
+      "premium",
+      "human"
+    ],
+    "industries": [
+      "financial technology",
+      "financial services"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "stack",
+      "alignment": "mixed"
+    },
+    "slots": [
+      "headline",
+      "mission",
+      "statistics",
+      "imageCarousel",
+      "productNote",
+      "foundingTeam"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "logos"
+    ],
+    "recommendedBefore": [
+      "team",
+      "case-studies",
+      "cta"
+    ],
     "tags": [
       "about",
       "marketing",
@@ -364,6 +942,37 @@
     "displayName": "Awards6",
     "category": "marketing",
     "description": "Milestones ledger with a display heading, labeled columns, and separator rows for title, type, and year.",
+    "sectionCategory": "awards",
+    "purpose": "Signals longevity and external recognition in a restrained, scannable record of achievements.",
+    "bestFor": [
+      "agency portfolios",
+      "institutional histories",
+      "credibility sections"
+    ],
+    "tone": [
+      "editorial",
+      "professional"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "table",
+      "alignment": "left",
+      "columns": 3
+    },
+    "slots": [
+      "headline",
+      "awardName",
+      "awardType",
+      "year"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "awards",
       "milestones",
@@ -390,6 +999,53 @@
     "displayName": "Bento19",
     "category": "marketing",
     "description": "Three-column masonry bento of six bordered cards with integration pills, compact charts, and AI ops illustrations.",
+    "sectionCategory": "features",
+    "purpose": "Explains several technical product benefits through varied visual demonstrations instead of uniform feature cards.",
+    "bestFor": [
+      "SaaS landing pages",
+      "technical products",
+      "product benefit overviews"
+    ],
+    "tone": [
+      "technical",
+      "modern",
+      "confident"
+    ],
+    "industries": [
+      "SaaS",
+      "technology"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "masonry",
+      "alignment": "mixed",
+      "columns": 3
+    },
+    "slots": [
+      "headline",
+      "featureItems",
+      "featureVisuals",
+      "supportingMetrics"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "about",
+      "logos"
+    ],
+    "recommendedBefore": [
+      "case-studies",
+      "pricing",
+      "testimonials",
+      "cta"
+    ],
     "tags": [
       "bento",
       "marketing",
@@ -417,6 +1073,53 @@
     "displayName": "CaseStudies11",
     "category": "marketing",
     "description": "Centered case-study section with a three-column grid of portrait poster cards — full-bleed photography, a bottom gradient, company mark, and title.",
+    "sectionCategory": "case-studies",
+    "purpose": "Turns selected work into visually dominant entry points that encourage visitors to explore detailed stories.",
+    "bestFor": [
+      "agency portfolios",
+      "consulting proof",
+      "customer success stories"
+    ],
+    "tone": [
+      "editorial",
+      "credible",
+      "premium"
+    ],
+    "industries": [
+      "creative agencies",
+      "architecture",
+      "hospitality"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "grid",
+      "alignment": "left",
+      "columns": 3
+    },
+    "slots": [
+      "headline",
+      "caseStudyImage",
+      "clientName",
+      "caseStudyTitle",
+      "outcome"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "features",
+      "about"
+    ],
+    "recommendedBefore": [
+      "pricing",
+      "testimonials",
+      "cta"
+    ],
     "tags": [
       "case-studies",
       "marketing",
@@ -443,6 +1146,48 @@
     "displayName": "CaseStudies13",
     "category": "marketing",
     "description": "Four-column case-study grid with cover photographs, large outcome metrics, category badges, and short client stories.",
+    "sectionCategory": "case-studies",
+    "purpose": "Proves outcomes with a balanced mix of project imagery, metrics, categories, and narrative context.",
+    "bestFor": [
+      "agency portfolios",
+      "consulting proof",
+      "customer success stories"
+    ],
+    "tone": [
+      "editorial",
+      "credible",
+      "premium"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "grid",
+      "alignment": "left",
+      "columns": 4
+    },
+    "slots": [
+      "headline",
+      "caseStudyImage",
+      "clientName",
+      "caseStudyTitle",
+      "outcome"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "features",
+      "about"
+    ],
+    "recommendedBefore": [
+      "pricing",
+      "testimonials",
+      "cta"
+    ],
     "tags": [
       "case-studies",
       "marketing",
@@ -469,6 +1214,54 @@
     "displayName": "CodeExample14",
     "category": "marketing",
     "description": "File-ops marketing section with a dotted radial wash, dual CTAs, accordion rows for create/update/delete, and a synced TypeScript snippet with copy.",
+    "sectionCategory": "content",
+    "purpose": "Makes a developer workflow concrete by pairing selectable operations with synchronized implementation code.",
+    "bestFor": [
+      "documentation",
+      "editorial resources",
+      "educational pages"
+    ],
+    "tone": [
+      "editorial",
+      "informative",
+      "structured"
+    ],
+    "industries": [
+      "developer tools",
+      "technology"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "split",
+      "alignment": "left",
+      "columns": 2
+    },
+    "slots": [
+      "headline",
+      "description",
+      "primaryCTA",
+      "secondaryCTA",
+      "operationTabs",
+      "codeSnippet",
+      "copyAction"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "related-content",
+      "cta",
+      "footer"
+    ],
     "tags": [
       "code",
       "example",
@@ -497,6 +1290,46 @@
     "displayName": "Compare5",
     "category": "marketing",
     "description": "Centered old-versus-new marketing compare with two tall photo cards, bottom scrims, outline actions, and a circular OR chip in the gutter.",
+    "sectionCategory": "comparison",
+    "purpose": "Frames a binary choice or transformation with equal visual weight and explicit paths into each option.",
+    "bestFor": [
+      "before-and-after narratives",
+      "alternative selection",
+      "product positioning"
+    ],
+    "tone": [
+      "bold",
+      "editorial"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "split",
+      "alignment": "center",
+      "columns": 2
+    },
+    "slots": [
+      "headline",
+      "leftOption",
+      "rightOption",
+      "optionMedia",
+      "optionCTA"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "features",
+      "content"
+    ],
+    "recommendedBefore": [
+      "pricing",
+      "cta"
+    ],
     "tags": [
       "compare",
       "marketing",
@@ -522,6 +1355,47 @@
     "displayName": "Content1",
     "category": "marketing",
     "description": "Long-form marketing article with a sticky in-page outline, scroll-linked active sections, and rich body blocks for images, lists, tables, and callouts.",
+    "sectionCategory": "content",
+    "purpose": "Supports deep reading while keeping a long, structured article navigable through a persistent outline.",
+    "bestFor": [
+      "documentation",
+      "editorial resources",
+      "educational pages"
+    ],
+    "tone": [
+      "editorial",
+      "informative",
+      "structured"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "sidebar",
+      "alignment": "left"
+    },
+    "slots": [
+      "breadcrumbs",
+      "headline",
+      "bodyContent",
+      "sectionNavigation",
+      "figures"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "related-content",
+      "cta",
+      "footer"
+    ],
     "tags": [
       "content",
       "marketing",
@@ -548,6 +1422,47 @@
     "displayName": "Content2",
     "category": "marketing",
     "description": "Content-hub explainer with a labeled intro, icon type grid, create and manage how-to panels, and an inline tip alert.",
+    "sectionCategory": "content",
+    "purpose": "Teaches a multi-part content model through categorized concepts and task-oriented how-to panels.",
+    "bestFor": [
+      "documentation",
+      "editorial resources",
+      "educational pages"
+    ],
+    "tone": [
+      "editorial",
+      "informative",
+      "structured"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "sectionLabel",
+      "headline",
+      "contentTypeGrid",
+      "howToPanels",
+      "tipCallout"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "related-content",
+      "cta",
+      "footer"
+    ],
     "tags": [
       "content",
       "marketing",
@@ -574,6 +1489,47 @@
     "displayName": "Content3",
     "category": "marketing",
     "description": "Knowledge-style marketing article with breadcrumbs, headline actions, a sticky topic rail, inline figures, a data table, and a callout.",
+    "sectionCategory": "content",
+    "purpose": "Presents reference-style guidance with navigation aids, evidence, structured data, and actionable context.",
+    "bestFor": [
+      "documentation",
+      "editorial resources",
+      "educational pages"
+    ],
+    "tone": [
+      "editorial",
+      "informative",
+      "structured"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "sidebar",
+      "alignment": "left"
+    },
+    "slots": [
+      "breadcrumbs",
+      "headline",
+      "bodyContent",
+      "sectionNavigation",
+      "figures"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "related-content",
+      "cta",
+      "footer"
+    ],
     "tags": [
       "content",
       "marketing",
@@ -601,6 +1557,47 @@
     "displayName": "Content4",
     "category": "marketing",
     "description": "Publication-style long read with breadcrumbs, author byline, inline figures, a scroll-aware table of contents, and a back-to-top control.",
+    "sectionCategory": "content",
+    "purpose": "Creates an editorial reading experience with authorship, figures, section navigation, and a return path.",
+    "bestFor": [
+      "documentation",
+      "editorial resources",
+      "educational pages"
+    ],
+    "tone": [
+      "editorial",
+      "informative",
+      "structured"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "sidebar",
+      "alignment": "left"
+    },
+    "slots": [
+      "breadcrumbs",
+      "headline",
+      "bodyContent",
+      "sectionNavigation",
+      "figures"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "related-content",
+      "cta",
+      "footer"
+    ],
     "tags": [
       "content",
       "marketing",
@@ -629,6 +1626,44 @@
     "displayName": "CountUp",
     "category": "marketing",
     "description": "Marketing proof figure that counts from a start value to a target when it enters view, honoring prefers-reduced-motion.",
+    "sectionCategory": "stats",
+    "purpose": "Draws attention to a single proof point or KPI with restrained entrance motion.",
+    "bestFor": [
+      "KPI highlights",
+      "social proof",
+      "impact metrics"
+    ],
+    "tone": [
+      "confident",
+      "minimal"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "center"
+    },
+    "slots": [
+      "value",
+      "prefix",
+      "suffix",
+      "label"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "logos"
+    ],
+    "recommendedBefore": [
+      "features",
+      "case-studies"
+    ],
     "tags": [
       "marketing",
       "text",
@@ -655,6 +1690,50 @@
     "displayName": "Cta22",
     "category": "marketing",
     "description": "Marketing CTA with a dark app-download panel, store badges, overlapping phone imagery, and a muted newsletter form in a three-column grid.",
+    "sectionCategory": "cta",
+    "purpose": "Combines app acquisition and newsletter capture in a visually rich closing conversion section.",
+    "bestFor": [
+      "conversion-focused landing pages",
+      "campaign closers",
+      "product acquisition"
+    ],
+    "tone": [
+      "bold",
+      "premium",
+      "confident"
+    ],
+    "industries": [
+      "mobile applications",
+      "consumer technology"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "grid",
+      "alignment": "mixed",
+      "columns": 3
+    },
+    "slots": [
+      "headline",
+      "appStoreActions",
+      "phoneMedia",
+      "newsletterForm"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "features",
+      "pricing",
+      "testimonials"
+    ],
+    "recommendedBefore": [
+      "footer"
+    ],
     "tags": [
       "cta",
       "marketing",
@@ -683,6 +1762,50 @@
     "displayName": "Cta28",
     "category": "marketing",
     "description": "Dark enterprise CTA with a serif headline, two-column icon capability grid, wide action, and a layered photo collage on extra-wide layouts.",
+    "sectionCategory": "cta",
+    "purpose": "Closes an enterprise narrative with capability reassurance, a prominent action, and premium editorial imagery.",
+    "bestFor": [
+      "conversion-focused landing pages",
+      "campaign closers",
+      "product acquisition"
+    ],
+    "tone": [
+      "bold",
+      "premium",
+      "confident"
+    ],
+    "industries": [
+      "enterprise technology",
+      "professional services"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "split",
+      "alignment": "mixed",
+      "columns": 2
+    },
+    "slots": [
+      "headline",
+      "capabilities",
+      "primaryCTA",
+      "imageCollage"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "features",
+      "pricing",
+      "testimonials"
+    ],
+    "recommendedBefore": [
+      "footer"
+    ],
     "tags": [
       "cta",
       "marketing",
@@ -710,6 +1833,38 @@
     "displayName": "CursorGrid",
     "category": "marketing",
     "description": "Marketing canvas lattice that lights cells around the cursor with configurable falloff and click pulses, honoring prefers-reduced-motion.",
+    "sectionCategory": "background",
+    "purpose": "Adds responsive ambient motion behind sparse hero or campaign content without supplying page structure itself.",
+    "bestFor": [
+      "experimental heroes",
+      "creative portfolios",
+      "campaign backdrops"
+    ],
+    "avoidFor": [
+      "content-heavy pages",
+      "interfaces where pointer effects would distract from tasks"
+    ],
+    "tone": [
+      "experimental",
+      "technical",
+      "energetic"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "center"
+    },
+    "slots": [
+      "backgroundSurface"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "marketing",
       "animation",
@@ -736,6 +1891,55 @@
     "displayName": "EcommerceHero8",
     "category": "marketing",
     "description": "Full-viewport fashion hero with synced autoplay campaign slides and a product thumbnail rail.",
+    "sectionCategory": "hero",
+    "purpose": "Opens a fashion storefront with campaign storytelling and direct access to featured products.",
+    "bestFor": [
+      "brand-led homepages",
+      "product launches",
+      "campaign landing pages"
+    ],
+    "avoidFor": [
+      "dense application screens",
+      "pages that need an understated opening"
+    ],
+    "tone": [
+      "bold",
+      "premium",
+      "editorial"
+    ],
+    "industries": [
+      "fashion",
+      "retail",
+      "ecommerce"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "overlay",
+      "alignment": "mixed"
+    },
+    "slots": [
+      "campaignSlides",
+      "campaignHeadline",
+      "campaignCTA",
+      "productThumbnails"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "logos",
+      "stats",
+      "features",
+      "about"
+    ],
     "tags": [
       "hero",
       "marketing",
@@ -762,6 +1966,44 @@
     "displayName": "EcommerceNavbar2",
     "category": "marketing",
     "description": "Dense storefront header with nested dropdowns, a mega shop panel, search, wishlist and cart badges, account menu, and an accordion mobile sheet.",
+    "sectionCategory": "navbar",
+    "purpose": "Provides comprehensive storefront wayfinding and fast access to product discovery, account, wishlist, and cart tasks.",
+    "bestFor": [
+      "primary site navigation",
+      "responsive marketing sites",
+      "commerce discovery"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "industries": [
+      "retail",
+      "ecommerce"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "full-width",
+      "alignment": "mixed"
+    },
+    "slots": [
+      "brand",
+      "navigationItems",
+      "utilityActions",
+      "mobileNavigation"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedBefore": [
+      "hero",
+      "content"
+    ],
     "tags": [
       "navbar",
       "marketing",
@@ -792,6 +2034,43 @@
     "displayName": "EmberFooterCta",
     "category": "marketing",
     "description": "Closing marketing footer with a waitlist form, serif headline, slim link row, and a token-based ember bed along the baseline.",
+    "sectionCategory": "footer",
+    "purpose": "Ends a page with atmospheric brand expression, a focused waitlist conversion, and essential links.",
+    "bestFor": [
+      "marketing site closure",
+      "secondary navigation",
+      "contact and legal information"
+    ],
+    "tone": [
+      "professional",
+      "trustworthy"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "stack",
+      "alignment": "center"
+    },
+    "slots": [
+      "headline",
+      "waitlistForm",
+      "footerLinks",
+      "legalText",
+      "decorativeEmbers"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "cta",
+      "contact",
+      "faq",
+      "content"
+    ],
     "tags": [
       "footer",
       "cta",
@@ -818,6 +2097,45 @@
     "displayName": "Faq12",
     "category": "marketing",
     "description": "Documentation-style FAQ with a category sidebar, per-topic accordions, and scroll-synced active highlighting.",
+    "sectionCategory": "faq",
+    "purpose": "Makes a large support or pre-sales question set easy to scan by grouping topics and tracking reading position.",
+    "bestFor": [
+      "pre-sales objections",
+      "support hubs",
+      "documentation-heavy products"
+    ],
+    "tone": [
+      "informative",
+      "structured",
+      "professional"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "sidebar",
+      "alignment": "left"
+    },
+    "slots": [
+      "headline",
+      "categories",
+      "questions",
+      "answers"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "pricing",
+      "features"
+    ],
+    "recommendedBefore": [
+      "cta",
+      "footer"
+    ],
     "tags": [
       "faq",
       "marketing",
@@ -846,6 +2164,55 @@
     "displayName": "Feature261",
     "category": "marketing",
     "description": "Marketing bento mosaic mixing a tall photo, a stat callout, a pricing tile, a short promo, an avatar cluster, and a supporting image.",
+    "sectionCategory": "features",
+    "purpose": "Communicates a broad value proposition through varied proof points, pricing, people, and product imagery in one mosaic.",
+    "bestFor": [
+      "SaaS landing pages",
+      "technical products",
+      "product benefit overviews"
+    ],
+    "tone": [
+      "technical",
+      "modern",
+      "confident"
+    ],
+    "industries": [
+      "SaaS",
+      "technology"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "masonry",
+      "alignment": "mixed",
+      "columns": 3
+    },
+    "slots": [
+      "featureMedia",
+      "statistic",
+      "price",
+      "promoCopy",
+      "customerAvatars",
+      "primaryCTA"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "about",
+      "logos"
+    ],
+    "recommendedBefore": [
+      "case-studies",
+      "pricing",
+      "testimonials",
+      "cta"
+    ],
     "tags": [
       "feature",
       "marketing",
@@ -873,6 +2240,43 @@
     "displayName": "FooterColumn",
     "category": "marketing",
     "description": "Site footer with a brand column, about and service links, a live-help row, contact details, and a legal bar.",
+    "sectionCategory": "footer",
+    "purpose": "Closes a service-oriented site with organized navigation, direct contact routes, and legal information.",
+    "bestFor": [
+      "marketing site closure",
+      "secondary navigation",
+      "contact and legal information"
+    ],
+    "tone": [
+      "professional",
+      "trustworthy"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "grid",
+      "alignment": "left"
+    },
+    "slots": [
+      "brand",
+      "linkGroups",
+      "contactDetails",
+      "legalLinks",
+      "conversionForm"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "cta",
+      "contact",
+      "faq",
+      "content"
+    ],
     "tags": [
       "footer",
       "marketing",
@@ -901,6 +2305,43 @@
     "displayName": "FooterSection",
     "category": "marketing",
     "description": "Site footer with a newsletter field, quick links, contact details, social marks, a light/dark toggle, and a legal row.",
+    "sectionCategory": "footer",
+    "purpose": "Combines site closure, newsletter capture, theme control, contact information, and secondary navigation.",
+    "bestFor": [
+      "marketing site closure",
+      "secondary navigation",
+      "contact and legal information"
+    ],
+    "tone": [
+      "professional",
+      "trustworthy"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "grid",
+      "alignment": "left"
+    },
+    "slots": [
+      "brand",
+      "linkGroups",
+      "contactDetails",
+      "legalLinks",
+      "conversionForm"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "cta",
+      "contact",
+      "faq",
+      "content"
+    ],
     "tags": [
       "footer",
       "marketing",
@@ -929,6 +2370,52 @@
     "displayName": "Gallery31",
     "category": "marketing",
     "description": "Product bento gallery with a centered kicker, five image tiles, and direction-aware hover overlays for name and price.",
+    "sectionCategory": "gallery",
+    "purpose": "Presents a curated product range as an image-first collection with lightweight price discovery.",
+    "bestFor": [
+      "visual portfolios",
+      "product collections",
+      "image-led brand pages"
+    ],
+    "tone": [
+      "editorial",
+      "visual",
+      "premium"
+    ],
+    "industries": [
+      "retail",
+      "ecommerce"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "grid",
+      "alignment": "center",
+      "columns": 3
+    },
+    "slots": [
+      "sectionLabel",
+      "headline",
+      "productImages",
+      "productNames",
+      "prices",
+      "productLinks"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "about"
+    ],
+    "recommendedBefore": [
+      "content",
+      "cta"
+    ],
     "tags": [
       "gallery",
       "marketing",
@@ -955,6 +2442,53 @@
     "displayName": "HeroSection5",
     "category": "marketing",
     "description": "Cinematic marketing hero with a framed looping video panel, bottom-left offer, a light header, and a logo marquee.",
+    "sectionCategory": "hero",
+    "purpose": "Creates an immersive brand-first opening while retaining a clear offer, primary action, and customer-logo proof.",
+    "bestFor": [
+      "brand-led homepages",
+      "product launches",
+      "campaign landing pages"
+    ],
+    "avoidFor": [
+      "dense application screens",
+      "pages that need an understated opening"
+    ],
+    "tone": [
+      "bold",
+      "premium",
+      "editorial"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "overlay",
+      "alignment": "left"
+    },
+    "slots": [
+      "brand",
+      "navigation",
+      "video",
+      "headline",
+      "description",
+      "primaryCTA",
+      "customerLogos"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": true,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "logos",
+      "stats",
+      "features",
+      "about"
+    ],
     "tags": [
       "hero",
       "marketing",
@@ -980,6 +2514,56 @@
     "displayName": "Hero146",
     "category": "marketing",
     "description": "Centered AI-agents hero on a square grid wash, with a gradient headline, metallic get-started pill, and a framed video teaser that exposes a play bar and optional presentation embed.",
+    "sectionCategory": "hero",
+    "purpose": "Introduces a technical AI product with focused copy and a product demonstration as the primary evidence.",
+    "bestFor": [
+      "brand-led homepages",
+      "product launches",
+      "campaign landing pages"
+    ],
+    "avoidFor": [
+      "dense application screens",
+      "pages that need an understated opening"
+    ],
+    "tone": [
+      "bold",
+      "premium",
+      "editorial"
+    ],
+    "industries": [
+      "artificial intelligence",
+      "developer tools",
+      "technology"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "center"
+    },
+    "slots": [
+      "eyebrow",
+      "headline",
+      "description",
+      "primaryCTA",
+      "videoTeaser"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": true,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "logos",
+      "stats",
+      "features",
+      "about"
+    ],
     "tags": [
       "hero",
       "marketing",
@@ -1006,6 +2590,50 @@
     "displayName": "Hero228",
     "category": "marketing",
     "description": "Centered marketing hero with a mixed serif headline, muted supporting copy, and an autoplay fan carousel of portraits with animated tick bars and name crossfades.",
+    "sectionCategory": "hero",
+    "purpose": "Builds an editorial, people-centered opening where rotating portraits carry more emotional weight than conversion controls.",
+    "bestFor": [
+      "brand-led homepages",
+      "product launches",
+      "campaign landing pages"
+    ],
+    "avoidFor": [
+      "dense application screens",
+      "pages that need an understated opening"
+    ],
+    "tone": [
+      "bold",
+      "premium",
+      "editorial"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "center"
+    },
+    "slots": [
+      "headline",
+      "description",
+      "portraitCarousel",
+      "personNames"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "logos",
+      "stats",
+      "features",
+      "about"
+    ],
     "tags": [
       "hero",
       "marketing",
@@ -1032,6 +2660,53 @@
     "displayName": "Hero230",
     "category": "marketing",
     "description": "Centered marketing hero with a pill kicker, dual pill CTAs, an auto-scrolling logo ticker, and an autoplay filmstrip of raised image cards.",
+    "sectionCategory": "hero",
+    "purpose": "Balances a direct conversion message with customer recognition and a lively stream of visual examples.",
+    "bestFor": [
+      "brand-led homepages",
+      "product launches",
+      "campaign landing pages"
+    ],
+    "avoidFor": [
+      "dense application screens",
+      "pages that need an understated opening"
+    ],
+    "tone": [
+      "bold",
+      "premium",
+      "editorial"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "center"
+    },
+    "slots": [
+      "eyebrow",
+      "headline",
+      "description",
+      "primaryCTA",
+      "secondaryCTA",
+      "customerLogos",
+      "imageFilmstrip"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "logos",
+      "stats",
+      "features",
+      "about"
+    ],
     "tags": [
       "hero",
       "marketing",
@@ -1059,6 +2734,53 @@
     "displayName": "Hero231",
     "category": "marketing",
     "description": "Split marketing hero with left-aligned copy and dual CTAs, a faded logo marquee, and a 3D coverflow of portrait cards.",
+    "sectionCategory": "hero",
+    "purpose": "Gives equal prominence to conversion copy, customer proof, and a dimensional portrait showcase.",
+    "bestFor": [
+      "brand-led homepages",
+      "product launches",
+      "campaign landing pages"
+    ],
+    "avoidFor": [
+      "dense application screens",
+      "pages that need an understated opening"
+    ],
+    "tone": [
+      "bold",
+      "premium",
+      "editorial"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "split",
+      "alignment": "left",
+      "columns": 2
+    },
+    "slots": [
+      "headline",
+      "description",
+      "primaryCTA",
+      "secondaryCTA",
+      "customerLogos",
+      "portraitCarousel"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "logos",
+      "stats",
+      "features",
+      "about"
+    ],
     "tags": [
       "hero",
       "marketing",
@@ -1084,6 +2806,55 @@
     "displayName": "Hero307",
     "category": "marketing",
     "description": "Fullscreen marketing hero with an oversized headline, paired CTAs, and a CSS-built admin dashboard that tilts in a 3D perspective scene.",
+    "sectionCategory": "hero",
+    "purpose": "Makes a software product feel ambitious by pairing oversized positioning with an immediately recognizable dashboard scene.",
+    "bestFor": [
+      "brand-led homepages",
+      "product launches",
+      "campaign landing pages"
+    ],
+    "avoidFor": [
+      "dense application screens",
+      "pages that need an understated opening"
+    ],
+    "tone": [
+      "bold",
+      "premium",
+      "editorial"
+    ],
+    "industries": [
+      "SaaS",
+      "technology"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "center"
+    },
+    "slots": [
+      "headline",
+      "description",
+      "primaryCTA",
+      "secondaryCTA",
+      "dashboardPreview"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "logos",
+      "stats",
+      "features",
+      "about"
+    ],
     "tags": [
       "hero",
       "marketing",
@@ -1110,6 +2881,59 @@
     "displayName": "Pricing28",
     "category": "marketing",
     "description": "Four-plan pricing section with avatar social proof, monthly/yearly billing tabs, tooltips, and grouped feature lists.",
+    "sectionCategory": "pricing",
+    "purpose": "Supports plan selection by comparing four subscriptions, billing periods, included features, and adoption proof.",
+    "bestFor": [
+      "comparing subscription tiers",
+      "self-serve SaaS sales",
+      "transparent product pricing"
+    ],
+    "avoidFor": [
+      "single-offer businesses",
+      "sales processes where pricing must remain private"
+    ],
+    "tone": [
+      "professional",
+      "structured",
+      "trustworthy"
+    ],
+    "industries": [
+      "SaaS",
+      "technology"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "cards",
+      "alignment": "left",
+      "columns": 4
+    },
+    "slots": [
+      "headline",
+      "description",
+      "billingToggle",
+      "pricingPlans",
+      "price",
+      "planFeatures",
+      "planCTA",
+      "socialProof"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "features",
+      "comparison",
+      "testimonials"
+    ],
+    "recommendedBefore": [
+      "faq",
+      "cta"
+    ],
     "tags": [
       "pricing",
       "marketing",
@@ -1138,6 +2962,44 @@
     "displayName": "ProductQuickView4",
     "category": "marketing",
     "description": "Storefront product quick-view dialog with an image carousel, sale price, color and size options, and add-to-cart plus details actions.",
+    "sectionCategory": "product",
+    "purpose": "Lets shoppers inspect imagery, price, variants, and purchase actions without leaving a product listing.",
+    "bestFor": [
+      "ecommerce product grids",
+      "catalog browsing",
+      "fast purchase decisions"
+    ],
+    "tone": [
+      "commercial",
+      "clean",
+      "professional"
+    ],
+    "industries": [
+      "retail",
+      "ecommerce"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "overlay",
+      "alignment": "mixed",
+      "columns": 2
+    },
+    "slots": [
+      "productImages",
+      "productName",
+      "price",
+      "variantSelectors",
+      "purchaseCTA",
+      "detailsLink"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
     "tags": [
       "product",
       "quick-view",
@@ -1167,6 +3029,43 @@
     "displayName": "Projects11",
     "category": "marketing",
     "description": "Masonry project photo wall in CSS columns — twelve unframed images that rise into view on scroll and lift with a brightness overlay on hover.",
+    "sectionCategory": "gallery",
+    "purpose": "Creates an immersive portfolio impression through a dense, minimally captioned wall of project imagery.",
+    "bestFor": [
+      "visual portfolios",
+      "product collections",
+      "image-led brand pages"
+    ],
+    "tone": [
+      "editorial",
+      "visual",
+      "premium"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "masonry",
+      "alignment": "mixed"
+    },
+    "slots": [
+      "projectImages",
+      "projectLinks"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "about"
+    ],
+    "recommendedBefore": [
+      "content",
+      "cta"
+    ],
     "tags": [
       "projects",
       "gallery",
@@ -1194,6 +3093,47 @@
     "displayName": "Projects13",
     "category": "marketing",
     "description": "Editorial project index: numbered rows with title, launch date, large description, and a small thumbnail, separated by hairline borders.",
+    "sectionCategory": "projects",
+    "purpose": "Lets visitors evaluate a body of work through descriptive, chronological project rows rather than an image-led gallery.",
+    "bestFor": [
+      "creative portfolios",
+      "agency work indexes",
+      "project archives"
+    ],
+    "tone": [
+      "editorial",
+      "premium",
+      "restrained"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "table",
+      "alignment": "left",
+      "columns": 4
+    },
+    "slots": [
+      "projectNumber",
+      "projectTitle",
+      "launchDate",
+      "projectDescription",
+      "thumbnail"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "about"
+    ],
+    "recommendedBefore": [
+      "case-studies",
+      "cta"
+    ],
     "tags": [
       "projects",
       "list",
@@ -1220,6 +3160,47 @@
     "displayName": "Projects16",
     "category": "marketing",
     "description": "Editorial project gallery with a medium-weight heading, a two-column staggered 4:3 and 4:5 photo grid, and a link action beneath a short paragraph.",
+    "sectionCategory": "projects",
+    "purpose": "Balances a concise portfolio introduction with a spacious, art-directed selection of project photography.",
+    "bestFor": [
+      "creative portfolios",
+      "agency work indexes",
+      "project archives"
+    ],
+    "tone": [
+      "editorial",
+      "premium",
+      "restrained"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "grid",
+      "alignment": "left",
+      "columns": 2
+    },
+    "slots": [
+      "headline",
+      "projectItems",
+      "projectImage",
+      "projectDescription",
+      "projectLink"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "about"
+    ],
+    "recommendedBefore": [
+      "case-studies",
+      "cta"
+    ],
     "tags": [
       "projects",
       "gallery",
@@ -1246,6 +3227,38 @@
     "displayName": "Scanner",
     "category": "marketing",
     "description": "Marketing canvas of interference bands that sweep like an oscilloscope, tinted with semantic tokens and still when motion is reduced.",
+    "sectionCategory": "background",
+    "purpose": "Creates a technical, signal-processing atmosphere for a backdrop or experimental campaign moment.",
+    "bestFor": [
+      "experimental heroes",
+      "creative portfolios",
+      "campaign backdrops"
+    ],
+    "avoidFor": [
+      "content-heavy pages",
+      "interfaces where pointer effects would distract from tasks"
+    ],
+    "tone": [
+      "experimental",
+      "technical",
+      "energetic"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "center"
+    },
+    "slots": [
+      "backgroundSurface"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "marketing",
       "animation",
@@ -1272,6 +3285,38 @@
     "displayName": "ShapeGrid",
     "category": "marketing",
     "description": "Marketing canvas of drifting outlined tiles — square, hexagon, circle, or triangle — that fill on hover and rest when motion is reduced.",
+    "sectionCategory": "background",
+    "purpose": "Provides a playful geometric backdrop that reacts to the pointer while leaving foreground messaging in control.",
+    "bestFor": [
+      "experimental heroes",
+      "creative portfolios",
+      "campaign backdrops"
+    ],
+    "avoidFor": [
+      "content-heavy pages",
+      "interfaces where pointer effects would distract from tasks"
+    ],
+    "tone": [
+      "experimental",
+      "technical",
+      "energetic"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "center"
+    },
+    "slots": [
+      "backgroundSurface"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "marketing",
       "animation",
@@ -1299,6 +3344,38 @@
     "displayName": "SplashCursor",
     "category": "marketing",
     "description": "Marketing canvas that trails ink splashes behind the pointer, mixing semantic token colors and staying still when motion is reduced.",
+    "sectionCategory": "background",
+    "purpose": "Adds expressive pointer-driven fluid motion for a dramatic campaign or creative portfolio surface.",
+    "bestFor": [
+      "experimental heroes",
+      "creative portfolios",
+      "campaign backdrops"
+    ],
+    "avoidFor": [
+      "content-heavy pages",
+      "interfaces where pointer effects would distract from tasks"
+    ],
+    "tone": [
+      "experimental",
+      "technical",
+      "energetic"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "center"
+    },
+    "slots": [
+      "backgroundSurface"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "marketing",
       "animation",
@@ -1325,6 +3402,43 @@
     "displayName": "SplitText",
     "category": "marketing",
     "description": "Marketing headline that splits into characters or words and staggers each unit into view, honoring prefers-reduced-motion.",
+    "sectionCategory": "content",
+    "purpose": "Turns a short headline into a staged entrance moment while preserving reduced-motion behavior.",
+    "bestFor": [
+      "documentation",
+      "editorial resources",
+      "educational pages"
+    ],
+    "tone": [
+      "editorial",
+      "informative",
+      "structured"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "stack",
+      "alignment": "center"
+    },
+    "slots": [
+      "animatedText"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "related-content",
+      "cta",
+      "footer"
+    ],
     "tags": [
       "marketing",
       "text",
@@ -1351,6 +3465,48 @@
     "displayName": "Team11",
     "category": "marketing",
     "description": "Bordered team header above a dense member grid that reveals a highlighted bio card on hover and keyboard focus from medium screens up.",
+    "sectionCategory": "team",
+    "purpose": "Makes a sizable team browsable while revealing richer biography details only on interaction.",
+    "bestFor": [
+      "company about pages",
+      "culture sections",
+      "recruiting pages"
+    ],
+    "tone": [
+      "human",
+      "editorial",
+      "professional"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "grid",
+      "alignment": "left",
+      "columns": 4
+    },
+    "slots": [
+      "headline",
+      "teamMembers",
+      "memberPortrait",
+      "memberName",
+      "memberRole",
+      "biography"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "about",
+      "stats"
+    ],
+    "recommendedBefore": [
+      "cta",
+      "footer"
+    ],
     "tags": [
       "team",
       "marketing",
@@ -1377,6 +3533,47 @@
     "displayName": "Team14",
     "category": "marketing",
     "description": "Split hiring section with a bordered statement panel, ghost CTA, and a row of tall member portraits that becomes a looping carousel on small screens.",
+    "sectionCategory": "team",
+    "purpose": "Pairs team visibility with a hiring message so culture and recruitment reinforce each other.",
+    "bestFor": [
+      "company about pages",
+      "culture sections",
+      "recruiting pages"
+    ],
+    "tone": [
+      "human",
+      "editorial",
+      "professional"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "split",
+      "alignment": "left",
+      "columns": 2
+    },
+    "slots": [
+      "hiringStatement",
+      "careersCTA",
+      "memberPortraits",
+      "memberNames",
+      "memberRoles"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "about",
+      "stats"
+    ],
+    "recommendedBefore": [
+      "cta",
+      "footer"
+    ],
     "tags": [
       "team",
       "marketing",
@@ -1405,6 +3602,46 @@
     "displayName": "Team17",
     "category": "marketing",
     "description": "Documentary team block with a 3:4 portrait grid, flowing alumni and collaborator name lists, and a two-column culture band.",
+    "sectionCategory": "team",
+    "purpose": "Documents the wider community around a team, including current members, alumni, collaborators, and culture.",
+    "bestFor": [
+      "company about pages",
+      "culture sections",
+      "recruiting pages"
+    ],
+    "tone": [
+      "human",
+      "editorial",
+      "professional"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "stack",
+      "alignment": "mixed"
+    },
+    "slots": [
+      "headline",
+      "memberPortraits",
+      "alumniNames",
+      "collaboratorNames",
+      "cultureStory"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "about",
+      "stats"
+    ],
+    "recommendedBefore": [
+      "cta",
+      "footer"
+    ],
     "tags": [
       "team",
       "marketing",
@@ -1431,6 +3668,38 @@
     "displayName": "TubelightNavbar",
     "category": "marketing",
     "description": "Floating pill navigation with a sliding active highlight and a primary-token tubelight glow on the current item.",
+    "sectionCategory": "navbar",
+    "purpose": "Provides compact primary navigation with a conspicuous animated indicator for the active destination.",
+    "bestFor": [
+      "primary site navigation",
+      "responsive marketing sites",
+      "commerce discovery"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "centered",
+      "alignment": "center"
+    },
+    "slots": [
+      "navigationItems",
+      "activeItem"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedBefore": [
+      "hero",
+      "content"
+    ],
     "tags": [
       "navbar",
       "marketing",
@@ -1459,6 +3728,41 @@
     "displayName": "Waitlist3",
     "category": "marketing",
     "description": "Split coming-soon waitlist with a company mark, launch badge, email form, overlapping avatars, copyright, and a full-height photo.",
+    "sectionCategory": "form",
+    "purpose": "Captures launch interest while using social proof and full-height photography to make a pre-release product feel established.",
+    "bestFor": [
+      "forms",
+      "settings",
+      "data entry"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "split",
+      "alignment": "left",
+      "columns": 2
+    },
+    "slots": [
+      "brand",
+      "launchStatus",
+      "headline",
+      "description",
+      "emailForm",
+      "customerAvatars",
+      "heroImage",
+      "legalText"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
     "tags": [
       "waitlist",
       "marketing",
@@ -1487,6 +3791,47 @@
     "displayName": "ApplicationShell1",
     "category": "dashboard",
     "description": "Collapsible application shell with grouped sidebar navigation, nested submenus, user footer, and a breadcrumb header.",
+    "sectionCategory": "application-shell",
+    "purpose": "Provides persistent hierarchical navigation and page context for a multi-area desktop application.",
+    "bestFor": [
+      "multi-page SaaS products",
+      "administration tools",
+      "business dashboards"
+    ],
+    "avoidFor": [
+      "single-purpose forms",
+      "marketing landing pages"
+    ],
+    "tone": [
+      "professional",
+      "structured",
+      "technical"
+    ],
+    "industries": [
+      "SaaS",
+      "enterprise software"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "sidebar",
+      "alignment": "left"
+    },
+    "slots": [
+      "brand",
+      "primaryNavigation",
+      "utilityNavigation",
+      "accountMenu",
+      "pageHeader",
+      "pageContent"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "dashboard",
       "shell",
@@ -1514,6 +3859,48 @@
     "displayName": "ApplicationShell13",
     "category": "dashboard",
     "description": "Top navigation dashboard shell with search, org and user menus, dropdown nav groups, a mobile drawer, and a bottom bar.",
+    "sectionCategory": "application-shell",
+    "purpose": "Frames a responsive business application with global search, organization controls, and adaptive navigation.",
+    "bestFor": [
+      "multi-page SaaS products",
+      "administration tools",
+      "business dashboards"
+    ],
+    "avoidFor": [
+      "single-purpose forms",
+      "marketing landing pages"
+    ],
+    "tone": [
+      "professional",
+      "structured",
+      "technical"
+    ],
+    "industries": [
+      "SaaS",
+      "enterprise software"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "brand",
+      "topNavigation",
+      "search",
+      "organizationMenu",
+      "accountMenu",
+      "mobileNavigation",
+      "pageContent"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "dashboard",
       "application-shell",
@@ -1541,6 +3928,45 @@
     "displayName": "ChartGroup14",
     "category": "dashboard",
     "description": "Analytics bento dashboard with date presets, a custom range calendar, KPI cards, a revenue area chart, traffic donut, top pages, and active people.",
+    "sectionCategory": "analytics",
+    "purpose": "Gives operators a broad performance snapshot with time controls, KPIs, trends, acquisition, content, and live activity.",
+    "bestFor": [
+      "business intelligence dashboards",
+      "growth analytics",
+      "operational reporting"
+    ],
+    "tone": [
+      "technical",
+      "professional",
+      "data-driven"
+    ],
+    "industries": [
+      "SaaS",
+      "analytics",
+      "ecommerce"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "grid",
+      "alignment": "left",
+      "columns": 3
+    },
+    "slots": [
+      "dateControls",
+      "keyMetrics",
+      "trendChart",
+      "breakdownChart",
+      "rankedList",
+      "liveActivity"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "dashboard",
       "charts",
@@ -1569,6 +3995,37 @@
     "displayName": "EventManager",
     "category": "dashboard",
     "description": "Calendar event manager with month, week, day, and list views, search, and tag filters.",
+    "sectionCategory": "calendar",
+    "purpose": "Supports finding, filtering, creating, and editing events across multiple calendar views.",
+    "bestFor": [
+      "scheduling products",
+      "booking workflows",
+      "date-driven dashboards"
+    ],
+    "tone": [
+      "professional",
+      "structured"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "grid",
+      "alignment": "left",
+      "columns": 7
+    },
+    "slots": [
+      "calendarHeader",
+      "dateControls",
+      "calendarGrid",
+      "events"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "dashboard",
       "calendar",
@@ -1598,6 +4055,41 @@
     "displayName": "ForgotPassword2",
     "category": "dashboard",
     "description": "Split password-recovery screen with a left-aligned email form and a full-height photograph on large screens.",
+    "sectionCategory": "authentication",
+    "purpose": "Guides a user through password recovery while using branded photography to soften a utility screen.",
+    "bestFor": [
+      "account onboarding",
+      "secure application access",
+      "identity verification flows"
+    ],
+    "tone": [
+      "clean",
+      "trustworthy",
+      "focused"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "split",
+      "alignment": "left",
+      "columns": 2
+    },
+    "slots": [
+      "brand",
+      "headline",
+      "instructions",
+      "emailField",
+      "submitAction",
+      "signInLink",
+      "brandImage"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
     "tags": [
       "auth",
       "dashboard",
@@ -1624,6 +4116,37 @@
     "displayName": "FullscreenCalendar",
     "category": "dashboard",
     "description": "Fullscreen month calendar with day cells, event lists, and today / month navigation.",
+    "sectionCategory": "calendar",
+    "purpose": "Maximizes month-level schedule visibility for products where events are the primary workspace.",
+    "bestFor": [
+      "scheduling products",
+      "booking workflows",
+      "date-driven dashboards"
+    ],
+    "tone": [
+      "professional",
+      "structured"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "grid",
+      "alignment": "left",
+      "columns": 7
+    },
+    "slots": [
+      "calendarHeader",
+      "dateControls",
+      "calendarGrid",
+      "events"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "dashboard",
       "calendar",
@@ -1650,6 +4173,41 @@
     "displayName": "Login4",
     "category": "dashboard",
     "description": "Centered borderless login with email, password, and full-width Google, Facebook, and GitHub buttons.",
+    "sectionCategory": "authentication",
+    "purpose": "Offers a compact sign-in path with credentials and several social authentication alternatives.",
+    "bestFor": [
+      "account onboarding",
+      "secure application access",
+      "identity verification flows"
+    ],
+    "tone": [
+      "clean",
+      "trustworthy",
+      "focused"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "centered",
+      "alignment": "left"
+    },
+    "slots": [
+      "brand",
+      "headline",
+      "emailField",
+      "passwordField",
+      "submitAction",
+      "socialSignInActions",
+      "recoveryLink",
+      "signUpLink"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
     "tags": [
       "auth",
       "dashboard",
@@ -1675,6 +4233,38 @@
     "displayName": "Todo9",
     "category": "dashboard",
     "description": "Searchable todo list with tag filters, per-task tag editing, and keyboard-friendly reorder.",
+    "sectionCategory": "task-management",
+    "purpose": "Helps users search, classify, complete, edit, and reorder a focused list of tasks.",
+    "bestFor": [
+      "personal productivity tools",
+      "team task dashboards",
+      "tagged work queues"
+    ],
+    "tone": [
+      "professional",
+      "structured",
+      "approachable"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "search",
+      "tagFilters",
+      "taskItems",
+      "taskStatus",
+      "taskActions"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
     "tags": [
       "dashboard",
       "todo",
@@ -1702,6 +4292,41 @@
     "displayName": "TwoFactor2",
     "category": "dashboard",
     "description": "Split two-factor screen with a compact six-digit code form and a full-height photograph on large screens.",
+    "sectionCategory": "authentication",
+    "purpose": "Collects a one-time security code in a branded, split-screen verification step.",
+    "bestFor": [
+      "account onboarding",
+      "secure application access",
+      "identity verification flows"
+    ],
+    "tone": [
+      "clean",
+      "trustworthy",
+      "focused"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "split",
+      "alignment": "left",
+      "columns": 2
+    },
+    "slots": [
+      "brand",
+      "headline",
+      "instructions",
+      "verificationCode",
+      "verifyAction",
+      "resendAction",
+      "brandImage"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
     "tags": [
       "auth",
       "dashboard",
@@ -1729,6 +4354,40 @@
     "displayName": "TwoFactor5",
     "category": "dashboard",
     "description": "Two-column authenticator pairing card with a scannable QR plate and a six-digit verification form.",
+    "sectionCategory": "authentication",
+    "purpose": "Guides initial authenticator pairing by keeping QR setup and code verification visible together.",
+    "bestFor": [
+      "account onboarding",
+      "secure application access",
+      "identity verification flows"
+    ],
+    "tone": [
+      "clean",
+      "trustworthy",
+      "focused"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "split",
+      "alignment": "left",
+      "columns": 2
+    },
+    "slots": [
+      "headline",
+      "instructions",
+      "qrCode",
+      "secretKey",
+      "verificationCode",
+      "verifyAction"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
     "tags": [
       "auth",
       "authenticator",
@@ -1755,6 +4414,39 @@
     "displayName": "VerifyEmail1",
     "category": "dashboard",
     "description": "Centered email verification card with a six-digit code, destination address, and a resend link under the panel.",
+    "sectionCategory": "authentication",
+    "purpose": "Confirms email ownership with a focused code-entry step and a clear resend fallback.",
+    "bestFor": [
+      "account onboarding",
+      "secure application access",
+      "identity verification flows"
+    ],
+    "tone": [
+      "clean",
+      "trustworthy",
+      "focused"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "centered",
+      "alignment": "left"
+    },
+    "slots": [
+      "brand",
+      "headline",
+      "destinationEmail",
+      "verificationCode",
+      "verifyAction",
+      "resendAction"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
     "tags": [
       "auth",
       "dashboard",

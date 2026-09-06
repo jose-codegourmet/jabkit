@@ -7,6 +7,28 @@ export default {
   addedAt: "2026-09-05",
   description:
     "Six-column about block with a large headline, full-width hero image, labeled intro, inline avatar profile, and a philosophy statement.",
+  sectionCategory: "about",
+  purpose:
+    "Introduces an organization through a strong visual manifesto, founder identity, and concise philosophy.",
+  bestFor: ["company story pages", "brand-led homepages", "culture sections"],
+  tone: ["editorial", "premium", "human"],
+  contentDensity: "high",
+  visualWeight: "high",
+  layout: {
+    type: "grid",
+    alignment: "mixed",
+    columns: 6,
+  },
+  slots: ["headline", "heroImage", "introduction", "profile", "philosophy"],
+  capabilities: {
+    supportsImage: true,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: false,
+    supportsDarkMode: true,
+  },
+  recommendedAfter: ["hero", "logos"],
+  recommendedBefore: ["team", "case-studies", "cta"],
   tags: [
     "about",
     "marketing",

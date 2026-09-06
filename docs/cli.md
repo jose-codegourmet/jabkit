@@ -4,11 +4,16 @@
 
 MCP tools are read-only. The CLI is the writer. An installed component must stay pristine until the consumer (or their agent) applies requested local edits in a separate step.
 
-## How to invoke it today
+## How to invoke it
 
-`packages/cli/package.json` is `private: true`, has no `build` script, and points `bin.jabkit` at `./src/index.ts` (raw TypeScript). `npx jabkit`, `pnpm dlx jabkit`, and `bunx jabkit` — the commands the showcase copies — do not resolve to a published package today.
+Published package: `@jabkit/cli`. The `bin` name is `jabkit`, so after install the command is `jabkit`. Consumers run:
 
-The working in-repo invocation is the one `apps/verify` uses:
+```bash
+npx @jabkit/cli init
+npx @jabkit/cli add button
+```
+
+The in-repo invocation `apps/verify` uses is still the TypeScript source:
 
 ```bash
 tsx packages/cli/src/index.ts init
@@ -18,7 +23,7 @@ tsx packages/cli/src/index.ts add --all --force
 
 `apps/verify/package.json` `sync` is `tsx ../../packages/cli/src/index.ts add --all --force`.
 
-The rest of this document describes that program, not a hypothetical published binary.
+`packages/cli` compiles with `pnpm --filter @jabkit/cli build` (`tsc -p tsconfig.build.json`) to `dist/index.js`. `bin.jabkit` points at that file.
 
 ## Commands
 
@@ -94,3 +99,19 @@ Order of operations:
 - `app/page.tsx` is a light/dark harness shell, not a gallery of installed components.
 
 To use it you still need a running showcase that serves `/r/*.json`.
+
+## Release
+
+New components do not require a CLI republish. The CLI fetches whatever the live registry serves.
+
+A new CLI version publishes when `packages/cli/package.json` `version` is not already on npm and that change lands on `main`. `.github/workflows/publish-cli.yml` checks `npm view @jabkit/cli@$VERSION`, then typechecks, builds, and runs `npm publish` from `packages/cli` via trusted publishing (OIDC). There is no `NPM_TOKEN`. The workflow does not run `pnpm check`.
+
+To release:
+
+```bash
+pnpm release:cli patch   # or minor / major
+```
+
+That is `npm version --no-git-tag-version` inside `packages/cli` only. Commit the version bump and push to `main`.
+
+First publish and the npm trusted-publisher form are manual. The package must exist on npm before the GitHub Actions publisher can be attached. On npmjs.com, add a GitHub Actions trusted publisher for org `jose-codegourmet`, repo `jabkit`, workflow filename `publish-cli.yml`, and allow the `npm publish` action. New trusted-publisher configs default to staged publishing unless that box is ticked.

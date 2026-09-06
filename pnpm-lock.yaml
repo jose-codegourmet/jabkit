@@ -123,10 +123,6 @@ importers:
         version: 5.9.3
 
   packages/cli:
-    dependencies:
-      '@jabkit/tokens':
-        specifier: workspace:*
-        version: link:../tokens
     devDependencies:
       '@types/node':
         specifier: ^24.10.1

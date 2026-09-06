@@ -7,6 +7,30 @@ export default {
   addedAt: "2026-09-05",
   description:
     "Milestones ledger with a display heading, labeled columns, and separator rows for title, type, and year.",
+  sectionCategory: "awards",
+  purpose:
+    "Signals longevity and external recognition in a restrained, scannable record of achievements.",
+  bestFor: [
+    "agency portfolios",
+    "institutional histories",
+    "credibility sections",
+  ],
+  tone: ["editorial", "professional"],
+  contentDensity: "medium",
+  visualWeight: "medium",
+  layout: {
+    type: "table",
+    alignment: "left",
+    columns: 3,
+  },
+  slots: ["headline", "awardName", "awardType", "year"],
+  capabilities: {
+    supportsImage: false,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: false,
+    supportsDarkMode: true,
+  },
   tags: [
     "awards",
     "milestones",

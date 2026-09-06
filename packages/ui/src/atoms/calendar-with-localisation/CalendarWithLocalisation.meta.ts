@@ -7,6 +7,30 @@ export default {
   addedAt: "2026-09-06",
   description:
     "Two-month appointment calendar with a language switcher that localizes copy, weekdays, and month titles.",
+  sectionCategory: "calendar",
+  purpose:
+    "Lets users choose an appointment range while demonstrating locale-sensitive dates and interface copy.",
+  bestFor: [
+    "scheduling products",
+    "booking workflows",
+    "date-driven dashboards",
+  ],
+  tone: ["professional", "structured"],
+  contentDensity: "medium",
+  visualWeight: "medium",
+  layout: {
+    type: "grid",
+    alignment: "left",
+    columns: 2,
+  },
+  slots: ["localeSelector", "instructions", "calendarMonths", "selectedRange"],
+  capabilities: {
+    supportsImage: false,
+    supportsVideo: false,
+    supportsForm: true,
+    supportsCTA: false,
+    supportsDarkMode: true,
+  },
   tags: ["calendar", "locale", "date", "range", "atom"],
   dependencies: ["lucide-react"],
   registryDependencies: ["button"],
