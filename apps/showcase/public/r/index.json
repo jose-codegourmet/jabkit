@@ -1242,6 +1242,32 @@
     }
   },
   {
+    "name": "scanner",
+    "displayName": "Scanner",
+    "category": "marketing",
+    "description": "Marketing canvas of interference bands that sweep like an oscilloscope, tinted with semantic tokens and still when motion is reduced.",
+    "tags": [
+      "marketing",
+      "animation",
+      "canvas",
+      "scanner",
+      "background",
+      "hero",
+      "interactive"
+    ],
+    "addedAt": "2026-09-06",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 720
+    }
+  },
+  {
     "name": "splash-cursor",
     "displayName": "SplashCursor",
     "category": "marketing",
