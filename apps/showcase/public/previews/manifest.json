@@ -2769,6 +2769,47 @@
           "format": "webp"
         }
       ]
+    },
+    "liquid-metal-button": {
+      "sourceHash": "195b2027a647f0307d734608df67d7ec41d248d163939bc6fb95a99da21625b4",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "liquid-metal-button.Default.dark.webp",
+          "bytes": 8592,
+          "width": 960,
+          "height": 520,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "liquid-metal-button.Variants.dark.webp",
+          "bytes": 7258,
+          "width": 960,
+          "height": 520,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "liquid-metal-button.ThemeComparison.dark.webp",
+          "bytes": 16022,
+          "width": 960,
+          "height": 520,
+          "format": "webp"
+        }
+      ]
     }
   }
 }

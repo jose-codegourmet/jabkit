@@ -1,0 +1,111 @@
+{
+  "name": "liquid-metal-button",
+  "displayName": "LiquidMetalButton",
+  "version": "1.0.0",
+  "addedAt": "2026-09-06",
+  "description": "Marketing CTA block with a liquid-metal pill, token chrome field, glowing rim, and hover pour. Still when motion is reduced.",
+  "sectionCategory": "cta",
+  "purpose": "Puts a tactile chrome CTA on a landing beat so a primary action feels poured rather than flat.",
+  "bestFor": [
+    "product launches",
+    "hero closers",
+    "campaign moments that need a metallic CTA without leaving semantic tokens"
+  ],
+  "avoidFor": [
+    "dense forms",
+    "task UI where a moving metal field would compete with inputs"
+  ],
+  "tone": [
+    "experimental",
+    "premium",
+    "confident"
+  ],
+  "industries": [
+    "technology",
+    "media",
+    "ecommerce"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "high",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "headline",
+    "primaryAction",
+    "iconAction"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "features"
+  ],
+  "recommendedBefore": [
+    "pricing",
+    "footer"
+  ],
+  "tags": [
+    "cta",
+    "button",
+    "liquid",
+    "metal",
+    "chrome",
+    "marketing",
+    "hover",
+    "landing",
+    "interactive"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 780
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "liquid-metal-button/LiquidMetalButton.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { SparklesIcon } from \"lucide-react\";\nimport { useEffect, useId, useRef } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  LiquidMetalAction,\n  LiquidMetalButtonProps,\n  LiquidMetalCtaProps,\n  LiquidMetalViewMode,\n} from \"./LiquidMetalButton.types\";\n\nconst DEFAULT_EYEBROW = \"Poured chrome\";\nconst DEFAULT_HEADING = \"A button that looks poured, not painted.\";\nconst DEFAULT_DESCRIPTION =\n  \"Token metal rolls under the label. Hover speeds the pour. Quiet when motion is reduced.\";\nconst DEFAULT_LABEL = \"Get Started\";\nconst DEFAULT_VIEW: LiquidMetalViewMode = \"text\";\nconst DEFAULT_SPEED = 0.6;\n\ntype Rgb = readonly [number, number, number];\n\nfunction tokenRgb(node: HTMLElement, name: string): Rgb {\n  const probe = document.createElement(\"span\");\n  probe.style.color = `var(${name})`;\n  probe.style.position = \"absolute\";\n  probe.style.visibility = \"hidden\";\n  probe.style.pointerEvents = \"none\";\n  node.appendChild(probe);\n  const color = getComputedStyle(probe).color;\n  probe.remove();\n  const nums = color.match(/[\\d.]+/g);\n  if (!nums || nums.length < 3) return [128, 128, 128];\n  return [Number(nums[0]), Number(nums[1]), Number(nums[2])];\n}\n\nfunction mix(a: Rgb, b: Rgb, t: number): Rgb {\n  const u = Math.max(0, Math.min(1, t));\n  return [\n    a[0] + (b[0] - a[0]) * u,\n    a[1] + (b[1] - a[1]) * u,\n    a[2] + (b[2] - a[2]) * u,\n  ];\n}\n\nfunction field(nx: number, ny: number, t: number) {\n  return (\n    Math.sin(nx * 7.4 + t * 0.92) * 0.34 +\n    Math.sin(ny * 5.8 - t * 1.08) * 0.28 +\n    Math.sin((nx * 1.6 + ny) * 4.6 + t * 0.58) * 0.22 +\n    Math.sin((nx - ny) * 9.1 - t * 0.41) * 0.16\n  );\n}\n\nfunction MetalCta({\n  label,\n  viewMode = DEFAULT_VIEW,\n  speed = DEFAULT_SPEED,\n  className,\n  onClick,\n  onPointerEnter,\n  onPointerLeave,\n  onPointerDown,\n  onPointerUp,\n  onPointerMove,\n  onKeyDown,\n  ...props\n}: LiquidMetalCtaProps) {\n  const buttonRef = useRef<HTMLButtonElement>(null);\n  const canvasRef = useRef<HTMLCanvasElement>(null);\n  const icon = viewMode === \"icon\";\n\n  useEffect(() => {\n    const button = buttonRef.current;\n    const canvas = canvasRef.current;\n    if (!button || !canvas) return;\n\n    const ctx = canvas.getContext(\"2d\", { alpha: false });\n    if (!ctx) return;\n\n    const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n    let reduceMotion = media.matches;\n    let frame = 0;\n    let width = 0;\n    let height = 0;\n    let dpr = 1;\n    let hovered = false;\n    let pressed = false;\n    let cadence = Math.max(0.12, speed);\n    const origin = performance.now();\n    let pointer: { x: number; y: number } | null = null;\n    const ripples: { x: number; y: number; born: number }[] = [];\n\n    const syncSize = () => {\n      const rect = button.getBoundingClientRect();\n      width = Math.max(1, rect.width);\n      height = Math.max(1, rect.height);\n      dpr = Math.min(2, window.devicePixelRatio || 1);\n      canvas.width = Math.round(width * dpr);\n      canvas.height = Math.round(height * dpr);\n      canvas.style.width = `${width}px`;\n      canvas.style.height = `${height}px`;\n    };\n\n    const localPoint = (event: PointerEvent) => {\n      const rect = button.getBoundingClientRect();\n      return { x: event.clientX - rect.left, y: event.clientY - rect.top };\n    };\n\n    const paint = (now: number) => {\n      const fg = tokenRgb(button, \"--jk-foreground\");\n      const bg = tokenRgb(button, \"--jk-background\");\n      const muted = tokenRgb(button, \"--jk-muted\");\n      const accent = tokenRgb(button, \"--jk-primary\");\n      const ring = tokenRgb(button, \"--jk-ring\");\n      const elapsed = (now - origin) / 1000;\n      const t = reduceMotion ? 0.42 : elapsed * cadence * (hovered ? 1.7 : 1);\n      const cols = Math.max(24, Math.round(width / 2));\n      const rows = Math.max(10, Math.round(height / 2));\n      const cellW = width / cols;\n      const cellH = height / rows;\n      const lightX = pointer && !reduceMotion ? pointer.x / width : 0.32;\n      const lightY = pointer && !reduceMotion ? pointer.y / height : 0.22;\n\n      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);\n      ctx.fillStyle = `rgb(${muted[0]} ${muted[1]} ${muted[2]})`;\n      ctx.fillRect(0, 0, width, height);\n\n      const sample = (nx: number, ny: number) => {\n        let h = field(nx, ny, t);\n        if (pointer && !reduceMotion) {\n          const dx = nx - pointer.x / width;\n          const dy = ny - pointer.y / height;\n          const dist = Math.sqrt(dx * dx + dy * dy);\n          h += Math.exp(-dist * dist * 9) * 0.55;\n        }\n        if (!reduceMotion) {\n          for (const ripple of ripples) {\n            const age = (now - ripple.born) / 520;\n            if (age < 0 || age > 1) continue;\n            const dx = nx - ripple.x / width;\n            const dy = ny - ripple.y / height;\n            const ringDist = Math.abs(\n              Math.sqrt(dx * dx + dy * dy) - age * 0.85,\n            );\n            h += Math.exp(-ringDist * ringDist * 70) * (1 - age) * 0.7;\n          }\n        }\n        return h;\n      };\n\n      for (let row = 0; row < rows; row += 1) {\n        const ny = (row + 0.5) / rows;\n        for (let col = 0; col < cols; col += 1) {\n          const nx = (col + 0.5) / cols;\n          const h = sample(nx, ny);\n          const hx = sample(nx + 0.04, ny) - h;\n          const hy = sample(nx, ny + 0.04) - h;\n          const nxn = -hx;\n          const nyn = -hy;\n          const nzn = 0.55;\n          const inv = 1 / Math.sqrt(nxn * nxn + nyn * nyn + nzn * nzn);\n          const lx = lightX - nx;\n          const ly = lightY - ny;\n          const lz = 0.85;\n          const lin = 1 / Math.sqrt(lx * lx + ly * ly + lz * lz);\n          const diff = Math.max(\n            0,\n            nxn * inv * lx * lin + nyn * inv * ly * lin + nzn * inv * lz * lin,\n          );\n          const spec = diff ** 18;\n          const metal = mix(fg, bg, 0.18 + h * 0.22 + diff * 0.42);\n          const tint = mix(accent, ring, (nx + ny + t * 0.08) % 1);\n          const lit = mix(metal, tint, 0.12 + spec * 0.35);\n          const highlight = mix(lit, bg, spec * 0.72);\n          ctx.fillStyle = `rgb(${highlight[0]} ${highlight[1]} ${highlight[2]})`;\n          ctx.fillRect(col * cellW, row * cellH, cellW + 0.5, cellH + 0.5);\n        }\n      }\n\n      const sheen = ctx.createLinearGradient(0, 0, 0, height);\n      sheen.addColorStop(\n        0,\n        `rgba(${bg[0]}, ${bg[1]}, ${bg[2]}, ${hovered ? 0.38 : 0.22})`,\n      );\n      sheen.addColorStop(0.45, `rgba(${bg[0]}, ${bg[1]}, ${bg[2]}, 0)`);\n      sheen.addColorStop(\n        1,\n        `rgba(${fg[0]}, ${fg[1]}, ${fg[2]}, ${pressed ? 0.45 : 0.18})`,\n      );\n      ctx.fillStyle = sheen;\n      ctx.fillRect(0, 0, width, height);\n    };\n\n    const tick = (now: number) => {\n      const cutoff = now - 600;\n      while (ripples[0] && ripples[0].born < cutoff) ripples.shift();\n      paint(now);\n      frame = window.requestAnimationFrame(tick);\n    };\n\n    const startLoop = () => {\n      if (frame) window.cancelAnimationFrame(frame);\n      if (reduceMotion) {\n        paint(origin);\n        return;\n      }\n      frame = window.requestAnimationFrame(tick);\n    };\n\n    const onMove = (event: PointerEvent) => {\n      if (reduceMotion) return;\n      pointer = localPoint(event);\n    };\n    const onEnter = () => {\n      hovered = true;\n    };\n    const onLeave = () => {\n      hovered = false;\n      pressed = false;\n      pointer = null;\n    };\n    const onDown = (event: PointerEvent) => {\n      pressed = true;\n      if (reduceMotion) return;\n      const point = localPoint(event);\n      ripples.push({ x: point.x, y: point.y, born: performance.now() });\n    };\n    const onUp = () => {\n      pressed = false;\n    };\n    const onMotion = () => {\n      reduceMotion = media.matches;\n      if (reduceMotion) {\n        pointer = null;\n        ripples.length = 0;\n      }\n      startLoop();\n    };\n\n    cadence = Math.max(0.12, speed);\n    syncSize();\n    startLoop();\n\n    const observer = new ResizeObserver(() => {\n      syncSize();\n      if (reduceMotion) paint(origin);\n    });\n    observer.observe(button);\n    media.addEventListener(\"change\", onMotion);\n    button.addEventListener(\"pointermove\", onMove);\n    button.addEventListener(\"pointerenter\", onEnter);\n    button.addEventListener(\"pointerleave\", onLeave);\n    button.addEventListener(\"pointerdown\", onDown);\n    button.addEventListener(\"pointerup\", onUp);\n    button.addEventListener(\"pointercancel\", onUp);\n\n    return () => {\n      observer.disconnect();\n      media.removeEventListener(\"change\", onMotion);\n      button.removeEventListener(\"pointermove\", onMove);\n      button.removeEventListener(\"pointerenter\", onEnter);\n      button.removeEventListener(\"pointerleave\", onLeave);\n      button.removeEventListener(\"pointerdown\", onDown);\n      button.removeEventListener(\"pointerup\", onUp);\n      button.removeEventListener(\"pointercancel\", onUp);\n      if (frame) window.cancelAnimationFrame(frame);\n    };\n  }, [speed]);\n\n  return (\n    <button\n      {...props}\n      aria-label={icon ? label : undefined}\n      className={cn(\n        \"jk-liquid-metal-cta relative isolate inline-flex h-12 shrink-0 items-center justify-center overflow-hidden rounded-full text-sm font-medium whitespace-nowrap text-muted-foreground\",\n        icon ? \"w-12\" : \"min-w-[9.25rem] px-5\",\n        \"shadow-[0_18px_28px_-18px_color-mix(in_oklab,var(--jk-foreground),transparent_55%)]\",\n        \"transition-[transform,box-shadow] duration-200 ease-out\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        \"active:translate-y-px\",\n        className,\n      )}\n      data-slot=\"liquid-metal-cta\"\n      data-view-mode={viewMode}\n      onClick={onClick}\n      onKeyDown={onKeyDown}\n      onPointerDown={onPointerDown}\n      onPointerEnter={onPointerEnter}\n      onPointerLeave={onPointerLeave}\n      onPointerMove={onPointerMove}\n      onPointerUp={onPointerUp}\n      ref={buttonRef}\n      type=\"button\"\n    >\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-liquid-metal-rim pointer-events-none absolute inset-0 rounded-full\"\n      />\n      <span aria-hidden=\"true\" className=\"pointer-events-none absolute inset-0\">\n        <canvas className=\"size-full rounded-full\" ref={canvasRef} />\n      </span>\n      <span className=\"relative z-10 inline-flex items-center justify-center gap-1.5 drop-shadow-[0_1px_1px_color-mix(in_oklab,var(--jk-foreground),transparent_55%)]\">\n        {icon ? <SparklesIcon aria-hidden=\"true\" className=\"size-4\" /> : label}\n      </span>\n    </button>\n  );\n}\n\nexport function LiquidMetalButton({\n  className,\n  eyebrow = DEFAULT_EYEBROW,\n  heading = DEFAULT_HEADING,\n  description = DEFAULT_DESCRIPTION,\n  label = DEFAULT_LABEL,\n  viewMode = DEFAULT_VIEW,\n  actions,\n  speed = DEFAULT_SPEED,\n  onAction,\n  ...props\n}: LiquidMetalButtonProps) {\n  const headingId = useId();\n  const faces: LiquidMetalAction[] =\n    actions && actions.length > 0\n      ? actions\n      : [{ id: \"featured\", label, viewMode }];\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-slot=\"liquid-metal-button\"\n      {...props}\n    >\n      <style href=\"jk-liquid-metal-button\" precedence=\"default\">{`\n        .jk-liquid-metal-rim {\n          box-shadow:\n            inset 0 1px 0 color-mix(in oklab, var(--jk-background), transparent 35%),\n            inset 0 -1px 0 color-mix(in oklab, var(--jk-foreground), transparent 78%),\n            0 0 0 1px color-mix(in oklab, var(--jk-foreground), transparent 72%);\n        }\n        .jk-liquid-metal-cta::after {\n          content: \"\";\n          position: absolute;\n          inset: -10px;\n          z-index: -1;\n          border-radius: 999px;\n          background: conic-gradient(\n            from 0deg,\n            color-mix(in oklab, var(--jk-muted), transparent 18%),\n            color-mix(in oklab, var(--jk-primary), transparent 42%),\n            color-mix(in oklab, var(--jk-ring), transparent 28%),\n            color-mix(in oklab, var(--jk-foreground), transparent 55%),\n            color-mix(in oklab, var(--jk-muted), transparent 18%)\n          );\n          filter: blur(14px);\n          opacity: 0.42;\n        }\n        .dark .jk-liquid-metal-cta::after {\n          opacity: 0.62;\n          filter: blur(16px);\n        }\n        @keyframes jk-liquid-metal-spin {\n          to { transform: rotate(1turn); }\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-liquid-metal-cta {\n            transition: transform 180ms ease, box-shadow 180ms ease;\n          }\n          .jk-liquid-metal-cta::after {\n            animation: jk-liquid-metal-spin 9s linear infinite;\n          }\n          .jk-liquid-metal-cta:hover::after {\n            opacity: 0.78;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-liquid-metal-cta::after {\n            animation: none;\n          }\n          .jk-liquid-metal-cta {\n            transition: none;\n          }\n        }\n      `}</style>\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24\">\n        <header className=\"mx-auto mb-10 max-w-2xl text-center sm:mb-14\">\n          {eyebrow ? (\n            <p className=\"mb-3 text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase\">\n              {eyebrow}\n            </p>\n          ) : null}\n          <h2\n            className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl lg:text-5xl\"\n            id={headingId}\n          >\n            {heading}\n          </h2>\n          {description ? (\n            <p className=\"mt-3 text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7\">\n              {description}\n            </p>\n          ) : null}\n        </header>\n        <div className=\"flex flex-wrap items-center justify-center gap-8\">\n          {faces.map((face) => (\n            <MetalCta\n              key={face.id}\n              label={face.label}\n              onClick={() => onAction?.(face)}\n              speed={speed}\n              viewMode={face.viewMode ?? DEFAULT_VIEW}\n            />\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "liquid-metal-button/LiquidMetalButton.types.ts",
+      "type": "types",
+      "content": "import type { ButtonHTMLAttributes, HTMLAttributes } from \"react\";\n\nexport type LiquidMetalViewMode = \"text\" | \"icon\";\n\nexport interface LiquidMetalAction {\n  id: string;\n  label: string;\n  viewMode?: LiquidMetalViewMode;\n}\n\nexport interface LiquidMetalButtonProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"onClick\"> {\n  eyebrow?: string;\n  heading?: string;\n  description?: string;\n  label?: string;\n  viewMode?: LiquidMetalViewMode;\n  actions?: LiquidMetalAction[];\n  speed?: number;\n  onAction?: (action: LiquidMetalAction) => void;\n}\n\nexport interface LiquidMetalCtaProps\n  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, \"children\"> {\n  label: string;\n  viewMode?: LiquidMetalViewMode;\n  speed?: number;\n}\n"
+    },
+    {
+      "path": "liquid-metal-button/index.ts",
+      "type": "index",
+      "content": "export { LiquidMetalButton } from \"./LiquidMetalButton\";\nexport type * from \"./LiquidMetalButton.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <LiquidMetalButton {...liquidMetalButtonMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <LiquidMetalButton {...liquidMetalButtonMocks.alternate} />\n    </div>"
+    }
+  ]
+}
