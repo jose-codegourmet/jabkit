@@ -181,12 +181,12 @@ function MetalCta({
       const sheen = ctx.createLinearGradient(0, 0, 0, height);
       sheen.addColorStop(
         0,
-        `color-mix(in oklab, var(--jk-background), transparent ${hovered ? 62 : 78}%)`,
+        `rgba(${bg[0]}, ${bg[1]}, ${bg[2]}, ${hovered ? 0.38 : 0.22})`,
       );
-      sheen.addColorStop(0.45, "transparent");
+      sheen.addColorStop(0.45, `rgba(${bg[0]}, ${bg[1]}, ${bg[2]}, 0)`);
       sheen.addColorStop(
         1,
-        `color-mix(in oklab, var(--jk-foreground), transparent ${pressed ? 55 : 82}%)`,
+        `rgba(${fg[0]}, ${fg[1]}, ${fg[2]}, ${pressed ? 0.45 : 0.18})`,
       );
       ctx.fillStyle = sheen;
       ctx.fillRect(0, 0, width, height);
