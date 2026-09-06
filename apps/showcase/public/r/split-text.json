@@ -1,0 +1,60 @@
+{
+  "name": "split-text",
+  "displayName": "SplitText",
+  "version": "1.0.0",
+  "addedAt": "2026-09-06",
+  "description": "Marketing headline that splits into characters or words and staggers each unit into view, honoring prefers-reduced-motion.",
+  "tags": [
+    "marketing",
+    "text",
+    "animation",
+    "headline",
+    "hero",
+    "split",
+    "stagger"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 640
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "split-text/SplitText.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { type CSSProperties, useEffect, useId, useRef, useState } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  SplitTextAlign,\n  SplitTextHeading,\n  SplitTextMode,\n  SplitTextProps,\n} from \"./SplitText.types\";\n\nconst defaults = {\n  eyebrow: \"Launch copy\",\n  text: \"Make every headline land, letter by letter.\",\n  description:\n    \"A marketing headline that splits into glyphs, then rises into place with a staggered ease.\",\n  as: \"h1\" as SplitTextHeading,\n  splitBy: \"chars\" as SplitTextMode,\n  delay: 80,\n  stagger: 28,\n  duration: 720,\n  threshold: 0.35,\n  rootMargin: \"0px 0px -8% 0px\",\n  align: \"center\" as SplitTextAlign,\n  replay: false,\n};\n\ntype Glyph = { key: string; value: string };\n\ntype Piece =\n  | { kind: \"break\"; key: string }\n  | { kind: \"space\"; key: string; value: string }\n  | { kind: \"word\"; key: string; chars: Glyph[] };\n\nfunction splitGraphemes(value: string): string[] {\n  if (typeof Intl !== \"undefined\" && \"Segmenter\" in Intl) {\n    const segmenter = new Intl.Segmenter(undefined, {\n      granularity: \"grapheme\",\n    });\n    return [...segmenter.segment(value)].map((part) => part.segment);\n  }\n  return Array.from(value);\n}\n\nfunction glyphStyle(delayMs: number, durationMs: number) {\n  return {\n    \"--jk-split-delay\": `${delayMs}ms`,\n    \"--jk-split-duration\": `${durationMs}ms`,\n  } as CSSProperties;\n}\n\nfunction tokenize(text: string): Piece[] {\n  const pieces: Piece[] = [];\n  let nextKey = 0;\n  const key = (prefix: string) => `${prefix}-${nextKey++}`;\n  const lines = text.split(\"\\n\");\n  for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {\n    const parts = lines[lineIndex].split(/(\\s+)/);\n    for (const part of parts) {\n      if (!part) continue;\n      if (/^\\s+$/.test(part)) {\n        pieces.push({\n          kind: \"space\",\n          key: key(\"space\"),\n          value: part.replace(/ /g, \"\\u00a0\"),\n        });\n        continue;\n      }\n      pieces.push({\n        kind: \"word\",\n        key: key(\"word\"),\n        chars: splitGraphemes(part).map((value) => ({\n          key: key(\"glyph\"),\n          value,\n        })),\n      });\n    }\n    if (lineIndex < lines.length - 1) {\n      pieces.push({ kind: \"break\", key: key(\"break\") });\n    }\n  }\n  return pieces;\n}\n\nconst alignClass: Record<SplitTextAlign, string> = {\n  left: \"items-start text-left\",\n  center: \"items-center text-center\",\n  right: \"items-end text-right\",\n};\n\nexport function SplitText({\n  className,\n  text = defaults.text,\n  eyebrow = defaults.eyebrow,\n  description = defaults.description,\n  as = defaults.as,\n  splitBy = defaults.splitBy,\n  delay = defaults.delay,\n  stagger = defaults.stagger,\n  duration = defaults.duration,\n  threshold = defaults.threshold,\n  rootMargin = defaults.rootMargin,\n  align = defaults.align,\n  replay = defaults.replay,\n  onAnimationComplete,\n  ...props\n}: SplitTextProps) {\n  const headingId = useId();\n  const rootRef = useRef<HTMLElement>(null);\n  const completeRef = useRef(onAnimationComplete);\n  completeRef.current = onAnimationComplete;\n  const [inView, setInView] = useState(false);\n  const [reduceMotion, setReduceMotion] = useState(false);\n  const pieces = tokenize(text);\n  const Heading = as;\n  const unitCount = pieces.reduce((count, piece) => {\n    if (piece.kind !== \"word\") return count;\n    return count + (splitBy === \"words\" ? 1 : piece.chars.length);\n  }, 0);\n\n  useEffect(() => {\n    const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n    const update = () => setReduceMotion(media.matches);\n    update();\n    media.addEventListener(\"change\", update);\n    return () => media.removeEventListener(\"change\", update);\n  }, []);\n\n  useEffect(() => {\n    const node = rootRef.current;\n    if (!node) return;\n    if (reduceMotion) {\n      setInView(true);\n      completeRef.current?.();\n      return;\n    }\n    const observer = new IntersectionObserver(\n      ([entry]) => {\n        if (entry.isIntersecting) {\n          setInView(true);\n          if (!replay) observer.disconnect();\n          return;\n        }\n        if (replay) setInView(false);\n      },\n      { threshold, rootMargin },\n    );\n    observer.observe(node);\n    return () => observer.disconnect();\n  }, [reduceMotion, replay, rootMargin, threshold]);\n\n  useEffect(() => {\n    if (!inView || reduceMotion || unitCount === 0) return;\n    const total = delay + Math.max(0, unitCount - 1) * stagger + duration;\n    const timer = window.setTimeout(() => completeRef.current?.(), total);\n    return () => window.clearTimeout(timer);\n  }, [delay, duration, inView, reduceMotion, stagger, unitCount]);\n\n  let unitIndex = 0;\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-in-view={inView ? \"true\" : \"false\"}\n      data-slot=\"split-text\"\n      {...props}\n      ref={rootRef}\n    >\n      <style href=\"jk-split-text\" precedence=\"default\">{`\n        @keyframes jk-split-text-rise {\n          from {\n            opacity: 0;\n            transform: translate3d(0, 108%, 0);\n          }\n          to {\n            opacity: 1;\n            transform: translate3d(0, 0, 0);\n          }\n        }\n        [data-slot=\"split-text\"] [data-slot=\"split-text-glyph\"] {\n          display: inline-block;\n          opacity: 0;\n          transform: translate3d(0, 108%, 0);\n        }\n        [data-slot=\"split-text\"][data-in-view=\"true\"] [data-slot=\"split-text-glyph\"] {\n          animation: jk-split-text-rise var(--jk-split-duration, 720ms)\n            cubic-bezier(0.16, 1, 0.3, 1) both;\n          animation-delay: var(--jk-split-delay, 0ms);\n        }\n        @media (prefers-reduced-motion: reduce) {\n          [data-slot=\"split-text\"] [data-slot=\"split-text-glyph\"] {\n            animation: none !important;\n            opacity: 1;\n            transform: none;\n          }\n        }\n      `}</style>\n      <div\n        className={cn(\n          \"mx-auto flex w-full max-w-5xl flex-col gap-5 px-6 py-20 sm:px-10 sm:py-24\",\n          alignClass[align],\n        )}\n      >\n        {eyebrow ? (\n          <p className=\"text-xs font-medium tracking-[0.22em] text-muted-foreground uppercase\">\n            {eyebrow}\n          </p>\n        ) : null}\n        <Heading\n          className=\"max-w-4xl text-4xl leading-[1.08] font-semibold tracking-[-0.05em] text-balance sm:text-5xl lg:text-6xl\"\n          id={headingId}\n        >\n          <span className=\"sr-only\">{text}</span>\n          <span aria-hidden=\"true\">\n            {pieces.map((piece) => {\n              if (piece.kind === \"break\") {\n                return <br key={piece.key} />;\n              }\n              if (piece.kind === \"space\") {\n                return <span key={piece.key}>{piece.value}</span>;\n              }\n              if (splitBy === \"words\") {\n                const index = unitIndex;\n                unitIndex += 1;\n                return (\n                  <span\n                    className=\"inline-block overflow-hidden align-bottom\"\n                    data-slot=\"split-text-unit\"\n                    key={piece.key}\n                  >\n                    <span\n                      data-slot=\"split-text-glyph\"\n                      style={glyphStyle(delay + index * stagger, duration)}\n                    >\n                      {piece.chars.map((glyph) => glyph.value).join(\"\")}\n                    </span>\n                  </span>\n                );\n              }\n              return (\n                <span\n                  className=\"inline-block whitespace-nowrap\"\n                  data-slot=\"split-text-word\"\n                  key={piece.key}\n                >\n                  {piece.chars.map((glyph) => {\n                    const index = unitIndex;\n                    unitIndex += 1;\n                    return (\n                      <span\n                        className=\"inline-block overflow-hidden align-bottom\"\n                        data-slot=\"split-text-unit\"\n                        key={glyph.key}\n                      >\n                        <span\n                          data-slot=\"split-text-glyph\"\n                          style={glyphStyle(delay + index * stagger, duration)}\n                        >\n                          {glyph.value}\n                        </span>\n                      </span>\n                    );\n                  })}\n                </span>\n              );\n            })}\n          </span>\n        </Heading>\n        {description ? (\n          <p className=\"max-w-xl text-base leading-7 text-muted-foreground sm:text-lg\">\n            {description}\n          </p>\n        ) : null}\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "split-text/SplitText.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type SplitTextAlign = \"left\" | \"center\" | \"right\";\nexport type SplitTextMode = \"chars\" | \"words\";\nexport type SplitTextHeading = \"h1\" | \"h2\" | \"h3\" | \"p\" | \"div\";\n\nexport interface SplitTextProps extends HTMLAttributes<HTMLElement> {\n  text?: string;\n  eyebrow?: string;\n  description?: string;\n  as?: SplitTextHeading;\n  splitBy?: SplitTextMode;\n  delay?: number;\n  stagger?: number;\n  duration?: number;\n  threshold?: number;\n  rootMargin?: string;\n  align?: SplitTextAlign;\n  replay?: boolean;\n  onAnimationComplete?: () => void;\n}\n"
+    },
+    {
+      "path": "split-text/index.ts",
+      "type": "index",
+      "content": "export { SplitText } from \"./SplitText\";\nexport type * from \"./SplitText.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <SplitText {...splitTextMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <SplitText {...splitTextMocks.alternate} />\n    </div>"
+    }
+  ]
+}
