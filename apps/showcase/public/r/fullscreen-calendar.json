@@ -41,7 +41,7 @@
     {
       "path": "fullscreen-calendar/index.ts",
       "type": "index",
-      "content": "export { FullscreenCalendar } from \"./FullscreenCalendar\";\nexport type {\n  FullscreenCalendarDay,\n  FullscreenCalendarEvent,\n  FullscreenCalendarProps,\n} from \"./FullscreenCalendar.types\";\n"
+      "content": "export { FullscreenCalendar } from \"./FullscreenCalendar\";\nexport type * from \"./FullscreenCalendar.types\";\n"
     },
     {
       "path": "lib/cn.ts",
