@@ -17,7 +17,6 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: 24
-          registry-url: https://registry.npmjs.org
           package-manager-cache: false
 
       - id: check
@@ -25,6 +24,10 @@ jobs:
         run: |
           NAME=$(node -p "require('./packages/cli/package.json').name")
           VERSION=$(node -p "require('./packages/cli/package.json').version")
+          if ! npm view "$NAME" name >/dev/null 2>&1; then
+            echo "::error::$NAME is not on npm yet. Create the @jabkit org, run npm login, publish 0.1.0 from packages/cli on your machine, then attach a GitHub Actions trusted publisher (workflow publish-cli.yml, allow npm publish)."
+            exit 1
+          fi
           if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
             echo "Already published: $NAME@$VERSION"
             echo "publish=false" >> "$GITHUB_OUTPUT"

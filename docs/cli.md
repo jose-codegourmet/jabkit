@@ -114,4 +114,6 @@ pnpm release:cli patch   # or minor / major
 
 That is `npm version --no-git-tag-version` inside `packages/cli` only. Commit the version bump and push to `main`.
 
-First publish and the npm trusted-publisher form are manual. The package must exist on npm before the GitHub Actions publisher can be attached. On npmjs.com, add a GitHub Actions trusted publisher for org `jose-codegourmet`, repo `jabkit`, workflow filename `publish-cli.yml`, and allow the `npm publish` action. New trusted-publisher configs default to staged publishing unless that box is ticked.
+GitHub cannot do the first publish. Trusted publishing is attached on an existing package, so `0.1.0` must be published from a laptop after `npm login`. The workflow also must not set `registry-url` / `NODE_AUTH_TOKEN`; a static token blocks the OIDC handshake and npm returns `E404`.
+
+On npmjs.com, add a GitHub Actions trusted publisher for org `jose-codegourmet`, repo `jabkit`, workflow filename `publish-cli.yml`, and allow the `npm publish` action. New trusted-publisher configs default to staged publishing unless that box is ticked.
