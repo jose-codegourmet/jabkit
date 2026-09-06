@@ -1,0 +1,110 @@
+{
+  "name": "spotlight-card",
+  "displayName": "SpotlightCard",
+  "version": "1.0.0",
+  "addedAt": "2026-09-06",
+  "description": "Marketing feature cards with a radial spotlight that tracks the pointer, using semantic tokens in light and dark.",
+  "sectionCategory": "features",
+  "purpose": "Draws attention to a small set of feature panels by lighting the surface under the pointer, without leaving semantic tokens.",
+  "bestFor": [
+    "landing feature grids",
+    "product capability rows",
+    "studio or tool marketing pages"
+  ],
+  "avoidFor": [
+    "dense documentation",
+    "forms or tables where a moving highlight would compete with controls"
+  ],
+  "tone": [
+    "modern",
+    "confident",
+    "professional"
+  ],
+  "industries": [
+    "technology",
+    "saas",
+    "media"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "grid",
+    "alignment": "center",
+    "columns": 3
+  },
+  "slots": [
+    "headline",
+    "content",
+    "featureVisuals"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "logos"
+  ],
+  "recommendedBefore": [
+    "pricing",
+    "cta",
+    "testimonials"
+  ],
+  "tags": [
+    "spotlight",
+    "card",
+    "hover",
+    "pointer",
+    "marketing",
+    "features",
+    "interactive",
+    "landing"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "spotlight-card/SpotlightCard.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { type ReactNode, useEffect, useId, useRef } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  SpotlightCardItem,\n  SpotlightCardProps,\n} from \"./SpotlightCard.types\";\n\nconst DEFAULT_EYEBROW = \"Pointer light\";\nconst DEFAULT_HEADING = \"A lamp that stays on the work.\";\nconst DEFAULT_DESCRIPTION =\n  \"Radial light tracks the pointer across each panel. Quiet when motion is reduced.\";\nconst DEFAULT_KICKER = \"Signal\";\nconst DEFAULT_TITLE = \"Lock on the active panel\";\nconst DEFAULT_BODY =\n  \"The highlight follows your hand so the card you are reading is obvious without a heavy border.\";\nconst DEFAULT_SPOTLIGHT_SIZE = 18;\n\nfunction CardCopy({ item }: { item: SpotlightCardItem }) {\n  return (\n    <>\n      {item.kicker ? (\n        <p className=\"text-[11px] font-medium tracking-[0.18em] text-muted-foreground uppercase\">\n          {item.kicker}\n        </p>\n      ) : null}\n      <p className=\"mt-4 text-xl font-semibold tracking-tight text-balance sm:text-2xl\">\n        {item.title}\n      </p>\n      {item.body ? (\n        <p className=\"mt-3 text-sm leading-6 text-muted-foreground sm:leading-7\">\n          {item.body}\n        </p>\n      ) : null}\n    </>\n  );\n}\n\nfunction SpotlightPanel({\n  size,\n  children,\n}: {\n  size: number;\n  children: ReactNode;\n}) {\n  const stageRef = useRef<HTMLElement>(null);\n\n  useEffect(() => {\n    const stage = stageRef.current;\n    if (!stage) return;\n\n    const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n    let reduceMotion = media.matches;\n    let frame = 0;\n    let pointer: { x: number; y: number } | null = null;\n    let x = 0.5;\n    let y = 0.5;\n    let intensity = 0.32;\n    let last = performance.now();\n\n    const apply = () => {\n      stage.style.setProperty(\"--jk-spot-x\", String(x));\n      stage.style.setProperty(\"--jk-spot-y\", String(y));\n      stage.style.setProperty(\"--jk-spot-i\", String(intensity));\n    };\n\n    const tick = (now: number) => {\n      const dt = Math.min(0.032, (now - last) / 1000);\n      last = now;\n      const targetX = pointer ? pointer.x : 0.5;\n      const targetY = pointer ? pointer.y : 0.5;\n      const targetI = reduceMotion ? 0.2 : pointer ? 0.92 : 0.34;\n\n      if (reduceMotion) {\n        x = 0.5;\n        y = 0.5;\n        intensity = 0.2;\n      } else {\n        x += (targetX - x) * Math.min(1, dt * 12);\n        y += (targetY - y) * Math.min(1, dt * 12);\n        intensity += (targetI - intensity) * Math.min(1, dt * 8);\n      }\n\n      apply();\n      frame = window.requestAnimationFrame(tick);\n    };\n\n    const local = (event: PointerEvent) => {\n      const rect = stage.getBoundingClientRect();\n      return {\n        x: Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width)),\n        y: Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height)),\n      };\n    };\n\n    const onMove = (event: PointerEvent) => {\n      if (reduceMotion) return;\n      pointer = local(event);\n    };\n    const onLeave = () => {\n      pointer = null;\n    };\n    const onMotion = () => {\n      reduceMotion = media.matches;\n      if (reduceMotion) pointer = null;\n    };\n\n    frame = window.requestAnimationFrame(tick);\n    media.addEventListener(\"change\", onMotion);\n    stage.addEventListener(\"pointermove\", onMove);\n    stage.addEventListener(\"pointerleave\", onLeave);\n\n    return () => {\n      window.cancelAnimationFrame(frame);\n      media.removeEventListener(\"change\", onMotion);\n      stage.removeEventListener(\"pointermove\", onMove);\n      stage.removeEventListener(\"pointerleave\", onLeave);\n    };\n  }, []);\n\n  return (\n    <article\n      className=\"jk-spotlight-card relative isolate h-full overflow-hidden rounded-[calc(var(--radius)+0.35rem)] border border-border bg-card p-6 text-card-foreground sm:p-7\"\n      data-slot=\"spotlight-card-panel\"\n      ref={stageRef}\n      style={{ [\"--jk-spot-size\" as string]: `${size}rem` }}\n    >\n      <div\n        aria-hidden=\"true\"\n        className=\"jk-spotlight-card-glow pointer-events-none absolute inset-0\"\n      />\n      <div\n        aria-hidden=\"true\"\n        className=\"jk-spotlight-card-rim pointer-events-none absolute inset-0 rounded-[inherit]\"\n      />\n      <div className=\"relative z-10\">{children}</div>\n    </article>\n  );\n}\n\nexport function SpotlightCard({\n  className,\n  eyebrow = DEFAULT_EYEBROW,\n  heading = DEFAULT_HEADING,\n  description = DEFAULT_DESCRIPTION,\n  kicker = DEFAULT_KICKER,\n  title = DEFAULT_TITLE,\n  body = DEFAULT_BODY,\n  cards,\n  spotlightSize = DEFAULT_SPOTLIGHT_SIZE,\n  children,\n  ...props\n}: SpotlightCardProps) {\n  const headingId = useId();\n  const faces =\n    cards && cards.length > 0\n      ? cards\n      : [{ id: \"featured\", kicker, title, body }];\n  const custom = Boolean(children) && faces.length === 1;\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-slot=\"spotlight-card\"\n      {...props}\n    >\n      <style href=\"jk-spotlight-card\" precedence=\"default\">{`\n        .jk-spotlight-card {\n          --jk-spot-x: 0.5;\n          --jk-spot-y: 0.5;\n          --jk-spot-i: 0.34;\n        }\n        .jk-spotlight-card-glow {\n          background: radial-gradient(\n            var(--jk-spot-size, 18rem) circle at calc(var(--jk-spot-x) * 100%) calc(var(--jk-spot-y) * 100%),\n            color-mix(in oklab, var(--jk-primary), transparent 52%),\n            transparent 58%\n          );\n          opacity: var(--jk-spot-i);\n          mix-blend-mode: multiply;\n        }\n        .dark .jk-spotlight-card-glow {\n          mix-blend-mode: screen;\n          background: radial-gradient(\n            var(--jk-spot-size, 18rem) circle at calc(var(--jk-spot-x) * 100%) calc(var(--jk-spot-y) * 100%),\n            color-mix(in oklab, var(--jk-primary), transparent 38%),\n            transparent 62%\n          );\n        }\n        .jk-spotlight-card-rim {\n          box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--jk-border), transparent 20%);\n          background: radial-gradient(\n            18rem circle at calc(var(--jk-spot-x) * 100%) calc(var(--jk-spot-y) * 100%),\n            color-mix(in oklab, var(--jk-ring), transparent 72%),\n            transparent 42%\n          );\n          opacity: calc(var(--jk-spot-i) * 0.55);\n          mix-blend-mode: overlay;\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-spotlight-card-glow,\n          .jk-spotlight-card-rim {\n            background: radial-gradient(\n              16rem circle at 50% 50%,\n              color-mix(in oklab, var(--jk-primary), transparent 62%),\n              transparent 58%\n            );\n            opacity: 0.22;\n          }\n        }\n      `}</style>\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24\">\n        <header className=\"mx-auto mb-10 max-w-2xl text-center sm:mb-14\">\n          {eyebrow ? (\n            <p className=\"mb-3 text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase\">\n              {eyebrow}\n            </p>\n          ) : null}\n          <h2\n            className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl lg:text-5xl\"\n            id={headingId}\n          >\n            {heading}\n          </h2>\n          {description ? (\n            <p className=\"mt-3 text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7\">\n              {description}\n            </p>\n          ) : null}\n        </header>\n        <div\n          className={cn(\n            \"grid items-stretch gap-5 sm:gap-6\",\n            faces.length > 2\n              ? \"md:grid-cols-3\"\n              : faces.length === 2\n                ? \"md:grid-cols-2\"\n                : \"grid-cols-1\",\n          )}\n        >\n          {faces.map((face) => (\n            <SpotlightPanel key={face.id} size={spotlightSize}>\n              {custom ? children : <CardCopy item={face} />}\n            </SpotlightPanel>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "spotlight-card/SpotlightCard.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport interface SpotlightCardItem {\n  id: string;\n  kicker?: string;\n  title: string;\n  body?: string;\n}\n\nexport interface SpotlightCardProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  eyebrow?: string;\n  heading?: string;\n  description?: string;\n  kicker?: string;\n  title?: string;\n  body?: string;\n  cards?: SpotlightCardItem[];\n  spotlightSize?: number;\n  children?: ReactNode;\n}\n"
+    },
+    {
+      "path": "spotlight-card/index.ts",
+      "type": "index",
+      "content": "export { SpotlightCard } from \"./SpotlightCard\";\nexport type * from \"./SpotlightCard.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <SpotlightCard {...spotlightCardMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <SpotlightCard {...spotlightCardMocks.alternate} />\n    </div>"
+    }
+  ]
+}
