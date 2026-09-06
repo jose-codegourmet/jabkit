@@ -1,0 +1,64 @@
+{
+  "name": "ember-footer-cta",
+  "displayName": "EmberFooterCta",
+  "version": "1.0.0",
+  "addedAt": "2026-09-06",
+  "description": "Closing marketing footer with a waitlist form, serif headline, slim link row, and a token-based ember bed along the baseline.",
+  "tags": [
+    "footer",
+    "cta",
+    "marketing",
+    "waitlist",
+    "newsletter",
+    "form",
+    "landing"
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "button",
+    "input",
+    "label"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 780
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "ember-footer-cta/EmberFooterCta.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { type FormEvent, useId } from \"react\";\nimport { Button } from \"@/atoms/button\";\nimport { Input } from \"@/atoms/input\";\nimport { Label } from \"@/atoms/label\";\nimport { cn } from \"@/lib/cn\";\nimport type { EmberFooterCtaProps } from \"./EmberFooterCta.types\";\n\nconst defaults = {\n  eyebrow: \"Last call\",\n  title: \"Join the waitlist.\",\n  description: \"Leave a work email. We will hold your desk.\",\n  emailLabel: \"Work email\",\n  emailPlaceholder: \"you@studio.work\",\n  submitLabel: \"Get early access\",\n  brand: \"Harbor, est. 2026\",\n  links: [\n    { label: \"Changelog\", href: \"#changelog\" },\n    { label: \"Twitter\", href: \"#twitter\" },\n    { label: \"GitHub\", href: \"#github\" },\n  ],\n  footnote: \"No spam, one launch email\",\n  showEmber: true,\n};\n\nconst SPARK_TONES = [\n  \"color-mix(in oklab, var(--jk-primary) 88%, transparent)\",\n  \"color-mix(in oklab, var(--jk-chart-4) 82%, transparent)\",\n  \"color-mix(in oklab, var(--jk-warning) 78%, transparent)\",\n] as const;\n\ntype Spark = {\n  id: string;\n  left: string;\n  bottom: string;\n  size: number;\n  delay: string;\n  duration: string;\n  opacity: number;\n  tone: (typeof SPARK_TONES)[number];\n};\n\nfunction buildSparks(count: number): Spark[] {\n  const sparks: Spark[] = [];\n  for (let index = 0; index < count; index++) {\n    const left = (index * 137.508) % 100;\n    const dist = Math.abs(left - 50) / 50;\n    const ridge = (1 - dist * dist) * 42 + 4;\n    const jitter = ((index * 53) % 17) / 17;\n    const bottom = jitter * ridge;\n    const size = 2 + (index % 5);\n    sparks.push({\n      id: `${left.toFixed(2)}-${bottom.toFixed(2)}-${size}-${index}`,\n      left: `${left.toFixed(2)}%`,\n      bottom: `${bottom.toFixed(2)}%`,\n      size,\n      delay: `${((index * 0.17) % 3.6).toFixed(2)}s`,\n      duration: `${(3.4 + (index % 5) * 0.45).toFixed(2)}s`,\n      opacity: 0.35 + ((index * 13) % 50) / 100,\n      tone: SPARK_TONES[index % SPARK_TONES.length],\n    });\n  }\n  return sparks;\n}\n\nconst SPARKS = buildSparks(72);\n\nfunction EmberBed() {\n  return (\n    <div\n      aria-hidden=\"true\"\n      className=\"pointer-events-none absolute inset-x-0 bottom-0 h-[42%] overflow-hidden\"\n    >\n      <div className=\"absolute inset-x-[-12%] bottom-[-28%] h-[90%] rounded-[100%] bg-[radial-gradient(ellipse_at_center,color-mix(in_oklab,var(--jk-primary)_42%,transparent),transparent_68%)] blur-2xl\" />\n      <div className=\"absolute inset-x-[8%] bottom-[-22%] h-[70%] rounded-[100%] bg-[radial-gradient(ellipse_at_center,color-mix(in_oklab,var(--jk-chart-4)_36%,transparent),transparent_72%)] blur-xl\" />\n      <div className=\"absolute inset-x-[22%] bottom-[-18%] h-[48%] rounded-[100%] bg-[radial-gradient(ellipse_at_center,color-mix(in_oklab,var(--jk-warning)_22%,transparent),transparent_70%)] blur-lg\" />\n      {SPARKS.map((spark) => (\n        <span\n          key={spark.id}\n          className=\"jk-ember-footer-cta-spark absolute rounded-[1px]\"\n          style={{\n            left: spark.left,\n            bottom: spark.bottom,\n            width: spark.size,\n            height: spark.size,\n            opacity: spark.opacity,\n            backgroundColor: spark.tone,\n            animationDelay: spark.delay,\n            animationDuration: spark.duration,\n            boxShadow: `0 0 ${spark.size * 2}px ${spark.tone}`,\n          }}\n        />\n      ))}\n    </div>\n  );\n}\n\nexport function EmberFooterCta({\n  className,\n  eyebrow = defaults.eyebrow,\n  title = defaults.title,\n  description = defaults.description,\n  emailLabel = defaults.emailLabel,\n  emailPlaceholder = defaults.emailPlaceholder,\n  submitLabel = defaults.submitLabel,\n  onSubscribe,\n  onSubmit,\n  brand = defaults.brand,\n  links = defaults.links,\n  footnote = defaults.footnote,\n  showEmber = defaults.showEmber,\n  ...props\n}: EmberFooterCtaProps) {\n  const headingId = useId();\n  const emailId = useId();\n\n  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {\n    onSubmit?.(event);\n    if (event.defaultPrevented) return;\n    event.preventDefault();\n    const email = String(\n      new FormData(event.currentTarget).get(\"email\") ?? \"\",\n    ).trim();\n    onSubscribe?.(email);\n  };\n\n  return (\n    <section\n      data-slot=\"ember-footer-cta\"\n      aria-labelledby={headingId}\n      className={cn(\n        \"relative isolate overflow-hidden bg-background text-foreground\",\n        className,\n      )}\n      {...props}\n    >\n      <style href=\"jk-ember-footer-cta\" precedence=\"default\">{`\n        @keyframes jk-ember-footer-cta-rise {\n          0%, 100% { transform: translateY(0); opacity: 0.35; }\n          50% { transform: translateY(-10px); opacity: 0.9; }\n        }\n        .jk-ember-footer-cta-spark {\n          animation: jk-ember-footer-cta-rise 4s ease-in-out infinite;\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-ember-footer-cta-spark { animation: none; }\n        }\n      `}</style>\n      {showEmber ? <EmberBed /> : null}\n\n      <div className=\"relative mx-auto flex min-h-[28rem] max-w-5xl flex-col justify-between gap-16 px-5 pt-20 pb-8 sm:px-8 sm:pt-24 sm:pb-10 lg:px-10\">\n        <div className=\"mx-auto flex w-full max-w-xl flex-col items-center text-center\">\n          {eyebrow ? (\n            <p className=\"text-[11px] font-medium tracking-[0.2em] text-muted-foreground uppercase\">\n              {eyebrow}\n            </p>\n          ) : null}\n          <h2\n            id={headingId}\n            className=\"mt-4 font-serif text-4xl leading-[1.12] font-normal tracking-[-0.03em] text-balance sm:text-5xl lg:text-6xl\"\n          >\n            {title}\n          </h2>\n          {description ? (\n            <p className=\"mt-4 max-w-md text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7\">\n              {description}\n            </p>\n          ) : null}\n\n          <form\n            className=\"mt-8 flex w-full max-w-lg flex-col gap-3 sm:flex-row sm:items-stretch\"\n            onSubmit={handleSubmit}\n          >\n            <div className=\"min-w-0 flex-1\">\n              <Label htmlFor={emailId} className=\"sr-only\">\n                {emailLabel}\n              </Label>\n              <Input\n                id={emailId}\n                name=\"email\"\n                type=\"email\"\n                required\n                autoComplete=\"email\"\n                placeholder={emailPlaceholder}\n                className=\"h-12 rounded-[--radius] border-input bg-card px-4 text-sm md:text-sm\"\n              />\n            </div>\n            <Button\n              type=\"submit\"\n              size=\"lg\"\n              className=\"h-12 shrink-0 rounded-[--radius] border-transparent bg-[linear-gradient(135deg,var(--jk-warning),var(--jk-destructive))] text-destructive-foreground shadow-[0_16px_32px_-20px_color-mix(in_oklab,var(--jk-destructive),transparent_25%)] hover:brightness-110\"\n            >\n              {submitLabel}\n            </Button>\n          </form>\n        </div>\n\n        <div className=\"grid gap-4 border-t border-border/60 pt-6 text-xs tracking-wide text-muted-foreground sm:grid-cols-3 sm:items-center\">\n          <p className=\"text-center sm:text-left\">{brand}</p>\n          {links.length > 0 ? (\n            <nav\n              aria-label=\"Footer\"\n              className=\"flex flex-wrap items-center justify-center gap-x-5 gap-y-2\"\n            >\n              {links.map((link) => (\n                <a\n                  key={`${link.href}-${link.label}`}\n                  href={link.href}\n                  className=\"transition-colors hover:text-foreground focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n                >\n                  {link.label}\n                </a>\n              ))}\n            </nav>\n          ) : (\n            <span />\n          )}\n          <p className=\"text-center sm:text-right\">{footnote}</p>\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "ember-footer-cta/EmberFooterCta.types.ts",
+      "type": "types",
+      "content": "import type { FormEventHandler, HTMLAttributes } from \"react\";\n\nexport interface EmberFooterCtaLink {\n  label: string;\n  href: string;\n}\n\nexport interface EmberFooterCtaProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\" | \"onSubmit\"> {\n  eyebrow?: string;\n  title?: string;\n  description?: string;\n  emailLabel?: string;\n  emailPlaceholder?: string;\n  submitLabel?: string;\n  onSubscribe?: (email: string) => void;\n  onSubmit?: FormEventHandler<HTMLFormElement>;\n  brand?: string;\n  links?: EmberFooterCtaLink[];\n  footnote?: string;\n  showEmber?: boolean;\n}\n"
+    },
+    {
+      "path": "ember-footer-cta/index.ts",
+      "type": "index",
+      "content": "export { EmberFooterCta } from \"./EmberFooterCta\";\nexport type * from \"./EmberFooterCta.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <EmberFooterCta {...emberFooterCtaMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <EmberFooterCta {...emberFooterCtaMocks.alternate} />\n    </div>"
+    }
+  ]
+}
