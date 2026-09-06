@@ -366,9 +366,9 @@ function InputModalPanel({
   onLanguageChange: (id: string) => void;
   onQualityChange: (id: string) => void;
   onFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onDragOver: (event: DragEvent<HTMLDivElement>) => void;
+  onDragOver: (event: DragEvent<HTMLElement>) => void;
   onDragLeave: () => void;
-  onDrop: (event: DragEvent<HTMLDivElement>) => void;
+  onDrop: (event: DragEvent<HTMLElement>) => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }) {
   const fileRef = useRef<HTMLInputElement>(null);
