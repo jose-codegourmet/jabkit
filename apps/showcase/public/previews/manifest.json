@@ -135,7 +135,7 @@
       ]
     },
     "dialog": {
-      "sourceHash": "76d6d3784d709c2ed7682d01e94a815cb33183eab3301ccbc9d53f8a0bc6c3a7",
+      "sourceHash": "247f14acdc48ce87022d669ce2bf7cec987dfff4567bcc69303646c0f76df734",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -149,17 +149,19 @@
           "story": "Default",
           "theme": "dark",
           "file": "dialog.Default.dark.webp",
-          "bytes": 1062,
+          "bytes": 1150,
           "width": 800,
-          "height": 480
+          "height": 520,
+          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
           "file": "dialog.Variants.dark.webp",
-          "bytes": 1062,
+          "bytes": 1080,
           "width": 800,
-          "height": 480
+          "height": 520,
+          "format": "webp"
         }
       ]
     },
