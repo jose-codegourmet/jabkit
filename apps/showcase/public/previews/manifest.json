@@ -2449,6 +2449,47 @@
           "format": "webp"
         }
       ]
+    },
+    "count-up": {
+      "sourceHash": "2427194e01b2a30df60426cd507c98d2fc473154f1b43d89f08643abb157e696",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "count-up.Default.dark.webp",
+          "bytes": 4852,
+          "width": 960,
+          "height": 427,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "count-up.Variants.dark.webp",
+          "bytes": 8054,
+          "width": 960,
+          "height": 427,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "count-up.ThemeComparison.dark.webp",
+          "bytes": 8786,
+          "width": 960,
+          "height": 427,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
