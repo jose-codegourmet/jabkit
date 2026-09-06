@@ -817,6 +817,34 @@
     }
   },
   {
+    "name": "footer-column",
+    "displayName": "FooterColumn",
+    "category": "marketing",
+    "description": "Site footer with a brand column, about and service links, a live-help row, contact details, and a legal bar.",
+    "tags": [
+      "footer",
+      "marketing",
+      "links",
+      "social",
+      "contact",
+      "columns",
+      "landing"
+    ],
+    "addedAt": "2026-09-06",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 820
+    }
+  },
+  {
     "name": "footer-section",
     "displayName": "FooterSection",
     "category": "marketing",
