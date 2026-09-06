@@ -1,0 +1,60 @@
+{
+  "name": "count-up",
+  "displayName": "CountUp",
+  "version": "1.0.0",
+  "addedAt": "2026-09-06",
+  "description": "Marketing proof figure that counts from a start value to a target when it enters view, honoring prefers-reduced-motion.",
+  "tags": [
+    "marketing",
+    "text",
+    "animation",
+    "counter",
+    "stats",
+    "metrics",
+    "number"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 640
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "count-up/CountUp.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { useEffect, useId, useRef, useState } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  CountUpAlign,\n  CountUpDirection,\n  CountUpItem,\n  CountUpProps,\n} from \"./CountUp.types\";\n\nconst defaults = {\n  eyebrow: \"Proof in motion\",\n  description:\n    \"A launch metric that ticks into place when it enters the viewport.\",\n  from: 0,\n  to: 100,\n  suffix: \"%\",\n  separator: \"\",\n  duration: 2000,\n  delay: 0,\n  direction: \"up\" as CountUpDirection,\n  startWhen: true,\n  threshold: 0.35,\n  rootMargin: \"0px 0px -8% 0px\",\n  align: \"center\" as CountUpAlign,\n  replay: false,\n};\n\nconst alignClass: Record<CountUpAlign, string> = {\n  left: \"items-start text-left\",\n  center: \"items-center text-center\",\n  right: \"items-end text-right\",\n};\n\nfunction easeOutCubic(t: number) {\n  return 1 - (1 - t) ** 3;\n}\n\nfunction inferredDecimals(value: number) {\n  const text = String(value);\n  const index = text.indexOf(\".\");\n  return index === -1 ? 0 : text.length - index - 1;\n}\n\nfunction formatValue(\n  value: number,\n  decimals: number,\n  separator: string,\n): string {\n  const negative = value < 0;\n  const abs = Math.abs(value);\n  const [intPart, fracPart] = abs.toFixed(decimals).split(\".\");\n  const grouped = separator\n    ? intPart.replace(/\\B(?=(\\d{3})+(?!\\d))/g, separator)\n    : intPart;\n  const body = decimals > 0 ? `${grouped}.${fracPart}` : grouped;\n  return negative ? `-${body}` : body;\n}\n\nfunction resolveItems(props: CountUpProps): CountUpItem[] {\n  if (props.items?.length) return props.items;\n  return [\n    {\n      from: props.from,\n      to: props.to ?? defaults.to,\n      prefix: props.prefix,\n      suffix: props.suffix ?? defaults.suffix,\n      separator: props.separator,\n      decimals: props.decimals,\n    },\n  ];\n}\n\nfunction CountUpFigure({\n  item,\n  duration,\n  delay,\n  direction,\n  active,\n  reduceMotion,\n  onStart,\n  onEnd,\n}: {\n  item: CountUpItem;\n  duration: number;\n  delay: number;\n  direction: CountUpDirection;\n  active: boolean;\n  reduceMotion: boolean;\n  onStart?: () => void;\n  onEnd?: () => void;\n}) {\n  const from = item.from ?? defaults.from;\n  const to = item.to;\n  const startValue = direction === \"down\" ? to : from;\n  const endValue = direction === \"down\" ? from : to;\n  const decimals = item.decimals ?? inferredDecimals(endValue);\n  const separator = item.separator ?? defaults.separator;\n  const [value, setValue] = useState(startValue);\n  const startedRef = useRef(false);\n  const onStartRef = useRef(onStart);\n  const onEndRef = useRef(onEnd);\n  onStartRef.current = onStart;\n  onEndRef.current = onEnd;\n\n  useEffect(() => {\n    if (!active) {\n      startedRef.current = false;\n      setValue(startValue);\n      return;\n    }\n    if (reduceMotion) {\n      setValue(endValue);\n      if (!startedRef.current) {\n        startedRef.current = true;\n        onStartRef.current?.();\n        onEndRef.current?.();\n      }\n      return;\n    }\n\n    let frame = 0;\n    let startAt = 0;\n    const tick = (now: number) => {\n      if (!startAt) startAt = now + delay;\n      if (now < startAt) {\n        frame = window.requestAnimationFrame(tick);\n        return;\n      }\n      if (!startedRef.current) {\n        startedRef.current = true;\n        onStartRef.current?.();\n      }\n      const elapsed = now - startAt;\n      const progress = Math.min(1, elapsed / Math.max(duration, 1));\n      const next =\n        startValue + (endValue - startValue) * easeOutCubic(progress);\n      setValue(next);\n      if (progress < 1) {\n        frame = window.requestAnimationFrame(tick);\n        return;\n      }\n      setValue(endValue);\n      onEndRef.current?.();\n    };\n    frame = window.requestAnimationFrame(tick);\n    return () => window.cancelAnimationFrame(frame);\n  }, [active, delay, duration, endValue, reduceMotion, startValue]);\n\n  const display = `${item.prefix ?? \"\"}${formatValue(value, decimals, separator)}${item.suffix ?? \"\"}`;\n  const finalLabel = `${item.prefix ?? \"\"}${formatValue(endValue, decimals, separator)}${item.suffix ?? \"\"}${item.label ? ` ${item.label}` : \"\"}`;\n\n  return (\n    <div className=\"flex min-w-0 flex-col gap-2\" data-slot=\"count-up-item\">\n      <p\n        aria-hidden=\"true\"\n        className=\"font-semibold tracking-[-0.06em] text-foreground tabular-nums text-5xl leading-none sm:text-6xl lg:text-7xl\"\n        data-slot=\"count-up-value\"\n      >\n        {display}\n      </p>\n      <span className=\"sr-only\">{finalLabel}</span>\n      {item.label ? (\n        <p className=\"text-sm leading-6 text-muted-foreground sm:text-base\">\n          {item.label}\n        </p>\n      ) : null}\n    </div>\n  );\n}\n\nexport function CountUp({\n  className,\n  to = defaults.to,\n  from = defaults.from,\n  prefix,\n  suffix = defaults.suffix,\n  separator = defaults.separator,\n  decimals,\n  items,\n  eyebrow = defaults.eyebrow,\n  description = defaults.description,\n  duration = defaults.duration,\n  delay = defaults.delay,\n  direction = defaults.direction,\n  startWhen = defaults.startWhen,\n  threshold = defaults.threshold,\n  rootMargin = defaults.rootMargin,\n  align = defaults.align,\n  replay = defaults.replay,\n  onStart,\n  onEnd,\n  ...props\n}: CountUpProps) {\n  const headingId = useId();\n  const rootRef = useRef<HTMLElement>(null);\n  const [inView, setInView] = useState(false);\n  const [reduceMotion, setReduceMotion] = useState(false);\n  const figures = resolveItems({\n    to,\n    from,\n    prefix,\n    suffix,\n    separator,\n    decimals,\n    items,\n  });\n  const active = startWhen && inView;\n\n  useEffect(() => {\n    const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n    const update = () => setReduceMotion(media.matches);\n    update();\n    media.addEventListener(\"change\", update);\n    return () => media.removeEventListener(\"change\", update);\n  }, []);\n\n  useEffect(() => {\n    const node = rootRef.current;\n    if (!node) return;\n    if (reduceMotion) {\n      setInView(true);\n      return;\n    }\n    const observer = new IntersectionObserver(\n      ([entry]) => {\n        if (entry.isIntersecting) {\n          setInView(true);\n          if (!replay) observer.disconnect();\n          return;\n        }\n        if (replay) setInView(false);\n      },\n      { threshold, rootMargin },\n    );\n    observer.observe(node);\n    return () => observer.disconnect();\n  }, [reduceMotion, replay, rootMargin, threshold]);\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-in-view={inView ? \"true\" : \"false\"}\n      data-slot=\"count-up\"\n      {...props}\n      ref={rootRef}\n    >\n      <div\n        className={cn(\n          \"mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-20 sm:px-10 sm:py-24\",\n          alignClass[align],\n        )}\n      >\n        {eyebrow ? (\n          <p\n            className=\"text-xs font-medium tracking-[0.22em] text-muted-foreground uppercase\"\n            id={headingId}\n          >\n            {eyebrow}\n          </p>\n        ) : (\n          <span className=\"sr-only\" id={headingId}>\n            Count up\n          </span>\n        )}\n        <div\n          className={cn(\n            \"grid w-full gap-10\",\n            figures.length > 1\n              ? \"sm:grid-cols-3 sm:gap-8\"\n              : \"justify-items-stretch\",\n            figures.length === 1 &&\n              align === \"center\" &&\n              \"justify-items-center\",\n            figures.length === 1 && align === \"right\" && \"justify-items-end\",\n          )}\n        >\n          {figures.map((item, index) => (\n            <CountUpFigure\n              active={active}\n              delay={delay + index * 90}\n              direction={direction}\n              duration={duration}\n              item={{\n                ...item,\n                separator: item.separator ?? separator,\n              }}\n              key={`${item.to}-${item.label ?? index}`}\n              onEnd={index === 0 ? onEnd : undefined}\n              onStart={index === 0 ? onStart : undefined}\n              reduceMotion={reduceMotion}\n            />\n          ))}\n        </div>\n        {description ? (\n          <p className=\"max-w-xl text-base leading-7 text-muted-foreground sm:text-lg\">\n            {description}\n          </p>\n        ) : null}\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "count-up/CountUp.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type CountUpAlign = \"left\" | \"center\" | \"right\";\nexport type CountUpDirection = \"up\" | \"down\";\n\nexport interface CountUpItem {\n  to: number;\n  from?: number;\n  prefix?: string;\n  suffix?: string;\n  separator?: string;\n  decimals?: number;\n  label?: string;\n}\n\nexport interface CountUpProps extends HTMLAttributes<HTMLElement> {\n  to?: number;\n  from?: number;\n  prefix?: string;\n  suffix?: string;\n  separator?: string;\n  decimals?: number;\n  items?: CountUpItem[];\n  eyebrow?: string;\n  description?: string;\n  duration?: number;\n  delay?: number;\n  direction?: CountUpDirection;\n  startWhen?: boolean;\n  threshold?: number;\n  rootMargin?: string;\n  align?: CountUpAlign;\n  replay?: boolean;\n  onStart?: () => void;\n  onEnd?: () => void;\n}\n"
+    },
+    {
+      "path": "count-up/index.ts",
+      "type": "index",
+      "content": "export { CountUp } from \"./CountUp\";\nexport type * from \"./CountUp.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <CountUp {...countUpMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <CountUp {...countUpMocks.alternate} />\n    </div>"
+    }
+  ]
+}

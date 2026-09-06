@@ -625,6 +625,32 @@
     }
   },
   {
+    "name": "count-up",
+    "displayName": "CountUp",
+    "category": "marketing",
+    "description": "Marketing proof figure that counts from a start value to a target when it enters view, honoring prefers-reduced-motion.",
+    "tags": [
+      "marketing",
+      "text",
+      "animation",
+      "counter",
+      "stats",
+      "metrics",
+      "number"
+    ],
+    "addedAt": "2026-09-06",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 640
+    }
+  },
+  {
     "name": "cta22",
     "displayName": "Cta22",
     "category": "marketing",
