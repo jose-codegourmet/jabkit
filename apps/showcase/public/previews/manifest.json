@@ -2203,6 +2203,47 @@
           "format": "webp"
         }
       ]
+    },
+    "event-manager": {
+      "sourceHash": "7311eb6a4875bc9746affce82fe2d812e5ccfe807bbf2ea67ac94622ff820cfa",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "event-manager.Default.dark.webp",
+          "bytes": 17360,
+          "width": 960,
+          "height": 864,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "event-manager.Variants.dark.webp",
+          "bytes": 10582,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "event-manager.ThemeComparison.dark.webp",
+          "bytes": 32640,
+          "width": 960,
+          "height": 864,
+          "format": "webp"
+        }
+      ]
     }
   }
 }

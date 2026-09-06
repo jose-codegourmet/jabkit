@@ -1300,6 +1300,35 @@
     }
   },
   {
+    "name": "event-manager",
+    "displayName": "EventManager",
+    "category": "dashboard",
+    "description": "Calendar event manager with month, week, day, and list views, search, and tag filters.",
+    "tags": [
+      "dashboard",
+      "calendar",
+      "events",
+      "schedule",
+      "tags",
+      "search",
+      "month",
+      "week"
+    ],
+    "addedAt": "2026-09-06",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
     "name": "forgot-password2",
     "displayName": "ForgotPassword2",
     "category": "dashboard",
