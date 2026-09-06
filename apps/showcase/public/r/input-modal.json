@@ -102,7 +102,7 @@
     {
       "path": "input-modal/index.ts",
       "type": "index",
-      "content": "export { InputModal } from \"./InputModal\";\nexport type {\n  InputModalOption,\n  InputModalPresentation,\n  InputModalProps,\n  InputModalSource,\n  InputModalSourceKind,\n  InputModalSourceStatus,\n  InputModalSubmitPayload,\n  InputModalTabId,\n  InputModalUrlKind,\n  InputModalVoice,\n} from \"./InputModal.types\";\n"
+      "content": "export { InputModal } from \"./InputModal\";\nexport type * from \"./InputModal.types\";\n"
     },
     {
       "path": "lib/cn.ts",
