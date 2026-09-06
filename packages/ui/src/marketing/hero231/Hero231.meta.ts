@@ -7,6 +7,43 @@ export default {
   addedAt: "2026-08-30",
   description:
     "Split marketing hero with left-aligned copy and dual CTAs, a faded logo marquee, and a 3D coverflow of portrait cards.",
+  sectionCategory: "hero",
+  purpose:
+    "Gives equal prominence to conversion copy, customer proof, and a dimensional portrait showcase.",
+  bestFor: [
+    "brand-led homepages",
+    "product launches",
+    "campaign landing pages",
+  ],
+  avoidFor: [
+    "dense application screens",
+    "pages that need an understated opening",
+  ],
+  tone: ["bold", "premium", "editorial"],
+  contentDensity: "medium",
+  visualWeight: "high",
+  layout: {
+    type: "split",
+    alignment: "left",
+    columns: 2,
+  },
+  slots: [
+    "headline",
+    "description",
+    "primaryCTA",
+    "secondaryCTA",
+    "customerLogos",
+    "portraitCarousel",
+  ],
+  capabilities: {
+    supportsImage: true,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: true,
+    supportsDarkMode: true,
+  },
+  recommendedAfter: ["navbar"],
+  recommendedBefore: ["logos", "stats", "features", "about"],
   tags: ["hero", "marketing", "carousel", "marquee", "cta", "portraits"],
   dependencies: [],
   registryDependencies: ["button"],

@@ -7,6 +7,38 @@ export default {
   addedAt: "2026-09-05",
   description:
     "Centered borderless login with email, password, and full-width Google, Facebook, and GitHub buttons.",
+  sectionCategory: "authentication",
+  purpose:
+    "Offers a compact sign-in path with credentials and several social authentication alternatives.",
+  bestFor: [
+    "account onboarding",
+    "secure application access",
+    "identity verification flows",
+  ],
+  tone: ["clean", "trustworthy", "focused"],
+  contentDensity: "low",
+  visualWeight: "medium",
+  layout: {
+    type: "centered",
+    alignment: "left",
+  },
+  slots: [
+    "brand",
+    "headline",
+    "emailField",
+    "passwordField",
+    "submitAction",
+    "socialSignInActions",
+    "recoveryLink",
+    "signUpLink",
+  ],
+  capabilities: {
+    supportsImage: false,
+    supportsVideo: false,
+    supportsForm: true,
+    supportsCTA: true,
+    supportsDarkMode: true,
+  },
   tags: ["auth", "dashboard", "form", "login", "oauth", "social"],
   dependencies: [],
   registryDependencies: ["button", "input", "label"],

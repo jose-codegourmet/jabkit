@@ -22,11 +22,42 @@ export interface ComponentPreviewMeta {
   capture?: ComponentCaptureMeta;
 }
 
+export type ComponentContentDensity = "low" | "medium" | "high";
+export type ComponentVisualWeight = "low" | "medium" | "high";
+
+export interface ComponentLayoutMeta {
+  type: string;
+  alignment?: "left" | "center" | "right" | "mixed";
+  columns?: number;
+}
+
+export interface ComponentCapabilitiesMeta {
+  supportsImage?: boolean;
+  supportsVideo?: boolean;
+  supportsForm?: boolean;
+  supportsCTA?: boolean;
+  supportsDarkMode?: boolean;
+}
+
 export interface ComponentMeta {
   name: string;
   displayName: string;
   version: string;
   description: string;
+  /** Semantic role used by composing agents. Structural grouping remains RegistryComponent.category. */
+  sectionCategory: string;
+  purpose: string;
+  bestFor: string[];
+  avoidFor?: string[];
+  tone?: string[];
+  industries?: string[];
+  contentDensity?: ComponentContentDensity;
+  visualWeight?: ComponentVisualWeight;
+  layout?: ComponentLayoutMeta;
+  slots?: string[];
+  capabilities?: ComponentCapabilitiesMeta;
+  recommendedAfter?: string[];
+  recommendedBefore?: string[];
   tags: string[];
   dependencies: string[];
   registryDependencies: string[];

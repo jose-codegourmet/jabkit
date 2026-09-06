@@ -84,6 +84,21 @@ export default {
   version: "1.0.0",
   addedAt: "YYYY-MM-DD",
   description: "One-sentence description of what the component does.",
+  sectionCategory: "content",
+  purpose: "Explains the design problem this component solves on a page.",
+  bestFor: ["A specific, realistic use case"],
+  tone: ["professional"],
+  contentDensity: "low",
+  visualWeight: "low",
+  layout: { type: "stack", alignment: "left" },
+  slots: ["headline", "content"],
+  capabilities: {
+    supportsImage: false,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: false,
+    supportsDarkMode: true,
+  },
   tags: ["example", "atom"],
   dependencies: [],
   registryDependencies: [],
@@ -100,6 +115,15 @@ export default {
 | `version` | Semver string for this component |
 | `addedAt` | ISO date string (`YYYY-MM-DD`) |
 | `description` | Short prose used in the showcase |
+| `sectionCategory` | Normalized semantic role used for agent selection; distinct from the structural registry `category` |
+| `purpose` | Why the component exists and the page-design problem it solves |
+| `bestFor` / `avoidFor` | Specific suitable and unsuitable use cases |
+| `tone` / `industries` | Visual personality and meaningful industry fit; omit industries for generic components |
+| `contentDensity` / `visualWeight` | `low`, `medium`, or `high` estimates for page rhythm |
+| `layout` | Primary desktop spatial structure, with meaningful alignment and column count when applicable |
+| `slots` | Human-readable semantic content areas an agent needs to populate |
+| `capabilities` | Actual image, video, form, CTA, and dark-mode support |
+| `recommendedAfter` / `recommendedBefore` | Suggested neighboring section categories for page composition |
 | `tags` | Search / filter keywords |
 | `dependencies` | npm packages the consumer must install (e.g. `@radix-ui/react-slot`) |
 | `registryDependencies` | Other JabKit component `name` values pulled in by the CLI |

@@ -2,7 +2,7 @@
   "pipelineVersion": 1,
   "components": {
     "avatar": {
-      "sourceHash": "9cd590d91a91cea4953e8ad3d0f50a7d221002c1fa031e93feb0b4ea36047d0d",
+      "sourceHash": "dc8c9d6439ab21642494d6609d268e8da177869a354a6f8b8860350a9e68211f",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -31,7 +31,7 @@
       ]
     },
     "badge": {
-      "sourceHash": "37513cc505cadfdb4af3e987061ae522d3be72b23d358d53de07de9f97c14d68",
+      "sourceHash": "df078d23a2c511b3aebfd3a30dfdb40ebedc5056690c46ac71933dad063fa086",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -60,7 +60,7 @@
       ]
     },
     "button": {
-      "sourceHash": "de2f31e06d0a8ecd8a5d29ec0fec0e41f6f4cf02df18c96bab69c5819c1968d5",
+      "sourceHash": "a440703d4b441fe6d985d378d9afb55c43a61315bd2e7520e052f9ffacad47bb",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -106,7 +106,7 @@
       ]
     },
     "checkbox": {
-      "sourceHash": "bf9c5c521f958ea6f2b85898fedb4e44a79a475d353eff92a1cae4e1714d3eab",
+      "sourceHash": "c449b11427ad31c64cbc239d6b7f490e13f94efafef71d945f13494f106a194d",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -135,7 +135,7 @@
       ]
     },
     "dialog": {
-      "sourceHash": "97084cbac3f2c7ddb0e29099744bb4b68f8814a6ebbf0ca25d49da35f9392622",
+      "sourceHash": "76d6d3784d709c2ed7682d01e94a815cb33183eab3301ccbc9d53f8a0bc6c3a7",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -164,7 +164,7 @@
       ]
     },
     "dropdown-menu": {
-      "sourceHash": "b1b4fb53bfd90972e9148070fd9b793aae726dffd9e97fdf303ab065717dd9c0",
+      "sourceHash": "8eea515fdaf010109b782b232a48d1532a78d9ccf2fb9df96eb19951fcf9009c",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -193,7 +193,7 @@
       ]
     },
     "input": {
-      "sourceHash": "55710de11c1e723a134801416614fe0141c1e97c125ddf2683919589f65ea951",
+      "sourceHash": "a1ec23f180061fe759ee7e20aea15b20676f7e3a098f8ba0180a44001d96cb77",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -222,7 +222,7 @@
       ]
     },
     "label": {
-      "sourceHash": "158672b4a1818482cb0a49ffe59b1169ea4583d4443d492d7a2f58a6dcf8e277",
+      "sourceHash": "c03ac44510c9e0dae28a06d47acb52137c383ab3ff4eb15158ad3b8da0ae67e1",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -251,7 +251,7 @@
       ]
     },
     "separator": {
-      "sourceHash": "e4ae0f0db4ebfd55e00ad3282d3a6a03d56bd10f0e03748d910560100355a1d6",
+      "sourceHash": "f515af234c58ba7723753274812c249e58d753eb1314218091dedcee32afe340",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -280,7 +280,7 @@
       ]
     },
     "skeleton": {
-      "sourceHash": "bcccd3a80d2c874067968f834f8c332af4abf6d108e9124351d5cb136984997d",
+      "sourceHash": "9d754ba2014b239ca33e624a0d80f07055c8dd06b7724935c24658c71c8ea255",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -309,7 +309,7 @@
       ]
     },
     "switch": {
-      "sourceHash": "5cd213b0052f63531252336a3fcfc15efa933b61a4715fb80e5e9b868a5708a8",
+      "sourceHash": "a6af39ef50ea3cf051b4afc72372310afcbc4245d18ab0d8377cf7a297bf4cef",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -338,7 +338,7 @@
       ]
     },
     "textarea": {
-      "sourceHash": "ba7dc76759cbaab78a1c3714149d68129afaf0a35d926b400e80ccf6e7c44f30",
+      "sourceHash": "50070e6e63ffee10ba8345902b883aa3d48a8c37b39b3931a460b40eb7a1a10a",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -367,7 +367,7 @@
       ]
     },
     "tooltip": {
-      "sourceHash": "4c6b869fff9baaebf937005d1c075526d41cd765ac7b19ab2fd9d8214971a665",
+      "sourceHash": "1cb85be7aa2badf868dd754421dc08c00ba7b612888f78b11dd7d992a6693061",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -396,7 +396,7 @@
       ]
     },
     "about11": {
-      "sourceHash": "acfac0cf8a8fdd119a7dd6871773b700569a9425feecd1e60a2878a0651e0be2",
+      "sourceHash": "44e99be7cd2b78949275df30139279c8ec49d7598225f67a52751483799a9972",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -434,7 +434,7 @@
       ]
     },
     "about14": {
-      "sourceHash": "c9258ce9598329af00c7cbc7b817eece7e95f4b9aae0e986346961b7f4ad5242",
+      "sourceHash": "a02e0bedef9fdf2c04a4f15a6dd2336f4c769ef4fa1b5eb88d063e0882e33f35",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -472,7 +472,7 @@
       ]
     },
     "about6": {
-      "sourceHash": "da30f8653d1735466a093b84b61d5c7b504689891d66641df296556396368fb0",
+      "sourceHash": "4101fd64dacbba0504029b049065bfdec1666c401aebdb9f0fa10a5dd877c5f1",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -510,7 +510,7 @@
       ]
     },
     "about8": {
-      "sourceHash": "bf6f06a1ed78391250384cd32d35f13370b6944d8b0afa1d834375546e7a4ed1",
+      "sourceHash": "ee71a40f1ed1e3e46b439dc693df4848ea8c8a91411184cf0bc23660dc00c079",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -548,7 +548,7 @@
       ]
     },
     "awards6": {
-      "sourceHash": "3ed3267da0b81813d18ef272d55006bb08feaf4ce8b0392ecbf35dce1aa3faf6",
+      "sourceHash": "ad3bbef7088a6609b42648f47e0388363b40759731951e9bfd18c6fb32edee3b",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -586,7 +586,7 @@
       ]
     },
     "bento19": {
-      "sourceHash": "379e8940f060aa959400bf5489dbd6d447be40bafe49d280ae19cae16643ff52",
+      "sourceHash": "50818907c420464d57acb8a14975a66e034c63d7868fa2297020d4ed6a2261f3",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -624,7 +624,7 @@
       ]
     },
     "case-studies11": {
-      "sourceHash": "00198147d08e755bb00432c69c053ea958e481f76a0638750a97b2dd74fb25bc",
+      "sourceHash": "74968fa6b315981d743dd8728835f7acaaa9f385113fbb288bdb40ce4b4a707e",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -653,7 +653,7 @@
       ]
     },
     "case-studies13": {
-      "sourceHash": "72b1095f382a9caea01cc8100540b9b97ca11fd18945565e3bb6262d036deae8",
+      "sourceHash": "efaa982a800d0b22c19d078fbcf262de47814c472016e0cfdec12a5b123a68de",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -691,7 +691,7 @@
       ]
     },
     "code-example14": {
-      "sourceHash": "fd39e08c573fa4c7f5d56ec844e3effaaee5bda46fc7acaf220a816f5b20a929",
+      "sourceHash": "a8d271819d34d972c18f9244512456739393e52351f8c21ae418995e6ad2c171",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -729,7 +729,7 @@
       ]
     },
     "compare5": {
-      "sourceHash": "26ce98ec491ce505c24afad34a4a99d22d4e1c4827d0de5da2fcfbe6f4a9d914",
+      "sourceHash": "478f15207effc256bcdb6c9f8381f5488d81a1deb07616ed856773ebbbea2290",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -767,7 +767,7 @@
       ]
     },
     "content1": {
-      "sourceHash": "6d0aae75d69c1c49703d7978879e690a0824a90c06294c05f22f8c769957fc5f",
+      "sourceHash": "7826775fbd13b0cc77e043fd79ffb312c4d4ec177936c8d8347c315585471b2d",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -805,7 +805,7 @@
       ]
     },
     "content2": {
-      "sourceHash": "77b0b0e9b0f0bca48e42169453c4ae76cadd8796605095a770b722bbfa62458c",
+      "sourceHash": "a4e63989727b8a1d630421db32534c382cf47505a870eab1e66d7802fa7636d9",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -843,7 +843,7 @@
       ]
     },
     "content3": {
-      "sourceHash": "d45127dcd9a50c9d5d56326aa068fd41fa9365ddd8904d352111157932a91aca",
+      "sourceHash": "d030aaf1eed5f30fbd365952e4e6d47c25ed0e6653310f5427608d040495d10c",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -881,7 +881,7 @@
       ]
     },
     "content4": {
-      "sourceHash": "ffe292ea5a29542accda24635bb90ebaf409cb2ea54314c1cb417faaa60316c0",
+      "sourceHash": "8f99b3a8509aee2a111b274486f921e8edcf699744af2fa21bd6240298b09a93",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -919,7 +919,7 @@
       ]
     },
     "cta22": {
-      "sourceHash": "0d646750c606a96a202edd34ef43f68171f96e7d14409c22dc5b9e02f5eaac76",
+      "sourceHash": "431301bed16056501535fd67a8c57dbdf8a402e31cee5be28b4c92da505beada",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -957,7 +957,7 @@
       ]
     },
     "cta28": {
-      "sourceHash": "a3694525826d542f7c44b505708e5f6d78a1e24fa2355911270bf74b80f6d115",
+      "sourceHash": "8feb8cae5448ba5760c05110bd5be6128f4445cba841223bc003d16b843f5b34",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -995,7 +995,7 @@
       ]
     },
     "ecommerce-hero8": {
-      "sourceHash": "42e06fafe3271ae645ce68a62ae3f4c8e22bd303f7a95a15f48c58a04689fb46",
+      "sourceHash": "cf765e37623e65193284e66851b8834e21f2f5facde8997bd5b706c5d8399a59",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1045,7 +1045,7 @@
       ]
     },
     "ecommerce-navbar2": {
-      "sourceHash": "7dadbe3ad0d1c7b595b5fc3bc95ed8afc9eb5cc3a13292cc4117ad9a6031d7f3",
+      "sourceHash": "1f34dac933817fabe2a4a6d0a7f4e2f6cfea847854e3f1d00fd757224ec3a69b",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1083,7 +1083,7 @@
       ]
     },
     "faq12": {
-      "sourceHash": "e1ffa318e10df9aef99e4342a66df96f3bf1d4f1d8b64b88bcab94b3365efa50",
+      "sourceHash": "20dd2bd5d51538981c8a46da89b1ca5fe2aeb38ece5e7a068c0110f01b096d03",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1121,7 +1121,7 @@
       ]
     },
     "feature261": {
-      "sourceHash": "f5a9371f4858363dadd444a9a0fc5c2d857a509dff90d69234ff7f002d71da25",
+      "sourceHash": "107ea03008990e3f85b9d6755fb46dd8be8d35408d0b6a5cc9f6e007e4711b9e",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1159,7 +1159,7 @@
       ]
     },
     "gallery31": {
-      "sourceHash": "b2f5a6b65e27120a3b711e5ec42775d9f0d24aaad870b6bb7beba4d8ba953995",
+      "sourceHash": "76fcc354c2646f945f5aba93a844fac6aed0cb6f2885217cdd61df763de9567c",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1197,7 +1197,7 @@
       ]
     },
     "hero-section-5": {
-      "sourceHash": "f31c9c3a764eb30730a7da9ab8a57976a9d94d7c7dbaa36f21d2880c3f492a1c",
+      "sourceHash": "2393c408d585be611044a1e3b120a3e3c45dbc29748f6bfae5e6bffa7ae7f42a",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1237,7 +1237,7 @@
       ]
     },
     "hero146": {
-      "sourceHash": "138213e1a1ba1b6aec451bcce48dd13910b250ce36a9dcafd649970c992c0045",
+      "sourceHash": "9b7983b1353356d8234528de2ff2f4916f58e83c56b9a97524c1b72e4c25bbce",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1266,7 +1266,7 @@
       ]
     },
     "hero228": {
-      "sourceHash": "29b45429f60805907afe7e83d9d276f4710c9b1d1c33e8694d99b2ab38d4c40b",
+      "sourceHash": "d63ea27a2ffbefc2a420d77f6008860b36a8f2d9851248694cd83bcecaf75ed8",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1306,7 +1306,7 @@
       ]
     },
     "hero230": {
-      "sourceHash": "f6fa3318113b2e5ab6e1703cf5706be21104a46404dec9b7d83637925aa28922",
+      "sourceHash": "ff747790510e80e8d542c9fbe43d7fc34e1ed5534b479c7168c170f626e6d472",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1346,7 +1346,7 @@
       ]
     },
     "hero231": {
-      "sourceHash": "ef79f0863c566626000bacc78564c3c67052c3811d3ef23d3356c07efe384f6a",
+      "sourceHash": "bd800042dd04efebf58496e529afbfc7069a8588011abeb46728ff568cbd8249",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1386,7 +1386,7 @@
       ]
     },
     "hero307": {
-      "sourceHash": "4a9d42d710725a7c5d298254fc581efc0a23397724d2b798be7b731385a0d3c7",
+      "sourceHash": "f197d35e08d7309611e890a76c38871b26269fcef4896252ce709449e54f1b40",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1424,7 +1424,7 @@
       ]
     },
     "pricing28": {
-      "sourceHash": "b6aba66e79672ad8d5e67f1a8f7f4ddb6f5a8806eccf141b291953fde3d5b07f",
+      "sourceHash": "465cd5748549cc8e988d5d96475e9dc740efdc67f779e9428f6416deba518383",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1462,7 +1462,7 @@
       ]
     },
     "waitlist3": {
-      "sourceHash": "d8eec906d27d221be7618915f8a80b934ac6a2271b38db68770c74db66533d00",
+      "sourceHash": "935978ae16fb3db3d958ae439a53d179adf9c2c39c6fb58bd4bb07e8d9c5b2dd",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1500,7 +1500,7 @@
       ]
     },
     "application-shell1": {
-      "sourceHash": "80ee1a8beedf727d8f3ef49c269482ba191fd6b7b7736ff49545abc0db04d845",
+      "sourceHash": "08054e571a241bc92022d1eb4e2c0c821a88676a2631b590ec0475fbd83e8198",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1538,7 +1538,7 @@
       ]
     },
     "application-shell13": {
-      "sourceHash": "647c7d222a3161492e2946c119f67b63f5b38e10d401eb076adf025f9df4e75e",
+      "sourceHash": "cd7cbb3db1c5b482cf3759ecbb0bce809dc4d49dda583384c6efddae3d09de0a",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1567,7 +1567,7 @@
       ]
     },
     "chart-group14": {
-      "sourceHash": "900c28107cf9ca374ed672fd28f1e45e26a9d74ea91f59d1364eecdd3319ef78",
+      "sourceHash": "6520e6625c73dd20237b240dcd89a5a77fab16c7bfeff879195c1aa13b74ac75",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1605,7 +1605,7 @@
       ]
     },
     "forgot-password2": {
-      "sourceHash": "4ac66152b821c333e7b6b2a82d6b2e7d661343dbe9b05b99a41d19700bcfc1e4",
+      "sourceHash": "4c6f00af47e35b68d4280f3cda9ea86ed0226a3e6a1c90e0e8ac386cd27a91a7",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1643,7 +1643,7 @@
       ]
     },
     "login4": {
-      "sourceHash": "f0f60961162dbeff2bbc64be2916630e2d89f25e03b4c500648680357304a912",
+      "sourceHash": "2bb4be15be971815340e72d9285fcd0b9e89c3fa2849bc309b9ef30343353f3c",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1681,7 +1681,7 @@
       ]
     },
     "two-factor2": {
-      "sourceHash": "7b084a52215e72aa90b4ff92badf77a3e8d7686df8913349fc59de646ba5c3d6",
+      "sourceHash": "b29bd606a6be52ee80d2e69930e9b392974710286144a4f43c8b8df90f0f1abd",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1719,7 +1719,7 @@
       ]
     },
     "two-factor5": {
-      "sourceHash": "639513ef507d70fd09739a877ee3f00fe757fef696432436286c99c7edb3be35",
+      "sourceHash": "fca2d66bbb4e8ead96a090b03dcf5d8a091803c285751ae750ab91cfa429fcde",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1757,7 +1757,7 @@
       ]
     },
     "team14": {
-      "sourceHash": "c09607d30bc1cd16663393d756a64171ee20805b560d51bd3b9df99ab8ca37c6",
+      "sourceHash": "d5ca463b2a07978db1e8a40c0c1d53d178471fd74bcfa5753d760f2cca1555fa",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1795,7 +1795,7 @@
       ]
     },
     "team17": {
-      "sourceHash": "9d1c7c4344348cec9c991c621045e54d44f9bcc782097e0eb28f173625019e98",
+      "sourceHash": "ad91fa380aadf386266b7e961009cd299a4407ef23816ee40b81835f2836059a",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1836,7 +1836,7 @@
       ]
     },
     "verify-email1": {
-      "sourceHash": "07fb322cd316f5570b6a3319889af3d74d5e54eaedb6035d79e6c288a2311a58",
+      "sourceHash": "208ba54e00cca2b074f35954914d7a6d0d1a09da12d00d6e9776360588ad20fd",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1877,7 +1877,7 @@
       ]
     },
     "team11": {
-      "sourceHash": "6f8199a58339a4f84173fdcf5a54d1c4ab6bf5ecae4f9b762cad90aee6416b0e",
+      "sourceHash": "ea34ce997577a3ecef54563b6986c604613d4d0f37a624151897ca26862c7dd0",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1918,7 +1918,7 @@
       ]
     },
     "product-quick-view4": {
-      "sourceHash": "5c091f48a3864777310200cba7d21e24276de1d8159a63dfe7d8258d0584e0a1",
+      "sourceHash": "e412241f3abcbb0ee1e84817916432be5a527e3b174f023d5c98b885845ffaf9",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1959,7 +1959,7 @@
       ]
     },
     "projects16": {
-      "sourceHash": "3086468d37f844ad107c2d5e5de4750c6ec6dadc0a21b5b4ccce045bf4a476b8",
+      "sourceHash": "1fa566c1c872a71cc8e86ec1fde6719bed95bee983fbe131e1f30e79fc36e5a1",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2000,7 +2000,7 @@
       ]
     },
     "projects11": {
-      "sourceHash": "2a7d03dae3ad2bc8279a6cb4350eaab90ffb9625361b3d1a6da59b51bddba22d",
+      "sourceHash": "781014f61ee8784b563d9fc124a685e76fdb9cf339742be98e4f2792addc99c4",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2041,7 +2041,7 @@
       ]
     },
     "todo9": {
-      "sourceHash": "e8f782d4e9d9acf1fccb68636d418a1d5ffd5456045b56d5057f7ea031736bf1",
+      "sourceHash": "144d1cfb6bfc64dbe356df379a38deea794ba3beb6379c1c7359c0176d686402",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2082,7 +2082,7 @@
       ]
     },
     "projects13": {
-      "sourceHash": "86ad52ecaca7aedc0be328fdf1c8e2960c200aeab2438494593d53b12f57c6ea",
+      "sourceHash": "eaad054562d7831dbf877ec6cc037ee99da4ab68f1477f6dab4ea8ac6537274e",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2123,7 +2123,7 @@
       ]
     },
     "tubelight-navbar": {
-      "sourceHash": "8653c3fa80c5fb75be0311679344cd65985a51b954fbc283110411311f692928",
+      "sourceHash": "c5617eecbedd39395d348ad86f888e23271126ec5188a8b90d6b7efa779e7f59",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2164,7 +2164,7 @@
       ]
     },
     "fullscreen-calendar": {
-      "sourceHash": "f9a63cf2d928b8ff023d145d9774ff0386f80d2e05ff54eb5b480b284867c28b",
+      "sourceHash": "799b3b53752c76388fe524d374b9821b1b8f549532db60fdbca67159ea8050cd",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2205,7 +2205,7 @@
       ]
     },
     "event-manager": {
-      "sourceHash": "7311eb6a4875bc9746affce82fe2d812e5ccfe807bbf2ea67ac94622ff820cfa",
+      "sourceHash": "f39d53c431ac75c80ef603e252ded62f25a6007a5fbac8677d379b40cc64972c",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2246,7 +2246,7 @@
       ]
     },
     "calendar-with-localisation": {
-      "sourceHash": "3f9c1a33da2d5a299514c1ad289ece99c3b9442135024f223d71abfa3de912d4",
+      "sourceHash": "dc3bba50a9456d11b2ce6509efb77e966e67ea56d199f961acbb2655e120820d",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2287,7 +2287,7 @@
       ]
     },
     "footer-section": {
-      "sourceHash": "0bd7c9ec463c468f2005be031c2d13f6add5ee219fdec11dc188db1831dedc25",
+      "sourceHash": "8ae8ff6e1a89058ce807679da22487ae4837444a7e4fb8957a98f0a8074af005",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2328,7 +2328,7 @@
       ]
     },
     "ember-footer-cta": {
-      "sourceHash": "49da006ff2045518153b288b6a1b55e1b9fd76d2a32c8705e6fcd9ea8af53346",
+      "sourceHash": "f0f6fd667822eaa85c2f8f8ab63b28fa749da67abfc412e2f201aa4ce6583e06",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2369,7 +2369,7 @@
       ]
     },
     "footer-column": {
-      "sourceHash": "bea7a6b9fe041036ca4916c18805c2bd2789e0467309aa05044afdd55e90b0f7",
+      "sourceHash": "e2a2a2465a64616556859d56a72192023dfd7e6296525983cb03903714691771",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2410,7 +2410,7 @@
       ]
     },
     "split-text": {
-      "sourceHash": "2d0f5db18b23a4f07c177bf34601ba3389cb0241c681b108b08f78246fdbf347",
+      "sourceHash": "b8f9814cc5347e8f46cf08bf83214bcdc086978ffeb8fd60afabbe54af1f3d81",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2451,7 +2451,7 @@
       ]
     },
     "count-up": {
-      "sourceHash": "2427194e01b2a30df60426cd507c98d2fc473154f1b43d89f08643abb157e696",
+      "sourceHash": "697682146acd5b872098cd359ceb30a027511f381b51d019fbb723be403bbfc5",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2492,7 +2492,7 @@
       ]
     },
     "cursor-grid": {
-      "sourceHash": "d3f7648d65f800234e7bbe6bf7cd6adad4012a09afc2fa4f13050af60122e66d",
+      "sourceHash": "a0213a9a092eca2d1143ddf7b021fd7952848ed8090eb0fb485e4b383c5d20ab",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2533,7 +2533,7 @@
       ]
     },
     "splash-cursor": {
-      "sourceHash": "ccefc030c091b7b6b7f8955958bd3029ace505e24a0e11a308dc9a514b5b33f6",
+      "sourceHash": "12adb01874506a6e3a52ee32abab0073f4bef9d6f1a614885802d4c7d1c9dfbd",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2574,7 +2574,7 @@
       ]
     },
     "scanner": {
-      "sourceHash": "ea7a56acc4084063e6ae5847f0a87c86796a66c2eddbd48a32a1dc8a359ad115",
+      "sourceHash": "92827ef065e5a93087f146ed47936940c6de709cab3d5d54510dcdc125a418c7",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2615,7 +2615,7 @@
       ]
     },
     "shape-grid": {
-      "sourceHash": "1463652416aef7ef28adccc755ebbd6e4a4fcee82f038591afa7b8b390382e68",
+      "sourceHash": "5542e6dc813c7e367a82fcede4f6c9dcf617547b0a6c129584d36f5f2d5e34ef",
       "pipelineVersion": 1,
       "stories": [
         "Default",

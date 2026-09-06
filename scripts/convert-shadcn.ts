@@ -45,7 +45,7 @@ for (const name of selected) {
   );
   await writeFile(
     path.join(dir, `${component}.meta.ts`),
-    `import type { ComponentMeta } from "@jabkit/build-registry";\n\nexport default {\n  name: "${name}",\n  displayName: "${component}",\n  version: "1.0.0",\n  addedAt: "2026-08-30",\n  description: "Accessible ${component} primitive adapted from shadcn/ui.",\n  tags: ["${name}", "primitive", "accessible"],\n  dependencies: [],\n  registryDependencies: [],\n  a11y: { keyboardNav: true, reducedMotion: true },\n} satisfies ComponentMeta;\n`,
+    `import type { ComponentMeta } from "@jabkit/build-registry";\n\nexport default {\n  name: "${name}",\n  displayName: "${component}",\n  version: "1.0.0",\n  addedAt: "2026-08-30",\n  description: "Accessible ${component} primitive adapted from shadcn/ui.",\n  sectionCategory: "form",\n  purpose: "Provides the ${component} control as a reusable interface primitive.",\n  bestFor: ["forms", "application interfaces"],\n  tone: ["clean", "professional"],\n  contentDensity: "low",\n  visualWeight: "low",\n  layout: { type: "stack", alignment: "left" },\n  slots: ["control"],\n  capabilities: { supportsForm: true, supportsDarkMode: true },\n  tags: ["${name}", "primitive", "accessible"],\n  dependencies: [],\n  registryDependencies: [],\n  a11y: { keyboardNav: true, reducedMotion: true },\n} satisfies ComponentMeta;\n`,
   );
   await writeFile(
     path.join(dir, `${component}.stories.tsx`),

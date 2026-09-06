@@ -7,6 +7,29 @@ export default {
   addedAt: "2026-09-05",
   description:
     "Searchable todo list with tag filters, per-task tag editing, and keyboard-friendly reorder.",
+  sectionCategory: "task-management",
+  purpose:
+    "Helps users search, classify, complete, edit, and reorder a focused list of tasks.",
+  bestFor: [
+    "personal productivity tools",
+    "team task dashboards",
+    "tagged work queues",
+  ],
+  tone: ["professional", "structured", "approachable"],
+  contentDensity: "high",
+  visualWeight: "medium",
+  layout: {
+    type: "stack",
+    alignment: "left",
+  },
+  slots: ["search", "tagFilters", "taskItems", "taskStatus", "taskActions"],
+  capabilities: {
+    supportsImage: false,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: false,
+    supportsDarkMode: true,
+  },
   tags: ["dashboard", "todo", "tasks", "tags", "search", "list"],
   dependencies: ["lucide-react"],
   registryDependencies: [

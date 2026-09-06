@@ -20,6 +20,19 @@ export interface ComponentMeta {
   displayName: string;
   version: string;
   description: string;
+  sectionCategory: string;
+  purpose: string;
+  bestFor: string[];
+  avoidFor?: string[];
+  tone?: string[];
+  industries?: string[];
+  contentDensity?: "low" | "medium" | "high";
+  visualWeight?: "low" | "medium" | "high";
+  layout?: { type: string; alignment?: string; columns?: number };
+  slots?: string[];
+  capabilities?: ComponentCapabilitiesMeta;
+  recommendedAfter?: string[];
+  recommendedBefore?: string[];
   tags: string[];
   dependencies: string[];
   registryDependencies: string[];
@@ -29,6 +42,12 @@ export interface ComponentMeta {
   preview?: ComponentPreviewMeta;
 }
 ```
+
+`category` remains the structural registry collection (`atoms`, `marketing`, or
+`dashboard`) because showcase routes and catalogue filters depend on it.
+`sectionCategory` is the normalized semantic role (`hero`, `pricing`, `form`,
+and so on) used by agents when composing pages. The registry index exposes the
+semantic selection fields as well as the full component entry.
 
 `cssVars`, if present, must include both `light` and `dark` maps or the build throws. No current component sets `cssVars`. Field meanings live in [adding-a-component.md](adding-a-component.md); do not duplicate that table here.
 
@@ -87,7 +106,7 @@ Each `pnpm registry:build` (`pnpm --filter @jabkit/build-registry build` → `ts
 
 1. `rm -rf apps/showcase/public/r` then recreates it. Stray files never survive a rebuild.
 2. Writes `apps/showcase/public/r/{name}.json` — the full `RegistryComponent` (`ComponentMeta` plus `category`, `files`, `examples`).
-3. Writes `apps/showcase/public/r/index.json` — a projection that keeps `name`, `displayName`, `category`, `description`, `tags`, `addedAt`, `dependencies`, `a11y`, and `preview` when present. It does **not** include `version`, `registryDependencies`, `cssVars`, `files`, `examples`, or `preview.capture`.
+3. Writes `apps/showcase/public/r/index.json` — a projection that keeps identity, structural category, agent-facing semantic metadata, search tags, dependencies, accessibility, dates, and public preview sizing. It does **not** include `version`, `registryDependencies`, `cssVars`, `files`, `examples`, or `preview.capture`.
 4. Writes `apps/showcase/lib/preview-manifest.generated.ts`.
 
 `apps/showcase/lib/registry.ts` is the only runtime reader inside the monorepo. `registryIndex()` throws with "run pnpm registry:build" if `index.json` is missing. `registryEntry(name)` returns `null` on a missing file.

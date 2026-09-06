@@ -7,6 +7,37 @@ export default {
   addedAt: "2026-09-03",
   description:
     "File-ops marketing section with a dotted radial wash, dual CTAs, accordion rows for create/update/delete, and a synced TypeScript snippet with copy.",
+  sectionCategory: "content",
+  purpose:
+    "Makes a developer workflow concrete by pairing selectable operations with synchronized implementation code.",
+  bestFor: ["documentation", "editorial resources", "educational pages"],
+  tone: ["editorial", "informative", "structured"],
+  industries: ["developer tools", "technology"],
+  contentDensity: "high",
+  visualWeight: "medium",
+  layout: {
+    type: "split",
+    alignment: "left",
+    columns: 2,
+  },
+  slots: [
+    "headline",
+    "description",
+    "primaryCTA",
+    "secondaryCTA",
+    "operationTabs",
+    "codeSnippet",
+    "copyAction",
+  ],
+  capabilities: {
+    supportsImage: false,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: true,
+    supportsDarkMode: true,
+  },
+  recommendedAfter: ["hero", "navbar"],
+  recommendedBefore: ["related-content", "cta", "footer"],
   tags: [
     "code",
     "example",

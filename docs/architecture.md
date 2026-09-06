@@ -1,6 +1,6 @@
 # Architecture
 
-JabKit is a pnpm + Turborepo monorepo. The product is source: components live in this repository, are published as registry JSON, and are copied into consumer projects. No workspace package is published to npm today (`private: true` on every `package.json`).
+JabKit is a pnpm + Turborepo monorepo. The product is source: components live in this repository, are published as registry JSON, and are copied into consumer projects. `@jabkit/cli` is the only workspace package published to npm. The UI library is not an npm UI package.
 
 Repository code is authoritative when this document disagrees with an assumption.
 
