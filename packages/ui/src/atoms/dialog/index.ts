@@ -1,1 +1,2 @@
-export { Dialog } from "./Dialog";
+export * from "./Dialog";
+export type * from "./Dialog.types";
