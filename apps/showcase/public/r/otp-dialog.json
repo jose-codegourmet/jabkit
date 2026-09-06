@@ -1,0 +1,104 @@
+{
+  "name": "otp-dialog",
+  "displayName": "OtpDialog",
+  "version": "1.0.0",
+  "addedAt": "2026-09-06",
+  "description": "Compact OTP verification dialog with four digit slots, resend countdown, and success or error feedback.",
+  "sectionCategory": "authentication",
+  "purpose": "Confirms a one-time code from email or SMS in a focused overlay so a signed-in product can finish a sensitive step without leaving the page.",
+  "bestFor": [
+    "email or SMS sign-in confirmation",
+    "step-up verification before a sensitive action",
+    "account recovery code entry"
+  ],
+  "avoidFor": [
+    "authenticator app pairing with a QR code",
+    "full-page login that should stay on a dedicated route"
+  ],
+  "tone": [
+    "clean",
+    "trustworthy",
+    "focused"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "overlay",
+    "alignment": "center",
+    "columns": 1
+  },
+  "slots": [
+    "headline",
+    "instructions",
+    "destination",
+    "verificationCode",
+    "statusMessage",
+    "verifyAction",
+    "resendAction"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "auth",
+    "dashboard",
+    "dialog",
+    "form",
+    "otp",
+    "verification",
+    "two-factor"
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "button",
+    "dialog",
+    "input",
+    "label"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "dashboard",
+  "files": [
+    {
+      "path": "otp-dialog/OtpDialog.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button } from \"@/atoms/button\";\nimport {\n  Dialog,\n  DialogContent,\n  DialogDescription,\n  DialogTitle,\n  DialogTrigger,\n} from \"@/atoms/dialog\";\nimport { Input } from \"@/atoms/input\";\nimport { Label } from \"@/atoms/label\";\nimport { cn } from \"@/lib/cn\";\nimport type { OtpDialogProps, OtpDialogStatus } from \"./OtpDialog.types\";\n\nconst defaults = {\n  triggerLabel: \"Enter verification code\",\n  title: \"Check your inbox\",\n  description: \"Enter the 4-digit code we sent to confirm this sign-in.\",\n  destination: \"you@northline.app\",\n  codeLabel: \"One-time code\",\n  verifyLabel: \"Verify code\",\n  resendLabel: \"Resend code\",\n  resendWaitingLabel: \"Resend code in {seconds}s\",\n  successMessage: \"Code confirmed. You can continue.\",\n  errorMessage: \"That code is incorrect. Try again or request a new one.\",\n  codeLength: 4,\n  resendCountdownSeconds: 30,\n} as const;\n\nfunction digitsFromCode(code: string | undefined, length: number) {\n  const cleaned = (code ?? \"\").replace(/\\D/g, \"\").slice(0, length);\n  return Array.from({ length }, (_, index) => cleaned[index] ?? \"\");\n}\n\nfunction formatWaitingLabel(template: string, seconds: number) {\n  return template.replace(\"{seconds}\", String(seconds));\n}\n\nfunction OtpDialogPanel({\n  codeLabel,\n  description,\n  destination,\n  digitId,\n  digits,\n  errorMessage,\n  handleDigitChange,\n  handleDigitKeyDown,\n  handleDigitPaste,\n  handleResend,\n  handleSubmit,\n  inDialog,\n  inputRefs,\n  length,\n  remaining,\n  resendLabel,\n  resendWaitingLabel,\n  status,\n  successMessage,\n  title,\n  verifyLabel,\n}: {\n  codeLabel: string;\n  description: string;\n  destination: string;\n  digitId: string;\n  digits: string[];\n  errorMessage: string;\n  handleDigitChange: (index: number, raw: string) => void;\n  handleDigitKeyDown: (\n    index: number,\n    event: React.KeyboardEvent<HTMLInputElement>,\n  ) => void;\n  handleDigitPaste: (\n    index: number,\n    event: React.ClipboardEvent<HTMLInputElement>,\n  ) => void;\n  handleResend: () => void;\n  handleSubmit: React.FormEventHandler<HTMLFormElement>;\n  inDialog: boolean;\n  inputRefs: React.MutableRefObject<Array<HTMLInputElement | null>>;\n  length: number;\n  remaining: number;\n  resendLabel: string;\n  resendWaitingLabel: string;\n  status: OtpDialogStatus;\n  successMessage: string;\n  title: string;\n  verifyLabel: string;\n}) {\n  const Title = inDialog ? DialogTitle : \"h2\";\n  const Description = inDialog ? DialogDescription : \"p\";\n  const statusId = `${digitId}-status`;\n  const destinationId = `${digitId}-destination`;\n  const invalid = status === \"error\";\n  const complete = digits.every((digit) => digit !== \"\");\n\n  return (\n    <div className=\"grid gap-5 p-5 sm:p-6\">\n      <div className=\"grid justify-items-center gap-2 text-center\">\n        <span\n          aria-hidden=\"true\"\n          className=\"grid size-11 place-items-center rounded-full border border-border bg-muted text-xs font-semibold tracking-[0.18em] text-foreground\"\n        >\n          OTP\n        </span>\n        <Title className=\"text-lg font-semibold tracking-[-0.03em] text-balance\">\n          {title}\n        </Title>\n        <Description className=\"max-w-[36ch] text-sm leading-6 text-muted-foreground\">\n          {description}\n        </Description>\n        <p\n          id={destinationId}\n          className=\"text-sm font-medium tracking-[-0.01em] text-foreground\"\n        >\n          {destination}\n        </p>\n      </div>\n\n      <form onSubmit={handleSubmit} className=\"grid gap-4\">\n        <fieldset className=\"m-0 grid justify-items-center gap-2 border-0 p-0\">\n          <Label htmlFor={`${digitId}-0`} className=\"sr-only\">\n            {codeLabel}\n          </Label>\n          <div className=\"flex justify-center gap-2\">\n            {digits.map((digit, index) => (\n              <Input\n                key={`${digitId}-${index.toString()}`}\n                ref={(node) => {\n                  inputRefs.current[index] = node;\n                }}\n                id={`${digitId}-${index}`}\n                name={index === 0 ? \"code\" : undefined}\n                inputMode=\"numeric\"\n                autoComplete={index === 0 ? \"one-time-code\" : \"off\"}\n                maxLength={index === 0 ? length : 1}\n                required\n                disabled={status === \"success\"}\n                aria-invalid={invalid || undefined}\n                aria-describedby={`${destinationId} ${statusId}`}\n                aria-label={`Digit ${index + 1} of ${length}`}\n                value={digit}\n                onChange={(event) =>\n                  handleDigitChange(index, event.currentTarget.value)\n                }\n                onKeyDown={(event) => handleDigitKeyDown(index, event)}\n                onPaste={(event) => handleDigitPaste(index, event)}\n                className=\"size-12 rounded-[--radius] p-0 text-center text-lg font-semibold tabular-nums sm:size-14\"\n              />\n            ))}\n          </div>\n        </fieldset>\n\n        <p\n          id={statusId}\n          role=\"status\"\n          aria-live=\"polite\"\n          className={cn(\n            \"min-h-5 text-center text-sm leading-5\",\n            status === \"error\" && \"text-destructive\",\n            status === \"success\" && \"text-success\",\n            status === \"idle\" && \"text-muted-foreground\",\n          )}\n        >\n          {status === \"error\"\n            ? errorMessage\n            : status === \"success\"\n              ? successMessage\n              : remaining > 0\n                ? formatWaitingLabel(resendWaitingLabel, remaining)\n                : \"\\u00a0\"}\n        </p>\n\n        <div className=\"grid gap-2\">\n          <Button\n            type=\"submit\"\n            size=\"lg\"\n            className=\"w-full\"\n            disabled={!complete || status === \"success\"}\n          >\n            {verifyLabel}\n          </Button>\n          <Button\n            type=\"button\"\n            variant=\"ghost\"\n            className=\"w-full\"\n            disabled={remaining > 0 || status === \"success\"}\n            onClick={handleResend}\n          >\n            {remaining > 0\n              ? formatWaitingLabel(resendWaitingLabel, remaining)\n              : resendLabel}\n          </Button>\n        </div>\n      </form>\n    </div>\n  );\n}\n\nexport function OtpDialog({\n  className,\n  triggerLabel = defaults.triggerLabel,\n  title = defaults.title,\n  description = defaults.description,\n  destination = defaults.destination,\n  codeLabel = defaults.codeLabel,\n  verifyLabel = defaults.verifyLabel,\n  resendLabel = defaults.resendLabel,\n  resendWaitingLabel = defaults.resendWaitingLabel,\n  successMessage = defaults.successMessage,\n  errorMessage = defaults.errorMessage,\n  codeLength = defaults.codeLength,\n  defaultCode,\n  expectedCode,\n  resendCountdownSeconds = defaults.resendCountdownSeconds,\n  defaultRemainingSeconds,\n  defaultOpen = false,\n  presentation = \"dialog\",\n  status: statusProp = \"idle\",\n  onVerify,\n  onResend,\n  ...props\n}: OtpDialogProps) {\n  const digitId = React.useId();\n  const length = Math.max(4, Math.min(8, Math.trunc(codeLength) || 4));\n  const cooldown = Math.max(0, Math.trunc(resendCountdownSeconds) || 0);\n  const [digits, setDigits] = React.useState(() =>\n    digitsFromCode(defaultCode, length),\n  );\n  const [status, setStatus] = React.useState<OtpDialogStatus>(statusProp);\n  const [remaining, setRemaining] = React.useState(() =>\n    Math.max(0, Math.trunc(defaultRemainingSeconds ?? cooldown)),\n  );\n  const inputRefs = React.useRef<Array<HTMLInputElement | null>>([]);\n\n  const focusAt = (index: number) => {\n    const next = Math.max(0, Math.min(length - 1, index));\n    inputRefs.current[next]?.focus();\n    inputRefs.current[next]?.select();\n  };\n\n  const writeDigits = (next: string[], focusIndex?: number) => {\n    setDigits(next);\n    if (status !== \"idle\") setStatus(\"idle\");\n    if (focusIndex != null) {\n      queueMicrotask(() => focusAt(focusIndex));\n    }\n  };\n\n  React.useEffect(() => {\n    if (remaining <= 0) return;\n    const timer = window.setInterval(() => {\n      setRemaining((value) => (value <= 1 ? 0 : value - 1));\n    }, 1000);\n    return () => window.clearInterval(timer);\n  }, [remaining]);\n\n  const handleDigitChange = (index: number, raw: string) => {\n    const cleaned = raw.replace(/\\D/g, \"\");\n    if (!cleaned) {\n      writeDigits(digits.map((digit, i) => (i === index ? \"\" : digit)));\n      return;\n    }\n\n    const next = [...digits];\n    const chars = cleaned.slice(0, length - index).split(\"\");\n    chars.forEach((char, offset) => {\n      next[index + offset] = char;\n    });\n    writeDigits(next, index + chars.length);\n  };\n\n  const handleDigitKeyDown = (\n    index: number,\n    event: React.KeyboardEvent<HTMLInputElement>,\n  ) => {\n    if (event.key === \"Backspace\" && !digits[index] && index > 0) {\n      event.preventDefault();\n      const next = [...digits];\n      next[index - 1] = \"\";\n      writeDigits(next, index - 1);\n    }\n    if (event.key === \"ArrowLeft\") {\n      event.preventDefault();\n      focusAt(index - 1);\n    }\n    if (event.key === \"ArrowRight\") {\n      event.preventDefault();\n      focusAt(index + 1);\n    }\n  };\n\n  const handleDigitPaste = (\n    index: number,\n    event: React.ClipboardEvent<HTMLInputElement>,\n  ) => {\n    const pasted = event.clipboardData.getData(\"text\").replace(/\\D/g, \"\");\n    if (!pasted) return;\n    event.preventDefault();\n    const next = [...digits];\n    pasted.split(\"\").forEach((char, offset) => {\n      if (index + offset < length) next[index + offset] = char;\n    });\n    writeDigits(next, Math.min(index + pasted.length, length) - 1);\n  };\n\n  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {\n    event.preventDefault();\n    const code = digits.join(\"\");\n    if (code.length !== length) return;\n    const matches = expectedCode == null || expectedCode === code;\n    if (!matches) {\n      setStatus(\"error\");\n      return;\n    }\n    setStatus(\"success\");\n    onVerify?.({ code });\n  };\n\n  const handleResend = () => {\n    if (remaining > 0) return;\n    writeDigits(\n      Array.from({ length }, () => \"\"),\n      0,\n    );\n    setStatus(\"idle\");\n    setRemaining(cooldown);\n    onResend?.();\n  };\n\n  const panel = (\n    <OtpDialogPanel\n      codeLabel={codeLabel}\n      description={description}\n      destination={destination}\n      digitId={digitId}\n      digits={digits}\n      errorMessage={errorMessage}\n      handleDigitChange={handleDigitChange}\n      handleDigitKeyDown={handleDigitKeyDown}\n      handleDigitPaste={handleDigitPaste}\n      handleResend={handleResend}\n      handleSubmit={handleSubmit}\n      inDialog={presentation === \"dialog\"}\n      inputRefs={inputRefs}\n      length={length}\n      remaining={remaining}\n      resendLabel={resendLabel}\n      resendWaitingLabel={resendWaitingLabel}\n      status={status}\n      successMessage={successMessage}\n      title={title}\n      verifyLabel={verifyLabel}\n    />\n  );\n\n  return (\n    <section\n      data-slot=\"otp-dialog\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto flex min-h-[28rem] max-w-3xl items-center justify-center px-5 py-16 sm:px-8 sm:py-20\">\n        {presentation === \"inline\" ? (\n          <div className=\"w-full max-w-sm overflow-hidden rounded-[calc(var(--radius)+0.35rem)] border border-border bg-popover text-popover-foreground shadow-sm\">\n            {panel}\n          </div>\n        ) : (\n          <Dialog defaultOpen={defaultOpen}>\n            <DialogTrigger render={<Button>{triggerLabel}</Button>} />\n            <DialogContent className=\"p-0 sm:max-w-sm\" showCloseButton>\n              {panel}\n            </DialogContent>\n          </Dialog>\n        )}\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "otp-dialog/OtpDialog.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type OtpDialogPresentation = \"dialog\" | \"inline\";\n\nexport type OtpDialogStatus = \"idle\" | \"error\" | \"success\";\n\nexport interface OtpDialogVerifyPayload {\n  code: string;\n}\n\nexport interface OtpDialogProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  triggerLabel?: string;\n  title?: string;\n  description?: string;\n  destination?: string;\n  codeLabel?: string;\n  verifyLabel?: string;\n  resendLabel?: string;\n  resendWaitingLabel?: string;\n  successMessage?: string;\n  errorMessage?: string;\n  codeLength?: number;\n  defaultCode?: string;\n  expectedCode?: string;\n  resendCountdownSeconds?: number;\n  defaultRemainingSeconds?: number;\n  defaultOpen?: boolean;\n  presentation?: OtpDialogPresentation;\n  status?: OtpDialogStatus;\n  onVerify?: (payload: OtpDialogVerifyPayload) => void;\n  onResend?: () => void;\n}\n"
+    },
+    {
+      "path": "otp-dialog/index.ts",
+      "type": "index",
+      "content": "export { OtpDialog } from \"./OtpDialog\";\nexport type * from \"./OtpDialog.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <OtpDialog {...otpDialogMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <OtpDialog {...otpDialogMocks.alternate} />\n    </div>"
+    }
+  ]
+}
