@@ -50,15 +50,15 @@ Shape (`Config` in `src/index.ts`), matching `apps/verify/jabkit.config.json`:
 {
   "componentsDir": "src/components/jabkit",
   "alias": "@/components/jabkit",
-  "registry": "http://localhost:3000",
+  "registry": "https://jabkit.joseadrianbuctuanon.dev",
   "formatter": "biome",
   "theme": { "mode": "class", "provider": "next-themes" }
 }
 ```
 
-`formatter` and `theme` are stored and currently unused by `add`. Registry URL precedence: `process.env.JABKIT_REGISTRY` if set, otherwise `config.registry`. `init` seeds `registry` from that env var or `http://localhost:3000`.
+`formatter` and `theme` are stored and currently unused by `add`. Registry URL precedence: `process.env.JABKIT_REGISTRY` if set, otherwise `config.registry`. `init` seeds `registry` from that env var or `https://jabkit.joseadrianbuctuanon.dev`. Use `JABKIT_REGISTRY=http://localhost:3000` when the showcase is running locally.
 
-The CLI always fetches over HTTP (`{registry}/r/{name}.json` and `{registry}/r/index.json`). It does not read `apps/showcase/public/r` from disk. For local work that means the showcase (`pnpm dev`) must be serving those files.
+The CLI always fetches over HTTP (`{registry}/r/{name}.json` and `{registry}/r/index.json`). It does not read `apps/showcase/public/r` from disk.
 
 ## `init`
 

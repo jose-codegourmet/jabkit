@@ -75,7 +75,8 @@ async function init() {
   const config: Config = {
     componentsDir: "src/components/jabkit",
     alias: "@/components/jabkit",
-    registry: process.env.JABKIT_REGISTRY ?? "http://localhost:3000",
+    registry:
+      process.env.JABKIT_REGISTRY ?? "https://jabkit.joseadrianbuctuanon.dev",
     formatter: "biome",
     theme: { mode: "class", provider: "next-themes" },
   };
