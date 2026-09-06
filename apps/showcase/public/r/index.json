@@ -59,6 +59,32 @@
     }
   },
   {
+    "name": "calendar-with-localisation",
+    "displayName": "CalendarWithLocalisation",
+    "category": "atoms",
+    "description": "Two-month appointment calendar with a language switcher that localizes copy, weekdays, and month titles.",
+    "tags": [
+      "calendar",
+      "locale",
+      "date",
+      "range",
+      "atom"
+    ],
+    "addedAt": "2026-09-06",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center",
+      "width": 720,
+      "height": 520
+    }
+  },
+  {
     "name": "checkbox",
     "displayName": "Checkbox",
     "category": "atoms",
