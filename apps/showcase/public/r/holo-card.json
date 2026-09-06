@@ -1,0 +1,112 @@
+{
+  "name": "holo-card",
+  "displayName": "HoloCard",
+  "version": "1.0.0",
+  "addedAt": "2026-09-06",
+  "description": "Marketing block with holographic trading cards: pointer-driven 3D tilt, token rainbow foil, and a contact shadow that leans with the surface.",
+  "sectionCategory": "features",
+  "purpose": "Turns a product or drop announcement into a tactile foil card that reacts to the pointer without leaving semantic tokens.",
+  "bestFor": [
+    "product launches",
+    "collectible or limited-drop pages",
+    "creative studio landings"
+  ],
+  "avoidFor": [
+    "dense documentation",
+    "task-heavy product UI where pointer effects would compete with controls"
+  ],
+  "tone": [
+    "experimental",
+    "modern",
+    "confident"
+  ],
+  "industries": [
+    "technology",
+    "media",
+    "ecommerce"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "high",
+  "layout": {
+    "type": "stack",
+    "alignment": "center",
+    "columns": 3
+  },
+  "slots": [
+    "headline",
+    "content",
+    "featureVisuals"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "logos"
+  ],
+  "recommendedBefore": [
+    "pricing",
+    "cta",
+    "testimonials"
+  ],
+  "tags": [
+    "holo",
+    "holographic",
+    "foil",
+    "card",
+    "marketing",
+    "tilt",
+    "interactive",
+    "landing"
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "badge"
+  ],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "holo-card/HoloCard.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { type ReactNode, useEffect, useId, useRef } from \"react\";\nimport { Badge } from \"@/atoms/badge\";\nimport { cn } from \"@/lib/cn\";\nimport type { HoloCardFace, HoloCardProps } from \"./HoloCard.types\";\n\nconst DEFAULT_EYEBROW = \"Limited foil\";\nconst DEFAULT_HEADING = \"A card that tracks the light.\";\nconst DEFAULT_DESCRIPTION =\n  \"Pointer tilt, rainbow foil, and a shadow that leans with the surface. Quiet when motion is reduced.\";\nconst DEFAULT_BRAND = \"Northline\";\nconst DEFAULT_BADGE = \"Foil\";\nconst DEFAULT_TITLE = \"Holo Card\";\nconst DEFAULT_SUBTITLE = \"Move the pointer across the card.\";\nconst DEFAULT_SERIAL = \"0001 / 2026\";\nconst DEFAULT_MARK = \"northline.studio\";\nconst DEFAULT_TILT = 16;\nconst DEFAULT_ASPECT = 1.586;\n\nfunction CardFace({ face }: { face: HoloCardFace }) {\n  return (\n    <>\n      <div className=\"flex items-start justify-between gap-3\">\n        <span className=\"text-[11px] font-medium tracking-[0.18em] text-muted-foreground uppercase\">\n          {face.brand}\n        </span>\n        {face.badge ? (\n          <Badge variant=\"outline\" className=\"border-border text-primary\">\n            {face.badge}\n          </Badge>\n        ) : null}\n      </div>\n      <div className=\"grid place-items-center py-4\">\n        <span\n          aria-hidden=\"true\"\n          className=\"relative grid size-24 place-items-center\"\n        >\n          <span className=\"absolute inset-0 rounded-full border border-border/80\" />\n          <span className=\"absolute inset-3 rounded-full border border-primary/40\" />\n          <span className=\"absolute inset-6 rounded-full bg-primary/20\" />\n          <span className=\"size-3 rounded-full bg-chart-1\" />\n        </span>\n      </div>\n      <div>\n        <p className=\"text-2xl font-semibold tracking-tight text-balance\">\n          {face.title}\n        </p>\n        {face.subtitle ? (\n          <p className=\"mt-1 text-sm leading-6 text-muted-foreground\">\n            {face.subtitle}\n          </p>\n        ) : null}\n      </div>\n      <div className=\"flex items-center justify-between gap-3 text-[11px] text-muted-foreground\">\n        {face.serial ? (\n          <span className=\"font-mono tracking-widest\">{face.serial}</span>\n        ) : (\n          <span />\n        )}\n        {face.mark ? <span>{face.mark}</span> : null}\n      </div>\n    </>\n  );\n}\n\nfunction FoilSurface({\n  aspect,\n  maxTilt,\n  children,\n}: {\n  aspect: number;\n  maxTilt: number;\n  children: ReactNode;\n}) {\n  const stageRef = useRef<HTMLDivElement>(null);\n  const cardRef = useRef<HTMLDivElement>(null);\n  const shadowRef = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    const stage = stageRef.current;\n    const card = cardRef.current;\n    const shadow = shadowRef.current;\n    if (!stage || !card || !shadow) return;\n\n    const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n    let reduceMotion = media.matches;\n    let frame = 0;\n    let pointer: { nx: number; ny: number } | null = null;\n    let rx = 0;\n    let ry = 0;\n    let vx = 0;\n    let vy = 0;\n    let hx = 0.5;\n    let hy = 0.5;\n    let intensity = 0;\n    let last = performance.now();\n    const stiffness = 160;\n    const damping = 16;\n\n    const apply = () => {\n      card.style.setProperty(\"--holo-x\", String(hx));\n      card.style.setProperty(\"--holo-y\", String(hy));\n      card.style.setProperty(\"--holo-i\", String(intensity));\n      card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;\n      const leanX = ry * 1.15;\n      const leanY = 22 - rx * 0.9;\n      shadow.style.transform = `translate3d(${leanX}px, ${leanY}px, 0) scale(0.92, 0.22)`;\n      shadow.style.opacity = String(0.28 + intensity * 0.28);\n    };\n\n    const tick = (now: number) => {\n      const dt = Math.min(0.032, (now - last) / 1000);\n      last = now;\n      const reduced = reduceMotion;\n      const restX = reduced ? 0.5 : 0.5 + Math.sin(now / 1400) * 0.08;\n      const restY = reduced ? 0.5 : 0.5 + Math.cos(now / 1700) * 0.06;\n      const targetX = pointer ? pointer.ny * maxTilt : 0;\n      const targetY = pointer ? pointer.nx * maxTilt : 0;\n      const targetHx = pointer ? pointer.nx * 0.5 + 0.5 : restX;\n      const targetHy = pointer ? pointer.ny * 0.5 + 0.5 : restY;\n      const targetI = pointer && !reduced ? 1 : reduced ? 0.22 : 0.38;\n\n      if (reduced) {\n        rx = 0;\n        ry = 0;\n        vx = 0;\n        vy = 0;\n        hx = 0.5;\n        hy = 0.5;\n        intensity = 0.22;\n      } else {\n        const ax = stiffness * (targetX - rx) - damping * vx;\n        const ay = stiffness * (targetY - ry) - damping * vy;\n        vx += ax * dt;\n        vy += ay * dt;\n        rx += vx * dt;\n        ry += vy * dt;\n        hx += (targetHx - hx) * Math.min(1, dt * 10);\n        hy += (targetHy - hy) * Math.min(1, dt * 10);\n        intensity += (targetI - intensity) * Math.min(1, dt * 8);\n      }\n\n      apply();\n      frame = window.requestAnimationFrame(tick);\n    };\n\n    const local = (event: PointerEvent) => {\n      const rect = stage.getBoundingClientRect();\n      const nx = ((event.clientX - rect.left) / rect.width) * 2 - 1;\n      const ny = ((event.clientY - rect.top) / rect.height) * 2 - 1;\n      return {\n        nx: Math.max(-1, Math.min(1, nx)),\n        ny: Math.max(-1, Math.min(1, ny)),\n      };\n    };\n\n    const onMove = (event: PointerEvent) => {\n      if (reduceMotion) return;\n      const point = local(event);\n      pointer = { nx: point.nx, ny: -point.ny };\n    };\n    const onLeave = () => {\n      pointer = null;\n    };\n    const onMotion = () => {\n      reduceMotion = media.matches;\n      if (reduceMotion) pointer = null;\n    };\n\n    frame = window.requestAnimationFrame(tick);\n    media.addEventListener(\"change\", onMotion);\n    stage.addEventListener(\"pointermove\", onMove);\n    stage.addEventListener(\"pointerleave\", onLeave);\n\n    return () => {\n      window.cancelAnimationFrame(frame);\n      media.removeEventListener(\"change\", onMotion);\n      stage.removeEventListener(\"pointermove\", onMove);\n      stage.removeEventListener(\"pointerleave\", onLeave);\n    };\n  }, [maxTilt]);\n\n  return (\n    <div\n      className=\"relative mx-auto w-full max-w-[22.5rem] [perspective:1100px]\"\n      ref={stageRef}\n    >\n      <div\n        aria-hidden=\"true\"\n        className=\"pointer-events-none absolute inset-x-8 bottom-0 h-16 rounded-[100%] bg-foreground/35 blur-2xl\"\n        ref={shadowRef}\n      />\n      <article\n        className=\"jk-holo-card relative isolate flex h-full flex-col justify-between overflow-hidden rounded-[calc(var(--radius)+0.45rem)] border border-border bg-card p-6 text-card-foreground will-change-transform\"\n        data-slot=\"holo-card-face\"\n        ref={cardRef}\n        style={{ aspectRatio: String(aspect) }}\n      >\n        <div\n          aria-hidden=\"true\"\n          className=\"jk-holo-card-foil pointer-events-none absolute inset-0\"\n        />\n        <div\n          aria-hidden=\"true\"\n          className=\"jk-holo-card-glint pointer-events-none absolute inset-0\"\n        />\n        <div\n          aria-hidden=\"true\"\n          className=\"pointer-events-none absolute inset-px rounded-[calc(var(--radius)+0.38rem)] border border-primary/15\"\n        />\n        <div className=\"relative z-10 flex h-full flex-col justify-between\">\n          {children}\n        </div>\n      </article>\n    </div>\n  );\n}\n\nexport function HoloCard({\n  className,\n  eyebrow = DEFAULT_EYEBROW,\n  heading = DEFAULT_HEADING,\n  description = DEFAULT_DESCRIPTION,\n  brand = DEFAULT_BRAND,\n  badge = DEFAULT_BADGE,\n  title = DEFAULT_TITLE,\n  subtitle = DEFAULT_SUBTITLE,\n  serial = DEFAULT_SERIAL,\n  mark = DEFAULT_MARK,\n  cards,\n  maxTilt = DEFAULT_TILT,\n  aspect = DEFAULT_ASPECT,\n  children,\n  ...props\n}: HoloCardProps) {\n  const headingId = useId();\n  const faces =\n    cards && cards.length > 0\n      ? cards\n      : [\n          {\n            id: \"featured\",\n            brand,\n            badge,\n            title,\n            subtitle,\n            serial,\n            mark,\n          },\n        ];\n  const custom = Boolean(children) && faces.length === 1;\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-slot=\"holo-card\"\n      {...props}\n    >\n      <style href=\"jk-holo-card\" precedence=\"default\">{`\n        .jk-holo-card {\n          --holo-x: 0.5;\n          --holo-y: 0.5;\n          --holo-i: 0.35;\n          transform-style: preserve-3d;\n        }\n        .jk-holo-card-foil {\n          background-image:\n            repeating-linear-gradient(\n              118deg,\n              color-mix(in oklab, var(--jk-chart-1), transparent 18%),\n              color-mix(in oklab, var(--jk-chart-5), transparent 8%) 12%,\n              color-mix(in oklab, var(--jk-chart-2), transparent 12%) 24%,\n              color-mix(in oklab, var(--jk-chart-4), transparent 6%) 38%,\n              color-mix(in oklab, var(--jk-chart-3), transparent 14%) 52%,\n              color-mix(in oklab, var(--jk-chart-1), transparent 18%) 64%\n            );\n          background-size: 240% 240%;\n          background-position: calc(var(--holo-x) * 100%) calc(var(--holo-y) * 100%);\n          mix-blend-mode: overlay;\n          opacity: calc(0.2 + var(--holo-i) * 0.48);\n        }\n        .dark .jk-holo-card-foil {\n          mix-blend-mode: color-dodge;\n          opacity: calc(0.16 + var(--holo-i) * 0.58);\n        }\n        .jk-holo-card-glint {\n          background:\n            radial-gradient(\n              28rem circle at calc(var(--holo-x) * 100%) calc(var(--holo-y) * 100%),\n              color-mix(in oklab, var(--jk-primary-foreground), transparent 42%),\n              transparent 38%\n            ),\n            linear-gradient(\n              calc(var(--holo-x) * 80deg + 40deg),\n              transparent 30%,\n              color-mix(in oklab, var(--jk-primary), transparent 72%) 48%,\n              transparent 62%\n            );\n          mix-blend-mode: soft-light;\n          opacity: calc(0.28 + var(--holo-i) * 0.5);\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-holo-card {\n            transform: none !important;\n          }\n          .jk-holo-card-foil,\n          .jk-holo-card-glint {\n            opacity: 0.22;\n          }\n        }\n      `}</style>\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24\">\n        <header className=\"mx-auto mb-10 max-w-2xl text-center sm:mb-14\">\n          {eyebrow ? (\n            <p className=\"mb-3 text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase\">\n              {eyebrow}\n            </p>\n          ) : null}\n          <h2\n            className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl lg:text-5xl\"\n            id={headingId}\n          >\n            {heading}\n          </h2>\n          {description ? (\n            <p className=\"mt-3 text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7\">\n              {description}\n            </p>\n          ) : null}\n        </header>\n        <div\n          className={cn(\n            \"grid items-start justify-items-center gap-10 sm:gap-8\",\n            faces.length > 1 ? \"md:grid-cols-3\" : \"grid-cols-1\",\n          )}\n        >\n          {faces.map((face) => (\n            <FoilSurface aspect={aspect} key={face.id} maxTilt={maxTilt}>\n              {custom ? children : <CardFace face={face} />}\n            </FoilSurface>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "holo-card/HoloCard.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport interface HoloCardFace {\n  id: string;\n  brand?: string;\n  badge?: string;\n  title: string;\n  subtitle?: string;\n  serial?: string;\n  mark?: string;\n}\n\nexport interface HoloCardProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  eyebrow?: string;\n  heading?: string;\n  description?: string;\n  brand?: string;\n  badge?: string;\n  title?: string;\n  subtitle?: string;\n  serial?: string;\n  mark?: string;\n  cards?: HoloCardFace[];\n  maxTilt?: number;\n  aspect?: number;\n  children?: ReactNode;\n}\n"
+    },
+    {
+      "path": "holo-card/index.ts",
+      "type": "index",
+      "content": "export { HoloCard } from \"./HoloCard\";\nexport type * from \"./HoloCard.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <HoloCard {...holoCardMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <HoloCard {...holoCardMocks.alternate} />\n    </div>"
+    }
+  ]
+}

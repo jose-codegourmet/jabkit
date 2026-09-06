@@ -2658,7 +2658,7 @@
       ]
     },
     "toast": {
-      "sourceHash": "54576f737febc114e243d1024cde05482df28ae7a75e53b991d5a9a506e0c94c",
+      "sourceHash": "395556381cb9c1699917ff0aff80a78c7dfcc831f692784f75261e788533f585",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2684,6 +2684,47 @@
           "bytes": 6526,
           "width": 800,
           "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "holo-card": {
+      "sourceHash": "a81992fbbd16baf549f488fea67b18a192a97793aa006d7d4b72b019c381b864",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "holo-card.Default.dark.webp",
+          "bytes": 9366,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "holo-card.Variants.dark.webp",
+          "bytes": 12378,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "holo-card.ThemeComparison.dark.webp",
+          "bytes": 17498,
+          "width": 960,
+          "height": 600,
           "format": "webp"
         }
       ]

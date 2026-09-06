@@ -7,6 +7,14 @@ export default {
   addedAt: "2026-09-06",
   description:
     "Temporary status messages with stacking, swipe dismiss, actions, and success, info, warning, and error types.",
+  sectionCategory: "feedback",
+  purpose:
+    "Surfaces short-lived success, warning, and error status without taking the user off the current screen.",
+  bestFor: [
+    "form save confirmation",
+    "async job status",
+    "non-blocking error recovery",
+  ],
   tags: ["toast", "notification", "feedback", "alert", "atom"],
   dependencies: ["@base-ui/react", "lucide-react"],
   registryDependencies: [],
