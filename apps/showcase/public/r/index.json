@@ -1268,6 +1268,33 @@
     }
   },
   {
+    "name": "shape-grid",
+    "displayName": "ShapeGrid",
+    "category": "marketing",
+    "description": "Marketing canvas of drifting outlined tiles — square, hexagon, circle, or triangle — that fill on hover and rest when motion is reduced.",
+    "tags": [
+      "marketing",
+      "animation",
+      "canvas",
+      "grid",
+      "shapes",
+      "background",
+      "hero",
+      "interactive"
+    ],
+    "addedAt": "2026-09-06",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 720
+    }
+  },
+  {
     "name": "splash-cursor",
     "displayName": "SplashCursor",
     "category": "marketing",
