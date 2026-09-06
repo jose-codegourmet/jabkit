@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 // biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.
 import * as React from "react";
 import { Button } from "../button/Button";
-import { createToastManager, Toaster, toast } from "./Toast";
+import { ToastCard, Toaster, toast } from "./Toast";
 import { toastMocks } from "./Toast.mocks";
 
 const meta = {
@@ -13,31 +13,6 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-
-const inFlowViewport =
-  "!pointer-events-auto !relative !inset-auto !bottom-auto !right-auto !mx-0 !w-full !max-w-none";
-
-function seededManager(item: {
-  title: string;
-  description?: string;
-  type?: string;
-  actionLabel?: string;
-}) {
-  const manager = createToastManager();
-  manager.add({
-    title: item.title,
-    description: item.description,
-    type: item.type,
-    timeout: 0,
-    ...(item.actionLabel
-      ? { actionProps: { children: item.actionLabel } }
-      : {}),
-  });
-  return manager;
-}
-
-const lightManager = seededManager(toastMocks.default);
-const darkManager = seededManager(toastMocks.default);
 
 export const Default: Story = {
   render: () => (
@@ -106,24 +81,16 @@ export const ThemeComparison: Story = {
   render: () => (
     <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border sm:grid-cols-2">
       <div className="bg-background p-8">
-        <div className="relative h-28 w-80">
-          <Toaster
-            disablePortal
-            timeout={0}
-            toastManager={lightManager}
-            viewportClassName={inFlowViewport}
-          />
-        </div>
+        <ToastCard
+          title={toastMocks.default.title}
+          description={toastMocks.default.description}
+        />
       </div>
       <div className="dark bg-background p-8">
-        <div className="relative h-28 w-80">
-          <Toaster
-            disablePortal
-            timeout={0}
-            toastManager={darkManager}
-            viewportClassName={inFlowViewport}
-          />
-        </div>
+        <ToastCard
+          title={toastMocks.default.title}
+          description={toastMocks.default.description}
+        />
       </div>
     </div>
   ),

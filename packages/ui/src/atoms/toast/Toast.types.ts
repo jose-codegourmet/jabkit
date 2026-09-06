@@ -1,4 +1,5 @@
 import type { Toast as ToastPrimitive } from "@base-ui/react/toast";
+import type { ReactNode } from "react";
 
 export type ToastStatus = "success" | "info" | "warning" | "error" | "loading";
 
@@ -16,3 +17,11 @@ export type ToasterProps = ToastProviderProps & {
   disablePortal?: boolean;
   viewportClassName?: string;
 };
+
+export interface ToastCardProps {
+  className?: string;
+  title: ReactNode;
+  description?: ReactNode;
+  type?: ToastStatus | string;
+  actionLabel?: ReactNode;
+}

@@ -1,6 +1,9 @@
 "use client";
 
-import { Toast as ToastPrimitive } from "@base-ui/react/toast";
+import {
+  type ToastManager,
+  Toast as ToastPrimitive,
+} from "@base-ui/react/toast";
 import {
   CircleAlertIcon,
   CircleCheckIcon,
@@ -9,10 +12,11 @@ import {
   TriangleAlertIcon,
   XIcon,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { type ReactNode, useLayoutEffect, useState } from "react";
 import { cn } from "@/lib/cn";
 import type {
   ToastActionProps,
+  ToastCardProps,
   ToastCloseProps,
   ToastContentProps,
   ToastDescriptionProps,
@@ -25,9 +29,28 @@ import type {
   ToastViewportProps,
 } from "./Toast.types";
 
-const toast = ToastPrimitive.createToastManager();
 const createToastManager = ToastPrimitive.createToastManager;
 const useToastManager = ToastPrimitive.useToastManager;
+
+let sharedManager: ToastManager | undefined;
+
+function getSharedToastManager() {
+  sharedManager ??= createToastManager();
+  return sharedManager;
+}
+
+const toast = {
+  add: ((options) =>
+    getSharedToastManager().add(options)) as ToastManager["add"],
+  close: ((id) => getSharedToastManager().close(id)) as ToastManager["close"],
+  update: ((id, options) =>
+    getSharedToastManager().update(id, options)) as ToastManager["update"],
+  promise: ((promiseValue, options) =>
+    getSharedToastManager().promise(
+      promiseValue,
+      options,
+    )) as ToastManager["promise"],
+};
 
 function ToastProvider({ ...props }: ToastProviderProps) {
   return <ToastPrimitive.Provider data-slot="toast-provider" {...props} />;
@@ -180,13 +203,55 @@ function ToastList() {
   ));
 }
 
+function ToastCard({
+  className,
+  title,
+  description,
+  type,
+  actionLabel,
+}: ToastCardProps) {
+  return (
+    <div
+      data-slot="toast"
+      className={cn(
+        "flex w-full max-w-sm items-center rounded-[--radius] border border-border bg-popover text-popover-foreground shadow-lg",
+        className,
+      )}
+    >
+      <div className="flex w-full items-center gap-3 overflow-hidden p-4">
+        <ToastIcon type={type} />
+        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+          <p className="text-sm font-medium text-foreground">{title}</p>
+          {description ? (
+            <p className="text-sm text-muted-foreground">{description}</p>
+          ) : null}
+        </div>
+        {actionLabel ? (
+          <span className="inline-flex h-8 shrink-0 items-center justify-center rounded-[--radius] border border-border bg-secondary px-3 text-sm font-medium text-secondary-foreground">
+            {actionLabel}
+          </span>
+        ) : null}
+        <span className="relative shrink-0 text-muted-foreground">
+          <XIcon className="size-4" />
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function Toaster({
   children,
-  toastManager = toast,
+  toastManager,
   disablePortal = false,
   viewportClassName,
   ...props
 }: ToasterProps) {
+  const [mounted, setMounted] = useState(false);
+  useLayoutEffect(() => {
+    setMounted(true);
+  }, []);
+  const manager =
+    toastManager ?? (mounted ? getSharedToastManager() : undefined);
   const viewport = (
     <ToastViewport className={viewportClassName}>
       <ToastList />
@@ -194,9 +259,15 @@ function Toaster({
   );
 
   return (
-    <ToastProvider toastManager={toastManager} {...props}>
+    <ToastProvider toastManager={manager} {...props}>
       {children}
-      {disablePortal ? viewport : <ToastPortal>{viewport}</ToastPortal>}
+      {mounted ? (
+        disablePortal ? (
+          viewport
+        ) : (
+          <ToastPortal>{viewport}</ToastPortal>
+        )
+      ) : null}
     </ToastProvider>
   );
 }
@@ -205,6 +276,7 @@ export {
   createToastManager,
   Toast,
   ToastAction,
+  ToastCard,
   ToastClose,
   ToastContent,
   ToastDescription,
