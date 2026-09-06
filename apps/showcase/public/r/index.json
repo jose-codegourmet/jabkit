@@ -706,6 +706,32 @@
     }
   },
   {
+    "name": "cursor-grid",
+    "displayName": "CursorGrid",
+    "category": "marketing",
+    "description": "Marketing canvas lattice that lights cells around the cursor with configurable falloff and click pulses, honoring prefers-reduced-motion.",
+    "tags": [
+      "marketing",
+      "animation",
+      "canvas",
+      "cursor",
+      "grid",
+      "hero",
+      "interactive"
+    ],
+    "addedAt": "2026-09-06",
+    "dependencies": [],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 720
+    }
+  },
+  {
     "name": "ecommerce-hero8",
     "displayName": "EcommerceHero8",
     "category": "marketing",
