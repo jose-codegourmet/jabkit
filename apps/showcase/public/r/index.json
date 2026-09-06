@@ -791,6 +791,34 @@
     }
   },
   {
+    "name": "footer-section",
+    "displayName": "FooterSection",
+    "category": "marketing",
+    "description": "Site footer with a newsletter field, quick links, contact details, social marks, a light/dark toggle, and a legal row.",
+    "tags": [
+      "footer",
+      "marketing",
+      "newsletter",
+      "links",
+      "social",
+      "theme",
+      "landing"
+    ],
+    "addedAt": "2026-09-06",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 820
+    }
+  },
+  {
     "name": "gallery31",
     "displayName": "Gallery31",
     "category": "marketing",
