@@ -2656,6 +2656,37 @@
           "format": "webp"
         }
       ]
+    },
+    "toast": {
+      "sourceHash": "54576f737febc114e243d1024cde05482df28ae7a75e53b991d5a9a506e0c94c",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "toast.Default.dark.webp",
+          "bytes": 2710,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "toast.Variants.dark.webp",
+          "bytes": 6526,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
     }
   }
 }

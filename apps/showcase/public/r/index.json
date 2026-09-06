@@ -629,6 +629,28 @@
     }
   },
   {
+    "name": "toast",
+    "displayName": "Toast",
+    "category": "atoms",
+    "description": "Temporary status messages with stacking, swipe dismiss, actions, and success, info, warning, and error types.",
+    "tags": [
+      "toast",
+      "notification",
+      "feedback",
+      "alert",
+      "atom"
+    ],
+    "addedAt": "2026-09-06",
+    "dependencies": [
+      "@base-ui/react",
+      "lucide-react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
     "name": "tooltip",
     "displayName": "Tooltip",
     "category": "atoms",
