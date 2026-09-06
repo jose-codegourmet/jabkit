@@ -1,15 +1,20 @@
 {
   "name": "dialog",
   "displayName": "Dialog",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "addedAt": "2026-08-30",
-  "description": "Accessible Dialog primitive adapted from shadcn/ui.",
+  "description": "Accessible modal dialog with trigger, overlay, header, description, and footer composed on Base UI.",
   "sectionCategory": "overlay",
   "purpose": "Moves a focused task or decision into a modal layer while preserving the surrounding page context.",
   "bestFor": [
     "focused workflows",
     "confirmations",
     "quick views"
+  ],
+  "avoidFor": [
+    "toasts",
+    "inline help",
+    "persistent page content"
   ],
   "tone": [
     "professional",
@@ -31,37 +36,50 @@
   "capabilities": {
     "supportsImage": false,
     "supportsVideo": false,
-    "supportsForm": false,
-    "supportsCTA": false,
+    "supportsForm": true,
+    "supportsCTA": true,
     "supportsDarkMode": true
   },
+  "recommendedAfter": [
+    "button"
+  ],
   "tags": [
     "dialog",
+    "modal",
+    "overlay",
     "primitive",
     "accessible"
   ],
-  "dependencies": [],
-  "registryDependencies": [],
+  "dependencies": [
+    "@base-ui/react",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
   "a11y": {
     "keyboardNav": true,
     "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
   },
   "category": "atoms",
   "files": [
     {
       "path": "dialog/Dialog.tsx",
       "type": "component",
-      "content": "\"use client\";\n\nimport { Dialog as DialogPrimitive } from \"@base-ui/react/dialog\";\nimport { XIcon } from \"lucide-react\";\nimport type * as React from \"react\";\nimport { Button } from \"@/atoms/button\";\nimport { cn } from \"@/lib/cn\";\n\nfunction Dialog({ ...props }: DialogPrimitive.Root.Props) {\n  return <DialogPrimitive.Root data-slot=\"dialog\" {...props} />;\n}\n\nfunction DialogTrigger({ ...props }: DialogPrimitive.Trigger.Props) {\n  return <DialogPrimitive.Trigger data-slot=\"dialog-trigger\" {...props} />;\n}\n\nfunction DialogPortal({ ...props }: DialogPrimitive.Portal.Props) {\n  return <DialogPrimitive.Portal data-slot=\"dialog-portal\" {...props} />;\n}\n\nfunction DialogClose({ ...props }: DialogPrimitive.Close.Props) {\n  return <DialogPrimitive.Close data-slot=\"dialog-close\" {...props} />;\n}\n\nfunction DialogOverlay({\n  className,\n  ...props\n}: DialogPrimitive.Backdrop.Props) {\n  return (\n    <DialogPrimitive.Backdrop\n      data-slot=\"dialog-overlay\"\n      className={cn(\n        \"fixed inset-0 isolate z-50 bg-foreground/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction DialogContent({\n  className,\n  children,\n  showCloseButton = true,\n  ...props\n}: DialogPrimitive.Popup.Props & {\n  showCloseButton?: boolean;\n}) {\n  return (\n    <DialogPortal>\n      <DialogOverlay />\n      <DialogPrimitive.Popup\n        data-slot=\"dialog-content\"\n        className={cn(\n          \"fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-popover p-4 text-sm text-popover-foreground ring-1 ring-foreground/10 duration-100 outline-none sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n        {showCloseButton && (\n          <DialogPrimitive.Close\n            data-slot=\"dialog-close\"\n            render={\n              <Button\n                variant=\"ghost\"\n                className=\"absolute top-2 right-2\"\n                size=\"sm\"\n              >\n                <XIcon />\n              </Button>\n            }\n          >\n            <XIcon />\n            <span className=\"sr-only\">Close</span>\n          </DialogPrimitive.Close>\n        )}\n      </DialogPrimitive.Popup>\n    </DialogPortal>\n  );\n}\n\nfunction DialogHeader({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"dialog-header\"\n      className={cn(\"flex flex-col gap-2\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction DialogFooter({\n  className,\n  showCloseButton = false,\n  children,\n  ...props\n}: React.ComponentProps<\"div\"> & {\n  showCloseButton?: boolean;\n}) {\n  return (\n    <div\n      data-slot=\"dialog-footer\"\n      className={cn(\n        \"-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-xl border-t bg-muted/50 p-4 sm:flex-row sm:justify-end\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      {showCloseButton && (\n        <DialogPrimitive.Close\n          render={<Button variant=\"secondary\">Close</Button>}\n        >\n          Close\n        </DialogPrimitive.Close>\n      )}\n    </div>\n  );\n}\n\nfunction DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {\n  return (\n    <DialogPrimitive.Title\n      data-slot=\"dialog-title\"\n      className={cn(\n        \"font-heading text-base leading-none font-medium\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction DialogDescription({\n  className,\n  ...props\n}: DialogPrimitive.Description.Props) {\n  return (\n    <DialogPrimitive.Description\n      data-slot=\"dialog-description\"\n      className={cn(\n        \"text-sm text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport {\n  Dialog,\n  DialogClose,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogOverlay,\n  DialogPortal,\n  DialogTitle,\n  DialogTrigger,\n};\n"
+      "content": "\"use client\";\n\nimport { Dialog as DialogPrimitive } from \"@base-ui/react/dialog\";\nimport { XIcon } from \"lucide-react\";\nimport { Button } from \"@/atoms/button\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  DialogCloseProps,\n  DialogContentProps,\n  DialogDescriptionProps,\n  DialogFooterProps,\n  DialogHeaderProps,\n  DialogOverlayProps,\n  DialogPortalProps,\n  DialogProps,\n  DialogTitleProps,\n  DialogTriggerProps,\n} from \"./Dialog.types\";\n\nfunction Dialog({ ...props }: DialogProps) {\n  return <DialogPrimitive.Root data-slot=\"dialog\" {...props} />;\n}\n\nfunction DialogTrigger({ ...props }: DialogTriggerProps) {\n  return <DialogPrimitive.Trigger data-slot=\"dialog-trigger\" {...props} />;\n}\n\nfunction DialogPortal({ ...props }: DialogPortalProps) {\n  return <DialogPrimitive.Portal data-slot=\"dialog-portal\" {...props} />;\n}\n\nfunction DialogClose({ ...props }: DialogCloseProps) {\n  return <DialogPrimitive.Close data-slot=\"dialog-close\" {...props} />;\n}\n\nfunction DialogOverlay({ className, ...props }: DialogOverlayProps) {\n  return (\n    <DialogPrimitive.Backdrop\n      data-slot=\"dialog-overlay\"\n      className={cn(\n        \"fixed inset-0 isolate z-50 bg-foreground/10 duration-100 supports-backdrop-filter:backdrop-blur-xs motion-reduce:animate-none data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction DialogContent({\n  className,\n  children,\n  showCloseButton = true,\n  ...props\n}: DialogContentProps) {\n  return (\n    <DialogPortal>\n      <DialogOverlay />\n      <DialogPrimitive.Popup\n        data-slot=\"dialog-content\"\n        className={cn(\n          \"fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-[--radius] bg-popover p-4 text-sm text-popover-foreground ring-1 ring-foreground/10 duration-100 outline-none motion-reduce:animate-none sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n        {showCloseButton ? (\n          <DialogPrimitive.Close\n            data-slot=\"dialog-close\"\n            render={\n              <Button\n                variant=\"ghost\"\n                size=\"sm\"\n                className=\"absolute top-2 right-2 size-8 p-0\"\n                aria-label=\"Close\"\n              >\n                <XIcon className=\"size-4\" />\n                <span className=\"sr-only\">Close</span>\n              </Button>\n            }\n          />\n        ) : null}\n      </DialogPrimitive.Popup>\n    </DialogPortal>\n  );\n}\n\nfunction DialogHeader({ className, ...props }: DialogHeaderProps) {\n  return (\n    <div\n      data-slot=\"dialog-header\"\n      className={cn(\"flex flex-col gap-2\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction DialogFooter({\n  className,\n  showCloseButton = false,\n  children,\n  ...props\n}: DialogFooterProps) {\n  return (\n    <div\n      data-slot=\"dialog-footer\"\n      className={cn(\n        \"-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-[--radius] border-t border-border bg-muted/50 p-4 sm:flex-row sm:justify-end\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      {showCloseButton ? (\n        <DialogPrimitive.Close\n          render={<Button variant=\"secondary\">Close</Button>}\n        />\n      ) : null}\n    </div>\n  );\n}\n\nfunction DialogTitle({ className, ...props }: DialogTitleProps) {\n  return (\n    <DialogPrimitive.Title\n      data-slot=\"dialog-title\"\n      className={cn(\"text-base leading-none font-medium\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction DialogDescription({ className, ...props }: DialogDescriptionProps) {\n  return (\n    <DialogPrimitive.Description\n      data-slot=\"dialog-description\"\n      className={cn(\n        \"text-sm text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport {\n  Dialog,\n  DialogClose,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogOverlay,\n  DialogPortal,\n  DialogTitle,\n  DialogTrigger,\n};\n"
     },
     {
       "path": "dialog/Dialog.types.ts",
       "type": "types",
-      "content": "export type DialogProps = Record<string, unknown>;\n"
+      "content": "import type { Dialog as DialogPrimitive } from \"@base-ui/react/dialog\";\nimport type { ComponentProps } from \"react\";\n\nexport type DialogProps = DialogPrimitive.Root.Props;\nexport type DialogTriggerProps = DialogPrimitive.Trigger.Props;\nexport type DialogPortalProps = DialogPrimitive.Portal.Props;\nexport type DialogCloseProps = DialogPrimitive.Close.Props;\nexport type DialogOverlayProps = DialogPrimitive.Backdrop.Props;\nexport type DialogTitleProps = DialogPrimitive.Title.Props;\nexport type DialogDescriptionProps = DialogPrimitive.Description.Props;\nexport type DialogHeaderProps = ComponentProps<\"div\">;\n\nexport type DialogContentProps = DialogPrimitive.Popup.Props & {\n  showCloseButton?: boolean;\n};\n\nexport type DialogFooterProps = ComponentProps<\"div\"> & {\n  showCloseButton?: boolean;\n};\n"
     },
     {
       "path": "dialog/index.ts",
       "type": "index",
-      "content": "export { Dialog } from \"./Dialog\";\n"
+      "content": "export {\n  Dialog,\n  DialogClose,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogOverlay,\n  DialogPortal,\n  DialogTitle,\n  DialogTrigger,\n} from \"./Dialog\";\nexport type {\n  DialogCloseProps,\n  DialogContentProps,\n  DialogDescriptionProps,\n  DialogFooterProps,\n  DialogHeaderProps,\n  DialogOverlayProps,\n  DialogPortalProps,\n  DialogProps,\n  DialogTitleProps,\n  DialogTriggerProps,\n} from \"./Dialog.types\";\n"
     },
     {
       "path": "lib/cn.ts",
@@ -72,7 +90,11 @@
   "examples": [
     {
       "name": "Default",
-      "code": "<div className=\"dark bg-background p-6\">\n      <Dialog />\n    </div>"
+      "code": "<Dialog>\n      <DialogTrigger render={<Button>{dialogMocks.default.trigger}</Button>} />\n      <DialogContent>\n        <DialogHeader>\n          <DialogTitle>{dialogMocks.default.title}</DialogTitle>\n          <DialogDescription>\n            {dialogMocks.default.description}\n          </DialogDescription>\n        </DialogHeader>\n        <DialogFooter>\n          <DialogClose\n            render={\n              <Button variant=\"secondary\">{dialogMocks.default.cancel}</Button>\n            }\n          />\n          <Button>{dialogMocks.default.confirm}</Button>\n        </DialogFooter>\n      </DialogContent>\n    </Dialog>"
+    },
+    {
+      "name": "Variants",
+      "code": "<Dialog>\n      <DialogTrigger\n        render={\n          <Button variant=\"destructive\">{dialogMocks.confirm.trigger}</Button>\n        }\n      />\n      <DialogContent showCloseButton={false}>\n        <DialogHeader>\n          <DialogTitle>{dialogMocks.confirm.title}</DialogTitle>\n          <DialogDescription>\n            {dialogMocks.confirm.description}\n          </DialogDescription>\n        </DialogHeader>\n        <DialogFooter showCloseButton>\n          <DialogClose\n            render={\n              <Button variant=\"secondary\">{dialogMocks.confirm.cancel}</Button>\n            }\n          />\n          <Button variant=\"destructive\">{dialogMocks.confirm.confirm}</Button>\n        </DialogFooter>\n      </DialogContent>\n    </Dialog>"
     }
   ]
 }
