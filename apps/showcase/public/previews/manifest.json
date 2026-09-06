@@ -2244,6 +2244,47 @@
           "format": "webp"
         }
       ]
+    },
+    "calendar-with-localisation": {
+      "sourceHash": "3f9c1a33da2d5a299514c1ad289ece99c3b9442135024f223d71abfa3de912d4",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "calendar-with-localisation.Default.dark.webp",
+          "bytes": 13570,
+          "width": 840,
+          "height": 560,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "calendar-with-localisation.Variants.dark.webp",
+          "bytes": 13568,
+          "width": 840,
+          "height": 560,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "calendar-with-localisation.ThemeComparison.dark.webp",
+          "bytes": 26524,
+          "width": 840,
+          "height": 560,
+          "format": "webp"
+        }
+      ]
     }
   }
 }

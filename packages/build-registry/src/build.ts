@@ -59,12 +59,15 @@ async function buildComponent(category: ComponentCategory, folder: string) {
     const key = /^[A-Za-z_$][\w$]*$/.test(meta.name)
       ? meta.name
       : JSON.stringify(meta.name);
-    const entry = `  ${key}: () => import(${JSON.stringify(importPath)}),`;
-    previewManifestEntries.push(
-      entry.length > 80
-        ? `  ${key}: () =>\n    import(${JSON.stringify(importPath)}),`
-        : entry,
-    );
+    const singleLine = `  ${key}: () => import(${JSON.stringify(importPath)}),`;
+    const wrappedImport = `    import(${JSON.stringify(importPath)}),`;
+    const entry =
+      singleLine.length <= 80
+        ? singleLine
+        : wrappedImport.length <= 80
+          ? `  ${key}: () =>\n${wrappedImport}`
+          : `  ${key}: () =>\n    import(\n      ${JSON.stringify(importPath)}\n    ),`;
+    previewManifestEntries.push(entry);
   }
 
   const files: RegistryFile[] = [];
