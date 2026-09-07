@@ -3476,6 +3476,47 @@
           "format": "webp"
         }
       ]
+    },
+    "carousel-cards": {
+      "sourceHash": "274919b63eacdd7244ddc4cbc8452a3f43d2ccaabc6f2c99e1b42e4d48586ff2",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "carousel-cards.Default.dark.webp",
+          "bytes": 33482,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "carousel-cards.Variants.dark.webp",
+          "bytes": 43524,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "carousel-cards.ThemeComparison.dark.webp",
+          "bytes": 47344,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
