@@ -1,0 +1,100 @@
+import {
+  BarChartIcon,
+  CodeIcon,
+  FileTextIcon,
+  GlobeIcon,
+  HandshakeIcon,
+  HelpCircleIcon,
+  LayersIcon,
+  LeafIcon,
+  PlugIcon,
+  RotateCcwIcon,
+  ShieldIcon,
+  StarIcon,
+  UserPlusIcon,
+  UsersIcon,
+  WalletIcon,
+} from "lucide-react";
+import type { NavigationMenuLinkItem } from "./NavigationMenu.types";
+
+export const navigationMenuMocks = {
+  brand: "Lumen",
+  cta: "Get started",
+  product: [
+    {
+      title: "Website builder",
+      href: "#builder",
+      description: "Ship responsive pages from a shared component kit.",
+      icon: GlobeIcon,
+    },
+    {
+      title: "Cloud platform",
+      href: "#cloud",
+      description: "Deploy, scale, and observe apps from one workspace.",
+      icon: LayersIcon,
+    },
+    {
+      title: "Team collaboration",
+      href: "#collaboration",
+      description: "Reviews, comments, and roles that stay out of the way.",
+      icon: UserPlusIcon,
+    },
+    { title: "Analytics", href: "#analytics", icon: BarChartIcon },
+    { title: "Integrations", href: "#integrations", icon: PlugIcon },
+    { title: "Commerce", href: "#commerce", icon: WalletIcon },
+    { title: "Security", href: "#security", icon: ShieldIcon },
+    { title: "API", href: "#api", icon: CodeIcon },
+  ] satisfies NavigationMenuLinkItem[],
+  company: [
+    {
+      title: "About",
+      href: "#about",
+      description: "The studio, the people, and the work we take on.",
+      icon: UsersIcon,
+    },
+    {
+      title: "Customer stories",
+      href: "#stories",
+      description: "How teams use Lumen to ship calmer product surfaces.",
+      icon: StarIcon,
+    },
+    {
+      title: "Terms",
+      href: "#terms",
+      description: "How the product is licensed and operated.",
+      icon: FileTextIcon,
+    },
+    {
+      title: "Privacy",
+      href: "#privacy",
+      description: "What we collect and how we protect it.",
+      icon: ShieldIcon,
+    },
+    {
+      title: "Refunds",
+      href: "#refunds",
+      description: "Cancellations and billing adjustments.",
+      icon: RotateCcwIcon,
+    },
+    {
+      title: "Partnerships",
+      href: "#partnerships",
+      description: "Agencies and platforms we build with.",
+      icon: HandshakeIcon,
+    },
+    {
+      title: "Journal",
+      href: "#journal",
+      description: "Release notes, tutorials, and studio writing.",
+      icon: LeafIcon,
+    },
+    {
+      title: "Help center",
+      href: "#help",
+      description: "Guides for setup, billing, and access.",
+      icon: HelpCircleIcon,
+    },
+  ] satisfies NavigationMenuLinkItem[],
+  pricingHref: "#pricing",
+  pricingLabel: "Pricing",
+} as const;
