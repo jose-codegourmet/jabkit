@@ -159,22 +159,22 @@ export const Variants: Story = {
               </div>
               <NavigationMenu className="max-w-none px-4 pt-2 pb-8" delay={0}>
                 <NavigationMenuDisclosure defaultOpen title="Product">
-                  <ul className="grid gap-1">
+                  <NavigationMenuList className="grid gap-1">
                     {navigationMenuMocks.product.map((link) => (
-                      <li key={link.href}>
+                      <NavigationMenuItem key={link.href}>
                         <NavigationMenuMobileItem item={link} />
-                      </li>
+                      </NavigationMenuItem>
                     ))}
-                  </ul>
+                  </NavigationMenuList>
                 </NavigationMenuDisclosure>
                 <NavigationMenuDisclosure title="Company">
-                  <ul className="grid gap-1">
+                  <NavigationMenuList className="grid gap-1">
                     {navigationMenuMocks.company.map((link) => (
-                      <li key={link.href}>
+                      <NavigationMenuItem key={link.href}>
                         <NavigationMenuMobileItem item={link} />
-                      </li>
+                      </NavigationMenuItem>
                     ))}
-                  </ul>
+                  </NavigationMenuList>
                 </NavigationMenuDisclosure>
                 <a
                   className="flex py-3 text-sm font-medium text-foreground"

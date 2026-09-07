@@ -50,20 +50,20 @@ const DefaultPreview = () => (
       <Button size="sm">{navigationMenuMocks.cta}</Button>
     </div>
     <div className="grid w-full border-t border-border md:grid-cols-[1fr_12rem]">
-      <ul className="grid grow gap-3 p-4 md:grid-cols-3 md:border-r md:border-border">
+      <NavigationMenuList className="grid grow gap-3 p-4 md:grid-cols-3 md:border-r md:border-border">
         {navigationMenuMocks.product.slice(0, 3).map((link) => (
-          <li key={link.href}>
+          <NavigationMenuItem key={link.href}>
             <NavigationMenuGridCard link={link} />
-          </li>
+          </NavigationMenuItem>
         ))}
-      </ul>
-      <ul className="space-y-1 p-3">
+      </NavigationMenuList>
+      <NavigationMenuList className="flex-col items-stretch space-y-1 p-3">
         {navigationMenuMocks.product.slice(3).map((link) => (
-          <li key={link.href}>
+          <NavigationMenuItem key={link.href}>
             <NavigationMenuSmallItem item={link} />
-          </li>
+          </NavigationMenuItem>
         ))}
-      </ul>
+      </NavigationMenuList>
     </div>
   </NavigationMenu>
 );
@@ -113,22 +113,22 @@ const VariantsPreview = () => (
             </div>
             <NavigationMenu className="max-w-none px-4 pt-2 pb-6" delay={0}>
               <NavigationMenuDisclosure defaultOpen title="Product">
-                <ul className="grid gap-1">
+                <NavigationMenuList className="grid gap-1">
                   {navigationMenuMocks.product.slice(0, 4).map((link) => (
-                    <li key={link.href}>
+                    <NavigationMenuItem key={link.href}>
                       <NavigationMenuMobileItem item={link} />
-                    </li>
+                    </NavigationMenuItem>
                   ))}
-                </ul>
+                </NavigationMenuList>
               </NavigationMenuDisclosure>
               <NavigationMenuDisclosure title="Company">
-                <ul className="grid gap-1">
+                <NavigationMenuList className="grid gap-1">
                   {navigationMenuMocks.company.slice(0, 3).map((link) => (
-                    <li key={link.href}>
+                    <NavigationMenuItem key={link.href}>
                       <NavigationMenuMobileItem item={link} />
-                    </li>
+                    </NavigationMenuItem>
                   ))}
-                </ul>
+                </NavigationMenuList>
               </NavigationMenuDisclosure>
             </NavigationMenu>
           </DialogContent>
