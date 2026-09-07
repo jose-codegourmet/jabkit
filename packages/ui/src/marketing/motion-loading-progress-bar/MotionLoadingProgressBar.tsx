@@ -131,7 +131,10 @@ function ProgressMeter({
         const pull = stiffness * (target - current) - damping * velocity;
         velocity += pull * dt;
         current += velocity * dt;
-        if (Math.abs(target - current) < 0.0008 && Math.abs(velocity) < 0.0008) {
+        if (
+          Math.abs(target - current) < 0.0008 &&
+          Math.abs(velocity) < 0.0008
+        ) {
           current = target;
           velocity = 0;
         }

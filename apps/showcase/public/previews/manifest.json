@@ -3292,6 +3292,56 @@
           "format": "webp"
         }
       ]
+    },
+    "motion-loading-progress-bar": {
+      "sourceHash": "1a44aa7fe6501a7cb9e8eda603f87e43dd999e9d1cea1a782812fff0d6b37d98",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "motion-loading-progress-bar.Default.dark.gif",
+          "bytes": 51752,
+          "width": 640,
+          "height": 320,
+          "format": "gif"
+        },
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "motion-loading-progress-bar.Default.dark.webp",
+          "bytes": 8328,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "motion-loading-progress-bar.Variants.dark.webp",
+          "bytes": 8548,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "motion-loading-progress-bar.ThemeComparison.dark.webp",
+          "bytes": 15644,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
