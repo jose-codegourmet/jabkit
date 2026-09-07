@@ -1,0 +1,105 @@
+{
+  "name": "random-letter-swap",
+  "displayName": "RandomLetterSwap",
+  "version": "1.0.0",
+  "addedAt": "2026-09-07",
+  "description": "Horizontal marketing navigation whose link labels shuffle glyphs in a random vertical swap on hover.",
+  "sectionCategory": "navbar",
+  "purpose": "Gives compact primary navigation a glitchy, kinetic type moment without leaving semantic tokens or reduced-motion support.",
+  "bestFor": [
+    "studio and agency sites",
+    "portfolio landings with few destinations",
+    "editorial brands that treat type as the visual"
+  ],
+  "avoidFor": [
+    "dense application shells",
+    "ecommerce catalogs with nested categories",
+    "utility sites that need always-static labels"
+  ],
+  "tone": [
+    "playful",
+    "editorial",
+    "kinetic"
+  ],
+  "industries": [
+    "design",
+    "media",
+    "fashion"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "navbar",
+    "alignment": "mixed"
+  },
+  "slots": [
+    "brand",
+    "navigationItems",
+    "cta"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedBefore": [
+    "hero",
+    "content"
+  ],
+  "tags": [
+    "navbar",
+    "marketing",
+    "navigation",
+    "header",
+    "kinetic",
+    "typography",
+    "hover",
+    "text"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 420
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "random-letter-swap/RandomLetterSwap.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  type CSSProperties,\n  useCallback,\n  useEffect,\n  useId,\n  useState,\n} from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  RandomLetterSwapItem,\n  RandomLetterSwapProps,\n} from \"./RandomLetterSwap.types\";\n\nconst defaults = {\n  brand: \"Fieldline\",\n  brandHref: \"#top\",\n  reverse: true,\n  staggerMs: 28,\n  durationMs: 620,\n  cta: { label: \"Start a brief\", href: \"#brief\" },\n  items: [\n    { label: \"Work\", href: \"#work\" },\n    { label: \"Studio\", href: \"#studio\" },\n    { label: \"Journal\", href: \"#journal\" },\n    { label: \"Visit\", href: \"#visit\" },\n  ],\n} satisfies {\n  brand: string;\n  brandHref: string;\n  reverse: boolean;\n  staggerMs: number;\n  durationMs: number;\n  cta: { label: string; href: string };\n  items: RandomLetterSwapItem[];\n};\n\nfunction splitGraphemes(value: string): string[] {\n  if (typeof Intl !== \"undefined\" && \"Segmenter\" in Intl) {\n    const segmenter = new Intl.Segmenter(undefined, {\n      granularity: \"grapheme\",\n    });\n    return [...segmenter.segment(value)].map((part) => part.segment);\n  }\n  return Array.from(value);\n}\n\nfunction toGlyphs(label: string) {\n  const glyphs: Array<{ key: string; value: string }> = [];\n  let order = 0;\n  for (const value of splitGraphemes(label)) {\n    glyphs.push({\n      key: `${label}:${order}:${value.codePointAt(0) ?? 0}`,\n      value,\n    });\n    order += 1;\n  }\n  return glyphs;\n}\n\nfunction sequentialOrder(length: number) {\n  return Array.from({ length }, (_, index) => index);\n}\n\nfunction shuffledOrder(length: number) {\n  const order = sequentialOrder(length);\n  for (let index = length - 1; index > 0; index -= 1) {\n    const swapWith = Math.floor(Math.random() * (index + 1));\n    const current = order[index];\n    order[index] = order[swapWith];\n    order[swapWith] = current;\n  }\n  return order;\n}\n\nfunction useReducedMotion() {\n  const [reduced, setReduced] = useState(false);\n\n  useEffect(() => {\n    const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n    const sync = () => setReduced(media.matches);\n    sync();\n    media.addEventListener(\"change\", sync);\n    return () => media.removeEventListener(\"change\", sync);\n  }, []);\n\n  return reduced;\n}\n\nfunction SwapNavLink({\n  item,\n  reverse,\n  staggerMs,\n  durationMs,\n  reducedMotion,\n}: {\n  item: RandomLetterSwapItem;\n  reverse: boolean;\n  staggerMs: number;\n  durationMs: number;\n  reducedMotion: boolean;\n}) {\n  const glyphs = toGlyphs(item.label);\n  const [order, setOrder] = useState(() => sequentialOrder(glyphs.length));\n\n  const reshuffle = useCallback(() => {\n    if (reducedMotion) return;\n    setOrder(shuffledOrder(glyphs.length));\n  }, [glyphs.length, reducedMotion]);\n\n  return (\n    <a\n      className=\"jk-rls-link text-sm font-medium tracking-tight text-muted-foreground outline-none transition-colors duration-200 motion-reduce:transition-none hover:text-foreground focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"\n      href={item.href}\n      onFocus={reshuffle}\n      onPointerEnter={reshuffle}\n    >\n      <span className=\"sr-only\">{item.label}</span>\n      {reducedMotion ? (\n        <span aria-hidden=\"true\" className=\"whitespace-nowrap\">\n          {item.label}\n        </span>\n      ) : (\n        <span aria-hidden=\"true\" className=\"jk-rls-label inline-flex\">\n          {glyphs.map((glyph, slot) => {\n            const value = glyph.value === \" \" ? \"\\u00a0\" : glyph.value;\n            const isSpace = glyph.value === \" \";\n            return (\n              <span\n                className={cn(\n                  \"jk-rls-cell relative inline-block h-[1.15em] overflow-hidden align-bottom leading-[1.15]\",\n                  isSpace && \"w-[0.35em]\",\n                )}\n                key={glyph.key}\n                style={\n                  {\n                    \"--jk-rls-i\": isSpace ? 0 : (order[slot] ?? slot),\n                    \"--jk-rls-stagger\": `${staggerMs}ms`,\n                    \"--jk-rls-duration\": `${durationMs}ms`,\n                  } as CSSProperties\n                }\n              >\n                {isSpace ? (\n                  value\n                ) : (\n                  <span\n                    className=\"jk-rls-stack inline-flex flex-col\"\n                    data-reverse={reverse ? \"true\" : \"false\"}\n                  >\n                    <span className=\"block h-[1.15em]\">{value}</span>\n                    <span className=\"block h-[1.15em]\">{value}</span>\n                  </span>\n                )}\n              </span>\n            );\n          })}\n        </span>\n      )}\n    </a>\n  );\n}\n\nexport function RandomLetterSwap({\n  className,\n  brand = defaults.brand,\n  brandHref = defaults.brandHref,\n  items = defaults.items,\n  cta = defaults.cta,\n  reverse = defaults.reverse,\n  staggerMs = defaults.staggerMs,\n  durationMs = defaults.durationMs,\n  ...props\n}: RandomLetterSwapProps) {\n  const titleId = useId();\n  const reducedMotion = useReducedMotion();\n\n  return (\n    <header\n      className={cn(\n        \"relative w-full bg-background px-5 py-6 text-foreground sm:px-8\",\n        className,\n      )}\n      data-slot=\"random-letter-swap\"\n      {...props}\n    >\n      <style href=\"jk-random-letter-swap\" precedence=\"default\">{`\n        .jk-rls-stack[data-reverse=\"true\"] {\n          transform: translate3d(0, -50%, 0);\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-rls-link:is(:hover, :focus-visible) .jk-rls-stack[data-reverse=\"false\"] {\n            animation: jk-rls-up var(--jk-rls-duration) cubic-bezier(0.16, 1, 0.3, 1) both;\n            animation-delay: calc(var(--jk-rls-i) * var(--jk-rls-stagger));\n          }\n          .jk-rls-link:is(:hover, :focus-visible) .jk-rls-stack[data-reverse=\"true\"] {\n            animation: jk-rls-down var(--jk-rls-duration) cubic-bezier(0.16, 1, 0.3, 1) both;\n            animation-delay: calc(var(--jk-rls-i) * var(--jk-rls-stagger));\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-rls-stack {\n            animation: none;\n            transform: none;\n          }\n        }\n        @keyframes jk-rls-up {\n          from { transform: translate3d(0, 0, 0); }\n          to { transform: translate3d(0, -50%, 0); }\n        }\n        @keyframes jk-rls-down {\n          from { transform: translate3d(0, -50%, 0); }\n          to { transform: translate3d(0, 0, 0); }\n        }\n      `}</style>\n\n      <div className=\"mx-auto flex max-w-6xl flex-col gap-5 lg:flex-row lg:items-center lg:justify-between\">\n        <a\n          className=\"w-fit text-sm font-medium tracking-[0.2em] text-foreground uppercase outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"\n          href={brandHref}\n        >\n          {brand}\n        </a>\n\n        <nav aria-labelledby={titleId} className=\"min-w-0\">\n          <h2 className=\"sr-only\" id={titleId}>\n            {brand} navigation\n          </h2>\n          <ul className=\"flex flex-wrap items-center gap-x-7 gap-y-3\">\n            {items.map((item) => (\n              <li key={`${item.href}-${item.label}`}>\n                <SwapNavLink\n                  durationMs={durationMs}\n                  item={item}\n                  reducedMotion={reducedMotion}\n                  reverse={reverse}\n                  staggerMs={staggerMs}\n                />\n              </li>\n            ))}\n          </ul>\n        </nav>\n\n        {cta ? (\n          <a\n            className=\"inline-flex w-fit items-center rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background outline-none transition-[transform,filter] duration-200 motion-reduce:transition-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98]\"\n            href={cta.href}\n          >\n            {cta.label}\n          </a>\n        ) : null}\n      </div>\n    </header>\n  );\n}\n"
+    },
+    {
+      "path": "random-letter-swap/RandomLetterSwap.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface RandomLetterSwapItem {\n  label: string;\n  href: string;\n}\n\nexport interface RandomLetterSwapCta {\n  label: string;\n  href: string;\n}\n\nexport interface RandomLetterSwapProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"onChange\"> {\n  brand?: string;\n  brandHref?: string;\n  items?: RandomLetterSwapItem[];\n  cta?: RandomLetterSwapCta;\n  /** When true, glyphs slide downward on hover. When false, they slide upward. */\n  reverse?: boolean;\n  /** Delay between each glyph in the shuffled sequence, in milliseconds. */\n  staggerMs?: number;\n  /** Duration of each glyph swap, in milliseconds. */\n  durationMs?: number;\n}\n"
+    },
+    {
+      "path": "random-letter-swap/index.ts",
+      "type": "index",
+      "content": "export { RandomLetterSwap } from \"./RandomLetterSwap\";\nexport type * from \"./RandomLetterSwap.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"min-h-80 bg-background text-foreground\">\n      <RandomLetterSwap {...randomLetterSwapMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"min-h-80 bg-background text-foreground\">\n      <RandomLetterSwap {...randomLetterSwapMocks.alternate} />\n    </div>"
+    }
+  ]
+}
