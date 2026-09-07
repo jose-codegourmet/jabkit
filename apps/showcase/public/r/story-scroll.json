@@ -1,0 +1,110 @@
+{
+  "name": "story-scroll",
+  "displayName": "StoryScroll",
+  "version": "1.0.0",
+  "addedAt": "2026-09-07",
+  "description": "Full-viewport marketing chapters that pin and stack on scroll, with huge type, hairlines, and semantic tone surfaces.",
+  "sectionCategory": "content",
+  "purpose": "Turns a landing narrative into a sequence of full-bleed sheets so each claim holds the viewport before the next one covers it.",
+  "bestFor": [
+    "manifesto or brand-story landings",
+    "studio and press about pages",
+    "launch stories that need one idea per scroll beat"
+  ],
+  "avoidFor": [
+    "short heroes with a single claim",
+    "forms, pricing tables, or dense docs where pinning hides the next block"
+  ],
+  "tone": [
+    "editorial",
+    "bold",
+    "confident"
+  ],
+  "industries": [
+    "media",
+    "creative",
+    "nonprofit"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "high",
+  "layout": {
+    "type": "stack",
+    "alignment": "left",
+    "columns": 1
+  },
+  "slots": [
+    "headline",
+    "bodyContent",
+    "list"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "logos"
+  ],
+  "recommendedBefore": [
+    "features",
+    "cta",
+    "footer"
+  ],
+  "tags": [
+    "story",
+    "scroll",
+    "sticky",
+    "chapters",
+    "manifesto",
+    "marketing",
+    "landing",
+    "editorial"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "story-scroll/StoryScroll.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  useEffect,\n  useId,\n  useRef,\n  useState,\n  useSyncExternalStore,\n} from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  StoryScrollChapter,\n  StoryScrollProps,\n  StoryScrollTone,\n} from \"./StoryScroll.types\";\n\nconst DEFAULT_CHAPTERS: StoryScrollChapter[] = [\n  {\n    id: \"who\",\n    kicker: \"01 Who we are\",\n    headline: \"Create\\nWithout\\nLimits\",\n    body: \"A press for people who make pictures, type, and objects. No feed ranking the work. Just the page and the hands that filled it.\",\n    tone: \"primary\",\n  },\n  {\n    id: \"mission\",\n    kicker: \"02 The mission\",\n    headline: \"Art\\nFirst\\nAlways\",\n    body: \"A studio network built for makers, by makers. We change how work is seen, shared, and paid.\",\n    points: [\n      {\n        title: \"Discovery\",\n        body: \"Human-curated rooms. Real eyes on real work, not a ranking that buries it.\",\n      },\n      {\n        title: \"Community\",\n        body: \"Collaborators, editors, and peers who push the next piece instead of the next post.\",\n      },\n      {\n        title: \"Value\",\n        body: \"Clear pricing. Named fees. Makers keep what they earn.\",\n      },\n    ],\n    closing:\n      \"Every feature starts with one question: does this serve the maker?\",\n    closingAlign: \"end\",\n    tone: \"inverse\",\n  },\n  {\n    id: \"join\",\n    kicker: \"03 Join us\",\n    headline: \"Ready\\nTo\\nBegin?\",\n    body: \"Bring a body of work, or a single sheet. Join the press and help write the next edition.\",\n    tone: \"muted\",\n  },\n];\n\nconst TONE_CLASS: Record<StoryScrollTone, string> = {\n  surface: \"bg-background text-foreground\",\n  muted: \"bg-muted text-foreground\",\n  card: \"bg-card text-card-foreground\",\n  primary: \"bg-primary text-primary-foreground\",\n  accent: \"bg-accent text-accent-foreground\",\n  inverse: \"bg-foreground text-background\",\n};\n\nfunction subscribeReducedMotion(onChange: () => void) {\n  const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n  media.addEventListener(\"change\", onChange);\n  return () => media.removeEventListener(\"change\", onChange);\n}\n\nfunction getReducedMotion() {\n  return window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;\n}\n\nfunction useReducedMotion() {\n  return useSyncExternalStore(\n    subscribeReducedMotion,\n    getReducedMotion,\n    () => false,\n  );\n}\n\nfunction HeadlineLines({\n  as: Tag,\n  id,\n  text,\n}: {\n  as: \"h1\" | \"h2\";\n  id?: string;\n  text: string;\n}) {\n  const lines = text.split(\"\\n\").filter((line) => line.length > 0);\n  return (\n    <Tag\n      className=\"text-[clamp(2.75rem,9vw,8.5rem)] font-bold leading-[0.88] tracking-tight uppercase\"\n      id={id}\n    >\n      {lines.map((line) => (\n        <span className=\"block\" key={line}>\n          {line}\n        </span>\n      ))}\n    </Tag>\n  );\n}\n\nfunction Hairline() {\n  return (\n    <hr className=\"my-[clamp(1rem,2vw,1.75rem)] border-0 border-t border-current/35\" />\n  );\n}\n\nfunction ChapterSheet({\n  chapter,\n  headingId,\n  index,\n  reduceMotion,\n  sheetRef,\n}: {\n  chapter: StoryScrollChapter;\n  headingId?: string;\n  index: number;\n  reduceMotion: boolean;\n  sheetRef: (node: HTMLElement | null) => void;\n}) {\n  const tone = chapter.tone ?? \"surface\";\n  const Heading = index === 0 ? \"h1\" : \"h2\";\n\n  return (\n    <article\n      aria-labelledby={headingId}\n      className={cn(\n        \"jk-story-scroll-chapter relative flex min-h-[100dvh] flex-col overflow-hidden px-5 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14\",\n        TONE_CLASS[tone],\n        reduceMotion ? \"static\" : \"sticky top-0\",\n      )}\n      data-slot=\"story-scroll-chapter\"\n      data-tone={tone}\n      ref={sheetRef}\n      style={reduceMotion ? undefined : { zIndex: index + 1 }}\n    >\n      {chapter.kicker ? (\n        <p className=\"text-xs font-semibold tracking-[0.2em] uppercase\">\n          {chapter.kicker}\n        </p>\n      ) : null}\n      <Hairline />\n      <HeadlineLines as={Heading} id={headingId} text={chapter.headline} />\n      {chapter.body ? (\n        <>\n          <Hairline />\n          <p className=\"max-w-[50ch] text-[clamp(1rem,2.2vw,1.85rem)] leading-relaxed\">\n            {chapter.body}\n          </p>\n        </>\n      ) : null}\n      {chapter.points && chapter.points.length > 0 ? (\n        <>\n          <Hairline />\n          <ul className=\"grid gap-x-[3vw] gap-y-8 sm:grid-cols-2 lg:grid-cols-3\">\n            {chapter.points.map((point) => (\n              <li className=\"min-w-0\" key={point.title}>\n                <p className=\"mb-2 text-sm font-semibold tracking-wider uppercase\">\n                  {point.title}\n                </p>\n                <p className=\"text-[clamp(0.85rem,1.2vw,1.05rem)] leading-relaxed text-current/75\">\n                  {point.body}\n                </p>\n              </li>\n            ))}\n          </ul>\n        </>\n      ) : null}\n      {chapter.closing ? (\n        <>\n          <Hairline />\n          <p\n            className={cn(\n              \"mt-auto max-w-[50ch] text-[clamp(1rem,2.2vw,1.85rem)] leading-relaxed\",\n              chapter.closingAlign === \"end\" && \"ml-auto text-right\",\n            )}\n          >\n            {chapter.closing}\n          </p>\n        </>\n      ) : (\n        <div className=\"mt-auto\" />\n      )}\n    </article>\n  );\n}\n\nexport function StoryScroll({\n  className,\n  label = \"Story\",\n  chapters,\n  ...props\n}: StoryScrollProps) {\n  const headingId = useId();\n  const reduceMotion = useReducedMotion();\n  const sheets = chapters && chapters.length > 0 ? chapters : DEFAULT_CHAPTERS;\n  const sheetRefs = useRef<Array<HTMLElement | null>>([]);\n  const [active, setActive] = useState(0);\n\n  useEffect(() => {\n    const nodes = sheets\n      .map((_, index) => sheetRefs.current[index])\n      .filter((node): node is HTMLElement => Boolean(node));\n    if (nodes.length === 0) return;\n\n    const observer = new IntersectionObserver(\n      (entries) => {\n        const visible = entries\n          .filter((entry) => entry.isIntersecting)\n          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];\n        if (!visible) return;\n        const next = nodes.indexOf(visible.target as HTMLElement);\n        if (next >= 0) setActive(next);\n      },\n      { threshold: [0.35, 0.55, 0.75] },\n    );\n\n    for (const node of nodes) observer.observe(node);\n    return () => observer.disconnect();\n  }, [sheets]);\n\n  const goTo = (index: number) => {\n    const node = sheetRefs.current[index];\n    if (!node) return;\n    node.scrollIntoView({\n      behavior: reduceMotion ? \"auto\" : \"smooth\",\n      block: \"start\",\n    });\n  };\n\n  return (\n    <section\n      aria-label={label}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-motion={reduceMotion ? \"off\" : \"on\"}\n      data-slot=\"story-scroll\"\n      {...props}\n    >\n      <style href=\"jk-story-scroll\" precedence=\"default\">{`\n        .jk-story-scroll-chapter {\n          transform-origin: 50% 0%;\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-story-scroll-chapter {\n            animation: jk-story-scroll-pack linear both;\n            animation-timeline: view();\n            animation-range: exit 0% exit 100%;\n          }\n        }\n        @keyframes jk-story-scroll-pack {\n          from { transform: scale(1); }\n          to { transform: scale(0.94); }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-story-scroll-chapter {\n            animation: none;\n            transform: none;\n          }\n        }\n      `}</style>\n      <div className=\"relative\">\n        {sheets.length > 1 ? (\n          <nav\n            aria-label=\"Story chapters\"\n            className=\"pointer-events-none absolute inset-y-0 right-3 z-30 hidden w-8 sm:right-5 sm:block\"\n          >\n            <ol className=\"sticky top-1/2 flex -translate-y-1/2 flex-col items-center gap-2\">\n              {sheets.map((chapter, index) => (\n                <li key={chapter.id}>\n                  <button\n                    aria-current={index === active ? \"true\" : undefined}\n                    aria-label={\n                      chapter.kicker ?? chapter.headline.replace(/\\n/g, \" \")\n                    }\n                    className={cn(\n                      \"pointer-events-auto size-2.5 rounded-full border border-current transition-transform duration-300 motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n                      index === active\n                        ? \"scale-125 bg-current\"\n                        : \"bg-transparent opacity-55 hover:opacity-100\",\n                    )}\n                    onClick={() => goTo(index)}\n                    type=\"button\"\n                  />\n                </li>\n              ))}\n            </ol>\n          </nav>\n        ) : null}\n        {sheets.map((chapter, index) => (\n          <ChapterSheet\n            chapter={chapter}\n            headingId={index === 0 ? headingId : `${headingId}-${chapter.id}`}\n            index={index}\n            key={chapter.id}\n            reduceMotion={reduceMotion}\n            sheetRef={(node) => {\n              sheetRefs.current[index] = node;\n            }}\n          />\n        ))}\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "story-scroll/StoryScroll.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type StoryScrollTone =\n  | \"surface\"\n  | \"muted\"\n  | \"card\"\n  | \"primary\"\n  | \"accent\"\n  | \"inverse\";\n\nexport interface StoryScrollPoint {\n  title: string;\n  body: string;\n}\n\nexport interface StoryScrollChapter {\n  id: string;\n  kicker?: string;\n  headline: string;\n  body?: string;\n  points?: StoryScrollPoint[];\n  closing?: string;\n  closingAlign?: \"start\" | \"end\";\n  tone?: StoryScrollTone;\n}\n\nexport interface StoryScrollProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"children\"> {\n  label?: string;\n  chapters?: StoryScrollChapter[];\n}\n"
+    },
+    {
+      "path": "story-scroll/index.ts",
+      "type": "index",
+      "content": "export { StoryScroll } from \"./StoryScroll\";\nexport type * from \"./StoryScroll.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <StoryScroll {...storyScrollMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <StoryScroll {...storyScrollMocks.alternate} />\n    </div>"
+    }
+  ]
+}
