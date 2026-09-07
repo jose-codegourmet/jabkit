@@ -3342,6 +3342,37 @@
           "format": "webp"
         }
       ]
+    },
+    "image-cropper": {
+      "sourceHash": "b67db3c9bd2f790f0173f981216ad21af9cfb1bcaf8a029d9dfc09ea81a00c30",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "image-cropper.Default.dark.webp",
+          "bytes": 7340,
+          "width": 720,
+          "height": 860,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "image-cropper.Variants.dark.webp",
+          "bytes": 7508,
+          "width": 720,
+          "height": 860,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
