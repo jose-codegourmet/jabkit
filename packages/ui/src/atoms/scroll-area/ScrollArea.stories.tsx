@@ -31,6 +31,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: { children: "Library files" },
   render: () => (
     <div className="bg-background p-6 text-foreground">
       <div className="w-[320px] overflow-hidden rounded-[--radius] border border-border bg-card text-card-foreground">
@@ -68,6 +69,7 @@ export const Default: Story = {
 };
 
 export const Variants: Story = {
+  args: { children: "Collection tags", orientation: "horizontal" },
   render: () => (
     <div className="bg-background p-6 text-foreground">
       <div className="w-[320px] overflow-hidden rounded-[--radius] border border-border bg-card p-3 text-card-foreground">
@@ -94,6 +96,7 @@ export const Variants: Story = {
 };
 
 export const ThemeComparison: Story = {
+  args: { children: "Library files" },
   render: () => (
     <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border sm:grid-cols-2">
       <div className="bg-background p-8">
