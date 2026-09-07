@@ -1,0 +1,105 @@
+{
+  "name": "menu-vertical",
+  "displayName": "MenuVertical",
+  "version": "1.0.0",
+  "addedAt": "2026-09-07",
+  "description": "Stacked large-type marketing navigation that slides an arrow in and optionally skews labels on hover.",
+  "sectionCategory": "navbar",
+  "purpose": "Gives landing pages a bold vertical index of destinations with a kinetic hover cue that stays on semantic tokens.",
+  "bestFor": [
+    "studio and agency landings",
+    "portfolio site indexes",
+    "minimal marketing sites with few destinations"
+  ],
+  "avoidFor": [
+    "dense application sidebars",
+    "ecommerce catalogs with nested categories",
+    "compact utility headers"
+  ],
+  "tone": [
+    "editorial",
+    "kinetic",
+    "bold"
+  ],
+  "industries": [
+    "design",
+    "media",
+    "fashion"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "navigationItems"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedBefore": [
+    "hero",
+    "content"
+  ],
+  "tags": [
+    "navbar",
+    "marketing",
+    "navigation",
+    "menu",
+    "vertical",
+    "hover",
+    "kinetic",
+    "typography"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 720
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "menu-vertical/MenuVertical.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ArrowRightIcon } from \"lucide-react\";\nimport type { CSSProperties } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { MenuVerticalItem, MenuVerticalProps } from \"./MenuVertical.types\";\n\nconst defaultItems: MenuVerticalItem[] = [\n  { label: \"Home\", href: \"#home\" },\n  { label: \"Pricing\", href: \"#pricing\" },\n  { label: \"Docs\", href: \"#docs\" },\n  { label: \"About Us\", href: \"#about\" },\n  { label: \"Contact\", href: \"#contact\" },\n];\n\nexport function MenuVertical({\n  className,\n  items = defaultItems,\n  skew = 0,\n  ...props\n}: MenuVerticalProps) {\n  return (\n    <nav\n      aria-label=\"Primary\"\n      className={cn(\n        \"relative w-full bg-background px-6 py-16 text-foreground sm:px-10\",\n        className,\n      )}\n      data-slot=\"menu-vertical\"\n      {...props}\n    >\n      <style href=\"jk-menu-vertical\" precedence=\"default\">{`\n        .jk-mv-link .jk-mv-arrow {\n          transform: translate3d(-110%, 0, 0);\n          opacity: 0;\n        }\n        .jk-mv-link .jk-mv-label {\n          transform: translate3d(-2.5rem, 0, 0);\n        }\n        .jk-mv-link:is(:hover, :focus-visible) .jk-mv-arrow {\n          transform: translate3d(0, 0, 0);\n          opacity: 1;\n        }\n        .jk-mv-link:is(:hover, :focus-visible) .jk-mv-label {\n          transform: translate3d(0, 0, 0) skewX(var(--jk-mv-skew, 0deg));\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-mv-link .jk-mv-arrow {\n            transition: transform 300ms ease-out, opacity 300ms ease-out;\n          }\n          .jk-mv-link .jk-mv-label {\n            transition: transform 300ms ease-out, color 300ms ease-out;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-mv-link .jk-mv-arrow,\n          .jk-mv-link .jk-mv-label {\n            transform: none;\n            transition: none;\n          }\n          .jk-mv-link:not(:hover):not(:focus-visible) .jk-mv-arrow {\n            opacity: 0;\n          }\n        }\n      `}</style>\n      <ul className=\"mx-auto flex w-full max-w-2xl flex-col gap-1\">\n        {items.map((item) => (\n          <li key={`${item.href}-${item.label}`}>\n            <a\n              className=\"jk-mv-link group/item flex items-center gap-3 overflow-hidden py-1 text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"\n              href={item.href}\n              style={{ \"--jk-mv-skew\": `${skew}deg` } as CSSProperties}\n            >\n              <ArrowRightIcon\n                aria-hidden=\"true\"\n                className=\"jk-mv-arrow size-8 shrink-0 text-primary sm:size-9\"\n              />\n              <span className=\"jk-mv-label text-4xl font-semibold tracking-tight text-foreground group-hover/item:text-primary group-focus-visible/item:text-primary sm:text-5xl\">\n                {item.label}\n              </span>\n            </a>\n          </li>\n        ))}\n      </ul>\n    </nav>\n  );\n}\n"
+    },
+    {
+      "path": "menu-vertical/MenuVertical.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface MenuVerticalItem {\n  label: string;\n  href: string;\n}\n\nexport interface MenuVerticalProps extends HTMLAttributes<HTMLElement> {\n  items?: MenuVerticalItem[];\n  /** Horizontal skew applied to labels on hover, in degrees. */\n  skew?: number;\n}\n"
+    },
+    {
+      "path": "menu-vertical/index.ts",
+      "type": "index",
+      "content": "export { MenuVertical } from \"./MenuVertical\";\nexport type * from \"./MenuVertical.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"min-h-[32rem] bg-background text-foreground\">\n      <MenuVertical {...menuVerticalMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"min-h-[32rem] bg-background text-foreground\">\n      <MenuVertical {...menuVerticalMocks.alternate} />\n    </div>"
+    }
+  ]
+}
