@@ -1,0 +1,112 @@
+{
+  "name": "motion-image-reveal-slider",
+  "displayName": "MotionImageRevealSlider",
+  "version": "1.0.0",
+  "addedAt": "2026-09-07",
+  "description": "Marketing still with a draggable rail that reveals a color photograph from a grayscale overlay, or compares two images.",
+  "sectionCategory": "comparison",
+  "purpose": "Lets a landing page show a before-and-after or color-versus-mono photograph as a single interactive frame instead of two static tiles.",
+  "bestFor": [
+    "before-and-after photography",
+    "color grading or retouching stories",
+    "renovation and product transformation beats"
+  ],
+  "avoidFor": [
+    "dense application consoles",
+    "galleries that need independent captions per still"
+  ],
+  "tone": [
+    "editorial",
+    "visual",
+    "kinetic"
+  ],
+  "industries": [
+    "media",
+    "design",
+    "architecture"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "high",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "headline",
+    "revealImage",
+    "overlayImage",
+    "sliderHandle"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "content"
+  ],
+  "recommendedBefore": [
+    "gallery",
+    "cta"
+  ],
+  "tags": [
+    "slider",
+    "reveal",
+    "comparison",
+    "image",
+    "grayscale",
+    "marketing",
+    "interactive",
+    "before-after",
+    "landing"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "motion-image-reveal-slider/MotionImageRevealSlider.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ChevronsLeftRightIcon } from \"lucide-react\";\nimport type { CSSProperties } from \"react\";\nimport { useEffect, useId, useRef } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { MotionImageRevealSliderProps } from \"./MotionImageRevealSlider.types\";\n\nconst DEFAULT_EYEBROW = \"Reveal\";\nconst DEFAULT_HEADING = \"Color waiting under the grain.\";\nconst DEFAULT_DESCRIPTION =\n  \"Drag the handle to peel grayscale back and show the photograph underneath. Arrow keys work too.\";\nconst DEFAULT_IMAGE_SRC = \"/assets/1a2d35c6581e840f.webp\";\nconst DEFAULT_IMAGE_ALT = \"Bright open studio with a long communal table\";\nconst DEFAULT_LEFT_LABEL = \"Color\";\nconst DEFAULT_RIGHT_LABEL = \"Mono\";\nconst DEFAULT_POSITION = 48;\nconst DEFAULT_STEP = 5;\n\nfunction clamp(value: number, min: number, max: number) {\n  return Math.min(max, Math.max(min, value));\n}\n\nfunction RevealStage({\n  imageSrc,\n  imageAlt,\n  overlaySrc,\n  overlayAlt,\n  grayscaleOverlay,\n  leftLabel,\n  rightLabel,\n  initialPosition,\n  step,\n  labelledBy,\n}: {\n  imageSrc: string;\n  imageAlt: string;\n  overlaySrc: string;\n  overlayAlt: string;\n  grayscaleOverlay: boolean;\n  leftLabel: string;\n  rightLabel: string;\n  initialPosition: number;\n  step: number;\n  labelledBy: string;\n}) {\n  const frameRef = useRef<HTMLDivElement>(null);\n  const sliderRef = useRef<HTMLDivElement>(null);\n  const positionRef = useRef(clamp(initialPosition, 0, 100));\n\n  useEffect(() => {\n    const frame = frameRef.current;\n    const slider = sliderRef.current;\n    if (!frame || !slider) return;\n\n    const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n    let dragging = false;\n    let pointerId: number | null = null;\n\n    const apply = (next: number, animate: boolean) => {\n      const value = clamp(next, 0, 100);\n      positionRef.current = value;\n      const reduce = media.matches;\n      frame.dataset.animate = animate && !reduce ? \"true\" : \"false\";\n      frame.style.setProperty(\"--reveal\", (value / 100).toFixed(4));\n      slider.setAttribute(\"aria-valuenow\", String(Math.round(value)));\n    };\n\n    const fromClientX = (clientX: number) => {\n      const rect = frame.getBoundingClientRect();\n      if (rect.width <= 0) return positionRef.current;\n      return ((clientX - rect.left) / rect.width) * 100;\n    };\n\n    const onPointerDown = (event: PointerEvent) => {\n      if (event.button !== 0) return;\n      dragging = true;\n      pointerId = event.pointerId;\n      frame.setPointerCapture(event.pointerId);\n      apply(fromClientX(event.clientX), false);\n      event.preventDefault();\n    };\n\n    const onPointerMove = (event: PointerEvent) => {\n      if (!dragging || event.pointerId !== pointerId) return;\n      apply(fromClientX(event.clientX), false);\n    };\n\n    const endDrag = (event: PointerEvent) => {\n      if (event.pointerId !== pointerId) return;\n      dragging = false;\n      pointerId = null;\n      if (frame.hasPointerCapture(event.pointerId)) {\n        frame.releasePointerCapture(event.pointerId);\n      }\n    };\n\n    const onKeyDown = (event: KeyboardEvent) => {\n      const current = positionRef.current;\n      if (event.key === \"ArrowLeft\" || event.key === \"ArrowDown\") {\n        event.preventDefault();\n        apply(current - step, true);\n      } else if (event.key === \"ArrowRight\" || event.key === \"ArrowUp\") {\n        event.preventDefault();\n        apply(current + step, true);\n      } else if (event.key === \"Home\") {\n        event.preventDefault();\n        apply(0, true);\n      } else if (event.key === \"End\") {\n        event.preventDefault();\n        apply(100, true);\n      } else if (event.key === \"PageDown\") {\n        event.preventDefault();\n        apply(current - step * 4, true);\n      } else if (event.key === \"PageUp\") {\n        event.preventDefault();\n        apply(current + step * 4, true);\n      }\n    };\n\n    apply(clamp(initialPosition, 0, 100), false);\n    frame.addEventListener(\"pointerdown\", onPointerDown);\n    frame.addEventListener(\"pointermove\", onPointerMove);\n    frame.addEventListener(\"pointerup\", endDrag);\n    frame.addEventListener(\"pointercancel\", endDrag);\n    slider.addEventListener(\"keydown\", onKeyDown);\n\n    return () => {\n      frame.removeEventListener(\"pointerdown\", onPointerDown);\n      frame.removeEventListener(\"pointermove\", onPointerMove);\n      frame.removeEventListener(\"pointerup\", endDrag);\n      frame.removeEventListener(\"pointercancel\", endDrag);\n      slider.removeEventListener(\"keydown\", onKeyDown);\n    };\n  }, [initialPosition, step]);\n\n  return (\n    <div\n      className=\"jk-mirs-frame relative mx-auto aspect-[16/10] w-full max-w-5xl cursor-ew-resize overflow-hidden rounded-[calc(var(--radius)+0.45rem)] border border-border bg-muted select-none\"\n      data-animate=\"false\"\n      ref={frameRef}\n      style={\n        {\n          \"--reveal\": String(clamp(initialPosition, 0, 100) / 100),\n        } as CSSProperties\n      }\n    >\n      <img\n        alt={imageAlt}\n        className=\"absolute inset-0 size-full object-cover\"\n        draggable={false}\n        src={imageSrc}\n      />\n      <div className=\"jk-mirs-overlay absolute inset-0\">\n        <img\n          alt={overlayAlt}\n          className={cn(\n            \"absolute inset-0 size-full object-cover\",\n            grayscaleOverlay && \"grayscale\",\n          )}\n          draggable={false}\n          src={overlaySrc}\n        />\n      </div>\n      <div\n        aria-hidden=\"true\"\n        className=\"pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-between px-4 py-3 sm:px-5\"\n      >\n        <span className=\"rounded-full border border-border bg-background/85 px-2.5 py-1 text-[11px] font-medium tracking-[0.14em] text-foreground uppercase backdrop-blur-sm\">\n          {leftLabel}\n        </span>\n        <span className=\"rounded-full border border-border bg-background/85 px-2.5 py-1 text-[11px] font-medium tracking-[0.14em] text-foreground uppercase backdrop-blur-sm\">\n          {rightLabel}\n        </span>\n      </div>\n      <div\n        aria-hidden=\"true\"\n        className=\"jk-mirs-rail pointer-events-none absolute inset-y-0 z-20 w-px bg-background shadow-[0_0_0_1px_color-mix(in_oklab,var(--jk-foreground),transparent_72%)]\"\n      />\n      <div\n        aria-labelledby={labelledBy}\n        aria-orientation=\"horizontal\"\n        aria-valuemax={100}\n        aria-valuemin={0}\n        aria-valuenow={Math.round(clamp(initialPosition, 0, 100))}\n        className=\"jk-mirs-handle absolute top-1/2 z-30 flex size-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background text-foreground shadow-[0_16px_32px_-18px_color-mix(in_oklab,var(--jk-foreground),transparent_40%)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"\n        ref={sliderRef}\n        role=\"slider\"\n        tabIndex={0}\n      >\n        <ChevronsLeftRightIcon aria-hidden=\"true\" className=\"size-5\" />\n      </div>\n    </div>\n  );\n}\n\nexport function MotionImageRevealSlider({\n  className,\n  eyebrow = DEFAULT_EYEBROW,\n  heading = DEFAULT_HEADING,\n  description = DEFAULT_DESCRIPTION,\n  imageSrc = DEFAULT_IMAGE_SRC,\n  imageAlt = DEFAULT_IMAGE_ALT,\n  overlaySrc,\n  overlayAlt,\n  grayscaleOverlay,\n  leftLabel = DEFAULT_LEFT_LABEL,\n  rightLabel = DEFAULT_RIGHT_LABEL,\n  initialPosition = DEFAULT_POSITION,\n  step = DEFAULT_STEP,\n  ...props\n}: MotionImageRevealSliderProps) {\n  const headingId = useId();\n  const overlayImageSrc = overlaySrc ?? imageSrc;\n  const overlayImageAlt = overlayAlt ?? `${imageAlt}, grayscale`;\n  const useGrayscale = grayscaleOverlay ?? overlaySrc == null;\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-slot=\"motion-image-reveal-slider\"\n      {...props}\n    >\n      <style href=\"jk-motion-image-reveal-slider\" precedence=\"default\">{`\n        @property --reveal {\n          syntax: \"<number>\";\n          inherits: true;\n          initial-value: 0.5;\n        }\n        .jk-mirs-overlay {\n          clip-path: inset(0 0 0 calc(var(--reveal) * 100%));\n        }\n        .jk-mirs-rail {\n          left: calc(var(--reveal) * 100%);\n        }\n        .jk-mirs-handle {\n          left: calc(var(--reveal) * 100%);\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-mirs-frame[data-animate=\"true\"] .jk-mirs-overlay {\n            transition: clip-path 280ms cubic-bezier(0.16, 1, 0.3, 1);\n          }\n          .jk-mirs-frame[data-animate=\"true\"] .jk-mirs-rail,\n          .jk-mirs-frame[data-animate=\"true\"] .jk-mirs-handle {\n            transition: left 280ms cubic-bezier(0.16, 1, 0.3, 1);\n          }\n        }\n      `}</style>\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24\">\n        <header className=\"mx-auto mb-10 max-w-2xl text-center sm:mb-14\">\n          {eyebrow ? (\n            <p className=\"mb-3 text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase\">\n              {eyebrow}\n            </p>\n          ) : null}\n          <h2\n            className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl lg:text-5xl\"\n            id={headingId}\n          >\n            {heading}\n          </h2>\n          {description ? (\n            <p className=\"mt-3 text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7\">\n              {description}\n            </p>\n          ) : null}\n        </header>\n        <RevealStage\n          grayscaleOverlay={useGrayscale}\n          imageAlt={imageAlt}\n          imageSrc={imageSrc}\n          initialPosition={initialPosition}\n          labelledBy={headingId}\n          leftLabel={leftLabel}\n          overlayAlt={overlayImageAlt}\n          overlaySrc={overlayImageSrc}\n          rightLabel={rightLabel}\n          step={step}\n        />\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "motion-image-reveal-slider/MotionImageRevealSlider.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface MotionImageRevealSliderProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  eyebrow?: string;\n  heading?: string;\n  description?: string;\n  imageSrc?: string;\n  imageAlt?: string;\n  overlaySrc?: string;\n  overlayAlt?: string;\n  grayscaleOverlay?: boolean;\n  leftLabel?: string;\n  rightLabel?: string;\n  initialPosition?: number;\n  step?: number;\n}\n"
+    },
+    {
+      "path": "motion-image-reveal-slider/index.ts",
+      "type": "index",
+      "content": "export { MotionImageRevealSlider } from \"./MotionImageRevealSlider\";\nexport type { MotionImageRevealSliderProps } from \"./MotionImageRevealSlider.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <MotionImageRevealSlider {...motionImageRevealSliderMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <MotionImageRevealSlider {...motionImageRevealSliderMocks.alternate} />\n    </div>"
+    }
+  ]
+}
