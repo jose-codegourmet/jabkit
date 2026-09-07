@@ -18,7 +18,6 @@ import {
   NavigationMenuList,
   NavigationMenuMobileItem,
   NavigationMenuSmallItem,
-  NavigationMenuTrigger,
   navigationMenuTriggerClassName,
 } from "./NavigationMenu";
 import { navigationMenuMocks } from "./NavigationMenu.mocks";
@@ -30,10 +29,12 @@ const DefaultPreview = () => (
         <Grid2x2PlusIcon aria-hidden="true" className="size-5" />
         {navigationMenuMocks.brand}
       </a>
-      <NavigationMenu delay={0} viewport={false}>
+      <NavigationMenu delay={0}>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Product</NavigationMenuTrigger>
+            <NavigationMenuLink className={navigationMenuTriggerClassName}>
+              Product
+            </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink
