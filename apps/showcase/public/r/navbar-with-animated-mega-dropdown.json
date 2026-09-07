@@ -1,0 +1,111 @@
+{
+  "name": "navbar-with-animated-mega-dropdown",
+  "displayName": "NavbarWithAnimatedMegaDropdown",
+  "version": "1.0.0",
+  "addedAt": "2026-09-07",
+  "description": "Marketing header with animated desktop mega menus, a primary CTA, and a slide-in overlay for small screens.",
+  "sectionCategory": "navbar",
+  "purpose": "Lets visitors scan products and resources from a compact header, with a shared animated mega panel on desktop and a disclosure drawer on mobile.",
+  "bestFor": [
+    "primary site navigation",
+    "SaaS marketing headers",
+    "multi-column mega menus"
+  ],
+  "avoidFor": [
+    "in-page tabs",
+    "dense storefront utility bars",
+    "sidebar app chrome"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "industries": [
+    "SaaS",
+    "technology"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "full-width",
+    "alignment": "mixed"
+  },
+  "slots": [
+    "brand",
+    "navigationItems",
+    "megaContent",
+    "cta",
+    "mobileNavigation"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedBefore": [
+    "hero",
+    "content"
+  ],
+  "tags": [
+    "navbar",
+    "marketing",
+    "navigation",
+    "header",
+    "mega-menu",
+    "dropdown",
+    "mobile",
+    "cta"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "navigation-menu",
+    "button",
+    "dialog"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 560
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "navbar-with-animated-mega-dropdown/NavbarWithAnimatedMegaDropdown.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { CompassIcon, MenuIcon, XIcon } from \"lucide-react\";\nimport { useState } from \"react\";\nimport { Button } from \"@/atoms/button\";\nimport {\n  Dialog,\n  DialogClose,\n  DialogContent,\n  DialogTitle,\n} from \"@/atoms/dialog\";\nimport {\n  NavigationMenu,\n  NavigationMenuContent,\n  NavigationMenuDisclosure,\n  NavigationMenuGridCard,\n  NavigationMenuItem,\n  NavigationMenuLargeItem,\n  NavigationMenuLink,\n  NavigationMenuList,\n  NavigationMenuMobileItem,\n  NavigationMenuSmallItem,\n  NavigationMenuTrigger,\n  navigationMenuTriggerClassName,\n} from \"@/atoms/navigation-menu\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  NavbarWithAnimatedMegaDropdownColumn,\n  NavbarWithAnimatedMegaDropdownLinkItem,\n  NavbarWithAnimatedMegaDropdownNavItem,\n  NavbarWithAnimatedMegaDropdownProps,\n} from \"./NavbarWithAnimatedMegaDropdown.types\";\n\nconst defaults = {\n  brand: { name: \"Paperlane\", href: \"#home\" },\n  cta: { label: \"Start free\", href: \"#start\" },\n  secondaryCta: { label: \"Sign in\", href: \"#sign-in\" },\n  navItems: [\n    {\n      kind: \"mega\",\n      label: \"Product\",\n      value: \"product\",\n      columns: [\n        {\n          title: \"Build\",\n          links: [\n            {\n              title: \"Page kit\",\n              href: \"#page-kit\",\n              description: \"Compose landing pages from shared blocks.\",\n              icon: \"layers\",\n            },\n            {\n              title: \"Workflows\",\n              href: \"#workflows\",\n              description: \"Route reviews without a second tool.\",\n              icon: \"plug\",\n            },\n            {\n              title: \"Insights\",\n              href: \"#insights\",\n              description: \"See what shipped this week.\",\n              icon: \"bar-chart\",\n            },\n          ],\n        },\n        {\n          title: \"Operate\",\n          links: [\n            { title: \"Templates\", href: \"#templates\", icon: \"file-text\" },\n            { title: \"API\", href: \"#api\", icon: \"code\" },\n            { title: \"Security\", href: \"#security\", icon: \"shield\" },\n            { title: \"Status\", href: \"#status\", icon: \"globe\" },\n          ],\n        },\n      ],\n      featured: {\n        title: \"Launch notes\",\n        href: \"#launch-notes\",\n        description: \"Keep release copy, owners, and dates in one lane.\",\n        icon: \"star\",\n      },\n    },\n    {\n      kind: \"mega\",\n      label: \"Resources\",\n      value: \"resources\",\n      columns: [\n        {\n          title: \"Learn\",\n          links: [\n            {\n              title: \"Guides\",\n              href: \"#guides\",\n              description: \"Setup, billing, and publishing walkthroughs.\",\n              icon: \"help-circle\",\n            },\n            {\n              title: \"Journal\",\n              href: \"#journal\",\n              description: \"Release notes and studio writing.\",\n              icon: \"leaf\",\n            },\n          ],\n        },\n      ],\n    },\n    { kind: \"link\", label: \"Pricing\", href: \"#pricing\" },\n  ],\n} satisfies {\n  brand: { name: string; href: string };\n  cta: { label: string; href: string };\n  secondaryCta: { label: string; href: string };\n  navItems: NavbarWithAnimatedMegaDropdownNavItem[];\n};\n\nconst staggerClass =\n  \"motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both motion-reduce:animate-none\";\n\nfunction MegaPanel({\n  columns,\n  featured,\n}: {\n  columns: NavbarWithAnimatedMegaDropdownColumn[];\n  featured?: NavbarWithAnimatedMegaDropdownLinkItem;\n}) {\n  const columnCount = Math.min(Math.max(columns.length, 1), 3);\n\n  return (\n    <div\n      className={cn(\n        \"grid w-[min(52rem,calc(100vw-3rem))] md:grid-cols-[minmax(0,1fr)_13rem]\",\n        !featured && \"md:grid-cols-1\",\n      )}\n    >\n      <div\n        className={cn(\n          \"grid grow gap-4 p-4 md:border-r md:border-border\",\n          columnCount === 1 && \"md:grid-cols-1\",\n          columnCount === 2 && \"md:grid-cols-2\",\n          columnCount >= 3 && \"md:grid-cols-3\",\n          !featured && \"md:border-r-0\",\n        )}\n      >\n        {columns.map((column, index) => (\n          <div\n            className={cn(\"flex flex-col gap-2\", staggerClass)}\n            key={column.title}\n            style={{\n              animationDelay: `${index * 55}ms`,\n              animationDuration: \"280ms\",\n            }}\n          >\n            <p className=\"px-1 text-xs font-medium tracking-wide text-muted-foreground\">\n              {column.title}\n            </p>\n            <ul className=\"grid gap-1\">\n              {column.links.map((link) => (\n                <li key={link.href}>\n                  {link.description ? (\n                    <NavigationMenuLargeItem link={link} />\n                  ) : (\n                    <NavigationMenuSmallItem item={link} />\n                  )}\n                </li>\n              ))}\n            </ul>\n          </div>\n        ))}\n      </div>\n      {featured ? (\n        <div\n          className={cn(\"p-3\", staggerClass)}\n          style={{\n            animationDelay: `${columns.length * 55}ms`,\n            animationDuration: \"280ms\",\n          }}\n        >\n          <NavigationMenuGridCard className=\"min-h-40\" link={featured} />\n        </div>\n      ) : null}\n    </div>\n  );\n}\n\nfunction DesktopNav({\n  items,\n  defaultValue,\n}: {\n  items: NavbarWithAnimatedMegaDropdownNavItem[];\n  defaultValue?: string | null;\n}) {\n  return (\n    <NavigationMenu className=\"hidden lg:flex\" defaultValue={defaultValue}>\n      <NavigationMenuList>\n        {items.map((item) => {\n          if (item.kind === \"link\") {\n            return (\n              <NavigationMenuItem key={item.label}>\n                <NavigationMenuLink\n                  className={navigationMenuTriggerClassName}\n                  href={item.href}\n                >\n                  {item.label}\n                </NavigationMenuLink>\n              </NavigationMenuItem>\n            );\n          }\n\n          return (\n            <NavigationMenuItem key={item.value} value={item.value}>\n              <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>\n              <NavigationMenuContent>\n                <MegaPanel columns={item.columns} featured={item.featured} />\n              </NavigationMenuContent>\n            </NavigationMenuItem>\n          );\n        })}\n      </NavigationMenuList>\n    </NavigationMenu>\n  );\n}\n\nfunction MobileNav({\n  items,\n  onNavigate,\n}: {\n  items: NavbarWithAnimatedMegaDropdownNavItem[];\n  onNavigate: () => void;\n}) {\n  return (\n    <NavigationMenu className=\"max-w-none px-4 pt-2 pb-6\" delay={0}>\n      {items.map((item) => {\n        if (item.kind === \"link\") {\n          return (\n            <a\n              className=\"flex py-3 text-sm font-medium text-foreground\"\n              href={item.href}\n              key={item.label}\n              onClick={onNavigate}\n            >\n              {item.label}\n            </a>\n          );\n        }\n\n        return (\n          <NavigationMenuDisclosure key={item.value} title={item.label}>\n            <NavigationMenuList className=\"grid gap-1\">\n              {item.columns.flatMap((column) =>\n                column.links.map((link) => (\n                  <NavigationMenuItem key={link.href}>\n                    <NavigationMenuMobileItem\n                      item={link}\n                      onClick={onNavigate}\n                    />\n                  </NavigationMenuItem>\n                )),\n              )}\n              {item.featured ? (\n                <NavigationMenuItem>\n                  <NavigationMenuMobileItem\n                    item={item.featured}\n                    onClick={onNavigate}\n                  />\n                </NavigationMenuItem>\n              ) : null}\n            </NavigationMenuList>\n          </NavigationMenuDisclosure>\n        );\n      })}\n    </NavigationMenu>\n  );\n}\n\nexport function NavbarWithAnimatedMegaDropdown({\n  className,\n  brand = defaults.brand,\n  navItems = defaults.navItems,\n  cta = defaults.cta,\n  secondaryCta = defaults.secondaryCta,\n  defaultValue = \"product\",\n  ...props\n}: NavbarWithAnimatedMegaDropdownProps) {\n  const [menuOpen, setMenuOpen] = useState(false);\n\n  return (\n    <header\n      className={cn(\n        \"sticky top-0 z-40 border-b border-border bg-background/90 text-foreground\",\n        \"backdrop-blur-md supports-[backdrop-filter]:bg-background/70\",\n        className,\n      )}\n      data-slot=\"navbar-with-animated-mega-dropdown\"\n      {...props}\n    >\n      <div className=\"mx-auto flex h-16 max-w-6xl items-center gap-3 px-4\">\n        <a\n          className=\"flex min-w-0 items-center gap-2 font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n          href={brand.href}\n        >\n          <span className=\"flex size-8 shrink-0 items-center justify-center rounded-[--radius] bg-primary text-primary-foreground\">\n            <CompassIcon aria-hidden=\"true\" className=\"size-4\" />\n          </span>\n          <span className=\"truncate\">{brand.name}</span>\n        </a>\n\n        <div className=\"hidden min-w-0 flex-1 justify-center lg:flex\">\n          <DesktopNav defaultValue={defaultValue} items={navItems} />\n        </div>\n\n        <div className=\"ml-auto flex items-center gap-2\">\n          <Button\n            asChild\n            className=\"hidden lg:inline-flex\"\n            size=\"sm\"\n            variant=\"ghost\"\n          >\n            <a href={secondaryCta.href}>{secondaryCta.label}</a>\n          </Button>\n          <Button asChild className=\"hidden lg:inline-flex\" size=\"sm\">\n            <a href={cta.href}>{cta.label}</a>\n          </Button>\n\n          <Dialog onOpenChange={setMenuOpen} open={menuOpen}>\n            <Button\n              aria-expanded={menuOpen}\n              aria-label=\"Open navigation\"\n              className=\"size-9 p-0 lg:hidden\"\n              onClick={() => setMenuOpen(true)}\n              size=\"sm\"\n              variant=\"ghost\"\n            >\n              <MenuIcon className=\"size-5\" />\n            </Button>\n            <DialogContent\n              className=\"top-0 right-0 left-auto h-dvh w-[min(22rem,calc(100%-1.5rem))] max-w-none translate-x-0 translate-y-0 gap-0 overflow-y-auto rounded-none rounded-l-[--radius] p-0 data-open:slide-in-from-right-4 sm:max-w-none\"\n              showCloseButton={false}\n            >\n              <div className=\"flex h-14 items-center justify-between border-b border-border px-4\">\n                <DialogTitle className=\"text-sm\">{brand.name}</DialogTitle>\n                <DialogClose\n                  render={\n                    <Button\n                      aria-label=\"Close navigation\"\n                      className=\"size-8 p-0\"\n                      size=\"sm\"\n                      variant=\"ghost\"\n                    >\n                      <XIcon className=\"size-4\" />\n                    </Button>\n                  }\n                />\n              </div>\n              <MobileNav\n                items={navItems}\n                onNavigate={() => setMenuOpen(false)}\n              />\n              <div className=\"mt-auto flex flex-col gap-2 border-t border-border p-4\">\n                <Button asChild size=\"sm\" variant=\"ghost\">\n                  <a href={secondaryCta.href}>{secondaryCta.label}</a>\n                </Button>\n                <Button asChild size=\"sm\">\n                  <a href={cta.href}>{cta.label}</a>\n                </Button>\n              </div>\n            </DialogContent>\n          </Dialog>\n        </div>\n      </div>\n    </header>\n  );\n}\n"
+    },
+    {
+      "path": "navbar-with-animated-mega-dropdown/NavbarWithAnimatedMegaDropdown.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport type { NavigationMenuLinkItem } from \"@/atoms/navigation-menu\";\n\nexport type NavbarWithAnimatedMegaDropdownLinkItem = NavigationMenuLinkItem;\n\nexport interface NavbarWithAnimatedMegaDropdownBrand {\n  name: string;\n  href: string;\n}\n\nexport interface NavbarWithAnimatedMegaDropdownCta {\n  label: string;\n  href: string;\n}\n\nexport interface NavbarWithAnimatedMegaDropdownColumn {\n  title: string;\n  links: NavbarWithAnimatedMegaDropdownLinkItem[];\n}\n\nexport type NavbarWithAnimatedMegaDropdownNavItem =\n  | {\n      kind: \"link\";\n      label: string;\n      href: string;\n    }\n  | {\n      kind: \"mega\";\n      label: string;\n      value: string;\n      columns: NavbarWithAnimatedMegaDropdownColumn[];\n      featured?: NavbarWithAnimatedMegaDropdownLinkItem;\n    };\n\nexport interface NavbarWithAnimatedMegaDropdownProps\n  extends HTMLAttributes<HTMLElement> {\n  brand?: NavbarWithAnimatedMegaDropdownBrand;\n  navItems?: NavbarWithAnimatedMegaDropdownNavItem[];\n  cta?: NavbarWithAnimatedMegaDropdownCta;\n  secondaryCta?: NavbarWithAnimatedMegaDropdownCta;\n  defaultValue?: string | null;\n}\n"
+    },
+    {
+      "path": "navbar-with-animated-mega-dropdown/index.ts",
+      "type": "index",
+      "content": "export { NavbarWithAnimatedMegaDropdown } from \"./NavbarWithAnimatedMegaDropdown\";\nexport type {\n  NavbarWithAnimatedMegaDropdownBrand,\n  NavbarWithAnimatedMegaDropdownColumn,\n  NavbarWithAnimatedMegaDropdownCta,\n  NavbarWithAnimatedMegaDropdownLinkItem,\n  NavbarWithAnimatedMegaDropdownNavItem,\n  NavbarWithAnimatedMegaDropdownProps,\n} from \"./NavbarWithAnimatedMegaDropdown.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"min-h-[28rem] bg-background text-foreground\">\n      <NavbarWithAnimatedMegaDropdown\n        {...navbarWithAnimatedMegaDropdownMocks.default}\n      />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"min-h-[22rem] bg-background text-foreground\">\n      <NavbarWithAnimatedMegaDropdown\n        {...navbarWithAnimatedMegaDropdownMocks.alternate}\n      />\n    </div>"
+    }
+  ]
+}
