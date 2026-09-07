@@ -1,0 +1,110 @@
+{
+  "name": "sterling-gate-kinetic-navigation",
+  "displayName": "SterlingGateKineticNavigation",
+  "version": "1.0.0",
+  "addedAt": "2026-09-07",
+  "description": "Full-screen kinetic navigation that reveals a typography-heavy overlay from a focused header, with ripple hover on destinations.",
+  "sectionCategory": "navbar",
+  "purpose": "Turns primary site navigation into an immersive index for luxury and agency pages that need a quiet, heavy-weighted reveal.",
+  "bestFor": [
+    "agency and studio sites",
+    "luxury brand landing pages",
+    "portfolio sites with few destinations"
+  ],
+  "avoidFor": [
+    "dense application shells",
+    "ecommerce catalogs with many nested categories",
+    "utility sites that need persistent inline links"
+  ],
+  "tone": [
+    "premium",
+    "editorial",
+    "quiet"
+  ],
+  "industries": [
+    "design",
+    "architecture",
+    "hospitality"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "high",
+  "layout": {
+    "type": "overlay",
+    "alignment": "left",
+    "columns": 1
+  },
+  "slots": [
+    "brand",
+    "menuTrigger",
+    "navigationItems",
+    "cta",
+    "pageCanvas"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedBefore": [
+    "hero",
+    "content"
+  ],
+  "tags": [
+    "navbar",
+    "marketing",
+    "navigation",
+    "overlay",
+    "fullscreen",
+    "kinetic",
+    "menu",
+    "luxury"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "sterling-gate-kinetic-navigation/SterlingGateKineticNavigation.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { MenuIcon, XIcon } from \"lucide-react\";\nimport {\n  type CSSProperties,\n  type PointerEvent,\n  type ReactNode,\n  useEffect,\n  useId,\n  useRef,\n  useState,\n} from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  SterlingGateKineticNavigationLink,\n  SterlingGateKineticNavigationProps,\n} from \"./SterlingGateKineticNavigation.types\";\n\nconst defaults = {\n  brand: \"Northglass\",\n  brandHref: \"#top\",\n  menuLabel: \"Index\",\n  closeLabel: \"Close\",\n  tagline: \"Spatial identity for places that last.\",\n  footnote: \"New work by referral\",\n  cta: { label: \"Book a visit\", href: \"#visit\" },\n  links: [\n    {\n      label: \"Work\",\n      href: \"#work\",\n      index: \"01\",\n      kicker: \"Selected rooms\",\n    },\n    {\n      label: \"Practice\",\n      href: \"#practice\",\n      index: \"02\",\n      kicker: \"How we build\",\n    },\n    {\n      label: \"Journal\",\n      href: \"#journal\",\n      index: \"03\",\n      kicker: \"Site notes\",\n    },\n    {\n      label: \"Contact\",\n      href: \"#contact\",\n      index: \"04\",\n      kicker: \"New briefs\",\n    },\n  ],\n} satisfies {\n  brand: string;\n  brandHref: string;\n  menuLabel: string;\n  closeLabel: string;\n  tagline: string;\n  footnote: string;\n  cta: { label: string; href: string };\n  links: SterlingGateKineticNavigationLink[];\n};\n\nfunction KineticLabel({ text }: { text: string }) {\n  const glyphs = Array.from(text, (value, order) => ({\n    key: `${text}:${order}:${value.codePointAt(0) ?? 0}`,\n    value,\n    order,\n  }));\n  return (\n    <span className=\"inline-flex flex-wrap\" aria-hidden=\"true\">\n      {glyphs.map((glyph) => (\n        <span\n          className=\"jk-sg-glyph inline-block\"\n          key={glyph.key}\n          style={{ \"--jk-sg-i\": glyph.order } as CSSProperties}\n        >\n          {glyph.value === \" \" ? \"\\u00a0\" : glyph.value}\n        </span>\n      ))}\n    </span>\n  );\n}\n\nfunction HeaderBar({\n  brand,\n  brandHref,\n  action,\n}: {\n  brand: string;\n  brandHref: string;\n  action: ReactNode;\n}) {\n  return (\n    <div className=\"flex h-16 items-center justify-between gap-4 px-5 sm:px-8 lg:px-10\">\n      <a\n        className=\"text-sm font-medium tracking-[0.18em] text-foreground uppercase outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"\n        href={brandHref}\n      >\n        {brand}\n      </a>\n      {action}\n    </div>\n  );\n}\n\nexport function SterlingGateKineticNavigation({\n  className,\n  brand = defaults.brand,\n  brandHref = defaults.brandHref,\n  menuLabel = defaults.menuLabel,\n  closeLabel = defaults.closeLabel,\n  links = defaults.links,\n  cta = defaults.cta,\n  footnote = defaults.footnote,\n  tagline = defaults.tagline,\n  children,\n  open: openProp,\n  defaultOpen = false,\n  onOpenChange,\n  ...props\n}: SterlingGateKineticNavigationProps) {\n  const panelId = useId();\n  const titleId = useId();\n  const menuButtonRef = useRef<HTMLButtonElement>(null);\n  const closeButtonRef = useRef<HTMLButtonElement>(null);\n  const panelRef = useRef<HTMLDivElement>(null);\n  const onOpenChangeRef = useRef(onOpenChange);\n  const openPropRef = useRef(openProp);\n  onOpenChangeRef.current = onOpenChange;\n  openPropRef.current = openProp;\n  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);\n  const open = openProp ?? uncontrolledOpen;\n\n  const setOpen = (next: boolean) => {\n    if (openPropRef.current === undefined) setUncontrolledOpen(next);\n    onOpenChangeRef.current?.(next);\n  };\n\n  useEffect(() => {\n    if (!open) return;\n    const previousOverflow = document.body.style.overflow;\n    document.body.style.overflow = \"hidden\";\n    closeButtonRef.current?.focus();\n    const onKeyDown = (event: globalThis.KeyboardEvent) => {\n      if (event.key === \"Escape\") {\n        if (openPropRef.current === undefined) setUncontrolledOpen(false);\n        onOpenChangeRef.current?.(false);\n      }\n    };\n    window.addEventListener(\"keydown\", onKeyDown);\n    return () => {\n      window.removeEventListener(\"keydown\", onKeyDown);\n      document.body.style.overflow = previousOverflow;\n      menuButtonRef.current?.focus();\n    };\n  }, [open]);\n\n  const moveSheen = (event: PointerEvent<HTMLDivElement>) => {\n    const node = panelRef.current;\n    if (!node) return;\n    const rect = node.getBoundingClientRect();\n    node.style.setProperty(\"--jk-sg-px\", `${event.clientX - rect.left}px`);\n    node.style.setProperty(\"--jk-sg-py\", `${event.clientY - rect.top}px`);\n  };\n\n  return (\n    <section\n      className={cn(\n        \"relative isolate min-h-[100dvh] overflow-hidden bg-background text-foreground\",\n        className,\n      )}\n      data-slot=\"sterling-gate-kinetic-navigation\"\n      {...props}\n    >\n      <style href=\"jk-sterling-gate-kinetic-navigation\" precedence=\"default\">{`\n        @keyframes jk-sg-panel {\n          from { opacity: 0; transform: translate3d(0, -6%, 0); }\n          to { opacity: 1; transform: none; }\n        }\n        @keyframes jk-sg-item {\n          from { opacity: 0; transform: translate3d(0, 1.1rem, 0); }\n          to { opacity: 1; transform: none; }\n        }\n        @keyframes jk-sg-ripple {\n          0% { transform: translate3d(0, 0, 0); }\n          38% { transform: translate3d(0, -0.12em, 0); }\n          100% { transform: translate3d(0, 0, 0); }\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-sg-panel {\n            animation: jk-sg-panel 0.72s cubic-bezier(0.16, 1, 0.3, 1) both;\n          }\n          .jk-sg-item {\n            animation: jk-sg-item 0.76s cubic-bezier(0.16, 1, 0.3, 1) both;\n            animation-delay: calc(90ms + var(--jk-sg-n) * 68ms);\n          }\n          .jk-sg-link:is(:hover, :focus-visible) .jk-sg-glyph {\n            animation: jk-sg-ripple 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;\n            animation-delay: calc(var(--jk-sg-i) * 28ms);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-sg-panel, .jk-sg-item, .jk-sg-glyph { animation: none; }\n          .jk-sg-sheen { display: none; }\n        }\n      `}</style>\n\n      <header className=\"relative z-10 border-b border-border/70 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/55\">\n        <HeaderBar\n          brand={brand}\n          brandHref={brandHref}\n          action={\n            <button\n              aria-controls={panelId}\n              aria-expanded={open}\n              className=\"inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium tracking-[0.16em] text-foreground uppercase outline-none transition-[transform,background-color] duration-200 motion-reduce:transition-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98]\"\n              onClick={() => setOpen(true)}\n              ref={menuButtonRef}\n              type=\"button\"\n            >\n              <MenuIcon aria-hidden=\"true\" className=\"size-3.5\" />\n              {menuLabel}\n            </button>\n          }\n        />\n      </header>\n\n      <div className=\"relative z-0 flex min-h-[calc(100dvh-4rem)] flex-col justify-end px-5 pb-16 sm:px-8 lg:px-10\">\n        <div\n          aria-hidden=\"true\"\n          className=\"pointer-events-none absolute inset-0 bg-[radial-gradient(48rem_28rem_at_82%_12%,color-mix(in_oklab,var(--jk-foreground)_8%,transparent),transparent_68%)]\"\n        />\n        <div className=\"relative max-w-3xl\">\n          {children ?? (\n            <p className=\"max-w-xl text-2xl leading-[1.15] tracking-tight text-balance sm:text-4xl lg:text-5xl\">\n              {tagline}\n            </p>\n          )}\n        </div>\n      </div>\n\n      {open ? (\n        <div\n          aria-labelledby={titleId}\n          aria-modal=\"true\"\n          className=\"jk-sg-panel absolute inset-0 z-50 flex min-h-[100dvh] flex-col bg-background text-foreground\"\n          id={panelId}\n          onPointerMove={moveSheen}\n          ref={panelRef}\n          role=\"dialog\"\n        >\n          <div\n            aria-hidden=\"true\"\n            className=\"jk-sg-sheen pointer-events-none absolute inset-0\"\n            style={{\n              background:\n                \"radial-gradient(28rem 22rem at var(--jk-sg-px, 72%) var(--jk-sg-py, 18%), color-mix(in oklab, var(--jk-foreground) 12%, transparent), transparent 72%)\",\n            }}\n          />\n          <div\n            aria-hidden=\"true\"\n            className=\"pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(to_top,color-mix(in_oklab,var(--jk-muted)_70%,transparent),transparent)]\"\n          />\n\n          <HeaderBar\n            brand={brand}\n            brandHref={brandHref}\n            action={\n              <button\n                className=\"inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium tracking-[0.16em] text-foreground uppercase outline-none transition-[transform,background-color] duration-200 motion-reduce:transition-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98]\"\n                onClick={() => setOpen(false)}\n                ref={closeButtonRef}\n                type=\"button\"\n              >\n                <XIcon aria-hidden=\"true\" className=\"size-3.5\" />\n                {closeLabel}\n              </button>\n            }\n          />\n\n          <div className=\"relative flex min-h-0 flex-1 flex-col justify-between gap-10 px-5 pt-6 pb-8 sm:px-8 sm:pt-8 lg:px-10\">\n            <nav aria-labelledby={titleId} className=\"max-w-5xl\">\n              <h2 className=\"sr-only\" id={titleId}>\n                {brand} navigation\n              </h2>\n              <ul className=\"flex flex-col\">\n                {links.map((link, index) => (\n                  <li\n                    className=\"jk-sg-item border-t border-border/80 last:border-b\"\n                    key={`${link.href}-${link.label}`}\n                    style={{ \"--jk-sg-n\": index } as CSSProperties}\n                  >\n                    <a\n                      className=\"jk-sg-link group flex items-baseline justify-between gap-6 py-3 outline-none sm:py-4\"\n                      href={link.href}\n                      onClick={() => setOpen(false)}\n                    >\n                      <span className=\"flex min-w-0 items-baseline gap-4 sm:gap-6\">\n                        {link.index ? (\n                          <span className=\"w-8 shrink-0 text-[11px] tracking-[0.16em] text-muted-foreground\">\n                            {link.index}\n                          </span>\n                        ) : null}\n                        <span className=\"min-w-0 text-4xl leading-[1.1] font-medium tracking-tight text-foreground sm:text-6xl lg:text-7xl\">\n                          <span className=\"sr-only\">{link.label}</span>\n                          <KineticLabel text={link.label} />\n                        </span>\n                      </span>\n                      {link.kicker ? (\n                        <span className=\"hidden max-w-[12rem] text-right text-sm text-muted-foreground transition-colors duration-200 motion-reduce:transition-none group-hover:text-foreground group-focus-visible:text-foreground sm:block\">\n                          {link.kicker}\n                        </span>\n                      ) : null}\n                    </a>\n                  </li>\n                ))}\n              </ul>\n            </nav>\n\n            <div className=\"jk-sg-item flex flex-col gap-4 border-t border-border/80 pt-6 sm:flex-row sm:items-end sm:justify-between\">\n              {cta ? (\n                <a\n                  className=\"inline-flex w-fit items-center rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background outline-none transition-[transform,filter] duration-200 motion-reduce:transition-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98]\"\n                  href={cta.href}\n                  onClick={() => setOpen(false)}\n                >\n                  {cta.label}\n                </a>\n              ) : null}\n              {footnote ? (\n                <p className=\"text-sm text-muted-foreground\">{footnote}</p>\n              ) : null}\n            </div>\n          </div>\n        </div>\n      ) : null}\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "sterling-gate-kinetic-navigation/SterlingGateKineticNavigation.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport interface SterlingGateKineticNavigationLink {\n  label: string;\n  href: string;\n  index?: string;\n  kicker?: string;\n}\n\nexport interface SterlingGateKineticNavigationCta {\n  label: string;\n  href: string;\n}\n\nexport interface SterlingGateKineticNavigationProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"onChange\"> {\n  brand?: string;\n  brandHref?: string;\n  menuLabel?: string;\n  closeLabel?: string;\n  links?: SterlingGateKineticNavigationLink[];\n  cta?: SterlingGateKineticNavigationCta;\n  footnote?: string;\n  tagline?: string;\n  children?: ReactNode;\n  open?: boolean;\n  defaultOpen?: boolean;\n  onOpenChange?: (open: boolean) => void;\n}\n"
+    },
+    {
+      "path": "sterling-gate-kinetic-navigation/index.ts",
+      "type": "index",
+      "content": "export { SterlingGateKineticNavigation } from \"./SterlingGateKineticNavigation\";\nexport type * from \"./SterlingGateKineticNavigation.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<SterlingGateKineticNavigation\n      {...sterlingGateKineticNavigationMocks.default}\n    />"
+    },
+    {
+      "name": "Variants",
+      "code": "<SterlingGateKineticNavigation\n      {...sterlingGateKineticNavigationMocks.alternate}\n    />"
+    }
+  ]
+}
