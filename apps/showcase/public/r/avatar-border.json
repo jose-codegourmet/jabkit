@@ -1,0 +1,94 @@
+{
+  "name": "avatar-border",
+  "displayName": "AvatarBorder",
+  "version": "1.0.0",
+  "addedAt": "2026-09-07",
+  "description": "Identity avatar wrapped in a token-colored conic ring that can spin or stay still.",
+  "sectionCategory": "identity",
+  "purpose": "Highlights a person or brand mark with a theme-aware border so profile faces stay distinct in dense lists and headers.",
+  "bestFor": [
+    "profile photos in headers",
+    "author bylines that need extra emphasis",
+    "online presence and member cards"
+  ],
+  "avoidFor": [
+    "large galleries of faces",
+    "decorative images that are not identity"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "image",
+    "fallback",
+    "ring"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "avatar"
+  ],
+  "tags": [
+    "avatar",
+    "border",
+    "identity",
+    "ring",
+    "atom"
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "avatar"
+  ],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "avatar-border/AvatarBorder.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { Avatar, AvatarFallback, AvatarImage } from \"@/atoms/avatar/Avatar\";\nimport { cn } from \"@/lib/cn\";\nimport type { AvatarBorderProps } from \"./AvatarBorder.types\";\n\nconst avatarSizeClass = {\n  sm: \"size-6\",\n  default: \"size-10\",\n  lg: \"size-16\",\n} as const;\n\nexport function AvatarBorder({\n  className,\n  src,\n  alt = \"\",\n  fallback,\n  size = \"default\",\n  animate = true,\n  children,\n  ...props\n}: AvatarBorderProps) {\n  return (\n    <div\n      className={cn(\n        \"jk-avatar-border relative inline-flex shrink-0 rounded-full p-[2px]\",\n        size === \"sm\" && \"p-px\",\n        size === \"lg\" && \"p-[3px]\",\n        className,\n      )}\n      data-animate={animate ? \"true\" : \"false\"}\n      data-size={size}\n      data-slot=\"avatar-border\"\n      {...props}\n    >\n      <style href=\"jk-avatar-border\" precedence=\"default\">{`\n        .jk-avatar-border-ring {\n          background: conic-gradient(\n            from 0deg,\n            var(--jk-chart-1),\n            var(--jk-chart-5),\n            var(--jk-chart-2),\n            var(--jk-primary),\n            var(--jk-chart-4),\n            var(--jk-chart-3),\n            var(--jk-chart-1)\n          );\n        }\n        @keyframes jk-avatar-border-spin {\n          to { transform: rotate(1turn); }\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-avatar-border[data-animate=\"true\"] .jk-avatar-border-ring {\n            animation: jk-avatar-border-spin 8s linear infinite;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-avatar-border-ring {\n            animation: none;\n          }\n        }\n      `}</style>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-avatar-border-ring pointer-events-none absolute inset-0 rounded-full\"\n      />\n      {children ? (\n        <div className=\"relative z-10\">{children}</div>\n      ) : (\n        <Avatar\n          className={cn(\"relative z-10 bg-background\", avatarSizeClass[size])}\n          size={size === \"sm\" ? \"sm\" : \"lg\"}\n        >\n          {src ? <AvatarImage alt={alt} src={src} /> : null}\n          <AvatarFallback>{fallback}</AvatarFallback>\n        </Avatar>\n      )}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "avatar-border/AvatarBorder.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type AvatarBorderSize = \"sm\" | \"default\" | \"lg\";\n\nexport interface AvatarBorderProps extends HTMLAttributes<HTMLDivElement> {\n  src?: string;\n  alt?: string;\n  fallback?: ReactNode;\n  size?: AvatarBorderSize;\n  animate?: boolean;\n  children?: ReactNode;\n}\n"
+    },
+    {
+      "path": "avatar-border/index.ts",
+      "type": "index",
+      "content": "export { AvatarBorder } from \"./AvatarBorder\";\nexport type { AvatarBorderProps, AvatarBorderSize } from \"./AvatarBorder.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background p-8 text-foreground\">\n      <AvatarBorder\n        alt={avatarBorderMocks.default.alt}\n        fallback={avatarBorderMocks.default.fallback}\n        size=\"lg\"\n        src={avatarBorderMocks.default.src}\n      />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"flex flex-wrap items-end gap-6 bg-background p-8 text-foreground\">\n      <AvatarBorder\n        alt={avatarBorderMocks.default.alt}\n        fallback={avatarBorderMocks.default.fallback}\n        size=\"sm\"\n        src={avatarBorderMocks.default.src}\n      />\n      <AvatarBorder\n        alt={avatarBorderMocks.second.alt}\n        fallback={avatarBorderMocks.second.fallback}\n        src={avatarBorderMocks.second.src}\n      />\n      <AvatarBorder fallback={avatarBorderMocks.fallback.fallback} size=\"lg\" />\n      <AvatarBorder\n        alt={avatarBorderMocks.default.alt}\n        animate={false}\n        fallback={avatarBorderMocks.default.fallback}\n        size=\"lg\"\n        src={avatarBorderMocks.default.src}\n      />\n    </div>"
+    }
+  ]
+}
