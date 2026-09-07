@@ -1,0 +1,115 @@
+{
+  "name": "carousel-cards",
+  "displayName": "CarouselCards",
+  "version": "1.0.0",
+  "addedAt": "2026-09-07",
+  "description": "Horizontally scrollable marketing rail of listing cards with image, rating, price, and a favorite control.",
+  "sectionCategory": "features",
+  "purpose": "Lets a landing page show bookable experiences or products in a snappy, keyboard-reachable card row without a full gallery.",
+  "bestFor": [
+    "experience or listing landings",
+    "product discovery rails",
+    "city-guide marketing sections"
+  ],
+  "avoidFor": [
+    "dense application tables",
+    "single-item product pages",
+    "content that must stay fully visible without scrolling"
+  ],
+  "tone": [
+    "editorial",
+    "modern",
+    "calm"
+  ],
+  "industries": [
+    "travel",
+    "ecommerce",
+    "hospitality"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "carousel",
+    "alignment": "left",
+    "columns": 4
+  },
+  "slots": [
+    "headline",
+    "listings",
+    "cta"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "logos"
+  ],
+  "recommendedBefore": [
+    "testimonials",
+    "pricing",
+    "cta"
+  ],
+  "tags": [
+    "carousel",
+    "cards",
+    "listings",
+    "marketing",
+    "gallery",
+    "favorites",
+    "ecommerce"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "badge",
+    "button"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "carousel-cards/CarouselCards.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  ChevronLeftIcon,\n  ChevronRightIcon,\n  HeartIcon,\n  StarIcon,\n} from \"lucide-react\";\nimport {\n  useCallback,\n  useEffect,\n  useId,\n  useRef,\n  useState,\n  useSyncExternalStore,\n} from \"react\";\nimport { Badge } from \"@/atoms/badge\";\nimport { Button } from \"@/atoms/button\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  CarouselCardsItem,\n  CarouselCardsProps,\n} from \"./CarouselCards.types\";\n\nconst DEFAULT_EYEBROW = \"In the city this month\";\nconst DEFAULT_HEADING = \"Experiences worth a slow afternoon\";\nconst DEFAULT_DESCRIPTION =\n  \"Book a desk, a walk, or a table. Cards snap as you scroll; save the ones you want to keep.\";\nconst DEFAULT_VIEW_ALL_HREF = \"#all-experiences\";\nconst DEFAULT_VIEW_ALL_LABEL = \"Show all\";\n\nconst DEFAULT_ITEMS: CarouselCardsItem[] = [\n  {\n    id: \"drawing\",\n    title: \"Dawn drawing on the harbor wall\",\n    image: \"/assets/d3f9bde61c9a29e7.webp\",\n    imageAlt: \"Empty office corridor with glass rooms and daylight\",\n    location: \"North Quay, Lisbon\",\n    price: 48,\n    currency: \"EUR\",\n    rating: 4.9,\n    reviewCount: 128,\n    badge: \"Original\",\n    date: \"Closes 21 May\",\n    href: \"#drawing\",\n  },\n  {\n    id: \"studio\",\n    title: \"Half-day desk in the plant room\",\n    image: \"/assets/462c849dc9a41e59.webp\",\n    imageAlt: \"Sunlit studio desks with plants and open notebooks\",\n    location: \"Campo de Ourique\",\n    price: 72,\n    currency: \"EUR\",\n    rating: 4.8,\n    reviewCount: 86,\n    badge: \"Popular\",\n    date: \"Open Saturdays\",\n    href: \"#studio\",\n  },\n  {\n    id: \"lamp\",\n    title: \"Evening light study with an arc lamp\",\n    image: \"/assets/6cc11e462a9aaded.webp\",\n    imageAlt: \"Arc floor lamp lighting a quiet corner\",\n    location: \"Estrela atelier\",\n    price: 36,\n    currency: \"EUR\",\n    rating: 4.7,\n    reviewCount: 54,\n    date: \"Closes 4 Jun\",\n    href: \"#lamp\",\n  },\n  {\n    id: \"concrete\",\n    title: \"Concrete stair walk with a guide\",\n    image: \"/assets/97c532d558fa4fbc.webp\",\n    imageAlt: \"Concrete structure photographed from the ground\",\n    location: \"Alcântara yards\",\n    price: 55,\n    currency: \"EUR\",\n    rating: 4.6,\n    reviewCount: 41,\n    badge: \"New\",\n    date: \"Fridays only\",\n    href: \"#concrete\",\n  },\n  {\n    id: \"lounge\",\n    title: \"Oak lounge hour and a slow pour\",\n    image: \"/assets/462a1be29787cd8e.webp\",\n    imageAlt: \"Low oak lounge chair on a pale floor\",\n    location: \"Príncipe Real\",\n    price: 29,\n    currency: \"EUR\",\n    rating: 4.9,\n    reviewCount: 203,\n    badge: \"Quiet\",\n    date: \"Drop-in\",\n    href: \"#lounge\",\n  },\n  {\n    id: \"stone\",\n    title: \"Stone table still-life session\",\n    image: \"/assets/488fa5330da1224c.webp\",\n    imageAlt: \"Sculptural stone side table in a sunlit room\",\n    location: \"Mouraria studio\",\n    price: 64,\n    currency: \"EUR\",\n    rating: 4.8,\n    reviewCount: 67,\n    date: \"Closes 12 Jun\",\n    href: \"#stone\",\n  },\n];\n\nfunction subscribeReducedMotion(onChange: () => void) {\n  const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n  media.addEventListener(\"change\", onChange);\n  return () => media.removeEventListener(\"change\", onChange);\n}\n\nfunction getReducedMotion() {\n  return window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;\n}\n\nfunction useReducedMotion() {\n  return useSyncExternalStore(\n    subscribeReducedMotion,\n    getReducedMotion,\n    () => false,\n  );\n}\n\nfunction formatPrice(price: number, currency = \"EUR\") {\n  return new Intl.NumberFormat(\"en-US\", {\n    style: \"currency\",\n    currency,\n    maximumFractionDigits: 0,\n  }).format(price);\n}\n\nfunction ListingCard({\n  item,\n  favorited,\n  onToggleFavorite,\n}: {\n  item: CarouselCardsItem;\n  favorited: boolean;\n  onToggleFavorite: () => void;\n}) {\n  const titleId = useId();\n  const media = (\n    <div className=\"relative overflow-hidden rounded-[calc(var(--radius)+0.15rem)] bg-muted\">\n      <img\n        alt={item.imageAlt}\n        className=\"aspect-[4/5] h-auto w-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover/card:scale-[1.04]\"\n        src={item.image}\n      />\n      {item.badge ? (\n        <Badge\n          className=\"pointer-events-none absolute top-3 left-3 border-border/80 bg-background/90 text-foreground backdrop-blur-sm\"\n          variant=\"outline\"\n        >\n          {item.badge}\n        </Badge>\n      ) : null}\n    </div>\n  );\n  const copy = (\n    <div className=\"mt-3 flex flex-col gap-1\">\n      <p\n        className=\"text-[0.95rem] leading-snug font-semibold tracking-tight text-balance\"\n        id={titleId}\n      >\n        {item.title}\n      </p>\n      <p className=\"text-sm text-muted-foreground\">{item.location}</p>\n      <div className=\"mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm\">\n        {item.rating != null ? (\n          <span className=\"inline-flex items-center gap-1 text-foreground\">\n            <StarIcon\n              aria-hidden=\"true\"\n              className=\"size-3.5 fill-warning text-warning\"\n            />\n            <span className=\"tabular-nums\">{item.rating.toFixed(1)}</span>\n            {item.reviewCount != null ? (\n              <span className=\"text-muted-foreground\">\n                ({item.reviewCount})\n              </span>\n            ) : null}\n          </span>\n        ) : null}\n        {item.date ? (\n          <span className=\"text-muted-foreground\">{item.date}</span>\n        ) : null}\n      </div>\n      <p className=\"mt-1 text-sm\">\n        <span className=\"font-semibold tabular-nums\">\n          {formatPrice(item.price, item.currency)}\n        </span>\n        <span className=\"text-muted-foreground\"> / person</span>\n      </p>\n    </div>\n  );\n  const favorite = (\n    <Button\n      aria-label={favorited ? \"Remove from saved\" : \"Save listing\"}\n      aria-pressed={favorited}\n      className=\"absolute top-3 right-3 z-10 size-9 rounded-full border border-border/70 bg-background/90 p-0 text-foreground shadow-none backdrop-blur-sm hover:bg-background\"\n      onClick={onToggleFavorite}\n      size=\"sm\"\n      type=\"button\"\n      variant=\"ghost\"\n    >\n      <HeartIcon\n        aria-hidden=\"true\"\n        className={cn(\n          \"size-4\",\n          favorited ? \"fill-primary text-primary\" : \"text-foreground\",\n        )}\n      />\n    </Button>\n  );\n\n  return (\n    <article\n      aria-labelledby={titleId}\n      className=\"group/card relative w-[15rem] shrink-0 snap-start sm:w-[16.25rem]\"\n      data-slot=\"carousel-cards-item\"\n    >\n      {item.href ? (\n        <a\n          className=\"block rounded-[--radius] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"\n          href={item.href}\n        >\n          {media}\n          {copy}\n        </a>\n      ) : (\n        <>\n          {media}\n          {copy}\n        </>\n      )}\n      {favorite}\n    </article>\n  );\n}\n\nexport function CarouselCards({\n  className,\n  eyebrow = DEFAULT_EYEBROW,\n  heading = DEFAULT_HEADING,\n  description = DEFAULT_DESCRIPTION,\n  viewAllHref = DEFAULT_VIEW_ALL_HREF,\n  viewAllLabel = DEFAULT_VIEW_ALL_LABEL,\n  items,\n  onFavoriteChange,\n  ...props\n}: CarouselCardsProps) {\n  const headingId = useId();\n  const scrollerId = useId();\n  const scrollerRef = useRef<HTMLDivElement>(null);\n  const reduceMotion = useReducedMotion();\n  const listings = items && items.length > 0 ? items : DEFAULT_ITEMS;\n  const [saved, setSaved] = useState<Set<string>>(\n    () =>\n      new Set(listings.filter((item) => item.favorited).map((item) => item.id)),\n  );\n  const [canPrev, setCanPrev] = useState(false);\n  const [canNext, setCanNext] = useState(true);\n\n  const syncEdges = useCallback(() => {\n    const node = scrollerRef.current;\n    if (!node) return;\n    const max = node.scrollWidth - node.clientWidth;\n    setCanPrev(node.scrollLeft > 8);\n    setCanNext(node.scrollLeft < max - 8);\n  }, []);\n\n  useEffect(() => {\n    const node = scrollerRef.current;\n    if (!node) return;\n    syncEdges();\n    node.addEventListener(\"scroll\", syncEdges, { passive: true });\n    window.addEventListener(\"resize\", syncEdges);\n    return () => {\n      node.removeEventListener(\"scroll\", syncEdges);\n      window.removeEventListener(\"resize\", syncEdges);\n    };\n  }, [syncEdges]);\n\n  const scrollByPage = (direction: -1 | 1) => {\n    const node = scrollerRef.current;\n    if (!node) return;\n    const firstCard = node.querySelector<HTMLElement>(\n      \"[data-slot='carousel-cards-item']\",\n    );\n    const step = firstCard\n      ? firstCard.getBoundingClientRect().width + 16\n      : node.clientWidth * 0.7;\n    node.scrollBy({\n      left: direction * Math.max(step, 160),\n      behavior: reduceMotion ? \"auto\" : \"smooth\",\n    });\n  };\n\n  const toggleFavorite = (id: string) => {\n    setSaved((current) => {\n      const next = new Set(current);\n      if (next.has(id)) {\n        next.delete(id);\n      } else {\n        next.add(id);\n      }\n      onFavoriteChange?.(id, next.has(id));\n      return next;\n    });\n  };\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-slot=\"carousel-cards\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24\">\n        <header className=\"mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between\">\n          <div className=\"max-w-xl\">\n            {eyebrow ? (\n              <p className=\"mb-3 text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase\">\n                {eyebrow}\n              </p>\n            ) : null}\n            <h2\n              className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl\"\n              id={headingId}\n            >\n              {heading}\n            </h2>\n            {description ? (\n              <p className=\"mt-3 text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7\">\n                {description}\n              </p>\n            ) : null}\n          </div>\n          <div className=\"flex shrink-0 items-center gap-2\">\n            {viewAllHref ? (\n              <a\n                className=\"mr-1 text-sm font-medium text-foreground underline-offset-4 hover:underline\"\n                href={viewAllHref}\n              >\n                {viewAllLabel}\n              </a>\n            ) : null}\n            <Button\n              aria-controls={scrollerId}\n              aria-label=\"Previous listings\"\n              className=\"size-10 rounded-full p-0\"\n              disabled={!canPrev}\n              onClick={() => scrollByPage(-1)}\n              size=\"sm\"\n              type=\"button\"\n              variant=\"secondary\"\n            >\n              <ChevronLeftIcon aria-hidden=\"true\" className=\"size-4\" />\n            </Button>\n            <Button\n              aria-controls={scrollerId}\n              aria-label=\"Next listings\"\n              className=\"size-10 rounded-full p-0\"\n              disabled={!canNext}\n              onClick={() => scrollByPage(1)}\n              size=\"sm\"\n              type=\"button\"\n              variant=\"secondary\"\n            >\n              <ChevronRightIcon aria-hidden=\"true\" className=\"size-4\" />\n            </Button>\n          </div>\n        </header>\n        <div\n          className={cn(\n            \"flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden\",\n            !reduceMotion && \"scroll-smooth\",\n          )}\n          id={scrollerId}\n          ref={scrollerRef}\n        >\n          {listings.map((item) => (\n            <ListingCard\n              favorited={saved.has(item.id)}\n              item={item}\n              key={item.id}\n              onToggleFavorite={() => toggleFavorite(item.id)}\n            />\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "carousel-cards/CarouselCards.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface CarouselCardsItem {\n  id: string;\n  title: string;\n  image: string;\n  imageAlt: string;\n  location: string;\n  price: number;\n  currency?: string;\n  rating?: number;\n  reviewCount?: number;\n  badge?: string;\n  date?: string;\n  href?: string;\n  favorited?: boolean;\n}\n\nexport interface CarouselCardsProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  eyebrow?: string;\n  heading?: string;\n  description?: string;\n  viewAllHref?: string;\n  viewAllLabel?: string;\n  items?: CarouselCardsItem[];\n  onFavoriteChange?: (id: string, favorited: boolean) => void;\n}\n"
+    },
+    {
+      "path": "carousel-cards/index.ts",
+      "type": "index",
+      "content": "export { CarouselCards } from \"./CarouselCards\";\nexport type * from \"./CarouselCards.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <CarouselCards {...carouselCardsMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <CarouselCards {...carouselCardsMocks.alternate} />\n    </div>"
+    }
+  ]
+}
