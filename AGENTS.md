@@ -38,6 +38,7 @@ Code wins when docs disagree. [docs/README.md](docs/README.md) is the index. Gen
 - `apps/showcase/public/r/*.json` is generated and committed. Run `pnpm registry:build` and commit its output with every component add or change.
 - Catalogue HTTP tools are read-only. The CLI writes source files into **consumer** projects, not into `packages/ui`.
 - An installed component is pristine before any requested local edits are applied.
+- Git commits are attributed only to **jose-codegourmet**. Never add `Co-authored-by` for anyone else — no Cursor, Copilot, Claude, or other agents or people. Omit the trailer entirely unless it names jose-codegourmet.
 
 ## Boundaries
 
@@ -79,3 +80,4 @@ Ship doc updates in the same PR as the behavior they describe.
 - Keep the change scoped to the issue. Do not bundle unrelated refactors.
 - Do not add tests or testing infrastructure unless the issue asks for them.
 - Do not invent architecture the code does not support.
+- Never write `Co-authored-by` except for jose-codegourmet. Do not add Cursor, Copilot, or any other co-author trailer to commit messages.
