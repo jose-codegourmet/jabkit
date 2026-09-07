@@ -33,7 +33,7 @@ export type NavbarWithAnimatedMegaDropdownNavItem =
     };
 
 export interface NavbarWithAnimatedMegaDropdownProps
-  extends HTMLAttributes<HTMLElement> {
+  extends Omit<HTMLAttributes<HTMLElement>, "defaultValue"> {
   brand?: NavbarWithAnimatedMegaDropdownBrand;
   navItems?: NavbarWithAnimatedMegaDropdownNavItem[];
   cta?: NavbarWithAnimatedMegaDropdownCta;
