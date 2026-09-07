@@ -18,28 +18,45 @@ jobs:
           node-version: 24
           package-manager-cache: false
 
-      - id: check
-        name: Is this version already published?
+      - name: Verify the version is new
         run: |
           NAME=$(node -p "require('./packages/cli/package.json').name")
           VERSION=$(node -p "require('./packages/cli/package.json').version")
+
           if ! npm view "$NAME" name >/dev/null 2>&1; then
             echo "::error::$NAME is not on npm yet. Create the @jabkit org, run npm login, publish 0.1.0 from packages/cli on your machine, then attach a GitHub Actions trusted publisher (workflow publish-cli.yml, allow npm publish)."
             exit 1
           fi
-          if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
-            echo "Already published: $NAME@$VERSION"
-            echo "publish=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "publish=true" >> "$GITHUB_OUTPUT"
+
+          if npm view "$NAME@$VERSION" version 2>/dev/null | grep -q .; then
+            echo "::error::$NAME@$VERSION is already on npm. Run 'pnpm release:cli patch', commit the bump to main, then dispatch this workflow again."
+            exit 1
           fi
 
-      - if: steps.check.outputs.publish == 'true'
-        run: pnpm install --frozen-lockfile
-      - if: steps.check.outputs.publish == 'true'
-        run: pnpm --filter @jabkit/cli typecheck
-      - if: steps.check.outputs.publish == 'true'
-        run: pnpm --filter @jabkit/cli build
-      - if: steps.check.outputs.publish == 'true'
-        run: npm publish
+          echo "Publishing $NAME@$VERSION"
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @jabkit/cli typecheck
+      - run: pnpm --filter @jabkit/cli build
+      - run: npm publish
         working-directory: packages/cli
+
+      - name: Confirm the registry moved the latest tag
+        run: |
+          NAME=$(node -p "require('./packages/cli/package.json').name")
+          VERSION=$(node -p "require('./packages/cli/package.json').version")
+          LATEST=""
+          for _ in $(seq 1 12); do
+            LATEST=$(npm view "$NAME" dist-tags.latest 2>/dev/null || true)
+            [ "$LATEST" = "$VERSION" ] && break
+            sleep 5
+          done
+          {
+            echo "### Published \`$NAME@$VERSION\`"
+            echo ""
+            echo "- registry \`latest\` is now \`$LATEST\`"
+            echo "- the npmjs.com page can stay cached for up to an hour; trust \`npm view $NAME dist-tags\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$LATEST" != "$VERSION" ]; then
+            echo "::warning::latest is still $LATEST; registry replication may be lagging"
+          fi

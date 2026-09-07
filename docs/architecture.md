@@ -89,7 +89,7 @@ The showcase alias is the one that surprises people. Inside `apps/showcase`, `@/
 - **Turbo** (`turbo.json`): `build` depends on `^build` with outputs `.next/**` and `dist/**`; `typecheck` depends on `^typecheck`; `dev` is persistent and uncached.
 - **Biome** is the only lint and format tool. `biome.json` excludes `.next`, `.turbo`, `node_modules`, `storybook-static`, `apps/showcase/public/r`, and `.shadcn-src`.
 - **Husky:** `pre-commit` runs `pnpm biome check --staged`; `commit-msg` runs commitlint with `@commitlint/config-conventional`.
-- **There is no `.github/` directory.** No CI workflows, no PR template, no issue templates. `pnpm check` at the repo root is the whole quality gate.
+- **GitHub Actions:** `.github/workflows/publish-cli.yml` is the only workflow. It is manual `workflow_dispatch` only; nothing runs on push or pull request. There is no PR template and no issue template. `pnpm check` at the repo root is the whole quality gate.
 
 `pnpm check` is `pnpm lint && pnpm typecheck && pnpm check:conventions && pnpm registry:verify && pnpm previews:verify`.
 
