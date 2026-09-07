@@ -1,0 +1,87 @@
+{
+  "name": "scroll-area",
+  "displayName": "ScrollArea",
+  "version": "1.0.0",
+  "addedAt": "2026-09-07",
+  "description": "A focusable overflow region with token-styled scrollbars for clipped lists and panels.",
+  "sectionCategory": "content",
+  "purpose": "Keeps long or wide content inside a bounded frame while preserving keyboard access and theme-aware scrollbars.",
+  "bestFor": [
+    "file and document lists",
+    "sidebar panels",
+    "tag rows that overflow"
+  ],
+  "avoidFor": [
+    "full-page document scrolling",
+    "carousels with snap points"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "content"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "scroll",
+    "overflow",
+    "scrollbar",
+    "list",
+    "atom"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "scroll-area/ScrollArea.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { ScrollAreaProps } from \"./ScrollArea.types\";\n\nconst scrollbarClasses =\n  \"[scrollbar-width:thin] [scrollbar-color:var(--jk-border)_transparent] [&::-webkit-scrollbar]:size-2.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/40\";\n\nexport function ScrollArea({\n  className,\n  children,\n  orientation = \"vertical\",\n  ...props\n}: ScrollAreaProps) {\n  return (\n    <div\n      data-slot=\"scroll-area\"\n      // Overflow regions must be in the tab order so keyboard users can scroll.\n      // biome-ignore lint/a11y/noNoninteractiveTabindex: focusable scroll container\n      tabIndex={0}\n      className={cn(\n        \"rounded-[inherit] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        orientation === \"vertical\" && \"overflow-y-auto overflow-x-hidden\",\n        orientation === \"horizontal\" && \"overflow-x-auto overflow-y-hidden\",\n        orientation === \"both\" && \"overflow-auto\",\n        scrollbarClasses,\n        className,\n      )}\n      {...props}\n    >\n      {children}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "scroll-area/ScrollArea.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type ScrollAreaOrientation = \"vertical\" | \"horizontal\" | \"both\";\n\nexport interface ScrollAreaProps extends HTMLAttributes<HTMLDivElement> {\n  children: ReactNode;\n  orientation?: ScrollAreaOrientation;\n}\n"
+    },
+    {
+      "path": "scroll-area/index.ts",
+      "type": "index",
+      "content": "export { ScrollArea } from \"./ScrollArea\";\nexport type * from \"./ScrollArea.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background p-6 text-foreground\">\n      <div className=\"w-[320px] overflow-hidden rounded-[--radius] border border-border bg-card text-card-foreground\">\n        <div className=\"border-b border-border px-3 py-2.5\">\n          <p className=\"text-sm font-medium\">Library</p>\n          <p className=\"text-xs text-muted-foreground\">12 items</p>\n        </div>\n        <ScrollArea aria-label=\"Library files\" className=\"h-64\">\n          <div className=\"sticky top-0 z-10 grid grid-cols-[1fr_auto] gap-3 border-b border-border bg-card px-3 py-2 text-xs font-medium text-muted-foreground\">\n            <span>Name</span>\n            <span>Size</span>\n          </div>\n          <ul className=\"p-1\">\n            {scrollAreaMocks.files.map((file) => {\n              const Icon = kindIcon[file.kind];\n              return (\n                <li key={file.name}>\n                  <div className=\"grid grid-cols-[1fr_auto] items-center gap-3 rounded-[calc(var(--radius)-4px)] px-2 py-1.5 text-sm hover:bg-accent\">\n                    <span className=\"flex min-w-0 items-center gap-2\">\n                      <Icon className=\"size-4 shrink-0 text-muted-foreground\" />\n                      <span className=\"truncate\">{file.name}</span>\n                    </span>\n                    <span className=\"rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground\">\n                      {file.size}\n                    </span>\n                  </div>\n                </li>\n              );\n            })}\n          </ul>\n        </ScrollArea>\n      </div>\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background p-6 text-foreground\">\n      <div className=\"w-[320px] overflow-hidden rounded-[--radius] border border-border bg-card p-3 text-card-foreground\">\n        <p className=\"mb-2 text-sm font-medium\">Collections</p>\n        <ScrollArea\n          aria-label=\"Collection tags\"\n          className=\"w-full\"\n          orientation=\"horizontal\"\n        >\n          <div className=\"flex w-max gap-2 pb-1\">\n            {scrollAreaMocks.tags.map((tag) => (\n              <span\n                key={tag}\n                className=\"rounded-full border border-border bg-secondary px-3 py-1 text-xs text-secondary-foreground\"\n              >\n                {tag}\n              </span>\n            ))}\n          </div>\n        </ScrollArea>\n      </div>\n    </div>"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+export const scrollAreaMocks = {
+  files: [
+    { name: "Brand", kind: "folder" as const, size: "12 items" },
+    { name: "Campaigns", kind: "folder" as const, size: "8 items" },
+    { name: "brand-guidelines.pdf", kind: "document" as const, size: "2.4 MB" },
+    { name: "press-kit.zip", kind: "archive" as const, size: "18.1 MB" },
+    { name: "hero-cover.webp", kind: "image" as const, size: "640 KB" },
+    { name: "logo-lockup.svg", kind: "image" as const, size: "24 KB" },
+    { name: "tokens.css", kind: "code" as const, size: "8 KB" },
+    { name: "invoice-august.pdf", kind: "document" as const, size: "112 KB" },
+    { name: "voiceover.wav", kind: "media" as const, size: "6.7 MB" },
+    { name: "launch-cut.mp4", kind: "media" as const, size: "84 MB" },
+    { name: "readme.md", kind: "code" as const, size: "4 KB" },
+    { name: "archive-2024.zip", kind: "archive" as const, size: "210 MB" },
+  ],
+  tags: [
+    "Brand",
+    "Campaign",
+    "Design system",
+    "Launch",
+    "Press",
+    "Social",
+    "Video",
+    "Archive",
+  ],
+} as const;
