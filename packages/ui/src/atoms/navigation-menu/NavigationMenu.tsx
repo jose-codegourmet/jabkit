@@ -224,7 +224,7 @@ function NavigationMenuPopup({
   return (
     <NavigationMenuPrimitive.Popup
       className={cn(
-        "relative h-[var(--popup-height)] w-[min(var(--popup-width),calc(100vw-2rem))] origin-(--transform-origin) overflow-hidden rounded-[--radius] bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-none transition-[width,height,opacity,transform] duration-150 motion-reduce:transition-none data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+        "relative h-[var(--popup-height)] w-[min(var(--popup-width),calc(100vw-2rem))] origin-(--transform-origin) overflow-hidden rounded-[--radius] bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-none motion-reduce:transition-none data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
         className,
       )}
       data-slot="navigation-menu-popup"

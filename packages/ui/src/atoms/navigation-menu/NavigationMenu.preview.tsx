@@ -11,7 +11,6 @@ import {
 } from "@/atoms/dialog";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuDisclosure,
   NavigationMenuGridCard,
   NavigationMenuItem,
@@ -25,34 +24,16 @@ import {
 import { navigationMenuMocks } from "./NavigationMenu.mocks";
 
 const DefaultPreview = () => (
-  <div className="w-[min(56rem,calc(100vw-2rem))] rounded-[--radius] border border-border bg-background px-4 text-foreground">
-    <div className="flex h-14 items-center justify-between gap-3">
+  <div className="w-[min(56rem,calc(100vw-2rem))] overflow-hidden rounded-[--radius] border border-border bg-background text-foreground">
+    <div className="flex h-14 items-center justify-between gap-3 px-4">
       <a className="flex items-center gap-2 font-semibold" href="#top">
         <Grid2x2PlusIcon aria-hidden="true" className="size-5" />
         {navigationMenuMocks.brand}
       </a>
-      <NavigationMenu defaultValue="product">
+      <NavigationMenu delay={0} viewport={false}>
         <NavigationMenuList>
-          <NavigationMenuItem value="product">
+          <NavigationMenuItem>
             <NavigationMenuTrigger>Product</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <div className="grid w-[min(48rem,calc(100vw-3rem))] md:grid-cols-[1fr_12rem]">
-                <ul className="grid grow gap-3 p-4 md:grid-cols-3 md:border-r md:border-border">
-                  {navigationMenuMocks.product.slice(0, 3).map((link) => (
-                    <li key={link.href}>
-                      <NavigationMenuGridCard link={link} />
-                    </li>
-                  ))}
-                </ul>
-                <ul className="space-y-1 p-3">
-                  {navigationMenuMocks.product.slice(3).map((link) => (
-                    <li key={link.href}>
-                      <NavigationMenuSmallItem item={link} />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink
@@ -65,6 +46,22 @@ const DefaultPreview = () => (
         </NavigationMenuList>
       </NavigationMenu>
       <Button size="sm">{navigationMenuMocks.cta}</Button>
+    </div>
+    <div className="grid border-t border-border md:grid-cols-[1fr_12rem]">
+      <ul className="grid grow gap-3 p-4 md:grid-cols-3 md:border-r md:border-border">
+        {navigationMenuMocks.product.slice(0, 3).map((link) => (
+          <li key={link.href}>
+            <NavigationMenuGridCard link={link} />
+          </li>
+        ))}
+      </ul>
+      <ul className="space-y-1 p-3">
+        {navigationMenuMocks.product.slice(3).map((link) => (
+          <li key={link.href}>
+            <NavigationMenuSmallItem item={link} />
+          </li>
+        ))}
+      </ul>
     </div>
   </div>
 );
