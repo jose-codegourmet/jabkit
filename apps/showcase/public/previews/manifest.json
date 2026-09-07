@@ -3138,6 +3138,37 @@
           "format": "webp"
         }
       ]
+    },
+    "navigation-menu": {
+      "sourceHash": "704a6c723dd3c80a8a34f5505d45227f247809d2285347549d5eda5d7c9f6a89",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "navigation-menu.Default.dark.webp",
+          "bytes": 10944,
+          "width": 960,
+          "height": 512,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "navigation-menu.Variants.dark.webp",
+          "bytes": 1324,
+          "width": 960,
+          "height": 512,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
