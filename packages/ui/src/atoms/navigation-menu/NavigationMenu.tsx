@@ -1,7 +1,25 @@
 "use client";
 
 import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu";
-import { ChevronDownIcon } from "lucide-react";
+import {
+  BarChartIcon,
+  ChevronDownIcon,
+  CodeIcon,
+  FileTextIcon,
+  GlobeIcon,
+  HandshakeIcon,
+  HelpCircleIcon,
+  LayersIcon,
+  LeafIcon,
+  type LucideIcon,
+  PlugIcon,
+  RotateCcwIcon,
+  ShieldIcon,
+  StarIcon,
+  UserPlusIcon,
+  UsersIcon,
+  WalletIcon,
+} from "lucide-react";
 import { useId, useState } from "react";
 import { cn } from "@/lib/cn";
 import type {
@@ -9,6 +27,7 @@ import type {
   NavigationMenuContentProps,
   NavigationMenuDisclosureProps,
   NavigationMenuGridCardProps,
+  NavigationMenuIconName,
   NavigationMenuIconProps,
   NavigationMenuItemProps,
   NavigationMenuLargeItemProps,
@@ -23,6 +42,36 @@ import type {
   NavigationMenuTriggerProps,
   NavigationMenuViewportProps,
 } from "./NavigationMenu.types";
+
+const namedIcons: Record<NavigationMenuIconName, LucideIcon> = {
+  "bar-chart": BarChartIcon,
+  code: CodeIcon,
+  "file-text": FileTextIcon,
+  globe: GlobeIcon,
+  handshake: HandshakeIcon,
+  "help-circle": HelpCircleIcon,
+  layers: LayersIcon,
+  leaf: LeafIcon,
+  plug: PlugIcon,
+  "rotate-ccw": RotateCcwIcon,
+  shield: ShieldIcon,
+  star: StarIcon,
+  "user-plus": UserPlusIcon,
+  users: UsersIcon,
+  wallet: WalletIcon,
+};
+
+function LinkIcon({
+  name,
+  className,
+}: {
+  name?: NavigationMenuIconName;
+  className?: string;
+}) {
+  if (!name) return null;
+  const Icon = namedIcons[name];
+  return <Icon aria-hidden="true" className={className} />;
+}
 
 export const navigationMenuTriggerClassName =
   "group inline-flex h-9 w-max items-center justify-center gap-1 rounded-[--radius] bg-background px-3 py-2 text-sm font-medium text-foreground outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring data-popup-open:bg-accent data-popup-open:text-accent-foreground disabled:pointer-events-none disabled:opacity-50";
@@ -213,7 +262,6 @@ function NavigationMenuGridCard({
   className,
   ...props
 }: NavigationMenuGridCardProps) {
-  const Icon = link.icon;
   return (
     <NavigationMenuLink
       className={cn(
@@ -223,9 +271,9 @@ function NavigationMenuGridCard({
       href={link.href}
       {...props}
     >
-      {Icon ? (
+      {link.icon ? (
         <span className="flex size-10 items-center justify-center rounded-[--radius] bg-muted text-foreground">
-          <Icon aria-hidden="true" className="size-5" />
+          <LinkIcon className="size-5" name={link.icon} />
         </span>
       ) : null}
       <span className="flex flex-col gap-1">
@@ -246,16 +294,13 @@ function NavigationMenuSmallItem({
   className,
   ...props
 }: NavigationMenuSmallItemProps) {
-  const Icon = item.icon;
   return (
     <NavigationMenuLink
       className={cn("gap-2 px-2 py-1.5", className)}
       href={href ?? item.href}
       {...props}
     >
-      {Icon ? (
-        <Icon aria-hidden="true" className="size-4 text-muted-foreground" />
-      ) : null}
+      <LinkIcon className="size-4 text-muted-foreground" name={item.icon} />
       <span>{item.title}</span>
     </NavigationMenuLink>
   );
@@ -267,16 +312,15 @@ function NavigationMenuLargeItem({
   className,
   ...props
 }: NavigationMenuLargeItemProps) {
-  const Icon = link.icon;
   return (
     <NavigationMenuLink
       className={cn("items-start gap-3 px-2 py-2", className)}
       href={href ?? link.href}
       {...props}
     >
-      {Icon ? (
+      {link.icon ? (
         <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-md bg-muted text-foreground">
-          <Icon aria-hidden="true" className="size-4" />
+          <LinkIcon className="size-4" name={link.icon} />
         </span>
       ) : null}
       <span className="flex min-w-0 flex-col gap-0.5">
@@ -297,7 +341,6 @@ function NavigationMenuMobileItem({
   className,
   ...props
 }: NavigationMenuMobileItemProps) {
-  const Icon = item.icon;
   return (
     <NavigationMenuLink
       className={cn(
@@ -307,9 +350,9 @@ function NavigationMenuMobileItem({
       href={href ?? item.href}
       {...props}
     >
-      {Icon ? (
+      {item.icon ? (
         <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-md bg-muted text-foreground">
-          <Icon aria-hidden="true" className="size-4" />
+          <LinkIcon className="size-4" name={item.icon} />
         </span>
       ) : null}
       <span className="flex min-w-0 flex-col gap-0.5">

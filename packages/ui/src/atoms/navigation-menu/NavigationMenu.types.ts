@@ -1,6 +1,22 @@
 import type { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu";
-import type { LucideIcon } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
+
+export type NavigationMenuIconName =
+  | "bar-chart"
+  | "code"
+  | "file-text"
+  | "globe"
+  | "handshake"
+  | "help-circle"
+  | "layers"
+  | "leaf"
+  | "plug"
+  | "rotate-ccw"
+  | "shield"
+  | "star"
+  | "user-plus"
+  | "users"
+  | "wallet";
 
 export type NavigationMenuProps = NavigationMenuPrimitive.Root.Props & {
   viewport?: boolean;
@@ -30,7 +46,7 @@ export interface NavigationMenuLinkItem {
   title: string;
   href: string;
   description?: string;
-  icon?: LucideIcon;
+  icon?: NavigationMenuIconName;
 }
 
 export interface NavigationMenuGridCardProps
