@@ -157,7 +157,7 @@ export const Variants: Story = {
                   }
                 />
               </div>
-              <div className="px-4 pt-2 pb-8">
+              <NavigationMenu className="max-w-none px-4 pt-2 pb-8" delay={0}>
                 <NavigationMenuDisclosure defaultOpen title="Product">
                   <ul className="grid gap-1">
                     {navigationMenuMocks.product.map((link) => (
@@ -182,7 +182,7 @@ export const Variants: Story = {
                 >
                   {navigationMenuMocks.pricingLabel}
                 </a>
-              </div>
+              </NavigationMenu>
             </DialogContent>
           </Dialog>
         </div>

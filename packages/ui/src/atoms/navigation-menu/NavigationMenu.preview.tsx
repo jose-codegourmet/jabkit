@@ -23,32 +23,33 @@ import {
 import { navigationMenuMocks } from "./NavigationMenu.mocks";
 
 const DefaultPreview = () => (
-  <div className="w-[min(56rem,calc(100vw-2rem))] overflow-hidden rounded-[--radius] border border-border bg-background text-foreground">
-    <div className="flex h-14 items-center justify-between gap-3 px-4">
+  <NavigationMenu
+    className="w-[min(56rem,calc(100vw-2rem))] max-w-none flex-col overflow-hidden rounded-[--radius] border border-border bg-background text-foreground"
+    delay={0}
+  >
+    <div className="flex h-14 w-full items-center justify-between gap-3 px-4">
       <a className="flex items-center gap-2 font-semibold" href="#top">
         <Grid2x2PlusIcon aria-hidden="true" className="size-5" />
         {navigationMenuMocks.brand}
       </a>
-      <NavigationMenu delay={0}>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuLink className={navigationMenuTriggerClassName}>
-              Product
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink
-              className={navigationMenuTriggerClassName}
-              href={navigationMenuMocks.pricingHref}
-            >
-              {navigationMenuMocks.pricingLabel}
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuLink className={navigationMenuTriggerClassName}>
+            Product
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink
+            className={navigationMenuTriggerClassName}
+            href={navigationMenuMocks.pricingHref}
+          >
+            {navigationMenuMocks.pricingLabel}
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+      </NavigationMenuList>
       <Button size="sm">{navigationMenuMocks.cta}</Button>
     </div>
-    <div className="grid border-t border-border md:grid-cols-[1fr_12rem]">
+    <div className="grid w-full border-t border-border md:grid-cols-[1fr_12rem]">
       <ul className="grid grow gap-3 p-4 md:grid-cols-3 md:border-r md:border-border">
         {navigationMenuMocks.product.slice(0, 3).map((link) => (
           <li key={link.href}>
@@ -64,7 +65,7 @@ const DefaultPreview = () => (
         ))}
       </ul>
     </div>
-  </div>
+  </NavigationMenu>
 );
 
 const VariantsPreview = () => (
@@ -110,7 +111,7 @@ const VariantsPreview = () => (
                 }
               />
             </div>
-            <div className="px-4 pt-2 pb-6">
+            <NavigationMenu className="max-w-none px-4 pt-2 pb-6" delay={0}>
               <NavigationMenuDisclosure defaultOpen title="Product">
                 <ul className="grid gap-1">
                   {navigationMenuMocks.product.slice(0, 4).map((link) => (
@@ -129,7 +130,7 @@ const VariantsPreview = () => (
                   ))}
                 </ul>
               </NavigationMenuDisclosure>
-            </div>
+            </NavigationMenu>
           </DialogContent>
         </Dialog>
       </div>
