@@ -1,0 +1,109 @@
+{
+  "name": "falling-text",
+  "displayName": "FallingText",
+  "version": "1.0.0",
+  "addedAt": "2026-09-09",
+  "description": "Marketing headline whose words fall with a physics-like tumble on click, hover, auto, or scroll, with semantic highlights and a static reduced-motion reading.",
+  "sectionCategory": "content",
+  "purpose": "Turns a short landing line into a gravity beat so highlighted claims stay readable while the rest of the sentence drops into place.",
+  "bestFor": [
+    "product launches",
+    "campaign heroes that need a kinetic headline",
+    "editorial landings that can afford a playful line"
+  ],
+  "avoidFor": [
+    "dense documentation",
+    "forms or task UI where falling copy would compete with controls"
+  ],
+  "tone": [
+    "experimental",
+    "playful",
+    "confident"
+  ],
+  "industries": [
+    "technology",
+    "media",
+    "ecommerce"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "headline",
+    "highlightedWords",
+    "description"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "navbar"
+  ],
+  "recommendedBefore": [
+    "features",
+    "cta",
+    "footer"
+  ],
+  "tags": [
+    "marketing",
+    "text",
+    "animation",
+    "headline",
+    "physics",
+    "falling",
+    "gravity",
+    "interactive"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 720
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "falling-text/FallingText.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  type PointerEvent as ReactPointerEvent,\n  useEffect,\n  useId,\n  useRef,\n  useState,\n} from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  FallingTextAlign,\n  FallingTextHeading,\n  FallingTextProps,\n  FallingTextTrigger,\n} from \"./FallingText.types\";\n\nconst defaults = {\n  eyebrow: \"Motion copy\",\n  text: \"Drop the headline and let gravity finish the pitch.\",\n  description:\n    \"Words rest in place until they fall. Highlighted tokens keep the semantic accent while the rest of the line settles on the floor.\",\n  highlightWords: [\"gravity\", \"pitch\"] as string[],\n  trigger: \"auto\" as FallingTextTrigger,\n  gravity: 1,\n  as: \"h1\" as FallingTextHeading,\n  align: \"center\" as FallingTextAlign,\n  threshold: 0.4,\n  rootMargin: \"0px 0px -8% 0px\",\n};\n\ntype WordToken = { key: string; value: string; highlight: boolean };\n\ntype Body = {\n  x: number;\n  y: number;\n  w: number;\n  h: number;\n  vx: number;\n  vy: number;\n  angle: number;\n  va: number;\n  pinned: boolean;\n};\n\nconst alignClass: Record<FallingTextAlign, string> = {\n  left: \"items-start text-left\",\n  center: \"items-center text-center\",\n  right: \"items-end text-right\",\n};\n\nconst wrapAlign: Record<FallingTextAlign, string> = {\n  left: \"justify-start\",\n  center: \"justify-center\",\n  right: \"justify-end\",\n};\n\nfunction wordKey(value: string) {\n  return value.replace(/[^\\p{L}\\p{N}]+/gu, \"\").toLowerCase();\n}\n\nfunction tokenize(text: string, highlightWords: string[]): WordToken[] {\n  const highlights = new Set(highlightWords.map(wordKey).filter(Boolean));\n  return text\n    .trim()\n    .split(/\\s+/)\n    .filter(Boolean)\n    .map((value, index) => ({\n      key: `${wordKey(value) || \"token\"}-${index}`,\n      value,\n      highlight: highlights.has(wordKey(value)),\n    }));\n}\n\nfunction usePrefersReducedMotion() {\n  const [reduced, setReduced] = useState(false);\n  useEffect(() => {\n    const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n    const update = () => setReduced(media.matches);\n    update();\n    media.addEventListener(\"change\", update);\n    return () => media.removeEventListener(\"change\", update);\n  }, []);\n  return reduced;\n}\n\nfunction applyTransform(el: HTMLElement, body: Body) {\n  el.style.transform = `translate3d(${body.x}px, ${body.y}px, 0) rotate(${body.angle}rad)`;\n}\n\nexport function FallingText({\n  className,\n  text = defaults.text,\n  eyebrow = defaults.eyebrow,\n  description = defaults.description,\n  highlightWords = defaults.highlightWords,\n  trigger = defaults.trigger,\n  gravity = defaults.gravity,\n  as = defaults.as,\n  align = defaults.align,\n  threshold = defaults.threshold,\n  rootMargin = defaults.rootMargin,\n  ...props\n}: FallingTextProps) {\n  const headingId = useId();\n  const rootRef = useRef<HTMLElement>(null);\n  const stageRef = useRef<HTMLElement>(null);\n  const startFallRef = useRef<() => void>(() => {});\n  const wordRefs = useRef<Array<HTMLSpanElement | null>>([]);\n  const bodiesRef = useRef<Body[]>([]);\n  const frameRef = useRef(0);\n  const lastTsRef = useRef<number | null>(null);\n  const gravityRef = useRef(gravity);\n  const dragRef = useRef<{\n    index: number;\n    pointerId: number;\n    ox: number;\n    oy: number;\n  } | null>(null);\n  const [fallen, setFallen] = useState(false);\n  const reducedMotion = usePrefersReducedMotion();\n  const words = tokenize(text, highlightWords);\n  const Heading = as;\n  const interactive = trigger === \"click\" || trigger === \"hover\";\n  const canFall = !reducedMotion && !fallen;\n  gravityRef.current = gravity;\n\n  const stopLoop = () => {\n    if (frameRef.current) cancelAnimationFrame(frameRef.current);\n    frameRef.current = 0;\n    lastTsRef.current = null;\n  };\n\n  const startFall = () => {\n    if (reducedMotion || fallen) return;\n    const stage = stageRef.current;\n    if (!stage) return;\n    const stageBox = stage.getBoundingClientRect();\n    const bodies: Body[] = [];\n    for (let i = 0; i < wordRefs.current.length; i += 1) {\n      const el = wordRefs.current[i];\n      if (!el) continue;\n      const box = el.getBoundingClientRect();\n      const body: Body = {\n        x: box.left - stageBox.left,\n        y: box.top - stageBox.top,\n        w: box.width,\n        h: box.height,\n        vx: (Math.random() - 0.5) * 140,\n        vy: Math.random() * -40,\n        angle: 0,\n        va: (Math.random() - 0.5) * 3.2,\n        pinned: false,\n      };\n      el.style.position = \"absolute\";\n      el.style.left = \"0\";\n      el.style.top = \"0\";\n      el.style.margin = \"0\";\n      el.style.willChange = \"transform\";\n      applyTransform(el, body);\n      bodies.push(body);\n    }\n    bodiesRef.current = bodies;\n    setFallen(true);\n    stopLoop();\n    const step = (ts: number) => {\n      const surface = stageRef.current;\n      if (!surface) return;\n      const last = lastTsRef.current ?? ts;\n      lastTsRef.current = ts;\n      const dt = Math.min(0.032, (ts - last) / 1000);\n      const width = surface.clientWidth;\n      const height = surface.clientHeight;\n      const g = 1680 * Math.max(0.15, gravityRef.current);\n      const list = bodiesRef.current;\n      const drag = dragRef.current;\n\n      for (let i = 0; i < list.length; i += 1) {\n        const body = list[i];\n        if (drag?.index === i || body.pinned) continue;\n        body.vy += g * dt;\n        body.vx *= 0.995;\n        body.va *= 0.992;\n        body.x += body.vx * dt;\n        body.y += body.vy * dt;\n        body.angle += body.va * dt;\n\n        if (body.x < 0) {\n          body.x = 0;\n          body.vx = Math.abs(body.vx) * 0.42;\n          body.va *= -0.6;\n        } else if (body.x + body.w > width) {\n          body.x = width - body.w;\n          body.vx = -Math.abs(body.vx) * 0.42;\n          body.va *= -0.6;\n        }\n        if (body.y < 0) {\n          body.y = 0;\n          body.vy = Math.abs(body.vy) * 0.2;\n        } else if (body.y + body.h > height) {\n          body.y = height - body.h;\n          body.vy *= -0.38;\n          body.vx *= 0.84;\n          body.va *= 0.72;\n          if (Math.abs(body.vy) < 28) body.vy = 0;\n          if (Math.abs(body.vx) < 8) body.vx = 0;\n          if (Math.abs(body.va) < 0.12) body.va = 0;\n        }\n      }\n\n      for (let i = 0; i < list.length; i += 1) {\n        for (let j = i + 1; j < list.length; j += 1) {\n          const a = list[i];\n          const b = list[j];\n          const ax = a.x + a.w / 2;\n          const ay = a.y + a.h / 2;\n          const bx = b.x + b.w / 2;\n          const by = b.y + b.h / 2;\n          const overlapX = (a.w + b.w) / 2 - Math.abs(ax - bx);\n          const overlapY = (a.h + b.h) / 2 - Math.abs(ay - by);\n          if (overlapX <= 0 || overlapY <= 0) continue;\n          if (overlapX < overlapY) {\n            const dir = ax < bx ? -1 : 1;\n            const push = overlapX / 2;\n            if (drag?.index !== i && !a.pinned) a.x += dir * push;\n            if (drag?.index !== j && !b.pinned) b.x -= dir * push;\n            const swap = a.vx;\n            a.vx = b.vx * 0.72;\n            b.vx = swap * 0.72;\n          } else {\n            const dir = ay < by ? -1 : 1;\n            const push = overlapY / 2;\n            if (drag?.index !== i && !a.pinned) a.y += dir * push;\n            if (drag?.index !== j && !b.pinned) b.y -= dir * push;\n            const swap = a.vy;\n            a.vy = b.vy * 0.62;\n            b.vy = swap * 0.62;\n          }\n        }\n      }\n\n      for (let i = 0; i < list.length; i += 1) {\n        const el = wordRefs.current[i];\n        if (el) applyTransform(el, list[i]);\n      }\n      frameRef.current = requestAnimationFrame(step);\n    };\n    frameRef.current = requestAnimationFrame(step);\n  };\n\n  startFallRef.current = startFall;\n\n  useEffect(() => {\n    return () => {\n      if (frameRef.current) cancelAnimationFrame(frameRef.current);\n    };\n  }, []);\n\n  useEffect(() => {\n    if (reducedMotion || fallen) return;\n    if (trigger === \"auto\") {\n      const timer = window.setTimeout(() => startFallRef.current(), 280);\n      return () => window.clearTimeout(timer);\n    }\n    if (trigger !== \"scroll\") return;\n    const node = rootRef.current;\n    if (!node) return;\n    const observer = new IntersectionObserver(\n      ([entry]) => {\n        if (entry.isIntersecting) startFallRef.current();\n      },\n      { threshold, rootMargin },\n    );\n    observer.observe(node);\n    return () => observer.disconnect();\n  }, [fallen, reducedMotion, rootMargin, threshold, trigger]);\n\n  const onActivate = () => {\n    if (!canFall) return;\n    if (trigger === \"click\" || trigger === \"hover\") startFall();\n  };\n\n  const onPointerDown = (\n    event: ReactPointerEvent<HTMLSpanElement>,\n    index: number,\n  ) => {\n    if (!fallen || reducedMotion) return;\n    const stage = stageRef.current;\n    const el = wordRefs.current[index];\n    const body = bodiesRef.current[index];\n    if (!stage || !el || !body) return;\n    const stageBox = stage.getBoundingClientRect();\n    dragRef.current = {\n      index,\n      pointerId: event.pointerId,\n      ox: event.clientX - stageBox.left - body.x,\n      oy: event.clientY - stageBox.top - body.y,\n    };\n    body.pinned = true;\n    body.vx = 0;\n    body.vy = 0;\n    el.setPointerCapture(event.pointerId);\n  };\n\n  const onPointerMove = (\n    event: ReactPointerEvent<HTMLSpanElement>,\n    index: number,\n  ) => {\n    const drag = dragRef.current;\n    const stage = stageRef.current;\n    const body = bodiesRef.current[index];\n    if (!drag || drag.index !== index || !stage || !body) return;\n    const stageBox = stage.getBoundingClientRect();\n    const nextX = event.clientX - stageBox.left - drag.ox;\n    const nextY = event.clientY - stageBox.top - drag.oy;\n    body.vx = (nextX - body.x) * 18;\n    body.vy = (nextY - body.y) * 18;\n    body.x = Math.max(0, Math.min(stage.clientWidth - body.w, nextX));\n    body.y = Math.max(0, Math.min(stage.clientHeight - body.h, nextY));\n    const el = wordRefs.current[index];\n    if (el) applyTransform(el, body);\n  };\n\n  const onPointerUp = (index: number) => {\n    const drag = dragRef.current;\n    if (!drag || drag.index !== index) return;\n    const body = bodiesRef.current[index];\n    if (body) body.pinned = false;\n    dragRef.current = null;\n  };\n\n  const hint =\n    reducedMotion || fallen\n      ? undefined\n      : trigger === \"click\"\n        ? \"Activate to drop the words.\"\n        : trigger === \"hover\"\n          ? \"Hover to drop the words.\"\n          : undefined;\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-fallen={fallen ? \"true\" : \"false\"}\n      data-slot=\"falling-text\"\n      {...props}\n      ref={rootRef}\n    >\n      <div\n        className={cn(\n          \"mx-auto flex w-full max-w-5xl flex-col gap-5 px-6 py-20 sm:px-10 sm:py-24\",\n          alignClass[align],\n        )}\n      >\n        {eyebrow ? (\n          <p className=\"text-xs font-medium tracking-[0.22em] text-muted-foreground uppercase\">\n            {eyebrow}\n          </p>\n        ) : null}\n        <Heading className=\"sr-only\" id={headingId}>\n          {text}\n        </Heading>\n        {(() => {\n          const stageClassName = cn(\n            \"relative min-h-[22rem] w-full max-w-4xl overflow-hidden rounded-[--radius] border border-border bg-card px-5 py-8 text-left text-4xl leading-[1.08] font-semibold tracking-[-0.05em] sm:min-h-[24rem] sm:px-8 sm:text-5xl lg:text-6xl\",\n            interactive && canFall && \"cursor-pointer\",\n          );\n          const wordsNode = (\n            <div\n              className={cn(\n                \"flex w-full flex-wrap gap-x-[0.38em] gap-y-[0.5em]\",\n                wrapAlign[align],\n                fallen && \"h-full\",\n              )}\n            >\n              {words.map((word, index) => (\n                <span\n                  className={cn(\n                    \"inline-block origin-center select-none\",\n                    word.highlight &&\n                      \"rounded-sm bg-primary/15 px-1.5 text-primary\",\n                    fallen && \"touch-none\",\n                  )}\n                  data-slot={\n                    word.highlight\n                      ? \"falling-text-highlight\"\n                      : \"falling-text-word\"\n                  }\n                  key={word.key}\n                  onPointerCancel={() => onPointerUp(index)}\n                  onPointerDown={(event) => onPointerDown(event, index)}\n                  onPointerMove={(event) => onPointerMove(event, index)}\n                  onPointerUp={() => onPointerUp(index)}\n                  ref={(node) => {\n                    wordRefs.current[index] = node;\n                  }}\n                >\n                  {word.value}\n                </span>\n              ))}\n            </div>\n          );\n          const assignStage = (node: HTMLElement | null) => {\n            stageRef.current = node;\n          };\n          if (trigger === \"click\") {\n            return (\n              <button\n                aria-label={hint}\n                className={stageClassName}\n                data-slot=\"falling-text-stage\"\n                onClick={onActivate}\n                ref={assignStage}\n                type=\"button\"\n              >\n                {wordsNode}\n              </button>\n            );\n          }\n          return (\n            <div\n              aria-hidden=\"true\"\n              className={stageClassName}\n              data-slot=\"falling-text-stage\"\n              onPointerEnter={trigger === \"hover\" ? onActivate : undefined}\n              ref={assignStage}\n            >\n              {wordsNode}\n            </div>\n          );\n        })()}\n        {description ? (\n          <p className=\"max-w-xl text-base leading-7 text-muted-foreground sm:text-lg\">\n            {description}\n          </p>\n        ) : null}\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "falling-text/FallingText.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type FallingTextTrigger = \"click\" | \"hover\" | \"auto\" | \"scroll\";\nexport type FallingTextHeading = \"h1\" | \"h2\" | \"h3\" | \"p\" | \"div\";\nexport type FallingTextAlign = \"left\" | \"center\" | \"right\";\n\nexport interface FallingTextProps extends HTMLAttributes<HTMLElement> {\n  text?: string;\n  eyebrow?: string;\n  description?: string;\n  highlightWords?: string[];\n  trigger?: FallingTextTrigger;\n  gravity?: number;\n  as?: FallingTextHeading;\n  align?: FallingTextAlign;\n  threshold?: number;\n  rootMargin?: string;\n}\n"
+    },
+    {
+      "path": "falling-text/index.ts",
+      "type": "index",
+      "content": "export { FallingText } from \"./FallingText\";\nexport type * from \"./FallingText.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <FallingText {...fallingTextMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <FallingText {...fallingTextMocks.alternate} />\n    </div>"
+    }
+  ]
+}
