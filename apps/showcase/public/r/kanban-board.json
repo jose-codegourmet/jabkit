@@ -76,7 +76,7 @@
     {
       "path": "kanban-board/index.ts",
       "type": "index",
-      "content": "export { KanbanBoard } from \"./KanbanBoard\";\nexport type {\n  KanbanBoardAssignee,\n  KanbanBoardCard,\n  KanbanBoardColumn,\n  KanbanBoardPriority,\n  KanbanBoardProps,\n  KanbanBoardTone,\n} from \"./KanbanBoard.types\";\n"
+      "content": "export { KanbanBoard } from \"./KanbanBoard\";\nexport type * from \"./KanbanBoard.types\";\n"
     },
     {
       "path": "lib/cn.ts",
