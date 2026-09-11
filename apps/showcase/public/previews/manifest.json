@@ -3567,6 +3567,47 @@
           "format": "webp"
         }
       ]
+    },
+    "kanban-board": {
+      "sourceHash": "497cf59b58b438b554e167f5cb7106abcc94d2efc818b520a4c12ced47fb8486",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "kanban-board.Default.dark.webp",
+          "bytes": 17616,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "kanban-board.Variants.dark.webp",
+          "bytes": 12060,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "kanban-board.ThemeComparison.dark.webp",
+          "bytes": 32494,
+          "width": 960,
+          "height": 804,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
