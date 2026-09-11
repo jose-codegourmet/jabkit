@@ -77,7 +77,7 @@
     {
       "path": "kanban/index.ts",
       "type": "index",
-      "content": "export { Kanban } from \"./Kanban\";\nexport type {\n  KanbanColumn,\n  KanbanItem,\n  KanbanOwner,\n  KanbanProps,\n  KanbanTone,\n} from \"./Kanban.types\";\n"
+      "content": "export { Kanban } from \"./Kanban\";\nexport type * from \"./Kanban.types\";\n"
     },
     {
       "path": "lib/cn.ts",

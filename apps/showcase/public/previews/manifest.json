@@ -3610,7 +3610,7 @@
       ]
     },
     "kanban": {
-      "sourceHash": "34cea6380eebb97099d0d38c8d83862f3705a1e70f20820fc615c4334e258fb1",
+      "sourceHash": "192e00811414fe0281a7d47da59df6262ea80444dfed61fe6f6e06e65e1c10f7",
       "pipelineVersion": 1,
       "stories": [
         "Default",
