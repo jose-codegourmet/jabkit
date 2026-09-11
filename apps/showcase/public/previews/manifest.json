@@ -3608,6 +3608,47 @@
           "format": "webp"
         }
       ]
+    },
+    "kanban": {
+      "sourceHash": "34cea6380eebb97099d0d38c8d83862f3705a1e70f20820fc615c4334e258fb1",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "kanban.Default.dark.webp",
+          "bytes": 12798,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "kanban.Variants.dark.webp",
+          "bytes": 8156,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "kanban.ThemeComparison.dark.webp",
+          "bytes": 20940,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
