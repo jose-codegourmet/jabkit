@@ -1,0 +1,98 @@
+{
+  "name": "kanban",
+  "displayName": "Kanban",
+  "version": "1.0.0",
+  "addedAt": "2026-09-11",
+  "description": "Compact status kanban for roadmap features with owners, initiatives, and date ranges.",
+  "sectionCategory": "task-management",
+  "purpose": "Visualizes planned work across status columns so teams can move features without a heavy card chrome.",
+  "bestFor": [
+    "product roadmaps",
+    "feature status boards",
+    "lightweight sprint tracking"
+  ],
+  "avoidFor": [
+    "dense delivery boards that need tags, comments, and add-card forms"
+  ],
+  "tone": [
+    "professional",
+    "structured",
+    "calm"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "grid",
+    "alignment": "left",
+    "columns": 3
+  },
+  "slots": [
+    "boardHeader",
+    "statusColumns",
+    "featureCards",
+    "owners"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "dashboard",
+    "kanban",
+    "roadmap",
+    "status",
+    "features",
+    "drag-and-drop"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "avatar"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "dashboard",
+  "files": [
+    {
+      "path": "kanban/Kanban.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { GripVerticalIcon } from \"lucide-react\";\nimport * as React from \"react\";\nimport { Avatar, AvatarFallback, AvatarImage } from \"@/atoms/avatar/Avatar\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  KanbanColumn,\n  KanbanItem,\n  KanbanProps,\n  KanbanTone,\n} from \"./Kanban.types\";\n\nconst TONE_DOT: Record<KanbanTone, string> = {\n  muted: \"bg-muted-foreground\",\n  warning: \"bg-warning\",\n  success: \"bg-success\",\n  \"chart-1\": \"bg-chart-1\",\n  \"chart-2\": \"bg-chart-2\",\n  \"chart-3\": \"bg-chart-3\",\n  \"chart-4\": \"bg-chart-4\",\n  \"chart-5\": \"bg-chart-5\",\n};\n\nconst defaults = {\n  title: \"Harbor roadmap\",\n  description: \"Move features across Planned, In Progress, and Done.\",\n  emptyColumnLabel: \"No features in this status.\",\n} as const;\n\nfunction initialsFor(name: string) {\n  return name\n    .split(\" \")\n    .filter(Boolean)\n    .map((part) => part[0])\n    .slice(0, 2)\n    .join(\"\")\n    .toUpperCase();\n}\n\nfunction formatDate(value: string, withYear = false) {\n  const parsed = new Date(`${value}T00:00:00`);\n  if (Number.isNaN(parsed.getTime())) return value;\n  return parsed.toLocaleDateString(\"en-US\", {\n    month: \"short\",\n    day: \"numeric\",\n    ...(withYear ? { year: \"numeric\" } : {}),\n  });\n}\n\nfunction formatRange(startAt?: string, endAt?: string) {\n  if (!startAt && !endAt) return null;\n  if (startAt && endAt) {\n    return `${formatDate(startAt)} – ${formatDate(endAt, true)}`;\n  }\n  return formatDate((startAt ?? endAt) as string, true);\n}\n\nfunction itemsInColumn(items: KanbanItem[], columnId: string) {\n  return items.filter((item) => item.columnId === columnId);\n}\n\nfunction moveItem(\n  items: KanbanItem[],\n  itemId: string,\n  columnId: string,\n  targetIndex?: number,\n): KanbanItem[] {\n  const fromIndex = items.findIndex((item) => item.id === itemId);\n  if (fromIndex < 0) return items;\n  const moving = items[fromIndex];\n  const without = items.filter((item) => item.id !== itemId);\n  const columnItems = itemsInColumn(without, columnId);\n  let insertAt = targetIndex ?? columnItems.length;\n  insertAt = Math.min(Math.max(insertAt, 0), columnItems.length);\n\n  if (moving.columnId === columnId) {\n    const currentIndex = itemsInColumn(items, columnId).findIndex(\n      (item) => item.id === itemId,\n    );\n    if (currentIndex === insertAt) return items;\n  }\n\n  const insertBefore = columnItems[insertAt];\n  const nextMoving = { ...moving, columnId };\n  if (!insertBefore) return [...without, nextMoving];\n  const spliceAt = without.findIndex((item) => item.id === insertBefore.id);\n  const next = [...without];\n  next.splice(spliceAt, 0, nextMoving);\n  return next;\n}\n\nfunction moveItemByColumn(\n  items: KanbanItem[],\n  columns: KanbanColumn[],\n  itemId: string,\n  offset: number,\n): KanbanItem[] {\n  const item = items.find((entry) => entry.id === itemId);\n  if (!item) return items;\n  const columnIndex = columns.findIndex(\n    (column) => column.id === item.columnId,\n  );\n  const nextColumn = columns[columnIndex + offset];\n  if (!nextColumn) return items;\n  return moveItem(items, itemId, nextColumn.id);\n}\n\nfunction moveItemByIndex(\n  items: KanbanItem[],\n  itemId: string,\n  offset: number,\n): KanbanItem[] {\n  const item = items.find((entry) => entry.id === itemId);\n  if (!item) return items;\n  const columnItems = itemsInColumn(items, item.columnId);\n  const currentIndex = columnItems.findIndex((entry) => entry.id === itemId);\n  return moveItem(items, itemId, item.columnId, currentIndex + offset);\n}\n\nexport function Kanban({\n  className,\n  title = defaults.title,\n  description = defaults.description,\n  columns = [],\n  items: itemsProp,\n  defaultItems = [],\n  emptyColumnLabel = defaults.emptyColumnLabel,\n  onItemsChange,\n  onItemMove,\n  ...props\n}: KanbanProps) {\n  const headingId = React.useId();\n  const isControlled = itemsProp !== undefined;\n  const [uncontrolledItems, setUncontrolledItems] =\n    React.useState<KanbanItem[]>(defaultItems);\n  const items = isControlled ? itemsProp : uncontrolledItems;\n  const [draggingId, setDraggingId] = React.useState<string | null>(null);\n  const [overColumnId, setOverColumnId] = React.useState<string | null>(null);\n\n  const commitItems = React.useCallback(\n    (next: KanbanItem[]) => {\n      if (!isControlled) setUncontrolledItems(next);\n      onItemsChange?.(next);\n    },\n    [isControlled, onItemsChange],\n  );\n\n  const applyMove = (\n    itemId: string,\n    columnId: string,\n    targetIndex?: number,\n  ) => {\n    const next = moveItem(items, itemId, columnId, targetIndex);\n    if (next === items) return;\n    commitItems(next);\n    const columnItems = itemsInColumn(next, columnId);\n    const index = columnItems.findIndex((item) => item.id === itemId);\n    if (index >= 0) onItemMove?.(itemId, columnId, index);\n  };\n\n  return (\n    <section\n      data-slot=\"kanban\"\n      aria-labelledby={headingId}\n      className={cn(\n        \"flex min-h-[100dvh] flex-col bg-background px-4 py-10 text-foreground sm:px-6\",\n        className,\n      )}\n      {...props}\n    >\n      <header className=\"mx-auto mb-8 w-full max-w-6xl\">\n        <h1\n          id={headingId}\n          className=\"text-2xl font-semibold tracking-tight sm:text-3xl\"\n        >\n          {title}\n        </h1>\n        <p className=\"mt-2 text-sm text-muted-foreground\">{description}</p>\n      </header>\n\n      <div className=\"mx-auto flex w-full max-w-6xl gap-4 overflow-x-auto pb-2\">\n        {columns.map((column) => (\n          <StatusColumn\n            key={column.id}\n            column={column}\n            items={itemsInColumn(items, column.id)}\n            emptyColumnLabel={emptyColumnLabel}\n            draggingId={draggingId}\n            over={overColumnId === column.id}\n            onDragStart={setDraggingId}\n            onDragOverColumn={() => setOverColumnId(column.id)}\n            onDragEnd={() => {\n              setDraggingId(null);\n              setOverColumnId(null);\n            }}\n            onDropItem={(itemId, index) => applyMove(itemId, column.id, index)}\n            onMoveColumn={(itemId, offset) => {\n              const next = moveItemByColumn(items, columns, itemId, offset);\n              if (next === items) return;\n              commitItems(next);\n              const moved = next.find((item) => item.id === itemId);\n              if (!moved) return;\n              const index = itemsInColumn(next, moved.columnId).findIndex(\n                (item) => item.id === itemId,\n              );\n              onItemMove?.(itemId, moved.columnId, index);\n            }}\n            onMoveIndex={(itemId, offset) => {\n              const next = moveItemByIndex(items, itemId, offset);\n              if (next === items) return;\n              commitItems(next);\n              const index = itemsInColumn(next, column.id).findIndex(\n                (item) => item.id === itemId,\n              );\n              if (index >= 0) onItemMove?.(itemId, column.id, index);\n            }}\n          />\n        ))}\n      </div>\n    </section>\n  );\n}\n\nfunction StatusColumn({\n  column,\n  items,\n  emptyColumnLabel,\n  draggingId,\n  over,\n  onDragStart,\n  onDragOverColumn,\n  onDragEnd,\n  onDropItem,\n  onMoveColumn,\n  onMoveIndex,\n}: {\n  column: KanbanColumn;\n  items: KanbanItem[];\n  emptyColumnLabel: string;\n  draggingId: string | null;\n  over: boolean;\n  onDragStart: (id: string) => void;\n  onDragOverColumn: () => void;\n  onDragEnd: () => void;\n  onDropItem: (itemId: string, index?: number) => void;\n  onMoveColumn: (itemId: string, offset: number) => void;\n  onMoveIndex: (itemId: string, offset: number) => void;\n}) {\n  const headingId = React.useId();\n  const tone = column.tone ?? \"muted\";\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      onDragOver={(event) => {\n        event.preventDefault();\n        onDragOverColumn();\n      }}\n      onDrop={(event) => {\n        event.preventDefault();\n        const itemId = event.dataTransfer.getData(\"text/plain\");\n        if (itemId) onDropItem(itemId);\n        onDragEnd();\n      }}\n      className={cn(\n        \"flex min-h-[22rem] w-72 shrink-0 flex-col gap-3\",\n        over && draggingId && \"rounded-[--radius] ring-2 ring-ring\",\n      )}\n    >\n      <div className=\"flex items-center gap-2 px-1\">\n        <span\n          className={cn(\"size-2 shrink-0 rounded-full\", TONE_DOT[tone])}\n          aria-hidden=\"true\"\n        />\n        <h2 id={headingId} className=\"truncate text-sm font-medium\">\n          {column.name}\n        </h2>\n        <span className=\"text-xs text-muted-foreground\">{items.length}</span>\n      </div>\n\n      <ul className=\"flex flex-1 flex-col gap-2\">\n        {items.length === 0 ? (\n          <li className=\"rounded-[--radius] border border-dashed border-border px-3 py-8 text-center text-sm text-muted-foreground\">\n            {emptyColumnLabel}\n          </li>\n        ) : (\n          items.map((item, index) => (\n            <FeatureCard\n              key={item.id}\n              item={item}\n              columnName={column.name}\n              index={index}\n              count={items.length}\n              dragging={draggingId === item.id}\n              onDragStart={() => onDragStart(item.id)}\n              onDragEnd={onDragEnd}\n              onDropBefore={(itemId) => onDropItem(itemId, index)}\n              onMoveColumn={(offset) => onMoveColumn(item.id, offset)}\n              onMoveIndex={(offset) => onMoveIndex(item.id, offset)}\n            />\n          ))\n        )}\n      </ul>\n    </section>\n  );\n}\n\nfunction FeatureCard({\n  item,\n  columnName,\n  index,\n  count,\n  dragging,\n  onDragStart,\n  onDragEnd,\n  onDropBefore,\n  onMoveColumn,\n  onMoveIndex,\n}: {\n  item: KanbanItem;\n  columnName: string;\n  index: number;\n  count: number;\n  dragging: boolean;\n  onDragStart: () => void;\n  onDragEnd: () => void;\n  onDropBefore: (itemId: string) => void;\n  onMoveColumn: (offset: number) => void;\n  onMoveIndex: (offset: number) => void;\n}) {\n  const initials = item.owner\n    ? (item.owner.initials ?? initialsFor(item.owner.name))\n    : \"\";\n  const range = formatRange(item.startAt, item.endAt);\n\n  return (\n    <li\n      draggable\n      onDragStart={(event) => {\n        event.dataTransfer.setData(\"text/plain\", item.id);\n        event.dataTransfer.effectAllowed = \"move\";\n        onDragStart();\n      }}\n      onDragEnd={onDragEnd}\n      onDragOver={(event) => event.preventDefault()}\n      onDrop={(event) => {\n        event.preventDefault();\n        event.stopPropagation();\n        const itemId = event.dataTransfer.getData(\"text/plain\");\n        if (itemId) onDropBefore(itemId);\n        onDragEnd();\n      }}\n      className={cn(\n        \"rounded-[--radius] border border-border bg-card p-3 shadow-sm\",\n        dragging && \"opacity-50\",\n      )}\n    >\n      <div className=\"flex items-start justify-between gap-2\">\n        <div className=\"min-w-0 flex-1\">\n          <p className=\"m-0 truncate text-sm font-medium\">{item.name}</p>\n          {item.initiative ? (\n            <p className=\"m-0 mt-1 truncate text-xs text-muted-foreground\">\n              {item.initiative}\n            </p>\n          ) : null}\n        </div>\n        <div className=\"flex shrink-0 items-center gap-1\">\n          {item.owner ? (\n            <Avatar size=\"sm\" className=\"size-4\">\n              {item.owner.imageSrc ? (\n                <AvatarImage src={item.owner.imageSrc} alt={item.owner.name} />\n              ) : null}\n              <AvatarFallback>{initials}</AvatarFallback>\n            </Avatar>\n          ) : null}\n          <button\n            type=\"button\"\n            aria-label={`Move ${item.name} in ${columnName}. ${index + 1} of ${count}. Use arrow keys to move.`}\n            className=\"inline-flex size-6 items-center justify-center rounded-[calc(var(--radius)-4px)] text-muted-foreground hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n            onKeyDown={(event) => {\n              if (event.key === \"ArrowLeft\") {\n                event.preventDefault();\n                onMoveColumn(-1);\n              }\n              if (event.key === \"ArrowRight\") {\n                event.preventDefault();\n                onMoveColumn(1);\n              }\n              if (event.key === \"ArrowUp\") {\n                event.preventDefault();\n                onMoveIndex(-1);\n              }\n              if (event.key === \"ArrowDown\") {\n                event.preventDefault();\n                onMoveIndex(1);\n              }\n            }}\n          >\n            <GripVerticalIcon className=\"size-3.5\" />\n          </button>\n        </div>\n      </div>\n      {range ? (\n        <p className=\"m-0 mt-2 text-xs text-muted-foreground\">{range}</p>\n      ) : null}\n    </li>\n  );\n}\n"
+    },
+    {
+      "path": "kanban/Kanban.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type KanbanTone =\n  | \"muted\"\n  | \"warning\"\n  | \"success\"\n  | \"chart-1\"\n  | \"chart-2\"\n  | \"chart-3\"\n  | \"chart-4\"\n  | \"chart-5\";\n\nexport interface KanbanOwner {\n  name: string;\n  initials?: string;\n  imageSrc?: string;\n}\n\nexport interface KanbanColumn {\n  id: string;\n  name: string;\n  tone?: KanbanTone;\n}\n\nexport interface KanbanItem {\n  id: string;\n  name: string;\n  columnId: string;\n  initiative?: string;\n  startAt?: string;\n  endAt?: string;\n  owner?: KanbanOwner;\n}\n\nexport interface KanbanProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  title?: string;\n  description?: string;\n  columns?: KanbanColumn[];\n  items?: KanbanItem[];\n  defaultItems?: KanbanItem[];\n  emptyColumnLabel?: string;\n  onItemsChange?: (items: KanbanItem[]) => void;\n  onItemMove?: (itemId: string, columnId: string, index: number) => void;\n}\n"
+    },
+    {
+      "path": "kanban/index.ts",
+      "type": "index",
+      "content": "export { Kanban } from \"./Kanban\";\nexport type * from \"./Kanban.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Kanban {...kanbanMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Kanban {...kanbanMocks.alternate} />\n    </div>"
+    }
+  ]
+}
