@@ -5755,6 +5755,64 @@
     }
   },
   {
+    "name": "kanban-board",
+    "displayName": "KanbanBoard",
+    "category": "dashboard",
+    "description": "Drag-and-drop kanban board with priority cards, assignees, and column counts.",
+    "sectionCategory": "task-management",
+    "purpose": "Lets product teams move work across status columns with tags, due dates, and owners.",
+    "bestFor": [
+      "sprint boards",
+      "ops work queues",
+      "product delivery dashboards"
+    ],
+    "tone": [
+      "professional",
+      "structured"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "grid",
+      "alignment": "left",
+      "columns": 4
+    },
+    "slots": [
+      "boardHeader",
+      "columns",
+      "cards",
+      "assignees"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "dashboard",
+      "kanban",
+      "board",
+      "tasks",
+      "drag-and-drop",
+      "sprint"
+    ],
+    "addedAt": "2026-09-11",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
     "name": "login4",
     "displayName": "Login4",
     "category": "dashboard",
