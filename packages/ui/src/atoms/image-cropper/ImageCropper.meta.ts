@@ -3,7 +3,7 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "image-cropper",
   displayName: "ImageCropper",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-07",
   description:
     "Upload a photo, zoom and pan to frame a crop, then preview and download the result.",

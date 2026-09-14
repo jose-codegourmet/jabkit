@@ -31,6 +31,15 @@ export const Variants: Story = {
   ),
 };
 
+export const LinkedAuthor: Story = {
+  args: { ...content4Mocks.linkedAuthor },
+  render: () => (
+    <div className="bg-background text-foreground">
+      <Content4 {...content4Mocks.linkedAuthor} />
+    </div>
+  ),
+};
+
 export const ThemeComparison: Story = {
   args: { ...content4Mocks.default },
   render: () => (

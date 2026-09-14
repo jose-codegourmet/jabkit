@@ -51,6 +51,23 @@ const ICONS: Record<
 
 const INTERVALS: Pricing28Interval[] = ["monthly", "yearly"];
 
+function planGridClass(count: number) {
+  if (count <= 1) {
+    return "mx-auto mt-10 grid max-w-md grid-cols-1 gap-4";
+  }
+  if (count === 2) {
+    return "mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2";
+  }
+  if (count === 3) {
+    return "mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3";
+  }
+  return "mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4";
+}
+
+function showExtraCount(value: string | undefined) {
+  return Boolean(value) && value !== "0";
+}
+
 function PlanTagline({
   tagline,
   tooltip,
@@ -210,6 +227,13 @@ export function Pricing28({
     yearly: yearlyLabel ?? "Yearly",
   };
 
+  const planList = plans ?? [];
+  const columnCount = Math.min(Math.max(planList.length, 1), 4);
+  const showPeople = (people?.length ?? 0) > 0;
+  const showCount = showExtraCount(extraCount);
+  const showTrust = (trustItems?.length ?? 0) > 0;
+  const showSocial = showPeople || showCount || showTrust;
+
   return (
     <TooltipProvider>
       <section
@@ -228,31 +252,40 @@ export function Pricing28({
             </h2>
           </div>
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-5 sm:flex-row sm:gap-8">
-            <AvatarGroup className="-space-x-3">
-              {people?.map((person) => (
-                <Avatar key={person.src} size="default">
-                  <AvatarImage src={person.src} alt={person.alt} />
-                  <AvatarFallback>{person.fallback}</AvatarFallback>
-                </Avatar>
-              ))}
-              {extraCount ? (
-                <AvatarGroupCount>+{extraCount}</AvatarGroupCount>
+          {showSocial ? (
+            <div className="mt-8 flex flex-col items-center justify-center gap-5 sm:flex-row sm:gap-8">
+              {showPeople || showCount ? (
+                <AvatarGroup className="-space-x-3">
+                  {people?.map((person) => (
+                    <Avatar key={person.src} size="default">
+                      <AvatarImage src={person.src} alt={person.alt} />
+                      <AvatarFallback>{person.fallback}</AvatarFallback>
+                    </Avatar>
+                  ))}
+                  {showCount ? (
+                    <AvatarGroupCount>+{extraCount}</AvatarGroupCount>
+                  ) : null}
+                </AvatarGroup>
               ) : null}
-            </AvatarGroup>
 
-            <div className="flex flex-col items-center gap-2 text-center sm:flex-row sm:items-stretch sm:gap-6 sm:text-left">
-              {trustItems?.map((item) => (
-                <p
-                  key={`${item.value}-${item.label}`}
-                  className="text-sm leading-5"
-                >
-                  <span className="font-semibold">{item.value}</span>
-                  <span className="text-muted-foreground"> {item.label}</span>
-                </p>
-              ))}
+              {showTrust ? (
+                <div className="flex flex-col items-center gap-2 text-center sm:flex-row sm:items-stretch sm:gap-6 sm:text-left">
+                  {trustItems?.map((item) => (
+                    <p
+                      key={`${item.value}-${item.label}`}
+                      className="text-sm leading-5"
+                    >
+                      <span className="font-semibold">{item.value}</span>
+                      <span className="text-muted-foreground">
+                        {" "}
+                        {item.label}
+                      </span>
+                    </p>
+                  ))}
+                </div>
+              ) : null}
             </div>
-          </div>
+          ) : null}
 
           <div className="mt-10 flex justify-center">
             <div
@@ -291,16 +324,18 @@ export function Pricing28({
             </div>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {plans?.map((plan) => (
+          <div className={planGridClass(columnCount)}>
+            {planList.map((plan) => (
               <PlanCard key={plan.id} plan={plan} interval={interval} />
             ))}
           </div>
 
-          <p className="mt-10 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-            <LockIcon className="size-3.5" aria-hidden="true" />
-            {secureLabel}
-          </p>
+          {secureLabel ? (
+            <p className="mt-10 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <LockIcon className="size-3.5" aria-hidden="true" />
+              {secureLabel}
+            </p>
+          ) : null}
         </div>
       </section>
     </TooltipProvider>

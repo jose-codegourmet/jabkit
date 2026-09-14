@@ -6,4 +6,5 @@ import { imageCropperMocks } from "./ImageCropper.mocks";
 export default {
   Default: () => <ImageCropper {...imageCropperMocks.default} />,
   Variants: () => <ImageCropper {...imageCropperMocks.widescreen} />,
+  RecoverableErrors: () => <ImageCropper {...imageCropperMocks.recoverable} />,
 };

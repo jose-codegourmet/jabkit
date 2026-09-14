@@ -214,4 +214,36 @@ export const pricing28Mocks = {
     ],
     secureLabel: "Billed securely",
   },
-} satisfies Record<"default" | "alternate", Pricing28Props>;
+  twoPlans: {
+    title: "Two plans that share a reading room",
+    people: [],
+    extraCount: "",
+    trustItems: [],
+    monthlyLabel: "Monthly",
+    yearlyLabel: "Yearly",
+    yearlyBadge: "",
+    defaultInterval: "monthly",
+    plans: [
+      {
+        ...defaultPlans[1],
+        id: "reader",
+        name: "Reader",
+        popular: false,
+        ctaLabel: "Choose Reader",
+        href: "#reader",
+        ctaVariant: "secondary",
+      },
+      {
+        ...defaultPlans[2],
+        id: "patron",
+        name: "Patron",
+        popular: true,
+        popularLabel: "Most used",
+        ctaLabel: "Choose Patron",
+        href: "#patron",
+        ctaVariant: "primary",
+      },
+    ],
+    secureLabel: "",
+  },
+} satisfies Record<"default" | "alternate" | "twoPlans", Pricing28Props>;

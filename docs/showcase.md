@@ -28,14 +28,19 @@ Everything under `apps/showcase/app/` and `apps/showcase/components/` is site ch
 | `/[category]` | `app/[category]/page.tsx` | Category list. `validCategories` is `atoms` \| `marketing` \| `dashboard`; anything else is `notFound()`. Copy on that page is the canonical category description. |
 | `/[category]/[name]` | `app/[category]/[name]/page.tsx` | Component detail. 404 if the entry is missing or `entry.category !== category`. |
 | `/preview/[name]/[story]` | `app/preview/[name]/[story]/page.tsx` | Isolated iframe document. |
-| `/samples` | `app/samples/page.tsx` | Sample index from `app/samples/catalog.ts`. Ready entries link; pending entries are not wrapped in `Link`. |
+| `/samples` | `app/samples/page.tsx` | Product-sample index from `app/samples/catalog.ts`. Ready entries link; pending entries are not wrapped in `Link`. |
 | `/samples/saas` | `app/samples/saas/page.tsx` | SaaS landing assembled from registry blocks. Demo chrome is `saas/layout.tsx`. |
 | `/samples/draft` | `app/samples/draft/page.tsx` | Unpublished DemoBar check. Omitted from the catalogue. |
 | `/samples/scope-reference` | `app/samples/scope-reference/page.tsx` | Scoped token/typography/portal reference. Not a catalogue sample. |
 | `/design-systems` | `app/design-systems/page.tsx` | Design-system directions index. Static so it is not captured by `/[category]`. |
+| `/design-systems/minimal` | `app/design-systems/minimal/page.tsx` | West Room Studio. Work index, six project details, studio, services, local inquiry. |
+| `/design-systems/neo-brutalism` | `app/design-systems/neo-brutalism/page.tsx` | Good Noise. Work, services, studio, local brief preview. |
+| `/design-systems/editorial` | `app/design-systems/editorial/page.tsx` | Common Hours. Story archive, nine longreads, contributors, about, membership preview. |
+| `/design-systems/luxury` | `app/design-systems/luxury/page.tsx` | Stillwater House. Rooms, room details, experiences, house, local stay inquiry. |
+| `/design-systems/retro` | `app/design-systems/retro/page.tsx` | Pocket Keeps. Collections, format picker, working local crop/download studio. |
 | `/mcp` | `app/mcp/route.ts` | Read-only JSON endpoint. See [mcp.md](mcp.md). |
 
-SH-01 dated gate and route matrix: [qa/design-system-showcases.md](qa/design-system-showcases.md).
+SH-01 dated gate, SH-07 full-site review template, and catalogue-cover rules: [qa/design-system-showcases.md](qa/design-system-showcases.md). Every `-12` release PR copies that template. Whole-site shots are not `pnpm previews:build` output.
 
 ## Preview architecture
 
@@ -82,19 +87,49 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 
 ## Samples
 
-`app/samples/catalog.ts` owns the index metadata and the sample-root route contract. Allowed roots are `/samples/saas` plus the five planned design-system sites: `minimal`, `neo-brutalism`, `editorial`, `luxury`, and `retro`. A ready entry’s `href` must pass `linkedSampleHref`, which only accepts `implementedSampleHrefs` (a subset of those roots). Paths outside the sample roots, or planned roots not yet on the implemented list, fail typecheck without an `as Route` assertion. Showcase `tsc --noEmit` does not load Next’s generated route union, so the implemented-href allowlist is the static contract; `Link` still uses typedRoutes at the call site. Pending entries have no `href` and must not be wrapped in `Link`. Collection completion is not required; one site can become ready on its own after its release ticket.
+`/samples` and `/design-systems` are separate catalogues. `app/samples/catalog.ts` owns product-sample metadata. The only ready sample is `/samples/saas` (Quarry). A ready entry’s `href` must pass `linkedSampleHref`, which only accepts `implementedSampleHrefs`. Paths outside those roots fail typecheck without an `as Route` assertion. Showcase `tsc --noEmit` does not load Next’s generated route union, so the implemented-href allowlist is the static contract; `Link` still uses typedRoutes at the call site. Pending entries have no `href` and must not be wrapped in `Link`.
 
-Today the only ready sample is `/samples/saas` (Quarry). The other five appear on `/samples` as non-linked “Soon” cards. `/samples/draft` exists only to exercise shared demo chrome and is omitted from the catalogue.
+`app/design-systems/catalog.ts` owns the five website-language sites. Ready entries use `linkedDesignSystemHref`. Index cards on both pages are text only (label, brand, description, status). There is no catalogue-cover field until a change actually renders one. `/samples/draft` exists only to exercise shared demo chrome and is omitted from both catalogues. Former `/samples/{system}` URLs redirect to `/design-systems/{system}`.
 
-`apps/showcase/components/samples/DemoBar.tsx` is the shared sample chrome: current design-system name, fictional-brand notice, All samples, Components, skip-to-sample (`#top`), and the existing `ThemeToggle` (root `ThemeProvider` only). It sits in document flow above the sample (`z-0`, not sticky or fixed) so it does not cover business navigation. Each site keeps its own nav and footer in its route layout or page. SaaS uses `app/samples/saas/layout.tsx` for the bar and keeps Quarry’s footer on the page.
+### Five-site route inventory (SH-08)
+
+Catalogue closeout for [#254](https://github.com/jose-codegourmet/jabkit/issues/254). Each site uses `DemoBar` plus `SampleScope` with its own `data-jk-design-system` id. Brand CSS is CSS modules under that tree; samples do not import each other’s styles. Unknown detail slugs call `notFound()` and have nested `not-found.tsx` files. SH-07 browser crawl, theme-with-popup, lab LCP, catalogue-cover screenshots, and Higgsfield provenance are **Deferred** pending Jose visual QA and [#260](https://github.com/jose-codegourmet/jabkit/issues/260). Accessibility and broken-flow behavior implemented in the site PRs stays as implemented-in-code.
+
+| Site | Root | Secondary routes | Local task | Release |
+| --- | --- | --- | --- | --- |
+| Minimal — West Room Studio | `/design-systems/minimal` | `/work`, `/work/[slug]` (×6), `/studio`, `/services`, `/contact` | Inquiry preview | [#266](https://github.com/jose-codegourmet/jabkit/pull/266) |
+| Neo-brutalism — Good Noise | `/design-systems/neo-brutalism` | `/work`, `/work/[slug]` (×6), `/services`, `/studio`, `/start` | Project brief | [#267](https://github.com/jose-codegourmet/jabkit/pull/267) |
+| Editorial — Common Hours | `/design-systems/editorial` | `/stories`, `/stories/[slug]` (×9), `/contributors/[slug]` (×3), `/about`, `/membership` | Membership preview | [#268](https://github.com/jose-codegourmet/jabkit/pull/268) |
+| Luxury — Stillwater House | `/design-systems/luxury` | `/rooms`, `/rooms/[slug]` (×3), `/experiences`, `/house`, `/inquire` | Stay inquiry | [#269](https://github.com/jose-codegourmet/jabkit/pull/269) |
+| Retro — Pocket Keeps | `/design-systems/retro` | `/collections`, `/collections/[slug]` (×3), `/how-it-works`, `/pricing`, `/studio` | Crop/download studio | [#270](https://github.com/jose-codegourmet/jabkit/pull/270) |
+
+SaaS remains ready at `/samples/saas` (Quarry). Shared enabling work: SH-01–07 in the [#255](https://github.com/jose-codegourmet/jabkit/pull/255)–[#265](https://github.com/jose-codegourmet/jabkit/pull/265) area.
+
+`apps/showcase/components/samples/DemoBar.tsx` is the shared demo chrome: current design-system name, fictional-brand notice, an index link (All samples or Design systems), Components, skip-to-sample (`#top`), and the existing `ThemeToggle` (root `ThemeProvider` only). It sits in document flow above the site (`z-0`, not sticky or fixed) so it does not cover business navigation. Each site keeps its own nav and footer in its route layout or page. SaaS uses `app/samples/saas/layout.tsx` for the bar and keeps Quarry’s footer on the page.
 
 `/samples/scope-reference` is a SH-03 engineering surface, not a catalogue entry. It wraps JabKit atoms in `SampleScope` (`apps/showcase/components/samples/SampleScope.tsx`) so each design-system id can apply scoped tokens, fallback typography, and a portal container without mutating `document.documentElement` on route mount. Query `?system=` is allowlisted to `minimal`, `neo-brutalism`, `editorial`, `luxury`, and `retro`.
 
-`app/samples/saas/page.tsx` imports real library components through the showcase `@/*` alias (`@/atoms/button`, `@/marketing/hero-section-5`, `@/dashboard/chart-group14`, …) and feeds them copy from `app/samples/saas/content.ts`. That page is showcase-only composition. Adding a released sample means adding its root route, flipping the catalog entry to `ready` with `linkedSampleHref(...)`, and composing pages under `app/samples/<system>/`. It is not a registry component.
+`app/samples/saas/page.tsx` imports real library components through the showcase `@/*` alias (`@/atoms/button`, `@/marketing/hero-section-5`, `@/dashboard/chart-group14`, …) and feeds them copy from `app/samples/saas/content.ts`. That page is showcase-only composition. Adding a released product sample means adding its root under `/samples`, flipping the catalog entry to `ready` with `linkedSampleHref(...)`. Adding a design-system site means composing under `app/design-systems/<system>/` and `linkedDesignSystemHref(...)`. Neither is a registry component.
 
-Because of the alias, do not invent `@/components/...` paths inside the showcase for library code. Import from `@/atoms|marketing|dashboard/...`. Showcase-only modules (DemoBar, SampleScope, catalog, sample layouts) use relative imports.
+Because of the alias, do not invent `@/components/...` paths inside the showcase for library code. Import from `@/atoms|marketing|dashboard/...`. Showcase-only modules (DemoBar, SampleScope, SH-06 helpers, catalog, sample layouts) use relative imports.
 
-Sample-site photography is not Unsplash. Each future design-system sample owns `app/samples/<system>/assets.ts` and `public/assets/design-systems/<system>/`. Those maps stay empty until the matching `-03` Higgsfield ticket. See [previews.md](previews.md).
+Sample-site photography is not Unsplash. Each design-system site owns `app/design-systems/<system>/assets.ts` and `public/assets/design-systems/<system>/`. See [previews.md](previews.md).
+
+### Content, navigation, and demo state (SH-06)
+
+Shared behavior for the five design-system sites. Layout and business copy stay in each `app/design-systems/<system>/` tree. Only repeated helpers belong in `components/samples/`.
+
+**Fixtures.** Plain typed records (`id`, `slug`, `kind`, `title`, `summary`, optional local `image.src` under `/assets/...`). Copy lives in `content.ts`, not JSX. Details and summaries read the same canonical object. Unknown slugs call `notFound()`. Empty lists use `sampleEmptyCopy.noMatches` plus a reset link.
+
+**Navigation and CTAs.** Each site owns its nav and footer. A CTA is a real route, a local action (form preview, in-memory favorite), or a disabled control with a visible reason. Do not use `href="#"` as a fake completed action. In-page hashes are allowed only when the target exists on that page.
+
+**URL state.** Allowlisted keys: `filter`, `q`, `project`, `room`, `plan`. Parse with `parseAllowlistedQuery`. Unknown keys are dropped. Invalid `filter` values become `all`. Preselect IDs must match a fixture of the matching kind; unknown IDs are ignored and must not be interpolated into headings or `href`s. Build links with `sampleHref` so only validated values are serialized. Back/forward and direct links are ordinary query strings.
+
+**Demo forms.** `DemoPreviewForm` is the reference: JabKit Label/Input/Textarea/Button, native `required` / `type="email"`, inline errors, focus on the first `:invalid` field, retained values on Edit, Reset back to an empty draft. Status is `draft` | `invalid` | `preview` | `reset` with a live region. Confirmation copy is “Preview prepared. Demo only.” Never claim an email was sent, a subscription started, or a room reserved. No fake server delay, consent-checkbox theater, analytics SDK, auth, or payment.
+
+**Lifetime.** Form values and visit favorites are in-memory React state. Reload or leaving the route clears them. Do not persist personal data. Pocket Keeps’ local file download remains the only real download exception called out in the roadmap.
+
+There is no public conventions route. SH-06 helpers are used by the shipped sites and documented here.
 
 ## Site chrome
 

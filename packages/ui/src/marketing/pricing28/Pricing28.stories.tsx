@@ -31,6 +31,15 @@ export const Variants: Story = {
   ),
 };
 
+export const TwoPlans: Story = {
+  args: { ...pricing28Mocks.twoPlans },
+  render: () => (
+    <div className="bg-background text-foreground">
+      <Pricing28 {...pricing28Mocks.twoPlans} />
+    </div>
+  ),
+};
+
 export const ThemeComparison: Story = {
   args: { ...pricing28Mocks.default },
   render: () => (

@@ -31,6 +31,15 @@ export const Variants: Story = {
   ),
 };
 
+export const StudioPreview: Story = {
+  args: { ...productQuickView4Mocks.studio },
+  render: () => (
+    <div className="bg-background text-foreground">
+      <ProductQuickView4 {...productQuickView4Mocks.studio} />
+    </div>
+  ),
+};
+
 export const ThemeComparison: Story = {
   args: { ...productQuickView4Mocks.default },
   render: () => (

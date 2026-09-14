@@ -144,10 +144,14 @@ function ListingCard({
   item,
   favorited,
   onToggleFavorite,
+  priceUnit,
+  showFavorite,
 }: {
   item: CarouselCardsItem;
   favorited: boolean;
   onToggleFavorite: () => void;
+  priceUnit: string;
+  showFavorite: boolean;
 }) {
   const titleId = useId();
   const media = (
@@ -199,7 +203,10 @@ function ListingCard({
         <span className="font-semibold tabular-nums">
           {formatPrice(item.price, item.currency)}
         </span>
-        <span className="text-muted-foreground"> / person</span>
+        <span className="text-muted-foreground break-words">
+          {" "}
+          / {priceUnit}
+        </span>
       </p>
     </div>
   );
@@ -243,7 +250,7 @@ function ListingCard({
           {copy}
         </>
       )}
-      {favorite}
+      {showFavorite ? favorite : null}
     </article>
   );
 }
@@ -257,6 +264,8 @@ export function CarouselCards({
   viewAllLabel = DEFAULT_VIEW_ALL_LABEL,
   items,
   onFavoriteChange,
+  priceUnit = "person",
+  showFavorite = true,
   ...props
 }: CarouselCardsProps) {
   const headingId = useId();
@@ -395,6 +404,8 @@ export function CarouselCards({
               item={item}
               key={item.id}
               onToggleFavorite={() => toggleFavorite(item.id)}
+              priceUnit={item.priceUnit ?? priceUnit}
+              showFavorite={showFavorite}
             />
           ))}
         </div>

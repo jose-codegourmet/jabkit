@@ -53,8 +53,18 @@ export interface Pricing28Plan {
 export interface Pricing28Props
   extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   title?: string;
+  /**
+   * Social-proof avatars. Pass `[]` to hide the row (with empty
+   * `extraCount` and `trustItems`). Defaults keep the mock portraits.
+   */
   people?: Pricing28Person[];
+  /**
+   * Extra-people label. Pass `""` or `"0"` to hide the count chip.
+   */
   extraCount?: string;
+  /**
+   * Trust stats beside the avatars. Pass `[]` to omit them.
+   */
   trustItems?: Pricing28TrustItem[];
   monthlyLabel?: string;
   yearlyLabel?: string;
@@ -62,6 +72,13 @@ export interface Pricing28Props
   defaultInterval?: Pricing28Interval;
   interval?: Pricing28Interval;
   onIntervalChange?: (interval: Pricing28Interval) => void;
+  /**
+   * One to four plans. The grid follows `plans.length` (1–4) instead of
+   * always using four desktop columns, so two plans sit in a balanced pair.
+   */
   plans?: Pricing28Plan[];
+  /**
+   * Footer lock line. Pass `""` to hide it when no payment exists.
+   */
   secureLabel?: string;
 }

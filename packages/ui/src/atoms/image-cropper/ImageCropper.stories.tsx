@@ -31,6 +31,15 @@ export const Variants: Story = {
   ),
 };
 
+export const RecoverableErrors: Story = {
+  args: { ...imageCropperMocks.recoverable },
+  render: () => (
+    <div className="bg-background p-6 text-foreground">
+      <ImageCropper {...imageCropperMocks.recoverable} />
+    </div>
+  ),
+};
+
 export const ThemeComparison: Story = {
   args: { ...imageCropperMocks.default },
   render: () => (

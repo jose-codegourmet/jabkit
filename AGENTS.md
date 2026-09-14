@@ -22,6 +22,7 @@ Code wins when docs disagree. [docs/README.md](docs/README.md) is the index. Gen
 | Registry JSON, metadata, or builder | [docs/registry.md](docs/registry.md) |
 | Showcase routes, previews, samples | [docs/showcase.md](docs/showcase.md) |
 | Preview capture pipeline, hosted assets, catalogue images | [docs/previews.md](docs/previews.md) |
+| Full-site sample review or catalogue covers | [docs/qa/design-system-showcases.md](docs/qa/design-system-showcases.md) then [docs/previews.md](docs/previews.md) |
 | Consumer install (`init` / `add`) | [docs/cli.md](docs/cli.md) |
 | Catalogue HTTP tools | [docs/mcp.md](docs/mcp.md) |
 | Whole-system map | [docs/architecture.md](docs/architecture.md) |
@@ -73,6 +74,7 @@ Ship doc updates in the same PR as the behavior they describe.
 | CLI flags or install writes | `docs/cli.md` |
 | `/mcp` tools | `docs/mcp.md` |
 | Preview capture pipeline, hosted assets, catalogue images | `docs/previews.md` |
+| Full-site review checklist or catalogue covers | `docs/qa/design-system-showcases.md` and `docs/previews.md` |
 | Workspace layout or generated artifacts | `docs/architecture.md` and `docs/README.md` |
 
 ## Working rules

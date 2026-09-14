@@ -35,6 +35,7 @@ export interface ProductQuickView4Size {
 export interface ProductQuickView4Selection {
   colorId: string;
   sizeId: string;
+  imageIndex: number;
 }
 
 export interface ProductQuickView4Props
@@ -50,6 +51,11 @@ export interface ProductQuickView4Props
   colorLegend?: string;
   sizeLegend?: string;
   addToCartLabel?: string;
+  /**
+   * Cart bag on the primary action. Pass `false` when the callback is a
+   * non-commerce action such as opening a local studio.
+   */
+  showCartIcon?: boolean;
   detailsLabel?: string;
   detailsHref?: string;
   defaultColorId?: string;

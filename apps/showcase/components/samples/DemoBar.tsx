@@ -1,12 +1,17 @@
+import type { Route } from "next";
 import Link from "next/link";
 import { ThemeToggle } from "../ThemeToggle";
 
 export function DemoBar({
   designSystem,
   brand,
+  indexHref = "/samples",
+  indexLabel = "All samples",
 }: {
   designSystem: string;
   brand: string;
+  indexHref?: Route;
+  indexLabel?: string;
 }) {
   return (
     <div className="relative z-0 border-b border-border bg-card">
@@ -31,10 +36,10 @@ export function DemoBar({
             className="flex min-w-0 flex-wrap items-center gap-x-1 gap-y-1"
           >
             <Link
-              href="/samples"
+              href={indexHref}
               className="inline-flex min-h-11 items-center px-2 text-sm text-muted-foreground hover:text-foreground"
             >
-              All samples
+              {indexLabel}
             </Link>
             <Link
               href="/components"

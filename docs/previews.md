@@ -58,7 +58,7 @@ Still captures use `reducedMotion: "reduce"`, `deviceScaleFactor: 1`, `en-US`, a
 
 Catalogue `PreviewImage` prefers the GIF under `prefers-reduced-motion: no-preference` and the still WebP otherwise.
 
-`pnpm previews:verify` is part of the SH-01 correctness gate recorded in [qa/design-system-showcases.md](qa/design-system-showcases.md).
+`pnpm previews:verify` is part of the SH-01 correctness gate recorded in [qa/design-system-showcases.md](qa/design-system-showcases.md). Whole-site review shots and catalogue covers are a different pipeline; see [Whole-site catalogue captures (SH-07)](#whole-site-catalogue-captures-sh-07).
 
 Run `pnpm previews:build -- --name {name}` whenever a component changes, then commit the output. `pnpm previews:verify` runs in `pnpm check` and fails if an asset is missing or its source hash is stale.
 
@@ -155,4 +155,19 @@ Manifest fields per asset:
 - [ ] `pnpm check:design-system-assets` passes
 
 `pnpm check:design-system-assets` is part of `pnpm check`. Empty series pass. Populated rows fail if the WebP, provenance, and `assets.ts` disagree, if a Higgsfield row lacks a UUID job id, if a remote/signed URL leaked into the manifest, or if a delivery file exceeds its budget without `budgetException`.
+
+## Whole-site catalogue captures (SH-07)
+
+Component stills in `public/previews/` stay above. **Do not** screenshot `/samples/<slug>` with `previews:build`, and do not add sample-page hashes to `previews/manifest.json`.
+
+Review evidence and catalogue covers are browser captures of the implemented production site. Process, pass/fail tables, and the copy-into-PR template live in [qa/design-system-showcases.md](qa/design-system-showcases.md).
+
+| Capture | Commit where | Provenance |
+| --- | --- | --- |
+| Component Default / Variants / ThemeComparison | `public/previews/{name}.{Story}.{theme}.webp` | `previews/manifest.json` hashes |
+| Higgsfield stills | `public/assets/design-systems/<system>/{file}.webp` | `kind: "higgsfield-mcp"` |
+| Catalogue cover (when the index renders it) | `public/assets/design-systems/<system>/catalogue-cover.webp` | `kind: "browser-capture"`, `model: "browser"`, `jobId: null` |
+| SaaS / PR-only review shots | PR attachments | Not a `DesignSystemId`; do not invent a `saas/` asset folder |
+
+`/samples` does not currently display a cover. Do not add a catalog metadata field until that UI exists. When it does, the cover file must be the real homepage, fonts and images settled, overlays closed, with route, viewport, theme, commit, and date recorded in the release PR.
 
