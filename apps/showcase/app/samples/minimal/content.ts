@@ -1,8 +1,3 @@
-import {
-  disciplineFilters,
-  sampleRoot,
-  serviceIds,
-} from "./types";
 import type {
   AssetSlot,
   Discipline,
@@ -14,6 +9,7 @@ import type {
   ServiceRecord,
   TeamMember,
 } from "./types";
+import { disciplineFilters, sampleRoot, serviceIds } from "./types";
 
 export const brand = {
   name: "West Room Studio",
@@ -603,9 +599,7 @@ export function parseDisciplineFilter(
   return value;
 }
 
-export function isServiceId(
-  value: string | undefined,
-): value is ServiceId {
+export function isServiceId(value: string | undefined): value is ServiceId {
   return (
     value !== undefined && (serviceIds as readonly string[]).includes(value)
   );
@@ -618,16 +612,12 @@ export function getProject(
   return projectBySlug.get(slug);
 }
 
-export function getService(
-  id: string | undefined,
-): ServiceRecord | undefined {
-  if (!id) return undefined;
+export function getService(id: string | undefined): ServiceRecord | undefined {
+  if (!isServiceId(id)) return undefined;
   return serviceById.get(id);
 }
 
-export function filterProjects(
-  discipline: DisciplineFilter,
-): ProjectRecord[] {
+export function filterProjects(discipline: DisciplineFilter): ProjectRecord[] {
   if (discipline === "all") return projects;
   return projects.filter((project) => project.discipline === discipline);
 }

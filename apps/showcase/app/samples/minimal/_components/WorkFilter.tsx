@@ -1,8 +1,8 @@
 import { Button } from "@/atoms/button";
 import { disciplineLabel, filterProjects, workHref } from "../content";
+import styles from "../style.module.css";
 import type { DisciplineFilter } from "../types";
 import { disciplineFilters } from "../types";
-import styles from "../style.module.css";
 
 const labels: Record<DisciplineFilter, string> = {
   all: "All",
@@ -11,21 +11,14 @@ const labels: Record<DisciplineFilter, string> = {
   retail: "Retail",
 };
 
-export function WorkFilter({
-  current,
-}: {
-  current: DisciplineFilter;
-}) {
+export function WorkFilter({ current }: { current: DisciplineFilter }) {
   const selected = current;
   const count = filterProjects(selected).length;
 
   return (
     <div className="flex flex-col gap-4">
-      <div
-        className="flex flex-wrap gap-2"
-        role="group"
-        aria-label="Filter by discipline"
-      >
+      <fieldset className="flex flex-wrap gap-2 border-0 p-0">
+        <legend className="sr-only">Filter by discipline</legend>
         {disciplineFilters.map((value) => {
           const selectedFilter = value === selected;
           return (
@@ -44,7 +37,7 @@ export function WorkFilter({
             </Button>
           );
         })}
-      </div>
+      </fieldset>
       <p className={`jk-caption ${styles.meta}`}>
         {count} {count === 1 ? "project" : "projects"}
         {selected === "all" ? "" : ` in ${disciplineLabel(selected)}`}

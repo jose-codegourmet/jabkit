@@ -12,8 +12,8 @@ import {
   projects,
   services,
 } from "../content";
-import type { ServiceId } from "../types";
 import styles from "../style.module.css";
+import type { ServiceId } from "../types";
 
 type FormValues = {
   name: string;

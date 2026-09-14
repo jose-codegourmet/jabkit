@@ -22,9 +22,7 @@ export function toProjects16Images(
   });
 }
 
-export function toContent1Sections(
-  project: ProjectRecord,
-): Content1Section[] {
+export function toContent1Sections(project: ProjectRecord): Content1Section[] {
   const [brief, constraints, response] = project.sections;
   const establishing = sampleImage(
     project.imageIds.establishing,

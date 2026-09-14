@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Button } from "@/atoms/button";
 import { Projects16 } from "@/marketing/projects16";
-import { sampleImage } from "./assets";
 import { toProjects16Images } from "./_components/adapters";
+import { sampleImage } from "./assets";
 import {
   approachClose,
   brand,
@@ -10,8 +10,8 @@ import {
   homeProjects,
   principles,
 } from "./content";
-import { sampleRoot as root } from "./types";
 import styles from "./style.module.css";
+import { sampleRoot as root } from "./types";
 
 export const metadata: Metadata = {
   title: "West Room Studio - JabKit Minimal sample",

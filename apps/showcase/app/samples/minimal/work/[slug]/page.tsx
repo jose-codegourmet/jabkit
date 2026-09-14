@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Button } from "@/atoms/button";
 import { Content1 } from "@/marketing/content1";
-import { sampleImage } from "../../assets";
 import { toContent1Sections } from "../../_components/adapters";
+import { sampleImage } from "../../assets";
 import {
   adjacentProjects,
   contactHref,
@@ -13,8 +13,8 @@ import {
   projects,
   serviceHref,
 } from "../../content";
-import { sampleRoot } from "../../types";
 import styles from "../../style.module.css";
+import { sampleRoot } from "../../types";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));

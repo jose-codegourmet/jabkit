@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { DemoBar } from "../../../../components/samples/DemoBar";
-import { SampleScope } from "../../../../components/samples/SampleScope";
+import { DemoBar } from "../../../components/samples/DemoBar";
+import { SampleScope } from "../../../components/samples/SampleScope";
 import { getReadySample } from "../catalog";
 import { SiteFooter, SiteHeader } from "./_components/SiteChrome";
 import styles from "./style.module.css";

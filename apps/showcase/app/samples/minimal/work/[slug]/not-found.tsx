@@ -1,7 +1,7 @@
 import { Button } from "@/atoms/button";
 import { unknownSlugCopy } from "../../content";
-import { sampleRoot } from "../../types";
 import styles from "../../style.module.css";
+import { sampleRoot } from "../../types";
 
 export default function UnknownProjectPage() {
   return (

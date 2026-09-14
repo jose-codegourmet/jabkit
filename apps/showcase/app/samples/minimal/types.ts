@@ -1,10 +1,6 @@
 export const sampleRoot = "/samples/minimal" as const;
 
-export const disciplines = [
-  "residential",
-  "workspace",
-  "retail",
-] as const;
+export const disciplines = ["residential", "workspace", "retail"] as const;
 
 export type Discipline = (typeof disciplines)[number];
 

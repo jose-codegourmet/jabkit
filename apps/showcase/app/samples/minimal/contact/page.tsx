@@ -32,8 +32,8 @@ export default async function ContactPage({
           <p className="jk-caption mt-4">
             Arrived with
             {service ? ` ${service.title}` : ""}
-            {project ? ` and ${project.title}` : ""}. You can change both in
-            the form.
+            {project ? ` and ${project.title}` : ""}. You can change both in the
+            form.
           </p>
         ) : null}
         <div className="mt-10">

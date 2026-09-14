@@ -18,8 +18,8 @@ import {
   NavigationMenuList,
 } from "@/atoms/navigation-menu";
 import { brand, demoNote, navItems } from "../content";
-import { sampleRoot } from "../types";
 import styles from "../style.module.css";
+import { sampleRoot } from "../types";
 
 function isCurrent(pathname: string, href: string) {
   if (href === sampleRoot) {
@@ -37,7 +37,11 @@ export function SiteHeader() {
         <a className={styles.wordmark} href={sampleRoot}>
           {brand.name}
         </a>
-        <NavigationMenu className={styles.desktopNav} delay={0} viewport={false}>
+        <NavigationMenu
+          className={styles.desktopNav}
+          delay={0}
+          viewport={false}
+        >
           <NavigationMenuList>
             {navItems.map((item) => (
               <NavigationMenuItem key={item.href}>

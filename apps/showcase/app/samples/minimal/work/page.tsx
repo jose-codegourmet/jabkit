@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Button } from "@/atoms/button";
-import { sampleImage } from "../assets";
 import { WorkFilter } from "../_components/WorkFilter";
+import { sampleImage } from "../assets";
 import {
   disciplineLabel,
   filterProjects,
@@ -56,7 +56,10 @@ export default async function WorkIndexPage({
               const portrait = index % 2 === 1;
               return (
                 <li key={project.slug}>
-                  <a className={styles.workLink} href={projectHref(project.slug)}>
+                  <a
+                    className={styles.workLink}
+                    href={projectHref(project.slug)}
+                  >
                     <figure className={styles.figure}>
                       <img
                         src={image.src}
@@ -65,9 +68,7 @@ export default async function WorkIndexPage({
                         height={image.height}
                         loading="lazy"
                         decoding="async"
-                        className={
-                          portrait ? "aspect-[4/5]" : "aspect-[4/3]"
-                        }
+                        className={portrait ? "aspect-[4/5]" : "aspect-[4/3]"}
                       />
                     </figure>
                     <p className={`${styles.workTitle} mt-3`}>

@@ -7,10 +7,7 @@ export const assets = {} as const satisfies SampleAssetMap;
  * Temporary local stills until MIN-03 lands. These are existing showcase
  * vendor files, not Higgsfield outputs, and are not listed in provenance.json.
  */
-const stubs: Record<
-  string,
-  { src: string; width: number; height: number }
-> = {
+const stubs: Record<string, { src: string; width: number; height: number }> = {
   "min-hero": {
     src: "/assets/862cb37aa54e557e.webp",
     width: 1920,
