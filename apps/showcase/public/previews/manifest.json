@@ -1967,11 +1967,12 @@
       ]
     },
     "projects16": {
-      "sourceHash": "1fa566c1c872a71cc8e86ec1fde6719bed95bee983fbe131e1f30e79fc36e5a1",
+      "sourceHash": "a33761778dc78d4772a05da2d10a8e1f4212cee58900ea81fd123915abb9cb77",
       "pipelineVersion": 1,
       "stories": [
         "Default",
         "Variants",
+        "Linked",
         "ThemeComparison"
       ],
       "themes": [
@@ -1994,6 +1995,15 @@
           "bytes": 40748,
           "width": 960,
           "height": 987,
+          "format": "webp"
+        },
+        {
+          "story": "Linked",
+          "theme": "dark",
+          "file": "projects16.Linked.dark.webp",
+          "bytes": 49964,
+          "width": 960,
+          "height": 1072,
           "format": "webp"
         },
         {
@@ -2090,11 +2100,12 @@
       ]
     },
     "projects13": {
-      "sourceHash": "eaad054562d7831dbf877ec6cc037ee99da4ab68f1477f6dab4ea8ac6537274e",
+      "sourceHash": "c51f804d486f41372d4b334725b4e95ed1727888a2244eab9c0069b21c3d8762",
       "pipelineVersion": 1,
       "stories": [
         "Default",
         "Variants",
+        "Linked",
         "ThemeComparison"
       ],
       "themes": [
@@ -2115,6 +2126,15 @@
           "theme": "dark",
           "file": "projects13.Variants.dark.webp",
           "bytes": 26860,
+          "width": 960,
+          "height": 733,
+          "format": "webp"
+        },
+        {
+          "story": "Linked",
+          "theme": "dark",
+          "file": "projects13.Linked.dark.webp",
+          "bytes": 32700,
           "width": 960,
           "height": 733,
           "format": "webp"
