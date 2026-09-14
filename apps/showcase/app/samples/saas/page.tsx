@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Button } from "@/atoms/button";
 import { Separator } from "@/atoms/separator";
 import { ChartGroup14 } from "@/dashboard/chart-group14";
 import { About8 } from "@/marketing/about8";
@@ -33,22 +32,6 @@ export const metadata: Metadata = {
 export default function SaasSamplePage() {
   return (
     <div id="top" className="overflow-x-hidden bg-background text-foreground">
-      <div className="border-b border-border bg-card">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-2.5 sm:px-6 lg:px-8">
-          <p className="text-xs leading-5 text-muted-foreground sm:text-sm">
-            JabKit sample. Assembled from existing blocks, not a live product.
-          </p>
-          <div className="flex flex-wrap items-center gap-2">
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/samples">All samples</Link>
-            </Button>
-            <Button variant="secondary" size="sm" asChild>
-              <Link href="/components">Components</Link>
-            </Button>
-          </div>
-        </div>
-      </div>
-
       <HeroSection5 {...hero} />
 
       <Compare5 {...compare} className="border-y border-border bg-card" />
