@@ -8,7 +8,7 @@ import { isReadySample, samples } from "./catalog";
 export const metadata: Metadata = {
   title: "Samples - JabKit",
   description:
-    "Complete pages assembled from JabKit blocks. Start with Quarry, West Room Studio, Good Noise, Common Hours, Stillwater House, or Pocket Keeps. Further design-system sites become ready independently.",
+    "Complete product pages assembled from JabKit blocks. Start with Quarry, then copy the composition into your own tree.",
 };
 
 export default function SamplesPage() {
@@ -23,20 +23,13 @@ export default function SamplesPage() {
           Pages, not galleries.
         </h1>
         <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
-          Each sample is a complete site composed from registry blocks. Use them
-          to see how JabKit reads as a product, then copy the pattern into your
-          own tree. Pending entries are listed but not linked until their root
-          route is released.
-        </p>
-        <p className="mt-4 max-w-2xl text-sm leading-6 text-muted-foreground">
-          Shared fixture, filter, and demo-form conventions live on a contract
-          route, not in this catalogue.{" "}
-          <Link
-            href="/samples/conventions"
-            className="font-medium text-foreground"
-          >
-            Sample conventions
+          Samples are product compositions from registry blocks. They show how
+          JabKit reads as a shipping site, not a style direction. Website
+          languages live on{" "}
+          <Link href="/design-systems" className="font-medium text-foreground">
+            Design systems
           </Link>
+          .
         </p>
         <div className="mt-14 grid gap-3">
           {samples.map((sample) => {

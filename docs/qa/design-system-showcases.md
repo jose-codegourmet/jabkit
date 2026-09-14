@@ -6,7 +6,7 @@ Copy the [evidence template](#evidence-template) into every `-12` release PR. De
 
 # SH-08 — Five-site closeout (honest SH-07 record)
 
-Code and catalogue closeout for [#254](https://github.com/jose-codegourmet/jabkit/issues/254). All five design-system entries plus SaaS are `ready` in `catalog.ts`. Route inventory: [showcase.md](../showcase.md) (Five-site route inventory). Release PRs: [#266](https://github.com/jose-codegourmet/jabkit/pull/266) Minimal, [#267](https://github.com/jose-codegourmet/jabkit/pull/267) Neo-brutalism, [#268](https://github.com/jose-codegourmet/jabkit/pull/268) Editorial, [#269](https://github.com/jose-codegourmet/jabkit/pull/269) Luxury, [#270](https://github.com/jose-codegourmet/jabkit/pull/270) Retro.
+Code and catalogue closeout for [#254](https://github.com/jose-codegourmet/jabkit/issues/254). SaaS is `ready` on `/samples`; the five design-system sites are `ready` on `/design-systems`. Route inventory: [showcase.md](../showcase.md) (Five-site route inventory). Release PRs: [#266](https://github.com/jose-codegourmet/jabkit/pull/266) Minimal, [#267](https://github.com/jose-codegourmet/jabkit/pull/267) Neo-brutalism, [#268](https://github.com/jose-codegourmet/jabkit/pull/268) Editorial, [#269](https://github.com/jose-codegourmet/jabkit/pull/269) Luxury, [#270](https://github.com/jose-codegourmet/jabkit/pull/270) Retro.
 
 This ticket does **not** run browser or visual QA. Do not treat the table below as a pass.
 
@@ -338,7 +338,7 @@ Files under `design-systems/**` (including `tokens.json`, `typography.json`, `co
 
 ## After this baseline
 
-West Room Studio (`/samples/minimal`), Good Noise (`/samples/neo-brutalism`), Common Hours (`/samples/editorial`), Stillwater House (`/samples/luxury`), and Pocket Keeps (`/samples/retro`) are additional ready samples. The SH-01 matrix above stays as the dated snapshot. Imagery for those sites still uses SH-04 empty provenance plus local vendor stubs until MIN-03 / NEO-03 / EDT-03 / LUX-03 / RET-03 (Jose owns series production via #260).
+West Room Studio (`/design-systems/minimal`), Good Noise (`/design-systems/neo-brutalism`), Common Hours (`/design-systems/editorial`), Stillwater House (`/design-systems/luxury`), and Pocket Keeps (`/design-systems/retro`) are the ready design-system sites. The SH-01 matrix above stays as the dated snapshot. Imagery ownership is [#260](https://github.com/jose-codegourmet/jabkit/issues/260).
 
 ## Handoff
 

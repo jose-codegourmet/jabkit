@@ -52,7 +52,7 @@ only if separately instructed to do so.
 
 Read [showcase ownership and routes](../docs/showcase.md), [theming](../docs/theming.md), [component conventions](../docs/adding-a-component.md), and [preview/asset handling](../docs/previews.md). Source code wins if an API changes after this roadmap’s review date.
 
-- Catalogue: [catalog.ts](../apps/showcase/app/samples/catalog.ts). Ready samples are SaaS plus all five design-system sites. Route inventory is in [docs/showcase.md](../docs/showcase.md).
+- Catalogue: SaaS on [samples/catalog.ts](../apps/showcase/app/samples/catalog.ts); the five website languages on [design-systems/catalog.ts](../apps/showcase/app/design-systems/catalog.ts). Route inventory is in [docs/showcase.md](../docs/showcase.md).
 - `@/*` in showcase resolves to `packages/ui/src/*`, not app-local code. Import library components directly and use relative imports for showcase composition. There is no UI root barrel and no new design-system component category.
 - [layout.tsx](../apps/showcase/app/layout.tsx) owns ThemeProvider and Geist font variables. Sample-specific typography, tokens, and portals use `SampleScope`; the design-system JSON files are not executable themes.
 - SH-05 destinations, EDT-04 Pricing28 columns, LUX-04 rate units, and ImageCropper local crop/download shipped with the shared and site PRs. ImageCropper is still not an AI editing backend.

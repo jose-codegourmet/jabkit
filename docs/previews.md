@@ -66,7 +66,7 @@ Run `pnpm previews:build -- --name {name}` whenever a component changes, then co
 
 Library catalogue captures and Unsplash rehosts stay above. **Newly generated photography, illustration, objects, and textures for the five design-system sample sites must be created with Higgsfield MCP.** Do not silently substitute another generator, a stock CDN, or a hotlinked reference-site image.
 
-This ticket owns the process, storage layout, and provenance contract. MIN-03, NEO-03, EDT-03, LUX-03, and RET-03 own series production and in-slot crop review. Empty `assets` arrays are valid until those tickets run. Do not invent job IDs, licenses, or generation results to look complete.
+This ticket owns the process, storage layout, and provenance contract. MIN-03, NEO-03, EDT-03, LUX-03, and RET-03 own series production. Those five Higgsfield series are committed under `public/assets/design-systems/<system>/` with kebab-case WebPs, `provenance.json`, and `assets.ts`. In-slot crop review still waits on the sample page tickets. Do not invent job IDs, licenses, or generation results.
 
 ### Higgsfield MCP versus other image sources
 
