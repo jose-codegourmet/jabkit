@@ -18,9 +18,7 @@ Minimal removes competing signals. Editorial establishes a point of view. Luxury
 
 ## Full website showcase roadmaps
 
-The [shared showcase roadmap](roadmap.md) contains 8 enabling/release tickets and links to 12 detailed tickets for each system: [Minimal](minimal/roadmap.md), [Neo-brutalism](neo-brutalism/roadmap.md), [Editorial](editorial/roadmap.md), [Luxury](luxury/roadmap.md), and [Retro](retro/roadmap.md). Each defines a different fictional business, six page templates, actual JabKit component mappings, dependencies, acceptance criteria, verification, asset shot lists, and copy-ready prompts.
-
-These are Markdown instructions for future work. They do not implement websites, create GitHub issues, or generate images. Future sample-image production must use **Higgsfield MCP**; real UI screenshots must be captured from the finished website. No `examples/` files are needed.
+The [shared showcase roadmap](roadmap.md) recorded 8 enabling/release tickets and 12 tickets per system: [Minimal](minimal/roadmap.md), [Neo-brutalism](neo-brutalism/roadmap.md), [Editorial](editorial/roadmap.md), [Luxury](luxury/roadmap.md), and [Retro](retro/roadmap.md). The five sample websites are shipped in `apps/showcase` (release PRs [#266](https://github.com/jose-codegourmet/jabkit/pull/266)–[#270](https://github.com/jose-codegourmet/jabkit/pull/270)). Higgsfield photography remains Jose-owned on [#260](https://github.com/jose-codegourmet/jabkit/issues/260); per-site `-03` issues were closed `not_planned`. Real UI screenshots still come from the running site. No `examples/` files are needed.
 
 ## Reading sequence
 

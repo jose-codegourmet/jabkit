@@ -1,18 +1,18 @@
 # Five complete design-system showcase websites
 
-Status: **planned implementation backlog** · Authored: **2026-09-14**. These documents do not implement routes, generate images, or create GitHub issues. The user selected a different fictional business for each design system. Keep the existing SaaS sample alongside them.
+Status: **shipped** (Higgsfield photography still open on [#260](https://github.com/jose-codegourmet/jabkit/issues/260); MIN-03–RET-03 [#204](https://github.com/jose-codegourmet/jabkit/issues/204)–[#208](https://github.com/jose-codegourmet/jabkit/issues/208) closed `not_planned`) · Authored: **2026-09-14** · Closeout: SH-08 / [#254](https://github.com/jose-codegourmet/jabkit/issues/254).
 
-The outcome is five coherent websites inside `apps/showcase`, not a gallery of isolated components. Each has six page templates, complete secondary routes, finished fixture content, a brand-specific shell, both themes, a meaningful local interaction, and a catalogue entry. Across the five briefs this means **30 templates and 54 concrete pages**, including the specified detail records. There are **68 proposed tickets: 8 shared and 12 per design system**.
+The five sample websites live in `apps/showcase` beside the existing SaaS sample. Each has six page templates, secondary routes, fixture content, a brand-specific shell, both themes, a local demo task, and a `ready` catalogue entry. Higgsfield series production is Jose-owned; sites currently use SH-04 empty provenance plus local vendor stubs.
 
 ## Website briefs and roadmaps
 
-| Design system | Fictional business | Primary journey | Roadmap |
-| --- | --- | --- | --- |
-| Minimal | West Room Studio — architecture/interiors | Work → case detail → service → inquiry preview | [12 tickets](minimal/roadmap.md) |
-| Neo-brutalism | Good Noise — independent branding studio | Work → engagement → project brief preview | [12 tickets](neo-brutalism/roadmap.md) |
-| Editorial | Common Hours — independent journal | Topic → longread → contributor → membership preview | [12 tickets](editorial/roadmap.md) |
-| Luxury | Stillwater House — boutique guest house | Rooms → detail → dates → stay-inquiry preview | [12 tickets](luxury/roadmap.md) |
-| Retro | Pocket Keeps — creative image utility | Collection → format → working crop/download studio | [12 tickets](retro/roadmap.md) |
+| Design system | Fictional business | Primary journey | Roadmap | Release |
+| --- | --- | --- | --- | --- |
+| Minimal | West Room Studio — architecture/interiors | Work → case detail → service → inquiry preview | [12 tickets](minimal/roadmap.md) | [#266](https://github.com/jose-codegourmet/jabkit/pull/266) |
+| Neo-brutalism | Good Noise — independent branding studio | Work → engagement → project brief preview | [12 tickets](neo-brutalism/roadmap.md) | [#267](https://github.com/jose-codegourmet/jabkit/pull/267) |
+| Editorial | Common Hours — independent journal | Topic → longread → contributor → membership preview | [12 tickets](editorial/roadmap.md) | [#268](https://github.com/jose-codegourmet/jabkit/pull/268) |
+| Luxury | Stillwater House — boutique guest house | Rooms → detail → dates → stay-inquiry preview | [12 tickets](luxury/roadmap.md) | [#269](https://github.com/jose-codegourmet/jabkit/pull/269) |
+| Retro | Pocket Keeps — creative image utility | Collection → format → working crop/download studio | [12 tickets](retro/roadmap.md) | [#270](https://github.com/jose-codegourmet/jabkit/pull/270) |
 
 ## How to turn this backlog into GitHub issues
 
@@ -50,14 +50,15 @@ only if separately instructed to do so.
 
 ## Grounding in the current repository
 
-Read [showcase ownership and routes](../docs/showcase.md), [theming](../docs/theming.md), [component conventions](../docs/adding-a-component.md), and [preview/asset handling](../docs/previews.md) before implementing. Source code wins if an API changes after this roadmap’s review date.
+Read [showcase ownership and routes](../docs/showcase.md), [theming](../docs/theming.md), [component conventions](../docs/adding-a-component.md), and [preview/asset handling](../docs/previews.md). Source code wins if an API changes after this roadmap’s review date.
 
-- The current sample registry is [catalog.ts](../apps/showcase/app/samples/catalog.ts), and the only ready sample is [SaaS](../apps/showcase/app/samples/saas/page.tsx). Its explicit JSX composition and separate content file are the existing pattern.
-- `SampleEntry.href` currently permits only `/samples/saas`; the index currently renders entries as links even when status is `soon`. SH-02 fixes these constraints before new catalogue entries become visible.
+- Catalogue: [catalog.ts](../apps/showcase/app/samples/catalog.ts). Ready samples are SaaS plus all five design-system sites. Route inventory is in [docs/showcase.md](../docs/showcase.md).
 - `@/*` in showcase resolves to `packages/ui/src/*`, not app-local code. Import library components directly and use relative imports for showcase composition. There is no UI root barrel and no new design-system component category.
-- [layout.tsx](../apps/showcase/app/layout.tsx) already owns ThemeProvider and Geist font variables. Sample-specific typography, tokens, and portals need deliberate scoping; the design-system JSON files are not executable themes.
-- Projects13/Projects16 lack per-item destinations; Projects16 renders only four images. Pricing28 has a fixed four-column desktop grid and recurring billing controls. CarouselCards currently appends `/ person`. ImageCropper provides local crop/zoom/download, not an AI editing backend. The tickets below name these concrete integration gaps.
-- Marketing and dashboard blocks may be composed by a showcase page, but library dependency boundaries remain unchanged. These business briefs do not force dashboard components into pages without a useful role.
+- [layout.tsx](../apps/showcase/app/layout.tsx) owns ThemeProvider and Geist font variables. Sample-specific typography, tokens, and portals use `SampleScope`; the design-system JSON files are not executable themes.
+- SH-05 destinations, EDT-04 Pricing28 columns, LUX-04 rate units, and ImageCropper local crop/download shipped with the shared and site PRs. ImageCropper is still not an AI editing backend.
+- Marketing and dashboard blocks may be composed by a showcase page, but library dependency boundaries remain unchanged.
+
+Stage F (SH-08) is the documentation and catalogue closeout. Browser/visual QA and Higgsfield series remain Deferred (#260).
 
 ## Scope and handoff common to every ticket
 
@@ -97,21 +98,21 @@ These are delivery lanes, not a requirement to finish every site’s stage befor
 
 ## Shared ticket index
 
-| ID | Issue | Depends on |
-| --- | --- | --- |
-| SH-01 | Record the implementation baseline and unblock the correctness gate | None |
-| SH-02 | Extend sample routing and provide shared demo controls | None |
-| SH-03 | Implement scoped style tokens, typography, and portal inheritance | None |
-| SH-04 | Define Higgsfield MCP image production and asset provenance | None |
-| SH-05 | Add backward-compatible project destinations to portfolio blocks | None |
-| SH-06 | Establish sample content, navigation, and demo-state conventions | None |
-| SH-07 | Define repeatable full-site review and catalogue capture evidence | None |
-| SH-08 | Close the five-site initiative and verify cross-site regressions | SH-01, MIN-12, NEO-12, EDT-12, LUX-12, RET-12 |
+| ID | Issue | PR | Status | Depends on |
+| --- | --- | --- | --- | --- |
+| SH-01 | [#187](https://github.com/jose-codegourmet/jabkit/issues/187) | [#255](https://github.com/jose-codegourmet/jabkit/pull/255), [#256](https://github.com/jose-codegourmet/jabkit/pull/256), [#257](https://github.com/jose-codegourmet/jabkit/pull/257) | Shipped | None |
+| SH-02 | [#188](https://github.com/jose-codegourmet/jabkit/issues/188) | [#258](https://github.com/jose-codegourmet/jabkit/pull/258) | Shipped | None |
+| SH-03 | [#189](https://github.com/jose-codegourmet/jabkit/issues/189) | [#259](https://github.com/jose-codegourmet/jabkit/pull/259) | Shipped | None |
+| SH-04 | [#190](https://github.com/jose-codegourmet/jabkit/issues/190) | [#261](https://github.com/jose-codegourmet/jabkit/pull/261) | Shipped (process; series on #260) | None |
+| SH-05 | [#191](https://github.com/jose-codegourmet/jabkit/issues/191) | [#262](https://github.com/jose-codegourmet/jabkit/pull/262) | Shipped | None |
+| SH-06 | [#192](https://github.com/jose-codegourmet/jabkit/issues/192) | [#264](https://github.com/jose-codegourmet/jabkit/pull/264) | Shipped | None |
+| SH-07 | [#193](https://github.com/jose-codegourmet/jabkit/issues/193) | [#265](https://github.com/jose-codegourmet/jabkit/pull/265) | Shipped (process). Filled visual evidence **Deferred** | None |
+| SH-08 | [#254](https://github.com/jose-codegourmet/jabkit/issues/254) | this closeout | Complete except Jose visual QA + #260 | SH-01, MIN-12, NEO-12, EDT-12, LUX-12, RET-12 |
 
 ## SH-01 — Record the implementation baseline and unblock the correctness gate
 
 **Suggested issue title:** `[showcase][SH-01] Record the implementation baseline and unblock the correctness gate`  
-**Status:** Planned · **Priority:** P0 · **Size:** M · **Labels:** `showcase`, `maintenance`  
+**Status:** Shipped ([#257](https://github.com/jose-codegourmet/jabkit/pull/257); gate fixes [#255](https://github.com/jose-codegourmet/jabkit/pull/255), [#256](https://github.com/jose-codegourmet/jabkit/pull/256)) · **Priority:** P0 · **Size:** M · **Labels:** `showcase`, `maintenance`  
 **Depends on:** None
 
 **Implementation surface:** Existing `package.json`, `apps/verify`, `docs/showcase.md`, `docs/theming.md`, and `docs/previews.md`; proposed implementation evidence in `docs/qa/design-system-showcases.md`.
@@ -133,7 +134,7 @@ These are delivery lanes, not a requirement to finish every site’s stage befor
 ## SH-02 — Extend sample routing and provide shared demo controls
 
 **Suggested issue title:** `[showcase][SH-02] Extend sample routing and provide shared demo controls`  
-**Status:** Planned · **Priority:** P0 · **Size:** M · **Labels:** `showcase`, `routing`  
+**Status:** Shipped ([#258](https://github.com/jose-codegourmet/jabkit/pull/258)) · **Priority:** P0 · **Size:** M · **Labels:** `showcase`, `routing`  
 **Depends on:** None
 
 **Implementation surface:** Existing `apps/showcase/app/samples/catalog.ts`, `app/samples/page.tsx`, `app/samples/saas/page.tsx`, and `app/layout.tsx`; proposed `apps/showcase/components/samples/DemoBar.tsx`.
@@ -157,7 +158,7 @@ These are delivery lanes, not a requirement to finish every site’s stage befor
 ## SH-03 — Implement scoped style tokens, typography, and portal inheritance
 
 **Suggested issue title:** `[showcase][SH-03] Implement scoped style tokens, typography, and portal inheritance`  
-**Status:** Planned · **Priority:** P0 · **Size:** L · **Labels:** `showcase`, `theming`  
+**Status:** Shipped ([#259](https://github.com/jose-codegourmet/jabkit/pull/259)) · **Priority:** P0 · **Size:** L · **Labels:** `showcase`, `theming`  
 **Depends on:** None
 
 **Implementation surface:** Existing `packages/tokens/tokens.css`, `apps/showcase/app/layout.tsx`, Button/Input/Dialog/NavigationMenu/Tooltip sources; proposed sample scope helper under `apps/showcase/components/samples/` and optional scoped preset stylesheet in `packages/tokens`.
@@ -181,7 +182,7 @@ These are delivery lanes, not a requirement to finish every site’s stage befor
 ## SH-04 — Define Higgsfield MCP image production and asset provenance
 
 **Suggested issue title:** `[showcase][SH-04] Define Higgsfield MCP image production and asset provenance`  
-**Status:** Planned · **Priority:** P0 · **Size:** M · **Labels:** `showcase`, `imagery`  
+**Status:** Shipped ([#261](https://github.com/jose-codegourmet/jabkit/pull/261); image series [#260](https://github.com/jose-codegourmet/jabkit/issues/260)) · **Priority:** P0 · **Size:** M · **Labels:** `showcase`, `imagery`  
 **Depends on:** None
 
 **Implementation surface:** Existing `docs/previews.md`, `apps/showcase/public/assets/sources.json`, and each system’s `imagery.md`; proposed `apps/showcase/public/assets/design-systems/<system>/` and `apps/showcase/app/samples/<system>/assets.ts`.
@@ -205,7 +206,7 @@ These are delivery lanes, not a requirement to finish every site’s stage befor
 ## SH-05 — Add backward-compatible project destinations to portfolio blocks
 
 **Suggested issue title:** `[showcase][SH-05] Add backward-compatible project destinations to portfolio blocks`  
-**Status:** Planned · **Priority:** P0 · **Size:** M · **Labels:** `showcase`, `components`  
+**Status:** Shipped ([#262](https://github.com/jose-codegourmet/jabkit/pull/262)) · **Priority:** P0 · **Size:** M · **Labels:** `showcase`, `components`  
 **Depends on:** None
 
 **Implementation surface:** Existing `packages/ui/src/marketing/projects13/` and `packages/ui/src/marketing/projects16/`, their metadata/stories/previews, and generated registry/preview outputs.
@@ -231,7 +232,7 @@ These are delivery lanes, not a requirement to finish every site’s stage befor
 ## SH-06 — Establish sample content, navigation, and demo-state conventions
 
 **Suggested issue title:** `[showcase][SH-06] Establish sample content, navigation, and demo-state conventions`  
-**Status:** Planned · **Priority:** P0 · **Size:** M · **Labels:** `showcase`, `interaction`  
+**Status:** Shipped ([#264](https://github.com/jose-codegourmet/jabkit/pull/264)) · **Priority:** P0 · **Size:** M · **Labels:** `showcase`, `interaction`  
 **Depends on:** None
 
 **Implementation surface:** Existing `apps/showcase/app/samples/saas/content.ts` and sample pattern; proposed `apps/showcase/components/samples/` utilities and documentation in `docs/showcase.md`.
@@ -255,7 +256,7 @@ These are delivery lanes, not a requirement to finish every site’s stage befor
 ## SH-07 — Define repeatable full-site review and catalogue capture evidence
 
 **Suggested issue title:** `[showcase][SH-07] Define repeatable full-site review and catalogue capture evidence`  
-**Status:** Planned · **Priority:** P0 · **Size:** M · **Labels:** `showcase`, `quality`  
+**Status:** Shipped ([#265](https://github.com/jose-codegourmet/jabkit/pull/265); filled visual evidence Deferred) · **Priority:** P0 · **Size:** M · **Labels:** `showcase`, `quality`  
 **Depends on:** None
 
 **Implementation surface:** Existing `docs/previews.md`, `docs/showcase.md`, and component preview pipeline; proposed `docs/qa/design-system-showcases.md` plus catalogue covers under `/assets/design-systems/<system>/`.
@@ -279,7 +280,7 @@ These are delivery lanes, not a requirement to finish every site’s stage befor
 ## SH-08 — Close the five-site initiative and verify cross-site regressions
 
 **Suggested issue title:** `[showcase][SH-08] Close the five-site initiative and verify cross-site regressions`  
-**Status:** Planned · **Priority:** P1 · **Size:** M · **Labels:** `showcase`, `release`  
+**Status:** Complete except Jose visual QA + [#260](https://github.com/jose-codegourmet/jabkit/issues/260) · **Priority:** P1 · **Size:** M · **Labels:** `showcase`, `release`  
 **Depends on:** `SH-01`, `MIN-12`, `NEO-12`, `EDT-12`, `LUX-12`, `RET-12`
 
 **Implementation surface:** Existing `/samples`, `/samples/saas`, catalogue and preview routes, `docs/showcase.md`, and all five system roadmaps.

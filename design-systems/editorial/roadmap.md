@@ -1,8 +1,8 @@
 # Common Hours — Editorial showcase roadmap
 
-Status: **in progress (sample implemented; EDT-03 imagery deferred to #260)** · Ticket prefix: **EDT** · Root: `/samples/editorial` · 12 tickets.
+Status: **shipped** ([#268](https://github.com/jose-codegourmet/jabkit/pull/268); EDT-03 imagery deferred to [#260](https://github.com/jose-codegourmet/jabkit/issues/260), [#206](https://github.com/jose-codegourmet/jabkit/issues/206) closed `not_planned`) · Ticket prefix: **EDT** · Root: `/samples/editorial` · 12 tickets.
 
-Read the [shared roadmap and mandatory handoff](../roadmap.md), then this folder’s [system](system.md), [rules](rules.md), [component guidance](components.json), [imagery direction](imagery.md), and [migration notes](migration.md). These are implementation tickets; none of the proposed routes or API extensions is claimed to exist yet.
+Read the [shared roadmap and mandatory handoff](../roadmap.md), then this folder’s [system](system.md), [rules](rules.md), [component guidance](components.json), [imagery direction](imagery.md), and [migration notes](migration.md). Ticket text below is the original brief. The sample is shipped; EDT-03 imagery is the remaining exception.
 
 ## The website to build
 
@@ -109,7 +109,7 @@ For the remaining shot-list assets, replace the subject and slot specification w
 
 ## Ticket index
 
-All tickets are required for the complete website. Shared dependencies refer to [the shared backlog](../roadmap.md); cross-style dependencies retain their stable IDs until GitHub issues exist. M/L are relative work sizes, not dates.
+All tickets are required for the complete website. Shared dependencies refer to [the shared backlog](../roadmap.md). **EDT-03** Higgsfield imagery is deferred to [#260](https://github.com/jose-codegourmet/jabkit/issues/260); GitHub [#206](https://github.com/jose-codegourmet/jabkit/issues/206) is closed `not_planned`. Remaining EDT tickets shipped in [#268](https://github.com/jose-codegourmet/jabkit/pull/268).
 
 | ID | Suggested issue | Size | Depends on |
 | --- | --- | --- | --- |

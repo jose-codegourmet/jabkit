@@ -4,6 +4,23 @@ Living process for [SH-07](https://github.com/jose-codegourmet/jabkit/issues/193
 
 Copy the [evidence template](#evidence-template) into every `-12` release PR. Defining this process does not replace a filled review. An attractive screenshot alone does not complete a site.
 
+# SH-08 — Five-site closeout (honest SH-07 record)
+
+Code and catalogue closeout for [#254](https://github.com/jose-codegourmet/jabkit/issues/254). All five design-system entries plus SaaS are `ready` in `catalog.ts`. Route inventory: [showcase.md](../showcase.md) (Five-site route inventory). Release PRs: [#266](https://github.com/jose-codegourmet/jabkit/pull/266) Minimal, [#267](https://github.com/jose-codegourmet/jabkit/pull/267) Neo-brutalism, [#268](https://github.com/jose-codegourmet/jabkit/pull/268) Editorial, [#269](https://github.com/jose-codegourmet/jabkit/pull/269) Luxury, [#270](https://github.com/jose-codegourmet/jabkit/pull/270) Retro.
+
+This ticket does **not** run browser or visual QA. Do not treat the table below as a pass.
+
+| SH-07 item | Result | Notes |
+| --- | --- | --- |
+| Browser crawl of listed routes | **Deferred** | Jose visual QA |
+| Theme switch with a popup open | **Deferred** | Jose visual QA |
+| Lab LCP / CLS on production | **Deferred** | Jose visual QA |
+| Catalogue cover screenshots | **Deferred** | `/samples` is still text-only; no cover field |
+| Higgsfield MCP provenance | **Deferred** | Series owned by [#260](https://github.com/jose-codegourmet/jabkit/issues/260). MIN-03–RET-03 [#204](https://github.com/jose-codegourmet/jabkit/issues/204)–[#208](https://github.com/jose-codegourmet/jabkit/issues/208) closed `not_planned` |
+| Accessibility / broken-flow rows | Implemented in code | Shipped in the site PRs; not re-scored here |
+
+Ready: **catalogue yes**; **visual/cover/imagery no** until Jose QA and #260.
+
 # SH-07 — Full-site review and catalogue capture
 
 Manual browser review of a **finished sample website**, plus optional committed catalogue-cover files. It uses existing commands (`pnpm check`, showcase production build, Chrome/Safari DevTools). It does **not** add a second test framework and does **not** feed `pnpm previews:build`.
