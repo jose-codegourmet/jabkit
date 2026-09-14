@@ -3406,7 +3406,7 @@
       ]
     },
     "image-cropper": {
-      "sourceHash": "1b49ff3e2b6bcd5350faccc692fc22e2aedf01ec3a1d8e8b7dab39fa4bbb5354",
+      "sourceHash": "b75087f2f14ffd912dc6c9866bee13a7cdcf3126b954879db80c81ac8242a827",
       "pipelineVersion": 1,
       "stories": [
         "Default",
