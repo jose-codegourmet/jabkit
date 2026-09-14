@@ -165,9 +165,7 @@ async function buildComponent(category: ComponentCategory, folder: string) {
       );
     }
   }
-  const dependencies = [
-    ...new Set([...meta.dependencies, ...libPackages]),
-  ];
+  const dependencies = [...new Set([...meta.dependencies, ...libPackages])];
   const component: RegistryComponent = {
     ...meta,
     dependencies,
