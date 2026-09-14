@@ -62,7 +62,10 @@
     "fashion",
     "cta"
   ],
-  "dependencies": [],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
   "registryDependencies": [
     "button"
   ],

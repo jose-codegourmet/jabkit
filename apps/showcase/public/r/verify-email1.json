@@ -46,7 +46,10 @@
     "verification",
     "verify-email"
   ],
-  "dependencies": [],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
   "registryDependencies": [
     "button",
     "input",

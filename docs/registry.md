@@ -75,6 +75,8 @@ Shipped `content` rewrites `@/atoms/<folder>`, `@/marketing/<folder>`, and `@/da
 
 If a file imports `@/lib/foo` and `packages/ui/src/lib/foo.ts` is missing, the build throws `{name} imports missing shared library foo`. That is why helpers must live under `packages/ui/src/lib/` and be imported as `@/lib/*`. See [design-system.md](design-system.md).
 
+Bare npm imports in those bundled lib files (for example `clsx` and `tailwind-merge` from `cn.ts`) are merged into the entry's `dependencies` so the CLI installs them.
+
 ## Example extraction
 
 `componentExamples()` matches this regex against the stories file:

@@ -41,6 +41,24 @@ function isShippedMockImport(source: string, fileName: string) {
   );
 }
 
+function npmPackageName(specifier: string) {
+  if (specifier.startsWith(".") || specifier.startsWith("@/")) return null;
+  if (specifier.startsWith("@")) {
+    const [scope, name] = specifier.split("/");
+    return name ? `${scope}/${name}` : scope;
+  }
+  return specifier.split("/")[0];
+}
+
+function npmSpecifiers(source: string) {
+  const specs = new Set<string>();
+  for (const match of source.matchAll(/from\s+["']([^"']+)["']/g)) {
+    const name = npmPackageName(match[1]);
+    if (name) specs.add(name);
+  }
+  return specs;
+}
+
 async function componentExamples(stories: string) {
   const pattern =
     /export const (\w+):[\s\S]*?render:\s*\(\)\s*=>\s*\(([\s\S]*?)\n\s*\)\s*[},]/g;
@@ -130,13 +148,16 @@ async function buildComponent(category: ComponentCategory, folder: string) {
       libImports.add(match[1]);
     }
   }
+  const libPackages = new Set<string>();
   for (const importPath of libImports) {
     const sourcePath = path.join(libRoot, `${importPath}.ts`);
     try {
+      const content = await readFile(sourcePath, "utf8");
+      for (const spec of npmSpecifiers(content)) libPackages.add(spec);
       files.push({
         path: `lib/${importPath}.ts`,
         type: "lib",
-        content: await readFile(sourcePath, "utf8"),
+        content,
       });
     } catch {
       throw new Error(
@@ -144,8 +165,12 @@ async function buildComponent(category: ComponentCategory, folder: string) {
       );
     }
   }
+  const dependencies = [
+    ...new Set([...meta.dependencies, ...libPackages]),
+  ];
   const component: RegistryComponent = {
     ...meta,
+    dependencies,
     ...(meta.preview ? { preview: registryPreview(meta.preview) } : {}),
     category,
     files,

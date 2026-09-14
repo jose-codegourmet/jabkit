@@ -63,7 +63,10 @@
     "media",
     "landing"
   ],
-  "dependencies": [],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
   "registryDependencies": [
     "avatar",
     "button"

@@ -54,7 +54,9 @@
     "mobile"
   ],
   "dependencies": [
-    "lucide-react"
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
   ],
   "registryDependencies": [
     "badge",

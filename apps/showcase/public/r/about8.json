@@ -59,7 +59,10 @@
     "team",
     "landing"
   ],
-  "dependencies": [],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
   "registryDependencies": [],
   "a11y": {
     "keyboardNav": true,

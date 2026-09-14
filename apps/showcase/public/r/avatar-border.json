@@ -47,7 +47,10 @@
     "ring",
     "atom"
   ],
-  "dependencies": [],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
   "registryDependencies": [
     "avatar"
   ],

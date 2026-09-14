@@ -49,7 +49,10 @@
     "two-factor",
     "verification"
   ],
-  "dependencies": [],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
   "registryDependencies": [
     "button",
     "input",

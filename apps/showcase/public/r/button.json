@@ -42,7 +42,9 @@
     "link"
   ],
   "dependencies": [
-    "@radix-ui/react-slot"
+    "@radix-ui/react-slot",
+    "clsx",
+    "tailwind-merge"
   ],
   "registryDependencies": [],
   "a11y": {

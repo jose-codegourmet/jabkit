@@ -48,7 +48,9 @@
     "drag-and-drop"
   ],
   "dependencies": [
-    "lucide-react"
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
   ],
   "registryDependencies": [
     "avatar"

@@ -52,7 +52,10 @@
     "landing",
     "photography"
   ],
-  "dependencies": [],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
   "registryDependencies": [
     "button"
   ],

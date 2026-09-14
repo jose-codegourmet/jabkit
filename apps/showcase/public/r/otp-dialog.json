@@ -52,7 +52,10 @@
     "verification",
     "two-factor"
   ],
-  "dependencies": [],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
   "registryDependencies": [
     "button",
     "dialog",

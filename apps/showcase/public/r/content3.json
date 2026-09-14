@@ -55,7 +55,10 @@
     "table",
     "guide"
   ],
-  "dependencies": [],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
   "registryDependencies": [
     "button",
     "badge",

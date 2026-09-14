@@ -53,7 +53,9 @@
     "atom"
   ],
   "dependencies": [
-    "lucide-react"
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
   ],
   "registryDependencies": [
     "button"

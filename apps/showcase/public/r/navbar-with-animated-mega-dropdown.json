@@ -59,7 +59,9 @@
     "cta"
   ],
   "dependencies": [
-    "lucide-react"
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
   ],
   "registryDependencies": [
     "navigation-menu",
