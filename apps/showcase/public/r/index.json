@@ -4317,7 +4317,7 @@
     "name": "projects13",
     "displayName": "Projects13",
     "category": "marketing",
-    "description": "Editorial project index: numbered rows with title, launch date, large description, and a small thumbnail, separated by hairline borders.",
+    "description": "Editorial project index: numbered rows with title, launch date, large description, and a small thumbnail, separated by hairline borders. Optional per-row hrefs render as title text links.",
     "sectionCategory": "projects",
     "purpose": "Lets visitors evaluate a body of work through descriptive, chronological project rows rather than an image-led gallery.",
     "bestFor": [
@@ -4342,13 +4342,14 @@
       "projectTitle",
       "launchDate",
       "projectDescription",
-      "thumbnail"
+      "thumbnail",
+      "projectLink"
     ],
     "capabilities": {
       "supportsImage": true,
       "supportsVideo": false,
       "supportsForm": false,
-      "supportsCTA": false,
+      "supportsCTA": true,
       "supportsDarkMode": true
     },
     "recommendedAfter": [
@@ -4374,7 +4375,7 @@
       "tailwind-merge"
     ],
     "a11y": {
-      "keyboardNav": false,
+      "keyboardNav": true,
       "reducedMotion": true
     },
     "preview": {
@@ -4387,7 +4388,7 @@
     "name": "projects16",
     "displayName": "Projects16",
     "category": "marketing",
-    "description": "Editorial project gallery with a medium-weight heading, a two-column staggered 4:3 and 4:5 photo grid, and a link action beneath a short paragraph.",
+    "description": "Editorial four-image gallery with a medium-weight heading, a two-column staggered 4:3 and 4:5 photo grid, optional captions with text-link destinations, and a link action beneath a short paragraph. Extra images are not rendered.",
     "sectionCategory": "projects",
     "purpose": "Balances a concise portfolio introduction with a spacious, art-directed selection of project photography.",
     "bestFor": [
@@ -4411,6 +4412,7 @@
       "headline",
       "projectItems",
       "projectImage",
+      "projectCaption",
       "projectDescription",
       "projectLink"
     ],

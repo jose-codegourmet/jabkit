@@ -207,6 +207,8 @@ All tickets are required for the complete website. Shared dependencies refer to 
 
 **Implementation surface:** apps/showcase/app/samples/neo-brutalism/_components/ plus existing Projects13, Content1, About6, and atom sources.
 
+**SH-05 API:** Set `Projects13Project.href` for a title text link whose accessible name is the project title. Omit `href` for an unlinked article row. Do not wrap the whole row or the thumbnail.
+
 **Work to deliver**
 
 - Map case-study records to Projects13 numbered rows with SH-05 hrefs. Retain dates, concise descriptions, and visible descriptive link text.
