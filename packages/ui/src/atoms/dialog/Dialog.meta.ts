@@ -3,7 +3,7 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "dialog",
   displayName: "Dialog",
-  version: "1.1.0",
+  version: "1.1.1",
   addedAt: "2026-08-30",
   description:
     "Accessible modal dialog with trigger, overlay, header, description, and footer composed on Base UI.",

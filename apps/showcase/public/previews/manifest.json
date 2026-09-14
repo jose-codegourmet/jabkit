@@ -60,7 +60,7 @@
       ]
     },
     "button": {
-      "sourceHash": "a440703d4b441fe6d985d378d9afb55c43a61315bd2e7520e052f9ffacad47bb",
+      "sourceHash": "4dfb9b3c1f30af5e2440c2d40f71307a6fe39f78113a69282c75cddb81d79839",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -75,33 +75,37 @@
           "story": "Default",
           "theme": "light",
           "file": "button.Default.light.webp",
-          "bytes": 2076,
+          "bytes": 2158,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Default",
           "theme": "dark",
           "file": "button.Default.dark.webp",
-          "bytes": 2004,
+          "bytes": 1984,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "light",
           "file": "button.Variants.light.webp",
-          "bytes": 1638,
+          "bytes": 1760,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
           "file": "button.Variants.dark.webp",
-          "bytes": 1624,
+          "bytes": 1790,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         }
       ]
     },
@@ -135,7 +139,7 @@
       ]
     },
     "dialog": {
-      "sourceHash": "247f14acdc48ce87022d669ce2bf7cec987dfff4567bcc69303646c0f76df734",
+      "sourceHash": "840c27a73c0c427e5f6c2b5b2e4714312dc4f7be506176d87bcb99699f6f660b",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -149,7 +153,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "dialog.Default.dark.webp",
-          "bytes": 1150,
+          "bytes": 1148,
           "width": 800,
           "height": 520,
           "format": "webp"
@@ -369,7 +373,7 @@
       ]
     },
     "tooltip": {
-      "sourceHash": "1cb85be7aa2badf868dd754421dc08c00ba7b612888f78b11dd7d992a6693061",
+      "sourceHash": "1fad2392345800b2fc67a406eef77f337f9eb9be4c91fbd6c3b76bb16da03490",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -383,17 +387,19 @@
           "story": "Default",
           "theme": "dark",
           "file": "tooltip.Default.dark.webp",
-          "bytes": 2022,
+          "bytes": 2076,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
           "file": "tooltip.Variants.dark.webp",
-          "bytes": 2022,
+          "bytes": 2076,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         }
       ]
     },
@@ -3140,7 +3146,7 @@
       ]
     },
     "navigation-menu": {
-      "sourceHash": "704a6c723dd3c80a8a34f5505d45227f247809d2285347549d5eda5d7c9f6a89",
+      "sourceHash": "9b86be1d369155c900c5fe5370b3d79066304c4fc210b32534b7531a1a190492",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -3154,7 +3160,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "navigation-menu.Default.dark.webp",
-          "bytes": 10944,
+          "bytes": 10938,
           "width": 960,
           "height": 512,
           "format": "webp"
@@ -3163,7 +3169,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "navigation-menu.Variants.dark.webp",
-          "bytes": 1324,
+          "bytes": 1310,
           "width": 960,
           "height": 512,
           "format": "webp"

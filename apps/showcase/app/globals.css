@@ -1,4 +1,5 @@
 @import "@jabkit/tokens/tokens.css";
+@import "@jabkit/tokens/scopes.css";
 
 @source "../../../packages/ui/src";
 

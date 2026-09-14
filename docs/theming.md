@@ -6,14 +6,27 @@ There is a separate open issue about preview-iframe theme behavior. This documen
 
 ## Token ownership
 
-`packages/tokens/tokens.css` is the only place `--jk-*` values are defined. `@jabkit/tokens` exports that file as `./tokens.css` and a TypeScript object as `./tokens`.
+`packages/tokens/tokens.css` is the only place canonical `--jk-*` values are defined. `@jabkit/tokens` exports that file as `./tokens.css`, a TypeScript object as `./tokens`, and sample-site presets as `./scopes.css`. Do not paste design-system JSON into CSS or register these presets as component `cssVars`.
 
 The CSS file:
 
 1. `@import "tailwindcss"`.
 2. Declares `@custom-variant dark (&:where(.dark, .dark *));` so `dark:` variants are class-scoped (an ancestor with `.dark`), not `prefers-color-scheme`.
 3. Sets light values on `:root` and dark values on `.dark`.
-4. Maps `--jk-*` into Tailwind's theme via `@theme inline`.
+4. Declares mode-independent foundation variables on `:root` (`--jk-space-*`, `--jk-content-max`, `--jk-border-width`, `--jk-control-height`, `--jk-shadow-control`, `--jk-font-display|body|label`). These have no automatic Tailwind `@theme` mapping.
+5. Maps `--jk-*` into Tailwind's theme via `@theme inline`.
+
+`scopes.css` is a separate preset file. It does **not** replace `:root`. Showcase (and any consumer that wants sample sites) imports it next to `tokens.css`. Each preset lives on `[data-jk-design-system="<id>"]` with light values on that node and dark values on:
+
+- `.dark [data-jk-design-system="<id>"]:not([data-jk-color-mode="light"])` (document class from `next-themes`)
+- `[data-jk-design-system="<id>"].dark`
+- `[data-jk-design-system="<id>"][data-jk-color-mode="dark"]`
+
+Ids are `minimal`, `neo-brutalism`, `editorial`, `luxury`, and `retro`. Values come from the authored `design-systems/*/tokens.json` and `typography.json` packs. Those JSON files are not a runtime loader. Font stacks are licensed fallbacks (Arial, Georgia, Impact, Trebuchet, Courier New); `typography.json` is not a font installer.
+
+Scoped role classes (`.jk-display`, `.jk-heading`, `.jk-body`, `.jk-lead`, `.jk-label`, `.jk-caption`) exist only under `[data-jk-design-system]`. Do not restyle every `h1` or `button` in the document.
+
+Inside a scope, `[data-slot="input"]` uses `--jk-control-height`, `--jk-radius`, and `--jk-border-width`. Button keeps its default sizes; primary fill uses `shadow-[var(--jk-shadow-control)]` so a scope can drop the catalogue glow without a new public prop. Samples may pass `className` (for example `active:translate-y-0`) for press translation. Default atom behavior outside a scope is unchanged.
 
 ## Semantic mapping
 
@@ -38,14 +51,16 @@ The CSS file:
 | `--jk-chart-1` … `--jk-chart-5` | `--color-chart-1` … `--color-chart-5` |
 | `--jk-radius` | `--radius` → `rounded-[--radius]` |
 
+Foundation variables (`--jk-space-*`, `--jk-content-max`, `--jk-border-width`, `--jk-control-height`, `--jk-shadow-control`, `--jk-font-*`) are CSS custom properties only. Button primary reads `--jk-shadow-control`. They are not `--color-*` utilities.
+
 Values are `oklch(...)`. Light and dark pairs are both defined in `tokens.css`; do not add a third theme by inventing a media query.
 
 ## Who imports `tokens.css`
 
 | File | Extra |
 | --- | --- |
-| `apps/showcase/app/globals.css` | `@source "../../../packages/ui/src"` so Tailwind v4 scans library class names. Also sets `html { background: var(--jk-background); }` and `* { border-color: var(--jk-border); }`. |
-| `apps/verify/app/globals.css` | Import only. Consumer-shaped. |
+| `apps/showcase/app/globals.css` | `@source "../../../packages/ui/src"` so Tailwind v4 scans library class names. Imports `scopes.css`. Also sets `html { background: var(--jk-background); }` and `* { border-color: var(--jk-border); }`. |
+| `apps/verify/app/globals.css` | Import `tokens.css` only. Consumer-shaped; sample scopes stay opt-in. |
 | `packages/ui/.storybook/preview.css` | Sets `body` background and foreground from `--jk-*`. |
 
 `@jabkit/cli` lists `@jabkit/tokens` as a dependency but does not import it. The CLI appends per-component `cssVars` (when present) to a consumer `src/app/globals.css`; it does not inject the shared token file.
@@ -62,6 +77,10 @@ Values are `oklch(...)`. Light and dark pairs are both defined in `tokens.css`; 
 `apps/showcase/components/ThemeToggle.tsx` is a three-way control (`light` / `system` / `dark`) with a `mounted` guard so `aria-pressed` is not wrong on the server render.
 
 This theming applies to **showcase chrome** (header, catalogue chrome, marketing copy). It does not automatically apply to preview iframes; those are a different document. See below. JSON under `design-systems/` is authored input, not loaded by `ThemeProvider`.
+
+Sample sites must not set `.dark` or font classes on `<html>` from a route effect. Wrap the sample tree in `SampleScope`, which sets `data-jk-design-system` and provides `JkPortalContainerProvider` from `@/lib/portal-container`. Dialog, Tooltip, and NavigationMenu portals read that container (Base UI `Portal` `container`) so overlays inherit the scope instead of mounting on `document.body`. Passing `container` on `DialogPortal`, `TooltipContent`, `NavigationMenu`, or `NavigationMenuViewport` still overrides the context.
+
+`/samples/scope-reference` is the reference surface: Button, Input, a navigation popup, Dialog, and Tooltip in light and dark for each allowlisted system. Leaving that route unmounts the scope; catalogue and `/samples/saas` keep default `:root` tokens.
 
 ## Storybook
 
@@ -97,6 +116,7 @@ This mismatch is a known theme bug. Do not "fix" it in a documentation change. P
 - Do not paper over a light-only color with a `dark:` override of a hardcoded utility. Change the token or the semantic class.
 - Export a `ThemeComparison` story. The convention checker requires the identifier; the registry builder excludes it from examples.
 - If you set `cssVars` on the meta, supply both `light` and `dark` or `pnpm registry:build` throws. No current component uses `cssVars`.
+- Overlay atoms that portal (Dialog, Tooltip, NavigationMenu viewport) must keep working when a `JkPortalContainerProvider` is present. Do not portal by mutating the document theme.
 
 ## Drift risk (do not "clean up" here)
 

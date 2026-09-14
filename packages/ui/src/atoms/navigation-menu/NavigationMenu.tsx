@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { useId, useState } from "react";
 import { cn } from "@/lib/cn";
+import { useJkPortalContainer } from "@/lib/portal-container";
 import type {
   NavigationMenuBackdropProps,
   NavigationMenuContentProps,
@@ -80,6 +81,7 @@ function NavigationMenu({
   className,
   children,
   viewport = true,
+  container,
   ...props
 }: NavigationMenuProps) {
   return (
@@ -92,7 +94,7 @@ function NavigationMenu({
       {...props}
     >
       {children}
-      {viewport ? <NavigationMenuViewport /> : null}
+      {viewport ? <NavigationMenuViewport container={container} /> : null}
     </NavigationMenuPrimitive.Root>
   );
 }
@@ -176,9 +178,14 @@ function NavigationMenuIcon({ className, ...props }: NavigationMenuIconProps) {
   );
 }
 
-function NavigationMenuPortal({ ...props }: NavigationMenuPortalProps) {
+function NavigationMenuPortal({
+  container,
+  ...props
+}: NavigationMenuPortalProps) {
+  const portalContainer = useJkPortalContainer(container);
   return (
     <NavigationMenuPrimitive.Portal
+      container={portalContainer ?? undefined}
       data-slot="navigation-menu-portal"
       {...props}
     />
@@ -239,10 +246,11 @@ function NavigationMenuViewport({
   alignOffset = 0,
   side = "bottom",
   sideOffset = 8,
+  container,
   ...props
 }: NavigationMenuViewportProps) {
   return (
-    <NavigationMenuPortal>
+    <NavigationMenuPortal container={container}>
       <NavigationMenuPositioner
         align={align}
         alignOffset={alignOffset}
