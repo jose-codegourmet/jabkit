@@ -31,6 +31,15 @@ export const Variants: Story = {
   ),
 };
 
+export const NightlyRates: Story = {
+  args: { ...carouselCardsMocks.nightly },
+  render: () => (
+    <div className="bg-background text-foreground">
+      <CarouselCards {...carouselCardsMocks.nightly} />
+    </div>
+  ),
+};
+
 export const ThemeComparison: Story = {
   args: { ...carouselCardsMocks.default },
   render: () => (

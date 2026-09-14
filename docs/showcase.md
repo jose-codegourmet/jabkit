@@ -31,7 +31,9 @@ Everything under `apps/showcase/app/` and `apps/showcase/components/` is site ch
 | `/samples` | `app/samples/page.tsx` | Sample index from `app/samples/catalog.ts`. Ready entries link; pending entries are not wrapped in `Link`. |
 | `/samples/saas` | `app/samples/saas/page.tsx` | SaaS landing assembled from registry blocks. Demo chrome is `saas/layout.tsx`. |
 | `/samples/minimal` | `app/samples/minimal/page.tsx` | West Room Studio. Work index, six project details, studio, services, local inquiry. Demo chrome is `minimal/layout.tsx`. |
+| `/samples/neo-brutalism` | `app/samples/neo-brutalism/page.tsx` | Good Noise. Work, services, studio, local brief preview. Demo chrome is `neo-brutalism/layout.tsx`. |
 | `/samples/editorial` | `app/samples/editorial/page.tsx` | Common Hours. Story archive, nine longreads, contributors, about, membership preview. Demo chrome is `editorial/layout.tsx`. |
+| `/samples/luxury` | `app/samples/luxury/page.tsx` | Stillwater House. Rooms, room details, experiences, house, local stay inquiry. Demo chrome is `luxury/layout.tsx`. |
 | `/samples/draft` | `app/samples/draft/page.tsx` | Unpublished DemoBar check. Omitted from the catalogue. |
 | `/samples/scope-reference` | `app/samples/scope-reference/page.tsx` | Scoped token/typography/portal reference. Not a catalogue sample. |
 | `/samples/conventions` | `app/samples/conventions/page.tsx` | SH-06 contract route: fixtures, URL filters, demo form. Not a catalogue site. |
@@ -88,7 +90,7 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 
 `app/samples/catalog.ts` owns the index metadata and the sample-root route contract. Allowed roots are `/samples/saas` plus the five planned design-system sites: `minimal`, `neo-brutalism`, `editorial`, `luxury`, and `retro`. A ready entry’s `href` must pass `linkedSampleHref`, which only accepts `implementedSampleHrefs` (a subset of those roots). Paths outside the sample roots, or planned roots not yet on the implemented list, fail typecheck without an `as Route` assertion. Showcase `tsc --noEmit` does not load Next’s generated route union, so the implemented-href allowlist is the static contract; `Link` still uses typedRoutes at the call site. Pending entries have no `href` and must not be wrapped in `Link`. Collection completion is not required; one site can become ready on its own after its release ticket.
 
-Ready samples are `/samples/saas` (Quarry), `/samples/minimal` (West Room Studio), `/samples/neo-brutalism` (Good Noise), and `/samples/editorial` (Common Hours). Luxury and Retro appear on `/samples` as non-linked “Soon” cards until their release tickets. Index cards are text only (label, brand, description, status). There is no catalogue-cover field on `SampleEntry` until a change actually renders one. `/samples/draft` exists only to exercise shared demo chrome and is omitted from the catalogue. `/samples/conventions` is the SH-06 contract route and is also omitted from the catalogue.
+Ready samples are `/samples/saas` (Quarry), `/samples/minimal` (West Room Studio), `/samples/neo-brutalism` (Good Noise), `/samples/editorial` (Common Hours), and `/samples/luxury` (Stillwater House). Retro appears on `/samples` as a non-linked “Soon” card until its release ticket. Index cards are text only (label, brand, description, status). There is no catalogue-cover field on `SampleEntry` until a change actually renders one. `/samples/draft` exists only to exercise shared demo chrome and is omitted from the catalogue. `/samples/conventions` is the SH-06 contract route and is also omitted from the catalogue.
 
 `apps/showcase/components/samples/DemoBar.tsx` is the shared sample chrome: current design-system name, fictional-brand notice, All samples, Components, skip-to-sample (`#top`), and the existing `ThemeToggle` (root `ThemeProvider` only). It sits in document flow above the sample (`z-0`, not sticky or fixed) so it does not cover business navigation. Each site keeps its own nav and footer in its route layout or page. SaaS uses `app/samples/saas/layout.tsx` for the bar and keeps Quarry’s footer on the page.
 
@@ -98,7 +100,7 @@ Ready samples are `/samples/saas` (Quarry), `/samples/minimal` (West Room Studio
 
 Because of the alias, do not invent `@/components/...` paths inside the showcase for library code. Import from `@/atoms|marketing|dashboard/...`. Showcase-only modules (DemoBar, SampleScope, SH-06 helpers, catalog, sample layouts) use relative imports.
 
-Sample-site photography is not Unsplash. Each design-system sample owns `app/samples/<system>/assets.ts` and `public/assets/design-systems/<system>/`. Those maps stay empty until the matching `-03` Higgsfield ticket. West Room Studio, Good Noise, and Common Hours (`/samples/editorial`) are otherwise complete; all three still use SH-04 empty provenance plus existing local vendor stills as stubs until MIN-03 / NEO-03 / EDT-03 (Jose owns series production via #260). See [previews.md](previews.md).
+Sample-site photography is not Unsplash. Each design-system sample owns `app/samples/<system>/assets.ts` and `public/assets/design-systems/<system>/`. Those maps stay empty until the matching `-03` Higgsfield ticket. West Room Studio, Good Noise, Common Hours, and Stillwater House (`/samples/luxury`) are otherwise complete; all four still use SH-04 empty provenance plus existing local vendor stills as stubs until MIN-03 / NEO-03 / EDT-03 / LUX-03 (Jose owns series production via #260). See [previews.md](previews.md).
 
 ### Content, navigation, and demo state (SH-06)
 

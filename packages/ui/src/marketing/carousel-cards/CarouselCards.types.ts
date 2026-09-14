@@ -8,6 +8,11 @@ export interface CarouselCardsItem {
   location: string;
   price: number;
   currency?: string;
+  /**
+   * Unit after the formatted price. Defaults to `person` so existing
+   * listings still read "/ person". Pass `night` for a stay rate.
+   */
+  priceUnit?: string;
   rating?: number;
   reviewCount?: number;
   badge?: string;
@@ -25,4 +30,13 @@ export interface CarouselCardsProps
   viewAllLabel?: string;
   items?: CarouselCardsItem[];
   onFavoriteChange?: (id: string, favorited: boolean) => void;
+  /**
+   * Fallback unit when an item omits `priceUnit`. Defaults to `person`.
+   */
+  priceUnit?: string;
+  /**
+   * Heart control on each card. Defaults to true. Pass false when there
+   * is no local saved-item behavior to describe.
+   */
+  showFavorite?: boolean;
 }

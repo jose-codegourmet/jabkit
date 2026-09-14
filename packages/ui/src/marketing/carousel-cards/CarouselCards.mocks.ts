@@ -147,6 +147,42 @@ const workshops: CarouselCardsItem[] = [
   },
 ];
 
+const rooms: CarouselCardsItem[] = [
+  {
+    id: "lake",
+    title: "Lake Room",
+    image: "/assets/d3f9bde61c9a29e7.webp",
+    imageAlt: "Quiet interior looking toward water through a wide window",
+    location: "Stillwater Reach, fictional lake",
+    price: 280,
+    currency: "EUR",
+    priceUnit: "night",
+    href: "#lake",
+  },
+  {
+    id: "garden",
+    title: "Garden Room",
+    image: "/assets/462c849dc9a41e59.webp",
+    imageAlt: "Ground-floor room opening toward a planted court",
+    location: "Stillwater Reach, fictional lake",
+    price: 240,
+    currency: "EUR",
+    priceUnit: "night",
+    href: "#garden",
+  },
+  {
+    id: "suite",
+    title: "Upper Suite",
+    image: "/assets/97c532d558fa4fbc.webp",
+    imageAlt: "Upper room with a long window and timber ceiling",
+    location: "Stillwater Reach, fictional lake",
+    price: 360,
+    currency: "EUR",
+    priceUnit: "night",
+    href: "#suite",
+  },
+];
+
 export const carouselCardsMocks = {
   default: {
     eyebrow: "In the city this month",
@@ -166,4 +202,15 @@ export const carouselCardsMocks = {
     viewAllLabel: "Browse workshops",
     items: workshops,
   },
-} satisfies Record<"default" | "alternate", CarouselCardsProps>;
+  nightly: {
+    eyebrow: "Three rooms",
+    heading: "Illustrative rates by the night",
+    description:
+      "Stay listings without ratings. The unit after the price is / night.",
+    viewAllHref: "#rooms",
+    viewAllLabel: "Compare rooms",
+    priceUnit: "night",
+    showFavorite: false,
+    items: rooms,
+  },
+} satisfies Record<"default" | "alternate" | "nightly", CarouselCardsProps>;
