@@ -889,11 +889,12 @@
       ]
     },
     "content4": {
-      "sourceHash": "8f99b3a8509aee2a111b274486f921e8edcf699744af2fa21bd6240298b09a93",
+      "sourceHash": "4b7336b6e5d7066eaa7f3ce053b9746ce93c3f87880d8e7a6651a7dcf4e49d30",
       "pipelineVersion": 1,
       "stories": [
         "Default",
         "Variants",
+        "LinkedAuthor",
         "ThemeComparison"
       ],
       "themes": [
@@ -904,25 +905,37 @@
           "story": "Default",
           "theme": "dark",
           "file": "content4.Default.dark.webp",
-          "bytes": 80568,
+          "bytes": 80536,
           "width": 960,
-          "height": 1756
+          "height": 1756,
+          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
           "file": "content4.Variants.dark.webp",
-          "bytes": 46012,
+          "bytes": 46766,
           "width": 960,
-          "height": 1067
+          "height": 1067,
+          "format": "webp"
+        },
+        {
+          "story": "LinkedAuthor",
+          "theme": "dark",
+          "file": "content4.LinkedAuthor.dark.webp",
+          "bytes": 82754,
+          "width": 960,
+          "height": 1759,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "content4.ThemeComparison.dark.webp",
-          "bytes": 130660,
+          "bytes": 131336,
           "width": 960,
-          "height": 2199
+          "height": 2199,
+          "format": "webp"
         }
       ]
     },
@@ -1432,11 +1445,12 @@
       ]
     },
     "pricing28": {
-      "sourceHash": "465cd5748549cc8e988d5d96475e9dc740efdc67f779e9428f6416deba518383",
+      "sourceHash": "65fa90b2353db9939c22bff0795d6d86910a1df6bee7a5e0ff8350fd7947bb55",
       "pipelineVersion": 1,
       "stories": [
         "Default",
         "Variants",
+        "TwoPlans",
         "ThemeComparison"
       ],
       "themes": [
@@ -1447,25 +1461,37 @@
           "story": "Default",
           "theme": "dark",
           "file": "pricing28.Default.dark.webp",
-          "bytes": 26672,
+          "bytes": 27214,
           "width": 960,
-          "height": 753
+          "height": 753,
+          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
           "file": "pricing28.Variants.dark.webp",
-          "bytes": 25670,
+          "bytes": 26168,
           "width": 960,
-          "height": 753
+          "height": 753,
+          "format": "webp"
+        },
+        {
+          "story": "TwoPlans",
+          "theme": "dark",
+          "file": "pricing28.TwoPlans.dark.webp",
+          "bytes": 17498,
+          "width": 960,
+          "height": 733,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "pricing28.ThemeComparison.dark.webp",
-          "bytes": 51936,
+          "bytes": 53016,
           "width": 960,
-          "height": 881
+          "height": 881,
+          "format": "webp"
         }
       ]
     },
