@@ -59,7 +59,7 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 
 `ScaledFrame.tsx` no longer exists. The home page and `/components` use the server-rendered `PreviewImage` component, which reads the committed preview manifest and renders a local `/previews/{file}` still WebP (or GIF when `preview.capture.format` is `"gif"`) instead of an iframe. Reduced-motion visitors receive the still. Button's home theme-proof strip selects its corresponding light or dark capture.
 
-`apps/showcase/public/previews/` contains the generated WebPs and `manifest.json`; `apps/showcase/public/assets/` contains re-hosted component images and `sources.json`. Both directories are committed generated artifacts. See [previews.md](previews.md).
+`apps/showcase/public/previews/` contains the generated WebPs and `manifest.json`; `apps/showcase/public/assets/` contains re-hosted component images and `sources.json`. Design-system sample photography lives under `public/assets/design-systems/` with a separate provenance contract. See [previews.md](previews.md).
 
 `ComponentPreview.tsx` is deliberately unchanged and remains a live iframe surface on the component detail page, retaining its device sizing, local theme toggle, and new-tab link.
 
@@ -85,6 +85,8 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 `app/samples/saas/page.tsx` imports real library components through the showcase `@/*` alias (`@/atoms/button`, `@/marketing/hero-section-5`, `@/dashboard/chart-group14`, …) and feeds them copy from `app/samples/saas/content.ts`. That page is showcase-only composition. Adding a sample means adding a route and a catalog entry, not a registry component.
 
 Because of the alias, do not invent `@/components/...` paths inside the showcase for library code. Import from `@/atoms|marketing|dashboard/...`.
+
+Sample-site photography is not Unsplash. Each future design-system sample owns `app/samples/<system>/assets.ts` and `public/assets/design-systems/<system>/`. Those maps stay empty until the matching `-03` Higgsfield ticket. See [previews.md](previews.md).
 
 ## Site chrome
 

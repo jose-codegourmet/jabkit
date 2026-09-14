@@ -21,7 +21,7 @@ Durable architectural decisions, when they need a record, may be added under `do
 | [qa/design-system-showcases.md](qa/design-system-showcases.md) | SH-01 dated gate baseline after #255/#256 | Distinguishing pre-existing vs new failures before design-system sample work |
 | [cli.md](cli.md) | `init` / `add` / `upgrade`, config, consumer files | Changing consumer install behavior |
 | [mcp.md](mcp.md) | Read-only catalogue HTTP tools | Changing agent-facing catalogue endpoints |
-| [previews.md](previews.md) | Preview capture, hosted images, and catalogue assets | Changing preview assets or remote component images |
+| [previews.md](previews.md) | Preview capture, hosted images, Higgsfield sample assets | Changing preview assets, vendored library images, or design-system photography |
 
 ## Task routing
 
@@ -34,7 +34,7 @@ Durable architectural decisions, when they need a record, may be added under `do
 | Recording or re-running the SH-01 correctness baseline | [qa/design-system-showcases.md](qa/design-system-showcases.md) |
 | Changing consumer install behavior | [cli.md](cli.md) |
 | Changing agent-facing catalogue endpoints | [mcp.md](mcp.md) |
-| Changing preview assets or remote component images | [previews.md](previews.md) |
+| Changing preview assets, vendored library images, or design-system photography | [previews.md](previews.md) |
 | Understanding the whole system first | [architecture.md](architecture.md) |
 | Choosing or applying a website style | [Design-system directions](../design-systems/README.md), then the selected system's `system.md` and `migration.md` |
 
