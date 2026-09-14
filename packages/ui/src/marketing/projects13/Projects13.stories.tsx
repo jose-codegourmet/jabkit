@@ -2,7 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 // biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.
 import * as React from "react";
 import { Projects13 } from "./Projects13";
-import { projects13AlternateMocks, projects13Mocks } from "./Projects13.mocks";
+import {
+  projects13AlternateMocks,
+  projects13LinkedMocks,
+  projects13Mocks,
+} from "./Projects13.mocks";
 
 const meta = {
   title: "Marketing/Projects13",
@@ -32,6 +36,18 @@ export const Variants: Story = {
       <Projects13
         label={projects13AlternateMocks.label}
         projects={projects13AlternateMocks.projects}
+      />
+    </div>
+  ),
+};
+
+export const Linked: Story = {
+  args: { ...projects13LinkedMocks },
+  render: () => (
+    <div className="bg-background text-foreground">
+      <Projects13
+        label={projects13LinkedMocks.label}
+        projects={projects13LinkedMocks.projects}
       />
     </div>
   ),

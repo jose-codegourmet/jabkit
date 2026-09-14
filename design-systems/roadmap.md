@@ -210,6 +210,8 @@ These are delivery lanes, not a requirement to finish every site’s stage befor
 
 **Implementation surface:** Existing `packages/ui/src/marketing/projects13/` and `packages/ui/src/marketing/projects16/`, their metadata/stories/previews, and generated registry/preview outputs.
 
+**API (landed):** `Projects13Project.href?` is a title text link. `Projects16Image.title?` / `href?` are caption text links. Projects16 renders `PROJECTS16_IMAGE_LIMIT` (4) ordered images and ignores extras. Defaults stay unlinked.
+
 **Work to deliver**
 
 - Projects13 items currently contain index, title, date, description, and image but no destination. Add an optional href with a real text-link focus target and an accessible name; preserve plain article output when absent.

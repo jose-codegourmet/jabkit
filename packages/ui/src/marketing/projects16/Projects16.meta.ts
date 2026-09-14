@@ -3,10 +3,10 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "projects16",
   displayName: "Projects16",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-05",
   description:
-    "Editorial project gallery with a medium-weight heading, a two-column staggered 4:3 and 4:5 photo grid, and a link action beneath a short paragraph.",
+    "Editorial four-image gallery with a medium-weight heading, a two-column staggered 4:3 and 4:5 photo grid, optional captions with text-link destinations, and a link action beneath a short paragraph. Extra images are not rendered.",
   sectionCategory: "projects",
   purpose:
     "Balances a concise portfolio introduction with a spacious, art-directed selection of project photography.",
@@ -23,6 +23,7 @@ export default {
     "headline",
     "projectItems",
     "projectImage",
+    "projectCaption",
     "projectDescription",
     "projectLink",
   ],

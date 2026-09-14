@@ -63,3 +63,20 @@ export const projects16AlternateMocks: typeof projects16Mocks = {
   action: { label: "See the archive", href: "#archive" },
   images: alternateImages,
 };
+
+export const projects16LinkedMocks: typeof projects16Mocks = {
+  title: "Work from the last two seasons.\nQuiet frames, kept in sequence.",
+  description:
+    "A four-image edit with captions. Extra records belong on an index page, not in this gallery.",
+  action: { label: "View all projects", href: "#projects" },
+  images: defaultImages.map((image, index) => {
+    const captions = [
+      { title: "Corridor rooms", href: "#corridor" },
+      { title: "Studio desks", href: "#studio" },
+      { title: "Corner lamp" },
+      { title: "Concrete frame", href: "#concrete" },
+    ] as const;
+    const caption = captions[index];
+    return caption ? { ...image, ...caption } : image;
+  }),
+};

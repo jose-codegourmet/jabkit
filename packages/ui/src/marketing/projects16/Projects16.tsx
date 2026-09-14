@@ -1,11 +1,15 @@
 import { useId } from "react";
 import { Button } from "@/atoms/button";
 import { cn } from "@/lib/cn";
-import type {
-  Projects16Aspect,
-  Projects16Image,
-  Projects16Props,
+import {
+  PROJECTS16_IMAGE_LIMIT,
+  type Projects16Aspect,
+  type Projects16Image,
+  type Projects16Props,
 } from "./Projects16.types";
+
+const captionLinkClassName =
+  "rounded-[--radius] text-inherit no-underline underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
 const defaults = {
   title: "Work from the last two seasons.\nQuiet frames, kept in sequence.",
@@ -76,14 +80,28 @@ function Photo({
   fallbackAspect: Projects16Aspect;
 }) {
   const aspect = image.aspect ?? fallbackAspect;
+  const caption = image.title ?? (image.href ? image.alt : undefined);
 
   return (
-    <figure className="overflow-hidden rounded-[--radius] bg-muted">
-      <img
-        src={image.src}
-        alt={image.alt}
-        className={cn("w-full object-cover", ASPECT_CLASS[aspect])}
-      />
+    <figure className="flex flex-col gap-3">
+      <div className="overflow-hidden rounded-[--radius] bg-muted">
+        <img
+          src={image.src}
+          alt={image.alt}
+          className={cn("w-full object-cover", ASPECT_CLASS[aspect])}
+        />
+      </div>
+      {caption ? (
+        <figcaption className="text-sm font-medium tracking-[-0.02em] text-pretty">
+          {image.href ? (
+            <a href={image.href} className={captionLinkClassName}>
+              {caption}
+            </a>
+          ) : (
+            caption
+          )}
+        </figcaption>
+      ) : null}
     </figure>
   );
 }
@@ -97,8 +115,9 @@ export function Projects16({
   ...props
 }: Projects16Props) {
   const headingId = useId();
-  const left = images.slice(0, 2);
-  const right = images.slice(2, 4);
+  const visible = images.slice(0, PROJECTS16_IMAGE_LIMIT);
+  const left = visible.slice(0, 2);
+  const right = visible.slice(2, 4);
 
   return (
     <section

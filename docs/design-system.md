@@ -35,6 +35,11 @@ Do not add a fourth category without changing the builder, the convention checke
 - Marketing and dashboard never depend on each other. Either may depend on atoms.
 - List npm packages in `dependencies`. List other JabKit `name` values in `registryDependencies`. The CLI and `get_install_plan` walk the latter.
 
+Portfolio destinations (SH-05):
+
+- `Projects13Project.href` is optional. When present, the row title is a text link with the project title as its accessible name. Without it, the row stays a plain article. Do not wrap the whole row.
+- `Projects16Image.title` and `Projects16Image.href` are optional. Captions are visible text; hrefs attach to the caption, not the figure. `PROJECTS16_IMAGE_LIMIT` is 4: the gallery renders the first four ordered items and ignores the rest. Six-item indexes belong in page composition, not this block.
+
 Real entries:
 
 - `packages/ui/src/marketing/hero307/Hero307.meta.ts` — `registryDependencies: ["button"]`

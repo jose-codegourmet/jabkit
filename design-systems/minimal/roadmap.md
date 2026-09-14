@@ -207,6 +207,8 @@ All tickets are required for the complete website. Shared dependencies refer to 
 
 **Implementation surface:** apps/showcase/app/samples/minimal/_components/ and existing Projects16, Content1, About14, and Faq12 source folders.
 
+**SH-05 API:** Pass four `Projects16Image` records. Set `title` for visible captions and `href` for caption text links (for example `/samples/minimal/work/[slug]`). Do not send six work-index records into this block; extra images are ignored. `PROJECTS16_IMAGE_LIMIT` is 4.
+
 **Work to deliver**
 
 - Build thin sample adapters from typed project records to Projects16 and Content1 props; pass exactly four selected image records to Projects16 and explicit content throughout.

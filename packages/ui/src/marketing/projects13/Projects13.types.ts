@@ -11,6 +11,8 @@ export interface Projects13Project {
   date: string;
   description: string;
   image: Projects13Image;
+  /** Optional destination. Renders as a text link on the title, not around the article. */
+  href?: string;
 }
 
 export interface Projects13Props extends HTMLAttributes<HTMLElement> {

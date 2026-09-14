@@ -1,6 +1,9 @@
 import { cn } from "@/lib/cn";
 import type { Projects13Project, Projects13Props } from "./Projects13.types";
 
+const projectLinkClassName =
+  "rounded-[--radius] text-inherit no-underline underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
 const DEFAULT_LABEL = "Selected projects";
 
 const defaultProjects: Projects13Project[] = [
@@ -80,7 +83,13 @@ export function Projects13({
                     {project.index ?? formatIndex(i)}
                   </p>
                   <h3 className="text-base font-medium tracking-[-0.02em] text-balance">
-                    {project.title}
+                    {project.href ? (
+                      <a href={project.href} className={projectLinkClassName}>
+                        {project.title}
+                      </a>
+                    ) : (
+                      project.title
+                    )}
                   </h3>
                   <p className="text-xs font-medium tracking-[0.16em] text-muted-foreground uppercase">
                     {project.date}

@@ -94,3 +94,15 @@ export const projects13AlternateMocks: typeof projects13Mocks = {
   label: "Studio archive",
   projects: alternateProjects,
 };
+
+export const projects13LinkedMocks: typeof projects13Mocks = {
+  label: "Selected projects",
+  projects: defaultProjects.map((project, index) =>
+    index === 2
+      ? project
+      : {
+          ...project,
+          href: `#${project.title.toLowerCase().replaceAll(" ", "-")}`,
+        },
+  ),
+};
