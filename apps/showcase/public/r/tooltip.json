@@ -39,7 +39,8 @@
   ],
   "dependencies": [
     "clsx",
-    "tailwind-merge"
+    "tailwind-merge",
+    "react"
   ],
   "registryDependencies": [],
   "a11y": {

@@ -375,7 +375,8 @@
       "@base-ui/react",
       "lucide-react",
       "clsx",
-      "tailwind-merge"
+      "tailwind-merge",
+      "react"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -659,7 +660,8 @@
       "@base-ui/react",
       "lucide-react",
       "clsx",
-      "tailwind-merge"
+      "tailwind-merge",
+      "react"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -992,7 +994,8 @@
     "addedAt": "2026-08-30",
     "dependencies": [
       "clsx",
-      "tailwind-merge"
+      "tailwind-merge",
+      "react"
     ],
     "a11y": {
       "keyboardNav": true,
