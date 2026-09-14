@@ -15,6 +15,7 @@ No new sample sites were added for this ticket.
 | pnpm | 11.24.0 |
 | Registry | 96 components in `apps/showcase/public/r/` |
 | CI | `.github/workflows/publish-cli.yml` does not run `pnpm check`. The correctness gate is local. |
+| This-PR verification | Node v24.21.0, pnpm 11.24.0: `pnpm check` green; `pnpm --filter @jabkit/showcase build` Next.js 16.3.3, 10 routes |
 
 ## Commands
 
