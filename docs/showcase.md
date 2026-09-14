@@ -89,9 +89,23 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 
 ## Samples
 
-`app/samples/catalog.ts` owns the index metadata and the sample-root route contract. Allowed roots are `/samples/saas` plus the five planned design-system sites: `minimal`, `neo-brutalism`, `editorial`, `luxury`, and `retro`. A ready entry’s `href` must pass `linkedSampleHref`, which only accepts `implementedSampleHrefs` (a subset of those roots). Paths outside the sample roots, or planned roots not yet on the implemented list, fail typecheck without an `as Route` assertion. Showcase `tsc --noEmit` does not load Next’s generated route union, so the implemented-href allowlist is the static contract; `Link` still uses typedRoutes at the call site. Pending entries have no `href` and must not be wrapped in `Link`. Collection completion is not required; one site can become ready on its own after its release ticket.
+`app/samples/catalog.ts` owns the index metadata and the sample-root route contract. Allowed roots are `/samples/saas` plus the five design-system sites: `minimal`, `neo-brutalism`, `editorial`, `luxury`, and `retro`. A ready entry’s `href` must pass `linkedSampleHref`, which only accepts `implementedSampleHrefs`. Paths outside those roots fail typecheck without an `as Route` assertion. Showcase `tsc --noEmit` does not load Next’s generated route union, so the implemented-href allowlist is the static contract; `Link` still uses typedRoutes at the call site. Pending entries have no `href` and must not be wrapped in `Link`.
 
-Ready samples are `/samples/saas` (Quarry), `/samples/minimal` (West Room Studio), `/samples/neo-brutalism` (Good Noise), `/samples/editorial` (Common Hours), `/samples/luxury` (Stillwater House), and `/samples/retro` (Pocket Keeps). Index cards are text only (label, brand, description, status). There is no catalogue-cover field on `SampleEntry` until a change actually renders one. `/samples/draft` exists only to exercise shared demo chrome and is omitted from the catalogue. `/samples/conventions` is the SH-06 contract route and is also omitted from the catalogue.
+Ready samples are `/samples/saas` (Quarry) plus the five design-system sites below. Index cards are text only (label, brand, description, status). There is no catalogue-cover field on `SampleEntry` until a change actually renders one. `/samples/draft` exists only to exercise shared demo chrome and is omitted from the catalogue. `/samples/conventions` is the SH-06 contract route and is also omitted from the catalogue.
+
+### Five-site route inventory (SH-08)
+
+Catalogue closeout for [#254](https://github.com/jose-codegourmet/jabkit/issues/254). Each site uses `DemoBar` plus `SampleScope` with its own `data-jk-design-system` id. Brand CSS is CSS modules under that tree; samples do not import each other’s styles. Unknown detail slugs call `notFound()` and have nested `not-found.tsx` files. SH-07 browser crawl, theme-with-popup, lab LCP, catalogue-cover screenshots, and Higgsfield provenance are **Deferred** pending Jose visual QA and [#260](https://github.com/jose-codegourmet/jabkit/issues/260). Accessibility and broken-flow behavior implemented in the site PRs stays as implemented-in-code.
+
+| Site | Root | Secondary routes | Local task | Release |
+| --- | --- | --- | --- | --- |
+| Minimal — West Room Studio | `/samples/minimal` | `/work`, `/work/[slug]` (×6), `/studio`, `/services`, `/contact` | Inquiry preview | [#266](https://github.com/jose-codegourmet/jabkit/pull/266) |
+| Neo-brutalism — Good Noise | `/samples/neo-brutalism` | `/work`, `/work/[slug]` (×6), `/services`, `/studio`, `/start` | Project brief | [#267](https://github.com/jose-codegourmet/jabkit/pull/267) |
+| Editorial — Common Hours | `/samples/editorial` | `/stories`, `/stories/[slug]` (×9), `/contributors/[slug]` (×3), `/about`, `/membership` | Membership preview | [#268](https://github.com/jose-codegourmet/jabkit/pull/268) |
+| Luxury — Stillwater House | `/samples/luxury` | `/rooms`, `/rooms/[slug]` (×3), `/experiences`, `/house`, `/inquire` | Stay inquiry | [#269](https://github.com/jose-codegourmet/jabkit/pull/269) |
+| Retro — Pocket Keeps | `/samples/retro` | `/collections`, `/collections/[slug]` (×3), `/how-it-works`, `/pricing`, `/studio` | Crop/download studio | [#270](https://github.com/jose-codegourmet/jabkit/pull/270) |
+
+SaaS remains ready at `/samples/saas` (Quarry). Shared enabling work: SH-01–07 in the [#255](https://github.com/jose-codegourmet/jabkit/pull/255)–[#265](https://github.com/jose-codegourmet/jabkit/pull/265) area.
 
 `apps/showcase/components/samples/DemoBar.tsx` is the shared sample chrome: current design-system name, fictional-brand notice, All samples, Components, skip-to-sample (`#top`), and the existing `ThemeToggle` (root `ThemeProvider` only). It sits in document flow above the sample (`z-0`, not sticky or fixed) so it does not cover business navigation. Each site keeps its own nav and footer in its route layout or page. SaaS uses `app/samples/saas/layout.tsx` for the bar and keeps Quarry’s footer on the page.
 

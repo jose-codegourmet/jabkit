@@ -32,10 +32,10 @@ const _rootsMatchSlugs: RootsMatchSlugs = true;
 void _rootsMatchSlugs;
 
 /**
- * Sample roots that currently have an App Router page and may be linked.
- * Planned roots stay in `sampleRootHrefs` until their release ticket adds
- * them here. Showcase `tsc` does not load generated `Route` unions, so this
- * allowlist is the checked contract instead of `as Route`.
+ * Sample roots that have an App Router page and may be linked.
+ * All six catalogue roots are implemented. Showcase `tsc` does not load
+ * generated `Route` unions, so this allowlist is the checked contract
+ * instead of `as Route`.
  */
 export const implementedSampleHrefs = [
   "/samples/saas",

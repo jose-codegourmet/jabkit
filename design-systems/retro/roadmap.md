@@ -1,8 +1,8 @@
 # Pocket Keeps — Retro showcase roadmap
 
-Status: **in progress (sample implemented; RET-03 imagery deferred to #260)** · Ticket prefix: **RET** · Root: `/samples/retro` · 12 tickets.
+Status: **shipped** ([#270](https://github.com/jose-codegourmet/jabkit/pull/270); RET-03 imagery deferred to [#260](https://github.com/jose-codegourmet/jabkit/issues/260), [#208](https://github.com/jose-codegourmet/jabkit/issues/208) closed `not_planned`) · Ticket prefix: **RET** · Root: `/samples/retro` · 12 tickets.
 
-Read the [shared roadmap and mandatory handoff](../roadmap.md), then this folder’s [system](system.md), [rules](rules.md), [component guidance](components.json), [imagery direction](imagery.md), and [migration notes](migration.md). These are implementation tickets; none of the proposed routes or API extensions is claimed to exist yet.
+Read the [shared roadmap and mandatory handoff](../roadmap.md), then this folder’s [system](system.md), [rules](rules.md), [component guidance](components.json), [imagery direction](imagery.md), and [migration notes](migration.md). Ticket text below is the original brief. The sample is shipped; RET-03 imagery is the remaining exception.
 
 ## The website to build
 
@@ -110,7 +110,7 @@ For the remaining shot-list assets, replace the subject and slot specification w
 
 ## Ticket index
 
-All tickets are required for the complete website. Shared dependencies refer to [the shared backlog](../roadmap.md); cross-style dependencies retain their stable IDs until GitHub issues exist. M/L are relative work sizes, not dates.
+All tickets are required for the complete website. Shared dependencies refer to [the shared backlog](../roadmap.md). **RET-03** Higgsfield imagery is deferred to [#260](https://github.com/jose-codegourmet/jabkit/issues/260); GitHub [#208](https://github.com/jose-codegourmet/jabkit/issues/208) is closed `not_planned`. Remaining RET tickets shipped in [#270](https://github.com/jose-codegourmet/jabkit/pull/270).
 
 | ID | Suggested issue | Size | Depends on |
 | --- | --- | --- | --- |
