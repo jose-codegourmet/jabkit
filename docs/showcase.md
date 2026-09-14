@@ -28,8 +28,9 @@ Everything under `apps/showcase/app/` and `apps/showcase/components/` is site ch
 | `/[category]` | `app/[category]/page.tsx` | Category list. `validCategories` is `atoms` \| `marketing` \| `dashboard`; anything else is `notFound()`. Copy on that page is the canonical category description. |
 | `/[category]/[name]` | `app/[category]/[name]/page.tsx` | Component detail. 404 if the entry is missing or `entry.category !== category`. |
 | `/preview/[name]/[story]` | `app/preview/[name]/[story]/page.tsx` | Isolated iframe document. |
-| `/samples` | `app/samples/page.tsx` | Sample index from `app/samples/catalog.ts`. |
-| `/samples/saas` | `app/samples/saas/page.tsx` | SaaS landing assembled from registry blocks. |
+| `/samples` | `app/samples/page.tsx` | Sample index from `app/samples/catalog.ts`. Ready entries link; pending entries are not wrapped in `Link`. |
+| `/samples/saas` | `app/samples/saas/page.tsx` | SaaS landing assembled from registry blocks. Demo chrome is `saas/layout.tsx`. |
+| `/samples/draft` | `app/samples/draft/page.tsx` | Unpublished DemoBar check. Omitted from the catalogue. |
 | `/design-systems` | `app/design-systems/page.tsx` | Design-system directions index. Static so it is not captured by `/[category]`. |
 | `/mcp` | `app/mcp/route.ts` | Read-only JSON endpoint. See [mcp.md](mcp.md). |
 
@@ -80,11 +81,15 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 
 ## Samples
 
-`app/samples/catalog.ts` is the index. Today there is one ready sample: `/samples/saas`.
+`app/samples/catalog.ts` owns the index metadata and the sample-root route contract. Allowed roots are `/samples/saas` plus the five planned design-system sites: `minimal`, `neo-brutalism`, `editorial`, `luxury`, and `retro`. A ready entry’s `href` must be a `LinkedSampleHref`: both a listed sample root and a path `typedRoutes` already knows. Pending entries have no `href` and must not be wrapped in `Link`. Collection completion is not required; one site can become ready on its own after its release ticket.
 
-`app/samples/saas/page.tsx` imports real library components through the showcase `@/*` alias (`@/atoms/button`, `@/marketing/hero-section-5`, `@/dashboard/chart-group14`, …) and feeds them copy from `app/samples/saas/content.ts`. That page is showcase-only composition. Adding a sample means adding a route and a catalog entry, not a registry component.
+Today the only ready sample is `/samples/saas` (Quarry). The other five appear on `/samples` as non-linked “Soon” cards. `/samples/draft` exists only to exercise shared demo chrome and is omitted from the catalogue.
 
-Because of the alias, do not invent `@/components/...` paths inside the showcase for library code. Import from `@/atoms|marketing|dashboard/...`.
+`apps/showcase/components/samples/DemoBar.tsx` is the shared sample chrome: current design-system name, fictional-brand notice, All samples, Components, skip-to-sample (`#top`), and the existing `ThemeToggle` (root `ThemeProvider` only). It sits in document flow above the sample (`z-0`, not sticky or fixed) so it does not cover business navigation. Each site keeps its own nav and footer in its route layout or page. SaaS uses `app/samples/saas/layout.tsx` for the bar and keeps Quarry’s footer on the page.
+
+`app/samples/saas/page.tsx` imports real library components through the showcase `@/*` alias (`@/atoms/button`, `@/marketing/hero-section-5`, `@/dashboard/chart-group14`, …) and feeds them copy from `app/samples/saas/content.ts`. That page is showcase-only composition. Adding a released sample means adding its root route, flipping the catalog entry to `ready` with `linkedSampleHref(...)`, and composing pages under `app/samples/<system>/`. It is not a registry component.
+
+Because of the alias, do not invent `@/components/...` paths inside the showcase for library code. Import from `@/atoms|marketing|dashboard/...`. Showcase-only modules (DemoBar, catalog, sample layouts) use relative imports.
 
 ## Site chrome
 

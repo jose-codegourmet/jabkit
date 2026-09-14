@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
-import { samples } from "./catalog";
+import { isReadySample, samples } from "./catalog";
 
 export const metadata: Metadata = {
   title: "Samples - JabKit",
   description:
-    "Complete pages assembled from JabKit blocks. Start with the SaaS landing sample.",
+    "Complete pages assembled from JabKit blocks. Start with the SaaS landing sample. Further design-system sites become ready independently.",
 };
 
 export default function SamplesPage() {
@@ -25,31 +25,53 @@ export default function SamplesPage() {
         <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
           Each sample is a complete site composed from registry blocks. Use them
           to see how JabKit reads as a product, then copy the pattern into your
-          own tree.
+          own tree. Pending entries are listed but not linked until their root
+          route is released.
         </p>
         <div className="mt-14 grid gap-3">
-          {samples.map((sample) => (
-            <Link
-              key={sample.slug}
-              href={sample.href}
-              className="group rounded-[--radius] border border-border bg-card p-6 transition hover:border-primary"
-            >
+          {samples.map((sample) => {
+            const body = (
               <div className="flex items-start justify-between gap-6">
                 <div>
                   <p className="font-mono text-[11px] text-primary uppercase">
+                    {sample.designSystem}
+                    {" · "}
                     {sample.status === "ready" ? "Ready" : "Soon"}
                   </p>
                   <h2 className="mt-2 text-xl font-semibold tracking-tight">
-                    {sample.title}
+                    {sample.brand}
                   </h2>
                   <p className="mt-2 max-w-2xl leading-7 text-muted-foreground">
                     {sample.description}
                   </p>
                 </div>
-                <ArrowRightIcon className="mt-1 shrink-0 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary" />
+                {isReadySample(sample) ? (
+                  <ArrowRightIcon className="mt-1 shrink-0 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary" />
+                ) : null}
               </div>
-            </Link>
-          ))}
+            );
+
+            if (isReadySample(sample)) {
+              return (
+                <Link
+                  key={sample.slug}
+                  href={sample.href}
+                  className="group rounded-[--radius] border border-border bg-card p-6 transition hover:border-primary"
+                >
+                  {body}
+                </Link>
+              );
+            }
+
+            return (
+              <article
+                key={sample.slug}
+                className="rounded-[--radius] border border-border bg-card p-6"
+              >
+                {body}
+              </article>
+            );
+          })}
         </div>
       </main>
       <SiteFooter />
