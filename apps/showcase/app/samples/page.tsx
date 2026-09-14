@@ -28,6 +28,16 @@ export default function SamplesPage() {
           own tree. Pending entries are listed but not linked until their root
           route is released.
         </p>
+        <p className="mt-4 max-w-2xl text-sm leading-6 text-muted-foreground">
+          Shared fixture, filter, and demo-form conventions live on a contract
+          route, not in this catalogue.{" "}
+          <Link
+            href="/samples/conventions"
+            className="font-medium text-foreground"
+          >
+            Sample conventions
+          </Link>
+        </p>
         <div className="mt-14 grid gap-3">
           {samples.map((sample) => {
             const body = (

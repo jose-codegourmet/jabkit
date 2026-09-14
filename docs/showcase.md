@@ -32,6 +32,8 @@ Everything under `apps/showcase/app/` and `apps/showcase/components/` is site ch
 | `/samples/saas` | `app/samples/saas/page.tsx` | SaaS landing assembled from registry blocks. Demo chrome is `saas/layout.tsx`. |
 | `/samples/draft` | `app/samples/draft/page.tsx` | Unpublished DemoBar check. Omitted from the catalogue. |
 | `/samples/scope-reference` | `app/samples/scope-reference/page.tsx` | Scoped token/typography/portal reference. Not a catalogue sample. |
+| `/samples/conventions` | `app/samples/conventions/page.tsx` | SH-06 contract route: fixtures, URL filters, demo form. Not a catalogue site. |
+| `/samples/conventions/[slug]` | `app/samples/conventions/[slug]/page.tsx` | Canonical fixture detail; unknown slugs 404. |
 | `/design-systems` | `app/design-systems/page.tsx` | Design-system directions index. Static so it is not captured by `/[category]`. |
 | `/mcp` | `app/mcp/route.ts` | Read-only JSON endpoint. See [mcp.md](mcp.md). |
 
@@ -84,7 +86,7 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 
 `app/samples/catalog.ts` owns the index metadata and the sample-root route contract. Allowed roots are `/samples/saas` plus the five planned design-system sites: `minimal`, `neo-brutalism`, `editorial`, `luxury`, and `retro`. A ready entry’s `href` must pass `linkedSampleHref`, which only accepts `implementedSampleHrefs` (a subset of those roots). Paths outside the sample roots, or planned roots not yet on the implemented list, fail typecheck without an `as Route` assertion. Showcase `tsc --noEmit` does not load Next’s generated route union, so the implemented-href allowlist is the static contract; `Link` still uses typedRoutes at the call site. Pending entries have no `href` and must not be wrapped in `Link`. Collection completion is not required; one site can become ready on its own after its release ticket.
 
-Today the only ready sample is `/samples/saas` (Quarry). The other five appear on `/samples` as non-linked “Soon” cards. `/samples/draft` exists only to exercise shared demo chrome and is omitted from the catalogue.
+Today the only ready sample is `/samples/saas` (Quarry). The other five appear on `/samples` as non-linked “Soon” cards. `/samples/draft` exists only to exercise shared demo chrome and is omitted from the catalogue. `/samples/conventions` is the SH-06 contract route and is also omitted from the catalogue.
 
 `apps/showcase/components/samples/DemoBar.tsx` is the shared sample chrome: current design-system name, fictional-brand notice, All samples, Components, skip-to-sample (`#top`), and the existing `ThemeToggle` (root `ThemeProvider` only). It sits in document flow above the sample (`z-0`, not sticky or fixed) so it does not cover business navigation. Each site keeps its own nav and footer in its route layout or page. SaaS uses `app/samples/saas/layout.tsx` for the bar and keeps Quarry’s footer on the page.
 
@@ -92,9 +94,25 @@ Today the only ready sample is `/samples/saas` (Quarry). The other five appear o
 
 `app/samples/saas/page.tsx` imports real library components through the showcase `@/*` alias (`@/atoms/button`, `@/marketing/hero-section-5`, `@/dashboard/chart-group14`, …) and feeds them copy from `app/samples/saas/content.ts`. That page is showcase-only composition. Adding a released sample means adding its root route, flipping the catalog entry to `ready` with `linkedSampleHref(...)`, and composing pages under `app/samples/<system>/`. It is not a registry component.
 
-Because of the alias, do not invent `@/components/...` paths inside the showcase for library code. Import from `@/atoms|marketing|dashboard/...`. Showcase-only modules (DemoBar, SampleScope, catalog, sample layouts) use relative imports.
+Because of the alias, do not invent `@/components/...` paths inside the showcase for library code. Import from `@/atoms|marketing|dashboard/...`. Showcase-only modules (DemoBar, SampleScope, SH-06 helpers, catalog, sample layouts) use relative imports.
 
 Sample-site photography is not Unsplash. Each future design-system sample owns `app/samples/<system>/assets.ts` and `public/assets/design-systems/<system>/`. Those maps stay empty until the matching `-03` Higgsfield ticket. See [previews.md](previews.md).
+
+### Content, navigation, and demo state (SH-06)
+
+Shared behavior for the five planned sites. Layout and business copy stay in each `app/samples/<system>/` tree. Only repeated helpers belong in `components/samples/`.
+
+**Fixtures.** Plain typed records (`id`, `slug`, `kind`, `title`, `summary`, optional local `image.src` under `/assets/...`). Copy lives in `content.ts`, not JSX. Details and summaries read the same canonical object. Unknown slugs call `notFound()`. Empty lists use `sampleEmptyCopy.noMatches` plus a reset link.
+
+**Navigation and CTAs.** Each site owns its nav and footer. A CTA is a real route, a local action (form preview, in-memory favorite), or a disabled control with a visible reason. Do not use `href="#"` as a fake completed action. In-page hashes are allowed only when the target exists on that page.
+
+**URL state.** Allowlisted keys: `filter`, `q`, `project`, `room`, `plan`. Parse with `parseAllowlistedQuery`. Unknown keys are dropped. Invalid `filter` values become `all`. Preselect IDs must match a fixture of the matching kind; unknown IDs are ignored and must not be interpolated into headings or `href`s. Build links with `sampleHref` so only validated values are serialized. Back/forward and direct links are ordinary query strings.
+
+**Demo forms.** `DemoPreviewForm` is the reference: JabKit Label/Input/Textarea/Button, native `required` / `type="email"`, inline errors, focus on the first `:invalid` field, retained values on Edit, Reset back to an empty draft. Status is `draft` | `invalid` | `preview` | `reset` with a live region. Confirmation copy is “Preview prepared. Demo only.” Never claim an email was sent, a subscription started, or a room reserved. No fake server delay, consent-checkbox theater, analytics SDK, auth, or payment.
+
+**Lifetime.** Form values and visit favorites are in-memory React state. Reload or leaving the route clears them. Do not persist personal data. Pocket Keeps’ local file download remains the only real download exception called out in the roadmap.
+
+Contract surface (not a branded sample): `/samples/conventions`.
 
 ## Site chrome
 
