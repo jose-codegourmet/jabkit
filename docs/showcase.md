@@ -33,6 +33,8 @@ Everything under `apps/showcase/app/` and `apps/showcase/components/` is site ch
 | `/design-systems` | `app/design-systems/page.tsx` | Design-system directions index. Static so it is not captured by `/[category]`. |
 | `/mcp` | `app/mcp/route.ts` | Read-only JSON endpoint. See [mcp.md](mcp.md). |
 
+SH-01 dated gate and route matrix: [qa/design-system-showcases.md](qa/design-system-showcases.md).
+
 ## Preview architecture
 
 1. `pnpm registry:build` writes a `previewManifest` keyed by registry `name`, each value a `() => import("@/{category}/{folder}/{Name}.preview")`.

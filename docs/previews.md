@@ -57,4 +57,6 @@ Still captures use `reducedMotion: "reduce"`, `deviceScaleFactor: 1`, `en-US`, a
 
 Catalogue `PreviewImage` prefers the GIF under `prefers-reduced-motion: no-preference` and the still WebP otherwise.
 
+`pnpm previews:verify` is part of the SH-01 correctness gate recorded in [qa/design-system-showcases.md](qa/design-system-showcases.md).
+
 Run `pnpm previews:build -- --name {name}` whenever a component changes, then commit the output. `pnpm previews:verify` runs in `pnpm check` and fails if an asset is missing or its source hash is stale.

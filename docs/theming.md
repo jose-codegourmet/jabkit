@@ -61,7 +61,7 @@ Values are `oklch(...)`. Light and dark pairs are both defined in `tokens.css`; 
 
 `apps/showcase/components/ThemeToggle.tsx` is a three-way control (`light` / `system` / `dark`) with a `mounted` guard so `aria-pressed` is not wrong on the server render.
 
-This theming applies to **showcase chrome** (header, catalogue chrome, marketing copy). It does not automatically apply to preview iframes; those are a different document. See below.
+This theming applies to **showcase chrome** (header, catalogue chrome, marketing copy). It does not automatically apply to preview iframes; those are a different document. See below. JSON under `design-systems/` is authored input, not loaded by `ThemeProvider`.
 
 ## Storybook
 
