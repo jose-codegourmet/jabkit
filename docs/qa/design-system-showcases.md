@@ -319,6 +319,10 @@ Showcase production build on this baseline (`pnpm --filter @jabkit/showcase buil
 
 Files under `design-systems/**` (including `tokens.json`, `typography.json`, `components.json`, `patterns.json`, `motion.json`) are **authored specifications**. They are not consumed by the CLI, registry builder, Tailwind, or showcase. There is no JSON-to-theme loader, style flag, or design-system selector. `/design-systems` is a static index page, not a renderer of those files. Adopting a palette is a manual copy into `tokens.css` or a consumer stylesheet, as [design-systems/README.md](../../design-systems/README.md) and [architecture.md](../architecture.md) already state.
 
+## After this baseline
+
+West Room Studio (`/samples/minimal`) is a second ready sample. The SH-01 matrix above stays as the dated snapshot. Imagery for that site still uses SH-04 empty provenance plus local vendor stubs until MIN-03 / issue #260.
+
 ## Handoff
 
 Planning, content, and asset work can proceed. Publishing a **ready** new sample still requires this gate: `pnpm check` and a showcase production build. Do not add further sample sites in this change.

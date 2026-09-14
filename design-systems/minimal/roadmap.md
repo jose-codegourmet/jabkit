@@ -1,6 +1,6 @@
 # West Room Studio — Minimal showcase roadmap
 
-Status: **planned** · Ticket prefix: **MIN** · Proposed root: `/samples/minimal` · 12 tickets.
+Status: **implemented in catalogue (imagery stubs until MIN-03 / #260)** · Ticket prefix: **MIN** · Root: `/samples/minimal` · 12 tickets.
 
 Read the [shared roadmap and mandatory handoff](../roadmap.md), then this folder’s [system](system.md), [rules](rules.md), [component guidance](components.json), [imagery direction](imagery.md), and [migration notes](migration.md). These are implementation tickets; none of the proposed routes or API extensions is claimed to exist yet.
 

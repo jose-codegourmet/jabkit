@@ -8,7 +8,7 @@ import { isReadySample, samples } from "./catalog";
 export const metadata: Metadata = {
   title: "Samples - JabKit",
   description:
-    "Complete pages assembled from JabKit blocks. Start with the SaaS landing sample. Further design-system sites become ready independently.",
+    "Complete pages assembled from JabKit blocks. Start with Quarry or West Room Studio. Further design-system sites become ready independently.",
 };
 
 export default function SamplesPage() {
