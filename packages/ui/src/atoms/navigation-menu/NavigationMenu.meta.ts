@@ -3,7 +3,7 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "navigation-menu",
   displayName: "NavigationMenu",
-  version: "1.0.0",
+  version: "1.0.1",
   addedAt: "2026-09-07",
   description:
     "Accessible site navigation with desktop mega menus, compact link lists, and a mobile disclosure drawer.",

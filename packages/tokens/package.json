@@ -4,6 +4,7 @@
   "private": true,
   "exports": {
     "./tokens.css": "./tokens.css",
+    "./scopes.css": "./scopes.css",
     "./tokens": "./tokens.ts"
   },
   "scripts": {

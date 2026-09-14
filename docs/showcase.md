@@ -31,6 +31,7 @@ Everything under `apps/showcase/app/` and `apps/showcase/components/` is site ch
 | `/samples` | `app/samples/page.tsx` | Sample index from `app/samples/catalog.ts`. Ready entries link; pending entries are not wrapped in `Link`. |
 | `/samples/saas` | `app/samples/saas/page.tsx` | SaaS landing assembled from registry blocks. Demo chrome is `saas/layout.tsx`. |
 | `/samples/draft` | `app/samples/draft/page.tsx` | Unpublished DemoBar check. Omitted from the catalogue. |
+| `/samples/scope-reference` | `app/samples/scope-reference/page.tsx` | Scoped token/typography/portal reference. Not a catalogue sample. |
 | `/design-systems` | `app/design-systems/page.tsx` | Design-system directions index. Static so it is not captured by `/[category]`. |
 | `/mcp` | `app/mcp/route.ts` | Read-only JSON endpoint. See [mcp.md](mcp.md). |
 
@@ -87,9 +88,11 @@ Today the only ready sample is `/samples/saas` (Quarry). The other five appear o
 
 `apps/showcase/components/samples/DemoBar.tsx` is the shared sample chrome: current design-system name, fictional-brand notice, All samples, Components, skip-to-sample (`#top`), and the existing `ThemeToggle` (root `ThemeProvider` only). It sits in document flow above the sample (`z-0`, not sticky or fixed) so it does not cover business navigation. Each site keeps its own nav and footer in its route layout or page. SaaS uses `app/samples/saas/layout.tsx` for the bar and keeps Quarry’s footer on the page.
 
+`/samples/scope-reference` is a SH-03 engineering surface, not a catalogue entry. It wraps JabKit atoms in `SampleScope` (`apps/showcase/components/samples/SampleScope.tsx`) so each design-system id can apply scoped tokens, fallback typography, and a portal container without mutating `document.documentElement` on route mount. Query `?system=` is allowlisted to `minimal`, `neo-brutalism`, `editorial`, `luxury`, and `retro`.
+
 `app/samples/saas/page.tsx` imports real library components through the showcase `@/*` alias (`@/atoms/button`, `@/marketing/hero-section-5`, `@/dashboard/chart-group14`, …) and feeds them copy from `app/samples/saas/content.ts`. That page is showcase-only composition. Adding a released sample means adding its root route, flipping the catalog entry to `ready` with `linkedSampleHref(...)`, and composing pages under `app/samples/<system>/`. It is not a registry component.
 
-Because of the alias, do not invent `@/components/...` paths inside the showcase for library code. Import from `@/atoms|marketing|dashboard/...`. Showcase-only modules (DemoBar, catalog, sample layouts) use relative imports.
+Because of the alias, do not invent `@/components/...` paths inside the showcase for library code. Import from `@/atoms|marketing|dashboard/...`. Showcase-only modules (DemoBar, SampleScope, catalog, sample layouts) use relative imports.
 
 ## Site chrome
 

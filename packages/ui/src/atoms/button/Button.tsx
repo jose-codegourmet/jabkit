@@ -6,7 +6,7 @@ import type { ButtonProps } from "./Button.types";
 
 const styles = {
   primary:
-    "bg-primary text-primary-foreground shadow-[0_10px_24px_-14px_color-mix(in_oklab,var(--jk-primary),transparent_25%)] hover:brightness-110",
+    "bg-primary text-primary-foreground shadow-[var(--jk-shadow-control)] hover:brightness-110",
   secondary:
     "bg-secondary text-secondary-foreground border border-border hover:bg-accent",
   ghost: "text-foreground hover:bg-accent",
@@ -31,6 +31,7 @@ export function Button({
   const Component = asChild ? Slot : "button";
   return (
     <Component
+      data-slot="button"
       className={cn(
         "inline-flex shrink-0 items-center justify-center rounded-[--radius] font-medium whitespace-nowrap transition-[transform,background-color,color,filter,box-shadow] duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 active:translate-y-px",
         styles[variant],

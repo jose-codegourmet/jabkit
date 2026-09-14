@@ -14,8 +14,8 @@ Root `design-systems/` contains authored specifications for five website styles,
 
 | Path | Package | Responsibility |
 | --- | --- | --- |
-| `packages/ui` | `@jabkit/ui` | Component source. 49 components under `src/atoms` (13), `src/marketing` (29), `src/dashboard` (7). Owns `src/lib/cn.ts`, `src/lib/theme.ts`, and Storybook in `.storybook/`. No root barrel. |
-| `packages/tokens` | `@jabkit/tokens` | `--jk-*` design tokens. Exports `./tokens.css` and `./tokens`. See [theming.md](theming.md). |
+| `packages/ui` | `@jabkit/ui` | Component source. 49 components under `src/atoms` (13), `src/marketing` (29), `src/dashboard` (7). Owns `src/lib/cn.ts`, `src/lib/theme.ts`, `src/lib/portal-container.ts`, and Storybook in `.storybook/`. No root barrel. |
+| `packages/tokens` | `@jabkit/tokens` | `--jk-*` design tokens. Exports `./tokens.css`, `./scopes.css`, and `./tokens`. See [theming.md](theming.md). |
 | `packages/build-registry` | `@jabkit/build-registry` | Registry generator (`src/build.ts`) and type contract (`src/index.ts`). See [registry.md](registry.md). |
 | `packages/cli` | `@jabkit/cli` | Consumer installer: `jabkit init \| add \| upgrade`. See [cli.md](cli.md). |
 | `packages/mcp` | `@jabkit/mcp` | Tool-name tuple only. The HTTP endpoint lives in the showcase. See [mcp.md](mcp.md). |

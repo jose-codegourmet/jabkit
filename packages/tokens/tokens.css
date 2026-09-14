@@ -32,6 +32,23 @@
   --jk-chart-4: oklch(0.65 0.18 315);
   --jk-chart-5: oklch(0.7 0.15 195);
   --jk-radius: 0.875rem;
+  --jk-space-xs: 0.25rem;
+  --jk-space-sm: 0.5rem;
+  --jk-space-md: 1rem;
+  --jk-space-lg: 2rem;
+  --jk-space-gutter: clamp(1.25rem, 4vw, 4rem);
+  --jk-space-section: clamp(4rem, 8vw, 8rem);
+  --jk-space-card: 1.5rem;
+  --jk-space-grid: 1.5rem;
+  --jk-content-max: 90rem;
+  --jk-border-width: 1px;
+  --jk-control-height: 2.75rem;
+  --jk-shadow-control: 0 10px 24px -14px
+    color-mix(in oklab, var(--jk-primary), transparent 25%);
+  --jk-font-display:
+    var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --jk-font-body: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --jk-font-label: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 .dark {

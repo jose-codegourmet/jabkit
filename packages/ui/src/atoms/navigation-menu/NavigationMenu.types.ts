@@ -20,6 +20,7 @@ export type NavigationMenuIconName =
 
 export type NavigationMenuProps = NavigationMenuPrimitive.Root.Props & {
   viewport?: boolean;
+  container?: NavigationMenuPrimitive.Portal.Props["container"];
 };
 
 export type NavigationMenuListProps = NavigationMenuPrimitive.List.Props;
@@ -40,7 +41,8 @@ export type NavigationMenuViewportProps = NavigationMenuPrimitive.Popup.Props &
   Pick<
     NavigationMenuPrimitive.Positioner.Props,
     "align" | "alignOffset" | "side" | "sideOffset"
-  >;
+  > &
+  Pick<NavigationMenuPrimitive.Portal.Props, "container">;
 
 export interface NavigationMenuLinkItem {
   title: string;
