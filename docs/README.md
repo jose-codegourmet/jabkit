@@ -18,7 +18,7 @@ Durable architectural decisions, when they need a record, may be added under `do
 | [theming.md](theming.md) | `--jk-*` tokens, light/dark, `next-themes`, preview iframe theme behavior | Changing a color, token, or dark-mode behavior |
 | [registry.md](registry.md) | Metadata, build, JSON outputs, example extraction | Changing registry output, metadata fields, or the builder |
 | [showcase.md](showcase.md) | Routes, previews, samples, showcase-only vs library | Changing catalogue UI, preview, or samples |
-| [qa/design-system-showcases.md](qa/design-system-showcases.md) | SH-01 dated gate baseline after #255/#256 | Distinguishing pre-existing vs new failures before design-system sample work |
+| [qa/design-system-showcases.md](qa/design-system-showcases.md) | SH-07 full-site review template and SH-01 dated gate baseline | Releasing a sample, capturing catalogue covers, or distinguishing pre-existing vs new gate failures |
 | [cli.md](cli.md) | `init` / `add` / `upgrade`, config, consumer files | Changing consumer install behavior |
 | [mcp.md](mcp.md) | Read-only catalogue HTTP tools | Changing agent-facing catalogue endpoints |
 | [previews.md](previews.md) | Preview capture, hosted images, Higgsfield sample assets | Changing preview assets, vendored library images, or design-system photography |
@@ -32,6 +32,7 @@ Durable architectural decisions, when they need a record, may be added under `do
 | Changing registry output, metadata fields, or the build | [registry.md](registry.md) |
 | Changing showcase routes, previews, or samples | [showcase.md](showcase.md) |
 | Recording or re-running the SH-01 correctness baseline | [qa/design-system-showcases.md](qa/design-system-showcases.md) |
+| Full-site sample review, catalogue covers, or release evidence | [qa/design-system-showcases.md](qa/design-system-showcases.md), then [previews.md](previews.md) |
 | Changing consumer install behavior | [cli.md](cli.md) |
 | Changing agent-facing catalogue endpoints | [mcp.md](mcp.md) |
 | Changing preview assets, vendored library images, or design-system photography | [previews.md](previews.md) |

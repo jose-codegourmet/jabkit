@@ -409,5 +409,5 @@ All tickets are required for the complete website. Shared dependencies refer to 
 - [ ] `pnpm check` and the showcase production build pass; changed library components have current registry JSON and committed preview images.
 - [ ] The catalogue card links to the real root route and its cover accurately represents this website. A reviewer can trace all generated images to Higgsfield MCP.
 
-**Verification and handoff:** Attach the route matrix, production command output, measured performance profile, component usage inventory, and desktop/mobile captures. This closes implementation readiness, not an unrequested deployment.
+**Verification and handoff:** Paste the SH-07 evidence template from [docs/qa/design-system-showcases.md](../../docs/qa/design-system-showcases.md). Attach the filled tables, production command output, measured LCP/CLS, component usage inventory, and desktop/mobile captures. An attractive screenshot alone does not complete the site. This closes implementation readiness, not an unrequested deployment.
 

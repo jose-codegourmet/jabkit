@@ -274,7 +274,7 @@ These are delivery lanes, not a requirement to finish every site’s stage befor
 - [ ] Accessibility review includes text/control contrast, visible focus, 44px preferred targets, headings, landmarks, reading order, live status, and portal focus return.
 - [ ] Failures result in linked follow-up defects or block readiness; an attractive screenshot alone does not complete a site.
 
-**Verification and handoff:** Link the template from every release ticket. Use existing tooling/manual browser review; no new test infrastructure is required by this documentation roadmap.
+**Verification and handoff:** Copy the tables in [docs/qa/design-system-showcases.md](../docs/qa/design-system-showcases.md) into every `-12` release PR. Use existing tooling and manual browser review; no new test infrastructure is required. Whole-site captures stay out of `public/previews/`.
 
 ## SH-08 — Close the five-site initiative and verify cross-site regressions
 
