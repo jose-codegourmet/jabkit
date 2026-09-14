@@ -1,5 +1,3 @@
-import type { Route } from "next";
-
 export const sampleSlugs = [
   "saas",
   "minimal",
@@ -34,17 +32,18 @@ const _rootsMatchSlugs: RootsMatchSlugs = true;
 void _rootsMatchSlugs;
 
 /**
- * A sample-root path that already exists as an App Router page.
- * `Route<H>` is never for destinations typedRoutes does not know, so a
- * ready catalog `href` cannot name a missing page or a non-sample path.
+ * Sample roots that currently have an App Router page and may be linked.
+ * Planned roots stay in `sampleRootHrefs` until their release ticket adds
+ * them here. Showcase `tsc` does not load generated `Route` unions, so this
+ * allowlist is the checked contract instead of `as Route`.
  */
-export type LinkedSampleHref = {
-  [H in SampleRootHref]: Route<H> extends H ? H : never;
-}[SampleRootHref];
+export const implementedSampleHrefs = [
+  "/samples/saas",
+] as const satisfies readonly SampleRootHref[];
 
-export function linkedSampleHref<H extends SampleRootHref>(
-  href: Route<H> extends H ? H : never,
-): H {
+export type LinkedSampleHref = (typeof implementedSampleHrefs)[number];
+
+export function linkedSampleHref<H extends LinkedSampleHref>(href: H): H {
   return href;
 }
 
@@ -69,7 +68,9 @@ export type PendingSample = SampleFields & {
 
 export type SampleEntry = ReadySample | PendingSample;
 
-export function isReadySample(sample: SampleEntry): sample is ReadySample {
+export function isReadySample<T extends { status: SampleStatus }>(
+  sample: T,
+): sample is T & { status: "ready" } {
   return sample.status === "ready";
 }
 

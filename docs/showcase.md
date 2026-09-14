@@ -81,7 +81,7 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 
 ## Samples
 
-`app/samples/catalog.ts` owns the index metadata and the sample-root route contract. Allowed roots are `/samples/saas` plus the five planned design-system sites: `minimal`, `neo-brutalism`, `editorial`, `luxury`, and `retro`. A ready entry’s `href` must be a `LinkedSampleHref`: both a listed sample root and a path `typedRoutes` already knows. Pending entries have no `href` and must not be wrapped in `Link`. Collection completion is not required; one site can become ready on its own after its release ticket.
+`app/samples/catalog.ts` owns the index metadata and the sample-root route contract. Allowed roots are `/samples/saas` plus the five planned design-system sites: `minimal`, `neo-brutalism`, `editorial`, `luxury`, and `retro`. A ready entry’s `href` must pass `linkedSampleHref`, which only accepts `implementedSampleHrefs` (a subset of those roots). Paths outside the sample roots, or planned roots not yet on the implemented list, fail typecheck without an `as Route` assertion. Showcase `tsc --noEmit` does not load Next’s generated route union, so the implemented-href allowlist is the static contract; `Link` still uses typedRoutes at the call site. Pending entries have no `href` and must not be wrapped in `Link`. Collection completion is not required; one site can become ready on its own after its release ticket.
 
 Today the only ready sample is `/samples/saas` (Quarry). The other five appear on `/samples` as non-linked “Soon” cards. `/samples/draft` exists only to exercise shared demo chrome and is omitted from the catalogue.
 
