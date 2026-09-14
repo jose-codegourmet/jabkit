@@ -39,6 +39,7 @@ void _rootsMatchSlugs;
  */
 export const implementedSampleHrefs = [
   "/samples/saas",
+  "/samples/minimal",
 ] as const satisfies readonly SampleRootHref[];
 
 export type LinkedSampleHref = (typeof implementedSampleHrefs)[number];
@@ -89,8 +90,9 @@ export const samples = [
     designSystem: "Minimal",
     brand: "West Room Studio",
     description:
-      "Architecture and interiors sample. Work, project detail, services, and a local inquiry preview. Catalogue link lands when this site is released.",
-    status: "soon",
+      "Architecture and interiors sample. Work, project detail, services, and a local inquiry preview.",
+    href: linkedSampleHref("/samples/minimal"),
+    status: "ready",
   },
   {
     slug: "neo-brutalism",
