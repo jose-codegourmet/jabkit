@@ -69,7 +69,7 @@ export interface ComponentMeta {
 
 export interface RegistryFile {
   path: string;
-  type: "component" | "types" | "index" | "lib";
+  type: "component" | "types" | "index" | "lib" | "mocks";
   content: string;
 }
 

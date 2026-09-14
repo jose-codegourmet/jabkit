@@ -38,7 +38,10 @@
       "accessible"
     ],
     "addedAt": "2026-08-30",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -93,7 +96,10 @@
       "atom"
     ],
     "addedAt": "2026-09-07",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -140,7 +146,10 @@
       "accessible"
     ],
     "addedAt": "2026-08-30",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -190,7 +199,9 @@
     ],
     "addedAt": "2026-08-30",
     "dependencies": [
-      "@radix-ui/react-slot"
+      "@radix-ui/react-slot",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -245,7 +256,9 @@
     ],
     "addedAt": "2026-09-06",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -297,7 +310,10 @@
       "accessible"
     ],
     "addedAt": "2026-08-30",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -357,7 +373,9 @@
     "addedAt": "2026-08-30",
     "dependencies": [
       "@base-ui/react",
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -407,7 +425,10 @@
       "accessible"
     ],
     "addedAt": "2026-08-30",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -468,7 +489,9 @@
     ],
     "addedAt": "2026-09-07",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -520,7 +543,10 @@
       "accessible"
     ],
     "addedAt": "2026-08-30",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -566,7 +592,10 @@
       "accessible"
     ],
     "addedAt": "2026-08-30",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -628,7 +657,9 @@
     "addedAt": "2026-09-07",
     "dependencies": [
       "@base-ui/react",
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -684,7 +715,10 @@
       "atom"
     ],
     "addedAt": "2026-09-07",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -731,7 +765,10 @@
       "accessible"
     ],
     "addedAt": "2026-08-30",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -776,7 +813,10 @@
       "accessible"
     ],
     "addedAt": "2026-08-30",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -822,7 +862,10 @@
       "accessible"
     ],
     "addedAt": "2026-08-30",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -868,7 +911,10 @@
       "accessible"
     ],
     "addedAt": "2026-08-30",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -896,7 +942,9 @@
     "addedAt": "2026-09-06",
     "dependencies": [
       "@base-ui/react",
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -942,7 +990,10 @@
       "accessible"
     ],
     "addedAt": "2026-08-30",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1011,7 +1062,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1079,7 +1133,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1145,7 +1202,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1217,7 +1277,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1274,7 +1337,10 @@
       "grid"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1348,7 +1414,10 @@
       "grid"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1425,7 +1494,9 @@
     ],
     "addedAt": "2026-09-07",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -1499,7 +1570,10 @@
       "testimonials"
     ],
     "addedAt": "2026-09-03",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1567,7 +1641,10 @@
       "landing"
     ],
     "addedAt": "2026-09-03",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1643,7 +1720,10 @@
       "landing"
     ],
     "addedAt": "2026-09-03",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1708,7 +1788,10 @@
       "photography"
     ],
     "addedAt": "2026-09-03",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1775,7 +1858,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1842,7 +1928,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1910,7 +1999,10 @@
       "guide"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -1979,7 +2071,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -2043,7 +2138,10 @@
       "number"
     ],
     "addedAt": "2026-09-06",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -2114,7 +2212,9 @@
     ],
     "addedAt": "2026-09-05",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -2185,7 +2285,9 @@
     ],
     "addedAt": "2026-09-05",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -2244,7 +2346,10 @@
       "interactive"
     ],
     "addedAt": "2026-09-06",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -2319,7 +2424,10 @@
       "cta"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -2386,7 +2494,9 @@
     ],
     "addedAt": "2026-09-05",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -2450,7 +2560,10 @@
       "landing"
     ],
     "addedAt": "2026-09-06",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -2525,7 +2638,10 @@
       "interactive"
     ],
     "addedAt": "2026-09-09",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -2591,7 +2707,9 @@
     ],
     "addedAt": "2026-09-05",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -2668,7 +2786,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -2732,7 +2853,9 @@
     ],
     "addedAt": "2026-09-06",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -2797,7 +2920,9 @@
     ],
     "addedAt": "2026-09-06",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -2870,7 +2995,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -2945,7 +3073,10 @@
       "interactive"
     ],
     "addedAt": "2026-09-06",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -3017,7 +3148,10 @@
       "landing"
     ],
     "addedAt": "2026-09-01",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -3093,7 +3227,10 @@
       "grid"
     ],
     "addedAt": "2026-09-01",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -3163,7 +3300,10 @@
       "editorial"
     ],
     "addedAt": "2026-08-30",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -3237,7 +3377,10 @@
       "landing"
     ],
     "addedAt": "2026-09-01",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -3309,7 +3452,10 @@
       "portraits"
     ],
     "addedAt": "2026-08-30",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -3384,7 +3530,10 @@
       "landing"
     ],
     "addedAt": "2026-09-01",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -3460,7 +3609,10 @@
       "landing"
     ],
     "addedAt": "2026-09-06",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -3541,7 +3693,9 @@
     ],
     "addedAt": "2026-09-06",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -3618,7 +3772,9 @@
     ],
     "addedAt": "2026-09-06",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -3689,7 +3845,9 @@
     ],
     "addedAt": "2026-09-07",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -3767,7 +3925,9 @@
     ],
     "addedAt": "2026-09-07",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -3842,7 +4002,10 @@
       "landing"
     ],
     "addedAt": "2026-09-07",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -3914,7 +4077,9 @@
     ],
     "addedAt": "2026-09-07",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -3995,7 +4160,9 @@
     ],
     "addedAt": "2026-09-05",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -4062,7 +4229,9 @@
     ],
     "addedAt": "2026-09-05",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -4127,7 +4296,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -4194,7 +4366,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -4261,7 +4436,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -4332,7 +4510,10 @@
       "text"
     ],
     "addedAt": "2026-09-07",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -4390,7 +4571,10 @@
       "interactive"
     ],
     "addedAt": "2026-09-06",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -4449,7 +4633,10 @@
       "interactive"
     ],
     "addedAt": "2026-09-06",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -4507,7 +4694,10 @@
       "interactive"
     ],
     "addedAt": "2026-09-06",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -4570,7 +4760,10 @@
       "stagger"
     ],
     "addedAt": "2026-09-06",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -4646,7 +4839,10 @@
       "landing"
     ],
     "addedAt": "2026-09-06",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -4721,7 +4917,9 @@
     ],
     "addedAt": "2026-09-07",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -4801,7 +4999,9 @@
     ],
     "addedAt": "2026-09-06",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -4878,7 +5078,10 @@
       "editorial"
     ],
     "addedAt": "2026-09-07",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -4946,7 +5149,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -5014,7 +5220,9 @@
     ],
     "addedAt": "2026-09-05",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -5081,7 +5289,10 @@
       "landing"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -5161,7 +5372,9 @@
     ],
     "addedAt": "2026-09-06",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -5238,7 +5451,10 @@
       "landing"
     ],
     "addedAt": "2026-09-06",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": false,
       "reducedMotion": true
@@ -5297,7 +5513,9 @@
     ],
     "addedAt": "2026-09-05",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -5360,7 +5578,9 @@
     ],
     "addedAt": "2026-09-05",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -5428,7 +5648,9 @@
     ],
     "addedAt": "2026-09-05",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -5498,7 +5720,10 @@
       "mobile"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -5564,7 +5789,9 @@
     ],
     "addedAt": "2026-09-05",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -5624,7 +5851,9 @@
     ],
     "addedAt": "2026-09-06",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -5686,7 +5915,10 @@
       "split"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -5742,7 +5974,9 @@
     ],
     "addedAt": "2026-09-06",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -5804,7 +6038,9 @@
     ],
     "addedAt": "2026-09-11",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -5862,7 +6098,9 @@
     ],
     "addedAt": "2026-09-11",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -5923,7 +6161,10 @@
       "social"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -5988,7 +6229,10 @@
       "two-factor"
     ],
     "addedAt": "2026-09-06",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -6046,7 +6290,9 @@
     ],
     "addedAt": "2026-09-05",
     "dependencies": [
-      "lucide-react"
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
     ],
     "a11y": {
       "keyboardNav": true,
@@ -6109,7 +6355,10 @@
       "verification"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -6169,7 +6418,10 @@
       "two-factor"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true
@@ -6228,7 +6480,10 @@
       "verify-email"
     ],
     "addedAt": "2026-09-05",
-    "dependencies": [],
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
     "a11y": {
       "keyboardNav": true,
       "reducedMotion": true

@@ -25,6 +25,40 @@ function registryPreview(preview?: ComponentPreviewMeta) {
   return registryPreview;
 }
 
+/** Consumer layout is flat under componentsDir; CLI rewrites `@/components/jabkit`. */
+function rewriteRegistryImports(content: string) {
+  return content.replace(
+    /@\/(atoms|marketing|dashboard)\//g,
+    "@/components/jabkit/",
+  );
+}
+
+function isShippedMockImport(source: string, fileName: string) {
+  const specifier = `./${fileName.replace(/\.ts$/, "")}`;
+  return (
+    source.includes(`from "${specifier}"`) ||
+    source.includes(`from '${specifier}'`)
+  );
+}
+
+function npmPackageName(specifier: string) {
+  if (specifier.startsWith(".") || specifier.startsWith("@/")) return null;
+  if (specifier.startsWith("@")) {
+    const [scope, name] = specifier.split("/");
+    return name ? `${scope}/${name}` : scope;
+  }
+  return specifier.split("/")[0];
+}
+
+function npmSpecifiers(source: string) {
+  const specs = new Set<string>();
+  for (const match of source.matchAll(/from\s+["']([^"']+)["']/g)) {
+    const name = npmPackageName(match[1]);
+    if (name) specs.add(name);
+  }
+  return specs;
+}
+
 async function componentExamples(stories: string) {
   const pattern =
     /export const (\w+):[\s\S]*?render:\s*\(\)\s*=>\s*\(([\s\S]*?)\n\s*\)\s*[},]/g;
@@ -71,27 +105,41 @@ async function buildComponent(category: ComponentCategory, folder: string) {
   }
 
   const files: RegistryFile[] = [];
+  const mockFiles = new Map<string, string>();
   for (const fileName of fileNames) {
     if (
       fileName.endsWith(".stories.tsx") ||
-      fileName.endsWith(".mocks.ts") ||
       fileName.endsWith(".meta.ts") ||
       fileName.endsWith(".preview.tsx")
     )
       continue;
+    const content = rewriteRegistryImports(
+      await readFile(path.join(componentDir, fileName), "utf8"),
+    );
+    if (fileName.endsWith(".mocks.ts")) {
+      mockFiles.set(fileName, content);
+      continue;
+    }
     const type =
       fileName === "index.ts"
         ? "index"
         : fileName.endsWith(".types.ts")
           ? "types"
           : "component";
-    if (type === "component" || type === "types" || type === "index") {
-      files.push({
-        path: `${folder}/${fileName}`,
-        type,
-        content: await readFile(path.join(componentDir, fileName), "utf8"),
-      });
-    }
+    files.push({
+      path: `${folder}/${fileName}`,
+      type,
+      content,
+    });
+  }
+  const shippedSource = files.map((file) => file.content).join("\n");
+  for (const [fileName, content] of mockFiles) {
+    if (!isShippedMockImport(shippedSource, fileName)) continue;
+    files.push({
+      path: `${folder}/${fileName}`,
+      type: "mocks",
+      content,
+    });
   }
   const stories = await readFile(path.join(componentDir, storyFile), "utf8");
   const libImports = new Set<string>();
@@ -100,13 +148,16 @@ async function buildComponent(category: ComponentCategory, folder: string) {
       libImports.add(match[1]);
     }
   }
+  const libPackages = new Set<string>();
   for (const importPath of libImports) {
     const sourcePath = path.join(libRoot, `${importPath}.ts`);
     try {
+      const content = await readFile(sourcePath, "utf8");
+      for (const spec of npmSpecifiers(content)) libPackages.add(spec);
       files.push({
         path: `lib/${importPath}.ts`,
         type: "lib",
-        content: await readFile(sourcePath, "utf8"),
+        content,
       });
     } catch {
       throw new Error(
@@ -114,8 +165,10 @@ async function buildComponent(category: ComponentCategory, folder: string) {
       );
     }
   }
+  const dependencies = [...new Set([...meta.dependencies, ...libPackages])];
   const component: RegistryComponent = {
     ...meta,
+    dependencies,
     ...(meta.preview ? { preview: registryPreview(meta.preview) } : {}),
     category,
     files,

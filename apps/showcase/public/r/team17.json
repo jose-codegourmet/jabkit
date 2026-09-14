@@ -53,7 +53,10 @@
     "culture",
     "landing"
   ],
-  "dependencies": [],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
   "registryDependencies": [],
   "a11y": {
     "keyboardNav": false,

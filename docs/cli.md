@@ -76,7 +76,7 @@ Order of operations:
 1. Load config. Resolve names (`--all` fetches `index.json` and uses every `name`).
 2. Walk `registryDependencies` depth-first, skipping names already seen, then push the entry. Requested components are resolved after their registry deps, so files for deps are written first.
 3. For each file in each resolved entry, destination is `{cwd}/{componentsDir}/{file.path}` (for example `src/components/jabkit/button/Button.tsx` and `src/components/jabkit/lib/cn.ts`). Existing files without `--force` throw.
-4. Rewrite imports: `@/components/jabkit` → `config.alias`, `@/lib/` → `{alias}/lib/`.
+4. Rewrite imports: `@/components/jabkit` → `config.alias`, `@/lib/` → `{alias}/lib/`. Category aliases (`@/atoms|marketing|dashboard/`) are already rewritten to `@/components/jabkit/` by the registry build; the CLI does not map them.
 5. If any resolved entry has `cssVars`, merge light maps and dark maps, and if `src/app/globals.css` exists, append a `:root` / `.dark` block. If that CSS file is missing, variables are skipped with no error.
 6. Write `.jabkit/manifest.json` (gitignored in this repo). `updatedAt` is an ISO timestamp. `components` is an array of `{ name, files }` — but `files` is the **same complete `manifestFiles` map** for every component, not that component's own files. Do not build upgrade logic on this shape until it is fixed.
 7. Union npm `dependencies` across resolved entries and run `pnpm add ...` in the consumer cwd (skipped / logged under `--dry-run`).

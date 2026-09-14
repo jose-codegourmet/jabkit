@@ -64,13 +64,18 @@ For each component folder, the builder includes:
 | `{Name}.tsx` | `"component"` |
 | `{Name}.types.ts` | `"types"` |
 | `index.ts` | `"index"` |
+| `{Name}.mocks.ts` when a shipped file imports it | `"mocks"` |
 | `packages/ui/src/lib/<x>.ts` for each `@/lib/<x>` import | `"lib"` |
 
-Excluded: `{Name}.stories.tsx`, `{Name}.mocks.ts`, `{Name}.meta.ts`, `{Name}.preview.tsx`. Those files stay in the monorepo. Preview modules are registered separately in the generated preview manifest, not in the JSON.
+Excluded: `{Name}.stories.tsx`, `{Name}.meta.ts`, `{Name}.preview.tsx`, and `{Name}.mocks.ts` when only stories/previews import them. Those files stay in the monorepo. Preview modules are registered separately in the generated preview manifest, not in the JSON.
 
 Each included file is stored as `{ path, type, content }` with `path` relative to the component folder for component files (`button/Button.tsx`) and as `lib/cn.ts` for shared helpers.
 
+Shipped `content` rewrites `@/atoms/<folder>`, `@/marketing/<folder>`, and `@/dashboard/<folder>` to `@/components/jabkit/<folder>` (including nested files such as `@/atoms/avatar/Avatar`). Library source in `packages/ui` keeps the category aliases for the showcase. The CLI then maps `@/components/jabkit` → `config.alias`. See [cli.md](cli.md).
+
 If a file imports `@/lib/foo` and `packages/ui/src/lib/foo.ts` is missing, the build throws `{name} imports missing shared library foo`. That is why helpers must live under `packages/ui/src/lib/` and be imported as `@/lib/*`. See [design-system.md](design-system.md).
+
+Bare npm imports in those bundled lib files (for example `clsx` and `tailwind-merge` from `cn.ts`) are merged into the entry's `dependencies` so the CLI installs them.
 
 ## Example extraction
 

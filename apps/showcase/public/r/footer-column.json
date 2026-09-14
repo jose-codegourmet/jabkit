@@ -51,7 +51,9 @@
     "landing"
   ],
   "dependencies": [
-    "lucide-react"
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
   ],
   "registryDependencies": [],
   "a11y": {

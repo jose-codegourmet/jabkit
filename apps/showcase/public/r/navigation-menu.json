@@ -54,7 +54,9 @@
   ],
   "dependencies": [
     "@base-ui/react",
-    "lucide-react"
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
   ],
   "registryDependencies": [
     "button",
