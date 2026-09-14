@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/atoms/button";
-import { DemoNotice } from "../../../components/samples/DemoNotice";
-import { sampleHref } from "../../../components/samples/query";
-import { findRecordBySlug } from "../../../components/samples/records";
-import { conventionRecords, conventionsPath } from "./content";
+import { DemoNotice } from "../../../../components/samples/DemoNotice";
+import { sampleHref } from "../../../../components/samples/query";
+import { findRecordBySlug } from "../../../../components/samples/records";
+import { conventionRecords, conventionsPath } from "../content";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
