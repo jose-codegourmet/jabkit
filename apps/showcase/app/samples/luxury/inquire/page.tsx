@@ -30,8 +30,8 @@ export default async function InquirePage({
         <div className={styles.frame}>
           <h1 className="jk-heading">Stay inquiry</h1>
           <p className="jk-lead mt-4">
-            Choose a room, dates, and guest count. Preview the inquiry in
-            this tab. Edit dates, then leave without booking. Nothing is sent.
+            Choose a room, dates, and guest count. Preview the inquiry in this
+            tab. Edit dates, then leave without booking. Nothing is sent.
           </p>
           <p className={`jk-caption ${styles.meta} mt-4`}>{demoNote}</p>
         </div>

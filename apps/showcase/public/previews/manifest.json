@@ -3530,11 +3530,12 @@
       ]
     },
     "carousel-cards": {
-      "sourceHash": "274919b63eacdd7244ddc4cbc8452a3f43d2ccaabc6f2c99e1b42e4d48586ff2",
+      "sourceHash": "da8f134de6ea9edc687fd41770bcf249e96510893ff44ec4e3fee1a2c945a0ef",
       "pipelineVersion": 1,
       "stories": [
         "Default",
         "Variants",
+        "NightlyRates",
         "ThemeComparison"
       ],
       "themes": [
@@ -3555,6 +3556,15 @@
           "theme": "dark",
           "file": "carousel-cards.Variants.dark.webp",
           "bytes": 43524,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "NightlyRates",
+          "theme": "dark",
+          "file": "carousel-cards.NightlyRates.dark.webp",
+          "bytes": 23822,
           "width": 960,
           "height": 600,
           "format": "webp"

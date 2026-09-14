@@ -208,7 +208,7 @@
   margin: 0;
 }
 
-.facts div {
+.factItem {
   display: grid;
   gap: 0.15rem;
 }

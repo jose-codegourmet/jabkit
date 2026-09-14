@@ -1,8 +1,8 @@
 "use client";
 
 import { type FormEvent, useId, useMemo, useState } from "react";
-import type { CalendarWithLocalisationRange } from "@/atoms/calendar-with-localisation";
 import { Button } from "@/atoms/button";
+import type { CalendarWithLocalisationRange } from "@/atoms/calendar-with-localisation";
 import { Input } from "@/atoms/input";
 import { Label } from "@/atoms/label";
 import { Textarea } from "@/atoms/textarea";
@@ -98,8 +98,7 @@ export function StayInquiry({
   const selectedRoom = getRoom(roomId);
   const selectedExperience = getExperience(experienceId);
   const completeRange = Boolean(range?.from && range.to);
-  const nights =
-    range?.from && range.to ? nightCount(range.from, range.to) : 0;
+  const nights = range?.from && range.to ? nightCount(range.from, range.to) : 0;
 
   const dateSummary = useMemo(() => {
     if (!range?.from) return "No dates selected.";
@@ -154,13 +153,7 @@ export function StayInquiry({
     if (Object.keys(nextErrors).length > 0) {
       setErrors(nextErrors);
       setStatus("invalid");
-      const order: FieldKey[] = [
-        "room",
-        "dates",
-        "guests",
-        "name",
-        "email",
-      ];
+      const order: FieldKey[] = ["room", "dates", "guests", "name", "email"];
       const first = order.find((key) => nextErrors[key]);
       if (first) document.getElementById(fieldId(first))?.focus();
       else firstInvalidControl(form)?.focus();
@@ -183,8 +176,7 @@ export function StayInquiry({
     return (
       <div className={styles.review} id="inquiry-review">
         <DemoNotice>
-          Preview prepared. Demo only. Nothing was sent, reserved, or
-          charged.
+          Preview prepared. Demo only. Nothing was sent, reserved, or charged.
         </DemoNotice>
         <p id={statusId} role="status" aria-live="polite" className="sr-only">
           {demoStatusCopy.preview}
@@ -214,9 +206,7 @@ export function StayInquiry({
           <div>
             <dt className={`jk-caption ${styles.meta}`}>Experience</dt>
             <dd className="jk-body">
-              {selectedExperience
-                ? selectedExperience.title
-                : "None selected"}
+              {selectedExperience ? selectedExperience.title : "None selected"}
             </dd>
           </div>
           <div>
@@ -235,8 +225,7 @@ export function StayInquiry({
           ) : null}
         </dl>
         <p className={`jk-caption ${styles.meta}`}>
-          {selectedRoom?.rateNote ??
-            "Rates are illustrative demo figures."}{" "}
+          {selectedRoom?.rateNote ?? "Rates are illustrative demo figures."}{" "}
           This preview does not compute a payable total.
         </p>
         <div className={styles.actions}>
@@ -263,8 +252,8 @@ export function StayInquiry({
       </p>
       {ignoredUnknownRoom ? (
         <DemoNotice>
-          That room is not in the house. Choose Lake Room, Garden Room, or
-          Upper Suite.
+          That room is not in the house. Choose Lake Room, Garden Room, or Upper
+          Suite.
         </DemoNotice>
       ) : null}
       {ignoredUnknownExperience ? (

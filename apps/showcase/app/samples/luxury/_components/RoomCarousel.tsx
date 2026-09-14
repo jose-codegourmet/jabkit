@@ -3,8 +3,8 @@
 import { useId, useState } from "react";
 import { CarouselCards } from "@/marketing/carousel-cards";
 import { rooms } from "../content";
-import { sampleRoot } from "../types";
 import styles from "../style.module.css";
+import { sampleRoot } from "../types";
 import { toCarouselItems } from "./adapters";
 
 export function RoomCarousel() {

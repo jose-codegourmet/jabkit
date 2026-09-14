@@ -5,13 +5,7 @@ import { Content1 } from "@/marketing/content1";
 import { Faq12 } from "@/marketing/faq12";
 import { toHouseSections } from "../_components/adapters";
 import { sampleImage } from "../assets";
-import {
-  demoNote,
-  host,
-  houseFaqs,
-  inquireHref,
-  setting,
-} from "../content";
+import { demoNote, host, houseFaqs, inquireHref, setting } from "../content";
 import styles from "../style.module.css";
 import { sampleRoot } from "../types";
 
@@ -80,9 +74,8 @@ export default function HousePage() {
           >
             <title id="grounds-title">Stillwater House grounds</title>
             <desc id="grounds-desc">
-              Lake at the top, landing, house with Garden Room toward the
-              court, Lake Room facing water, Upper Suite above, woodland
-              behind.
+              Lake at the top, landing, house with Garden Room toward the court,
+              Lake Room facing water, Upper Suite above, woodland behind.
             </desc>
             <rect
               x="8"

@@ -41,8 +41,8 @@ export default function LuxuryHomePage() {
               className="aspect-[4/5] object-cover object-[center_35%] md:aspect-[16/9]"
             />
             <figcaption className={`jk-caption ${styles.caption}`}>
-              Stillwater House on Stillwater Reach. Photography is a stub
-              until LUX-03.
+              Stillwater House on Stillwater Reach. Photography is a stub until
+              LUX-03.
             </figcaption>
           </figure>
           <div className={`${styles.heroCopy} mt-8`}>
@@ -89,9 +89,9 @@ export default function LuxuryHomePage() {
             A house that stays in one place
           </h2>
           <p className="jk-body mt-4">
-            Timber, plaster, and a kitchen table that seats the guests who
-            are actually staying. Helen Mora keeps the path, the landing, and
-            the three rooms in the same story.
+            Timber, plaster, and a kitchen table that seats the guests who are
+            actually staying. Helen Mora keeps the path, the landing, and the
+            three rooms in the same story.
           </p>
           <div className={`${styles.actions} mt-6`}>
             <Button asChild variant="secondary">
@@ -107,8 +107,8 @@ export default function LuxuryHomePage() {
             Plan a stay without booking
           </h2>
           <p className="jk-body mt-4">
-            Choose a room, preferred dates, and a guest count. Use Inquire
-            in the header when you want to preview the form. Nothing is sent.
+            Choose a room, preferred dates, and a guest count. Use Inquire in
+            the header when you want to preview the form. Nothing is sent.
           </p>
         </div>
       </section>

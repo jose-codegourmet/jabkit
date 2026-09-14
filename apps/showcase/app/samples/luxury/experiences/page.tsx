@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { Button } from "@/atoms/button";
 import { sampleImage } from "../assets";
-import {
-  demoNote,
-  experiences,
-  inquireHref,
-} from "../content";
+import { demoNote, experiences, inquireHref } from "../content";
 import styles from "../style.module.css";
 import type { ExperienceRecord } from "../types";
 
@@ -26,10 +22,7 @@ function ExperienceChapter({
 }) {
   const image = sampleImage(experience.imageId, experience.alt);
   return (
-    <article
-      className={styles.section}
-      aria-labelledby={experience.slug}
-    >
+    <article className={styles.section} aria-labelledby={experience.slug}>
       <div
         className={`${styles.frame} ${styles.chapter} ${reverse ? styles.chapterReverse : ""}`}
       >
@@ -103,9 +96,8 @@ export default async function ExperiencesPage({
         <div className={styles.frame}>
           <h1 className="jk-heading">Three experiences</h1>
           <p className="jk-lead mt-4">
-            Water, table, and woodland at the same property. None of them
-            is a booked slot. Ask about one in the inquiry if you want it
-            noted.
+            Water, table, and woodland at the same property. None of them is a
+            booked slot. Ask about one in the inquiry if you want it noted.
           </p>
           <p className={`jk-caption ${styles.meta} mt-4`}>{demoNote}</p>
         </div>

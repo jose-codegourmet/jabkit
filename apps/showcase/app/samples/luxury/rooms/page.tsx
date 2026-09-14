@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
 import { Button } from "@/atoms/button";
 import { sampleImage } from "../assets";
-import {
-  demoNote,
-  formatRate,
-  inquireHref,
-  roomHref,
-  rooms,
-} from "../content";
+import { demoNote, formatRate, inquireHref, roomHref, rooms } from "../content";
 import styles from "../style.module.css";
 
 export const metadata: Metadata = {
