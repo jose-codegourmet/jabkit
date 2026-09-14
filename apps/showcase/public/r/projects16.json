@@ -86,7 +86,7 @@
     {
       "path": "projects16/index.ts",
       "type": "index",
-      "content": "export { Projects16 } from \"./Projects16\";\nexport { PROJECTS16_IMAGE_LIMIT } from \"./Projects16.types\";\nexport type * from \"./Projects16.types\";\n"
+      "content": "export { Projects16 } from \"./Projects16\";\nexport type * from \"./Projects16.types\";\nexport { PROJECTS16_IMAGE_LIMIT } from \"./Projects16.types\";\n"
     },
     {
       "path": "lib/cn.ts",
