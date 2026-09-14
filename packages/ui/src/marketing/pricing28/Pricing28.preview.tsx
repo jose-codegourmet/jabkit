@@ -25,5 +25,10 @@ export default {
       <Pricing28 {...pricing28Mocks.alternate} />
     </div>
   ),
+  TwoPlans: () => (
+    <div className="w-full">
+      <Pricing28 {...pricing28Mocks.twoPlans} />
+    </div>
+  ),
   ThemeComparison,
 };

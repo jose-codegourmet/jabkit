@@ -210,10 +210,7 @@ function Outline({
                       ? "bg-accent text-accent-foreground"
                       : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
                   )}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    onSelect(item.id);
-                  }}
+                  onClick={() => onSelect(item.id)}
                 >
                   {item.title}
                 </a>
@@ -301,7 +298,7 @@ export function Content4({
   }, [outline]);
 
   const handleSelect = (id: string) => {
-    scrollToNode(document.getElementById(id));
+    setActiveId(id);
   };
 
   const handleBackToTop = () => {
@@ -365,9 +362,18 @@ export function Content4({
                   <AvatarFallback>{author.fallback}</AvatarFallback>
                 </Avatar>
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-foreground">
-                    {author.name}
-                  </p>
+                  {author.href ? (
+                    <a
+                      href={author.href}
+                      className="text-sm font-medium text-foreground underline-offset-4 hover:underline focus-visible:rounded-[--radius] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    >
+                      {author.name}
+                    </a>
+                  ) : (
+                    <p className="text-sm font-medium text-foreground">
+                      {author.name}
+                    </p>
+                  )}
                   <p className="text-sm text-muted-foreground">
                     {author.role
                       ? `${author.role} · ${author.date}`

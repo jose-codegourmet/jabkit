@@ -25,5 +25,10 @@ export default {
       <Content4 {...content4Mocks.alternate} />
     </div>
   ),
+  LinkedAuthor: () => (
+    <div className="w-full">
+      <Content4 {...content4Mocks.linkedAuthor} />
+    </div>
+  ),
   ThemeComparison,
 };
