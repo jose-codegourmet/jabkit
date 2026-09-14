@@ -1952,11 +1952,12 @@
       ]
     },
     "product-quick-view4": {
-      "sourceHash": "e412241f3abcbb0ee1e84817916432be5a527e3b174f023d5c98b885845ffaf9",
+      "sourceHash": "7db38579613913f83faa6eba8c3cbdfc0ea843b103b6a3f4c4b55f8fcd6881ea",
       "pipelineVersion": 1,
       "stories": [
         "Default",
         "Variants",
+        "StudioPreview",
         "ThemeComparison"
       ],
       "themes": [
@@ -1967,7 +1968,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "product-quick-view4.Default.dark.webp",
-          "bytes": 30328,
+          "bytes": 30268,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1976,7 +1977,16 @@
           "story": "Variants",
           "theme": "dark",
           "file": "product-quick-view4.Variants.dark.webp",
-          "bytes": 20144,
+          "bytes": 20082,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "StudioPreview",
+          "theme": "dark",
+          "file": "product-quick-view4.StudioPreview.dark.webp",
+          "bytes": 16356,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1985,7 +1995,7 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "product-quick-view4.ThemeComparison.dark.webp",
-          "bytes": 42664,
+          "bytes": 42636,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -3396,11 +3406,12 @@
       ]
     },
     "image-cropper": {
-      "sourceHash": "b67db3c9bd2f790f0173f981216ad21af9cfb1bcaf8a029d9dfc09ea81a00c30",
+      "sourceHash": "b75087f2f14ffd912dc6c9866bee13a7cdcf3126b954879db80c81ac8242a827",
       "pipelineVersion": 1,
       "stories": [
         "Default",
-        "Variants"
+        "Variants",
+        "RecoverableErrors"
       ],
       "themes": [
         "dark"
@@ -3410,7 +3421,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "image-cropper.Default.dark.webp",
-          "bytes": 7340,
+          "bytes": 9900,
           "width": 720,
           "height": 860,
           "format": "webp"
@@ -3419,7 +3430,16 @@
           "story": "Variants",
           "theme": "dark",
           "file": "image-cropper.Variants.dark.webp",
-          "bytes": 7508,
+          "bytes": 10454,
+          "width": 720,
+          "height": 860,
+          "format": "webp"
+        },
+        {
+          "story": "RecoverableErrors",
+          "theme": "dark",
+          "file": "image-cropper.RecoverableErrors.dark.webp",
+          "bytes": 10904,
           "width": 720,
           "height": 860,
           "format": "webp"

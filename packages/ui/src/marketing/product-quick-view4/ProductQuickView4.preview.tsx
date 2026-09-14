@@ -31,5 +31,10 @@ export default {
       <ProductQuickView4 {...productQuickView4Mocks.alternate} />
     </div>
   ),
+  StudioPreview: () => (
+    <div className="w-full">
+      <ProductQuickView4 {...productQuickView4Mocks.studio} />
+    </div>
+  ),
   ThemeComparison,
 };

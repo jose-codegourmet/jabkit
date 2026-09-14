@@ -87,4 +87,38 @@ export const productQuickView4Mocks = {
     defaultOpen: true,
     presentation: "dialog",
   },
+  studio: {
+    triggerLabel: "Choose a crop",
+    title: "Weekend Postcards",
+    description:
+      "Pick an artwork and a crop format, then open the local studio. Nothing is added to a cart.",
+    price: "",
+    compareAtPrice: "",
+    images: [
+      {
+        src: "/assets/8b10f8ca8e999989.webp",
+        alt: "Placeholder pier photographed for a weekend postcard crop",
+      },
+      {
+        src: "/assets/1543ba72d246c0c3.webp",
+        alt: "Placeholder kiosk photographed for a weekend postcard crop",
+      },
+    ],
+    colors: [],
+    sizes: [
+      { id: "1:1", label: "1:1" },
+      { id: "4:3", label: "4:3" },
+      { id: "16:9", label: "16:9" },
+      { id: "free", label: "Free" },
+    ],
+    colorLegend: "Color",
+    sizeLegend: "Crop format",
+    addToCartLabel: "Open in studio",
+    showCartIcon: false,
+    detailsLabel: "How cropping works",
+    detailsHref: "#studio-notes",
+    defaultSizeId: "4:3",
+    defaultOpen: true,
+    presentation: "inline",
+  },
 } as const satisfies Record<string, ProductQuickView4Props>;

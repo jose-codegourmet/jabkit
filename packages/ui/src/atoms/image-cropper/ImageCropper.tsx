@@ -12,10 +12,13 @@ import {
 } from "react";
 import { Button } from "@/atoms/button";
 import { cn } from "@/lib/cn";
-import type {
-  ImageCropperArea,
-  ImageCropperAspect,
-  ImageCropperProps,
+import {
+  type ImageCropperArea,
+  type ImageCropperAspect,
+  type ImageCropperError,
+  type ImageCropperProps,
+  imageCropperAcceptedTypes,
+  imageCropperDefaultMaxFileBytes,
 } from "./ImageCropper.types";
 
 const ASPECT_OPTIONS: Array<{ value: ImageCropperAspect; label: string }> = [
@@ -30,6 +33,19 @@ const PAN_STEP = 12;
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
+}
+
+function formatFileLimit(bytes: number) {
+  const mega = bytes / (1024 * 1024);
+  if (mega >= 1) {
+    const rounded = Number.isInteger(mega) ? mega.toString() : mega.toFixed(1);
+    return `${rounded} MB`;
+  }
+  return `${bytes} bytes`;
+}
+
+function isAcceptedImageType(type: string) {
+  return (imageCropperAcceptedTypes as readonly string[]).includes(type);
 }
 
 function aspectValue(
@@ -124,8 +140,12 @@ export function ImageCropper({
   minZoom = 1,
   maxZoom = 3,
   downloadFileName = "cropped-image.png",
+  maxFileBytes = imageCropperDefaultMaxFileBytes,
+  showReset = false,
+  resetLabel = "Reset to sample",
   onCropChange,
   onFileChange,
+  onUploadError,
   ...props
 }: ImageCropperProps) {
   const fileInputId = useId();
@@ -149,9 +169,19 @@ export function ImageCropper({
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
   const [viewport, setViewport] = useState({ width: 0, height: 0 });
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<ImageCropperError | null>(null);
+  const lastGoodSrcRef = useRef<string | undefined>(src);
+  const onUploadErrorRef = useRef(onUploadError);
+  onUploadErrorRef.current = onUploadError;
+
+  const reportError = useCallback((next: ImageCropperError | null) => {
+    setError(next);
+    onUploadErrorRef.current?.(next);
+  }, []);
 
   useEffect(() => {
     setImageSrc(src);
+    setError(null);
   }, [src]);
 
   useEffect(() => {
@@ -255,11 +285,32 @@ export function ImageCropper({
   const handleFiles = useCallback(
     (files: FileList | null) => {
       const file = files?.[0];
-      if (!file?.type?.startsWith("image/")) return;
+      if (!file) return;
+      if (!isAcceptedImageType(file.type)) {
+        reportError({
+          code: "type",
+          message:
+            "Use a JPEG, PNG, WebP, or GIF. This file was not accepted, and the current image was kept.",
+        });
+        return;
+      }
+      if (file.size > maxFileBytes) {
+        reportError({
+          code: "size",
+          message: `This file is larger than ${formatFileLimit(maxFileBytes)}. Choose a smaller image. The current image was kept.`,
+        });
+        return;
+      }
+      reportError(null);
       replaceImage(URL.createObjectURL(file), file);
     },
-    [replaceImage],
+    [maxFileBytes, replaceImage, reportError],
   );
+
+  const resetToSample = useCallback(() => {
+    reportError(null);
+    replaceImage(src, null);
+  }, [replaceImage, reportError, src]);
 
   useEffect(() => {
     return () => {
@@ -427,10 +478,24 @@ export function ImageCropper({
               draggable={false}
               height={displayHeight}
               onLoad={(event) => {
+                lastGoodSrcRef.current = event.currentTarget.currentSrc;
                 setImageSize({
                   width: event.currentTarget.naturalWidth,
                   height: event.currentTarget.naturalHeight,
                 });
+              }}
+              onError={() => {
+                reportError({
+                  code: "decode",
+                  message:
+                    "This file could not be read as an image. The previous image was restored when one was available.",
+                });
+                const fallback = lastGoodSrcRef.current?.startsWith("blob:")
+                  ? src
+                  : (lastGoodSrcRef.current ?? src);
+                if (fallback && fallback !== imageSrc) {
+                  replaceImage(fallback, null);
+                }
               }}
               ref={imageRef}
               src={imageSrc}
@@ -458,7 +523,8 @@ export function ImageCropper({
             htmlFor={fileInputId}
           >
             <ImageIcon className="size-8 text-foreground" />
-            Drop an image here or choose a file to crop.
+            Drop a JPEG, PNG, WebP, or GIF here, or choose a file to crop. Files
+            larger than {formatFileLimit(maxFileBytes)} are not loaded.
           </label>
         )}
       </div>
@@ -519,7 +585,7 @@ export function ImageCropper({
 
         <div className="flex flex-wrap gap-2">
           <input
-            accept="image/*"
+            accept={imageCropperAcceptedTypes.join(",")}
             className="sr-only"
             id={fileInputId}
             onChange={(event) => {
@@ -534,6 +600,17 @@ export function ImageCropper({
               Upload
             </label>
           </Button>
+          {showReset ? (
+            <Button
+              disabled={!src || imageSrc === src}
+              onClick={resetToSample}
+              size="sm"
+              type="button"
+              variant="ghost"
+            >
+              {resetLabel}
+            </Button>
+          ) : null}
           <Button
             className="gap-2"
             disabled={!imageSrc || !area || busy}
@@ -547,6 +624,16 @@ export function ImageCropper({
           </Button>
         </div>
       </div>
+      {error ? (
+        <p className="text-sm text-destructive" role="alert">
+          {error.message}
+        </p>
+      ) : (
+        <p className="text-xs text-muted-foreground">
+          Processing stays in this browser. Nothing is uploaded to a server.
+          JPEG, PNG, WebP, or GIF up to {formatFileLimit(maxFileBytes)}.
+        </p>
+      )}
     </div>
   );
 }

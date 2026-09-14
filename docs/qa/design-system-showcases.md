@@ -321,7 +321,7 @@ Files under `design-systems/**` (including `tokens.json`, `typography.json`, `co
 
 ## After this baseline
 
-West Room Studio (`/samples/minimal`), Good Noise (`/samples/neo-brutalism`), Common Hours (`/samples/editorial`), and Stillwater House (`/samples/luxury`) are additional ready samples. The SH-01 matrix above stays as the dated snapshot. Imagery for those sites still uses SH-04 empty provenance plus local vendor stubs until MIN-03 / NEO-03 / EDT-03 / LUX-03 (Jose owns series production via #260).
+West Room Studio (`/samples/minimal`), Good Noise (`/samples/neo-brutalism`), Common Hours (`/samples/editorial`), Stillwater House (`/samples/luxury`), and Pocket Keeps (`/samples/retro`) are additional ready samples. The SH-01 matrix above stays as the dated snapshot. Imagery for those sites still uses SH-04 empty provenance plus local vendor stubs until MIN-03 / NEO-03 / EDT-03 / LUX-03 / RET-03 (Jose owns series production via #260).
 
 ## Handoff
 
