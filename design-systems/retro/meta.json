@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "retro",
+  "name": "Retro",
+  "status": "draft-specification",
+  "intent": "Give a website tactile personality through a coherent remembered material world without sacrificing current usability.",
+  "keywords": ["tactile", "nostalgic", "playful", "collected", "analog"],
+  "bestFor": [
+    "Creative tools and personal products",
+    "Music and community publications",
+    "Asset collections and culture-led campaigns"
+  ],
+  "avoidFor": [
+    "Serious workflows where decorative metaphors obscure controls",
+    "Brands unable to choose a consistent era or material family"
+  ],
+  "referenceReviewDate": "2026-09-14",
+  "files": {
+    "system.md": "system.md",
+    "rules.md": "rules.md",
+    "tokens.json": "tokens.json",
+    "typography.json": "typography.json",
+    "components.json": "components.json",
+    "patterns.json": "patterns.json",
+    "motion.json": "motion.json",
+    "motion.md": "motion.md",
+    "migration.md": "migration.md",
+    "imagery.md": "imagery.md",
+    "references.md": "references.md"
+  },
+  "compatibility": {
+    "runtime": "Documentation only; manual application required.",
+    "tokenSource": "../../packages/tokens/tokens.css",
+    "modes": ["light", "dark"],
+    "categories": ["atoms", "marketing", "dashboard"],
+    "automaticInstall": false,
+    "foundationVariables": "Proposed additions, not existing runtime variables."
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "retro",
+  "patterns": [
+    {
+      "id": "creative-product",
+      "purpose": "Make a modern creative tool feel approachable and personal.",
+      "sections": [
+        "Product promise and compact collage",
+        "Real product demonstration",
+        "Three concrete uses",
+        "Curated examples",
+        "Offer and download",
+        "Maker note"
+      ],
+      "desktop": "A compact central opening followed by a wide demonstration and grouped use cases.",
+      "mobile": "Keep one decorative object; product demonstration and CTA remain full width.",
+      "conversion": "Show the real result before the download or signup.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "music-community",
+      "purpose": "Present episodes or releases as a coherent collection.",
+      "sections": [
+        "Publication identity and signup",
+        "Featured episode",
+        "Release or episode collection",
+        "Community contributions",
+        "About and subscription"
+      ],
+      "desktop": "One lead sleeve followed by an aligned collection; playback remains conventional.",
+      "mobile": "Single-column sleeves with titles and controls outside the art.",
+      "conversion": "Listen or subscribe without navigating decorative objects.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "asset-pack",
+      "purpose": "Sell a specific collection with visible contents and terms.",
+      "sections": [
+        "Pack identity and hero object",
+        "Detail closeups",
+        "Included assets",
+        "Compatibility and license summary",
+        "Purchase and sample download"
+      ],
+      "desktop": "A single large render leads into a catalogue at a consistent camera angle.",
+      "mobile": "One or two assets per row depending on label length; no clipped controls.",
+      "conversion": "Compare the contents and license before purchase.",
+      "imageryGuide": "imagery.md"
+    }
+  ]
+}

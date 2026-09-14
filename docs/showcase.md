@@ -30,6 +30,7 @@ Everything under `apps/showcase/app/` and `apps/showcase/components/` is site ch
 | `/preview/[name]/[story]` | `app/preview/[name]/[story]/page.tsx` | Isolated iframe document. |
 | `/samples` | `app/samples/page.tsx` | Sample index from `app/samples/catalog.ts`. |
 | `/samples/saas` | `app/samples/saas/page.tsx` | SaaS landing assembled from registry blocks. |
+| `/design-systems` | `app/design-systems/page.tsx` | Design-system directions index. Static so it is not captured by `/[category]`. |
 | `/mcp` | `app/mcp/route.ts` | Read-only JSON endpoint. See [mcp.md](mcp.md). |
 
 ## Preview architecture

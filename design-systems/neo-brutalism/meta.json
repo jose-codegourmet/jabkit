@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "neo-brutalism",
+  "name": "Neo-brutalism",
+  "status": "draft-specification",
+  "intent": "Make hierarchy, boundaries, and actions immediate while giving the brand a bold independent voice.",
+  "keywords": ["graphic", "direct", "tactile", "high-contrast", "poster"],
+  "bestFor": [
+    "Independent creative businesses",
+    "Food, culture, and event campaigns",
+    "Personality-led portfolios"
+  ],
+  "avoidFor": [
+    "Brands whose message needs discretion",
+    "Dense product interfaces where decorative collision slows the task"
+  ],
+  "referenceReviewDate": "2026-09-14",
+  "files": {
+    "system.md": "system.md",
+    "rules.md": "rules.md",
+    "tokens.json": "tokens.json",
+    "typography.json": "typography.json",
+    "components.json": "components.json",
+    "patterns.json": "patterns.json",
+    "motion.json": "motion.json",
+    "motion.md": "motion.md",
+    "migration.md": "migration.md",
+    "imagery.md": "imagery.md",
+    "references.md": "references.md"
+  },
+  "compatibility": {
+    "runtime": "Documentation only; manual application required.",
+    "tokenSource": "../../packages/tokens/tokens.css",
+    "modes": ["light", "dark"],
+    "categories": ["atoms", "marketing", "dashboard"],
+    "automaticInstall": false,
+    "foundationVariables": "Proposed additions, not existing runtime variables."
+  }
+}

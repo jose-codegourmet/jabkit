@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "neo-brutalism",
+  "durationMs": {
+    "feedback": 100,
+    "transition": 180,
+    "reveal": "One short 8px translation on decorative media; no text scrambling.",
+    "stagger": 35
+  },
+  "easing": {
+    "standard": "cubic-bezier(0.2, 0, 0, 1)"
+  },
+  "behaviors": {
+    "hover": {
+      "trigger": "pointer enters an enabled control",
+      "effect": "Reduce the hard shadow from 4px to 2px without moving the control.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    },
+    "press": {
+      "trigger": "pointer or keyboard activation",
+      "effect": "Translate 2px toward the shadow and reduce its offset to 2px.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    },
+    "reveal": {
+      "trigger": "secondary figure first enters viewport",
+      "effect": "One short 8px translation on decorative media; no text scrambling.",
+      "duration": "reveal",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    },
+    "image": {
+      "trigger": "explicit gallery action or one decorative entrance",
+      "effect": "A decorative cutout can settle once by 2 degrees; functional media stays square.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    },
+    "menu": {
+      "trigger": "menu open or close action",
+      "effect": "Open a ruled panel with a short opacity transition.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    }
+  },
+  "global": {
+    "autoplay": false,
+    "audioAutoplay": false,
+    "maxStaggerItems": 3,
+    "replayOnScroll": false,
+    "reducedMotionMedia": "(prefers-reduced-motion: reduce)",
+    "contentBeforeEnhancement": "Visible, usable, and in reading order.",
+    "colorTransition": "Optional brief color feedback; reduced motion removes spatial animation and stagger."
+  }
+}

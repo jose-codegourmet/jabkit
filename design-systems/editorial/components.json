@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "editorial",
+  "components": {
+    "button": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/button/Button.tsx"],
+      "adaptation": "A restrained editorial action with a literal destination or verb; it should not interrupt reading.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API."
+    },
+    "card": {
+      "category": "marketing",
+      "existingCandidates": [],
+      "adaptation": "An article or index entry with a title, image, deck, and real metadata when available.",
+      "notes": "No standalone card atom is assumed; compose semantic HTML with existing atoms."
+    },
+    "input": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/input/Input.tsx"],
+      "adaptation": "A clearly labeled reading-width field; errors appear with explanatory text below it.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API."
+    },
+    "navbar": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/menu-vertical/MenuVertical.tsx"
+      ],
+      "adaptation": "A masthead plus real sections or tasks, with a plain current-section indicator.",
+      "notes": "MenuVertical is a reference for a navigation list, not a compact header. Its large type and moving labels require replacement for this navbar direction."
+    },
+    "hero": {
+      "category": "marketing",
+      "existingCandidates": [],
+      "adaptation": "A cover composition: title, standfirst, one meaningful image, and a route into the content.",
+      "notes": "Compose the specified section with semantic HTML, a figure, and existing Button. No exact hero match is assumed; Hero307 includes a dashboard composition that does not fit this direction."
+    },
+    "pricing": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/pricing28/Pricing28.tsx"
+      ],
+      "adaptation": "Membership or service choices presented as an understandable comparison with exclusions visible.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API."
+    }
+  }
+}

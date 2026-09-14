@@ -1,0 +1,8 @@
+@import "../app/globals.css";
+
+@source "../components";
+
+:root {
+  --font-geist-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-geist-mono: ui-monospace, monospace;
+}

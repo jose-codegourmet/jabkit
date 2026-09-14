@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "editorial",
+  "durationMs": {
+    "feedback": 160,
+    "transition": 240,
+    "reveal": "An optional 10px figure entrance at chapter boundaries, once.",
+    "stagger": 50
+  },
+  "easing": {
+    "standard": "cubic-bezier(0.22, 0.61, 0.36, 1)"
+  },
+  "behaviors": {
+    "hover": {
+      "trigger": "pointer enters an enabled control",
+      "effect": "Reveal an underline on linked titles; keep the cover image still.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    },
+    "press": {
+      "trigger": "pointer or keyboard activation",
+      "effect": "Change the action surface without scaling or rotating it.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    },
+    "reveal": {
+      "trigger": "secondary figure first enters viewport",
+      "effect": "An optional 10px figure entrance at chapter boundaries, once.",
+      "duration": "reveal",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    },
+    "image": {
+      "trigger": "explicit gallery action or one decorative entrance",
+      "effect": "Keep documentary images still; a user-controlled gallery may crossfade.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    },
+    "menu": {
+      "trigger": "menu open or close action",
+      "effect": "Reveal section links as one group with a short opacity transition.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    }
+  },
+  "global": {
+    "autoplay": false,
+    "audioAutoplay": false,
+    "maxStaggerItems": 3,
+    "replayOnScroll": false,
+    "reducedMotionMedia": "(prefers-reduced-motion: reduce)",
+    "contentBeforeEnhancement": "Visible, usable, and in reading order.",
+    "colorTransition": "Optional brief color feedback; reduced motion removes spatial animation and stagger."
+  }
+}

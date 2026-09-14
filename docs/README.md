@@ -13,6 +13,8 @@ Durable architectural decisions, when they need a record, may be added under `do
 | [architecture.md](architecture.md) | Monorepo layout, ownership, generated artifacts, boundaries | First time in the repo, or a change that crosses packages |
 | [adding-a-component.md](adding-a-component.md) | Mandatory file checklist for a new or substantially changed component | Adding or modifying a component |
 | [design-system.md](design-system.md) | Categories, composition, tokens-as-classes, a11y and responsive conventions | Deciding *how* a component should be built |
+| [Design-system directions](../design-systems/README.md) | Minimal, neo-brutalist, editorial, luxury, and retro specifications, reference analysis, and AI image guidance | Planning a website style or adapting JabKit's visual language |
+| [Showcase roadmaps](../design-systems/roadmap.md) | Detailed Markdown tickets and prompts for five complete websites, with JabKit component mappings and Higgsfield MCP imagery instructions | Breaking design-system showcases into implementation issues |
 | [theming.md](theming.md) | `--jk-*` tokens, light/dark, `next-themes`, preview iframe theme behavior | Changing a color, token, or dark-mode behavior |
 | [registry.md](registry.md) | Metadata, build, JSON outputs, example extraction | Changing registry output, metadata fields, or the builder |
 | [showcase.md](showcase.md) | Routes, previews, samples, showcase-only vs library | Changing catalogue UI, preview, or samples |
@@ -32,6 +34,7 @@ Durable architectural decisions, when they need a record, may be added under `do
 | Changing agent-facing catalogue endpoints | [mcp.md](mcp.md) |
 | Changing preview assets or remote component images | [previews.md](previews.md) |
 | Understanding the whole system first | [architecture.md](architecture.md) |
+| Choosing or applying a website style | [Design-system directions](../design-systems/README.md), then the selected system's `system.md` and `migration.md` |
 
 ## Ownership
 

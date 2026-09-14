@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "editorial",
+  "name": "Editorial",
+  "status": "draft-specification",
+  "intent": "Turn information into an authored sequence with a clear opening, evidence, context, and a useful conclusion.",
+  "keywords": ["authored", "narrative", "curious", "layered", "readable"],
+  "bestFor": [
+    "Publications and cultural indexes",
+    "Personal creative practices",
+    "Case studies, community guides, and story-led events"
+  ],
+  "avoidFor": [
+    "A simple utility that should get out of the way",
+    "Pages with no genuine story or evidence to organize"
+  ],
+  "referenceReviewDate": "2026-09-14",
+  "files": {
+    "system.md": "system.md",
+    "rules.md": "rules.md",
+    "tokens.json": "tokens.json",
+    "typography.json": "typography.json",
+    "components.json": "components.json",
+    "patterns.json": "patterns.json",
+    "motion.json": "motion.json",
+    "motion.md": "motion.md",
+    "migration.md": "migration.md",
+    "imagery.md": "imagery.md",
+    "references.md": "references.md"
+  },
+  "compatibility": {
+    "runtime": "Documentation only; manual application required.",
+    "tokenSource": "../../packages/tokens/tokens.css",
+    "modes": ["light", "dark"],
+    "categories": ["atoms", "marketing", "dashboard"],
+    "automaticInstall": false,
+    "foundationVariables": "Proposed additions, not existing runtime variables."
+  }
+}

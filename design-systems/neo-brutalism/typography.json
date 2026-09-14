@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "neo-brutalism",
+  "families": {
+    "display": "Impact, \"Arial Narrow\", Arial, sans-serif",
+    "body": "Arial, Helvetica, sans-serif",
+    "label": "\"Courier New\", monospace"
+  },
+  "roles": {
+    "display": {
+      "family": "display",
+      "fontSize": "clamp(3rem, 1.5rem + 6vw, 7rem)",
+      "lineHeight": 1.0,
+      "fontWeight": 700,
+      "letterSpacing": "-0.025em",
+      "maxWidth": "18ch"
+    },
+    "heading": {
+      "family": "display",
+      "fontSize": "clamp(2rem, 1rem + 3vw, 4rem)",
+      "lineHeight": 1.15,
+      "fontWeight": 700,
+      "letterSpacing": "-0.015em",
+      "maxWidth": "28ch"
+    },
+    "body": {
+      "family": "body",
+      "fontSize": "1rem",
+      "lineHeight": 1.5,
+      "fontWeight": 400,
+      "letterSpacing": "0em",
+      "maxWidth": "58ch"
+    },
+    "lead": {
+      "family": "body",
+      "fontSize": "clamp(1.125rem, 1rem + 0.5vw, 1.375rem)",
+      "lineHeight": 1.5,
+      "fontWeight": 400,
+      "letterSpacing": "0em",
+      "maxWidth": "44ch"
+    },
+    "label": {
+      "family": "label",
+      "fontSize": ".9375rem",
+      "lineHeight": 1.35,
+      "fontWeight": 700,
+      "letterSpacing": ".01em",
+      "maxWidth": "none"
+    },
+    "caption": {
+      "family": "label",
+      "fontSize": ".875rem",
+      "lineHeight": 1.5,
+      "fontWeight": 400,
+      "letterSpacing": "0em",
+      "maxWidth": "60ch"
+    }
+  },
+  "implementation": {
+    "status": "Fallback stacks, not bundled fonts or extracted reference-site font names.",
+    "loading": "If selecting a licensed brand font later, self-host or use the existing framework font pipeline; provide a fallback and font-display strategy.",
+    "wrapping": "Use natural wraps; do not force desktop line breaks on mobile. Let controls grow if long translated labels need it.",
+    "metrics": "Check fallback width, italic descenders, and layout shifts after font loading. Serif display has at least 1.1 line height.",
+    "responsive": "Use rem plus viewport terms with clamp; verify actual browser text zoom and narrow reflow."
+  }
+}

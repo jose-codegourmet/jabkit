@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "minimal",
+  "name": "Minimal",
+  "status": "draft-specification",
+  "intent": "Make a small number of carefully chosen things easy to notice, compare, and understand.",
+  "keywords": ["quiet", "precise", "open", "image-led", "restrained"],
+  "bestFor": [
+    "Design and architecture portfolios",
+    "Photography and independent studios",
+    "Focused service websites"
+  ],
+  "avoidFor": [
+    "Offers that need many competing promotions",
+    "Image-poor portfolios relying on empty space to feel finished"
+  ],
+  "referenceReviewDate": "2026-09-14",
+  "files": {
+    "system.md": "system.md",
+    "rules.md": "rules.md",
+    "tokens.json": "tokens.json",
+    "typography.json": "typography.json",
+    "components.json": "components.json",
+    "patterns.json": "patterns.json",
+    "motion.json": "motion.json",
+    "motion.md": "motion.md",
+    "migration.md": "migration.md",
+    "imagery.md": "imagery.md",
+    "references.md": "references.md"
+  },
+  "compatibility": {
+    "runtime": "Documentation only; manual application required.",
+    "tokenSource": "../../packages/tokens/tokens.css",
+    "modes": ["light", "dark"],
+    "categories": ["atoms", "marketing", "dashboard"],
+    "automaticInstall": false,
+    "foundationVariables": "Proposed additions, not existing runtime variables."
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "minimal",
+  "patterns": [
+    {
+      "id": "studio-gallery",
+      "purpose": "Let the work establish trust before introducing services.",
+      "sections": [
+        "Short practice introduction and dominant work",
+        "Unequal selected-work pair with captions",
+        "Practice statement and one contextual image",
+        "Service scope comparison",
+        "Direct inquiry and contact details"
+      ],
+      "desktop": "Seven-column lead image with a two-column caption; alternate image scales around a shared baseline.",
+      "mobile": "One image per row; captions immediately follow their image.",
+      "conversion": "View work first, then inquire with an understood scope.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "project-detail",
+      "purpose": "Explain one project without turning it into a card collection.",
+      "sections": [
+        "Project title and brief",
+        "Full-width establishing view",
+        "Two detail views",
+        "Constraints and decisions",
+        "Outcome and next project"
+      ],
+      "desktop": "A narrow reading column beside a wider media column.",
+      "mobile": "Brief, establishing view, decisions, and detail views in that order.",
+      "conversion": "Offer the next project and a distinct inquiry link.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "service-page",
+      "purpose": "Make a small service offering easy to compare.",
+      "sections": [
+        "Service promise",
+        "Relevant completed work",
+        "Two scope options",
+        "Process and practical questions",
+        "Inquiry form"
+      ],
+      "desktop": "Aligned, border-light service columns with the same information order.",
+      "mobile": "Stack scopes with headings, then one inquiry form.",
+      "conversion": "Show scope and exclusions before requesting contact.",
+      "imageryGuide": "imagery.md"
+    }
+  ]
+}
