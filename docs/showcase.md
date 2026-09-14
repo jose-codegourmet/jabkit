@@ -88,4 +88,6 @@ Because of the alias, do not invent `@/components/...` paths inside the showcase
 
 `SiteHeader` (sticky, mobile burger, `ThemeToggle`) and `SiteFooter` wrap marketing routes. The header's GitHub anchor is currently `https://github.com` with no repo path.
 
+Chrome stories (`components/*.stories.tsx`) and `.storybook/` are excluded from `apps/showcase/tsconfig.json`. They are not Next.js app modules; `next build` must not type-check `@storybook/nextjs-vite`.
+
 Preview routes do not render the header; they are a blank document for the iframe.
