@@ -43,6 +43,7 @@ export const implementedSampleHrefs = [
   "/samples/neo-brutalism",
   "/samples/editorial",
   "/samples/luxury",
+  "/samples/retro",
 ] as const satisfies readonly SampleRootHref[];
 
 export type LinkedSampleHref = (typeof implementedSampleHrefs)[number];
@@ -129,8 +130,9 @@ export const samples = [
     designSystem: "Retro",
     brand: "Pocket Keeps",
     description:
-      "Creative image-utility sample. Collection, format, and a local crop/download studio. Catalogue link lands when this site is released.",
-    status: "soon",
+      "Creative image-utility sample. Collection, format, and a local crop/download studio.",
+    href: linkedSampleHref("/samples/retro"),
+    status: "ready",
   },
 ] as const satisfies readonly SampleEntry[];
 

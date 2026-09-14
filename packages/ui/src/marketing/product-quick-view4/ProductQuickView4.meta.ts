@@ -3,10 +3,10 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "product-quick-view4",
   displayName: "ProductQuickView4",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-05",
   description:
-    "Storefront product quick-view dialog with an image carousel, sale price, color and size options, and add-to-cart plus details actions.",
+    "Product quick-view dialog with an image carousel, optional price and color groups, size or format options, and a primary action plus details link.",
   sectionCategory: "product",
   purpose:
     "Lets shoppers inspect imagery, price, variants, and purchase actions without leaving a product listing.",

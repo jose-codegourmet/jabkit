@@ -92,6 +92,7 @@ function ProductPanel({
   colorLegend,
   sizeLegend,
   addToCartLabel,
+  showCartIcon,
   detailsLabel,
   detailsHref,
   colorId,
@@ -112,6 +113,7 @@ function ProductPanel({
   colorLegend: string;
   sizeLegend: string;
   addToCartLabel: string;
+  showCartIcon: boolean;
   detailsLabel: string;
   detailsHref: string;
   colorId: string;
@@ -128,11 +130,13 @@ function ProductPanel({
   const activeImage = images[imageIndex] ?? images[0];
   const selectedColor = colors.find((color) => color.id === colorId);
   const selectedSize = sizes.find((size) => size.id === sizeId);
-  const canAdd =
-    Boolean(colorId) &&
-    Boolean(sizeId) &&
-    selectedColor?.available !== false &&
-    selectedSize?.available !== false;
+  const colorReady =
+    colors.length === 0 ||
+    (Boolean(colorId) && selectedColor?.available !== false);
+  const sizeReady =
+    sizes.length === 0 ||
+    (Boolean(sizeId) && selectedSize?.available !== false);
+  const canAdd = colorReady && sizeReady;
   const Title = inDialog ? DialogTitle : "h2";
   const Description = inDialog ? DialogDescription : "p";
 
@@ -200,16 +204,18 @@ function ProductPanel({
           </Description>
         </div>
 
-        <p className="flex flex-wrap items-baseline gap-2">
-          <span className="text-xl font-semibold tracking-[-0.03em]">
-            {price}
-          </span>
-          {compareAtPrice ? (
-            <span className="text-sm text-muted-foreground line-through">
-              {compareAtPrice}
+        {price ? (
+          <p className="flex flex-wrap items-baseline gap-2">
+            <span className="text-xl font-semibold tracking-[-0.03em]">
+              {price}
             </span>
-          ) : null}
-        </p>
+            {compareAtPrice ? (
+              <span className="text-sm text-muted-foreground line-through">
+                {compareAtPrice}
+              </span>
+            ) : null}
+          </p>
+        ) : null}
 
         {colors.length > 0 ? (
           <fieldset className="flex flex-col gap-3">
@@ -316,10 +322,10 @@ function ProductPanel({
             disabled={!canAdd}
             onClick={() => {
               if (!canAdd) return;
-              onAddToCart?.({ colorId, sizeId });
+              onAddToCart?.({ colorId, sizeId, imageIndex });
             }}
           >
-            <ShoppingBagIcon className="size-4" />
+            {showCartIcon ? <ShoppingBagIcon className="size-4" /> : null}
             {addToCartLabel}
           </Button>
           <Button asChild className="w-full" variant="secondary">
@@ -346,6 +352,7 @@ export function ProductQuickView4({
   colorLegend = "Color",
   sizeLegend = "Size",
   addToCartLabel = "Add to cart",
+  showCartIcon = true,
   detailsLabel = "View product details",
   detailsHref = "#overcoat",
   defaultColorId,
@@ -380,6 +387,7 @@ export function ProductQuickView4({
       onSizeChange={setSizeId}
       onViewDetails={onViewDetails}
       price={price}
+      showCartIcon={showCartIcon}
       sizeId={sizeId}
       sizeLegend={sizeLegend}
       sizes={sizes}
