@@ -1,6 +1,6 @@
 # Stillwater House — Luxury showcase roadmap
 
-Status: **planned** · Ticket prefix: **LUX** · Proposed root: `/samples/luxury` · 12 tickets.
+Status: **in progress (sample implemented; LUX-03 imagery deferred to #260)** · Ticket prefix: **LUX** · Root: `/samples/luxury` · 12 tickets.
 
 Read the [shared roadmap and mandatory handoff](../roadmap.md), then this folder’s [system](system.md), [rules](rules.md), [component guidance](components.json), [imagery direction](imagery.md), and [migration notes](migration.md). These are implementation tickets; none of the proposed routes or API extensions is claimed to exist yet.
 

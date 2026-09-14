@@ -25,5 +25,10 @@ export default {
       <CarouselCards {...carouselCardsMocks.alternate} />
     </div>
   ),
+  NightlyRates: () => (
+    <div className="w-full">
+      <CarouselCards {...carouselCardsMocks.nightly} />
+    </div>
+  ),
   ThemeComparison,
 };

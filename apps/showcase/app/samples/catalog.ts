@@ -42,6 +42,7 @@ export const implementedSampleHrefs = [
   "/samples/minimal",
   "/samples/neo-brutalism",
   "/samples/editorial",
+  "/samples/luxury",
 ] as const satisfies readonly SampleRootHref[];
 
 export type LinkedSampleHref = (typeof implementedSampleHrefs)[number];
@@ -119,8 +120,9 @@ export const samples = [
     designSystem: "Luxury",
     brand: "Stillwater House",
     description:
-      "Boutique guest house sample. Rooms, detail, dates, and a stay-inquiry preview. Catalogue link lands when this site is released.",
-    status: "soon",
+      "Boutique guest house sample. Rooms, detail, dates, and a stay-inquiry preview.",
+    href: linkedSampleHref("/samples/luxury"),
+    status: "ready",
   },
   {
     slug: "retro",
