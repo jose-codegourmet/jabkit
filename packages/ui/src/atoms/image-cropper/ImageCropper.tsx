@@ -145,7 +145,7 @@ export function ImageCropper({
   resetLabel = "Reset to sample",
   onCropChange,
   onFileChange,
-  onError,
+  onUploadError,
   ...props
 }: ImageCropperProps) {
   const fileInputId = useId();
@@ -171,12 +171,12 @@ export function ImageCropper({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<ImageCropperError | null>(null);
   const lastGoodSrcRef = useRef<string | undefined>(src);
-  const onErrorRef = useRef(onError);
-  onErrorRef.current = onError;
+  const onUploadErrorRef = useRef(onUploadError);
+  onUploadErrorRef.current = onUploadError;
 
   const reportError = useCallback((next: ImageCropperError | null) => {
     setError(next);
-    onErrorRef.current?.(next);
+    onUploadErrorRef.current?.(next);
   }, []);
 
   useEffect(() => {

@@ -4181,7 +4181,7 @@
     "name": "product-quick-view4",
     "displayName": "ProductQuickView4",
     "category": "marketing",
-    "description": "Storefront product quick-view dialog with an image carousel, sale price, color and size options, and add-to-cart plus details actions.",
+    "description": "Product quick-view dialog with an image carousel, optional price and color groups, size or format options, and a primary action plus details link.",
     "sectionCategory": "product",
     "purpose": "Lets shoppers inspect imagery, price, variants, and purchase actions without leaving a product listing.",
     "bestFor": [

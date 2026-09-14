@@ -48,5 +48,5 @@ export interface ImageCropperProps extends HTMLAttributes<HTMLDivElement> {
   resetLabel?: string;
   onCropChange?: (area: ImageCropperArea) => void;
   onFileChange?: (file: File | null) => void;
-  onError?: (error: ImageCropperError | null) => void;
+  onUploadError?: (error: ImageCropperError | null) => void;
 }

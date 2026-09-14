@@ -2,11 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Badge } from "@/atoms/badge";
-import {
-  ImageCropper,
-  type ImageCropperArea,
-  imageCropperDefaultMaxFileBytes,
-} from "@/atoms/image-cropper";
+import { ImageCropper, type ImageCropperArea } from "@/atoms/image-cropper";
 import { sampleImage } from "../assets";
 import { cropFormatLabels, toCropperAspect } from "../content";
 import styles from "../style.module.css";
@@ -41,7 +37,6 @@ export function LocalStudio({
         alt={asset.alt}
         aspect={toCropperAspect(aspect)}
         downloadFileName={downloadName}
-        maxFileBytes={imageCropperDefaultMaxFileBytes}
         resetLabel="Reset to sample"
         showReset
         src={image.src}
