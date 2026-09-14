@@ -40,6 +40,7 @@ void _rootsMatchSlugs;
 export const implementedSampleHrefs = [
   "/samples/saas",
   "/samples/minimal",
+  "/samples/neo-brutalism",
 ] as const satisfies readonly SampleRootHref[];
 
 export type LinkedSampleHref = (typeof implementedSampleHrefs)[number];
@@ -99,8 +100,9 @@ export const samples = [
     designSystem: "Neo-brutalism",
     brand: "Good Noise",
     description:
-      "Independent branding studio sample. Work, engagement, and a project-brief preview. Catalogue link lands when this site is released.",
-    status: "soon",
+      "Independent branding studio sample. Work, engagement, and a project-brief preview.",
+    href: linkedSampleHref("/samples/neo-brutalism"),
+    status: "ready",
   },
   {
     slug: "editorial",

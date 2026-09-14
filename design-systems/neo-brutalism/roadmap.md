@@ -1,6 +1,6 @@
 # Good Noise — Neo Brutalism showcase roadmap
 
-Status: **planned** · Ticket prefix: **NEO** · Proposed root: `/samples/neo-brutalism` · 12 tickets.
+Status: **implemented in showcase** (NEO-03 imagery still pending via #260) · Ticket prefix: **NEO** · Root: `/samples/neo-brutalism` · 12 tickets.
 
 Read the [shared roadmap and mandatory handoff](../roadmap.md), then this folder’s [system](system.md), [rules](rules.md), [component guidance](components.json), [imagery direction](imagery.md), and [migration notes](migration.md). These are implementation tickets; none of the proposed routes or API extensions is claimed to exist yet.
 
