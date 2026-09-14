@@ -4,9 +4,13 @@ JabKit themes through semantic CSS custom properties, not through per-component 
 
 There is a separate open issue about preview-iframe theme behavior. This document describes the intended contract and the current implementation. It does not claim the iframe bug is solved.
 
+## Independent website themes
+
+The five `apps/<system>` websites own `app/globals.css` and `app/theme.css`. They do not import showcase styles or the shared five-style scope sheet. Their Tailwind v4 configuration scans their own app/components and shared UI source, and uses app-local semantic values. The original `packages/tokens/scopes.css` remains available for the catalogue reference surface and library stories. See [standalone apps](standalone-design-systems.md).
+
 ## Token ownership
 
-`packages/tokens/tokens.css` is the only place canonical `--jk-*` values are defined. `@jabkit/tokens` exports that file as `./tokens.css`, a TypeScript object as `./tokens`, and sample-site presets as `./scopes.css`. Do not paste design-system JSON into CSS or register these presets as component `cssVars`.
+`packages/tokens/tokens.css` owns canonical shared-library `--jk-*` values. `@jabkit/tokens` exports that file as `./tokens.css`, a TypeScript object as `./tokens`, and sample-site presets as `./scopes.css`. Do not paste design-system JSON into CSS or register these presets as component `cssVars`.
 
 The CSS file:
 

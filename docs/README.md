@@ -14,9 +14,11 @@ Durable architectural decisions, when they need a record, may be added under `do
 | [adding-a-component.md](adding-a-component.md) | Mandatory file checklist for a new or substantially changed component | Adding or modifying a component |
 | [design-system.md](design-system.md) | Categories, composition, tokens-as-classes, a11y and responsive conventions | Deciding *how* a component should be built |
 | [Design-system directions](../design-systems/README.md) | Minimal, neo-brutalist, editorial, luxury, and retro specifications, reference analysis, and AI image guidance | Planning a website style or adapting JabKit's visual language |
-| [Showcase roadmaps](../design-systems/roadmap.md) | Five shipped sample websites plus remaining Higgsfield imagery on #260; original ticket text kept as history | Status of the five-site showcase, or the original ticket briefs |
+| [Showcase roadmaps](../design-systems/roadmap.md) | Historical website tickets; current apps and imagery guidance linked at the top | Status of the five-site showcase, or the original ticket briefs |
 | [theming.md](theming.md) | `--jk-*` tokens, light/dark, `next-themes`, preview iframe theme behavior | Changing a color, token, or dark-mode behavior |
 | [registry.md](registry.md) | Metadata, build, JSON outputs, example extraction | Changing registry output, metadata fields, or the builder |
+| [Redesign review](qa/design-system-redesign.md) | Approved image placements, visual changes, and production browser verification | Reviewing the five redesigned websites |
+| [standalone-design-systems.md](standalone-design-systems.md) | Independent apps, local Tailwind configuration, routes, subdomains, and user-owned image production | Working on any of the five design-system websites |
 | [showcase.md](showcase.md) | Routes, previews, samples, showcase-only vs library | Changing catalogue UI, preview, or samples |
 | [qa/design-system-showcases.md](qa/design-system-showcases.md) | SH-07 full-site review template and SH-01 dated gate baseline | Releasing a sample, capturing catalogue covers, or distinguishing pre-existing vs new gate failures |
 | [cli.md](cli.md) | `init` / `add` / `upgrade`, config, consumer files | Changing consumer install behavior |

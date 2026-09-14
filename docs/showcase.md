@@ -19,6 +19,10 @@ Everything under `apps/showcase/app/` and `apps/showcase/components/` is site ch
 
 `apps/showcase/tsconfig.json` maps `@/*` to `../../packages/ui/src/*`. Imports such as `@/atoms/button` inside the showcase resolve into the library. Showcase-only modules use relative paths. Samples depend on this alias; see below.
 
+## Independent design-system websites
+
+The five complete design-system sites now live in `apps/minimal`, `apps/neo-brutalism`, `apps/editorial`, `apps/luxury`, and `apps/retro`, with local routes rooted at `/`. They no longer compile as showcase pages. `/design-systems` remains the directory; its links use the configured external origins in `common/design-system-sites.ts`. Production entries without an origin are not clickable. Old design-system/sample prefixes redirect temporarily to those origins, or to the directory if unconfigured. See [standalone apps](standalone-design-systems.md) for environment variables, ports, asset ownership, and deployment.
+
 ## Routes
 
 | Route | File | Role |
@@ -33,11 +37,6 @@ Everything under `apps/showcase/app/` and `apps/showcase/components/` is site ch
 | `/samples/draft` | `app/samples/draft/page.tsx` | Unpublished DemoBar check. Omitted from the catalogue. |
 | `/samples/scope-reference` | `app/samples/scope-reference/page.tsx` | Scoped token/typography/portal reference. Not a catalogue sample. |
 | `/design-systems` | `app/design-systems/page.tsx` | Design-system directions index. Static so it is not captured by `/[category]`. |
-| `/design-systems/minimal` | `app/design-systems/minimal/page.tsx` | West Room Studio. Work index, six project details, studio, services, local inquiry. |
-| `/design-systems/neo-brutalism` | `app/design-systems/neo-brutalism/page.tsx` | Good Noise. Work, services, studio, local brief preview. |
-| `/design-systems/editorial` | `app/design-systems/editorial/page.tsx` | Common Hours. Story archive, nine longreads, contributors, about, membership preview. |
-| `/design-systems/luxury` | `app/design-systems/luxury/page.tsx` | Stillwater House. Rooms, room details, experiences, house, local stay inquiry. |
-| `/design-systems/retro` | `app/design-systems/retro/page.tsx` | Pocket Keeps. Collections, format picker, working local crop/download studio. |
 | `/mcp` | `app/mcp/route.ts` | Read-only JSON endpoint. See [mcp.md](mcp.md). |
 
 SH-01 dated gate, SH-07 full-site review template, and catalogue-cover rules: [qa/design-system-showcases.md](qa/design-system-showcases.md). Every `-12` release PR copies that template. Whole-site shots are not `pnpm previews:build` output.
@@ -66,7 +65,7 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 
 `ScaledFrame.tsx` no longer exists. The home page and `/components` use the server-rendered `PreviewImage` component, which reads the committed preview manifest and renders a local `/previews/{file}` still WebP (or GIF when `preview.capture.format` is `"gif"`) instead of an iframe. Reduced-motion visitors receive the still. Button's home theme-proof strip selects its corresponding light or dark capture.
 
-`apps/showcase/public/previews/` contains the generated WebPs and `manifest.json`; `apps/showcase/public/assets/` contains re-hosted component images and `sources.json`. Design-system sample photography lives under `public/assets/design-systems/` with a separate provenance contract. See [previews.md](previews.md).
+`apps/showcase/public/previews/` contains the generated WebPs and `manifest.json`; `apps/showcase/public/assets/` contains re-hosted component images and `sources.json`. Design-system photography now lives under each independent app’s `public/assets/design-systems/` with a separate provenance contract. See [previews.md](previews.md).
 
 `ComponentPreview.tsx` is deliberately unchanged and remains a live iframe surface on the component detail page, retaining its device sizing, local theme toggle, and new-tab link.
 
@@ -89,11 +88,11 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 
 `/samples` and `/design-systems` are separate catalogues. `app/samples/catalog.ts` owns product-sample metadata. The only ready sample is `/samples/saas` (Quarry). A ready entry’s `href` must pass `linkedSampleHref`, which only accepts `implementedSampleHrefs`. Paths outside those roots fail typecheck without an `as Route` assertion. Showcase `tsc --noEmit` does not load Next’s generated route union, so the implemented-href allowlist is the static contract; `Link` still uses typedRoutes at the call site. Pending entries have no `href` and must not be wrapped in `Link`.
 
-`app/design-systems/catalog.ts` owns the five website-language sites. Ready entries use `linkedDesignSystemHref`. Index cards on both pages are text only (label, brand, description, status). There is no catalogue-cover field until a change actually renders one. `/samples/draft` exists only to exercise shared demo chrome and is omitted from both catalogues. Former `/samples/{system}` URLs redirect to `/design-systems/{system}`.
+`app/design-systems/catalog.ts` owns the five website-language sites. Ready entries use configured external app origins; `isReadyDesignSystem` narrows entries with a usable URL. Index cards on both pages are text only (label, brand, description, status). There is no catalogue-cover field until a change actually renders one. `/samples/draft` exists only to exercise shared demo chrome and is omitted from both catalogues. Former `/samples/{system}` URLs redirect to `/design-systems/{system}`.
 
 ### Five-site route inventory (SH-08)
 
-Catalogue closeout for [#254](https://github.com/jose-codegourmet/jabkit/issues/254). Each site uses `DemoBar` plus `SampleScope` with its own `data-jk-design-system` id. Brand CSS is CSS modules under that tree; samples do not import each other’s styles. Unknown detail slugs call `notFound()` and have nested `not-found.tsx` files. SH-07 browser crawl, theme-with-popup, lab LCP, catalogue-cover screenshots, and Higgsfield provenance are **Deferred** pending Jose visual QA and [#260](https://github.com/jose-codegourmet/jabkit/issues/260). Accessibility and broken-flow behavior implemented in the site PRs stays as implemented-in-code.
+Catalogue closeout for [#254](https://github.com/jose-codegourmet/jabkit/issues/254). Historical closeout before migration: each site used `DemoBar` plus `SampleScope` with its own `data-jk-design-system` id. Current ownership is documented in [standalone apps](standalone-design-systems.md). Brand CSS is CSS modules under that tree; samples do not import each other’s styles. Unknown detail slugs call `notFound()` and have nested `not-found.tsx` files. SH-07 browser crawl, theme-with-popup, lab LCP, catalogue-cover screenshots, and Higgsfield provenance are **Deferred** pending Jose visual QA and [#260](https://github.com/jose-codegourmet/jabkit/issues/260). Accessibility and broken-flow behavior implemented in the site PRs stays as implemented-in-code.
 
 | Site | Root | Secondary routes | Local task | Release |
 | --- | --- | --- | --- | --- |

@@ -1,0 +1,296 @@
+.home {
+  --jk-home-rule: color-mix(in oklch, var(--jk-foreground) 20%, transparent);
+}
+.hero {
+  display: grid;
+  grid-template-columns: 0.85fr 1.45fr;
+  gap: 4vw;
+  padding: 3rem var(--jk-space-gutter) 0;
+  max-width: 90rem;
+  margin: auto;
+  align-items: center;
+}
+.heroCopy {
+  padding-block: 1rem 3rem;
+}
+.label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  margin-bottom: 1.8rem;
+}
+.hero h1 {
+  font-family: var(--jk-font-display);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 4.9vw, 4.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.065em;
+}
+.lede {
+  font-size: 1rem;
+  max-width: 30ch;
+  line-height: 1.7;
+  margin: 1.6rem 0 2rem;
+  color: var(--jk-muted-foreground);
+}
+.heroFigure picture {
+  display: block;
+  height: clamp(340px, 39vw, 555px);
+  overflow: hidden;
+}
+.heroFigure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.heroFigure figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.72rem;
+  padding-block: 0.8rem;
+}
+.practiceLine {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 2.5rem var(--jk-space-gutter) 0;
+  padding-block: 1.2rem;
+  border-block: 1px solid var(--jk-home-rule);
+  font-size: 0.75rem;
+}
+.work > div {
+  max-width: 90rem;
+  padding: 5rem var(--jk-space-gutter);
+  gap: 2.2rem;
+}
+.work h2 {
+  font-family: var(--jk-font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 3vw, 3rem);
+  letter-spacing: -0.05em;
+  max-width: none;
+}
+.work figure img {
+  max-height: 470px;
+  transition: transform 600ms ease;
+}
+.work figure:hover img {
+  transform: scale(1.025);
+}
+.work figure figcaption {
+  font-family: var(--jk-font-body);
+  padding-block: 0.5rem 1.6rem;
+}
+.work [class~="grid"] {
+  gap: 2rem;
+}
+.approach {
+  padding: 4rem var(--jk-space-gutter);
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: center;
+  gap: 7vw;
+  background: var(--jk-muted);
+}
+.model {
+  display: block;
+  max-height: 640px;
+  overflow: hidden;
+}
+.model img {
+  width: 100%;
+  height: 100%;
+  max-height: 640px;
+  object-fit: cover;
+}
+.home h2 {
+  font-family: var(--jk-font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 3.4vw, 3.4rem);
+  letter-spacing: -0.055em;
+  line-height: 1.16;
+}
+.approachCopy > p,
+.materialCopy p {
+  color: var(--jk-muted-foreground);
+  line-height: 1.8;
+  max-width: 48ch;
+  margin: 1.5rem 0;
+}
+.approach ol {
+  margin: 2rem 0;
+}
+.approach li {
+  display: flex;
+  gap: 1.5rem;
+  border-top: 1px solid var(--jk-home-rule);
+  padding-block: 1.2rem;
+}
+.approach li > span {
+  font-size: 0.7rem;
+  margin-top: 0.25rem;
+}
+.approach h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.approach li p {
+  font-size: 0.86rem;
+  color: var(--jk-muted-foreground);
+  line-height: 1.7;
+  margin-top: 0.4rem;
+  max-width: 42ch;
+}
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 0.5rem;
+  border-bottom: 1px solid var(--jk-foreground);
+  font-size: 0.85rem;
+}
+.materials {
+  display: grid;
+  grid-template-columns: 1.05fr 1.3fr 0.65fr;
+  align-items: center;
+  gap: 2.4rem;
+  padding: 6rem var(--jk-space-gutter);
+}
+.materials picture {
+  display: block;
+}
+.materials img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+.shadowStudy {
+  align-self: end;
+  margin-bottom: 2rem;
+}
+.shadowStudy img {
+  aspect-ratio: 2 / 3;
+}
+.close {
+  position: relative;
+  margin: 0 var(--jk-space-gutter) 5rem;
+  background: var(--jk-muted);
+}
+.close > picture {
+  display: block;
+}
+.close > picture img {
+  width: 100%;
+  height: 490px;
+  object-fit: cover;
+}
+.closeCopy {
+  position: absolute;
+  left: 3.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42%;
+  color: var(--jk-image-paper);
+}
+.closeCopy h2 {
+  text-shadow: 0 1px 12px var(--jk-image-ink);
+}
+.closeCopy p {
+  margin: 1.5rem 0;
+  max-width: 26ch;
+  line-height: 1.6;
+}
+@media (max-width: 767px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding-top: 2.3rem;
+  }
+  .heroCopy {
+    padding: 0;
+  }
+  .hero h1 {
+    font-size: clamp(2.8rem, 11vw, 4.5rem);
+  }
+  .label {
+    margin-bottom: 1rem;
+  }
+  .lede {
+    max-width: 34ch;
+    margin-block: 1rem 1.4rem;
+  }
+  .heroFigure picture {
+    height: 370px;
+  }
+  .practiceLine {
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 1.5rem;
+  }
+  .work > div {
+    padding-block: 3.5rem;
+  }
+  .approach {
+    grid-template-columns: 1fr;
+    padding-block: 2rem 3rem;
+    gap: 2rem;
+  }
+  .model img {
+    max-height: 380px;
+  }
+  .materials {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 1rem;
+    padding-block: 3.5rem;
+  }
+  .materialCopy {
+    grid-column: 1 / -1;
+    padding-bottom: 1rem;
+  }
+  .close {
+    margin-bottom: 3rem;
+  }
+  .close > picture img {
+    height: 450px;
+  }
+  .closeCopy {
+    top: 2rem;
+    left: 1.5rem;
+    transform: none;
+    width: calc(100% - 3rem);
+  }
+  .closeCopy h2 {
+    font-size: 2rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work figure img {
+    transition: none;
+    transform: none;
+  }
+}
+
+.approach {
+  background:
+    linear-gradient(
+      color-mix(in oklch, var(--jk-muted) 94%, transparent),
+      color-mix(in oklch, var(--jk-muted) 94%, transparent)
+    ),
+    url("/assets/design-systems/minimal/min-background-paper.webp") center /
+    700px;
+}
+.close::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--jk-image-ink) 68%, transparent),
+    transparent 75%
+  );
+  pointer-events: none;
+}
+.closeCopy {
+  z-index: 1;
+}

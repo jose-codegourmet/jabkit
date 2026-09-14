@@ -1,5 +1,7 @@
 # Pocket Keeps — Retro showcase roadmap
 
+**2026-09-15 update:** The runtime now lives in `apps/retro` with root `/` and app-owned Tailwind configuration. The older ticket text below is historical. Use [the current app guide](../../docs/standalone-design-systems.md) for paths/deployment and [PROMPTS_FOR_IMAGES.md](../../PROMPTS_FOR_IMAGES.md) for Jose-run Higgsfield generation, logos, CTA artwork, and backgrounds. The agent does not generate images.
+
 Status: **shipped** ([#270](https://github.com/jose-codegourmet/jabkit/pull/270); RET-03 imagery deferred to [#260](https://github.com/jose-codegourmet/jabkit/issues/260), [#208](https://github.com/jose-codegourmet/jabkit/issues/208) closed `not_planned`) · Ticket prefix: **RET** · Root: `/samples/retro` · 12 tickets.
 
 Read the [shared roadmap and mandatory handoff](../roadmap.md), then this folder’s [system](system.md), [rules](rules.md), [component guidance](components.json), [imagery direction](imagery.md), and [migration notes](migration.md). Ticket text below is the original brief. The sample is shipped; RET-03 imagery is the remaining exception.

@@ -1,5 +1,7 @@
 # JabKit design systems
 
+**Current work:** [Full image prompts](../PROMPTS_FOR_IMAGES.md) cover logo concepts, wordmarks, CTA scenes, backgrounds, and complete supporting imagery for Jose to execute in Higgsfield. [Standalone app guide](../docs/standalone-design-systems.md) covers the five independent apps and subdomain setup.
+
 Five authored design directions for making JabKit feel at home in different kinds of websites. These are implementation briefs for humans and coding agents, not installed themes or copies of the reference sites. Start with the desired experience, then work through composition, tokens, components, imagery, and motion.
 
 The starting references are the 22 URLs in [TO_EXTRACT.md](../TO_EXTRACT.md). Each system records the pages inspected, their visual character and structure, and any access limitations. The proposed palettes, measurements, component guidance, and image prompts are original JabKit recommendations, not extracted CSS or the reference owners' design systems.

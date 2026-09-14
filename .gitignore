@@ -8,3 +8,5 @@ coverage
 **/storybook-static
 apps/verify/src/components/jabkit
 .jabkit
+
+*.tsbuildinfo

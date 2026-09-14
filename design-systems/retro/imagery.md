@@ -56,6 +56,6 @@ Store component media locally under the hosted `/assets/...` convention. Follow 
 
 The image must serve its section, preserve a recognizable subject at mobile size, leave the required quiet area, and belong to the same series as its neighbors. Reject attractive images with implausible materials, broken object geometry, unintentional text, inconsistent shadows, or a crop that obstructs the action. The page should still communicate the offer if the image is unavailable.
 
-## Planned sample showcase production
+## Current image-production handoff
 
-For the full JabKit sample website, **use Higgsfield MCP for all newly generated imagery**. Follow the asset shot list and production ticket in [roadmap.md](roadmap.md), and the capability discovery, provenance, and local-asset requirements in [the shared roadmap](../roadmap.md). If Higgsfield MCP is unavailable, image production remains blocked until it is connected; do not silently use a different generator. Capture actual UI screenshots from the implemented website, and keep labels, logos, and controls as code/text.
+Jose generates the images in Higgsfield manually. Use [PROMPTS_FOR_IMAGES.md](../../PROMPTS_FOR_IMAGES.md) for the complete set, including logos, wordmarks, CTA artwork, backgrounds, and supporting content. The coding agent must not call an image generator. New logo concepts are an explicit exception to the older generic “no logos” photograph rules; functional text and controls still remain HTML. See [standalone apps](../../docs/standalone-design-systems.md) for asset ownership.

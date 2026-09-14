@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "turbo run build",
-    "dev": "pnpm --filter @jabkit/showcase dev",
+    "dev": "pnpm --parallel --filter @jabkit/showcase --filter @jabkit/minimal --filter @jabkit/neo-brutalism --filter @jabkit/editorial --filter @jabkit/luxury --filter @jabkit/retro dev",
     "storybook": "pnpm --filter @jabkit/ui storybook",
     "storybook:build": "pnpm --filter @jabkit/ui storybook:build",
     "lint": "biome check .",
@@ -23,7 +23,8 @@
     "previews:build": "tsx scripts/build-preview-assets.ts",
     "previews:verify": "tsx scripts/verify-preview-assets.ts",
     "check": "pnpm lint && pnpm typecheck && pnpm check:conventions && pnpm check:design-system-assets && pnpm registry:verify && pnpm previews:verify",
-    "release:cli": "pnpm --filter @jabkit/cli exec npm version --no-git-tag-version"
+    "release:cli": "pnpm --filter @jabkit/cli exec npm version --no-git-tag-version",
+    "dev:design-systems": "pnpm --parallel --filter @jabkit/minimal --filter @jabkit/neo-brutalism --filter @jabkit/editorial --filter @jabkit/luxury --filter @jabkit/retro dev"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.15",

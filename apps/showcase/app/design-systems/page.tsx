@@ -24,8 +24,8 @@ export default function DesignSystemsPage() {
         </h1>
         <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
           Each direction is a full fictional website with its own tokens, type,
-          and routes. Product compositions assembled from registry blocks live
-          on{" "}
+          and routes, deployed as an independent app. Product compositions
+          assembled from registry blocks live on{" "}
           <Link href="/samples" className="font-medium text-foreground">
             Samples
           </Link>
@@ -39,7 +39,9 @@ export default function DesignSystemsPage() {
                   <p className="font-mono text-[11px] text-primary uppercase">
                     {entry.designSystem}
                     {" · "}
-                    {entry.status === "ready" ? "Ready" : "Soon"}
+                    {entry.status === "ready"
+                      ? "Open website"
+                      : "Deployment not configured"}
                   </p>
                   <h2 className="mt-2 text-xl font-semibold tracking-tight">
                     {entry.brand}
@@ -56,13 +58,13 @@ export default function DesignSystemsPage() {
 
             if (isReadyDesignSystem(entry)) {
               return (
-                <Link
+                <a
                   key={entry.slug}
                   href={entry.href}
                   className="group rounded-[--radius] border border-border bg-card p-6 transition hover:border-primary"
                 >
                   {body}
-                </Link>
+                </a>
               );
             }
 

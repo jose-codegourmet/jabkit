@@ -62,99 +62,59 @@ Catalogue `PreviewImage` prefers the GIF under `prefers-reduced-motion: no-prefe
 
 Run `pnpm previews:build -- --name {name}` whenever a component changes, then commit the output. `pnpm previews:verify` runs in `pnpm check` and fails if an asset is missing or its source hash is stale.
 
-## Design-system sample images (SH-04)
+## Design-system sample images
 
-Library catalogue captures and Unsplash rehosts stay above. **Newly generated photography, illustration, objects, and textures for the five design-system sample sites must be created with Higgsfield MCP.** Do not silently substitute another generator, a stock CDN, or a hotlinked reference-site image.
+Jose generates new sample imagery himself in Higgsfield. The coding agent writes prompts and integrates approved supplied outputs; it must not invoke an image generator or spend credits. [PROMPTS_FOR_IMAGES.md](../PROMPTS_FOR_IMAGES.md) is the current production brief, including original logos/wordmarks, CTA artwork, backgrounds, process assets, and the full content series. This supersedes the earlier agent-operated SH-04 workflow.
 
-This ticket owns the process, storage layout, and provenance contract. MIN-03, NEO-03, EDT-03, LUX-03, and RET-03 own series production. Those five Higgsfield series are committed under `public/assets/design-systems/<system>/` with kebab-case WebPs, `provenance.json`, and `assets.ts`. In-slot crop review still waits on the sample page tickets. Do not invent job IDs, licenses, or generation results.
+### Ownership and production
 
-### Higgsfield MCP versus other image sources
+Each website owns `apps/<system>/public/assets/design-systems/<system>/`. Its `app/assets.ts` reads its own provenance JSON through `lib/design-system-assets.ts`. The old showcase asset URLs redirect to the configured standalone site when its origin is supplied. See [standalone apps](standalone-design-systems.md).
 
-| Source | Use | Not for |
-| --- | --- | --- |
-| Higgsfield MCP `generate_image` / `generate_image_batch` | Sample photography, illustration, objects, textures | Logos, nav, headlines, prices, controls, fake UI screenshots |
-| Browser capture of the implemented showcase | Catalogue covers, product UI evidence (SH-07) | Invented screens of unfinished pages |
-| HTML / SVG / type in code | Brand marks, labels, interactive UI | Painting functional text into a generated bitmap |
-| `pnpm assets:vendor` + `sources.json` | Unsplash / Simple Icons used by `packages/ui` | Higgsfield outputs |
-| Pocket Keeps user upload (RET-10) | Local demo files in the browser | Sending visitor files to Higgsfield |
+Existing WebPs and their provenance move intact. Do not relabel prior MCP-generated images as manual outputs or regenerate already approved assets. The user may deliver new full-quality files separately; retain those masters, optimize approved content derivatives to WebP, and inspect their actual slots before replacing runtime files. Record real dimensions, bytes, crop, alt text, and generation metadata.
 
-### Access discovery (recorded 2026-09-14)
+The existing photo-manifest gate validates WebP content/texture deliveries. Logo concepts may arrive as PNG and need reviewed SVG geometry/lettering for final brand use; do not shoehorn an SVG into a manifest row claiming it is a WebP. Document the final brand-asset files separately when integrating them. No new logo output is created by the app migration.
 
-Implementation-time discovery against the connected **Higgsfield** MCP namespace. Re-run these tools at the start of every `-03` ticket; models and costs change.
+### Sources and allowed roles
 
-1. Confirm the namespace is usable (`GetDynamicTools` / `models_explore`). If it is missing, `needsAuth`, or errors, **stop**. Mark the image ticket blocked and request the Higgsfield connection. Do not switch to another image service.
-2. `models_explore` `action: "get"` or `"recommend"` with the shot’s goal and `type: "image"`. Record the **returned** `id`, `provider_name`, and allowed `aspect_ratios`. Do not assume a model from this document if discovery disagrees.
-3. `generate_image` with `get_cost: true` and `use_unlim: false` to preflight credits. Do not hard-code a price. On 2026-09-14 a `gpt_image_2_5` 16:9 preflight returned **1 credit** for that exact request; other models and qualities differ.
-4. `balance` confirms the workspace can spend credits. Do not commit balances, plan SKUs as prices, or checkout URLs.
-
-Tools that matter for this workflow:
-
-| Tool | Role |
+| Source | Role |
 | --- | --- |
-| `models_explore` | Catalog, constraints, recommend |
-| `generate_image` | One prompt (optional `count` 2–4 variants); `get_cost` preflight |
-| `generate_image_batch` | 1–12 independent prompts; no `get_cost` inside the batch |
-| `jobs_wait` | Poll up to 12 batch job IDs |
-| `job_status` | Single job; typical image 10–20s |
-| `media_import_url` / `media_upload` | Reference media as `media_id`, never a raw HTTPS URL in `medias[].value` |
+| Jose's Higgsfield outputs | Photography, illustration, logo concepts, CTA artwork, backgrounds, and objects from the prompt document |
+| Existing Higgsfield MCP outputs | Historical images with their original real provider/job metadata preserved |
+| Browser captures | Real implemented UI and catalogue covers, never fake AI-generated screenshots |
+| HTML / SVG / typesetting | Final cleaned brand geometry, readable wordmarks, navigation, prices, headings, and clickable CTA controls |
+| `assets:vendor` / `sources.json` | Existing library Unsplash/Simple Icons workflow; it does not ingest these Higgsfield assets |
+| Pocket Keeps upload | User image processed only in the browser; not sent to Higgsfield |
 
-`generate_image` documents `gpt_image_2_5` as the default general image model. `models_explore` `recommend` for photoreal interior photography also returned `recraft_v4_1` and `soul_location`. `soul_2` remains a specialized portrait/fashion route. Free-trial unlimited generations were **not spendable** during this discovery (`unlim.available: false`); do not pass `use_unlim: true` unless the operator explicitly asks.
+### Photo provenance contract
 
-Output retrieval: wait until the job is terminal, then download **once** to disk. Result URLs may be signed. **Never commit retrieval URLs, upload URLs, API keys, or cookies.** Copy the returned **job UUID** into provenance when the tool provides one.
+`provenance.json` contains `schemaVersion: 1`, the `system` identifier, and `assets`. Types live in each app's `lib/design-system-assets.ts`; the root validator uses the compatible schema in `apps/showcase/lib/design-system-assets.ts` and checks each app's actual files and `app/assets.ts` exports.
 
-### Production sequence (each `-03` ticket)
-
-1. Read that system’s `design-systems/<system>/imagery.md` and the shot list on the `-03` ticket.
-2. Discover tools/models as above. If Higgsfield MCP is unavailable, block.
-3. Generate **one** representative hero/cover. Review crop, materials, and exclusions before the rest of the series.
-4. Produce the remaining shots with `generate_image` or `generate_image_batch`. Keep variants of one prompt on `generate_image`; use the batch tool for independent prompts.
-5. Reject outputs with watermarks, gibberish text, logos, implausible anatomy/architecture, or painted UI chrome.
-6. Optimize locally to WebP (same Sharp pipeline as vendor: rotate, `quality: 82`, no animation). Keep intrinsic width/height. Place the file at `apps/showcase/public/assets/design-systems/<system>/<fileName>.webp`.
-7. Export a typed row from `apps/showcase/app/samples/<system>/assets.ts` via `toSampleAsset` / `sampleAssetSrc`.
-8. Add a provenance row with the real prompt, model id, job id, date, dimensions, crop, alt/role, delivery budget, and rights status.
-9. Review the file in its **real** desktop and mobile slots after the page exists. SH-04 does not ship those pages.
-
-### Provenance contract
-
-Committed file: `apps/showcase/public/assets/design-systems/<system>/provenance.json`.
-
-Runtime map: `apps/showcase/app/samples/<system>/assets.ts` (relative import; the showcase `@/*` alias is the library).
-
-Types: `apps/showcase/lib/design-system-assets.ts`.
-
-`sources.json` maps external Unsplash/Simple Icons URLs to hashed WebPs. It is **not** this manifest. Do not add Higgsfield jobs to `sources.json`, and do not teach `assets:vendor` to download Higgsfield URLs.
-
-Manifest fields per asset:
-
-| Field | Rule |
+| Field | Requirement |
 | --- | --- |
-| `id` | Kebab-case, matches the `assets.ts` key and the shot-list id |
-| `fileName` | Kebab-case `.webp` in the same folder |
-| `kind` | `higgsfield-mcp` or `browser-capture` |
-| `prompt` / `negativeDirection` | The actual prompt used; never a made-up stand-in |
-| `provider` | `Higgsfield MCP` for generated stills |
-| `model` | Catalog `id` from `models_explore` (or `browser` for captures) |
-| `generatedAt` | ISO timestamp of the successful job |
-| `jobId` | UUID returned by Higgsfield, or `null` only for browser captures. No placeholders |
-| `width` / `height` / `bytes` | Must match the committed file |
-| `aspectRatio` | The ratio requested/returned |
-| `crop.focalX` / `focalY` | 0–1, plus CSS `objectPosition` |
-| `alt` / `role` | Non-empty alt when `content`; empty alt when `decorative` |
+| `id` / `fileName` | Kebab-case slot ID and matching `.webp` file |
+| `kind` | `higgsfield` for user-supplied manual generations; `higgsfield-mcp` for actual historical MCP runs; `browser-capture` for screenshots |
+| `provider` | `Higgsfield`, `Higgsfield MCP`, or the actual browser-capture source, matching the kind |
+| `prompt` / `negativeDirection` | Actual prompt and exclusions, not a fabricated reconstruction of an unknown generation |
+| `model` | Actual model when known, explicitly `not-recorded` when a manual export lacks that information; `browser` for captures |
+| `generatedAt` | Actual known generation date as an ISO timestamp; obtain it from the user if missing rather than invent it |
+| `jobId` | Actual UUID for MCP runs. Manual Higgsfield outputs may use `null` when the UI/export supplies no job ID; captures use `null` |
+| `width` / `height` / `bytes` | Match the delivered WebP exactly |
+| `aspectRatio` | Actual requested/returned ratio |
+| `crop` | `focalX`, `focalY` in 0–1 and CSS `objectPosition` |
+| `alt` / `role` | Meaningful alternative for `content`; empty alternative for `decorative` |
 | `deliveryRole` | `hero` ≤300KB, `content` ≤180KB, `texture` ≤60KB |
-| `budgetException` | Non-empty justification if over budget, else `null` |
-| `outputUseRights` | `higgsfield-account-terms` when the still came from this account, `browser-capture` for screenshots, `unrecorded` only when the tool returned no rights string. Do not invent Creative Commons or stock licenses. Higgsfield image tools did not return a per-asset license field during discovery |
+| `budgetException` | Explicit rationale for an oversized delivery, otherwise `null` |
+| `outputUseRights` | Actual applicable `higgsfield-account-terms`, `browser-capture`, or `unrecorded`; no invented stock/Creative Commons license |
 
-### Checklist ( `-03` handoff)
+No credentials, signed retrieval URLs, API keys, cookies, or fabricated job IDs belong in committed provenance. `sources.json` is unrelated and remains the library's URL-to-hash vendor map.
 
-- [ ] Higgsfield MCP used; access failure documented instead of a substitute generator
-- [ ] Representative image approved before the series
-- [ ] Every generated file traces to a real prompt and job id
-- [ ] Intrinsic size, crop, alt strategy, and `/assets/design-systems/<system>/...` URL
-- [ ] Desktop and mobile crops reviewed in the real slot
-- [ ] No reference-site hotlinks, watermarks, or generated functional text
-- [ ] `pnpm check:design-system-assets` passes
+### Integration gate
 
-`pnpm check:design-system-assets` is part of `pnpm check`. Empty series pass. Populated rows fail if the WebP, provenance, and `assets.ts` disagree, if a Higgsfield row lacks a UUID job id, if a remote/signed URL leaked into the manifest, or if a delivery file exceeds its budget without `budgetException`.
+1. Match approved output to its exact slot ID and retain the old master before replacement.
+2. Review logo spelling/geometry, image realism, crop, and composition. A CTA image does not replace an accessible HTML button.
+3. Optimize content derivatives, record actual provenance, and update the owning app's files only.
+4. Inspect desktop/mobile in light/dark. Do not repeat a hero as a silent fallback for missing supporting imagery.
+5. Run `pnpm check:design-system-assets`; it is part of `pnpm check`. The checker validates file hashes by byte count/dimensions, the declared budget, metadata, and the exported asset map. It does not claim the visual design is complete.
 
 ## Whole-site catalogue captures (SH-07)
 

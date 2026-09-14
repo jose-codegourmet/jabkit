@@ -39,6 +39,191 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  apps/editorial:
+    dependencies:
+      '@jabkit/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@radix-ui/react-icons':
+        specifier: ^1.3.2
+        version: 1.3.2(react@19.2.8)
+      next:
+        specifier: ^16.1.6
+        version: 16.3.3(@babel/core@7.29.7)(@types/node@24.13.3)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react:
+        specifier: ^19.2.4
+        version: 19.2.8
+      react-dom:
+        specifier: ^19.2.4
+        version: 19.2.8(react@19.2.8)
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4.2.1
+        version: 4.3.3
+      '@types/node':
+        specifier: ^24.10.1
+        version: 24.13.3
+      '@types/react':
+        specifier: ^19.2.8
+        version: 19.2.18
+      tailwindcss:
+        specifier: ^4.2.1
+        version: 4.3.3
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  apps/luxury:
+    dependencies:
+      '@jabkit/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@radix-ui/react-icons':
+        specifier: ^1.3.2
+        version: 1.3.2(react@19.2.8)
+      next:
+        specifier: ^16.1.6
+        version: 16.3.3(@babel/core@7.29.7)(@types/node@24.13.3)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react:
+        specifier: ^19.2.4
+        version: 19.2.8
+      react-dom:
+        specifier: ^19.2.4
+        version: 19.2.8(react@19.2.8)
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4.2.1
+        version: 4.3.3
+      '@types/node':
+        specifier: ^24.10.1
+        version: 24.13.3
+      '@types/react':
+        specifier: ^19.2.8
+        version: 19.2.18
+      tailwindcss:
+        specifier: ^4.2.1
+        version: 4.3.3
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  apps/minimal:
+    dependencies:
+      '@jabkit/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@radix-ui/react-icons':
+        specifier: ^1.3.2
+        version: 1.3.2(react@19.2.8)
+      next:
+        specifier: ^16.1.6
+        version: 16.3.3(@babel/core@7.29.7)(@types/node@24.13.3)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react:
+        specifier: ^19.2.4
+        version: 19.2.8
+      react-dom:
+        specifier: ^19.2.4
+        version: 19.2.8(react@19.2.8)
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4.2.1
+        version: 4.3.3
+      '@types/node':
+        specifier: ^24.10.1
+        version: 24.13.3
+      '@types/react':
+        specifier: ^19.2.8
+        version: 19.2.18
+      tailwindcss:
+        specifier: ^4.2.1
+        version: 4.3.3
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  apps/neo-brutalism:
+    dependencies:
+      '@jabkit/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@radix-ui/react-icons':
+        specifier: ^1.3.2
+        version: 1.3.2(react@19.2.8)
+      next:
+        specifier: ^16.1.6
+        version: 16.3.3(@babel/core@7.29.7)(@types/node@24.13.3)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react:
+        specifier: ^19.2.4
+        version: 19.2.8
+      react-dom:
+        specifier: ^19.2.4
+        version: 19.2.8(react@19.2.8)
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4.2.1
+        version: 4.3.3
+      '@types/node':
+        specifier: ^24.10.1
+        version: 24.13.3
+      '@types/react':
+        specifier: ^19.2.8
+        version: 19.2.18
+      tailwindcss:
+        specifier: ^4.2.1
+        version: 4.3.3
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  apps/retro:
+    dependencies:
+      '@jabkit/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@radix-ui/react-icons':
+        specifier: ^1.3.2
+        version: 1.3.2(react@19.2.8)
+      next:
+        specifier: ^16.1.6
+        version: 16.3.3(@babel/core@7.29.7)(@types/node@24.13.3)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react:
+        specifier: ^19.2.4
+        version: 19.2.8
+      react-dom:
+        specifier: ^19.2.4
+        version: 19.2.8(react@19.2.8)
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4.2.1
+        version: 4.3.3
+      '@types/node':
+        specifier: ^24.10.1
+        version: 24.13.3
+      '@types/react':
+        specifier: ^19.2.8
+        version: 19.2.18
+      tailwindcss:
+        specifier: ^4.2.1
+        version: 4.3.3
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
   apps/showcase:
     dependencies:
       '@jabkit/tokens':

@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
+import {
+  designSystemSiteUrl,
+  designSystemSlugs,
+} from "./common/design-system-sites";
 
-// Redeploy trigger so Production picks up TubelightNavbar registry.
 const nextConfig: NextConfig = {
   typedRoutes: true,
   outputFileTracingIncludes: {
@@ -18,56 +21,31 @@ const nextConfig: NextConfig = {
         destination: "/samples",
         permanent: true,
       },
-      {
-        source: "/samples/minimal",
-        destination: "/design-systems/minimal",
-        permanent: true,
-      },
-      {
-        source: "/samples/minimal/:path*",
-        destination: "/design-systems/minimal/:path*",
-        permanent: true,
-      },
-      {
-        source: "/samples/neo-brutalism",
-        destination: "/design-systems/neo-brutalism",
-        permanent: true,
-      },
-      {
-        source: "/samples/neo-brutalism/:path*",
-        destination: "/design-systems/neo-brutalism/:path*",
-        permanent: true,
-      },
-      {
-        source: "/samples/editorial",
-        destination: "/design-systems/editorial",
-        permanent: true,
-      },
-      {
-        source: "/samples/editorial/:path*",
-        destination: "/design-systems/editorial/:path*",
-        permanent: true,
-      },
-      {
-        source: "/samples/luxury",
-        destination: "/design-systems/luxury",
-        permanent: true,
-      },
-      {
-        source: "/samples/luxury/:path*",
-        destination: "/design-systems/luxury/:path*",
-        permanent: true,
-      },
-      {
-        source: "/samples/retro",
-        destination: "/design-systems/retro",
-        permanent: true,
-      },
-      {
-        source: "/samples/retro/:path*",
-        destination: "/design-systems/retro/:path*",
-        permanent: true,
-      },
+      ...designSystemSlugs.flatMap((slug) => {
+        const origin = designSystemSiteUrl(slug);
+        const routes = ["samples", "design-systems"].flatMap((prefix) => [
+          {
+            source: `/${prefix}/${slug}`,
+            destination: origin || "/design-systems",
+            permanent: false,
+          },
+          {
+            source: `/${prefix}/${slug}/:path*`,
+            destination: origin ? `${origin}/:path*` : "/design-systems",
+            permanent: false,
+          },
+        ]);
+        return origin
+          ? [
+              ...routes,
+              {
+                source: `/assets/design-systems/${slug}/:path*`,
+                destination: `${origin}/assets/design-systems/${slug}/:path*`,
+                permanent: false,
+              },
+            ]
+          : routes;
+      }),
     ];
   },
 };

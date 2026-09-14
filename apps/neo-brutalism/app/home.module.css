@@ -1,0 +1,362 @@
+.home h1,
+.home h2 {
+  font-family: var(--jk-font-display);
+  font-weight: 900;
+  font-stretch: condensed;
+  font-variation-settings: "wdth" 75;
+  letter-spacing: -0.065em;
+  line-height: 0.95;
+}
+.home h2 {
+  font-size: clamp(2.7rem, 4.5vw, 4.5rem);
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  border-bottom: 2px solid var(--jk-foreground);
+}
+.heroCopy {
+  background: var(--jk-primary);
+  color: var(--jk-primary-foreground);
+  padding: 3.7rem var(--jk-space-gutter);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 2.4rem;
+}
+.hero h1 {
+  font-size: clamp(3rem, 6.1vw, 6rem);
+}
+.heroCopy > p:not(.eyebrow) {
+  max-width: 36ch;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 1.8rem 0;
+}
+.heroImage {
+  display: block;
+  min-width: 0;
+}
+.heroImage img {
+  width: 100%;
+  height: 100%;
+  max-height: 590px;
+  min-height: 480px;
+  object-fit: cover;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+.heroCopy [data-slot="button"],
+.closeCopy [data-slot="button"] {
+  background: var(--jk-image-ink);
+  color: var(--jk-image-paper);
+  border-color: var(--jk-image-ink);
+  box-shadow: 4px 4px 0
+    color-mix(in oklch, var(--jk-image-ink) 30%, transparent);
+}
+.plainLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding-block: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.ticker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: 1.2rem var(--jk-space-gutter);
+  border-bottom: 2px solid var(--jk-foreground);
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.work {
+  padding: 4.5rem var(--jk-space-gutter);
+}
+.sectionTitle {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 2.3rem;
+  gap: 2rem;
+}
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.project {
+  border: 2px solid var(--jk-foreground);
+  display: block;
+  box-shadow: 5px 5px 0 var(--jk-foreground);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+.project:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0 var(--jk-foreground);
+}
+.project picture {
+  display: block;
+  overflow: hidden;
+}
+.project img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.projectCaption {
+  border-top: 2px solid var(--jk-foreground);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.3rem 1rem;
+}
+.projectCaption > svg {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.index {
+  font-size: 0.7rem;
+  align-self: flex-start;
+  padding-top: 0.2rem;
+}
+.projectCaption h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.projectCaption p {
+  font-size: 0.72rem;
+  text-transform: capitalize;
+  margin-top: 0.3rem;
+}
+.services {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 5vw;
+  padding: 4.5rem var(--jk-space-gutter);
+  border-block: 2px solid var(--jk-foreground);
+  background: var(--jk-muted);
+}
+.serviceVisual {
+  padding: 1.8rem;
+  background:
+    url("/assets/design-systems/neo-brutalism/neo-background-ink.webp") center /
+    cover;
+  align-self: center;
+}
+.serviceVisual picture {
+  display: block;
+}
+.serviceVisual img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.serviceVisual > p {
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  background: var(--jk-background);
+}
+.serviceCopy h2 {
+  margin-bottom: 2rem;
+}
+.serviceRow {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding-block: 1.4rem;
+  border-top: 2px solid var(--jk-foreground);
+}
+.serviceRow > span {
+  font-size: 0.72rem;
+  padding-top: 0.5rem;
+}
+.serviceRow > svg {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.serviceRow h3 {
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: -0.04em;
+}
+.serviceRow p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  max-width: 42ch;
+  margin-top: 0.5rem;
+}
+.studio {
+  padding: 4.5rem var(--jk-space-gutter);
+  background:
+    linear-gradient(
+      var(--jk-background),
+      color-mix(in oklch, var(--jk-background) 90%, transparent)
+    ),
+    url("/assets/design-systems/neo-brutalism/neo-background-print.webp");
+}
+.studioIntro {
+  margin-bottom: 2rem;
+}
+.studioIntro p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 1.3rem;
+}
+.wall {
+  display: block;
+}
+.wall img {
+  width: 100%;
+  max-height: 580px;
+  object-fit: cover;
+}
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 2px solid var(--jk-foreground);
+}
+.steps li {
+  padding: 1.5rem;
+  border-right: 2px solid var(--jk-foreground);
+}
+.steps li:last-child {
+  border-right: 0;
+}
+.steps span {
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+.steps h3 {
+  margin-block: 1rem 0.7rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+.steps p {
+  line-height: 1.6;
+  font-size: 0.85rem;
+}
+.close {
+  position: relative;
+  border-block: 2px solid var(--jk-foreground);
+}
+.close > picture {
+  display: block;
+}
+.close img {
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+}
+.closeCopy {
+  position: absolute;
+  inset: 0 auto 0 var(--jk-space-gutter);
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  color: var(--jk-image-ink);
+}
+.closeCopy p {
+  max-width: 28ch;
+  margin-block: 1.5rem;
+  line-height: 1.6;
+}
+@media (max-width: 767px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .heroCopy {
+    padding-block: 2.5rem;
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
+  .eyebrow {
+    margin-bottom: 1.5rem;
+  }
+  .heroImage img {
+    min-height: 0;
+    height: 320px;
+  }
+  .ticker {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem;
+    font-size: 0.65rem;
+  }
+  .ticker span:last-child {
+    display: none;
+  }
+  .work,
+  .studio,
+  .services {
+    padding-block: 3rem;
+  }
+  .sectionTitle {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .projectGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .project img {
+    aspect-ratio: 4 / 3;
+  }
+  .services {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .serviceVisual {
+    order: 2;
+  }
+  .steps {
+    grid-template-columns: 1fr 1fr;
+  }
+  .steps li {
+    padding: 1rem;
+    border-bottom: 2px solid var(--jk-foreground);
+  }
+  .steps li:nth-child(2) {
+    border-right: 0;
+  }
+  .steps li:nth-child(n + 3) {
+    border-bottom: 0;
+  }
+  .close img {
+    height: 650px;
+  }
+  .closeCopy {
+    inset: 2.5rem var(--jk-space-gutter) auto;
+    width: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project {
+    transition: none;
+    transform: none;
+  }
+}

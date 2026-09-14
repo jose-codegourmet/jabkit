@@ -1,0 +1,208 @@
+/* Pocket Keeps: app-owned tokens and typography. Edit independently. */
+
+[data-jk-design-system] {
+  background-color: var(--jk-background);
+  color: var(--jk-foreground);
+  font-family: var(--jk-font-body);
+  --font-sans: var(--jk-font-body);
+}
+
+[data-jk-design-system] [data-slot="input"] {
+  height: var(--jk-control-height);
+  min-height: var(--jk-control-height);
+  border-radius: var(--jk-radius);
+  border-width: var(--jk-border-width);
+}
+
+[data-jk-design-system] [data-slot="button"] {
+  border-radius: var(--jk-radius);
+}
+
+[data-jk-design-system] .jk-display {
+  font-family: var(--jk-role-font-display);
+  font-size: var(--jk-text-display);
+  font-weight: var(--jk-weight-display);
+  letter-spacing: var(--jk-tracking-display);
+  line-height: var(--jk-leading-display);
+  max-width: var(--jk-measure-display);
+}
+
+[data-jk-design-system] .jk-heading {
+  font-family: var(--jk-role-font-heading);
+  font-size: var(--jk-text-heading);
+  font-weight: var(--jk-weight-heading);
+  letter-spacing: var(--jk-tracking-heading);
+  line-height: var(--jk-leading-heading);
+  max-width: var(--jk-measure-heading);
+}
+
+[data-jk-design-system] .jk-body {
+  font-family: var(--jk-role-font-body);
+  font-size: var(--jk-text-body);
+  font-weight: var(--jk-weight-body);
+  letter-spacing: var(--jk-tracking-body);
+  line-height: var(--jk-leading-body);
+  max-width: var(--jk-measure-body);
+}
+
+[data-jk-design-system] .jk-lead {
+  font-family: var(--jk-role-font-lead);
+  font-size: var(--jk-text-lead);
+  font-weight: var(--jk-weight-lead);
+  letter-spacing: var(--jk-tracking-lead);
+  line-height: var(--jk-leading-lead);
+  max-width: var(--jk-measure-lead);
+}
+
+[data-jk-design-system] .jk-label {
+  font-family: var(--jk-role-font-label);
+  font-size: var(--jk-text-label);
+  font-weight: var(--jk-weight-label);
+  letter-spacing: var(--jk-tracking-label);
+  line-height: var(--jk-leading-label);
+}
+
+[data-jk-design-system] .jk-caption {
+  font-family: var(--jk-role-font-caption);
+  font-size: var(--jk-text-caption);
+  font-weight: var(--jk-weight-caption);
+  letter-spacing: var(--jk-tracking-caption);
+  line-height: var(--jk-leading-caption);
+  max-width: var(--jk-measure-caption);
+}
+
+[data-jk-design-system="retro"] {
+  --jk-background: oklch(0.975 0.02 85);
+  --jk-foreground: oklch(0.2 0.02 85);
+  --jk-card: oklch(0.995 0.01 85);
+  --jk-card-foreground: oklch(0.2 0.02 85);
+  --jk-popover: oklch(0.995 0.01 85);
+  --jk-popover-foreground: oklch(0.2 0.02 85);
+  --jk-primary: oklch(0.36 0.06 175);
+  --jk-primary-foreground: oklch(0.99 0.002 85);
+  --jk-secondary: oklch(0.925 0.02 85);
+  --jk-secondary-foreground: oklch(0.2 0.02 85);
+  --jk-accent: oklch(0.91 0.045 90);
+  --jk-accent-foreground: oklch(0.2 0.02 85);
+  --jk-muted: oklch(0.94 0.02 85);
+  --jk-muted-foreground: oklch(0.44 0.02 85);
+  --jk-destructive: oklch(0.44 0.16 25);
+  --jk-destructive-foreground: oklch(0.99 0.002 85);
+  --jk-success: oklch(0.4 0.075 150);
+  --jk-success-foreground: oklch(0.99 0.002 85);
+  --jk-warning: oklch(0.84 0.12 85);
+  --jk-warning-foreground: oklch(0.19 0.008 85);
+  --jk-border: oklch(0.78 0.02 85);
+  --jk-input: oklch(0.54 0.02 85);
+  --jk-ring: oklch(0.4 0.06 85);
+  --jk-chart-1: oklch(0.48 0.08 85);
+  --jk-chart-2: oklch(0.48 0.08 150);
+  --jk-chart-3: oklch(0.52 0.08 55);
+  --jk-chart-4: oklch(0.48 0.08 320);
+  --jk-chart-5: oklch(0.49 0.08 210);
+  --jk-radius: 0.25rem;
+  --jk-space-xs: 0.25rem;
+  --jk-space-sm: 0.5rem;
+  --jk-space-md: 1rem;
+  --jk-space-lg: 2rem;
+  --jk-space-gutter: clamp(1.25rem, 3.5vw, 3.5rem);
+  --jk-space-section: clamp(2.5rem, 4vw, 4.5rem);
+  --jk-space-card: 1.5rem;
+  --jk-space-grid: 1.5rem;
+  --jk-content-max: 80rem;
+  --jk-border-width: 1px;
+  --jk-control-height: 2.75rem;
+  --jk-shadow-control: 2px 2px 0 var(--jk-foreground);
+  --jk-font-display: "Arial Rounded MT Bold", "Trebuchet MS", Arial, sans-serif;
+  --jk-font-body: "Trebuchet MS", Arial, sans-serif;
+  --jk-font-label: "Courier New", monospace;
+  --jk-text-display: clamp(2.5rem, 1.25rem + 4vw, 5rem);
+  --jk-leading-display: 1.08;
+  --jk-weight-display: 700;
+  --jk-tracking-display: -0.025em;
+  --jk-measure-display: 18ch;
+  --jk-role-font-display: var(--jk-font-display);
+  --jk-text-heading: clamp(1.75rem, 1.2rem + 2vw, 3rem);
+  --jk-leading-heading: 1.15;
+  --jk-weight-heading: 700;
+  --jk-tracking-heading: -0.015em;
+  --jk-measure-heading: 28ch;
+  --jk-role-font-heading: var(--jk-font-display);
+  --jk-text-body: 1rem;
+  --jk-leading-body: 1.6;
+  --jk-weight-body: 400;
+  --jk-tracking-body: 0em;
+  --jk-measure-body: 60ch;
+  --jk-role-font-body: var(--jk-font-body);
+  --jk-text-lead: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --jk-leading-lead: 1.5;
+  --jk-weight-lead: 400;
+  --jk-tracking-lead: 0em;
+  --jk-measure-lead: 44ch;
+  --jk-role-font-lead: var(--jk-font-body);
+  --jk-text-label: 0.9375rem;
+  --jk-leading-label: 1.35;
+  --jk-weight-label: 700;
+  --jk-tracking-label: 0.01em;
+  --jk-measure-label: none;
+  --jk-role-font-label: var(--jk-font-label);
+  --jk-text-caption: 0.875rem;
+  --jk-leading-caption: 1.5;
+  --jk-weight-caption: 400;
+  --jk-tracking-caption: 0em;
+  --jk-measure-caption: 60ch;
+  --jk-role-font-caption: var(--jk-font-label);
+}
+
+.dark [data-jk-design-system="retro"]:not([data-jk-color-mode="light"]),
+[data-jk-design-system="retro"].dark,
+[data-jk-design-system="retro"][data-jk-color-mode="dark"] {
+  --jk-background: oklch(0.19 0.02 85);
+  --jk-foreground: oklch(0.96 0.02 85);
+  --jk-card: oklch(0.24 0.01 85);
+  --jk-card-foreground: oklch(0.96 0.02 85);
+  --jk-popover: oklch(0.24 0.01 85);
+  --jk-popover-foreground: oklch(0.96 0.02 85);
+  --jk-primary: oklch(0.83 0.06 175);
+  --jk-primary-foreground: oklch(0.19 0.008 85);
+  --jk-secondary: oklch(0.28 0.02 85);
+  --jk-secondary-foreground: oklch(0.96 0.02 85);
+  --jk-accent: oklch(0.29 0.028 90);
+  --jk-accent-foreground: oklch(0.96 0.02 85);
+  --jk-muted: oklch(0.26 0.02 85);
+  --jk-muted-foreground: oklch(0.77 0.02 85);
+  --jk-destructive: oklch(0.8 0.13 25);
+  --jk-destructive-foreground: oklch(0.19 0.002 85);
+  --jk-success: oklch(0.8 0.09 150);
+  --jk-success-foreground: oklch(0.19 0.002 85);
+  --jk-warning: oklch(0.84 0.12 85);
+  --jk-warning-foreground: oklch(0.19 0.008 85);
+  --jk-border: oklch(0.4 0.02 85);
+  --jk-input: oklch(0.64 0.02 85);
+  --jk-ring: oklch(0.81 0.06 85);
+  --jk-chart-1: oklch(0.76 0.08 85);
+  --jk-chart-2: oklch(0.76 0.08 150);
+  --jk-chart-3: oklch(0.76 0.08 55);
+  --jk-chart-4: oklch(0.76 0.08 320);
+  --jk-chart-5: oklch(0.76 0.08 210);
+  --jk-radius: 0.25rem;
+}
+
+[data-jk-design-system="retro"] {
+  --jk-font-display: "DM Serif Display", serif;
+  --jk-font-body: "DM Sans", sans-serif;
+  --jk-font-label: "DM Sans", sans-serif;
+  --jk-content-max: 90rem;
+  --jk-space-gutter: clamp(1.25rem, 4.4vw, 4rem);
+  --jk-space-section: clamp(3.5rem, 6vw, 6rem);
+  --jk-text-display: clamp(2.75rem, 5.5vw, 5.5rem);
+  --jk-measure-display: 22ch;
+  --jk-text-heading: clamp(2rem, 3.3vw, 3.5rem);
+  --jk-weight-display: 400;
+  --jk-weight-heading: 400;
+  --jk-text-body: 1rem;
+  --jk-leading-body: 1.7;
+  --jk-control-height: 3rem;
+  --jk-image-ink: oklch(0.14 0.018 160);
+  --jk-image-paper: oklch(0.98 0.008 85);
+}

@@ -1,5 +1,7 @@
 # Five complete design-system showcase websites
 
+**2026-09-15 architecture update:** The five websites have moved to independent `apps/<system>` workspaces. [Standalone app guide](../docs/standalone-design-systems.md) is the current implementation/deployment reference. [PROMPTS_FOR_IMAGES.md](../PROMPTS_FOR_IMAGES.md) is the user-executed Higgsfield handoff. The original ticket instructions below are retained as history and do not authorize automatic image generation.
+
 Status: **shipped** (Higgsfield photography still open on [#260](https://github.com/jose-codegourmet/jabkit/issues/260); MIN-03–RET-03 [#204](https://github.com/jose-codegourmet/jabkit/issues/204)–[#208](https://github.com/jose-codegourmet/jabkit/issues/208) closed `not_planned`) · Authored: **2026-09-14** · Closeout: SH-08 / [#254](https://github.com/jose-codegourmet/jabkit/issues/254).
 
 The five sample websites live in `apps/showcase` beside the existing SaaS sample. Each has six page templates, secondary routes, fixture content, a brand-specific shell, both themes, a local demo task, and a `ready` catalogue entry. Higgsfield series production is Jose-owned; sites currently use SH-04 empty provenance plus local vendor stubs.

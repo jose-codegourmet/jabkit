@@ -1,0 +1,338 @@
+.home h1,
+.home h2 {
+  font-family: var(--jk-font-display);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+.home h2 {
+  font-size: clamp(2.8rem, 4.6vw, 4.8rem);
+}
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+.hero > picture {
+  display: block;
+}
+.hero > picture img {
+  width: 100%;
+  height: min(690px, calc(100svh - 80px));
+  min-height: 520px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--jk-image-ink) 74%, transparent),
+    color-mix(in oklch, var(--jk-image-ink) 15%, transparent) 65%,
+    transparent
+  );
+  pointer-events: none;
+}
+.heroCopy {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 7vw;
+  transform: translateY(-50%);
+  color: var(--jk-image-paper);
+}
+.heroCopy > p:first-child {
+  text-transform: uppercase;
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  margin-bottom: 2rem;
+}
+.hero h1 {
+  font-size: clamp(4rem, 7.4vw, 7.8rem);
+}
+.lede {
+  font-size: 0.95rem;
+  max-width: 28ch;
+  line-height: 1.75;
+  margin-block: 1.7rem 2rem;
+}
+.actions {
+  display: flex;
+  gap: 1.8rem;
+  align-items: center;
+}
+.heroCopy [data-slot="button"] {
+  color: var(--jk-image-ink);
+  background: var(--jk-image-paper);
+}
+.heroLink {
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+.intro {
+  padding: 5rem 1.5rem;
+  text-align: center;
+  background:
+    linear-gradient(
+      color-mix(in oklch, var(--jk-background) 95%, transparent),
+      color-mix(in oklch, var(--jk-background) 95%, transparent)
+    ),
+    url("/assets/design-systems/luxury/lux-background-linen.webp") center /
+    700px;
+}
+.intro img {
+  width: 42px;
+  height: 34px;
+  object-fit: contain;
+  margin: 0 auto 1.6rem;
+}
+[class~="dark"] .intro img {
+  filter: brightness(0) invert(1);
+}
+.intro p {
+  max-width: 50ch;
+  margin: 1.5rem auto;
+  font-size: 0.9rem;
+  line-height: 1.9;
+}
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding-block: 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--jk-border);
+}
+.rooms {
+  border-top: 1px solid var(--jk-border);
+}
+.rooms [data-slot="carousel-cards"] h2 {
+  font-family: var(--jk-font-display);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  font-size: clamp(2.8rem, 4vw, 4rem);
+}
+.rooms [data-slot="carousel-cards"] h3 {
+  font-family: var(--jk-font-display);
+  font-weight: 500;
+  font-size: 1.9rem;
+}
+.rooms [data-slot="carousel-cards"] img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.rooms [data-slot="carousel-cards"] article {
+  box-shadow: none;
+  border-color: var(--jk-border);
+}
+.experiences {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  margin: 5rem var(--jk-space-gutter);
+  gap: 5vw;
+  align-items: center;
+}
+.experiences picture {
+  display: block;
+}
+.experiences img {
+  width: 100%;
+  height: 620px;
+  object-fit: cover;
+}
+.experienceCopy > p {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  max-width: 42ch;
+  margin: 1.5rem 0 2rem;
+}
+.experienceLinks a {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-block: 1.3rem;
+  border-top: 1px solid var(--jk-border);
+}
+.experienceLinks a > span {
+  font-size: 0.65rem;
+}
+.experienceLinks a > svg {
+  margin-left: auto;
+}
+.experienceLinks h3 {
+  font-family: var(--jk-font-display);
+  font-size: 1.7rem;
+  line-height: 1.15;
+}
+.experienceLinks p {
+  font-size: 0.7rem;
+  color: var(--jk-muted-foreground);
+  margin-top: 0.4rem;
+}
+.house {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr 0.65fr;
+  gap: 2rem;
+  margin: 6rem var(--jk-space-gutter);
+  align-items: center;
+}
+.houseCopy p {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  max-width: 35ch;
+  margin: 1.6rem 0;
+}
+.house picture {
+  display: block;
+}
+.house img {
+  width: 100%;
+  object-fit: cover;
+}
+.water img {
+  height: 400px;
+}
+.door {
+  align-self: end;
+}
+.door img {
+  height: 320px;
+}
+.close {
+  display: grid;
+  grid-template-columns: 1.3fr 0.85fr;
+  margin-top: 4rem;
+  background: var(--jk-muted);
+}
+.close picture {
+  display: block;
+}
+.close img {
+  width: 100%;
+  height: 580px;
+  object-fit: cover;
+}
+.closeCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem 4vw;
+}
+.small {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  margin-bottom: 2rem;
+}
+.closeCopy h2 {
+  font-size: clamp(3.8rem, 6vw, 6rem);
+}
+.closeCopy > p:not(.small) {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  max-width: 30ch;
+  margin: 1.5rem 0 2rem;
+}
+.note {
+  margin-top: 1.2rem;
+  font-size: 0.65rem;
+  color: var(--jk-muted-foreground);
+  line-height: 1.5;
+}
+@media (max-width: 767px) {
+  .hero > picture img {
+    height: 640px;
+    min-height: 0;
+    object-position: 60% center;
+  }
+  .heroCopy {
+    left: var(--jk-space-gutter);
+    right: var(--jk-space-gutter);
+  }
+  .hero h1 {
+    font-size: 4.8rem;
+  }
+  .hero::after {
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--jk-image-ink) 68%, transparent),
+      color-mix(in oklch, var(--jk-image-ink) 22%, transparent)
+    );
+  }
+  .actions {
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .intro {
+    padding-block: 3.5rem;
+  }
+  .experiences {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-block: 3rem;
+  }
+  .experiences img {
+    height: 390px;
+  }
+  .house {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 1rem;
+    margin-block: 3rem;
+  }
+  .houseCopy {
+    grid-column: 1 / -1;
+    padding-bottom: 1rem;
+  }
+  .water img {
+    height: 300px;
+  }
+  .door img {
+    height: 250px;
+  }
+  .close {
+    grid-template-columns: 1fr;
+  }
+  .close img {
+    height: 410px;
+  }
+  .closeCopy {
+    padding: 2.5rem var(--jk-space-gutter);
+  }
+}
+
+.rooms [data-slot="carousel-cards-item"] p[id] {
+  font-family: var(--jk-font-display);
+  font-size: 1.9rem;
+  line-height: 1.1;
+  font-weight: 500;
+}
+.rooms [data-slot="carousel-cards-item"] > a > div:first-child {
+  aspect-ratio: 4 / 3;
+}
+.rooms [data-slot="carousel-cards-item"] img {
+  width: 100%;
+  height: 100%;
+}
+@media (min-width: 768px) {
+  .rooms [data-slot="carousel-cards"] > div > div[id] {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+  .rooms [data-slot="carousel-cards-item"] {
+    width: auto;
+  }
+  .rooms button[aria-controls] {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .rooms [data-slot="carousel-cards-item"] {
+    width: 82vw;
+  }
+}

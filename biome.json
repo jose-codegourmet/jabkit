@@ -11,13 +11,31 @@
       "!apps/showcase/public/r",
       "!apps/showcase/public/assets",
       "!apps/showcase/public/previews",
-      "!.shadcn-src"
+      "!.shadcn-src",
+      "!apps/*/public/assets",
+      "!tmp/higgsfield-originals"
     ]
   },
-  "formatter": { "enabled": true, "indentStyle": "space", "indentWidth": 2 },
-  "linter": { "enabled": true, "rules": { "preset": "recommended" } },
-  "css": { "parser": { "tailwindDirectives": true } },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended"
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
   "javascript": {
-    "formatter": { "quoteStyle": "double", "semicolons": "always" }
+    "formatter": {
+      "quoteStyle": "double",
+      "semicolons": "always"
+    }
   }
 }

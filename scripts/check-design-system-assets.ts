@@ -10,7 +10,6 @@ import {
   provenanceSchemaVersion,
   sampleAssetSrc,
 } from "../apps/showcase/lib/design-system-assets";
-import { assetsRoot } from "./preview-assets";
 
 const uuidPattern =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -136,8 +135,15 @@ function parseAsset(
     problem(system, `${label}.id must be kebab-case`);
   if (fileName && !fileNamePattern.test(fileName))
     problem(system, `${label}.fileName must be kebab-case.webp`);
-  if (kind !== "higgsfield-mcp" && kind !== "browser-capture")
-    problem(system, `${label}.kind must be higgsfield-mcp or browser-capture`);
+  if (
+    kind !== "higgsfield-mcp" &&
+    kind !== "higgsfield" &&
+    kind !== "browser-capture"
+  )
+    problem(
+      system,
+      `${label}.kind must be higgsfield-mcp, higgsfield, or browser-capture`,
+    );
   if (role !== "content" && role !== "decorative")
     problem(system, `${label}.role must be content or decorative`);
   if (
@@ -152,7 +158,10 @@ function parseAsset(
     outputUseRights !== "unrecorded"
   )
     problem(system, `${label}.outputUseRights is not a known status`);
-  if (kind === "higgsfield-mcp" && outputUseRights === "browser-capture")
+  if (
+    (kind === "higgsfield-mcp" || kind === "higgsfield") &&
+    outputUseRights === "browser-capture"
+  )
     problem(system, `${label} mixes Higgsfield kind with capture rights`);
   if (
     kind === "browser-capture" &&
@@ -161,6 +170,11 @@ function parseAsset(
     problem(system, `${label} mixes capture kind with Higgsfield rights`);
   if (kind === "higgsfield-mcp" && provider !== "Higgsfield MCP")
     problem(system, `${label}.provider must be "Higgsfield MCP"`);
+  if (kind === "higgsfield" && provider !== "Higgsfield")
+    problem(
+      system,
+      `${label}.provider must be "Higgsfield" for manually supplied outputs`,
+    );
   if (kind === "browser-capture" && model !== "browser")
     problem(system, `${label}.model for captures must be "browser"`);
   if (role === "content" && alt !== null && alt.trim() === "")
@@ -173,7 +187,7 @@ function parseAsset(
     if (kind === "higgsfield-mcp")
       problem(
         system,
-        `${label}.jobId is required for Higgsfield outputs; use null only for browser captures`,
+        `${label}.jobId is required for MCP outputs; null is allowed for manual Higgsfield outputs or browser captures`,
       );
   } else if (typeof value.jobId !== "string") {
     problem(system, `${label}.jobId must be a UUID string or null`);
@@ -251,7 +265,9 @@ function parseAsset(
     return null;
 
   if (
-    (kind !== "higgsfield-mcp" && kind !== "browser-capture") ||
+    (kind !== "higgsfield-mcp" &&
+      kind !== "higgsfield" &&
+      kind !== "browser-capture") ||
     (role !== "content" && role !== "decorative") ||
     (deliveryRole !== "hero" &&
       deliveryRole !== "content" &&
@@ -321,10 +337,14 @@ function parseManifest(
   return { schemaVersion: provenanceSchemaVersion, system, assets };
 }
 
-const systemsRoot = path.join(assetsRoot, "design-systems");
-
 for (const system of designSystemIds) {
-  const folder = path.join(systemsRoot, system);
+  const folder = path.join(
+    process.cwd(),
+    "apps",
+    system,
+    "public/assets/design-systems",
+    system,
+  );
   const manifestPath = path.join(folder, "provenance.json");
   if (!(await isFile(manifestPath))) {
     problem(system, "missing provenance.json");
@@ -335,9 +355,7 @@ for (const system of designSystemIds) {
   const manifest = parseManifest(system, raw);
   if (!manifest) continue;
 
-  const assetsModule = (await import(
-    `../apps/showcase/app/samples/${system}/assets.ts`
-  )) as {
+  const assetsModule = (await import(`../apps/${system}/app/assets.ts`)) as {
     assets: Record<string, { src: string; width: number; height: number }>;
   };
   const exportedIds = Object.keys(assetsModule.assets);

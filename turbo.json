@@ -1,9 +1,26 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": ["PREVIEW_BASE_URL"],
+  "globalEnv": [
+    "PREVIEW_BASE_URL",
+    "NEXT_PUBLIC_JABKIT_URL",
+    "MINIMAL_SITE_URL",
+    "NEO_BRUTALISM_SITE_URL",
+    "EDITORIAL_SITE_URL",
+    "LUXURY_SITE_URL",
+    "RETRO_SITE_URL"
+  ],
   "tasks": {
-    "build": { "dependsOn": ["^build"], "outputs": [".next/**", "dist/**"] },
-    "typecheck": { "dependsOn": ["^typecheck"], "outputs": [] },
-    "dev": { "cache": false, "persistent": true }
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "dist/**"]
+    },
+    "typecheck": {
+      "dependsOn": ["^typecheck"],
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
   }
 }
