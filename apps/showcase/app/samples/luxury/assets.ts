@@ -1,4 +1,9 @@
-import type { SampleAssetMap } from "../../../lib/design-system-assets";
+import {
+  type ProvenanceManifest,
+  sampleAssetsFromManifest,
+} from "../../../lib/design-system-assets";
+import provenance from "../../../public/assets/design-systems/luxury/provenance.json";
 
-/** Filled by LUX-03. Empty until Higgsfield series production. */
-export const assets = {} as const satisfies SampleAssetMap;
+export const assets = sampleAssetsFromManifest(
+  provenance as ProvenanceManifest,
+);
