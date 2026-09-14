@@ -61,7 +61,7 @@
     {
       "path": "tooltip/index.ts",
       "type": "index",
-      "content": "export {\n  Tooltip,\n  TooltipContent,\n  TooltipProvider,\n  TooltipTrigger,\n} from \"./Tooltip\";\nexport type * from \"./Tooltip.types\";\n"
+      "content": "export * from \"./Tooltip\";\nexport type * from \"./Tooltip.types\";\n"
     },
     {
       "path": "lib/cn.ts",
