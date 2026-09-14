@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "neo-brutalism",
+  "patterns": [
+    {
+      "id": "campaign-poster",
+      "purpose": "Make one offer feel immediate and unmistakable.",
+      "sections": [
+        "Large statement and isolated product",
+        "Short factual proof strip",
+        "Product or work wall",
+        "How it works in three short stages",
+        "Offer comparison",
+        "Primary action"
+      ],
+      "desktop": "Hard-edged grid with a seven-column title and five-column object field.",
+      "mobile": "Statement, CTA, object, then proof; remove overlaps.",
+      "conversion": "The same primary task anchors opening and closing contexts.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "independent-portfolio",
+      "purpose": "Show craft without flattening the personality.",
+      "sections": [
+        "Name and practice statement",
+        "Selected case-study posters",
+        "Approach and capabilities",
+        "Availability and contact"
+      ],
+      "desktop": "Alternate full-width project posters and paired project rows.",
+      "mobile": "One poster at a time with live titles under each asset.",
+      "conversion": "Project details lead to an inquiry with context.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "local-event",
+      "purpose": "Give an event a recognizable poster and usable logistics.",
+      "sections": [
+        "Event identity and date",
+        "Lineup or offering",
+        "Program grouped by time",
+        "Venue and access",
+        "Ticket options and practical questions"
+      ],
+      "desktop": "Separate expressive poster art from the factual schedule grid.",
+      "mobile": "Schedule becomes a vertical sequence; venue and access remain visible.",
+      "conversion": "Make ticket conditions clear before purchase.",
+      "imageryGuide": "imagery.md"
+    }
+  ]
+}

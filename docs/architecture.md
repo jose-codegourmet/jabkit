@@ -4,6 +4,10 @@ JabKit is a pnpm + Turborepo monorepo. The product is source: components live in
 
 Repository code is authoritative when this document disagrees with an assumption.
 
+## Design direction documents
+
+Root `design-systems/` contains authored specifications for five website styles, including semantic palette proposals, composition guidance, motion, migration, and image prompting. It is documentation outside the pnpm workspaces, not a runtime package or generated registry input. No CLI, builder, or showcase loader consumes these JSON files. See the [design-system index](../design-systems/README.md) and [document contract](../design-systems/contract.md).
+
 ## Workspaces
 
 `pnpm-workspace.yaml` includes `apps/*` and `packages/*`. Node is `>=24` (`.nvmrc` is `24`); the package manager is `pnpm@11.24.0`.

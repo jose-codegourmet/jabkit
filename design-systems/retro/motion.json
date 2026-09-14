@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "retro",
+  "durationMs": {
+    "feedback": 120,
+    "transition": 220,
+    "reveal": "Decorative objects settle once from 8px away; maximum rotation change is 3 degrees.",
+    "stagger": 45
+  },
+  "easing": {
+    "standard": "cubic-bezier(0.2, 0.8, 0.2, 1)"
+  },
+  "behaviors": {
+    "hover": {
+      "trigger": "pointer enters an enabled control",
+      "effect": "Reduce the 2px shadow to 1px; the hit area stays fixed.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    },
+    "press": {
+      "trigger": "pointer or keyboard activation",
+      "effect": "Translate by 1px toward the hard shadow without scaling text.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    },
+    "reveal": {
+      "trigger": "secondary figure first enters viewport",
+      "effect": "Decorative objects settle once from 8px away; maximum rotation change is 3 degrees.",
+      "duration": "reveal",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    },
+    "image": {
+      "trigger": "explicit gallery action or one decorative entrance",
+      "effect": "Only a decorative object can tilt once; covers and product demonstrations stay still.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    },
+    "menu": {
+      "trigger": "menu open or close action",
+      "effect": "Reveal links as a group; any tab-like styling retains normal navigation behavior.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Show final geometry immediately; preserve a static surface, underline, and focus change. No translation, zoom, rotation, or stagger."
+    }
+  },
+  "global": {
+    "autoplay": false,
+    "audioAutoplay": false,
+    "maxStaggerItems": 3,
+    "replayOnScroll": false,
+    "reducedMotionMedia": "(prefers-reduced-motion: reduce)",
+    "contentBeforeEnhancement": "Visible, usable, and in reading order.",
+    "colorTransition": "Optional brief color feedback; reduced motion removes spatial animation and stagger."
+  }
+}

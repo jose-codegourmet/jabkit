@@ -26,6 +26,12 @@ export function SiteFooter() {
           >
             Samples
           </Link>
+          <Link
+            href="/design-systems"
+            className="inline-flex min-h-11 items-center hover:text-foreground"
+          >
+            Design systems
+          </Link>
           <a
             href="#how-it-works"
             className="inline-flex min-h-11 items-center hover:text-foreground"

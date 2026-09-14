@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "editorial",
+  "patterns": [
+    {
+      "id": "feature-story",
+      "purpose": "Build an argument with evidence and changes of pace.",
+      "sections": [
+        "Title, standfirst, and cover photograph",
+        "Opening question",
+        "Evidence with captioned images",
+        "One pull quote or visual interlude",
+        "Interpretation",
+        "Related reading or contact"
+      ],
+      "desktop": "Eight-column reading area with a two-column margin for annotations.",
+      "mobile": "Move annotations below their related passage; retain heading order.",
+      "conversion": "A relevant next story or a well-contextualized inquiry.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "cultural-index",
+      "purpose": "Make an authored collection browsable and comparable.",
+      "sections": [
+        "Publication identity and scope",
+        "Search or category controls",
+        "Entries with consistent metadata",
+        "Method and update information",
+        "Submission or contact"
+      ],
+      "desktop": "One featured entry followed by a structured index, not equally loud covers.",
+      "mobile": "Single-column entries; preserve search and filters.",
+      "conversion": "Choose an entry or submit a useful contribution.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "personal-event",
+      "purpose": "Balance a personal story with practical attendance tasks.",
+      "sections": [
+        "Invitation and RSVP",
+        "Short chronological story",
+        "Celebration schedule",
+        "Travel and accessibility details",
+        "Questions and RSVP"
+      ],
+      "desktop": "Invitation-sized opening followed by a timeline and plain logistics groups.",
+      "mobile": "Vertical timeline; RSVP remains reachable from navigation.",
+      "conversion": "Attend or respond without being forced through every story panel.",
+      "imageryGuide": "imagery.md"
+    }
+  ]
+}

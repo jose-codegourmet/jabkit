@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "luxury",
+  "name": "Luxury",
+  "status": "draft-specification",
+  "intent": "Build desire and trust through exceptional attention to imagery, pacing, material detail, and service clarity.",
+  "keywords": ["immersive", "considered", "material", "selective", "attentive"],
+  "bestFor": [
+    "Hospitality and destinations",
+    "Design objects, interiors, and craft",
+    "Bespoke services and curated cultural events"
+  ],
+  "avoidFor": [
+    "Commodity offers competing mainly on speed and discounts",
+    "Pages that cannot support the visual promise with real detail"
+  ],
+  "referenceReviewDate": "2026-09-14",
+  "files": {
+    "system.md": "system.md",
+    "rules.md": "rules.md",
+    "tokens.json": "tokens.json",
+    "typography.json": "typography.json",
+    "components.json": "components.json",
+    "patterns.json": "patterns.json",
+    "motion.json": "motion.json",
+    "motion.md": "motion.md",
+    "migration.md": "migration.md",
+    "imagery.md": "imagery.md",
+    "references.md": "references.md"
+  },
+  "compatibility": {
+    "runtime": "Documentation only; manual application required.",
+    "tokenSource": "../../packages/tokens/tokens.css",
+    "modes": ["light", "dark"],
+    "categories": ["atoms", "marketing", "dashboard"],
+    "automaticInstall": false,
+    "foundationVariables": "Proposed additions, not existing runtime variables."
+  }
+}

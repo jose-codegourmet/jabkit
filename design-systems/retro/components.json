@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "retro",
+  "components": {
+    "button": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/button/Button.tsx"],
+      "adaptation": "A tactile but modern control with modest corners and a small hard shadow.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API."
+    },
+    "card": {
+      "category": "marketing",
+      "existingCandidates": [],
+      "adaptation": "A collectible image or episode entry with a plain caption area, inspired by sleeves or index cards.",
+      "notes": "No standalone card atom is assumed; compose semantic HTML with existing atoms."
+    },
+    "input": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/input/Input.tsx"],
+      "adaptation": "A stable labeled field on a clean paper-like surface; texture cannot impair the typed value.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API."
+    },
+    "navbar": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/menu-vertical/MenuVertical.tsx"
+      ],
+      "adaptation": "A compact identity and ordinary links, optionally organized like simple file tabs without fake window controls.",
+      "notes": "MenuVertical is a reference for a navigation list, not a compact header. Its large type and moving labels require replacement for this navbar direction."
+    },
+    "hero": {
+      "category": "marketing",
+      "existingCandidates": [],
+      "adaptation": "A concise product promise with a few material objects supporting the idea.",
+      "notes": "Compose the specified section with semantic HTML, a figure, and existing Button. No exact hero match is assumed; Hero307 includes a dashboard composition that does not fit this direction."
+    },
+    "pricing": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/pricing28/Pricing28.tsx"
+      ],
+      "adaptation": "A clear offer panel inspired by a small printed order card, with modern, explicit terms.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API."
+    }
+  }
+}

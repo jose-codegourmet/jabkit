@@ -18,6 +18,13 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
       <Link href="/samples" className={navClassName} onClick={onNavigate}>
         Samples
       </Link>
+      <Link
+        href="/design-systems"
+        className={navClassName}
+        onClick={onNavigate}
+      >
+        Design systems
+      </Link>
       <Link href="/#how-it-works" className={navClassName} onClick={onNavigate}>
         How it works
       </Link>

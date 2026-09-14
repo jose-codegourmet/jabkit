@@ -30,6 +30,7 @@ Everything under `apps/showcase/app/` and `apps/showcase/components/` is site ch
 | `/preview/[name]/[story]` | `app/preview/[name]/[story]/page.tsx` | Isolated iframe document. |
 | `/samples` | `app/samples/page.tsx` | Sample index from `app/samples/catalog.ts`. |
 | `/samples/saas` | `app/samples/saas/page.tsx` | SaaS landing assembled from registry blocks. |
+| `/design-systems` | `app/design-systems/page.tsx` | Design-system directions index. Static so it is not captured by `/[category]`. |
 | `/mcp` | `app/mcp/route.ts` | Read-only JSON endpoint. See [mcp.md](mcp.md). |
 
 ## Preview architecture
@@ -86,5 +87,7 @@ Because of the alias, do not invent `@/components/...` paths inside the showcase
 ## Site chrome
 
 `SiteHeader` (sticky, mobile burger, `ThemeToggle`) and `SiteFooter` wrap marketing routes. The header's GitHub anchor is currently `https://github.com` with no repo path.
+
+Chrome stories (`components/*.stories.tsx`) and `.storybook/` are excluded from `apps/showcase/tsconfig.json`. They are not Next.js app modules; `next build` must not type-check `@storybook/nextjs-vite`.
 
 Preview routes do not render the header; they are a blank document for the iframe.

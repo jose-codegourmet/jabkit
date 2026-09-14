@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "luxury",
+  "patterns": [
+    {
+      "id": "destination",
+      "purpose": "Introduce a place and make a visit practical.",
+      "sections": [
+        "Atmospheric establishing image with reservation action",
+        "A short account of the experience",
+        "Rooms, objects, or menu details",
+        "What is included and how to visit",
+        "Reservation or inquiry"
+      ],
+      "desktop": "Broad image fields followed by narrow text and paired details.",
+      "mobile": "Portrait hero, concise description, visible booking action, then supporting images.",
+      "conversion": "Reservation remains available without playing media.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "collection",
+      "purpose": "Make a small collection feel deliberately curated.",
+      "sections": [
+        "Collection title and lead object",
+        "Material and making detail",
+        "Selected pieces",
+        "Care and service information",
+        "Inquiry or purchase"
+      ],
+      "desktop": "One lead object followed by varied but aligned object photographs.",
+      "mobile": "One object per row with complete title and practical information.",
+      "conversion": "Product facts support the decision before the action.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "bespoke-service",
+      "purpose": "Translate atmosphere into a credible service relationship.",
+      "sections": [
+        "Promise and representative project",
+        "Selected work",
+        "Process with real responsibilities",
+        "Service scopes and conditions",
+        "Consultation request"
+      ],
+      "desktop": "Large project frames alternate with measured, plain process blocks.",
+      "mobile": "Project, evidence, process, scope, and inquiry in direct order.",
+      "conversion": "Explain what happens after an inquiry and the information needed.",
+      "imageryGuide": "imagery.md"
+    }
+  ]
+}

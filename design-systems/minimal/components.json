@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "minimal",
+  "components": {
+    "button": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/button/Button.tsx"],
+      "adaptation": "A compact, square action with no aura; its weight comes from a solid fill or a deliberate outline.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API."
+    },
+    "card": {
+      "category": "marketing",
+      "existingCandidates": [],
+      "adaptation": "An unboxed figure with a linked title and caption. A card is a content relationship, not necessarily a panel.",
+      "notes": "No standalone card atom is assumed; compose semantic HTML with existing atoms."
+    },
+    "input": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/input/Input.tsx"],
+      "adaptation": "A square, full-width field with an explicit label; a subtle divider elsewhere must not weaken its boundary.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API."
+    },
+    "navbar": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/menu-vertical/MenuVertical.tsx"
+      ],
+      "adaptation": "A compact wordmark and a few plain text destinations distributed on one baseline.",
+      "notes": "MenuVertical is a reference for a navigation list, not a compact header. Its large type and moving labels require replacement for this navbar direction."
+    },
+    "hero": {
+      "category": "marketing",
+      "existingCandidates": [],
+      "adaptation": "A small practice statement accompanying one commanding image; there is no badge stack.",
+      "notes": "Compose the specified section with semantic HTML, a figure, and existing Button. No exact hero match is assumed; Hero307 includes a dashboard composition that does not fit this direction."
+    },
+    "pricing": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/pricing28/Pricing28.tsx"
+      ],
+      "adaptation": "Two aligned service scopes on the page background, with the same order of inclusions and conditions.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API."
+    }
+  }
+}
