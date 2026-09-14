@@ -133,7 +133,7 @@ export default {
 
 ### `{Name}.mocks.ts` (optional)
 
-Keep story and preview data out of the component file:
+Keep story and preview data out of the component file. The registry ships `{Name}.mocks.ts` only when a shipped `{Name}.tsx` (or types/index) imports it; story-only mocks stay in the monorepo:
 
 ```ts
 export const exampleMocks = {
