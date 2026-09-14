@@ -41,6 +41,7 @@ export const implementedSampleHrefs = [
   "/samples/saas",
   "/samples/minimal",
   "/samples/neo-brutalism",
+  "/samples/editorial",
 ] as const satisfies readonly SampleRootHref[];
 
 export type LinkedSampleHref = (typeof implementedSampleHrefs)[number];
@@ -109,8 +110,9 @@ export const samples = [
     designSystem: "Editorial",
     brand: "Common Hours",
     description:
-      "Independent journal sample. Topic, longread, contributor, and membership preview. Catalogue link lands when this site is released.",
-    status: "soon",
+      "Independent journal sample. Topic archive, longreads, contributors, and a local membership preview.",
+    href: linkedSampleHref("/samples/editorial"),
+    status: "ready",
   },
   {
     slug: "luxury",

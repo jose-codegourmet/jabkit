@@ -1,6 +1,6 @@
 # Common Hours — Editorial showcase roadmap
 
-Status: **planned** · Ticket prefix: **EDT** · Proposed root: `/samples/editorial` · 12 tickets.
+Status: **in progress (sample implemented; EDT-03 imagery deferred to #260)** · Ticket prefix: **EDT** · Root: `/samples/editorial` · 12 tickets.
 
 Read the [shared roadmap and mandatory handoff](../roadmap.md), then this folder’s [system](system.md), [rules](rules.md), [component guidance](components.json), [imagery direction](imagery.md), and [migration notes](migration.md). These are implementation tickets; none of the proposed routes or API extensions is claimed to exist yet.
 

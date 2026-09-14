@@ -12,6 +12,8 @@ export interface Content4Author {
   avatarSrc: string;
   avatarAlt: string;
   fallback: string;
+  /** Optional profile destination. The name remains the accessible label. */
+  href?: string;
 }
 
 export interface Content4Paragraph {

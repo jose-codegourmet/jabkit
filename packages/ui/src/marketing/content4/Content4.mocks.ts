@@ -13,6 +13,11 @@ export const content4Author: Content4Author = {
   fallback: "MS",
 };
 
+export const content4LinkedAuthor: Content4Author = {
+  ...content4Author,
+  href: "#mira-solano",
+};
+
 export const content4Blocks: Content4Block[] = [
   {
     type: "paragraph",
@@ -99,6 +104,18 @@ export const content4Mocks = {
     ],
     title: "How we write a launch that operators can actually run",
     author: content4Author,
+    outlineLabel: "On this page",
+    backToTopLabel: "Back to top",
+    blocks: content4Blocks,
+  },
+  linkedAuthor: {
+    breadcrumbs: [
+      { label: "Journal", href: "#journal" },
+      { label: "Field notes", href: "#notes" },
+      { label: "The launch brief" },
+    ],
+    title: "How we write a launch that operators can actually run",
+    author: content4LinkedAuthor,
     outlineLabel: "On this page",
     backToTopLabel: "Back to top",
     blocks: content4Blocks,

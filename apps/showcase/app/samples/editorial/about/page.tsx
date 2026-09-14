@@ -1,0 +1,68 @@
+import type { Metadata } from "next";
+import { Button } from "@/atoms/button";
+import { Content1 } from "@/marketing/content1";
+import { toAboutSections } from "../_components/adapters";
+import {
+  contributorHref,
+  contributors,
+  demoNote,
+  storiesHref,
+} from "../content";
+import styles from "../style.module.css";
+import { sampleRoot } from "../types";
+
+export const metadata: Metadata = {
+  title: "About - Common Hours",
+  description:
+    "Editorial point of view, issue structure, and the three fictional contributors.",
+};
+
+export default function AboutPage() {
+  return (
+    <main id="top">
+      <header className={styles.section}>
+        <div className={styles.frame}>
+          <h1 className="jk-heading">About the journal</h1>
+          <p className="jk-lead mt-4">
+            Common Hours is a fictional independent journal. The district is
+            invented. The membership is a preview. The reading is the point.
+          </p>
+          <p className={`jk-caption ${styles.meta} mt-4`}>{demoNote}</p>
+        </div>
+      </header>
+      <Content1
+        kicker="Late Light"
+        title="How we edit a week"
+        description="Point of view, the shape of an issue, and the routes a reader can take without finishing a narrative first."
+        outlineLabel="On this page"
+        sections={toAboutSections()}
+      />
+      <section className={styles.section} aria-labelledby="masthead">
+        <div className={styles.frame}>
+          <h2 className="jk-heading" id="masthead">
+            Contributors
+          </h2>
+          <ul className={`${styles.listPlain} mt-8`}>
+            {contributors.map((person) => (
+              <li key={person.slug}>
+                <h3>
+                  <a href={contributorHref(person.slug)}>{person.name}</a>
+                </h3>
+                <p className={`jk-caption ${styles.meta}`}>{person.role}</p>
+                <p className="jk-body mt-2">{person.shortBio}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8 flex flex-wrap gap-2">
+            <Button asChild>
+              <a href={storiesHref("all")}>Browse stories</a>
+            </Button>
+            <Button asChild variant="secondary">
+              <a href={`${sampleRoot}/membership`}>Membership</a>
+            </Button>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
