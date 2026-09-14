@@ -7,6 +7,8 @@ import { assetsRoot, root, uiRoot } from "./preview-assets";
 
 const hostedAssetBase = "/assets";
 const sourceMapPath = path.join(assetsRoot, "sources.json");
+// Higgsfield design-system files live under assets/design-systems/ and are
+// not produced or rewritten here. See docs/previews.md.
 const unavailableImageFallback =
   "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&h=900&q=80";
 const remoteAssetPattern =

@@ -2,6 +2,8 @@
 
 JabKit's agent-facing catalogue is a **read-only JSON HTTP endpoint** on the showcase: `apps/showcase/app/mcp/route.ts`.
 
+This is not Higgsfield MCP. Sample-showcase photography uses the Higgsfield tool namespace documented in [previews.md](previews.md).
+
 `packages/mcp` (`@jabkit/mcp`) currently exports one thing: the `jabkitTools` string tuple and the `JabkitTool` type in `packages/mcp/src/index.ts`. It has no server and no handlers. The live dispatch table is the showcase route, which duplicates the name list rather than importing the package.
 
 ## Protocol
