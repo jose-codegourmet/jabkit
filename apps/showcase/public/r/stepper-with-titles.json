@@ -1,0 +1,96 @@
+{
+  "name": "stepper-with-titles",
+  "displayName": "StepperWithTitles",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A horizontal progress stepper with numbered markers, titles, and supporting descriptions.",
+  "sectionCategory": "navigation",
+  "purpose": "Shows where a person is in a short linear flow and lets them jump to a completed or upcoming step.",
+  "bestFor": [
+    "checkout and billing flows",
+    "account onboarding",
+    "multi-step forms with named stages"
+  ],
+  "avoidFor": [
+    "non-linear tasks that need a sidebar or tabs",
+    "dense wizards with more than a handful of steps"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "low",
+  "layout": {
+    "type": "row",
+    "alignment": "center",
+    "columns": 3
+  },
+  "slots": [
+    "stepTitle",
+    "stepDescription",
+    "stepIndicator"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "stepper",
+    "progress",
+    "wizard",
+    "navigation",
+    "atom"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center",
+    "width": 720,
+    "height": 220
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "stepper-with-titles/StepperWithTitles.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { CheckIcon } from \"lucide-react\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { useId, useState } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { StepperWithTitlesProps } from \"./StepperWithTitles.types\";\n\nexport function StepperWithTitles({\n  className,\n  steps,\n  value,\n  defaultValue = 1,\n  onValueChange,\n  ...props\n}: StepperWithTitlesProps) {\n  const labelId = useId();\n  const [uncontrolled, setUncontrolled] = useState(defaultValue);\n  const current = value ?? uncontrolled;\n  const currentTitle = steps[current - 1]?.title ?? \"\";\n\n  function selectStep(step: number) {\n    if (steps[step - 1]?.disabled) return;\n    if (value === undefined) setUncontrolled(step);\n    onValueChange?.(step);\n  }\n\n  function moveBy(delta: number) {\n    let next = current + delta;\n    while (next >= 1 && next <= steps.length && steps[next - 1]?.disabled) {\n      next += delta;\n    }\n    if (next >= 1 && next <= steps.length) selectStep(next);\n  }\n\n  return (\n    <div\n      className={cn(\"w-full min-w-[20rem] text-center\", className)}\n      data-slot=\"stepper-with-titles\"\n      onKeyDown={(event) => {\n        if (event.key === \"ArrowRight\") {\n          event.preventDefault();\n          moveBy(1);\n        }\n        if (event.key === \"ArrowLeft\") {\n          event.preventDefault();\n          moveBy(-1);\n        }\n      }}\n      {...props}\n    >\n      <ol\n        aria-labelledby={labelId}\n        className=\"flex w-full items-start\"\n        data-orientation=\"horizontal\"\n      >\n        {steps.map((item, index) => {\n          const step = index + 1;\n          const isComplete = step < current;\n          const isCurrent = step === current;\n          const isLast = step === steps.length;\n\n          return (\n            <li\n              className=\"group/step relative flex flex-1 flex-col items-center\"\n              data-complete={isComplete || undefined}\n              data-current={isCurrent || undefined}\n              key={`${item.title}-${step}`}\n            >\n              {!isLast ? (\n                <span\n                  aria-hidden=\"true\"\n                  className={cn(\n                    \"pointer-events-none absolute top-3 left-[calc(50%+0.875rem)] h-px w-[calc(100%-1.75rem)] -translate-y-1/2 motion-reduce:transition-none\",\n                    isComplete ? \"bg-primary\" : \"bg-border\",\n                    \"motion-safe:transition-colors motion-safe:duration-200\",\n                  )}\n                />\n              ) : null}\n              <button\n                aria-current={isCurrent ? \"step\" : undefined}\n                className={cn(\n                  \"relative z-10 flex w-full flex-col items-center gap-3 rounded-[--radius] px-1 outline-none\",\n                  \"focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n                  \"disabled:pointer-events-none disabled:opacity-50\",\n                )}\n                disabled={item.disabled}\n                onClick={() => selectStep(step)}\n                type=\"button\"\n              >\n                <span\n                  className={cn(\n                    \"flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-medium\",\n                    \"motion-reduce:transition-none motion-safe:transition-colors motion-safe:duration-200\",\n                    isComplete || isCurrent\n                      ? \"bg-primary text-primary-foreground\"\n                      : \"bg-muted text-muted-foreground\",\n                  )}\n                >\n                  {isComplete ? (\n                    <CheckIcon aria-hidden=\"true\" className=\"size-3.5\" />\n                  ) : (\n                    step\n                  )}\n                </span>\n                <span className=\"space-y-0.5 px-1\">\n                  <span\n                    className={cn(\n                      \"block text-sm font-medium\",\n                      isCurrent || isComplete\n                        ? \"text-foreground\"\n                        : \"text-muted-foreground\",\n                    )}\n                  >\n                    {item.title}\n                  </span>\n                  {item.description ? (\n                    <span className=\"hidden text-xs text-muted-foreground sm:block\">\n                      {item.description}\n                    </span>\n                  ) : null}\n                </span>\n              </button>\n            </li>\n          );\n        })}\n      </ol>\n      <p className=\"sr-only\" id={labelId}>\n        Progress\n      </p>\n      <p\n        aria-live=\"polite\"\n        className=\"mt-3 text-xs text-muted-foreground\"\n        role=\"status\"\n      >\n        {currentTitle ? `Current step: ${currentTitle}` : null}\n      </p>\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "stepper-with-titles/StepperWithTitles.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface StepperWithTitlesStep {\n  title: string;\n  description?: string;\n  disabled?: boolean;\n}\n\nexport interface StepperWithTitlesProps\n  extends Omit<HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  steps: readonly StepperWithTitlesStep[];\n  value?: number;\n  defaultValue?: number;\n  onValueChange?: (step: number) => void;\n}\n"
+    },
+    {
+      "path": "stepper-with-titles/index.ts",
+      "type": "index",
+      "content": "export { StepperWithTitles } from \"./StepperWithTitles\";\nexport type * from \"./StepperWithTitles.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"w-[36rem] bg-background p-8 text-foreground\">\n      <StepperWithTitles {...stepperWithTitlesMocks.checkout} />\n    </div>"
+    },
+    {
+      "name": "Onboarding",
+      "code": "<div className=\"w-[42rem] bg-background p-8 text-foreground\">\n      <StepperWithTitles {...stepperWithTitlesMocks.onboarding} />\n    </div>"
+    }
+  ]
+}
