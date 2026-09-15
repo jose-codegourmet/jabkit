@@ -2,26 +2,18 @@ import type { AdmitOneTicketProps } from "./AdmitOneTicket.types";
 
 export const admitOneTicketMocks = {
   default: {
-    eyebrow: "Door pass",
-    heading: "A ticket that tilts like paper.",
-    description:
-      "Perforated stub, dithered stock, and a glare that follows the pointer. Still when motion is reduced.",
-    name: "Inez Calder",
-    presenter: "Harbor Hall presents",
-    event: "Night Shift Sessions",
-    venue: "Pier 9, Oakland",
-    dates: "Sept 18-19",
+    name: "Garry Tan",
+    presenter: "Y Combinator presents",
+    event: "Startup School 2026",
+    venue: "Chase Center, SF",
+    dates: "July 25-26",
     stubText: "Admit one",
     watermark: "2026",
-    serial: "HH-1842",
-    maxTilt: 14,
     width: 741,
+    tilt: true,
+    maxTilt: 9,
   },
   alternate: {
-    eyebrow: "Weekend pair",
-    heading: "Two cuts of the same stub.",
-    description:
-      "Same perforated ticket, two rooms. Festival floor and a late set on the pier.",
     tickets: [
       {
         id: "floor",
@@ -32,7 +24,6 @@ export const admitOneTicketMocks = {
         dates: "Sept 18",
         stubText: "Floor",
         watermark: "NLF",
-        serial: "NLF-2201",
       },
       {
         id: "late",
@@ -43,10 +34,10 @@ export const admitOneTicketMocks = {
         dates: "Sept 19",
         stubText: "Admit one",
         watermark: "2026",
-        serial: "HH-1904",
       },
     ],
-    maxTilt: 10,
     width: 640,
+    tilt: true,
+    maxTilt: 9,
   },
 } satisfies Record<"default" | "alternate", AdmitOneTicketProps>;

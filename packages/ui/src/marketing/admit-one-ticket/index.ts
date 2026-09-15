@@ -1,2 +1,5 @@
 export { AdmitOneTicket } from "./AdmitOneTicket";
-export type * from "./AdmitOneTicket.types";
+export type {
+  AdmitOneTicketFace,
+  AdmitOneTicketProps,
+} from "./AdmitOneTicket.types";
