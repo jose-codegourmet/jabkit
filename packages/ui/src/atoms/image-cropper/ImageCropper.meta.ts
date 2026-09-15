@@ -32,6 +32,12 @@ export default {
     supportsDarkMode: true,
   },
   recommendedAfter: ["button"],
+  usedIn: [
+    {
+      site: "retro",
+      role: "Studio and home embed loaded through next/dynamic with ssr: false so cached images initialize crop dimensions.",
+    },
+  ],
   tags: ["image", "crop", "upload", "zoom", "preview", "atom"],
   dependencies: ["lucide-react"],
   registryDependencies: ["button"],

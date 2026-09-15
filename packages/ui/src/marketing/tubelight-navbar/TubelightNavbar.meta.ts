@@ -9,9 +9,10 @@ export default {
     "Floating pill navigation with a sliding active highlight and a primary-token tubelight glow on the current item.",
   sectionCategory: "navbar",
   purpose:
-    "Provides compact primary navigation with a conspicuous animated indicator for the active destination.",
+    "Provides compact primary navigation with a conspicuous animated indicator for the active destination. A bottom-dock composition needs reserved page space and matching document scroll padding so the last content is not covered.",
   bestFor: [
     "primary site navigation",
+    "floating bottom docks",
     "responsive marketing sites",
     "commerce discovery",
   ],
@@ -31,6 +32,12 @@ export default {
     supportsDarkMode: true,
   },
   recommendedBefore: ["hero", "content"],
+  usedIn: [
+    {
+      site: "retro",
+      role: "Floating paper tab dock at the foot of the page; activeName from usePathname, restyled through navigation.module.css.",
+    },
+  ],
   tags: [
     "navbar",
     "marketing",

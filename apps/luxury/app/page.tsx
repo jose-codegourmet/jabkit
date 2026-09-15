@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function LuxuryHomePage() {
   return (
     <main id="top" className={s.home}>
-      <section className={s.hero}>
+      <section data-motion-hero className={s.hero}>
         <ArtImage
           id="lux-hero"
           mobile="lux-hero-mobile"
@@ -22,7 +22,7 @@ export default function LuxuryHomePage() {
         />
         <div className={s.heroCopy}>
           <p>Stillwater Reach</p>
-          <h1>
+          <h1 data-motion-title>
             A slower kind
             <br />
             of stay.
@@ -42,7 +42,7 @@ export default function LuxuryHomePage() {
           </div>
         </div>
       </section>
-      <section className={s.intro}>
+      <section data-motion-reveal className={s.intro}>
         <img
           src="/assets/design-systems/luxury/lux-logo-symbol.webp"
           alt=""
@@ -62,10 +62,14 @@ export default function LuxuryHomePage() {
           Discover the house <ArrowUpRight width={16} height={16} />
         </a>
       </section>
-      <div className={s.rooms}>
+      <div className={s.rooms} data-motion-room>
         <RoomCarousel />
       </div>
-      <section className={s.experiences} aria-labelledby="experience-home">
+      <section
+        data-motion-reveal
+        className={s.experiences}
+        aria-labelledby="experience-home"
+      >
         <ArtImage
           id="lux-dining-detail"
           alt="A seasonal dinner served on the timber porch overlooking the lake"
@@ -94,7 +98,11 @@ export default function LuxuryHomePage() {
           </div>
         </div>
       </section>
-      <section className={s.house} aria-labelledby="house-home">
+      <section
+        data-motion-reveal
+        className={s.house}
+        aria-labelledby="house-home"
+      >
         <div className={s.houseCopy}>
           <h2 id="house-home">
             At home,
@@ -120,7 +128,11 @@ export default function LuxuryHomePage() {
           className={s.door}
         />
       </section>
-      <section className={s.close} aria-labelledby="plan-stay">
+      <section
+        data-motion-reveal
+        className={s.close}
+        aria-labelledby="plan-stay"
+      >
         <ArtImage
           id="lux-cta"
           mobile="lux-cta-mobile"

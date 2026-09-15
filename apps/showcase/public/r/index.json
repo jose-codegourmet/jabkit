@@ -32,6 +32,12 @@
       "supportsCTA": false,
       "supportsDarkMode": true
     },
+    "usedIn": [
+      {
+        "site": "editorial",
+        "role": "Contributor grid on home and size lg portrait on contributor profiles."
+      }
+    ],
     "tags": [
       "avatar",
       "primitive",
@@ -140,6 +146,20 @@
       "supportsCTA": false,
       "supportsDarkMode": true
     },
+    "usedIn": [
+      {
+        "site": "neo-brutalism",
+        "role": "Outline discipline badge on case meta."
+      },
+      {
+        "site": "editorial",
+        "role": "Secondary topic badge on story archive, story detail, and contributor bibliography."
+      },
+      {
+        "site": "retro",
+        "role": "Collection tags and the active crop-format label in the studio."
+      }
+    ],
     "tags": [
       "badge",
       "primitive",
@@ -189,6 +209,28 @@
       "supportsCTA": true,
       "supportsDarkMode": true
     },
+    "usedIn": [
+      {
+        "site": "minimal",
+        "role": "Hero and page CTAs, inquiry submit, work-filter chips via asChild links, and case prev/next."
+      },
+      {
+        "site": "neo-brutalism",
+        "role": "Page CTAs, brief submit, work-search reset, and case prev/next."
+      },
+      {
+        "site": "editorial",
+        "role": "Page CTAs, archive filters, membership preview, and story/contributor not-found actions."
+      },
+      {
+        "site": "luxury",
+        "role": "Page CTAs and stay-inquiry submit."
+      },
+      {
+        "site": "retro",
+        "role": "Page CTAs, collection filters, and plan-preview actions."
+      }
+    ],
     "tags": [
       "button",
       "cta",
@@ -247,6 +289,12 @@
       "supportsCTA": false,
       "supportsDarkMode": true
     },
+    "usedIn": [
+      {
+        "site": "luxury",
+        "role": "Controlled stay-range picker with numberOfMonths from matchMedia and a locale whose week start agrees across server and browser."
+      }
+    ],
     "tags": [
       "calendar",
       "locale",
@@ -304,6 +352,12 @@
       "supportsCTA": false,
       "supportsDarkMode": true
     },
+    "usedIn": [
+      {
+        "site": "neo-brutalism",
+        "role": "Controlled deliverable multi-select in the brief form."
+      }
+    ],
     "tags": [
       "checkbox",
       "primitive",
@@ -329,7 +383,8 @@
     "bestFor": [
       "focused workflows",
       "confirmations",
-      "quick views"
+      "quick views",
+      "full-screen navigation overlays"
     ],
     "avoidFor": [
       "toasts",
@@ -362,6 +417,16 @@
     },
     "recommendedAfter": [
       "button"
+    ],
+    "usedIn": [
+      {
+        "site": "minimal",
+        "role": "Full-screen project index; showCloseButton is false and local CSS overrides the centered-dialog translate utilities."
+      },
+      {
+        "site": "luxury",
+        "role": "Full-screen photographic room menu; showCloseButton is false and local CSS overrides the centered-dialog translate utilities."
+      }
     ],
     "tags": [
       "dialog",
@@ -480,6 +545,12 @@
     "recommendedAfter": [
       "button"
     ],
+    "usedIn": [
+      {
+        "site": "retro",
+        "role": "Studio and home embed loaded through next/dynamic with ssr: false so cached images initialize crop dimensions."
+      }
+    ],
     "tags": [
       "image",
       "crop",
@@ -538,6 +609,28 @@
       "supportsCTA": false,
       "supportsDarkMode": true
     },
+    "usedIn": [
+      {
+        "site": "minimal",
+        "role": "Inquiry form fields with aria-invalid and autocomplete."
+      },
+      {
+        "site": "neo-brutalism",
+        "role": "Brief fields and work-index search that writes the URL."
+      },
+      {
+        "site": "editorial",
+        "role": "Archive search and membership signup preview fields."
+      },
+      {
+        "site": "luxury",
+        "role": "Stay-inquiry guest and contact fields."
+      },
+      {
+        "site": "retro",
+        "role": "Collection-filter search."
+      }
+    ],
     "tags": [
       "input",
       "primitive",
@@ -587,6 +680,28 @@
       "supportsCTA": false,
       "supportsDarkMode": true
     },
+    "usedIn": [
+      {
+        "site": "minimal",
+        "role": "Inquiry form labels paired with Input and Textarea."
+      },
+      {
+        "site": "neo-brutalism",
+        "role": "Brief and work-search labels, including Checkbox options."
+      },
+      {
+        "site": "editorial",
+        "role": "Archive search and membership preview field labels."
+      },
+      {
+        "site": "luxury",
+        "role": "Stay-inquiry field labels."
+      },
+      {
+        "site": "retro",
+        "role": "Collection-filter search label."
+      }
+    ],
     "tags": [
       "label",
       "primitive",
@@ -907,6 +1022,20 @@
       "supportsCTA": false,
       "supportsDarkMode": true
     },
+    "usedIn": [
+      {
+        "site": "minimal",
+        "role": "Inquiry message field."
+      },
+      {
+        "site": "neo-brutalism",
+        "role": "Brief notes field."
+      },
+      {
+        "site": "luxury",
+        "role": "Stay-inquiry notes field."
+      }
+    ],
     "tags": [
       "textarea",
       "primitive",
@@ -1126,6 +1255,16 @@
       "case-studies",
       "cta"
     ],
+    "usedIn": [
+      {
+        "site": "minimal",
+        "role": "Studio story block with title, intro, philosophy, profile, and image."
+      },
+      {
+        "site": "luxury",
+        "role": "Host and house-keeper section on the house page."
+      }
+    ],
     "tags": [
       "about",
       "marketing",
@@ -1194,6 +1333,12 @@
       "team",
       "case-studies",
       "cta"
+    ],
+    "usedIn": [
+      {
+        "site": "neo-brutalism",
+        "role": "Studio story and workplace photo sections on the studio page."
+      }
     ],
     "tags": [
       "about",
@@ -1485,6 +1630,12 @@
       "testimonials",
       "pricing",
       "cta"
+    ],
+    "usedIn": [
+      {
+        "site": "luxury",
+        "role": "Home rooms strip; onFavoriteChange writes a local Set and a live region, with viewAllHref to the rooms index."
+      }
     ],
     "tags": [
       "carousel",
@@ -1851,6 +2002,28 @@
       "cta",
       "footer"
     ],
+    "usedIn": [
+      {
+        "site": "minimal",
+        "role": "Project case body with a sticky outline on work detail pages."
+      },
+      {
+        "site": "neo-brutalism",
+        "role": "Case study body with a sticky outline on work detail pages."
+      },
+      {
+        "site": "editorial",
+        "role": "Editorial process sections on the about page."
+      },
+      {
+        "site": "luxury",
+        "role": "House details and room specification sections."
+      },
+      {
+        "site": "retro",
+        "role": "Studio guide sections on how-it-works."
+      }
+    ],
     "tags": [
       "content",
       "marketing",
@@ -2061,6 +2234,12 @@
       "related-content",
       "cta",
       "footer"
+    ],
+    "usedIn": [
+      {
+        "site": "editorial",
+        "role": "Long-form story body with breadcrumbs, author byline, and mapped blocks; the topic badge lives outside the component."
+      }
     ],
     "tags": [
       "content",
@@ -2698,6 +2877,28 @@
     "recommendedBefore": [
       "cta",
       "footer"
+    ],
+    "usedIn": [
+      {
+        "site": "minimal",
+        "role": "Services FAQs from faqCategories."
+      },
+      {
+        "site": "neo-brutalism",
+        "role": "Engagement FAQs on the services page."
+      },
+      {
+        "site": "editorial",
+        "role": "Membership FAQs below the plan preview."
+      },
+      {
+        "site": "luxury",
+        "role": "House and stay FAQs on the house page."
+      },
+      {
+        "site": "retro",
+        "role": "Home, guide, and pricing FAQs; the home instance is restyled through home.module.css."
+      }
     ],
     "tags": [
       "faq",
@@ -3795,10 +3996,11 @@
     "category": "marketing",
     "description": "Stacked large-type marketing navigation that slides an arrow in and optionally skews labels on hover.",
     "sectionCategory": "navbar",
-    "purpose": "Gives landing pages a bold vertical index of destinations with a kinetic hover cue that stays on semantic tokens.",
+    "purpose": "Gives landing pages a bold vertical index of destinations with a kinetic cue that fires on hover and keyboard focus and stays on semantic tokens.",
     "bestFor": [
       "studio and agency landings",
       "portfolio site indexes",
+      "full-screen overlay menus",
       "minimal marketing sites with few destinations"
     ],
     "avoidFor": [
@@ -3835,6 +4037,12 @@
     "recommendedBefore": [
       "hero",
       "content"
+    ],
+    "usedIn": [
+      {
+        "site": "minimal",
+        "role": "Project index inside a full-screen Dialog; onPointerOver and onFocus sync Motion preview images."
+      }
     ],
     "tags": [
       "navbar",
@@ -4038,11 +4246,13 @@
     ],
     "tone": [
       "clean",
-      "professional"
+      "professional",
+      "editorial"
     ],
     "industries": [
       "SaaS",
-      "technology"
+      "technology",
+      "media"
     ],
     "contentDensity": "medium",
     "visualWeight": "medium",
@@ -4067,6 +4277,12 @@
     "recommendedBefore": [
       "hero",
       "content"
+    ],
+    "usedIn": [
+      {
+        "site": "editorial",
+        "role": "Primary chrome with subject columns, archive destinations, and a photographic issue card; defaultValue is null, with a sibling Motion reading-progress bar."
+      }
     ],
     "tags": [
       "navbar",
@@ -4152,6 +4368,16 @@
       "faq",
       "cta"
     ],
+    "usedIn": [
+      {
+        "site": "editorial",
+        "role": "Membership plan cards with a controlled billing interval and empty people, trustItems, and badges."
+      },
+      {
+        "site": "retro",
+        "role": "Pricing concepts with a controlled billing interval and empty people, trustItems, and badges."
+      }
+    ],
     "tags": [
       "pricing",
       "marketing",
@@ -4187,7 +4413,8 @@
     "bestFor": [
       "ecommerce product grids",
       "catalog browsing",
-      "fast purchase decisions"
+      "fast purchase decisions",
+      "non-commerce format pickers launched from a listing"
     ],
     "tone": [
       "commercial",
@@ -4220,6 +4447,12 @@
       "supportsCTA": true,
       "supportsDarkMode": true
     },
+    "usedIn": [
+      {
+        "site": "retro",
+        "role": "Crop-format launcher on collection detail: presentation is dialog, showCartIcon is false, colors is empty, sizes are crop formats, and onAddToCart routes to the studio."
+      }
+    ],
     "tags": [
       "product",
       "quick-view",
@@ -4360,6 +4593,12 @@
       "case-studies",
       "cta"
     ],
+    "usedIn": [
+      {
+        "site": "neo-brutalism",
+        "role": "Filtered case list on the work index, labeled Case list."
+      }
+    ],
     "tags": [
       "projects",
       "list",
@@ -4430,6 +4669,12 @@
     "recommendedBefore": [
       "case-studies",
       "cta"
+    ],
+    "usedIn": [
+      {
+        "site": "minimal",
+        "role": "Home project gallery with a data-motion-gallery marker and a CTA action link."
+      }
     ],
     "tags": [
       "projects",
@@ -4864,7 +5109,7 @@
     "category": "marketing",
     "description": "Full-screen kinetic navigation that reveals a typography-heavy overlay from a focused header, with ripple hover on destinations.",
     "sectionCategory": "navbar",
-    "purpose": "Turns primary site navigation into an immersive index for luxury and agency pages that need a quiet, heavy-weighted reveal.",
+    "purpose": "Turns primary site navigation into an immersive index for luxury and agency pages that need a quiet, heavy-weighted reveal. The overlay does not contain focus or inert the page; consumers must add a Tab trap and background inertness.",
     "bestFor": [
       "agency and studio sites",
       "luxury brand landing pages",
@@ -4873,7 +5118,8 @@
     "avoidFor": [
       "dense application shells",
       "ecommerce catalogs with many nested categories",
-      "utility sites that need persistent inline links"
+      "utility sites that need persistent inline links",
+      "overlays that must trap focus without a local wrapper"
     ],
     "tone": [
       "premium",
@@ -4909,6 +5155,12 @@
     "recommendedBefore": [
       "hero",
       "content"
+    ],
+    "usedIn": [
+      {
+        "site": "neo-brutalism",
+        "role": "Controlled 80px sticky header and full-screen lime menu; local wrapper adds background inertness and a Tab trap."
+      }
     ],
     "tags": [
       "navbar",
@@ -5476,9 +5728,10 @@
     "category": "marketing",
     "description": "Floating pill navigation with a sliding active highlight and a primary-token tubelight glow on the current item.",
     "sectionCategory": "navbar",
-    "purpose": "Provides compact primary navigation with a conspicuous animated indicator for the active destination.",
+    "purpose": "Provides compact primary navigation with a conspicuous animated indicator for the active destination. A bottom-dock composition needs reserved page space and matching document scroll padding so the last content is not covered.",
     "bestFor": [
       "primary site navigation",
+      "floating bottom docks",
       "responsive marketing sites",
       "commerce discovery"
     ],
@@ -5506,6 +5759,12 @@
     "recommendedBefore": [
       "hero",
       "content"
+    ],
+    "usedIn": [
+      {
+        "site": "retro",
+        "role": "Floating paper tab dock at the foot of the page; activeName from usePathname, restyled through navigation.module.css."
+      }
     ],
     "tags": [
       "navbar",

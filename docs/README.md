@@ -17,6 +17,7 @@ Durable architectural decisions, when they need a record, may be added under `do
 | [Showcase roadmaps](../design-systems/roadmap.md) | Historical website tickets; current apps and imagery guidance linked at the top | Status of the five-site showcase, or the original ticket briefs |
 | [theming.md](theming.md) | `--jk-*` tokens, light/dark, `next-themes`, preview iframe theme behavior | Changing a color, token, or dark-mode behavior |
 | [registry.md](registry.md) | Metadata, build, JSON outputs, example extraction | Changing registry output, metadata fields, or the builder |
+| [Navigation and motion review](qa/design-system-motion.md) | Per-site navigation components, animation ownership, and accessibility verification | Changing motion or navigation in the five apps |
 | [Redesign review](qa/design-system-redesign.md) | Approved image placements, visual changes, and production browser verification | Reviewing the five redesigned websites |
 | [standalone-design-systems.md](standalone-design-systems.md) | Independent apps, local Tailwind configuration, routes, subdomains, and user-owned image production | Working on any of the five design-system websites |
 | [showcase.md](showcase.md) | Routes, previews, samples, showcase-only vs library | Changing catalogue UI, preview, or samples |

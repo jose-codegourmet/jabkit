@@ -36,6 +36,12 @@ export default {
   },
   recommendedAfter: ["hero", "about"],
   recommendedBefore: ["case-studies", "cta"],
+  usedIn: [
+    {
+      site: "minimal",
+      role: "Home project gallery with a data-motion-gallery marker and a CTA action link.",
+    },
+  ],
   tags: [
     "projects",
     "gallery",

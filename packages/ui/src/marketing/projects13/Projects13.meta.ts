@@ -36,6 +36,12 @@ export default {
   },
   recommendedAfter: ["hero", "about"],
   recommendedBefore: ["case-studies", "cta"],
+  usedIn: [
+    {
+      site: "neo-brutalism",
+      role: "Filtered case list on the work index, labeled Case list.",
+    },
+  ],
   tags: [
     "projects",
     "list",

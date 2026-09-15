@@ -157,3 +157,102 @@ body {
   font-style: normal;
   font-display: swap;
 }
+
+/* Interactive content remains reachable when animation is disabled. */
+[data-motion-image],
+[data-motion-hero] {
+  overflow: clip;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-motion-canvas] *,
+  [data-motion-canvas] *::before,
+  [data-motion-canvas] *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* The library mega-panel uses the scoped portal; these styles follow it. */
+[data-jk-design-system="editorial"] [data-slot="navigation-menu-popup"] {
+  border-radius: 0;
+  border-top: 3px solid var(--jk-primary);
+}
+[data-jk-design-system="editorial"]
+  [data-slot="navigation-menu-content"]
+  > div
+  > div:last-child
+  > a[class~="min-h-40"] {
+  min-height: 310px;
+  justify-content: flex-end;
+  border: 0;
+  padding: 1rem;
+  background:
+    linear-gradient(
+      transparent 20%,
+      color-mix(in oklch, var(--jk-image-ink) 90%, transparent)
+    ),
+    url("/assets/design-systems/editorial/edt-issue-object.webp") center / cover;
+  color: var(--jk-image-paper);
+}
+[data-jk-design-system="editorial"]
+  [data-slot="navigation-menu-content"]
+  > div
+  > div:last-child
+  > a[class~="min-h-40"]
+  span {
+  color: inherit;
+}
+[data-jk-design-system="editorial"]
+  [data-slot="navigation-menu-content"]
+  > div
+  > div:last-child
+  > a[class~="min-h-40"]
+  span
+  > span:first-child {
+  font-family: var(--jk-font-display);
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+[data-jk-design-system="editorial"]
+  [data-slot="dialog-content"]:has([data-slot="navigation-menu"]) {
+  display: flex;
+  flex-direction: column;
+}
+[data-jk-design-system="editorial"]
+  [data-slot="dialog-content"]
+  > div:first-child {
+  flex-shrink: 0;
+}
+[data-jk-design-system="editorial"]
+  [data-slot="dialog-content"]
+  [data-slot="navigation-menu"] {
+  display: block;
+  width: 100%;
+  max-width: none;
+  padding: 1.5rem 1rem;
+}
+[data-jk-design-system="editorial"]
+  [data-slot="dialog-content"]
+  [data-slot="navigation-menu"]
+  > a,
+[data-jk-design-system="editorial"]
+  [data-slot="navigation-menu-disclosure"]
+  > button {
+  font-family: var(--jk-font-display);
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.1;
+  padding-block: 1rem;
+}
+[data-jk-design-system="editorial"]
+  [data-slot="dialog-content"]
+  [data-slot="navigation-menu"]::after {
+  content: "";
+  display: block;
+  height: 210px;
+  margin-top: 2rem;
+  background:
+    url("/assets/design-systems/editorial/edt-issue-object.webp") center / cover;
+}

@@ -15,7 +15,11 @@ export function ArtImage({
   const image = sampleImage(id, alt);
   const portrait = mobile ? sampleImage(mobile, alt) : undefined;
   return (
-    <picture className={className}>
+    <picture
+      className={className}
+      data-motion-image={!priority || undefined}
+      data-motion-wall={id === "neo-process-wall" || undefined}
+    >
       {portrait ? (
         <source media="(max-width: 767px)" srcSet={portrait.src} />
       ) : null}

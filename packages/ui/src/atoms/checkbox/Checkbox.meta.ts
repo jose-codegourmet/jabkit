@@ -25,6 +25,12 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  usedIn: [
+    {
+      site: "neo-brutalism",
+      role: "Controlled deliverable multi-select in the brief form.",
+    },
+  ],
   tags: ["checkbox", "primitive", "accessible"],
   dependencies: [],
   registryDependencies: [],

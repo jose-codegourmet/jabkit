@@ -34,6 +34,12 @@ export default {
   },
   recommendedAfter: ["hero", "navbar"],
   recommendedBefore: ["related-content", "cta", "footer"],
+  usedIn: [
+    {
+      site: "editorial",
+      role: "Long-form story body with breadcrumbs, author byline, and mapped blocks; the topic badge lives outside the component.",
+    },
+  ],
   tags: [
     "content",
     "marketing",

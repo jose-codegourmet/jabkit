@@ -33,6 +33,7 @@ export interface ComponentMeta {
   capabilities?: ComponentCapabilitiesMeta;
   recommendedAfter?: string[];
   recommendedBefore?: string[];
+  usedIn?: ComponentUsageMeta[];
   tags: string[];
   dependencies: string[];
   registryDependencies: string[];
@@ -111,7 +112,7 @@ Each `pnpm registry:build` (`pnpm --filter @jabkit/build-registry build` → `ts
 
 1. `rm -rf apps/showcase/public/r` then recreates it. Stray files never survive a rebuild.
 2. Writes `apps/showcase/public/r/{name}.json` — the full `RegistryComponent` (`ComponentMeta` plus `category`, `files`, `examples`).
-3. Writes `apps/showcase/public/r/index.json` — a projection that keeps identity, structural category, agent-facing semantic metadata, search tags, dependencies, accessibility, dates, and public preview sizing. It does **not** include `version`, `registryDependencies`, `cssVars`, `files`, `examples`, or `preview.capture`.
+3. Writes `apps/showcase/public/r/index.json` — a projection that keeps identity, structural category, agent-facing semantic metadata (including optional `usedIn`), search tags, dependencies, accessibility, dates, and public preview sizing. It does **not** include `version`, `registryDependencies`, `cssVars`, `files`, `examples`, or `preview.capture`.
 4. Writes `apps/showcase/lib/preview-manifest.generated.ts`.
 
 `apps/showcase/lib/registry.ts` is the only runtime reader inside the monorepo. `registryIndex()` throws with "run pnpm registry:build" if `index.json` is missing. `registryEntry(name)` returns `null` on a missing file.

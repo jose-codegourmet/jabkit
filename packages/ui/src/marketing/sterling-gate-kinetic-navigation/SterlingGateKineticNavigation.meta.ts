@@ -9,7 +9,7 @@ export default {
     "Full-screen kinetic navigation that reveals a typography-heavy overlay from a focused header, with ripple hover on destinations.",
   sectionCategory: "navbar",
   purpose:
-    "Turns primary site navigation into an immersive index for luxury and agency pages that need a quiet, heavy-weighted reveal.",
+    "Turns primary site navigation into an immersive index for luxury and agency pages that need a quiet, heavy-weighted reveal. The overlay does not contain focus or inert the page; consumers must add a Tab trap and background inertness.",
   bestFor: [
     "agency and studio sites",
     "luxury brand landing pages",
@@ -19,6 +19,7 @@ export default {
     "dense application shells",
     "ecommerce catalogs with many nested categories",
     "utility sites that need persistent inline links",
+    "overlays that must trap focus without a local wrapper",
   ],
   tone: ["premium", "editorial", "quiet"],
   industries: ["design", "architecture", "hospitality"],
@@ -38,6 +39,12 @@ export default {
     supportsDarkMode: true,
   },
   recommendedBefore: ["hero", "content"],
+  usedIn: [
+    {
+      site: "neo-brutalism",
+      role: "Controlled 80px sticky header and full-screen lime menu; local wrapper adds background inertness and a Tab trap.",
+    },
+  ],
   tags: [
     "navbar",
     "marketing",

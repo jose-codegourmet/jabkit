@@ -39,6 +39,20 @@ export interface ComponentCapabilitiesMeta {
   supportsDarkMode?: boolean;
 }
 
+/** Standalone design-system apps under apps/*. Kept local: build-registry never imports apps/*. */
+export type ComponentUsageSite =
+  | "minimal"
+  | "neo-brutalism"
+  | "editorial"
+  | "luxury"
+  | "retro";
+
+export interface ComponentUsageMeta {
+  site: ComponentUsageSite;
+  /** How that site actually composes the component, including local wrapping or overrides. */
+  role: string;
+}
+
 export interface ComponentMeta {
   name: string;
   displayName: string;
@@ -58,6 +72,7 @@ export interface ComponentMeta {
   capabilities?: ComponentCapabilitiesMeta;
   recommendedAfter?: string[];
   recommendedBefore?: string[];
+  usedIn?: ComponentUsageMeta[];
   tags: string[];
   dependencies: string[];
   registryDependencies: string[];

@@ -16,10 +16,10 @@ export const metadata: Metadata = {
 export default function MinimalHomePage() {
   return (
     <main id="top" className={s.home}>
-      <section className={s.hero}>
+      <section data-motion-hero className={s.hero}>
         <div className={s.heroCopy}>
           <p className={s.label}>Architecture & interiors</p>
-          <h1>
+          <h1 data-motion-title>
             Room for
             <br />
             everyday life.
@@ -52,13 +52,18 @@ export default function MinimalHomePage() {
         <span>Residential · Interiors · Adaptive reuse</span>
       </div>
       <Projects16
+        data-motion-gallery
         className={s.work}
         title="A few places we've made."
         description="Homes, shared rooms, and the spaces in between. Each begins with what is already there."
         action={{ label: "View all six projects", href: "/work" }}
         images={toProjects16Images(homeProjects())}
       />
-      <section className={s.approach} aria-labelledby="approach">
+      <section
+        data-motion-reveal
+        className={s.approach}
+        aria-labelledby="approach"
+      >
         <ArtImage
           id="min-process-model"
           alt="Carefully cut study model of a compact urban room"
@@ -90,7 +95,11 @@ export default function MinimalHomePage() {
           </a>
         </div>
       </section>
-      <section className={s.materials} aria-labelledby="materials-title">
+      <section
+        data-motion-reveal
+        className={s.materials}
+        aria-labelledby="materials-title"
+      >
         <div className={s.materialCopy}>
           <h2 id="materials-title">
             Few materials.
@@ -115,7 +124,7 @@ export default function MinimalHomePage() {
           className={s.shadowStudy}
         />
       </section>
-      <section className={s.close} aria-labelledby="inquire">
+      <section data-motion-reveal className={s.close} aria-labelledby="inquire">
         <ArtImage
           id="min-cta"
           mobile="min-cta-mobile"

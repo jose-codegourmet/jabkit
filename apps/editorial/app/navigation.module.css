@@ -1,0 +1,77 @@
+.shell {
+  position: sticky;
+  top: 0;
+  z-index: 45;
+  background: var(--jk-background);
+}
+.mega {
+  position: relative;
+  background: var(--jk-background);
+  backdrop-filter: none;
+  border-bottom: 1px solid var(--jk-foreground);
+}
+.mega > div {
+  max-width: none;
+  height: 80px;
+  padding-inline: var(--jk-space-gutter);
+}
+.mega > div > a {
+  min-width: 200px;
+}
+.mega > div > a > span:first-child {
+  display: none;
+}
+.mega > div > a > span:last-child {
+  font-family: var(--jk-font-display);
+  font-size: 1.9rem;
+  font-weight: 400;
+  letter-spacing: -0.045em;
+}
+.mega button,
+.mega a {
+  border-radius: 0;
+}
+.mega [data-slot="navigation-menu-trigger"] {
+  font-size: 0.85rem;
+}
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--jk-primary);
+  transform-origin: left;
+  pointer-events: none;
+}
+@media (max-width: 767px) {
+  .mega > div {
+    height: 72px;
+  }
+  .mega > div > a {
+    min-width: 0;
+  }
+  .mega > div > a > span:last-child {
+    font-size: 1.6rem;
+  }
+}
+
+[class~="dark"] .logo img {
+  filter: brightness(0) invert(1);
+}
+.header a:focus-visible,
+.header button:focus-visible,
+.panel a:focus-visible,
+.panel button:focus-visible {
+  outline: 2px solid var(--jk-ring);
+  outline-offset: 5px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .shell *,
+  .header *,
+  .panel *,
+  .kinetic * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

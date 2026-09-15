@@ -27,13 +27,13 @@ export default function EditorialHomePage() {
   const author = getContributor(lead.authorId);
   return (
     <main id="top" className={s.home}>
-      <section className={s.masthead}>
+      <section data-motion-reveal className={s.masthead}>
         <div className={s.issueLine}>
           <span>{currentIssue.label}</span>
           <span>An independent journal of everyday life</span>
           <span>{currentIssue.dateLine}</span>
         </div>
-        <h1>
+        <h1 data-motion-title>
           <img
             src="/assets/design-systems/editorial/edt-logo-wordmark.webp"
             alt="Common Hours"
@@ -52,7 +52,11 @@ export default function EditorialHomePage() {
           </a>
         </nav>
       </section>
-      <section className={s.cover} aria-labelledby="cover-lead">
+      <section
+        data-motion-reveal
+        className={s.cover}
+        aria-labelledby="cover-lead"
+      >
         <a
           href={storyHref(lead.slug)}
           className={s.coverImage}
@@ -81,7 +85,7 @@ export default function EditorialHomePage() {
       </section>
       <div className={s.secondary}>
         {homeSecondary().map((story) => (
-          <article key={story.slug}>
+          <article key={story.slug} data-motion-story>
             <a href={storyHref(story.slug)} className={s.secondaryImage}>
               <ArtImage id={story.leadImageId} alt={story.leadAlt} />
             </a>
@@ -97,7 +101,11 @@ export default function EditorialHomePage() {
           </article>
         ))}
       </div>
-      <section className={s.issueFeature} aria-labelledby="topics">
+      <section
+        data-motion-reveal
+        className={s.issueFeature}
+        aria-labelledby="topics"
+      >
         <ArtImage
           id="edt-issue-object"
           alt="A photograph-led journal open to a quiet neighborhood street"
@@ -119,11 +127,12 @@ export default function EditorialHomePage() {
           </Button>
         </div>
       </section>
-      <section className={s.more} aria-labelledby="also">
+      <section data-motion-reveal className={s.more} aria-labelledby="also">
+        <hr className={s.motionRule} data-motion-rule />
         <h2 id="also">Also in this issue</h2>
         <div className={s.moreGrid}>
           {homeMore().map((story) => (
-            <article key={story.slug}>
+            <article key={story.slug} data-motion-story>
               <a href={storyHref(story.slug)}>
                 <ArtImage id={story.leadImageId} alt={story.leadAlt} />
                 <p className={s.kicker}>{topicLabels[story.topic]}</p>
@@ -136,7 +145,11 @@ export default function EditorialHomePage() {
           ))}
         </div>
       </section>
-      <section className={s.editors} aria-labelledby="contributors">
+      <section
+        data-motion-reveal
+        className={s.editors}
+        aria-labelledby="contributors"
+      >
         <div className={s.editorsIntro}>
           <ArtImage
             id="edt-background-collage"
@@ -175,7 +188,7 @@ export default function EditorialHomePage() {
           })}
         </div>
       </section>
-      <section className={s.join} aria-labelledby="join">
+      <section data-motion-reveal className={s.join} aria-labelledby="join">
         <ArtImage
           id="edt-cta"
           mobile="edt-cta-mobile"

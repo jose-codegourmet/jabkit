@@ -25,6 +25,20 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  usedIn: [
+    {
+      site: "minimal",
+      role: "Inquiry message field.",
+    },
+    {
+      site: "neo-brutalism",
+      role: "Brief notes field.",
+    },
+    {
+      site: "luxury",
+      role: "Stay-inquiry notes field.",
+    },
+  ],
   tags: ["textarea", "primitive", "accessible"],
   dependencies: [],
   registryDependencies: [],

@@ -25,6 +25,8 @@ Each app contains:
 - `app/globals.css`: the app's Tailwind v4 import, explicit source scanning, semantic utility mappings, baseline tokens, and global rules. Tailwind v4 uses CSS configuration; there is no unused `tailwind.config.js` added just to look independent.
 - `app/theme.css`: only that business's palette, type roles, geometry, and light/dark overrides. Edit it directly without changing siblings or the catalogue. These values started from the previous scope preset and are app-owned, not regenerated from Markdown/JSON.
 - `app/style.module.css`: shared local chrome and secondary-page treatments. `app/home.module.css` owns the distinct homepage composition; the homepages are not variations of one common template.
+- `app/navigation.module.css` and `app/_components/SiteNavigation.tsx`: the site-specific navigation composition, using JabKit navigation components and local Motion interactions.
+- `app/_components/MotionCanvas.tsx`: scoped GSAP choreography for route content, with responsive cleanup and reduced-motion support.
 - `app/layout.tsx`: the app's document and metadata, ThemeProvider, small demo bar, scoped portal mount, brand header/footer. It does not load showcase fonts or import catalogue chrome.
 - `components/` and `lib/`: local copies of the small demo helpers and asset reader needed by this app. No app imports another app's code. Keep the provenance contract compatible with the root asset validator when changing these readers.
 - `public/assets/design-systems/<system>/`: optimized WebPs, provenance, and the historical contact sheet for this site. New assets are registered with their actual dimensions, byte counts, and supplied generation metadata. The historical contact sheet does not include the new delivery.
@@ -93,3 +95,8 @@ The root `pnpm check` is **not fully green**: `apps/verify` has existing unresol
 ### Visual integration — 2026-09-15
 
 The next pass integrated all 40 newly approved outputs and rebuilt all five homepages, with supporting-page refinements and self-hosted brand typography. Production verification covered all 54 routes, 320px overflow on every page, four local form previews, the room carousel/calendar, and the real PNG download. See [the redesign review](qa/design-system-redesign.md) for placements and the full verification record. Root `pnpm check` still stops at the existing `apps/verify` type errors; the five app builds/typechecks and separately run asset/convention/registry/preview gates pass.
+
+
+### Navigation and motion
+
+Each site now uses a different navigation composition and motion rhythm, with GSAP and Motion for React declared by each app. See [the motion review](qa/design-system-motion.md) for component mappings, ownership, accessibility behavior, and verification. Component `{Name}.meta.ts` files record those proven compositions in optional `usedIn` entries, which the registry index exposes to catalogue tools.

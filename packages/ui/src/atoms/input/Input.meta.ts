@@ -25,6 +25,28 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  usedIn: [
+    {
+      site: "minimal",
+      role: "Inquiry form fields with aria-invalid and autocomplete.",
+    },
+    {
+      site: "neo-brutalism",
+      role: "Brief fields and work-index search that writes the URL.",
+    },
+    {
+      site: "editorial",
+      role: "Archive search and membership signup preview fields.",
+    },
+    {
+      site: "luxury",
+      role: "Stay-inquiry guest and contact fields.",
+    },
+    {
+      site: "retro",
+      role: "Collection-filter search.",
+    },
+  ],
   tags: ["input", "primitive", "accessible"],
   dependencies: [],
   registryDependencies: [],

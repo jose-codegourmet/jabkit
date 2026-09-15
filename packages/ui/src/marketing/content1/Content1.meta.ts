@@ -34,6 +34,28 @@ export default {
   },
   recommendedAfter: ["hero", "navbar"],
   recommendedBefore: ["related-content", "cta", "footer"],
+  usedIn: [
+    {
+      site: "minimal",
+      role: "Project case body with a sticky outline on work detail pages.",
+    },
+    {
+      site: "neo-brutalism",
+      role: "Case study body with a sticky outline on work detail pages.",
+    },
+    {
+      site: "editorial",
+      role: "Editorial process sections on the about page.",
+    },
+    {
+      site: "luxury",
+      role: "House details and room specification sections.",
+    },
+    {
+      site: "retro",
+      role: "Studio guide sections on how-it-works.",
+    },
+  ],
   tags: [
     "content",
     "marketing",

@@ -47,6 +47,16 @@ export default {
   },
   recommendedAfter: ["features", "comparison", "testimonials"],
   recommendedBefore: ["faq", "cta"],
+  usedIn: [
+    {
+      site: "editorial",
+      role: "Membership plan cards with a controlled billing interval and empty people, trustItems, and badges.",
+    },
+    {
+      site: "retro",
+      role: "Pricing concepts with a controlled billing interval and empty people, trustItems, and badges.",
+    },
+  ],
   tags: [
     "pricing",
     "marketing",

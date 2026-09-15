@@ -39,6 +39,12 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["testimonials", "pricing", "cta"],
+  usedIn: [
+    {
+      site: "luxury",
+      role: "Home rooms strip; onFavoriteChange writes a local Set and a live region, with viewAllHref to the rooms index.",
+    },
+  ],
   tags: [
     "carousel",
     "cards",

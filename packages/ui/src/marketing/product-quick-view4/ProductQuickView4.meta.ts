@@ -14,6 +14,7 @@ export default {
     "ecommerce product grids",
     "catalog browsing",
     "fast purchase decisions",
+    "non-commerce format pickers launched from a listing",
   ],
   tone: ["commercial", "clean", "professional"],
   industries: ["retail", "ecommerce"],
@@ -39,6 +40,12 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  usedIn: [
+    {
+      site: "retro",
+      role: "Crop-format launcher on collection detail: presentation is dialog, showCartIcon is false, colors is empty, sizes are crop formats, and onAddToCart routes to the studio.",
+    },
+  ],
   tags: [
     "product",
     "quick-view",

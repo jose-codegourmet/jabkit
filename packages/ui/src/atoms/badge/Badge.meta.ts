@@ -25,6 +25,20 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  usedIn: [
+    {
+      site: "neo-brutalism",
+      role: "Outline discipline badge on case meta.",
+    },
+    {
+      site: "editorial",
+      role: "Secondary topic badge on story archive, story detail, and contributor bibliography.",
+    },
+    {
+      site: "retro",
+      role: "Collection tags and the active crop-format label in the studio.",
+    },
+  ],
   tags: ["badge", "primitive", "accessible"],
   dependencies: [],
   registryDependencies: [],

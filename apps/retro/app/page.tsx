@@ -7,6 +7,7 @@ import { Button } from "@/atoms/button";
 import { Faq12 } from "@/marketing/faq12";
 import { ArtImage } from "./_components/ArtImage";
 import { StudioPreview } from "./_components/StudioPreview";
+import { TactileLink } from "./_components/TactileLink";
 import { collectionHref, collections, studioHref } from "./content";
 import s from "./home.module.css";
 export const metadata: Metadata = {
@@ -17,10 +18,10 @@ export const metadata: Metadata = {
 export default function RetroHomePage() {
   return (
     <main id="top" className={s.home}>
-      <section className={s.hero}>
+      <section data-motion-hero className={s.hero}>
         <div className={s.heroCopy}>
           <p className={s.small}>A little home for your pictures</p>
-          <h1>
+          <h1 data-motion-title>
             Your pictures.
             <br />A little closer.
           </h1>
@@ -39,7 +40,7 @@ export default function RetroHomePage() {
             </a>
           </div>
         </div>
-        <div className={s.heroArt}>
+        <div className={s.heroArt} data-motion-paper>
           <ArtImage
             id="ret-collection-sleeves"
             alt="Three paper sleeves holding prints of places worth remembering"
@@ -59,12 +60,16 @@ export default function RetroHomePage() {
         <ArrowRight width={17} height={17} />
         <span>Keep a little piece.</span>
       </div>
-      <section className={s.packs} aria-labelledby="packs">
+      <section data-motion-reveal className={s.packs} aria-labelledby="packs">
         <h2 id="packs">Start with a small collection.</h2>
         <p>A few ready-to-use favorites, gathered by mood.</p>
         <div className={s.packGrid}>
           {collections.map((c, i) => (
-            <a href={collectionHref(c.slug)} key={c.slug} className={s.pack}>
+            <TactileLink
+              href={collectionHref(c.slug)}
+              key={c.slug}
+              className={s.pack}
+            >
               <ArtImage id={c.coverId} alt={c.coverAlt} />
               <div>
                 <span>Collection 0{i + 1}</span>
@@ -74,11 +79,15 @@ export default function RetroHomePage() {
                 </p>
                 <ArrowUpRight width={22} height={22} />
               </div>
-            </a>
+            </TactileLink>
           ))}
         </div>
       </section>
-      <section className={s.studio} aria-labelledby="studio-home">
+      <section
+        data-motion-reveal
+        className={s.studio}
+        aria-labelledby="studio-home"
+      >
         <div className={s.studioCopy}>
           <h2 id="studio-home">
             A small studio.
@@ -102,7 +111,11 @@ export default function RetroHomePage() {
           <StudioPreview />
         </div>
       </section>
-      <section className={s.process} aria-labelledby="steps-home">
+      <section
+        data-motion-reveal
+        className={s.process}
+        aria-labelledby="steps-home"
+      >
         <div className={s.processTitle}>
           <h2 id="steps-home">
             From a picture
@@ -137,7 +150,11 @@ export default function RetroHomePage() {
           ))}
         </ol>
       </section>
-      <section className={s.close} aria-labelledby="keep-title">
+      <section
+        data-motion-reveal
+        className={s.close}
+        aria-labelledby="keep-title"
+      >
         <ArtImage
           id="ret-cta"
           mobile="ret-cta-mobile"

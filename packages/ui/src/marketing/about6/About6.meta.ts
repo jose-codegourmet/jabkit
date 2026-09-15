@@ -29,6 +29,12 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["team", "case-studies", "cta"],
+  usedIn: [
+    {
+      site: "neo-brutalism",
+      role: "Studio story and workplace photo sections on the studio page.",
+    },
+  ],
   tags: [
     "about",
     "marketing",

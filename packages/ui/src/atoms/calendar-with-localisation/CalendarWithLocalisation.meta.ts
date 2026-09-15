@@ -31,6 +31,12 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  usedIn: [
+    {
+      site: "luxury",
+      role: "Controlled stay-range picker with numberOfMonths from matchMedia and a locale whose week start agrees across server and browser.",
+    },
+  ],
   tags: ["calendar", "locale", "date", "range", "atom"],
   dependencies: ["lucide-react"],
   registryDependencies: ["button"],

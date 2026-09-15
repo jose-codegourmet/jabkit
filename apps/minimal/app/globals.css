@@ -150,3 +150,18 @@ body {
   font-style: normal;
   font-display: swap;
 }
+
+/* Interactive content remains reachable when animation is disabled. */
+[data-motion-image],
+[data-motion-hero] {
+  overflow: clip;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-motion-canvas] *,
+  [data-motion-canvas] *::before,
+  [data-motion-canvas] *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}

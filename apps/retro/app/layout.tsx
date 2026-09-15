@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes";
 import type { ReactNode } from "react";
 import { DemoBar } from "../components/DemoBar";
 import { SampleScope } from "../components/samples/SampleScope";
+import { MotionCanvas } from "./_components/MotionCanvas";
 import { SiteFooter, SiteHeader } from "./_components/SiteChrome";
 import styles from "./style.module.css";
 import "./globals.css";
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               Skip to content
             </a>
             <SiteHeader />
-            {children}
+            <MotionCanvas>{children}</MotionCanvas>
             <SiteFooter />
             <DemoBar brand="Pocket Keeps" />
           </SampleScope>

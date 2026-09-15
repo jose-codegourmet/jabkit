@@ -9,7 +9,8 @@
   "bestFor": [
     "focused workflows",
     "confirmations",
-    "quick views"
+    "quick views",
+    "full-screen navigation overlays"
   ],
   "avoidFor": [
     "toasts",
@@ -42,6 +43,16 @@
   },
   "recommendedAfter": [
     "button"
+  ],
+  "usedIn": [
+    {
+      "site": "minimal",
+      "role": "Full-screen project index; showCloseButton is false and local CSS overrides the centered-dialog translate utilities."
+    },
+    {
+      "site": "luxury",
+      "role": "Full-screen photographic room menu; showCloseButton is false and local CSS overrides the centered-dialog translate utilities."
+    }
   ],
   "tags": [
     "dialog",

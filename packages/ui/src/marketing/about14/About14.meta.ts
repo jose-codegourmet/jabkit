@@ -29,6 +29,16 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["team", "case-studies", "cta"],
+  usedIn: [
+    {
+      site: "minimal",
+      role: "Studio story block with title, intro, philosophy, profile, and image.",
+    },
+    {
+      site: "luxury",
+      role: "Host and house-keeper section on the house page.",
+    },
+  ],
   tags: [
     "about",
     "marketing",

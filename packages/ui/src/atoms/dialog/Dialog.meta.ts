@@ -10,7 +10,12 @@ export default {
   sectionCategory: "overlay",
   purpose:
     "Moves a focused task or decision into a modal layer while preserving the surrounding page context.",
-  bestFor: ["focused workflows", "confirmations", "quick views"],
+  bestFor: [
+    "focused workflows",
+    "confirmations",
+    "quick views",
+    "full-screen navigation overlays",
+  ],
   avoidFor: ["toasts", "inline help", "persistent page content"],
   tone: ["professional", "focused"],
   contentDensity: "medium",
@@ -28,6 +33,16 @@ export default {
     supportsDarkMode: true,
   },
   recommendedAfter: ["button"],
+  usedIn: [
+    {
+      site: "minimal",
+      role: "Full-screen project index; showCloseButton is false and local CSS overrides the centered-dialog translate utilities.",
+    },
+    {
+      site: "luxury",
+      role: "Full-screen photographic room menu; showCloseButton is false and local CSS overrides the centered-dialog translate utilities.",
+    },
+  ],
   tags: ["dialog", "modal", "overlay", "primitive", "accessible"],
   dependencies: ["@base-ui/react", "lucide-react"],
   registryDependencies: ["button"],

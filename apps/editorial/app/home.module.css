@@ -349,3 +349,10 @@
     font-size: 2.4rem;
   }
 }
+
+.motionRule {
+  border: 0;
+  height: 1px;
+  background: var(--jk-foreground);
+  margin-bottom: 1.5rem;
+}

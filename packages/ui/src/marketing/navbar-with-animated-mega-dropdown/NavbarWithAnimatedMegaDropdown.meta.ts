@@ -20,8 +20,8 @@ export default {
     "dense storefront utility bars",
     "sidebar app chrome",
   ],
-  tone: ["clean", "professional"],
-  industries: ["SaaS", "technology"],
+  tone: ["clean", "professional", "editorial"],
+  industries: ["SaaS", "technology", "media"],
   contentDensity: "medium",
   visualWeight: "medium",
   layout: {
@@ -37,6 +37,12 @@ export default {
     supportsDarkMode: true,
   },
   recommendedBefore: ["hero", "content"],
+  usedIn: [
+    {
+      site: "editorial",
+      role: "Primary chrome with subject columns, archive destinations, and a photographic issue card; defaultValue is null, with a sibling Motion reading-progress bar.",
+    },
+  ],
   tags: [
     "navbar",
     "marketing",

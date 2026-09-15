@@ -1,0 +1,126 @@
+.shell {
+  position: relative;
+  z-index: 40;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88px;
+  margin: 0 var(--jk-space-gutter);
+  border-bottom: 1px solid var(--jk-border);
+  gap: 1rem;
+}
+.logo img {
+  width: 195px;
+  height: auto;
+}
+.header > p {
+  font-size: 0.8rem;
+  color: var(--jk-muted-foreground);
+}
+.studio {
+  background: var(--jk-primary);
+  color: var(--jk-primary-foreground);
+  padding: 0.8rem 1.2rem;
+  border-radius: 4px;
+  box-shadow: 3px 3px 0 var(--jk-foreground);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.8rem;
+}
+.dock {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  translate: -50% 0;
+  z-index: 45;
+}
+.tabs {
+  background: transparent;
+  padding: 0;
+}
+.tabs nav > div {
+  border-radius: 8px;
+  background: var(--jk-card);
+  border: 1px solid var(--jk-foreground);
+  box-shadow: 4px 5px 0
+    color-mix(in oklch, var(--jk-foreground) 25%, transparent);
+  backdrop-filter: none;
+  padding: 6px;
+}
+.tabs nav a {
+  border-radius: 4px;
+  min-height: 44px;
+  padding: 0.7rem 1.1rem;
+  font-family: var(--jk-font-body);
+}
+.tabs nav > div > span {
+  border-radius: 4px;
+  background: var(--jk-secondary);
+}
+.tabs [data-active] > span:last-child {
+  box-shadow: none;
+}
+.tabs [data-active] > span:last-child > span {
+  display: none;
+}
+@media (max-width: 767px) {
+  .header {
+    height: 76px;
+  }
+  .logo img {
+    width: 155px;
+  }
+  .header > p {
+    display: none;
+  }
+  .studio {
+    padding: 0.7rem 0.8rem;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+  }
+  .dock {
+    bottom: 12px;
+  }
+  .tabs nav a {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.25rem;
+    padding: 0.45rem 0.65rem;
+    min-width: 65px;
+  }
+  .tabs nav a > span:first-child {
+    display: block;
+    font-size: 0.62rem;
+  }
+  .tabs nav a > span:nth-child(2) {
+    display: flex;
+  }
+  .tabs [data-active] > span:last-child {
+    display: none;
+  }
+}
+
+[class~="dark"] .logo img {
+  filter: brightness(0) invert(1);
+}
+.header a:focus-visible,
+.header button:focus-visible,
+.panel a:focus-visible,
+.panel button:focus-visible {
+  outline: 2px solid var(--jk-ring);
+  outline-offset: 5px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .shell *,
+  .header *,
+  .panel *,
+  .kinetic * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

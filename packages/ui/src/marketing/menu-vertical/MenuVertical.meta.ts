@@ -9,10 +9,11 @@ export default {
     "Stacked large-type marketing navigation that slides an arrow in and optionally skews labels on hover.",
   sectionCategory: "navbar",
   purpose:
-    "Gives landing pages a bold vertical index of destinations with a kinetic hover cue that stays on semantic tokens.",
+    "Gives landing pages a bold vertical index of destinations with a kinetic cue that fires on hover and keyboard focus and stays on semantic tokens.",
   bestFor: [
     "studio and agency landings",
     "portfolio site indexes",
+    "full-screen overlay menus",
     "minimal marketing sites with few destinations",
   ],
   avoidFor: [
@@ -37,6 +38,12 @@ export default {
     supportsDarkMode: true,
   },
   recommendedBefore: ["hero", "content"],
+  usedIn: [
+    {
+      site: "minimal",
+      role: "Project index inside a full-screen Dialog; onPointerOver and onFocus sync Motion preview images.",
+    },
+  ],
   tags: [
     "navbar",
     "marketing",

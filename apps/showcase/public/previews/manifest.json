@@ -2,7 +2,7 @@
   "pipelineVersion": 1,
   "components": {
     "avatar": {
-      "sourceHash": "dc8c9d6439ab21642494d6609d268e8da177869a354a6f8b8860350a9e68211f",
+      "sourceHash": "37fb034872bb94610619b9cd4ef616eda0d75d7c8ea5381fe24e6567b956557e",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -31,7 +31,7 @@
       ]
     },
     "badge": {
-      "sourceHash": "df078d23a2c511b3aebfd3a30dfdb40ebedc5056690c46ac71933dad063fa086",
+      "sourceHash": "5b99545fd175af2aa06f491443d1519e673f574f397a2daa69b8758b745ce9f3",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -60,7 +60,7 @@
       ]
     },
     "button": {
-      "sourceHash": "4dfb9b3c1f30af5e2440c2d40f71307a6fe39f78113a69282c75cddb81d79839",
+      "sourceHash": "f8a1f087a1eb32a24e812ec119bc05886d7bff121fd04a756ea4c31bb7194821",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -110,7 +110,7 @@
       ]
     },
     "checkbox": {
-      "sourceHash": "c449b11427ad31c64cbc239d6b7f490e13f94efafef71d945f13494f106a194d",
+      "sourceHash": "531d40fd66c141c3df9485200a120ca6c3ee4b434f2bfcba6dc7a5f3dc6782e3",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -139,7 +139,7 @@
       ]
     },
     "dialog": {
-      "sourceHash": "840c27a73c0c427e5f6c2b5b2e4714312dc4f7be506176d87bcb99699f6f660b",
+      "sourceHash": "20d1f8f8d692835b7a4dc004a698e9fdd930a12d5fad7ab749d587e06cd10d02",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -199,7 +199,7 @@
       ]
     },
     "input": {
-      "sourceHash": "a1ec23f180061fe759ee7e20aea15b20676f7e3a098f8ba0180a44001d96cb77",
+      "sourceHash": "d7ace2dfda105a0eeab21248579c667d104a1ff1c2a6cb5617f4b6a43be0dd3d",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -228,7 +228,7 @@
       ]
     },
     "label": {
-      "sourceHash": "c03ac44510c9e0dae28a06d47acb52137c383ab3ff4eb15158ad3b8da0ae67e1",
+      "sourceHash": "b16fc33a3521f8394fef6170e99337a8f5304305370c69c56c909a60aa4134be",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -344,7 +344,7 @@
       ]
     },
     "textarea": {
-      "sourceHash": "50070e6e63ffee10ba8345902b883aa3d48a8c37b39b3931a460b40eb7a1a10a",
+      "sourceHash": "3920f141b071a95136fbfe7fe507bf92f47379e40f00ef52b262634adf6fe7a1",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -442,7 +442,7 @@
       ]
     },
     "about14": {
-      "sourceHash": "a02e0bedef9fdf2c04a4f15a6dd2336f4c769ef4fa1b5eb88d063e0882e33f35",
+      "sourceHash": "9e60d341ff8303bdbe88d5d3700b411d613764a55bc99daa56758b45c90131a1",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -480,7 +480,7 @@
       ]
     },
     "about6": {
-      "sourceHash": "4101fd64dacbba0504029b049065bfdec1666c401aebdb9f0fa10a5dd877c5f1",
+      "sourceHash": "e78832335dcce9f6899c25039bf4e8a15fe88453aff6ef0d7c2a97e28d3432fc",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -775,7 +775,7 @@
       ]
     },
     "content1": {
-      "sourceHash": "7826775fbd13b0cc77e043fd79ffb312c4d4ec177936c8d8347c315585471b2d",
+      "sourceHash": "79d67663e42bd4bb1413494ba97b4548a80c1687e91c0f1ee1648b908c973e70",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -889,7 +889,7 @@
       ]
     },
     "content4": {
-      "sourceHash": "4b7336b6e5d7066eaa7f3ce053b9746ce93c3f87880d8e7a6651a7dcf4e49d30",
+      "sourceHash": "436a49681a7162f6c69f6e296cc13dc73e2a72bde828e532261630c7669054a1",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1104,7 +1104,7 @@
       ]
     },
     "faq12": {
-      "sourceHash": "20dd2bd5d51538981c8a46da89b1ca5fe2aeb38ece5e7a068c0110f01b096d03",
+      "sourceHash": "5e881ace45ffe451843a20f3b1c8cefd8eb2b25116ddeb9c8ebc93a7dc99e5f7",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1445,7 +1445,7 @@
       ]
     },
     "pricing28": {
-      "sourceHash": "65fa90b2353db9939c22bff0795d6d86910a1df6bee7a5e0ff8350fd7947bb55",
+      "sourceHash": "144ded1f3773b017425c5065b7e94fc34fda336279abbb581afe0a607560e56f",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -1952,7 +1952,7 @@
       ]
     },
     "product-quick-view4": {
-      "sourceHash": "7db38579613913f83faa6eba8c3cbdfc0ea843b103b6a3f4c4b55f8fcd6881ea",
+      "sourceHash": "d18f58d35be3f4ec71a38fd1c9006aa657012fd4551e63e93bd19ad70aae91c0",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2003,7 +2003,7 @@
       ]
     },
     "projects16": {
-      "sourceHash": "2109907cfcb6c1f57d7c278a8e729b7ddfb158f346246379bee573633c8ead34",
+      "sourceHash": "cb8688667b3c4797b2bb8b4c45bcd58f3641579e572764ba773a0f2bc78e798c",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2136,7 +2136,7 @@
       ]
     },
     "projects13": {
-      "sourceHash": "c51f804d486f41372d4b334725b4e95ed1727888a2244eab9c0069b21c3d8762",
+      "sourceHash": "d44ace4f1ff29ae0d53cfe7a74b349cdd96a0ce1c32d489e64a770173ada9b37",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2187,7 +2187,7 @@
       ]
     },
     "tubelight-navbar": {
-      "sourceHash": "c5617eecbedd39395d348ad86f888e23271126ec5188a8b90d6b7efa779e7f59",
+      "sourceHash": "319189257dd990ed0411c0b6b405e731017d9356d0ca36fab3af77dddd7f0cb5",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2310,7 +2310,7 @@
       ]
     },
     "calendar-with-localisation": {
-      "sourceHash": "dc3bba50a9456d11b2ce6509efb77e966e67ea56d199f961acbb2655e120820d",
+      "sourceHash": "9a4d0c07b1bbb5f1676aa39721d831715404fcbc485c3727e118309bcbe2d253",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -3120,7 +3120,7 @@
       ]
     },
     "sterling-gate-kinetic-navigation": {
-      "sourceHash": "744bad7587b144d2be4db12bd65a0d57e4721fbf13c24371f5386e6daaddcccc",
+      "sourceHash": "f165e6ddd2cd144b93281d751601a45f1d66a143c5e4368e79d2dd01a5a45a3b",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -3233,7 +3233,7 @@
       ]
     },
     "navbar-with-animated-mega-dropdown": {
-      "sourceHash": "7a774bf55cf3428366adf8c69b9330c53652a8ed88c57a077f3247114be20b0e",
+      "sourceHash": "fb09c748cb8465cb056ad0869f14db24b1bd984395520451ec638d1084f9c66c",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -3274,7 +3274,7 @@
       ]
     },
     "menu-vertical": {
-      "sourceHash": "2f8912e6cc978fbb558fee0a107973bb5cd61d90ea28dac8d080f242ad6deffe",
+      "sourceHash": "097b2b349a3cb29a6b0411fc180cd00e725ae00b37df336563fc2f8a190779e1",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -3406,7 +3406,7 @@
       ]
     },
     "image-cropper": {
-      "sourceHash": "b75087f2f14ffd912dc6c9866bee13a7cdcf3126b954879db80c81ac8242a827",
+      "sourceHash": "c4e053b16153b41dccf7498613ae5e8d2a1cd30236cb3c561b8292d463f42a55",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -3550,7 +3550,7 @@
       ]
     },
     "carousel-cards": {
-      "sourceHash": "da8f134de6ea9edc687fd41770bcf249e96510893ff44ec4e3fee1a2c945a0ef",
+      "sourceHash": "15bd9a38308bfd123202f88a5e5109a5d097ddd658fca15711856b64aa51c979",
       "pipelineVersion": 1,
       "stories": [
         "Default",

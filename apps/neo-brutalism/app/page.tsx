@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 export default function NeoHomePage() {
   return (
     <main id="top" className={s.home}>
-      <section className={s.hero}>
+      <section data-motion-hero className={s.hero}>
         <div className={s.heroCopy}>
           <p className={s.eyebrow}>Independent minds. Unmistakable brands.</p>
-          <h1>
+          <h1 data-motion-title>
             MAKE SOME
             <br />
             GOOD NOISE.
@@ -51,7 +51,11 @@ export default function NeoHomePage() {
         <span aria-hidden="true">↗</span>
         <span>Made to be seen</span>
       </div>
-      <section className={s.work} aria-labelledby="work-title">
+      <section
+        data-motion-reveal
+        className={s.work}
+        aria-labelledby="work-title"
+      >
         <div className={s.sectionTitle}>
           <h2 id="work-title">
             WORK THAT
@@ -64,7 +68,12 @@ export default function NeoHomePage() {
         </div>
         <div className={s.projectGrid}>
           {homeProjects().map((p, i) => (
-            <a key={p.slug} href={`/work/${p.slug}`} className={s.project}>
+            <a
+              key={p.slug}
+              href={`/work/${p.slug}`}
+              className={s.project}
+              data-motion-poster
+            >
               <ArtImage id={p.imageIds.object} alt={p.alt.object} />
               <div className={s.projectCaption}>
                 <span className={s.index}>0{i + 1}</span>
@@ -80,7 +89,11 @@ export default function NeoHomePage() {
           ))}
         </div>
       </section>
-      <section className={s.services} aria-labelledby="engagements">
+      <section
+        data-motion-reveal
+        className={s.services}
+        aria-labelledby="engagements"
+      >
         <div className={s.serviceVisual}>
           <ArtImage
             id="neo-service-object"
@@ -119,7 +132,7 @@ export default function NeoHomePage() {
           </a>
         </div>
       </section>
-      <section className={s.studio} aria-labelledby="method">
+      <section data-motion-reveal className={s.studio} aria-labelledby="method">
         <div className={s.studioIntro}>
           <h2 id="method">
             LESS GUESSWORK.
@@ -146,7 +159,7 @@ export default function NeoHomePage() {
           ))}
         </ol>
       </section>
-      <section className={s.close} aria-labelledby="close">
+      <section data-motion-reveal className={s.close} aria-labelledby="close">
         <ArtImage
           id="neo-cta"
           mobile="neo-cta-mobile"

@@ -25,6 +25,28 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  usedIn: [
+    {
+      site: "minimal",
+      role: "Inquiry form labels paired with Input and Textarea.",
+    },
+    {
+      site: "neo-brutalism",
+      role: "Brief and work-search labels, including Checkbox options.",
+    },
+    {
+      site: "editorial",
+      role: "Archive search and membership preview field labels.",
+    },
+    {
+      site: "luxury",
+      role: "Stay-inquiry field labels.",
+    },
+    {
+      site: "retro",
+      role: "Collection-filter search label.",
+    },
+  ],
   tags: ["label", "primitive", "accessible"],
   dependencies: [],
   registryDependencies: [],

@@ -30,6 +30,28 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  usedIn: [
+    {
+      site: "minimal",
+      role: "Hero and page CTAs, inquiry submit, work-filter chips via asChild links, and case prev/next.",
+    },
+    {
+      site: "neo-brutalism",
+      role: "Page CTAs, brief submit, work-search reset, and case prev/next.",
+    },
+    {
+      site: "editorial",
+      role: "Page CTAs, archive filters, membership preview, and story/contributor not-found actions.",
+    },
+    {
+      site: "luxury",
+      role: "Page CTAs and stay-inquiry submit.",
+    },
+    {
+      site: "retro",
+      role: "Page CTAs, collection filters, and plan-preview actions.",
+    },
+  ],
   tags: ["button", "cta", "action", "submit", "form", "link"],
   dependencies: ["@radix-ui/react-slot"],
   registryDependencies: [],

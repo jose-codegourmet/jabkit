@@ -124,6 +124,7 @@ export default {
 | `slots` | Human-readable semantic content areas an agent needs to populate |
 | `capabilities` | Actual image, video, form, CTA, and dark-mode support |
 | `recommendedAfter` / `recommendedBefore` | Suggested neighboring section categories for page composition |
+| `usedIn` | Optional; `{ site, role }[]` recording which standalone design-system app ships the component and how. Populate only when a site actually uses it. `site` is `minimal`, `neo-brutalism`, `editorial`, `luxury`, or `retro`. |
 | `tags` | Search / filter keywords |
 | `dependencies` | npm packages the consumer must install (e.g. `@radix-ui/react-slot`) |
 | `registryDependencies` | Other JabKit component `name` values pulled in by the CLI |

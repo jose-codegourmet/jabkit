@@ -32,6 +32,28 @@ export default {
   },
   recommendedAfter: ["pricing", "features"],
   recommendedBefore: ["cta", "footer"],
+  usedIn: [
+    {
+      site: "minimal",
+      role: "Services FAQs from faqCategories.",
+    },
+    {
+      site: "neo-brutalism",
+      role: "Engagement FAQs on the services page.",
+    },
+    {
+      site: "editorial",
+      role: "Membership FAQs below the plan preview.",
+    },
+    {
+      site: "luxury",
+      role: "House and stay FAQs on the house page.",
+    },
+    {
+      site: "retro",
+      role: "Home, guide, and pricing FAQs; the home instance is restyled through home.module.css.",
+    },
+  ],
   tags: ["faq", "marketing", "accordion", "sidebar", "docs", "help", "landing"],
   dependencies: ["lucide-react"],
   registryDependencies: ["button"],

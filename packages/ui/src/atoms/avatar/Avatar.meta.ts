@@ -25,6 +25,12 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  usedIn: [
+    {
+      site: "editorial",
+      role: "Contributor grid on home and size lg portrait on contributor profiles.",
+    },
+  ],
   tags: ["avatar", "primitive", "accessible"],
   dependencies: [],
   registryDependencies: [],
