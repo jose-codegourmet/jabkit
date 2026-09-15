@@ -1,0 +1,111 @@
+{
+  "name": "qr-code-generator",
+  "displayName": "QrCodeGenerator",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Type a URL or short note and get a live QR mark you can copy or download as PNG.",
+  "sectionCategory": "form",
+  "purpose": "Turns a short payload into a scannable code without leaving the page or sending data to a server.",
+  "bestFor": [
+    "share links on a landing page",
+    "event check-in codes",
+    "wifi or contact handoff"
+  ],
+  "avoidFor": [
+    "binary payloads over ~180 bytes",
+    "styled brand marks that need a logo overlay",
+    "server-signed tickets"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "title",
+    "preview",
+    "payload",
+    "download",
+    "copy"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "input",
+    "button"
+  ],
+  "tags": [
+    "qr",
+    "code",
+    "download",
+    "link",
+    "atom"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button",
+    "input",
+    "label"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center",
+    "width": 420,
+    "height": 560
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "qr-code-generator/QrCodeGenerator.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { CheckIcon, CopyIcon, DownloadIcon } from \"lucide-react\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { useEffect, useId, useMemo, useRef, useState } from \"react\";\nimport { Button } from \"@/components/jabkit/button\";\nimport { Input } from \"@/components/jabkit/input\";\nimport { Label } from \"@/components/jabkit/label\";\nimport { cn } from \"@/lib/cn\";\nimport { encodeQrMatrix, qrCodeMaxBytes } from \"./encodeQrMatrix\";\nimport type { QrCodeGeneratorProps } from \"./QrCodeGenerator.types\";\n\nfunction downloadPng(\n  matrix: number[][],\n  fileName: string,\n  moduleColor: string,\n  quietColor: string,\n) {\n  const moduleSize = 8;\n  const quiet = 4;\n  const edge = (matrix.length + quiet * 2) * moduleSize;\n  const canvas = document.createElement(\"canvas\");\n  canvas.width = edge;\n  canvas.height = edge;\n  const context = canvas.getContext(\"2d\");\n  if (!context) return;\n  context.fillStyle = quietColor;\n  context.fillRect(0, 0, edge, edge);\n  context.fillStyle = moduleColor;\n  for (let row = 0; row < matrix.length; row++) {\n    for (let col = 0; col < matrix[row].length; col++) {\n      if (!matrix[row][col]) continue;\n      context.fillRect(\n        (col + quiet) * moduleSize,\n        (row + quiet) * moduleSize,\n        moduleSize,\n        moduleSize,\n      );\n    }\n  }\n  const link = document.createElement(\"a\");\n  link.href = canvas.toDataURL(\"image/png\");\n  link.download = fileName;\n  link.click();\n}\n\nexport function QrCodeGenerator({\n  className,\n  value,\n  defaultValue = \"\",\n  onValueChange,\n  title = \"QR code\",\n  description = \"Type a link or short note. The mark updates as you type.\",\n  inputLabel = \"Payload\",\n  placeholder = \"https://jabkit.dev\",\n  downloadLabel = \"Download PNG\",\n  downloadFileName = \"qr-code.png\",\n  copyLabel = \"Copy text\",\n  copiedLabel = \"Copied\",\n  emptyLabel = \"Enter text to draw a code\",\n  overflowLabel = \"Shorten the text. This version holds about 180 characters.\",\n  size = 192,\n  ...props\n}: QrCodeGeneratorProps) {\n  const inputId = useId();\n  const headingId = useId();\n  const statusId = useId();\n  const rootRef = useRef<HTMLDivElement>(null);\n  const [uncontrolled, setUncontrolled] = useState(defaultValue);\n  const [copied, setCopied] = useState(false);\n  const payload = value ?? uncontrolled;\n  const byteLength = new TextEncoder().encode(payload).length;\n  const overflow = byteLength > qrCodeMaxBytes;\n  const matrix = useMemo(\n    () => (payload && !overflow ? encodeQrMatrix(payload) : null),\n    [overflow, payload],\n  );\n\n  useEffect(() => {\n    if (!copied) return;\n    const timer = window.setTimeout(() => setCopied(false), 1600);\n    return () => window.clearTimeout(timer);\n  }, [copied]);\n\n  const setPayload = (next: string) => {\n    if (value === undefined) setUncontrolled(next);\n    onValueChange?.(next);\n  };\n\n  const handleDownload = () => {\n    if (!matrix) return;\n    const styles = getComputedStyle(\n      rootRef.current ?? document.documentElement,\n    );\n    downloadPng(\n      matrix,\n      downloadFileName,\n      styles.getPropertyValue(\"--jk-foreground\").trim() || \"currentColor\",\n      styles.getPropertyValue(\"--jk-background\").trim() || \"transparent\",\n    );\n  };\n\n  const handleCopy = async () => {\n    if (!payload) return;\n    try {\n      await navigator.clipboard.writeText(payload);\n      setCopied(true);\n    } catch {\n      setCopied(false);\n    }\n  };\n\n  return (\n    <div\n      aria-labelledby={headingId}\n      className={cn(\n        \"flex w-full max-w-md flex-col gap-4 rounded-[--radius] border border-border bg-card p-5 text-card-foreground shadow-sm\",\n        className,\n      )}\n      data-slot=\"qr-code-generator\"\n      ref={rootRef}\n      {...props}\n    >\n      <div className=\"flex flex-col gap-1\">\n        <h2 className=\"text-sm font-medium\" id={headingId}>\n          {title}\n        </h2>\n        <p className=\"text-sm text-muted-foreground\">{description}</p>\n      </div>\n\n      <div\n        className=\"flex items-center justify-center rounded-[--radius] border border-border bg-background p-5\"\n        style={{ minHeight: size + 40 }}\n      >\n        {matrix ? (\n          <svg\n            aria-label={payload}\n            className=\"text-foreground motion-reduce:transition-none\"\n            height={size}\n            role=\"img\"\n            viewBox={`0 0 ${matrix.length} ${matrix.length}`}\n            width={size}\n          >\n            <rect\n              className=\"fill-background\"\n              height={matrix.length}\n              width={matrix.length}\n              x={0}\n              y={0}\n            />\n            {matrix.flatMap((row, y) =>\n              row.flatMap((cell, x) =>\n                cell ? (\n                  <rect\n                    className=\"fill-current\"\n                    height={1}\n                    key={`${x}-${y}`}\n                    width={1}\n                    x={x}\n                    y={y}\n                  />\n                ) : (\n                  []\n                ),\n              ),\n            )}\n          </svg>\n        ) : (\n          <p\n            className=\"max-w-[16rem] text-center text-sm text-muted-foreground\"\n            id={statusId}\n          >\n            {overflow ? overflowLabel : emptyLabel}\n          </p>\n        )}\n      </div>\n\n      <div className=\"flex flex-col gap-2\">\n        <Label htmlFor={inputId}>{inputLabel}</Label>\n        <Input\n          aria-describedby={!matrix ? statusId : undefined}\n          aria-invalid={overflow || undefined}\n          id={inputId}\n          onChange={(event) => setPayload(event.target.value)}\n          placeholder={placeholder}\n          value={payload}\n        />\n      </div>\n\n      <div className=\"flex flex-wrap gap-2\">\n        <Button\n          className=\"gap-2 motion-reduce:transition-none\"\n          disabled={!matrix}\n          onClick={handleDownload}\n          size=\"sm\"\n          type=\"button\"\n        >\n          <DownloadIcon className=\"size-4\" />\n          {downloadLabel}\n        </Button>\n        <Button\n          className=\"gap-2 motion-reduce:transition-none\"\n          disabled={!payload}\n          onClick={() => {\n            void handleCopy();\n          }}\n          size=\"sm\"\n          type=\"button\"\n          variant=\"secondary\"\n        >\n          {copied ? (\n            <CheckIcon className=\"size-4\" />\n          ) : (\n            <CopyIcon className=\"size-4\" />\n          )}\n          {copied ? copiedLabel : copyLabel}\n        </Button>\n      </div>\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "qr-code-generator/QrCodeGenerator.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface QrCodeGeneratorProps extends HTMLAttributes<HTMLDivElement> {\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (value: string) => void;\n  title?: string;\n  description?: string;\n  inputLabel?: string;\n  placeholder?: string;\n  downloadLabel?: string;\n  downloadFileName?: string;\n  copyLabel?: string;\n  copiedLabel?: string;\n  emptyLabel?: string;\n  overflowLabel?: string;\n  size?: number;\n}\n"
+    },
+    {
+      "path": "qr-code-generator/encodeQrMatrix.ts",
+      "type": "component",
+      "content": "/** Byte-mode QR encoder (versions 1-10, ECC M). Spec-based; not vendor source. */\n\nconst TOTAL_CODEWORDS = [0, 26, 44, 70, 100, 134, 172, 196, 242, 292, 346];\nconst EC_PER_BLOCK = [0, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26];\nconst EC_BLOCKS = [0, 1, 1, 1, 2, 2, 4, 4, 4, 4, 6];\nconst ALIGNMENT = [\n  [],\n  [],\n  [6, 18],\n  [6, 22],\n  [6, 26],\n  [6, 30],\n  [6, 34],\n  [6, 22, 38],\n  [6, 24, 42],\n  [6, 26, 46],\n  [6, 28, 50],\n];\n\nconst EXP = new Uint8Array(512);\nconst LOG = new Uint8Array(256);\n\n(() => {\n  let value = 1;\n  for (let i = 0; i < 255; i++) {\n    EXP[i] = value;\n    LOG[value] = i;\n    value <<= 1;\n    if (value & 0x100) value ^= 0x11d;\n  }\n  for (let i = 255; i < 512; i++) EXP[i] = EXP[i - 255];\n})();\n\nfunction gfMul(a: number, b: number) {\n  if (a === 0 || b === 0) return 0;\n  return EXP[LOG[a] + LOG[b]];\n}\n\nfunction rsDivisor(degree: number) {\n  const result = new Array(degree).fill(0);\n  result[degree - 1] = 1;\n  let root = 1;\n  for (let i = 0; i < degree; i++) {\n    for (let j = 0; j < result.length; j++) {\n      result[j] = gfMul(result[j], root);\n      if (j + 1 < result.length) result[j] ^= result[j + 1];\n    }\n    root = gfMul(root, 2);\n  }\n  return result;\n}\n\nfunction rsEncode(data: number[], degree: number) {\n  const gen = rsDivisor(degree);\n  const ecc = new Array(degree).fill(0);\n  for (const byte of data) {\n    const factor = byte ^ ecc[0];\n    ecc.shift();\n    ecc.push(0);\n    for (let i = 0; i < degree; i++) ecc[i] ^= gfMul(gen[i], factor);\n  }\n  return ecc;\n}\n\nfunction dataCapacity(version: number) {\n  return TOTAL_CODEWORDS[version] - EC_PER_BLOCK[version] * EC_BLOCKS[version];\n}\n\nfunction countBits(version: number) {\n  return version <= 9 ? 8 : 16;\n}\n\nfunction chooseVersion(payload: Uint8Array) {\n  for (let version = 1; version <= 10; version++) {\n    const bits = 4 + countBits(version) + payload.length * 8 + 4;\n    if (Math.ceil(bits / 8) <= dataCapacity(version)) return version;\n  }\n  return null;\n}\n\nfunction packedBits(payload: Uint8Array, version: number, dataWords: number) {\n  const bits: number[] = [];\n  const push = (value: number, length: number) => {\n    for (let i = length - 1; i >= 0; i--) bits.push((value >> i) & 1);\n  };\n  push(0b0100, 4);\n  push(payload.length, countBits(version));\n  for (const byte of payload) push(byte, 8);\n  const maxBits = dataWords * 8;\n  const terminator = Math.min(4, maxBits - bits.length);\n  push(0, terminator);\n  while (bits.length % 8 !== 0) bits.push(0);\n  const bytes: number[] = [];\n  for (let i = 0; i < bits.length; i += 8) {\n    let byte = 0;\n    for (let j = 0; j < 8; j++) byte = (byte << 1) | bits[i + j];\n    bytes.push(byte);\n  }\n  const pads = [0xec, 0x11];\n  let pad = 0;\n  while (bytes.length < dataWords) {\n    bytes.push(pads[pad % 2]);\n    pad += 1;\n  }\n  return bytes;\n}\n\nfunction interleave(data: number[], version: number) {\n  const blocks = EC_BLOCKS[version];\n  const ecLen = EC_PER_BLOCK[version];\n  const shortLen = Math.floor(data.length / blocks);\n  const longCount = data.length % blocks;\n  const groups: { data: number[]; ecc: number[] }[] = [];\n  let offset = 0;\n  for (let i = 0; i < blocks; i++) {\n    const len = i < blocks - longCount ? shortLen : shortLen + 1;\n    const block = data.slice(offset, offset + len);\n    offset += len;\n    groups.push({ data: block, ecc: rsEncode(block, ecLen) });\n  }\n  const out: number[] = [];\n  const maxData = Math.max(...groups.map((g) => g.data.length));\n  for (let i = 0; i < maxData; i++) {\n    for (const group of groups) {\n      if (i < group.data.length) out.push(group.data[i]);\n    }\n  }\n  for (let i = 0; i < ecLen; i++) {\n    for (const group of groups) out.push(group.ecc[i]);\n  }\n  return out;\n}\n\nfunction sizeOf(version: number) {\n  return 17 + 4 * version;\n}\n\nfunction maskBit(mask: number, row: number, col: number) {\n  switch (mask) {\n    case 0:\n      return (row + col) % 2 === 0;\n    case 1:\n      return row % 2 === 0;\n    case 2:\n      return col % 3 === 0;\n    case 3:\n      return (row + col) % 3 === 0;\n    case 4:\n      return (Math.floor(row / 2) + Math.floor(col / 3)) % 2 === 0;\n    case 5:\n      return ((row * col) % 2) + ((row * col) % 3) === 0;\n    case 6:\n      return (((row * col) % 2) + ((row * col) % 3)) % 2 === 0;\n    default:\n      return (((row + col) % 2) + ((row * col) % 3)) % 2 === 0;\n  }\n}\n\nfunction setModule(\n  matrix: number[][],\n  reserved: boolean[][],\n  row: number,\n  col: number,\n  dark: boolean,\n) {\n  matrix[row][col] = dark ? 1 : 0;\n  reserved[row][col] = true;\n}\n\nfunction drawFinder(\n  matrix: number[][],\n  reserved: boolean[][],\n  row: number,\n  col: number,\n) {\n  for (let r = -1; r <= 7; r++) {\n    for (let c = -1; c <= 7; c++) {\n      const rr = row + r;\n      const cc = col + c;\n      if (rr < 0 || cc < 0 || rr >= matrix.length || cc >= matrix.length)\n        continue;\n      const on =\n        (r >= 0 && r <= 6 && (c === 0 || c === 6)) ||\n        (c >= 0 && c <= 6 && (r === 0 || r === 6)) ||\n        (r >= 2 && r <= 4 && c >= 2 && c <= 4);\n      setModule(matrix, reserved, rr, cc, on);\n    }\n  }\n}\n\nfunction drawAlignment(\n  matrix: number[][],\n  reserved: boolean[][],\n  row: number,\n  col: number,\n) {\n  for (let r = -2; r <= 2; r++) {\n    for (let c = -2; c <= 2; c++) {\n      if (reserved[row + r][col + c]) return;\n    }\n  }\n  for (let r = -2; r <= 2; r++) {\n    for (let c = -2; c <= 2; c++) {\n      const on = Math.max(Math.abs(r), Math.abs(c)) !== 1;\n      setModule(matrix, reserved, row + r, col + c, on);\n    }\n  }\n}\n\nfunction encodeFormatBits(mask: number) {\n  const data = mask;\n  let rem = data << 10;\n  for (let i = 14; i >= 10; i--) {\n    if ((rem >>> i) & 1) rem ^= 0x537 << (i - 10);\n  }\n  return ((data << 10) | rem) ^ 0x5412;\n}\n\nfunction encodeVersionBits(version: number) {\n  let rem = version << 12;\n  for (let i = 17; i >= 12; i--) {\n    if ((rem >>> i) & 1) rem ^= 0x1f25 << (i - 12);\n  }\n  return (version << 12) | rem;\n}\n\nfunction placeFormat(\n  matrix: number[][],\n  reserved: boolean[][],\n  bits: number,\n  writeReserved: boolean,\n) {\n  const n = matrix.length;\n  for (let i = 0; i <= 14; i++) {\n    const dark = ((bits >> i) & 1) === 1;\n    const positions: [number, number][] = [];\n    if (i < 6) positions.push([i, 8]);\n    else if (i < 8) positions.push([i + 1, 8]);\n    else if (i === 8) positions.push([8, 7]);\n    else positions.push([8, 14 - i]);\n    if (i < 8) positions.push([8, n - 1 - i]);\n    else positions.push([n - 15 + i, 8]);\n    for (const [row, col] of positions) {\n      if (writeReserved) reserved[row][col] = true;\n      else matrix[row][col] = dark ? 1 : 0;\n    }\n  }\n  setModule(matrix, reserved, n - 8, 8, true);\n}\n\nfunction placeVersion(matrix: number[][], bits: number) {\n  const n = matrix.length;\n  for (let i = 0; i < 18; i++) {\n    const dark = ((bits >> i) & 1) === 1;\n    const row = Math.floor(i / 3);\n    const col = i % 3;\n    matrix[row][n - 11 + col] = dark ? 1 : 0;\n    matrix[n - 11 + col][row] = dark ? 1 : 0;\n  }\n}\n\nfunction reserveVersion(reserved: boolean[][]) {\n  const n = reserved.length;\n  for (let i = 0; i < 18; i++) {\n    const row = Math.floor(i / 3);\n    const col = i % 3;\n    reserved[row][n - 11 + col] = true;\n    reserved[n - 11 + col][row] = true;\n  }\n}\n\nfunction penalty(matrix: number[][]) {\n  const n = matrix.length;\n  let score = 0;\n  for (let r = 0; r < n; r++) {\n    let run = 1;\n    for (let c = 1; c < n; c++) {\n      if (matrix[r][c] === matrix[r][c - 1]) run += 1;\n      else {\n        if (run >= 5) score += run - 2;\n        run = 1;\n      }\n    }\n    if (run >= 5) score += run - 2;\n  }\n  for (let c = 0; c < n; c++) {\n    let run = 1;\n    for (let r = 1; r < n; r++) {\n      if (matrix[r][c] === matrix[r - 1][c]) run += 1;\n      else {\n        if (run >= 5) score += run - 2;\n        run = 1;\n      }\n    }\n    if (run >= 5) score += run - 2;\n  }\n  for (let r = 0; r < n - 1; r++) {\n    for (let c = 0; c < n - 1; c++) {\n      const v = matrix[r][c];\n      if (\n        v === matrix[r][c + 1] &&\n        v === matrix[r + 1][c] &&\n        v === matrix[r + 1][c + 1]\n      )\n        score += 3;\n    }\n  }\n  const finder = [1, 0, 1, 1, 1, 0, 1];\n  const hasFinder = (line: number[], start: number) =>\n    finder.every((bit, i) => line[start + i] === bit);\n  const lightRun = (line: number[], start: number, dir: number) => {\n    let count = 0;\n    for (let i = start; i >= 0 && i < line.length && line[i] === 0; i += dir)\n      count += 1;\n    return count;\n  };\n  const scan = (line: number[]) => {\n    for (let i = 0; i <= line.length - 7; i++) {\n      if (!hasFinder(line, i)) continue;\n      if (lightRun(line, i - 1, -1) >= 4 || lightRun(line, i + 7, 1) >= 4)\n        score += 40;\n    }\n  };\n  for (let r = 0; r < n; r++) scan(matrix[r]);\n  for (let c = 0; c < n; c++) scan(matrix.map((row) => row[c]));\n  let dark = 0;\n  for (const row of matrix) for (const cell of row) dark += cell;\n  const percent = (dark * 100) / (n * n);\n  score += Math.floor(Math.abs(percent - 50) / 5) * 10;\n  return score;\n}\n\nfunction placeData(\n  matrix: number[][],\n  reserved: boolean[][],\n  codewords: number[],\n  mask: number,\n) {\n  const n = matrix.length;\n  const bits: number[] = [];\n  for (const word of codewords) {\n    for (let i = 7; i >= 0; i--) bits.push((word >> i) & 1);\n  }\n  let index = 0;\n  let upward = true;\n  for (let col = n - 1; col > 0; col -= 2) {\n    if (col === 6) col -= 1;\n    for (let i = 0; i < n; i++) {\n      const row = upward ? n - 1 - i : i;\n      for (const c of [col, col - 1]) {\n        if (reserved[row][c]) continue;\n        let bit = index < bits.length ? bits[index] : 0;\n        index += 1;\n        if (maskBit(mask, row, c)) bit ^= 1;\n        matrix[row][c] = bit;\n      }\n    }\n    upward = !upward;\n  }\n}\n\nfunction buildReserved(version: number) {\n  const n = sizeOf(version);\n  const matrix = Array.from({ length: n }, () => Array(n).fill(0));\n  const reserved = Array.from({ length: n }, () => Array(n).fill(false));\n  drawFinder(matrix, reserved, 0, 0);\n  drawFinder(matrix, reserved, 0, n - 7);\n  drawFinder(matrix, reserved, n - 7, 0);\n  for (const row of ALIGNMENT[version]) {\n    for (const col of ALIGNMENT[version]) {\n      drawAlignment(matrix, reserved, row, col);\n    }\n  }\n  for (let i = 8; i < n - 8; i++) {\n    setModule(matrix, reserved, 6, i, i % 2 === 0);\n    setModule(matrix, reserved, i, 6, i % 2 === 0);\n  }\n  placeFormat(matrix, reserved, 0, true);\n  if (version >= 7) reserveVersion(reserved);\n  return { matrix, reserved };\n}\n\nexport function encodeQrMatrix(text: string): number[][] | null {\n  const payload = new TextEncoder().encode(text);\n  const version = chooseVersion(payload);\n  if (version === null) return null;\n  const dataWords = dataCapacity(version);\n  const codewords = interleave(packedBits(payload, version, dataWords), version);\n  const base = buildReserved(version);\n  let bestMatrix = base.matrix;\n  let bestScore = Number.POSITIVE_INFINITY;\n  for (let mask = 0; mask < 8; mask++) {\n    const matrix = base.matrix.map((row) => row.slice());\n    placeData(matrix, base.reserved, codewords, mask);\n    placeFormat(matrix, base.reserved, encodeFormatBits(mask), false);\n    if (version >= 7) placeVersion(matrix, encodeVersionBits(version));\n    const score = penalty(matrix);\n    if (score < bestScore) {\n      bestScore = score;\n      bestMatrix = matrix;\n    }\n  }\n  return bestMatrix;\n}\n\nexport const qrCodeMaxBytes = 187;\n"
+    },
+    {
+      "path": "qr-code-generator/index.ts",
+      "type": "index",
+      "content": "export { QrCodeGenerator } from \"./QrCodeGenerator\";\nexport type * from \"./QrCodeGenerator.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background p-6 text-foreground\">\n      <QrCodeGenerator {...qrCodeGeneratorMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background p-6 text-foreground\">\n      <QrCodeGenerator {...qrCodeGeneratorMocks.event} />\n    </div>"
+    }
+  ]
+}
