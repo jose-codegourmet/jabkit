@@ -3,30 +3,30 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "light-eagle",
   displayName: "LightEagle",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A token-tinted chevron wing field with an optional caption and a slow glide that pauses under reduced motion.",
+    "A square-corner isometric cube tessellation at 200px, with three face inks mapped to semantic tokens.",
   sectionCategory: "content",
   purpose:
-    "Gives empty states, catalogue cards, and section backdrops a feathered chevron texture that stays on semantic tokens in light and dark.",
+    "Fills a region with the Uiverse light-eagle hexagonal cube weave without rounding the field to the shared control radius.",
   bestFor: [
-    "decorative tiles behind captions",
-    "catalogue or story frames that need a light geometric field",
-    "quiet pattern fills on product surfaces",
+    "section covers and empty-state backdrops",
+    "card or banner texture behind a short caption",
+    "catalogue samples that need a geometric field",
   ],
   avoidFor: [
-    "primary actions or form controls",
-    "dense data that needs a plain surface",
+    "text-heavy reading panes",
+    "controls that need a quiet, solid surface",
   ],
   tone: ["playful", "clean"],
   contentDensity: "low",
-  visualWeight: "medium",
+  visualWeight: "high",
   layout: {
     type: "stack",
-    alignment: "left",
+    alignment: "center",
   },
-  slots: ["caption"],
+  slots: ["field", "caption"],
   capabilities: {
     supportsImage: false,
     supportsVideo: false,
@@ -34,11 +34,13 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
-  tags: ["pattern", "chevron", "background", "texture", "atom"],
+  tags: ["pattern", "hexagon", "cube", "geometric", "background", "atom"],
   dependencies: [],
   registryDependencies: [],
   a11y: { keyboardNav: false, reducedMotion: true },
   preview: {
     layout: "center",
+    width: 440,
+    height: 280,
   },
 } satisfies ComponentMeta;

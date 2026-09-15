@@ -4,6 +4,19 @@ import { LightEagle } from "./LightEagle";
 import { lightEagleMocks } from "./LightEagle.mocks";
 
 export default {
-  Default: () => <LightEagle {...lightEagleMocks.default} />,
-  Tones: () => <LightEagle {...lightEagleMocks.sky} />,
+  Default: () => (
+    <div className="h-64 w-80">
+      <LightEagle {...lightEagleMocks.default} />
+    </div>
+  ),
+  Tones: () => (
+    <div className="flex w-80 flex-col gap-4">
+      <div className="h-56">
+        <LightEagle {...lightEagleMocks.default} />
+      </div>
+      <div className="h-56">
+        <LightEagle {...lightEagleMocks.slate} />
+      </div>
+    </div>
+  ),
 };
