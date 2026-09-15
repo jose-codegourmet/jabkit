@@ -1,6 +1,6 @@
 export const loudParrotMocks = {
   default: {
-    label: "Isometric tile field",
+    label: "Isometric cube field",
     size: "md" as const,
     tone: "default" as const,
   },
@@ -18,6 +18,5 @@ export const loudParrotMocks = {
     label: "Compact isometric swatch",
     size: "sm" as const,
     tone: "default" as const,
-    animate: false,
   },
 } as const;
