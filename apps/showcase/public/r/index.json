@@ -7378,12 +7378,12 @@
     "name": "skiper-39",
     "displayName": "Skiper39",
     "category": "marketing",
-    "description": "Full-bleed marketing stage with a canvas crowd of walking figures, optional sprite sheets, and a still reading when motion is reduced.",
+    "description": "Full-bleed crowd canvas with a centered uppercase label and walking Open Peeps figures along the lower stage.",
     "sectionCategory": "hero",
-    "purpose": "Gives a landing a living sidewalk so the headline sits over motion instead of an empty field.",
+    "purpose": "Fills a landing viewport with a living sidewalk so the page feels occupied before the next section.",
     "bestFor": [
-      "event and community landings",
       "creative studio heroes",
+      "event and community landings",
       "campaign pages that want a populated street without photography"
     ],
     "avoidFor": [
@@ -7407,9 +7407,7 @@
       "alignment": "center"
     },
     "slots": [
-      "eyebrow",
-      "headline",
-      "description",
+      "label",
       "crowd"
     ],
     "capabilities": {
@@ -7433,7 +7431,7 @@
       "canvas",
       "crowd",
       "animation",
-      "walkers",
+      "open-peeps",
       "skiper"
     ],
     "addedAt": "2026-09-15",
