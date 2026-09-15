@@ -1,0 +1,90 @@
+{
+  "name": "curvy-earwig",
+  "displayName": "CurvyEarwig",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A circular search control that unfurls into a pill field on hover or focus.",
+  "sectionCategory": "form",
+  "purpose": "Gives toolbars and headers a compact search target that opens only when someone means to type.",
+  "bestFor": [
+    "header or toolbar search that should stay quiet until used",
+    "playful catalogue filters that still need a native text field",
+    "demo surfaces that show a collapsed and open search state"
+  ],
+  "avoidFor": [
+    "always-visible search on dense data tables",
+    "forms that need a labeled field sitting in a grid"
+  ],
+  "tone": [
+    "playful",
+    "clean"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "field",
+    "glyph"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "search",
+    "input",
+    "expand",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "curvy-earwig/CurvyEarwig.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { CurvyEarwigProps } from \"./CurvyEarwig.types\";\n\nconst sizes = {\n  sm: {\n    box: \"2.25rem\",\n    open: \"13.5rem\",\n    text: \"0.8125rem\",\n  },\n  md: {\n    box: \"2.75rem\",\n    open: \"16.5rem\",\n    text: \"0.875rem\",\n  },\n  lg: {\n    box: \"3.25rem\",\n    open: \"19.5rem\",\n    text: \"1rem\",\n  },\n} as const;\n\nexport function CurvyEarwig({\n  className,\n  size = \"md\",\n  expanded = false,\n  animate = true,\n  label = \"Search\",\n  disabled,\n  type = \"search\",\n  style,\n  ...props\n}: CurvyEarwigProps) {\n  const metrics = sizes[size];\n\n  return (\n    <label\n      className={cn(\n        \"jk-curvy-earwig relative inline-flex shrink-0 items-center\",\n        disabled && \"cursor-not-allowed opacity-50\",\n        className,\n      )}\n      data-animate={animate ? \"true\" : \"false\"}\n      data-expanded={expanded ? \"true\" : \"false\"}\n      data-size={size}\n      data-slot=\"curvy-earwig\"\n      style={\n        {\n          \"--jk-curvy-earwig-box\": metrics.box,\n          \"--jk-curvy-earwig-open\": metrics.open,\n          \"--jk-curvy-earwig-text\": metrics.text,\n          ...style,\n        } as React.CSSProperties\n      }\n    >\n      <style href=\"jk-curvy-earwig\" precedence=\"default\">{`\n        .jk-curvy-earwig {\n          width: var(--jk-curvy-earwig-box);\n          height: var(--jk-curvy-earwig-box);\n        }\n        .jk-curvy-earwig:hover,\n        .jk-curvy-earwig:focus-within,\n        .jk-curvy-earwig[data-expanded=\"true\"] {\n          width: var(--jk-curvy-earwig-open);\n        }\n        .jk-curvy-earwig-shell {\n          background: color-mix(in oklab, var(--jk-card) 88%, var(--jk-muted));\n          box-shadow:\n            inset 0 0 0 1px var(--jk-border),\n            0 8px 22px color-mix(in oklab, var(--jk-foreground), transparent 88%);\n        }\n        .jk-curvy-earwig:hover .jk-curvy-earwig-shell,\n        .jk-curvy-earwig:focus-within .jk-curvy-earwig-shell,\n        .jk-curvy-earwig[data-expanded=\"true\"] .jk-curvy-earwig-shell {\n          box-shadow:\n            inset 0 0 0 1px color-mix(in oklab, var(--jk-ring) 55%, var(--jk-border)),\n            0 10px 26px color-mix(in oklab, var(--jk-foreground), transparent 84%);\n        }\n        .jk-curvy-earwig-field {\n          color: var(--jk-foreground);\n          font-size: var(--jk-curvy-earwig-text);\n          opacity: 0;\n        }\n        .jk-curvy-earwig-field::placeholder {\n          color: var(--jk-muted-foreground);\n        }\n        .jk-curvy-earwig:hover .jk-curvy-earwig-field,\n        .jk-curvy-earwig:focus-within .jk-curvy-earwig-field,\n        .jk-curvy-earwig[data-expanded=\"true\"] .jk-curvy-earwig-field {\n          opacity: 1;\n        }\n        .jk-curvy-earwig-lens {\n          border: 2px solid var(--jk-muted-foreground);\n        }\n        .jk-curvy-earwig-handle {\n          background: var(--jk-muted-foreground);\n        }\n        .jk-curvy-earwig:hover .jk-curvy-earwig-lens,\n        .jk-curvy-earwig:focus-within .jk-curvy-earwig-lens,\n        .jk-curvy-earwig[data-expanded=\"true\"] .jk-curvy-earwig-lens {\n          border-color: var(--jk-primary);\n        }\n        .jk-curvy-earwig:hover .jk-curvy-earwig-handle,\n        .jk-curvy-earwig:focus-within .jk-curvy-earwig-handle,\n        .jk-curvy-earwig[data-expanded=\"true\"] .jk-curvy-earwig-handle {\n          background: var(--jk-primary);\n        }\n        .jk-curvy-earwig:focus-within .jk-curvy-earwig-shell {\n          outline: 2px solid transparent;\n          box-shadow:\n            inset 0 0 0 1px var(--jk-ring),\n            0 0 0 3px color-mix(in oklab, var(--jk-ring), transparent 62%),\n            0 10px 26px color-mix(in oklab, var(--jk-foreground), transparent 84%);\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-curvy-earwig[data-animate=\"true\"] {\n            transition: width 320ms cubic-bezier(0.22, 1, 0.36, 1);\n          }\n          .jk-curvy-earwig[data-animate=\"true\"] .jk-curvy-earwig-shell {\n            transition: box-shadow 220ms ease;\n          }\n          .jk-curvy-earwig[data-animate=\"true\"] .jk-curvy-earwig-field {\n            transition: opacity 180ms ease;\n          }\n          .jk-curvy-earwig[data-animate=\"true\"] .jk-curvy-earwig-lens,\n          .jk-curvy-earwig[data-animate=\"true\"] .jk-curvy-earwig-handle {\n            transition:\n              border-color 180ms ease,\n              background-color 180ms ease;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-curvy-earwig,\n          .jk-curvy-earwig-shell,\n          .jk-curvy-earwig-field,\n          .jk-curvy-earwig-lens,\n          .jk-curvy-earwig-handle {\n            transition: none;\n          }\n        }\n      `}</style>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-curvy-earwig-shell pointer-events-none absolute inset-0 overflow-hidden rounded-full\"\n      />\n      <input\n        aria-label={label}\n        className=\"jk-curvy-earwig-field relative z-10 h-full w-full min-w-0 appearance-none border-0 bg-transparent pr-[var(--jk-curvy-earwig-box)] pl-3.5 outline-none disabled:cursor-not-allowed\"\n        disabled={disabled}\n        type={type}\n        {...props}\n      />\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-curvy-earwig-glyph pointer-events-none absolute top-0 right-0 z-20 block h-[var(--jk-curvy-earwig-box)] w-[var(--jk-curvy-earwig-box)]\"\n      >\n        <span className=\"jk-curvy-earwig-lens absolute top-[26%] left-[24%] block size-[38%] rounded-full\" />\n        <span className=\"jk-curvy-earwig-handle absolute top-[62%] left-[54%] block h-0.5 w-[28%] origin-left rotate-45 rounded-full\" />\n      </span>\n    </label>\n  );\n}\n"
+    },
+    {
+      "path": "curvy-earwig/CurvyEarwig.types.ts",
+      "type": "types",
+      "content": "import type { InputHTMLAttributes } from \"react\";\n\nexport type CurvyEarwigSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface CurvyEarwigProps\n  extends Omit<InputHTMLAttributes<HTMLInputElement>, \"size\" | \"type\"> {\n  size?: CurvyEarwigSize;\n  expanded?: boolean;\n  animate?: boolean;\n  label?: string;\n  type?: InputHTMLAttributes<HTMLInputElement>[\"type\"];\n}\n"
+    },
+    {
+      "path": "curvy-earwig/index.ts",
+      "type": "index",
+      "content": "export { CurvyEarwig } from \"./CurvyEarwig\";\nexport type * from \"./CurvyEarwig.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<CurvyEarwig {...curvyEarwigMocks.default} />"
+    },
+    {
+      "name": "Expanded",
+      "code": "<CurvyEarwig {...curvyEarwigMocks.expanded} />"
+    }
+  ]
+}
