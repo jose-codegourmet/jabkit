@@ -1,98 +1,82 @@
 "use client";
 
 import {
-  ArrowRightLeftIcon,
+  ArrowRightIcon,
   CalendarIcon,
   ClockIcon,
   MapPinIcon,
-  SearchIcon,
+  PlusIcon,
+  SendIcon,
 } from "lucide-react";
-import { type FormEvent, type ReactNode, useId, useState } from "react";
+import { type CSSProperties, type FormEvent, useId, useState } from "react";
 import { Button } from "@/atoms/button";
-import { Input } from "@/atoms/input";
-import { Label } from "@/atoms/label";
 import { cn } from "@/lib/cn";
 import type { RideBookingFormProps } from "./RideBookingForm.types";
 
 const defaults = {
-  city: "Portland, OR",
+  city: "Chandigarh, IN",
   imageSrc: "/assets/e9d88fab9e45c86f.webp",
-  imageAlt: "Glass towers along a downtown street at dusk",
-  title: "Book a ride across town",
-  description:
-    "Set pickup, dropoff, and a time. Harbor finds a car that can meet you there.",
-  pickupLabel: "Pickup",
-  pickupPlaceholder: "Pearl District, 12th and Lovejoy",
+  imageAlt: "Illustration of a person getting into a car in a city",
+  title: "Go anywhere with Uber",
+  changeCityLabel: "Change city",
+  changeCityHref: "#",
+  pickupPlaceholder: "Pickup location",
+  pickupAriaLabel: "Pickup location",
   defaultPickup: "",
-  dropoffLabel: "Dropoff",
-  dropoffPlaceholder: "Airport, hotel, or street",
+  sharePickupLabel: "Share pickup location",
+  dropoffPlaceholder: "Dropoff location",
+  dropoffAriaLabel: "Dropoff location",
   defaultDropoff: "",
-  dateLabel: "Date",
-  defaultDate: "",
-  timeLabel: "Time",
-  defaultTime: "",
-  submitLabel: "Find a ride",
-  swapLabel: "Swap pickup and dropoff",
+  defaultDate: "Today",
+  defaultTime: "Now",
+  timeOptions: ["Now", "In 15 min", "In 30 min", "In 1 hour"] as const,
+  timeAriaLabel: "Select time",
+  submitLabel: "See prices",
+  loginLabel: "Log in to see your recent activity",
+  loginHref: "#",
 } as const;
 
-function FieldShell({
-  id,
-  label,
-  icon,
-  children,
-}: {
-  id: string;
-  label: string;
-  icon: ReactNode;
-  children: ReactNode;
-}) {
-  return (
-    <div className="space-y-2">
-      <Label htmlFor={id}>{label}</Label>
-      <div className="relative">
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-muted-foreground"
-        >
-          {icon}
-        </span>
-        {children}
-      </div>
-    </div>
-  );
-}
+const riseStyle = (order: number): CSSProperties => ({
+  animationDelay: `${200 + order * 100}ms`,
+});
 
 export function RideBookingForm({
   className,
   city = defaults.city,
+  imageUrl,
   imageSrc = defaults.imageSrc,
   imageAlt = defaults.imageAlt,
   title = defaults.title,
-  description = defaults.description,
-  pickupLabel = defaults.pickupLabel,
+  changeCityLabel = defaults.changeCityLabel,
+  changeCityHref = defaults.changeCityHref,
   pickupPlaceholder = defaults.pickupPlaceholder,
+  pickupAriaLabel = defaults.pickupAriaLabel,
   defaultPickup = defaults.defaultPickup,
-  dropoffLabel = defaults.dropoffLabel,
+  sharePickupLabel = defaults.sharePickupLabel,
   dropoffPlaceholder = defaults.dropoffPlaceholder,
+  dropoffAriaLabel = defaults.dropoffAriaLabel,
   defaultDropoff = defaults.defaultDropoff,
-  dateLabel = defaults.dateLabel,
   defaultDate = defaults.defaultDate,
-  timeLabel = defaults.timeLabel,
   defaultTime = defaults.defaultTime,
+  timeOptions = defaults.timeOptions,
+  timeAriaLabel = defaults.timeAriaLabel,
   submitLabel = defaults.submitLabel,
-  swapLabel = defaults.swapLabel,
+  loginLabel = defaults.loginLabel,
+  loginHref = defaults.loginHref,
   onSearch,
   onSubmit,
+  onChangeCity,
+  onLogin,
+  onSharePickup,
   ...props
 }: RideBookingFormProps) {
   const headingId = useId();
   const pickupId = useId();
   const dropoffId = useId();
-  const dateId = useId();
   const timeId = useId();
+  const media = imageUrl ?? imageSrc;
   const [pickup, setPickup] = useState(defaultPickup);
   const [dropoff, setDropoff] = useState(defaultDropoff);
-  const [date, setDate] = useState(defaultDate);
   const [time, setTime] = useState(defaultTime);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -102,150 +86,220 @@ export function RideBookingForm({
     onSearch?.({
       pickup: pickup.trim(),
       dropoff: dropoff.trim(),
-      date,
+      date: defaultDate,
       time,
     });
-  };
-
-  const swapStops = () => {
-    setPickup(dropoff);
-    setDropoff(pickup);
   };
 
   return (
     <section
       aria-labelledby={headingId}
-      className={cn("bg-background text-foreground", className)}
+      className={cn(
+        "mx-auto w-full max-w-6xl bg-background p-4 text-foreground lg:p-8",
+        className,
+      )}
       data-slot="ride-booking-form"
       {...props}
     >
-      <div className="mx-auto flex min-h-[32rem] max-w-5xl items-center justify-center px-5 py-16 sm:px-8 sm:py-20">
-        <article
-          className={cn(
-            "w-full max-w-md overflow-hidden rounded-[calc(var(--radius)+0.4rem)] border border-border bg-card text-card-foreground shadow-sm",
-            "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500",
-          )}
-        >
-          <figure className="relative h-44 overflow-hidden bg-muted sm:h-52">
-            <img
-              alt={imageAlt}
-              className="absolute inset-0 size-full object-cover"
-              src={imageSrc}
-            />
-            <figcaption className="dark absolute inset-x-0 bottom-0 flex items-end bg-gradient-to-t from-background via-background/70 to-transparent px-5 pb-4 pt-16">
-              <span className="inline-flex items-center gap-2 text-sm font-medium text-foreground">
-                <MapPinIcon aria-hidden="true" className="size-4 shrink-0" />
-                {city}
-              </span>
-            </figcaption>
-          </figure>
+      <style href="jk-ride-booking-form" precedence="default">{`
+        @keyframes jk-ride-booking-form-rise {
+          from { opacity: 0; transform: translateY(1.25rem); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes jk-ride-booking-form-media {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        .jk-ride-booking-form-rise {
+          animation: jk-ride-booking-form-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .jk-ride-booking-form-media {
+          animation: jk-ride-booking-form-media 500ms ease-out both;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .jk-ride-booking-form-rise,
+          .jk-ride-booking-form-media {
+            animation: none;
+          }
+        }
+      `}</style>
 
-          <form
-            className="flex flex-col gap-5 p-5 sm:p-6"
-            onSubmit={handleSubmit}
+      <div className="grid grid-cols-1 items-center gap-8 overflow-hidden rounded-lg bg-background lg:grid-cols-2">
+        <div className="p-4 sm:p-8">
+          <p
+            className="jk-ride-booking-form-rise mb-6 text-sm text-muted-foreground"
+            style={riseStyle(0)}
           >
-            <header className="space-y-2">
-              <h2
-                className="text-xl font-semibold tracking-tight text-balance sm:text-2xl"
-                id={headingId}
-              >
-                {title}
-              </h2>
-              {description ? (
-                <p className="text-sm leading-6 text-muted-foreground">
-                  {description}
-                </p>
-              ) : null}
-            </header>
+            <MapPinIcon
+              aria-hidden="true"
+              className="mr-2 inline-block size-4"
+            />
+            {city}
+            <a
+              className="ml-2 text-sm font-medium text-primary hover:underline"
+              href={changeCityHref}
+              onClick={(event) => {
+                if (!onChangeCity) return;
+                event.preventDefault();
+                onChangeCity();
+              }}
+            >
+              {changeCityLabel}
+            </a>
+          </p>
 
-            <div className="space-y-3">
-              <FieldShell
-                icon={<MapPinIcon className="size-4" />}
-                id={pickupId}
-                label={pickupLabel}
-              >
-                <Input
+          <h1
+            className="jk-ride-booking-form-rise mb-8 text-4xl font-bold text-balance text-foreground sm:text-5xl"
+            id={headingId}
+            style={riseStyle(1)}
+          >
+            {title}
+          </h1>
+
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <div
+              className="jk-ride-booking-form-rise relative rounded-lg bg-muted/40 p-4"
+              style={riseStyle(2)}
+            >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute top-9 bottom-9 left-6 w-px border-l border-dashed border-border"
+              />
+
+              <div className="relative mb-2 flex items-center">
+                <div className="z-10 rounded-full border border-border bg-background p-1">
+                  <MapPinIcon
+                    aria-hidden="true"
+                    className="size-4 text-foreground"
+                  />
+                </div>
+                <label className="sr-only" htmlFor={pickupId}>
+                  {pickupAriaLabel}
+                </label>
+                <input
+                  aria-label={pickupAriaLabel}
                   autoComplete="street-address"
-                  className="h-12 rounded-[--radius] bg-background pl-9"
+                  className="w-full bg-transparent py-2 pr-10 pl-4 text-foreground outline-none placeholder:text-muted-foreground focus-visible:ring-0"
                   id={pickupId}
                   name="pickup"
                   onChange={(event) => setPickup(event.target.value)}
                   placeholder={pickupPlaceholder}
-                  required
                   type="text"
                   value={pickup}
                 />
-              </FieldShell>
-
-              <div className="-my-1 flex justify-end">
                 <button
-                  aria-label={swapLabel}
-                  className="grid size-9 place-items-center rounded-full border border-border bg-background text-foreground shadow-sm outline-none transition-[transform,background-color] duration-200 ease-out hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.98] motion-reduce:transition-none"
-                  onClick={swapStops}
+                  aria-label={sharePickupLabel}
+                  className="absolute right-2 p-1 text-muted-foreground transition-colors hover:text-foreground"
+                  onClick={onSharePickup}
                   type="button"
                 >
-                  <ArrowRightLeftIcon aria-hidden="true" className="size-4" />
+                  <SendIcon aria-hidden="true" className="size-5" />
                 </button>
               </div>
 
-              <FieldShell
-                icon={<MapPinIcon className="size-4" />}
-                id={dropoffId}
-                label={dropoffLabel}
-              >
-                <Input
+              <hr className="mx-12 border-border" />
+
+              <div className="relative mt-2 flex items-center">
+                <div className="z-10 rounded-full border border-border bg-background p-1">
+                  <PlusIcon
+                    aria-hidden="true"
+                    className="size-4 text-foreground"
+                  />
+                </div>
+                <label className="sr-only" htmlFor={dropoffId}>
+                  {dropoffAriaLabel}
+                </label>
+                <input
+                  aria-label={dropoffAriaLabel}
                   autoComplete="off"
-                  className="h-12 rounded-[--radius] bg-background pl-9"
+                  className="w-full bg-transparent py-2 pl-4 text-foreground outline-none placeholder:text-muted-foreground focus-visible:ring-0"
                   id={dropoffId}
                   name="dropoff"
                   onChange={(event) => setDropoff(event.target.value)}
                   placeholder={dropoffPlaceholder}
-                  required
                   type="text"
                   value={dropoff}
                 />
-              </FieldShell>
+              </div>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2">
-              <FieldShell
-                icon={<CalendarIcon className="size-4" />}
-                id={dateId}
-                label={dateLabel}
-              >
-                <Input
-                  className="h-12 rounded-[--radius] bg-background pl-9"
-                  id={dateId}
-                  name="date"
-                  onChange={(event) => setDate(event.target.value)}
-                  required
-                  type="date"
-                  value={date}
+            <div
+              className="jk-ride-booking-form-rise grid grid-cols-2 gap-4"
+              style={riseStyle(3)}
+            >
+              <div className="flex items-center rounded-lg bg-muted/40 px-4 py-3">
+                <CalendarIcon
+                  aria-hidden="true"
+                  className="size-5 text-muted-foreground"
                 />
-              </FieldShell>
-              <FieldShell
-                icon={<ClockIcon className="size-4" />}
-                id={timeId}
-                label={timeLabel}
-              >
-                <Input
-                  className="h-12 rounded-[--radius] bg-background pl-9"
+                <span className="ml-3 text-foreground">{defaultDate}</span>
+              </div>
+              <div className="relative flex items-center rounded-lg bg-muted/40 px-4 py-3">
+                <ClockIcon
+                  aria-hidden="true"
+                  className="size-5 text-muted-foreground"
+                />
+                <span className="ml-3 text-foreground">{time}</span>
+                <label className="sr-only" htmlFor={timeId}>
+                  {timeAriaLabel}
+                </label>
+                <select
+                  aria-label={timeAriaLabel}
+                  className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
                   id={timeId}
                   name="time"
                   onChange={(event) => setTime(event.target.value)}
-                  required
-                  type="time"
                   value={time}
-                />
-              </FieldShell>
+                >
+                  {timeOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
-            <Button className="h-12 w-full gap-2" size="lg" type="submit">
-              <SearchIcon aria-hidden="true" className="size-4" />
-              {submitLabel}
-            </Button>
+            <div
+              className="jk-ride-booking-form-rise flex items-center space-x-4 pt-4"
+              style={riseStyle(4)}
+            >
+              <Button
+                className="h-12 px-8 text-sm hover:bg-primary/90"
+                size="lg"
+                type="submit"
+              >
+                {submitLabel}
+              </Button>
+              <a
+                className="group text-sm text-muted-foreground transition-colors hover:text-foreground"
+                href={loginHref}
+                onClick={(event) => {
+                  if (!onLogin) return;
+                  event.preventDefault();
+                  onLogin();
+                }}
+              >
+                {loginLabel}
+                <ArrowRightIcon
+                  aria-hidden="true"
+                  className="ml-1 inline-block size-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
+                />
+              </a>
+            </div>
           </form>
-        </article>
+        </div>
+
+        <div
+          className="jk-ride-booking-form-media hidden h-full w-full p-8 lg:block"
+          style={{ animationDelay: "120ms" }}
+        >
+          <img
+            alt={imageAlt}
+            className="h-full w-full rounded-lg object-cover"
+            src={media}
+          />
+        </div>
       </div>
     </section>
   );

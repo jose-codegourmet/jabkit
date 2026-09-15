@@ -7184,9 +7184,9 @@
     "name": "ride-booking-form",
     "displayName": "RideBookingForm",
     "category": "marketing",
-    "description": "Marketing booking card with a city photo, pickup and dropoff fields, date and time, and a search CTA.",
+    "description": "Two-column mobility booking block with a city line, oversized headline, connected pickup and dropoff fields, Today and Now chips, and a price CTA.",
     "sectionCategory": "form",
-    "purpose": "Lets a mobility landing page collect a ride request without sending visitors into a full app checkout.",
+    "purpose": "Lets a ride-hailing landing page collect pickup, dropoff, and a departure window beside a city illustration.",
     "bestFor": [
       "taxi and rideshare landing pages",
       "airport transfer campaigns",
@@ -7209,19 +7209,20 @@
     "contentDensity": "medium",
     "visualWeight": "high",
     "layout": {
-      "type": "card",
-      "alignment": "center",
-      "columns": 1
+      "type": "split",
+      "alignment": "left",
+      "columns": 2
     },
     "slots": [
-      "cityMedia",
+      "cityLine",
       "headline",
-      "description",
       "pickupField",
       "dropoffField",
-      "dateField",
-      "timeField",
-      "searchCTA"
+      "dateChip",
+      "timeChip",
+      "searchCTA",
+      "loginLink",
+      "cityMedia"
     ],
     "capabilities": {
       "supportsImage": true,

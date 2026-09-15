@@ -10,22 +10,29 @@ export interface RideBookingFormSearchDetails {
 export interface RideBookingFormProps
   extends Omit<HTMLAttributes<HTMLElement>, "title" | "onSubmit"> {
   city?: string;
+  imageUrl?: string;
   imageSrc?: string;
   imageAlt?: string;
   title?: string;
-  description?: string;
-  pickupLabel?: string;
+  changeCityLabel?: string;
+  changeCityHref?: string;
   pickupPlaceholder?: string;
+  pickupAriaLabel?: string;
   defaultPickup?: string;
-  dropoffLabel?: string;
+  sharePickupLabel?: string;
   dropoffPlaceholder?: string;
+  dropoffAriaLabel?: string;
   defaultDropoff?: string;
-  dateLabel?: string;
   defaultDate?: string;
-  timeLabel?: string;
   defaultTime?: string;
+  timeOptions?: readonly string[];
+  timeAriaLabel?: string;
   submitLabel?: string;
-  swapLabel?: string;
+  loginLabel?: string;
+  loginHref?: string;
   onSearch?: (details: RideBookingFormSearchDetails) => void;
   onSubmit?: FormEventHandler<HTMLFormElement>;
+  onChangeCity?: () => void;
+  onLogin?: () => void;
+  onSharePickup?: () => void;
 }

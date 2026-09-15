@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "ride-booking-form",
   displayName: "RideBookingForm",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Marketing booking card with a city photo, pickup and dropoff fields, date and time, and a search CTA.",
+    "Two-column mobility booking block with a city line, oversized headline, connected pickup and dropoff fields, Today and Now chips, and a price CTA.",
   sectionCategory: "form",
   purpose:
-    "Lets a mobility landing page collect a ride request without sending visitors into a full app checkout.",
+    "Lets a ride-hailing landing page collect pickup, dropoff, and a departure window beside a city illustration.",
   bestFor: [
     "taxi and rideshare landing pages",
     "airport transfer campaigns",
@@ -21,19 +21,20 @@ export default {
   contentDensity: "medium",
   visualWeight: "high",
   layout: {
-    type: "card",
-    alignment: "center",
-    columns: 1,
+    type: "split",
+    alignment: "left",
+    columns: 2,
   },
   slots: [
-    "cityMedia",
+    "cityLine",
     "headline",
-    "description",
     "pickupField",
     "dropoffField",
-    "dateField",
-    "timeField",
+    "dateChip",
+    "timeChip",
     "searchCTA",
+    "loginLink",
+    "cityMedia",
   ],
   capabilities: {
     supportsImage: true,
@@ -54,7 +55,7 @@ export default {
     "conversion",
   ],
   dependencies: ["lucide-react"],
-  registryDependencies: ["button", "input", "label"],
+  registryDependencies: ["button"],
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: { layout: "fit", width: 1440, height: 900 },
 } satisfies ComponentMeta;

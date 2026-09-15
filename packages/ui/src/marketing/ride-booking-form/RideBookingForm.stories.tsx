@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: { ...rideBookingFormMocks.default },
   render: () => (
-    <div className="bg-background text-foreground">
+    <div className="flex min-h-svh w-full items-center justify-center bg-muted text-foreground">
       <RideBookingForm {...rideBookingFormMocks.default} />
     </div>
   ),
@@ -25,7 +25,7 @@ export const Default: Story = {
 export const Variants: Story = {
   args: { ...rideBookingFormMocks.alternate },
   render: () => (
-    <div className="bg-background text-foreground">
+    <div className="flex min-h-svh w-full items-center justify-center bg-muted text-foreground">
       <RideBookingForm {...rideBookingFormMocks.alternate} />
     </div>
   ),
@@ -35,10 +35,10 @@ export const ThemeComparison: Story = {
   args: { ...rideBookingFormMocks.default },
   render: () => (
     <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border lg:grid-cols-2">
-      <div className="bg-background">
+      <div className="flex min-h-svh items-center bg-muted">
         <RideBookingForm {...rideBookingFormMocks.default} />
       </div>
-      <div className="dark bg-background">
+      <div className="dark flex min-h-svh items-center bg-muted">
         <RideBookingForm {...rideBookingFormMocks.default} />
       </div>
     </div>
