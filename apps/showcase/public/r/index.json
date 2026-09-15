@@ -9888,6 +9888,80 @@
     }
   },
   {
+    "name": "agndex-dashboard",
+    "displayName": "AgndexDashboard",
+    "category": "dashboard",
+    "description": "Developer portal for search indexes, API credentials, billing, and project settings.",
+    "sectionCategory": "application-shell",
+    "purpose": "Frames a search-index product with a sidebar portal, project switcher, and credential or billing views.",
+    "bestFor": [
+      "developer portals",
+      "search and index products",
+      "API credential consoles"
+    ],
+    "avoidFor": [
+      "marketing landing pages",
+      "single-purpose auth forms"
+    ],
+    "tone": [
+      "technical",
+      "professional",
+      "structured"
+    ],
+    "industries": [
+      "SaaS",
+      "developer tools"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "sidebar",
+      "alignment": "left",
+      "columns": 2
+    },
+    "slots": [
+      "brand",
+      "sidebarNavigation",
+      "projectSwitcher",
+      "appearanceToggle",
+      "accountMenu",
+      "indexList",
+      "credentials",
+      "billing"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "dashboard",
+      "developer-portal",
+      "indexes",
+      "api-keys",
+      "billing",
+      "sidebar",
+      "project"
+    ],
+    "addedAt": "2026-09-15",
+    "dependencies": [
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
     "name": "application-shell1",
     "displayName": "ApplicationShell1",
     "category": "dashboard",
