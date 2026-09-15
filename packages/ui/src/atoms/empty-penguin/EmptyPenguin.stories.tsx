@@ -23,7 +23,7 @@ export const Default: Story = {
 export const On: Story = {
   args: { ...emptyPenguinMocks.alternate },
   render: () => (
-    <div className="flex flex-wrap items-center gap-4 bg-background p-8 text-foreground">
+    <div className="flex flex-wrap items-center justify-center gap-10 bg-background p-10 text-foreground">
       <EmptyPenguin {...emptyPenguinMocks.alternate} />
       <EmptyPenguin {...emptyPenguinMocks.compact} />
     </div>
@@ -34,10 +34,10 @@ export const ThemeComparison: Story = {
   args: { ...emptyPenguinMocks.default },
   render: () => (
     <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border sm:grid-cols-2">
-      <div className="flex items-center justify-center bg-background p-8">
+      <div className="flex items-center justify-center bg-background p-10">
         <EmptyPenguin {...emptyPenguinMocks.alternate} />
       </div>
-      <div className="dark flex items-center justify-center bg-background p-8">
+      <div className="dark flex items-center justify-center bg-background p-10">
         <EmptyPenguin {...emptyPenguinMocks.alternate} />
       </div>
     </div>

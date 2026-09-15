@@ -3,16 +3,16 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "empty-penguin",
   displayName: "EmptyPenguin",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A compact on/off switch with a sliding thumb, token-colored track, and a quiet unused state.",
+    "A 70 by 36 neo-brutalist on/off switch: 100px pill track, 2px ink border, 4px offset shadow, and a labeled thumb that slides the well.",
   sectionCategory: "form",
   purpose:
-    "Lets people flip a single persistent setting without a labeled checkbox or a full settings row.",
+    "Lets people flip a single persistent setting with the Uiverse empty-penguin motion, without flattening the 100px radii.",
   bestFor: [
     "settings and preference toggles",
-    "compact form rows",
+    "playful form rows that need an on/off caption in the thumb",
     "feature flags in light product UI",
   ],
   avoidFor: [
@@ -20,7 +20,7 @@ export default {
     "actions that submit or navigate",
     "destructive confirmations",
   ],
-  tone: ["clean", "playful"],
+  tone: ["playful", "bold"],
   contentDensity: "low",
   visualWeight: "low",
   layout: {
