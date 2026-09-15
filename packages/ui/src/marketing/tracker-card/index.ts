@@ -1,2 +1,5 @@
 export { TrackerCard } from "./TrackerCard";
-export type * from "./TrackerCard.types";
+export type {
+  TrackerCardFlagMark,
+  TrackerCardProps,
+} from "./TrackerCard.types";
