@@ -6,9 +6,9 @@ export type HardSwanPalette = "field" | "dusk";
 
 export interface HardSwanProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
-  /** Tile grain of the hatch. */
+  /** Tile grain. `regular` is the inspo 95px × 15px / 135px offset. */
   scale?: HardSwanScale;
-  /** Token pairing for the two bands. */
+  /** Token pairing for the two hatch inks. */
   palette?: HardSwanPalette;
   /** Slow hatch drift. Disabled when the user prefers reduced motion. */
   animated?: boolean;

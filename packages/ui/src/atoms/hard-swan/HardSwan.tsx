@@ -4,19 +4,19 @@ import { cn } from "@/lib/cn";
 import type { HardSwanProps } from "./HardSwan.types";
 
 const scales = {
-  fine: { x: "3.4rem", y: "0.62rem", shift: "4.8rem" },
-  regular: { x: "5.6rem", y: "0.88rem", shift: "7.6rem" },
-  coarse: { x: "8.2rem", y: "1.2rem", shift: "11rem" },
+  fine: { x: "47.5px", y: "7.5px", shift: "67.5px" },
+  regular: { x: "95px", y: "15px", shift: "135px" },
+  coarse: { x: "142.5px", y: "22.5px", shift: "202.5px" },
 } as const;
 
 const palettes = {
   field: {
-    band: "var(--jk-chart-2)",
-    ink: "var(--jk-primary)",
+    a: "color-mix(in oklab, var(--jk-chart-2) 34%, var(--jk-card))",
+    b: "color-mix(in oklab, var(--jk-chart-4) 78%, var(--jk-primary))",
   },
   dusk: {
-    band: "var(--jk-chart-5)",
-    ink: "var(--jk-chart-4)",
+    a: "color-mix(in oklab, var(--jk-chart-5) 36%, var(--jk-card))",
+    b: "color-mix(in oklab, var(--jk-chart-1) 72%, var(--jk-primary))",
   },
 } as const;
 
@@ -35,20 +35,16 @@ export function HardSwan({
 
   return (
     <div
-      aria-label={label}
-      className={cn(
-        "jk-hard-swan relative isolate min-h-40 w-full overflow-hidden rounded-[--radius] border border-border",
-        animated && "jk-hard-swan-live",
-        className,
-      )}
+      aria-label={children ? undefined : label}
+      className={cn("jk-hard-swan", animated && "jk-hard-swan-live", className)}
       data-palette={palette}
       data-scale={scale}
       data-slot="hard-swan"
-      role="img"
+      role={children ? undefined : "img"}
       style={
         {
-          "--jk-hard-swan-a": tones.band,
-          "--jk-hard-swan-b": tones.ink,
+          "--jk-hard-swan-a": tones.a,
+          "--jk-hard-swan-b": tones.b,
           "--jk-hard-swan-x": grain.x,
           "--jk-hard-swan-y": grain.y,
           "--jk-hard-swan-shift": grain.shift,
@@ -59,22 +55,33 @@ export function HardSwan({
     >
       <style href="jk-hard-swan" precedence="default">{`
         .jk-hard-swan {
-          background-color: var(--jk-hard-swan-a);
+          position: relative;
+          isolation: isolate;
+          width: 100%;
+          height: 100%;
+          min-height: 10rem;
+          overflow: hidden;
+          border: 0;
+          border-radius: 0;
           background-image:
             linear-gradient(
-              42deg,
-              var(--jk-hard-swan-a) 0 22%,
-              transparent 22% 78%,
-              var(--jk-hard-swan-a) 78% 100%
+              45deg,
+              var(--jk-hard-swan-a) 25%,
+              transparent 25%,
+              transparent 75%,
+              var(--jk-hard-swan-a) 75%,
+              var(--jk-hard-swan-a)
             ),
             linear-gradient(
-              42deg,
-              var(--jk-hard-swan-b) 0 22%,
-              var(--jk-hard-swan-a) 22% 78%,
-              var(--jk-hard-swan-b) 78% 100%
+              45deg,
+              var(--jk-hard-swan-b) 25%,
+              var(--jk-hard-swan-a) 25%,
+              var(--jk-hard-swan-a) 75%,
+              var(--jk-hard-swan-b) 75%,
+              var(--jk-hard-swan-b)
             );
-          background-position: 0 0, var(--jk-hard-swan-shift) var(--jk-hard-swan-shift);
           background-size: var(--jk-hard-swan-x) var(--jk-hard-swan-y);
+          background-position: 0 0, var(--jk-hard-swan-shift) var(--jk-hard-swan-shift);
         }
         @media (prefers-reduced-motion: no-preference) {
           .jk-hard-swan-live {
@@ -95,7 +102,7 @@ export function HardSwan({
         }
       `}</style>
       {children ? (
-        <div className="relative z-10 flex h-full min-h-40 items-center justify-center p-6">
+        <div className="relative z-10 flex h-full min-h-40 items-center justify-center p-6 text-card-foreground">
           {children}
         </div>
       ) : null}
