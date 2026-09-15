@@ -3,10 +3,10 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "jolly-chicken",
   displayName: "JollyChicken",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A day-to-night switch that slides a sun into a moon while clouds yield to stars.",
+    "A 60×34 pill day-to-night checkbox: sun, halo rays, and drifting clouds slide into a cratered moon and four-point stars.",
   sectionCategory: "form",
   purpose:
     "Gives appearance or quiet-hours toggles a readable scene instead of a plain thumb, still using semantic tokens.",

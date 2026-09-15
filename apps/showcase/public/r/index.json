@@ -1294,7 +1294,7 @@
     "name": "jolly-chicken",
     "displayName": "JollyChicken",
     "category": "atoms",
-    "description": "A day-to-night switch that slides a sun into a moon while clouds yield to stars.",
+    "description": "A 60×34 pill day-to-night checkbox: sun, halo rays, and drifting clouds slide into a cratered moon and four-point stars.",
     "sectionCategory": "form",
     "purpose": "Gives appearance or quiet-hours toggles a readable scene instead of a plain thumb, still using semantic tokens.",
     "bestFor": [
