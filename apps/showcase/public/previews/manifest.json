@@ -3813,6 +3813,47 @@
           "format": "webp"
         }
       ]
+    },
+    "pricing-calendar": {
+      "sourceHash": "6c55ae61630a645467c0fa657e0d12e1455ab3665bfcef200532f0a2196a1017",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "pricing-calendar.Default.dark.webp",
+          "bytes": 19488,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "pricing-calendar.Variants.dark.webp",
+          "bytes": 20048,
+          "width": 960,
+          "height": 634,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "pricing-calendar.ThemeComparison.dark.webp",
+          "bytes": 37804,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
     }
   }
 }

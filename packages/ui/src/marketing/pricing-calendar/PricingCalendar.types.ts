@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from "react";
 
 export interface PricingCalendarProps
-  extends Omit<HTMLAttributes<HTMLElement>, "title"> {
+  extends Omit<HTMLAttributes<HTMLElement>, "title" | "onSelect"> {
   title?: string;
   description?: string;
   currency?: string;
