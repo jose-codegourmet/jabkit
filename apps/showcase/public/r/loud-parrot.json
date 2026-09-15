@@ -1,0 +1,91 @@
+{
+  "name": "loud-parrot",
+  "displayName": "LoudParrot",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A faceted isometric tile field built from three semantic tones for decorative fills and swatches.",
+  "sectionCategory": "content",
+  "purpose": "Adds a repeating cubic lattice backdrop that tracks light and dark tokens instead of a fixed palette.",
+  "bestFor": [
+    "decorative section fills",
+    "catalogue swatches",
+    "empty-state or card backgrounds"
+  ],
+  "avoidFor": [
+    "text-heavy regions that need a flat reading surface",
+    "controls that must stay visually quiet"
+  ],
+  "tone": [
+    "playful",
+    "bold"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "high",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "field",
+    "content"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "pattern",
+    "isometric",
+    "background",
+    "decorative",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "loud-parrot/LoudParrot.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { LoudParrotProps } from \"./LoudParrot.types\";\n\nconst frameSizes = {\n  sm: \"h-24 w-36\",\n  md: \"h-40 w-64\",\n  lg: \"h-56 w-80\",\n} as const;\n\nconst cellSizes = {\n  sm: \"2.5rem\",\n  md: \"3.75rem\",\n  lg: \"5rem\",\n} as const;\n\nconst tones = {\n  default: {\n    hi: \"var(--jk-card)\",\n    mid: \"var(--jk-muted)\",\n    lo: \"var(--jk-foreground)\",\n  },\n  muted: {\n    hi: \"var(--jk-background)\",\n    mid: \"var(--jk-secondary)\",\n    lo: \"var(--jk-muted-foreground)\",\n  },\n  chart: {\n    hi: \"var(--jk-chart-5)\",\n    mid: \"var(--jk-chart-1)\",\n    lo: \"var(--jk-chart-4)\",\n  },\n} as const;\n\nexport function LoudParrot({\n  className,\n  children,\n  label = \"Decorative isometric field\",\n  size = \"md\",\n  tone = \"default\",\n  animate = true,\n  ...props\n}: LoudParrotProps) {\n  const triad = tones[tone];\n\n  return (\n    <div\n      aria-label={children ? undefined : label}\n      className={cn(\n        \"jk-loud-parrot relative overflow-hidden rounded-[--radius] border border-border\",\n        !children && frameSizes[size],\n        children && \"min-h-40 w-full\",\n        className,\n      )}\n      data-animate={animate ? \"true\" : \"false\"}\n      data-size={size}\n      data-slot=\"loud-parrot\"\n      data-tone={tone}\n      role={children ? undefined : \"img\"}\n      style={\n        {\n          \"--jk-loud-parrot-hi\": triad.hi,\n          \"--jk-loud-parrot-mid\": triad.mid,\n          \"--jk-loud-parrot-lo\": triad.lo,\n          \"--jk-loud-parrot-cell\": cellSizes[size],\n        } as React.CSSProperties\n      }\n      {...props}\n    >\n      <style href=\"jk-loud-parrot\" precedence=\"default\">{`\n        .jk-loud-parrot-field {\n          --lp-cell: var(--jk-loud-parrot-cell);\n          --lp-span-x: calc(var(--lp-cell) * 1.85);\n          --lp-span-y: calc(var(--lp-cell) * 1.6);\n          background-color: var(--jk-loud-parrot-mid);\n          background-image:\n            repeating-conic-gradient(\n              from 30deg at 50% 50%,\n              var(--jk-loud-parrot-hi) 0deg 60deg,\n              var(--jk-loud-parrot-mid) 60deg 120deg,\n              var(--jk-loud-parrot-lo) 120deg 180deg\n            ),\n            repeating-linear-gradient(\n              90deg,\n              transparent 0 calc(var(--lp-cell) * 0.92),\n              color-mix(in oklab, var(--jk-border), transparent 35%)\n                calc(var(--lp-cell) * 0.92) var(--lp-cell)\n            );\n          background-size: var(--lp-span-x) var(--lp-span-y), var(--lp-cell) 100%;\n          background-position: 0 0, 0 0;\n        }\n        @keyframes jk-loud-parrot-drift {\n          to {\n            background-position:\n              var(--lp-span-x) var(--lp-span-y),\n              var(--lp-cell) 0;\n          }\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-loud-parrot[data-animate=\"true\"] .jk-loud-parrot-field {\n            animation: jk-loud-parrot-drift 22s linear infinite;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-loud-parrot-field {\n            animation: none;\n          }\n        }\n      `}</style>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-loud-parrot-field pointer-events-none absolute inset-0\"\n      />\n      {children ? (\n        <div className=\"relative z-10 p-6 text-card-foreground\">{children}</div>\n      ) : null}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "loud-parrot/LoudParrot.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type LoudParrotSize = \"sm\" | \"md\" | \"lg\";\nexport type LoudParrotTone = \"default\" | \"muted\" | \"chart\";\n\nexport interface LoudParrotProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n  label?: string;\n  size?: LoudParrotSize;\n  tone?: LoudParrotTone;\n  animate?: boolean;\n}\n"
+    },
+    {
+      "path": "loud-parrot/index.ts",
+      "type": "index",
+      "content": "export { LoudParrot } from \"./LoudParrot\";\nexport type * from \"./LoudParrot.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background p-8 text-foreground\">\n      <LoudParrot {...loudParrotMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Tones",
+      "code": "<div className=\"flex flex-wrap items-end gap-6 bg-background p-8 text-foreground\">\n      <LoudParrot {...loudParrotMocks.compact} />\n      <LoudParrot {...loudParrotMocks.muted} />\n      <LoudParrot {...loudParrotMocks.chart} />\n    </div>"
+    }
+  ]
+}

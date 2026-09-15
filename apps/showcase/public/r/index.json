@@ -1181,6 +1181,63 @@
     }
   },
   {
+    "name": "loud-parrot",
+    "displayName": "LoudParrot",
+    "category": "atoms",
+    "description": "A faceted isometric tile field built from three semantic tones for decorative fills and swatches.",
+    "sectionCategory": "content",
+    "purpose": "Adds a repeating cubic lattice backdrop that tracks light and dark tokens instead of a fixed palette.",
+    "bestFor": [
+      "decorative section fills",
+      "catalogue swatches",
+      "empty-state or card backgrounds"
+    ],
+    "avoidFor": [
+      "text-heavy regions that need a flat reading surface",
+      "controls that must stay visually quiet"
+    ],
+    "tone": [
+      "playful",
+      "bold"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "high",
+    "layout": {
+      "type": "stack",
+      "alignment": "center"
+    },
+    "slots": [
+      "field",
+      "content"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "pattern",
+      "isometric",
+      "background",
+      "decorative",
+      "atom"
+    ],
+    "addedAt": "2026-09-15",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "navigation-menu",
     "displayName": "NavigationMenu",
     "category": "atoms",
