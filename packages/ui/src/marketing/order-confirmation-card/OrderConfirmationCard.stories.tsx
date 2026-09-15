@@ -34,7 +34,7 @@ export const Variants: Story = {
 export const ThemeComparison: Story = {
   args: { ...orderConfirmationCardMocks.default },
   render: () => (
-    <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border lg:grid-cols-2">
+    <div className="grid gap-px overflow-hidden rounded-[2rem] border border-border bg-border lg:grid-cols-2">
       <div className="bg-background">
         <OrderConfirmationCard {...orderConfirmationCardMocks.default} />
       </div>

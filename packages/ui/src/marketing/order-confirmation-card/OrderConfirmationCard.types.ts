@@ -1,46 +1,25 @@
-import type { HTMLAttributes } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 
-export interface OrderConfirmationItem {
-  id: string;
-  name: string;
-  detail?: string;
-  quantity: number;
-  price: string;
-  image?: {
-    src: string;
-    alt: string;
-  };
-}
-
-export interface OrderConfirmationMeta {
+export interface OrderConfirmationDetail {
   label: string;
   value: string;
-}
-
-export interface OrderConfirmationAction {
-  label: string;
-  href: string;
+  emphasize?: boolean;
 }
 
 export interface OrderConfirmationCardProps
   extends Omit<HTMLAttributes<HTMLElement>, "title"> {
-  eyebrow?: string;
-  heading?: string;
-  description?: string;
-  statusLabel?: string;
-  statusDetail?: string;
-  orderIdLabel?: string;
+  title?: string;
   orderId?: string;
-  itemsHeading?: string;
-  items?: OrderConfirmationItem[];
-  quantityLabel?: string;
-  shippingHeading?: string;
-  shippingLines?: string[];
-  summary?: OrderConfirmationMeta[];
-  totalLabel?: string;
-  total?: string;
-  paymentMethodLabel?: string;
   paymentMethod?: string;
-  primaryAction?: OrderConfirmationAction;
-  secondaryAction?: OrderConfirmationAction;
+  dateTime?: string;
+  totalAmount?: string;
+  orderIdLabel?: string;
+  paymentMethodLabel?: string;
+  dateTimeLabel?: string;
+  totalLabel?: string;
+  details?: OrderConfirmationDetail[];
+  buttonText?: string;
+  accountHref?: string;
+  onGoToAccount?: () => void;
+  icon?: ReactNode;
 }
