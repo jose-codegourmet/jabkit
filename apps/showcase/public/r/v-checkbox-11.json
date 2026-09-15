@@ -61,8 +61,8 @@
   },
   "preview": {
     "layout": "center",
-    "width": 640,
-    "height": 420
+    "width": 960,
+    "height": 460
   },
   "category": "atoms",
   "files": [

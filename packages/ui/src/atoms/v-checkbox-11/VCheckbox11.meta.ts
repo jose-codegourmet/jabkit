@@ -42,8 +42,8 @@ export default {
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: {
     layout: "center",
-    width: 640,
-    height: 420,
-    capture: { viewport: { width: 760, height: 480 } },
+    width: 960,
+    height: 460,
+    capture: { viewport: { width: 1100, height: 540 } },
   },
 } satisfies ComponentMeta;
