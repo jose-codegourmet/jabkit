@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "loud-parrot",
   displayName: "LoudParrot",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A faceted isometric tile field built from three semantic tones for decorative fills and swatches.",
+    "A square isometric cube lattice with the Uiverse loud-parrot tile geometry on semantic faces.",
   sectionCategory: "content",
   purpose:
-    "Adds a repeating cubic lattice backdrop that tracks light and dark tokens instead of a fixed palette.",
+    "Fills a region with the exact layered-conic cube tessellation, keeping square corners and token-mapped faces.",
   bestFor: [
     "decorative section fills",
     "catalogue swatches",
@@ -37,7 +37,7 @@ export default {
   tags: ["pattern", "isometric", "background", "decorative", "atom"],
   dependencies: [],
   registryDependencies: [],
-  a11y: { keyboardNav: false, reducedMotion: true },
+  a11y: { keyboardNav: false, reducedMotion: false },
   preview: {
     layout: "center",
   },

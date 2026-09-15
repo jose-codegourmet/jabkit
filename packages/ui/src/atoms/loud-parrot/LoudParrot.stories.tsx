@@ -36,7 +36,7 @@ export const Tones: Story = {
 export const ThemeComparison: Story = {
   args: { ...loudParrotMocks.default },
   render: () => (
-    <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border sm:grid-cols-2">
+    <div className="grid gap-px overflow-hidden rounded-none border border-border bg-border sm:grid-cols-2">
       <div className="flex items-center justify-center bg-background p-8">
         <LoudParrot {...loudParrotMocks.default} />
       </div>

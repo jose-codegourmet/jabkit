@@ -8,5 +8,4 @@ export interface LoudParrotProps extends HTMLAttributes<HTMLDivElement> {
   label?: string;
   size?: LoudParrotSize;
   tone?: LoudParrotTone;
-  animate?: boolean;
 }

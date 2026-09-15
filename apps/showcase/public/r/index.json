@@ -1590,9 +1590,9 @@
     "name": "loud-parrot",
     "displayName": "LoudParrot",
     "category": "atoms",
-    "description": "A faceted isometric tile field built from three semantic tones for decorative fills and swatches.",
+    "description": "A square isometric cube lattice with the Uiverse loud-parrot tile geometry on semantic faces.",
     "sectionCategory": "content",
-    "purpose": "Adds a repeating cubic lattice backdrop that tracks light and dark tokens instead of a fixed palette.",
+    "purpose": "Fills a region with the exact layered-conic cube tessellation, keeping square corners and token-mapped faces.",
     "bestFor": [
       "decorative section fills",
       "catalogue swatches",
@@ -1637,7 +1637,7 @@
     ],
     "a11y": {
       "keyboardNav": false,
-      "reducedMotion": true
+      "reducedMotion": false
     },
     "preview": {
       "layout": "center"
