@@ -1,35 +1,34 @@
-import type { FormEventHandler, HTMLAttributes } from "react";
+import type { ChangeEventHandler, FormEventHandler, HTMLAttributes } from "react";
 
 export interface FormSearchDetails {
   destination: string;
-  checkIn: string;
-  checkOut: string;
+  dateRange: string;
   rooms: number;
   guests: number;
 }
 
 export interface FormProps
-  extends Omit<HTMLAttributes<HTMLElement>, "title" | "onSubmit"> {
-  title?: string;
-  description?: string;
-  destinationLabel?: string;
-  destinationPlaceholder?: string;
+  extends Omit<HTMLAttributes<HTMLElement>, "onSubmit"> {
+  destinationsLabel?: string;
+  detailsLabel?: string;
+  destination?: string;
   defaultDestination?: string;
-  checkInLabel?: string;
-  defaultCheckIn?: string;
-  checkOutLabel?: string;
-  defaultCheckOut?: string;
-  roomsLabel?: string;
+  destinationPlaceholder?: string;
+  dateRange?: string;
+  defaultDateRange?: string;
+  rooms?: number;
   defaultRooms?: number;
   minRooms?: number;
   maxRooms?: number;
-  guestsLabel?: string;
+  guests?: number;
   defaultGuests?: number;
   minGuests?: number;
   maxGuests?: number;
-  decreaseLabel?: string;
-  increaseLabel?: string;
   submitLabel?: string;
+  onDestinationChange?: ChangeEventHandler<HTMLInputElement>;
+  onDateRangeClick?: () => void;
+  onRoomsClick?: () => void;
+  onGuestsClick?: () => void;
   onSearch?: (details: FormSearchDetails) => void;
   onSubmit?: FormEventHandler<HTMLFormElement>;
 }
