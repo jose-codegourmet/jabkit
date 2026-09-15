@@ -5665,6 +5665,89 @@
     }
   },
   {
+    "name": "hero-39",
+    "displayName": "Hero39",
+    "category": "marketing",
+    "description": "Full-bleed retreat hero with a painterly landscape, pill nav CTA, italic emphasis headline, glass search field, and press wordmarks.",
+    "sectionCategory": "hero",
+    "purpose": "Opens a hospitality or wellness landing page with a photographic plate, a centered offer, and a search-led conversion.",
+    "bestFor": [
+      "retreat and hospitality landings",
+      "wellness campaign pages",
+      "brand-led homepages"
+    ],
+    "avoidFor": [
+      "dense application screens",
+      "pages that need an understated opening"
+    ],
+    "tone": [
+      "calm",
+      "premium",
+      "editorial"
+    ],
+    "industries": [
+      "hospitality",
+      "travel",
+      "wellness"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "overlay",
+      "alignment": "center"
+    },
+    "slots": [
+      "brand",
+      "navigation",
+      "badge",
+      "headline",
+      "description",
+      "search",
+      "pressLogos"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "logos",
+      "features",
+      "about",
+      "cta"
+    ],
+    "tags": [
+      "hero",
+      "marketing",
+      "cta",
+      "landing",
+      "search",
+      "pill",
+      "photo",
+      "retreat"
+    ],
+    "addedAt": "2026-09-15",
+    "dependencies": [
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
     "name": "hero-section-5",
     "displayName": "HeroSection5",
     "category": "marketing",
