@@ -1,0 +1,127 @@
+{
+  "name": "receipt-pricing",
+  "displayName": "ReceiptPricing",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Pricing section that prints each plan as a thermal receipt with a ledger, yearly discount line, barcode, and serrated edges.",
+  "sectionCategory": "pricing",
+  "purpose": "Lets a landing page compare subscriptions as shop tickets so visitors can read line items, the subtotal, and the yearly discount in one glance.",
+  "bestFor": [
+    "SaaS plan comparison with a tactile ledger",
+    "studios and shops that already talk in tickets",
+    "yearly billing that should show months free as a line item"
+  ],
+  "avoidFor": [
+    "usage-based quotes that cannot be totaled in advance",
+    "enterprise pricing that must stay behind a form",
+    "dense feature matrices"
+  ],
+  "tone": [
+    "playful",
+    "professional",
+    "structured"
+  ],
+  "industries": [
+    "SaaS",
+    "creative",
+    "print"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "cards",
+    "alignment": "center",
+    "columns": 3
+  },
+  "slots": [
+    "headline",
+    "description",
+    "billingToggle",
+    "receiptPlans",
+    "lineItems",
+    "subtotal",
+    "discount",
+    "total",
+    "barcode",
+    "planCTA"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "features"
+  ],
+  "recommendedBefore": [
+    "faq",
+    "testimonials",
+    "cta"
+  ],
+  "tags": [
+    "pricing",
+    "receipt",
+    "ledger",
+    "billing",
+    "marketing",
+    "plans",
+    "yearly"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 1100
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "receipt-pricing/ReceiptPricing.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { type KeyboardEvent, useEffect, useId, useRef, useState } from \"react\";\nimport { Button } from \"@/components/jabkit/button\";\nimport { cn } from \"@/lib/cn\";\nimport { receiptPricingMocks } from \"./ReceiptPricing.mocks\";\nimport type {\n  ReceiptPricingLine,\n  ReceiptPricingPeriod,\n  ReceiptPricingPlan,\n  ReceiptPricingProps,\n} from \"./ReceiptPricing.types\";\n\nconst PERIODS: ReceiptPricingPeriod[] = [\"monthly\", \"yearly\"];\n\nfunction formatMoney(amount: number, currency: string, locale: string) {\n  return new Intl.NumberFormat(locale, {\n    style: \"currency\",\n    currency,\n    maximumFractionDigits: amount % 1 === 0 ? 0 : 2,\n  }).format(amount);\n}\n\nfunction formatIssued(issuedAt: string, locale: string) {\n  const date = new Date(`${issuedAt}T12:00:00`);\n  if (Number.isNaN(date.getTime())) return issuedAt;\n  return new Intl.DateTimeFormat(locale, {\n    year: \"numeric\",\n    month: \"short\",\n    day: \"2-digit\",\n  }).format(date);\n}\n\nfunction sumLines(lines: ReceiptPricingLine[]) {\n  return lines.reduce((total, line) => total + line.amount, 0);\n}\n\nfunction barcodeBars(seed: string) {\n  let n = 2166136261;\n  for (let i = 0; i < seed.length; i++) {\n    n ^= seed.charCodeAt(i);\n    n = Math.imul(n, 16777619);\n  }\n  return Array.from({ length: 38 }, (_, position) => {\n    n = Math.imul(n ^ (n >>> 13), 1274126177);\n    return {\n      id: `${seed}-${position}-${n >>> 0}`,\n      width: 1 + (Math.abs(n) % 3),\n    };\n  });\n}\n\nfunction LedgerRow({\n  label,\n  value,\n  muted = false,\n  strong = false,\n}: {\n  label: string;\n  value: string;\n  muted?: boolean;\n  strong?: boolean;\n}) {\n  return (\n    <div\n      className={cn(\n        \"flex items-baseline gap-2 font-mono text-[11px] leading-5 sm:text-xs\",\n        muted && \"text-muted-foreground\",\n        strong && \"font-semibold\",\n      )}\n    >\n      <span className=\"shrink-0\">{label}</span>\n      <span\n        aria-hidden=\"true\"\n        className=\"min-w-3 flex-1 border-b border-dotted border-border\"\n      />\n      <span className=\"shrink-0 tabular-nums\">{value}</span>\n    </div>\n  );\n}\n\nfunction ReceiptNotch({ flip = false }: { flip?: boolean }) {\n  const teeth = 24;\n  const points: string[] = [];\n  if (flip) {\n    points.push(\"0,0\");\n    for (let i = 0; i <= teeth; i++) {\n      points.push(`${(i / teeth) * 100},${i % 2 === 0 ? 0 : 8}`);\n    }\n    points.push(\"100,0\");\n  } else {\n    points.push(\"0,8\");\n    for (let i = 0; i <= teeth; i++) {\n      points.push(`${(i / teeth) * 100},${i % 2 === 0 ? 8 : 0}`);\n    }\n    points.push(\"100,8\");\n  }\n\n  return (\n    <svg\n      aria-hidden=\"true\"\n      className=\"block h-3 w-full text-card\"\n      preserveAspectRatio=\"none\"\n      viewBox=\"0 0 100 8\"\n    >\n      <polygon fill=\"currentColor\" points={points.join(\" \")} />\n    </svg>\n  );\n}\n\nfunction ReceiptSlip({\n  plan,\n  period,\n  merchant,\n  merchantNote,\n  orderPrefix,\n  issuedAt,\n  monthsFree,\n  printMs,\n  showStamp,\n  showBarcode,\n  currency,\n  locale,\n}: {\n  plan: ReceiptPricingPlan;\n  period: ReceiptPricingPeriod;\n  merchant: string;\n  merchantNote?: string;\n  orderPrefix: string;\n  issuedAt: string;\n  monthsFree: number;\n  printMs: number;\n  showStamp: boolean;\n  showBarcode: boolean;\n  currency: string;\n  locale: string;\n}) {\n  const slipRef = useRef<HTMLElement>(null);\n  const monthlySubtotal = sumLines(plan.monthly);\n  const yearly = period === \"yearly\";\n  const billedMonths = yearly ? Math.max(12 - monthsFree, 1) : 1;\n  const discount = yearly ? monthlySubtotal * monthsFree : 0;\n  const total = monthlySubtotal * billedMonths;\n  const orderId = `${orderPrefix}-${plan.id.slice(0, 4).toUpperCase()}-${plan.monthly.length}${plan.name.length}`;\n  const money = (amount: number) => formatMoney(amount, currency, locale);\n\n  useEffect(() => {\n    const node = slipRef.current;\n    if (!node) return;\n    if (window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n    const animation = node.animate(\n      [\n        { clipPath: \"inset(0 0 100% 0)\", opacity: 0.35 },\n        { clipPath: \"inset(0 0 0 0)\", opacity: 1 },\n      ],\n      {\n        duration: printMs,\n        easing: \"cubic-bezier(0.16, 1, 0.3, 1)\",\n        fill: \"both\",\n      },\n    );\n    return () => animation.cancel();\n  }, [printMs]);\n\n  return (\n    <article\n      className={cn(\"relative flex h-full flex-col\", plan.featured && \"z-[1]\")}\n      ref={slipRef}\n    >\n      <ReceiptNotch />\n      <div\n        className={cn(\n          \"relative flex flex-1 flex-col border-x border-border bg-card px-5 pt-4 pb-5 text-card-foreground shadow-[0_18px_40px_-28px_color-mix(in_oklab,var(--jk-foreground),transparent_70%)]\",\n          plan.featured && \"ring-1 ring-primary/40\",\n        )}\n      >\n        {showStamp ? (\n          <span\n            aria-hidden=\"true\"\n            className=\"pointer-events-none absolute top-16 right-4 rotate-[-12deg] rounded-[2px] border-2 border-primary/55 px-2 py-0.5 font-mono text-[10px] font-bold tracking-[0.18em] text-primary/70 uppercase\"\n          >\n            {yearly ? \"YEAR\" : \"MO\"}\n          </span>\n        ) : null}\n\n        <header className=\"text-center\">\n          <p className=\"font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase\">\n            {merchant}\n          </p>\n          <h3 className=\"mt-2 text-xl font-semibold tracking-tight\">\n            {plan.name}\n          </h3>\n          {plan.tag ? (\n            <p className=\"mt-1 font-mono text-[11px] text-muted-foreground text-pretty\">\n              {plan.tag}\n            </p>\n          ) : null}\n          {merchantNote ? (\n            <p className=\"mt-2 font-mono text-[10px] text-muted-foreground\">\n              {merchantNote}\n            </p>\n          ) : null}\n        </header>\n\n        <div className=\"mt-4 space-y-1 border-t border-dashed border-border pt-3\">\n          <LedgerRow label=\"Ticket\" value={orderId} muted />\n          <LedgerRow\n            label=\"Issued\"\n            value={formatIssued(issuedAt, locale)}\n            muted\n          />\n          <LedgerRow\n            label=\"Period\"\n            value={yearly ? `12 mo / ${billedMonths} billed` : \"1 month\"}\n            muted\n          />\n        </div>\n\n        <ul className=\"mt-3 space-y-1.5 border-t border-dashed border-border pt-3\">\n          {plan.monthly.map((line) => (\n            <li key={line.label}>\n              <LedgerRow\n                label={yearly ? `${line.label} x12` : line.label}\n                value={money(yearly ? line.amount * 12 : line.amount)}\n              />\n            </li>\n          ))}\n        </ul>\n\n        <div className=\"mt-3 space-y-1.5 border-t border-dashed border-border pt-3\">\n          <LedgerRow\n            label=\"Subtotal\"\n            value={money(yearly ? monthlySubtotal * 12 : monthlySubtotal)}\n          />\n          {yearly && discount > 0 ? (\n            <LedgerRow\n              label={`${monthsFree} months free`}\n              muted\n              value={`-${money(discount)}`}\n            />\n          ) : null}\n          <LedgerRow label=\"Total\" strong value={money(total)} />\n        </div>\n\n        {showBarcode ? (\n          <div className=\"mt-5 border-t border-dashed border-border pt-4\">\n            <div\n              aria-hidden=\"true\"\n              className=\"flex h-10 items-end justify-center gap-px\"\n            >\n              {barcodeBars(orderId).map((bar) => (\n                <span\n                  className=\"bg-foreground\"\n                  key={bar.id}\n                  style={{\n                    width: bar.width,\n                    height: bar.width > 1 ? \"100%\" : \"72%\",\n                  }}\n                />\n              ))}\n            </div>\n            <p className=\"mt-2 text-center font-mono text-[10px] tracking-[0.28em] text-muted-foreground\">\n              {orderId.replaceAll(\"-\", \"\")}\n            </p>\n          </div>\n        ) : null}\n\n        <Button\n          asChild\n          className=\"mt-5 w-full rounded-none\"\n          size=\"lg\"\n          variant={plan.featured ? \"primary\" : \"secondary\"}\n        >\n          <a href={plan.href}>{plan.ctaLabel}</a>\n        </Button>\n      </div>\n      <ReceiptNotch flip />\n    </article>\n  );\n}\n\nexport function ReceiptPricing({\n  className,\n  title = receiptPricingMocks.default.title,\n  description = receiptPricingMocks.default.description,\n  merchant = receiptPricingMocks.default.merchant,\n  merchantNote = receiptPricingMocks.default.merchantNote,\n  orderPrefix = receiptPricingMocks.default.orderPrefix,\n  issuedAt = receiptPricingMocks.default.issuedAt,\n  monthsFree = receiptPricingMocks.default.monthsFree,\n  printMs = receiptPricingMocks.default.printMs,\n  showStamp = receiptPricingMocks.default.showStamp,\n  showBarcode = receiptPricingMocks.default.showBarcode,\n  monthlyLabel = receiptPricingMocks.default.monthlyLabel,\n  yearlyLabel = receiptPricingMocks.default.yearlyLabel,\n  currency = receiptPricingMocks.default.currency,\n  locale = receiptPricingMocks.default.locale,\n  defaultPeriod = \"monthly\",\n  period: periodProp,\n  onPeriodChange,\n  plans = receiptPricingMocks.default.plans,\n  ...props\n}: ReceiptPricingProps) {\n  const headingId = useId();\n  const descriptionId = useId();\n  const tabPrefix = useId();\n  const [uncontrolled, setUncontrolled] =\n    useState<ReceiptPricingPeriod>(defaultPeriod);\n  const period = periodProp ?? uncontrolled;\n\n  const setPeriod = (next: ReceiptPricingPeriod) => {\n    if (periodProp === undefined) setUncontrolled(next);\n    onPeriodChange?.(next);\n  };\n\n  const onTabListKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {\n    const index = PERIODS.indexOf(period);\n    if (event.key === \"ArrowRight\" || event.key === \"ArrowLeft\") {\n      event.preventDefault();\n      const delta = event.key === \"ArrowRight\" ? 1 : -1;\n      const next = PERIODS[(index + delta + PERIODS.length) % PERIODS.length];\n      setPeriod(next);\n      document.getElementById(`${tabPrefix}-${next}`)?.focus();\n    }\n  };\n\n  const labels: Record<ReceiptPricingPeriod, string> = {\n    monthly: monthlyLabel ?? \"Monthly\",\n    yearly: yearlyLabel ?? \"Yearly\",\n  };\n\n  const planList = plans ?? [];\n  const columnCount = Math.min(Math.max(planList.length, 1), 3);\n\n  return (\n    <section\n      aria-describedby={description ? descriptionId : undefined}\n      aria-labelledby={headingId}\n      className={cn(\n        \"bg-muted text-foreground [font-variant-ligatures:none]\",\n        className,\n      )}\n      data-slot=\"receipt-pricing\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20\">\n        <header className=\"mx-auto max-w-2xl text-center\">\n          <h2\n            className=\"text-3xl font-semibold tracking-tight text-balance sm:text-5xl sm:leading-[1.1]\"\n            id={headingId}\n          >\n            {title}\n          </h2>\n          {description ? (\n            <p\n              className=\"mt-3 text-sm leading-6 text-muted-foreground text-pretty sm:text-base\"\n              id={descriptionId}\n            >\n              {description}\n            </p>\n          ) : null}\n        </header>\n\n        <div className=\"mt-8 flex justify-center\">\n          <div\n            aria-label=\"Billing period\"\n            className=\"inline-flex rounded-full border border-border bg-muted p-1\"\n            onKeyDown={onTabListKeyDown}\n            role=\"tablist\"\n          >\n            {PERIODS.map((id) => {\n              const selected = period === id;\n              return (\n                <button\n                  aria-selected={selected}\n                  className={cn(\n                    \"rounded-full px-4 py-1.5 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none motion-reduce:transition-none\",\n                    selected\n                      ? \"bg-background text-foreground shadow-[0_8px_16px_-12px_color-mix(in_oklab,var(--jk-foreground),transparent_55%)]\"\n                      : \"text-muted-foreground hover:text-foreground\",\n                  )}\n                  id={`${tabPrefix}-${id}`}\n                  key={id}\n                  onClick={() => setPeriod(id)}\n                  role=\"tab\"\n                  tabIndex={selected ? 0 : -1}\n                  type=\"button\"\n                >\n                  {labels[id]}\n                </button>\n              );\n            })}\n          </div>\n        </div>\n\n        <div\n          className={cn(\n            \"mx-auto mt-10 grid gap-6\",\n            columnCount === 1 && \"max-w-sm grid-cols-1\",\n            columnCount === 2 && \"max-w-3xl grid-cols-1 sm:grid-cols-2\",\n            columnCount >= 3 && \"grid-cols-1 sm:grid-cols-2 xl:grid-cols-3\",\n          )}\n        >\n          {planList.map((plan) => (\n            <ReceiptSlip\n              currency={currency ?? \"USD\"}\n              issuedAt={issuedAt ?? \"2026-09-15\"}\n              key={`${plan.id}-${period}`}\n              locale={locale ?? \"en-US\"}\n              merchant={merchant ?? \"Northslip\"}\n              merchantNote={merchantNote}\n              monthsFree={monthsFree ?? 2}\n              orderPrefix={orderPrefix ?? \"NS\"}\n              period={period}\n              plan={plan}\n              printMs={printMs ?? 460}\n              showBarcode={showBarcode ?? true}\n              showStamp={showStamp ?? true}\n            />\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "receipt-pricing/ReceiptPricing.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type ReceiptPricingPeriod = \"monthly\" | \"yearly\";\n\nexport interface ReceiptPricingLine {\n  label: string;\n  amount: number;\n}\n\nexport interface ReceiptPricingPlan {\n  id: string;\n  name: string;\n  tag?: string;\n  href: string;\n  ctaLabel: string;\n  monthly: ReceiptPricingLine[];\n  featured?: boolean;\n}\n\nexport interface ReceiptPricingProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  title?: string;\n  description?: string;\n  merchant?: string;\n  merchantNote?: string;\n  orderPrefix?: string;\n  issuedAt?: string;\n  monthsFree?: number;\n  printMs?: number;\n  showStamp?: boolean;\n  showBarcode?: boolean;\n  monthlyLabel?: string;\n  yearlyLabel?: string;\n  currency?: string;\n  locale?: string;\n  defaultPeriod?: ReceiptPricingPeriod;\n  period?: ReceiptPricingPeriod;\n  onPeriodChange?: (period: ReceiptPricingPeriod) => void;\n  plans?: ReceiptPricingPlan[];\n}\n"
+    },
+    {
+      "path": "receipt-pricing/index.ts",
+      "type": "index",
+      "content": "export { ReceiptPricing } from \"./ReceiptPricing\";\nexport type * from \"./ReceiptPricing.types\";\n"
+    },
+    {
+      "path": "receipt-pricing/ReceiptPricing.mocks.ts",
+      "type": "mocks",
+      "content": "import type { ReceiptPricingProps } from \"./ReceiptPricing.types\";\n\nexport const receiptPricingMocks = {\n  default: {\n    title: \"Pricing, printed.\",\n    description:\n      \"Every line item, the subtotal, and what you actually owe. Yearly reprints with two months off.\",\n    merchant: \"Northslip\",\n    merchantNote: \"Event analytics for product teams\",\n    orderPrefix: \"NS\",\n    issuedAt: \"2026-09-15\",\n    monthsFree: 2,\n    printMs: 460,\n    showStamp: true,\n    showBarcode: true,\n    monthlyLabel: \"Monthly\",\n    yearlyLabel: \"Yearly\",\n    currency: \"USD\",\n    locale: \"en-US\",\n    defaultPeriod: \"monthly\",\n    plans: [\n      {\n        id: \"starter\",\n        name: \"Starter\",\n        tag: \"One builder, one product\",\n        href: \"#starter\",\n        ctaLabel: \"Take Starter\",\n        monthly: [\n          { label: \"Builder seat\", amount: 19 },\n          { label: \"Event credits\", amount: 12 },\n          { label: \"Replay window\", amount: 4 },\n        ],\n      },\n      {\n        id: \"studio\",\n        name: \"Studio\",\n        tag: \"A small team shipping weekly\",\n        href: \"#studio\",\n        ctaLabel: \"Take Studio\",\n        featured: true,\n        monthly: [\n          { label: \"Five seats\", amount: 79 },\n          { label: \"Event credits\", amount: 28 },\n          { label: \"Replay window\", amount: 9 },\n          { label: \"Shared boards\", amount: 8 },\n        ],\n      },\n      {\n        id: \"bench\",\n        name: \"Bench\",\n        tag: \"Org-wide capture and review\",\n        href: \"#bench\",\n        ctaLabel: \"Talk to Bench\",\n        monthly: [\n          { label: \"Twenty seats\", amount: 220 },\n          { label: \"Event credits\", amount: 64 },\n          { label: \"Replay window\", amount: 18 },\n          { label: \"Audit export\", amount: 22 },\n        ],\n      },\n    ],\n  },\n  alternate: {\n    title: \"Bindery rates, on a slip.\",\n    description:\n      \"Press time, paper, and bind labor listed like a shop ticket. Yearly keeps two months off the tape.\",\n    merchant: \"Halden Bindery\",\n    merchantNote: \"Short-run books and edition work\",\n    orderPrefix: \"HB\",\n    issuedAt: \"2026-11-03\",\n    monthsFree: 2,\n    printMs: 460,\n    showStamp: true,\n    showBarcode: true,\n    monthlyLabel: \"Monthly\",\n    yearlyLabel: \"Yearly\",\n    currency: \"USD\",\n    locale: \"en-US\",\n    defaultPeriod: \"yearly\",\n    plans: [\n      {\n        id: \"folio\",\n        name: \"Folio\",\n        tag: \"One press, nights and weekends\",\n        href: \"#folio\",\n        ctaLabel: \"Hold Folio\",\n        monthly: [\n          { label: \"Press hours\", amount: 42 },\n          { label: \"Text stock\", amount: 16 },\n          { label: \"Saddle stitch\", amount: 8 },\n        ],\n      },\n      {\n        id: \"quire\",\n        name: \"Quire\",\n        tag: \"Weekly editions for a shop\",\n        href: \"#quire\",\n        ctaLabel: \"Hold Quire\",\n        featured: true,\n        monthly: [\n          { label: \"Press hours\", amount: 96 },\n          { label: \"Text stock\", amount: 34 },\n          { label: \"Case bind\", amount: 21 },\n          { label: \"Foil stamp\", amount: 14 },\n        ],\n      },\n    ],\n  },\n} satisfies Record<\"default\" | \"alternate\", ReceiptPricingProps>;\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <ReceiptPricing {...receiptPricingMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <ReceiptPricing {...receiptPricingMocks.alternate} />\n    </div>"
+    }
+  ]
+}

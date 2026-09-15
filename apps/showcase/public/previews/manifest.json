@@ -3895,6 +3895,47 @@
           "format": "webp"
         }
       ]
+    },
+    "receipt-pricing": {
+      "sourceHash": "a2fe3c2398e22f01402da8cfc7f8c36b8797bf1008f606265510210a2177f01c",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "receipt-pricing.Default.dark.webp",
+          "bytes": 23918,
+          "width": 960,
+          "height": 733,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "receipt-pricing.Variants.dark.webp",
+          "bytes": 20368,
+          "width": 960,
+          "height": 733,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "receipt-pricing.ThemeComparison.dark.webp",
+          "bytes": 44206,
+          "width": 960,
+          "height": 733,
+          "format": "webp"
+        }
+      ]
     }
   }
 }

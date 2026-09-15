@@ -1,0 +1,66 @@
+import type { ComponentMeta } from "@jabkit/build-registry";
+
+export default {
+  name: "receipt-pricing",
+  displayName: "ReceiptPricing",
+  version: "1.0.0",
+  addedAt: "2026-09-15",
+  description:
+    "Pricing section that prints each plan as a thermal receipt with a ledger, yearly discount line, barcode, and serrated edges.",
+  sectionCategory: "pricing",
+  purpose:
+    "Lets a landing page compare subscriptions as shop tickets so visitors can read line items, the subtotal, and the yearly discount in one glance.",
+  bestFor: [
+    "SaaS plan comparison with a tactile ledger",
+    "studios and shops that already talk in tickets",
+    "yearly billing that should show months free as a line item",
+  ],
+  avoidFor: [
+    "usage-based quotes that cannot be totaled in advance",
+    "enterprise pricing that must stay behind a form",
+    "dense feature matrices",
+  ],
+  tone: ["playful", "professional", "structured"],
+  industries: ["SaaS", "creative", "print"],
+  contentDensity: "medium",
+  visualWeight: "medium",
+  layout: {
+    type: "cards",
+    alignment: "center",
+    columns: 3,
+  },
+  slots: [
+    "headline",
+    "description",
+    "billingToggle",
+    "receiptPlans",
+    "lineItems",
+    "subtotal",
+    "discount",
+    "total",
+    "barcode",
+    "planCTA",
+  ],
+  capabilities: {
+    supportsImage: false,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: true,
+    supportsDarkMode: true,
+  },
+  recommendedAfter: ["hero", "features"],
+  recommendedBefore: ["faq", "testimonials", "cta"],
+  tags: [
+    "pricing",
+    "receipt",
+    "ledger",
+    "billing",
+    "marketing",
+    "plans",
+    "yearly",
+  ],
+  dependencies: [],
+  registryDependencies: ["button"],
+  a11y: { keyboardNav: true, reducedMotion: true },
+  preview: { layout: "fit", width: 1440, height: 1100 },
+} satisfies ComponentMeta;
