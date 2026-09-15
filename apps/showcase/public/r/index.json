@@ -2912,9 +2912,9 @@
     "name": "young-dragon",
     "displayName": "YoungDragon",
     "category": "atoms",
-    "description": "A wireframe cube loader that tumbles in space using outlined faces and semantic tokens.",
+    "description": "A square-faced 3D cube loader that tumbles on two axes using outlined faces and semantic tokens.",
     "sectionCategory": "feedback",
-    "purpose": "Marks an in-progress wait with a geometric 3D cube instead of a flat ring, still reading in light and dark.",
+    "purpose": "Marks an in-progress wait with a geometric 3D cube instead of a flat ring, keeping sharp square faces in light and dark.",
     "bestFor": [
       "overlay and empty-state loading",
       "playful async waits that still need a status role",
