@@ -25,8 +25,9 @@ export const Default: Story = {
 export const Variants: Story = {
   args: { ...qrCodeGeneratorMocks.event },
   render: () => (
-    <div className="bg-background p-6 text-foreground">
+    <div className="flex flex-col gap-6 bg-background p-6 text-foreground">
       <QrCodeGenerator {...qrCodeGeneratorMocks.event} />
+      <QrCodeGenerator {...qrCodeGeneratorMocks.empty} />
     </div>
   ),
 };
@@ -34,7 +35,7 @@ export const Variants: Story = {
 export const ThemeComparison: Story = {
   args: { ...qrCodeGeneratorMocks.default },
   render: () => (
-    <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border sm:grid-cols-2">
+    <div className="grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
       <div className="bg-background p-6">
         <QrCodeGenerator {...qrCodeGeneratorMocks.default} />
       </div>

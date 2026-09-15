@@ -5,14 +5,17 @@ export interface QrCodeGeneratorProps extends HTMLAttributes<HTMLDivElement> {
   defaultValue?: string;
   onValueChange?: (value: string) => void;
   title?: string;
-  description?: string;
+  emptyDescription?: string;
   inputLabel?: string;
   placeholder?: string;
   downloadLabel?: string;
+  downloadingLabel?: string;
+  savedLabel?: string;
   downloadFileName?: string;
-  copyLabel?: string;
-  copiedLabel?: string;
   emptyLabel?: string;
   overflowLabel?: string;
+  downloadErrorLabel?: string;
   size?: number;
+  isLoading?: boolean;
+  error?: string | null;
 }
