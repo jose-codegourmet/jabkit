@@ -1,5 +1,3 @@
-"use client";
-
 // biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.
 import * as React from "react";
 import { cn } from "@/lib/cn";
@@ -13,109 +11,135 @@ export function EmptyPenguin({
   disabled = false,
   label = "Toggle setting",
   size = "md",
-  type,
-  onClick,
+  name,
+  offText = "off",
+  onText = "on",
   ...props
 }: EmptyPenguinProps) {
-  const [uncontrolled, setUncontrolled] = React.useState(defaultChecked);
-  const isOn = checked ?? uncontrolled;
-
-  const commit = (next: boolean) => {
-    if (checked === undefined) setUncontrolled(next);
-    onCheckedChange?.(next);
-  };
-
   return (
-    <button
-      aria-checked={isOn}
-      aria-label={label}
-      className={cn("jk-empty-penguin", className)}
+    <label
+      className={cn(
+        "jk-empty-penguin",
+        size === "sm" && "jk-empty-penguin-sm",
+        disabled && "jk-empty-penguin-disabled",
+        className,
+      )}
       data-size={size}
       data-slot="empty-penguin"
-      data-state={isOn ? "on" : "off"}
-      disabled={disabled}
-      role="switch"
-      type={type ?? "button"}
       {...props}
-      onClick={(event) => {
-        onClick?.(event);
-        if (event.defaultPrevented || disabled) return;
-        commit(!isOn);
-      }}
     >
       <style href="jk-empty-penguin" precedence="default">{`
         .jk-empty-penguin {
+          --jk-empty-penguin-focus: var(--jk-primary);
+          --jk-empty-penguin-face: var(--jk-card);
+          --jk-empty-penguin-ink: var(--jk-foreground);
+          --jk-empty-penguin-track: color-mix(
+            in oklab,
+            var(--jk-muted-foreground) 42%,
+            var(--jk-muted)
+          );
           position: relative;
-          display: inline-flex;
-          flex-shrink: 0;
+          display: flex;
+          flex-direction: column;
           align-items: center;
           justify-content: center;
-          padding: 0;
-          border: 0;
-          background: transparent;
-          font-size: 1.0625rem;
-          line-height: 1;
+          width: 70px;
+          height: 36px;
+          transform: translateX(calc(50% - 10px));
           cursor: pointer;
         }
-        .jk-empty-penguin[data-size="sm"] {
-          font-size: 0.8125rem;
+        .jk-empty-penguin-sm {
+          transform: translateX(calc(50% - 10px)) scale(0.75);
+          transform-origin: center;
         }
-        .jk-empty-penguin:focus-visible {
-          outline: none;
-        }
-        .jk-empty-penguin:focus-visible .jk-empty-penguin-track {
-          box-shadow: 0 0 0 2px var(--jk-background), 0 0 0 4px var(--jk-ring);
-        }
-        .jk-empty-penguin:disabled {
+        .jk-empty-penguin-disabled {
           cursor: not-allowed;
           opacity: 0.5;
         }
-        .jk-empty-penguin-track {
-          position: relative;
-          display: block;
-          width: 3.5em;
-          height: 2em;
-          overflow: hidden;
-          border: 1px solid var(--jk-input);
-          border-radius: 999px;
-          background: var(--jk-background);
+        .jk-empty-penguin-disabled .jk-empty-penguin-input {
+          cursor: not-allowed;
+          pointer-events: none;
         }
-        .jk-empty-penguin[data-state="on"] .jk-empty-penguin-track {
-          border-color: var(--jk-primary);
-          background: var(--jk-primary);
-        }
-        .jk-empty-penguin-thumb {
+        .jk-empty-penguin-input {
           position: absolute;
-          top: 0.25em;
-          left: 0.25em;
-          width: 1.4em;
-          height: 1.4em;
-          border-radius: 999px;
-          background: var(--jk-muted-foreground);
+          inset: 0;
+          z-index: 1;
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          cursor: pointer;
+          opacity: 0;
         }
-        .jk-empty-penguin[data-state="on"] .jk-empty-penguin-thumb {
-          background: var(--jk-primary-foreground);
-          transform: translateX(1.5em);
+        .jk-empty-penguin-slider {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          box-sizing: border-box;
+          border: 2px solid var(--jk-empty-penguin-ink);
+          border-radius: 100px;
+          background-color: var(--jk-empty-penguin-track);
+          box-shadow: 4px 4px var(--jk-empty-penguin-ink);
+        }
+        .jk-empty-penguin-slider::before {
+          content: attr(data-off);
+          position: absolute;
+          left: 2px;
+          bottom: 1px;
+          box-sizing: border-box;
+          width: 30px;
+          height: 30px;
+          border: 2px solid var(--jk-empty-penguin-ink);
+          border-radius: 100px;
+          background-color: var(--jk-empty-penguin-face);
+          color: var(--jk-empty-penguin-ink);
+          font-size: 14px;
+          font-weight: 600;
+          line-height: 25px;
+          text-align: center;
+        }
+        .jk-empty-penguin-input:checked + .jk-empty-penguin-slider {
+          background-color: var(--jk-empty-penguin-focus);
+          transform: translateX(-32px);
+        }
+        .jk-empty-penguin-input:checked + .jk-empty-penguin-slider::before {
+          content: attr(data-on);
+          transform: translateX(32px);
+        }
+        .jk-empty-penguin-input:focus-visible + .jk-empty-penguin-slider {
+          outline: 2px solid var(--jk-ring);
+          outline-offset: 4px;
         }
         @media (prefers-reduced-motion: no-preference) {
-          .jk-empty-penguin-track,
-          .jk-empty-penguin-thumb {
-            transition:
-              background-color 400ms ease,
-              border-color 400ms ease,
-              transform 400ms ease;
+          .jk-empty-penguin-slider,
+          .jk-empty-penguin-slider::before {
+            transition: 0.3s;
           }
         }
         @media (prefers-reduced-motion: reduce) {
-          .jk-empty-penguin-track,
-          .jk-empty-penguin-thumb {
+          .jk-empty-penguin-slider,
+          .jk-empty-penguin-slider::before {
             transition: none;
           }
         }
       `}</style>
-      <span aria-hidden="true" className="jk-empty-penguin-track">
-        <span className="jk-empty-penguin-thumb" />
-      </span>
-    </button>
+      <input
+        aria-label={label}
+        checked={checked}
+        className="jk-empty-penguin-input"
+        defaultChecked={checked === undefined ? defaultChecked : undefined}
+        disabled={disabled}
+        name={name}
+        onChange={(event) => onCheckedChange?.(event.target.checked)}
+        type="checkbox"
+      />
+      <span
+        aria-hidden="true"
+        className="jk-empty-penguin-slider"
+        data-off={offText}
+        data-on={onText}
+      />
+    </label>
   );
 }
