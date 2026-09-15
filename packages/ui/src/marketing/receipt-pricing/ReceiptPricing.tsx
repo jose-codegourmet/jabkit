@@ -80,16 +80,31 @@ function LedgerRow({
 }
 
 function ReceiptNotch({ flip = false }: { flip?: boolean }) {
+  const teeth = 24;
+  const points: string[] = [];
+  if (flip) {
+    points.push("0,0");
+    for (let i = 0; i <= teeth; i++) {
+      points.push(`${(i / teeth) * 100},${i % 2 === 0 ? 0 : 8}`);
+    }
+    points.push("100,0");
+  } else {
+    points.push("0,8");
+    for (let i = 0; i <= teeth; i++) {
+      points.push(`${(i / teeth) * 100},${i % 2 === 0 ? 8 : 0}`);
+    }
+    points.push("100,8");
+  }
+
   return (
-    <div
+    <svg
       aria-hidden="true"
-      className={cn(
-        "h-3 w-full bg-card",
-        flip
-          ? "[mask-image:radial-gradient(circle_6px_at_center_0,transparent_6px,black_6.5px)] [mask-position:center_top] [mask-repeat:repeat-x] [mask-size:14px_12px]"
-          : "[mask-image:radial-gradient(circle_6px_at_center_100%,transparent_6px,black_6.5px)] [mask-position:center_bottom] [mask-repeat:repeat-x] [mask-size:14px_12px]",
-      )}
-    />
+      className="block h-3 w-full text-card"
+      preserveAspectRatio="none"
+      viewBox="0 0 100 8"
+    >
+      <polygon fill="currentColor" points={points.join(" ")} />
+    </svg>
   );
 }
 
@@ -169,7 +184,7 @@ function ReceiptSlip({
         ) : null}
 
         <header className="text-center">
-          <p className="font-mono text-[10px] tracking-[0.22em] text-muted-foreground uppercase">
+          <p className="font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase">
             {merchant}
           </p>
           <h3 className="mt-2 text-xl font-semibold tracking-tight">
@@ -321,14 +336,17 @@ export function ReceiptPricing({
     <section
       aria-describedby={description ? descriptionId : undefined}
       aria-labelledby={headingId}
-      className={cn("bg-background text-foreground", className)}
+      className={cn(
+        "bg-muted text-foreground [font-variant-ligatures:none]",
+        className,
+      )}
       data-slot="receipt-pricing"
       {...props}
     >
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
         <header className="mx-auto max-w-2xl text-center">
           <h2
-            className="text-3xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl sm:leading-[1.08]"
+            className="text-3xl font-semibold tracking-tight text-balance sm:text-5xl sm:leading-[1.1]"
             id={headingId}
           >
             {title}
