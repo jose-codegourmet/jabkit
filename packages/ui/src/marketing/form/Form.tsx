@@ -1,13 +1,7 @@
 "use client";
 
 import { BedDouble, CalendarDays, MapPin, Users2 } from "lucide-react";
-import {
-  type FormEvent,
-  type ReactNode,
-  useId,
-  useState,
-} from "react";
-import { Button } from "@/atoms/button";
+import { type FormEvent, type ReactNode, useId, useState } from "react";
 import { cn } from "@/lib/cn";
 import type { FormProps } from "./Form.types";
 
@@ -37,25 +31,24 @@ function InfoButton({
   children,
   className,
   onClick,
-  type = "button",
 }: {
   children: ReactNode;
   className?: string;
   onClick?: () => void;
-  type?: "button" | "submit";
 }) {
   return (
-    <Button
+    <button
       className={cn(
-        "h-12 flex-1 justify-start gap-3 rounded-xl border border-border bg-background px-4 text-left font-normal text-muted-foreground shadow-none hover:bg-accent hover:text-accent-foreground",
+        "flex h-12 flex-1 items-center justify-start gap-3 rounded-xl border border-input bg-background px-4 text-left text-sm font-normal text-muted-foreground outline-none",
+        "hover:bg-accent hover:text-accent-foreground",
+        "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         className,
       )}
       onClick={onClick}
-      type={type}
-      variant="secondary"
+      type="button"
     >
       {children}
-    </Button>
+    </button>
   );
 }
 
@@ -129,10 +122,7 @@ export function Form({
         >
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className={cn("space-y-2", stagger)}>
-              <h2
-                className="font-medium text-card-foreground"
-                id={headingId}
-              >
+              <h2 className="font-medium text-card-foreground" id={headingId}>
                 {destinationsLabel}
               </h2>
               <div className="relative">
@@ -157,15 +147,11 @@ export function Form({
               </div>
             </div>
 
-            <div
-              className={cn("space-y-2", stagger, "motion-safe:delay-100")}
-            >
-              <h3 className="font-medium text-card-foreground">
-                {detailsLabel}
-              </h3>
+            <div className={cn("space-y-2", stagger, "motion-safe:delay-100")}>
+              <h3 className="font-medium text-card-foreground">{detailsLabel}</h3>
               <div className="flex flex-col gap-2 sm:flex-row">
                 <InfoButton onClick={onDateRangeClick}>
-                  <CalendarDays aria-hidden="true" className="size-5" />
+                  <CalendarDays aria-hidden="true" className="size-5 shrink-0" />
                   <span>{dateRangeValue}</span>
                 </InfoButton>
                 <div className="flex flex-1 gap-2">
@@ -180,7 +166,7 @@ export function Form({
                       onRoomsClick?.();
                     }}
                   >
-                    <BedDouble aria-hidden="true" className="size-5" />
+                    <BedDouble aria-hidden="true" className="size-5 shrink-0" />
                     <span>{roomsValue}</span>
                   </InfoButton>
                   <InfoButton
@@ -194,7 +180,7 @@ export function Form({
                       onGuestsClick?.();
                     }}
                   >
-                    <Users2 aria-hidden="true" className="size-5" />
+                    <Users2 aria-hidden="true" className="size-5 shrink-0" />
                     <span>{guestsValue}</span>
                   </InfoButton>
                 </div>
@@ -202,13 +188,12 @@ export function Form({
             </div>
 
             <div className={cn(stagger, "motion-safe:delay-200")}>
-              <Button
-                className="h-12 w-full rounded-xl text-base font-bold active:translate-y-0 active:scale-[0.98] motion-reduce:active:scale-100"
-                size="lg"
+              <button
+                className="h-12 w-full rounded-xl bg-primary text-base font-bold text-primary-foreground outline-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98] motion-reduce:active:scale-100"
                 type="submit"
               >
                 {submitLabel}
-              </Button>
+              </button>
             </div>
           </form>
         </div>
