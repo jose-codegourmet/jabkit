@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "curvy-earwig",
   displayName: "CurvyEarwig",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A circular search control that unfurls into a pill field on hover or focus.",
+    "A 160px-radius capsule search field that collapses to a 50px disc when the icon is toggled.",
   sectionCategory: "form",
   purpose:
-    "Gives toolbars and headers a compact search target that opens only when someone means to type.",
+    "Gives headers a compact search target that opens into a wide pill only after the icon is clicked.",
   bestFor: [
     "header or toolbar search that should stay quiet until used",
     "playful catalogue filters that still need a native text field",
@@ -26,7 +26,7 @@ export default {
     type: "stack",
     alignment: "center",
   },
-  slots: ["field", "glyph"],
+  slots: ["toggle", "field", "glyph"],
   capabilities: {
     supportsImage: false,
     supportsVideo: false,
