@@ -8,13 +8,13 @@ Read [PROMPTS_FOR_IMAGES.md](../PROMPTS_FOR_IMAGES.md) first for new imagery. Jo
 
 Run from the repository root with the repository's Node/pnpm versions and `pnpm install`.
 
-| App / package | Business | Dev command | Local URL |
-| --- | --- | --- | --- |
-| `apps/minimal` / `@jabkit/minimal` | West Room Studio | `pnpm --filter @jabkit/minimal dev` | `http://localhost:3101` |
-| `apps/neo-brutalism` / `@jabkit/neo-brutalism` | Good Noise | `pnpm --filter @jabkit/neo-brutalism dev` | `http://localhost:3102` |
-| `apps/editorial` / `@jabkit/editorial` | Common Hours | `pnpm --filter @jabkit/editorial dev` | `http://localhost:3103` |
-| `apps/luxury` / `@jabkit/luxury` | Stillwater House | `pnpm --filter @jabkit/luxury dev` | `http://localhost:3104` |
-| `apps/retro` / `@jabkit/retro` | Pocket Keeps | `pnpm --filter @jabkit/retro dev` | `http://localhost:3105` |
+| App / package | Business | Dev command | Local URL | Production |
+| --- | --- | --- | --- | --- |
+| `apps/minimal` / `@jabkit/minimal` | West Room Studio | `pnpm --filter @jabkit/minimal dev` | `http://localhost:3101` | [minimal.jabkit.joseadrianbuctuanon.dev](https://minimal.jabkit.joseadrianbuctuanon.dev) |
+| `apps/neo-brutalism` / `@jabkit/neo-brutalism` | Good Noise | `pnpm --filter @jabkit/neo-brutalism dev` | `http://localhost:3102` | [neo-brutalism.jabkit.joseadrianbuctuanon.dev](https://neo-brutalism.jabkit.joseadrianbuctuanon.dev) |
+| `apps/editorial` / `@jabkit/editorial` | Common Hours | `pnpm --filter @jabkit/editorial dev` | `http://localhost:3103` | [editorial.jabkit.joseadrianbuctuanon.dev](https://editorial.jabkit.joseadrianbuctuanon.dev) |
+| `apps/luxury` / `@jabkit/luxury` | Stillwater House | `pnpm --filter @jabkit/luxury dev` | `http://localhost:3104` | [luxry.jabkit.joseadrianbuctuanon.dev](https://luxry.jabkit.joseadrianbuctuanon.dev) |
+| `apps/retro` / `@jabkit/retro` | Pocket Keeps | `pnpm --filter @jabkit/retro dev` | `http://localhost:3105` | [retro.jabkit.joseadrianbuctuanon.dev](https://retro.jabkit.joseadrianbuctuanon.dev) |
 
 `pnpm dev` starts the JabKit catalogue on port 3000 and all five websites in parallel. `pnpm dev:design-systems` starts only the five websites; `pnpm --filter @jabkit/showcase dev` starts only the catalogue. Each app supports `build`, `start`, and `typecheck`; unlike showcase, its build does not regenerate the component registry. Use `pnpm --filter @jabkit/minimal build` and `pnpm --filter @jabkit/minimal start`, changing the package name for the other sites. Production `start` uses Next’s standard port behavior (`PORT`, or 3000 by default). For simultaneous local production previews, pass `--port 3101` through the individual start command and use the other listed ports for the remaining apps.
 
@@ -55,13 +55,13 @@ In the **showcase deployment**, set actual HTTP(S) origins without a trailing pa
 
 | Variable | Destination |
 | --- | --- |
-| `MINIMAL_SITE_URL` | Minimal subdomain |
-| `NEO_BRUTALISM_SITE_URL` | Neo-brutalism subdomain |
-| `EDITORIAL_SITE_URL` | Editorial subdomain |
-| `LUXURY_SITE_URL` | Luxury subdomain |
-| `RETRO_SITE_URL` | Retro subdomain |
+| `MINIMAL_SITE_URL` | `https://minimal.jabkit.joseadrianbuctuanon.dev` |
+| `NEO_BRUTALISM_SITE_URL` | `https://neo-brutalism.jabkit.joseadrianbuctuanon.dev` |
+| `EDITORIAL_SITE_URL` | `https://editorial.jabkit.joseadrianbuctuanon.dev` |
+| `LUXURY_SITE_URL` | `https://luxry.jabkit.joseadrianbuctuanon.dev` |
+| `RETRO_SITE_URL` | `https://retro.jabkit.joseadrianbuctuanon.dev` |
 
-See [showcase env template](../apps/showcase/.env.example). No production subdomain is invented. During `next dev`, absent values default to ports 3101–3105. During production builds, absent values produce non-clickable “Deployment not configured” entries. Configure the origins and rebuild the catalogue when the sites are deployed; redirects and prerendered catalogue links are build-time configuration.
+See [showcase env template](../apps/showcase/.env.example). During `next dev`, absent values default to ports 3101–3105. During production builds, absent values use the live origins above. The Luxury host is `luxry` as deployed. Env vars remain overrides when a destination changes; rebuild the catalogue after changing them because redirects and prerendered directory links are build-time configuration.
 
 The catalogue's `/design-systems` remains the directory. Its links navigate to external app origins using ordinary anchors. Both old `/design-systems/<system>/:path*` and older `/samples/<system>/:path*` addresses temporarily redirect to the configured app, retaining path and query. Without a configured production destination they return to the directory instead of a guessed subdomain. Old design-system asset URLs redirect to the new origin only when configured.
 

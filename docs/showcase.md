@@ -21,7 +21,7 @@ Everything under `apps/showcase/app/` and `apps/showcase/components/` is site ch
 
 ## Independent design-system websites
 
-The five complete design-system sites now live in `apps/minimal`, `apps/neo-brutalism`, `apps/editorial`, `apps/luxury`, and `apps/retro`, with local routes rooted at `/`. They no longer compile as showcase pages. `/design-systems` remains the directory; its links use the configured external origins in `common/design-system-sites.ts`. Production entries without an origin are not clickable. Old design-system/sample prefixes redirect temporarily to those origins, or to the directory if unconfigured. See [standalone apps](standalone-design-systems.md) for environment variables, ports, asset ownership, and deployment.
+The five complete design-system sites now live in `apps/minimal`, `apps/neo-brutalism`, `apps/editorial`, `apps/luxury`, and `apps/retro`, with local routes rooted at `/`. They no longer compile as showcase pages. `/design-systems` remains the directory; its links use the origins in `common/design-system-sites.ts` (localhost ports in development, live `*.jabkit.joseadrianbuctuanon.dev` hosts in production). Old design-system/sample prefixes redirect temporarily to those origins. See [standalone apps](standalone-design-systems.md) for environment variables, ports, asset ownership, and deployment.
 
 ## Routes
 
