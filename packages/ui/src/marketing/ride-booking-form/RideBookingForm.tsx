@@ -140,7 +140,10 @@ export function RideBookingForm({
             </figcaption>
           </figure>
 
-          <form className="flex flex-col gap-5 p-5 sm:p-6" onSubmit={handleSubmit}>
+          <form
+            className="flex flex-col gap-5 p-5 sm:p-6"
+            onSubmit={handleSubmit}
+          >
             <header className="space-y-2">
               <h2
                 className="text-xl font-semibold tracking-tight text-balance sm:text-2xl"
