@@ -1,19 +1,20 @@
 export const stupidInsectMocks = {
   default: {
     cellSize: "md" as const,
-    tone: "primary" as const,
-    animated: true,
-  },
-  chart: {
-    cellSize: "lg" as const,
-    tone: "chart" as const,
-    animated: true,
-    children: "Chart tone",
-  },
-  still: {
-    cellSize: "sm" as const,
-    tone: "primary" as const,
+    tone: "sand" as const,
     animated: false,
-    children: "Still tile",
+    label: "Sand ring field",
+  },
+  dusk: {
+    cellSize: "lg" as const,
+    tone: "dusk" as const,
+    animated: true,
+    label: "Dusk ring field",
+  },
+  overlay: {
+    cellSize: "sm" as const,
+    tone: "sand" as const,
+    animated: false,
+    label: "Captioned ring field",
   },
 } as const;

@@ -1,2 +1,6 @@
 export { StupidInsect } from "./StupidInsect";
-export type * from "./StupidInsect.types";
+export type {
+  StupidInsectCellSize,
+  StupidInsectProps,
+  StupidInsectTone,
+} from "./StupidInsect.types";

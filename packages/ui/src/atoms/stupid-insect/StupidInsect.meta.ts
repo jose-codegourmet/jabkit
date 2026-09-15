@@ -3,21 +3,21 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "stupid-insect",
   displayName: "StupidInsect",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A tiled concentric-ring field built from semantic tokens, with an optional slow drift that stops under reduced motion.",
+    "A square-corner concentric-ring tile at 150px, with sand and navy inks mapped to semantic tokens.",
   sectionCategory: "content",
   purpose:
-    "Gives a surface a repeating radial-ring texture without leaving the token set or introducing vendor hex colors.",
+    "Fills a region with the Uiverse stupid-insect radial weave without rounding the field to the shared control radius.",
   bestFor: [
-    "hero or card backdrop texture",
-    "catalogue pattern tiles",
-    "playful empty-state backgrounds",
+    "section covers and empty-state backdrops",
+    "card or banner texture behind a short caption",
+    "catalogue samples that need a decorative field",
   ],
   avoidFor: [
-    "dense data surfaces that need quiet chrome",
-    "text-heavy reading columns",
+    "text-heavy reading panes",
+    "controls that need a quiet, solid surface",
   ],
   tone: ["playful", "bold"],
   contentDensity: "low",
@@ -26,7 +26,7 @@ export default {
     type: "stack",
     alignment: "center",
   },
-  slots: ["overlay"],
+  slots: ["field", "caption"],
   capabilities: {
     supportsImage: false,
     supportsVideo: false,
@@ -34,7 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
-  tags: ["pattern", "background", "texture", "atom"],
+  tags: ["pattern", "texture", "rings", "background", "atom"],
   dependencies: [],
   registryDependencies: [],
   a11y: { keyboardNav: false, reducedMotion: true },

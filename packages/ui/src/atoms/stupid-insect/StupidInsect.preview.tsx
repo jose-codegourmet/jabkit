@@ -5,9 +5,18 @@ import { stupidInsectMocks } from "./StupidInsect.mocks";
 
 export default {
   Default: () => (
-    <StupidInsect className="h-64 w-80" {...stupidInsectMocks.default} />
+    <div className="h-64 w-80">
+      <StupidInsect {...stupidInsectMocks.default} />
+    </div>
   ),
-  ChartTone: () => (
-    <StupidInsect className="h-64 w-80" {...stupidInsectMocks.chart} />
+  Tones: () => (
+    <div className="flex w-80 flex-col gap-4">
+      <div className="h-56">
+        <StupidInsect {...stupidInsectMocks.default} />
+      </div>
+      <div className="h-56">
+        <StupidInsect {...stupidInsectMocks.dusk} />
+      </div>
+    </div>
   ),
 };
