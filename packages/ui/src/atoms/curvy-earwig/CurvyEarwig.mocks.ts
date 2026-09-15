@@ -1,17 +1,17 @@
 export const curvyEarwigMocks = {
   default: {
     label: "Search",
-    placeholder: "Search",
+    placeholder: "search",
   },
   expanded: {
-    label: "Search the catalogue",
-    placeholder: "Type to search",
+    label: "Search",
+    placeholder: "search",
     defaultValue: "atlas",
     expanded: true,
   },
   compact: {
-    label: "Compact search",
-    placeholder: "Find",
+    label: "Search",
+    placeholder: "search",
     size: "sm" as const,
     expanded: true,
   },

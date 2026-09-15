@@ -8,5 +8,6 @@ export interface CurvyEarwigProps
   expanded?: boolean;
   animate?: boolean;
   label?: string;
+  toggleLabel?: string;
   type?: InputHTMLAttributes<HTMLInputElement>["type"];
 }

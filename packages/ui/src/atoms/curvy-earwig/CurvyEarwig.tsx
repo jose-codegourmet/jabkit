@@ -3,23 +3,8 @@ import * as React from "react";
 import { cn } from "@/lib/cn";
 import type { CurvyEarwigProps } from "./CurvyEarwig.types";
 
-const sizes = {
-  sm: {
-    box: "2.25rem",
-    open: "13.5rem",
-    text: "0.8125rem",
-  },
-  md: {
-    box: "2.75rem",
-    open: "16.5rem",
-    text: "0.875rem",
-  },
-  lg: {
-    box: "3.25rem",
-    open: "19.5rem",
-    text: "1rem",
-  },
-} as const;
+const searchPath =
+  "M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z";
 
 export function CurvyEarwig({
   className,
@@ -27,137 +12,208 @@ export function CurvyEarwig({
   expanded = false,
   animate = true,
   label = "Search",
+  toggleLabel = "Toggle search field",
   disabled,
-  type = "search",
-  style,
+  type = "text",
+  id,
   ...props
 }: CurvyEarwigProps) {
-  const metrics = sizes[size];
+  const reactId = React.useId();
+  const toggleId = `${reactId}-toggle`;
+  const fieldId = id ?? `${reactId}-field`;
 
   return (
-    <label
-      className={cn(
-        "jk-curvy-earwig relative inline-flex shrink-0 items-center",
-        disabled && "cursor-not-allowed opacity-50",
-        className,
-      )}
+    <div
+      className={cn("jk-curvy-earwig", className)}
       data-animate={animate ? "true" : "false"}
-      data-expanded={expanded ? "true" : "false"}
       data-size={size}
       data-slot="curvy-earwig"
-      style={
-        {
-          "--jk-curvy-earwig-box": metrics.box,
-          "--jk-curvy-earwig-open": metrics.open,
-          "--jk-curvy-earwig-text": metrics.text,
-          ...style,
-        } as React.CSSProperties
-      }
     >
       <style href="jk-curvy-earwig" precedence="default">{`
         .jk-curvy-earwig {
-          width: var(--jk-curvy-earwig-box);
-          height: var(--jk-curvy-earwig-box);
+          position: relative;
+          box-sizing: border-box;
+          width: fit-content;
+          color: var(--jk-background);
         }
-        .jk-curvy-earwig:hover,
-        .jk-curvy-earwig:focus-within,
-        .jk-curvy-earwig[data-expanded="true"] {
-          width: var(--jk-curvy-earwig-open);
+        .jk-curvy-earwig *,
+        .jk-curvy-earwig *::before,
+        .jk-curvy-earwig *::after {
+          box-sizing: border-box;
+        }
+        .jk-curvy-earwig-toggle {
+          position: absolute;
+          z-index: 9;
+          width: 30px;
+          height: 30px;
+          margin: 0;
+          appearance: none;
+          cursor: pointer;
+          border: none;
+          background: transparent;
+          right: 17px;
+          top: 10px;
+        }
+        .jk-curvy-earwig[data-size="sm"] .jk-curvy-earwig-toggle {
+          width: 24px;
+          height: 24px;
+          right: 13px;
+          top: 8px;
+        }
+        .jk-curvy-earwig[data-size="lg"] .jk-curvy-earwig-toggle {
+          width: 36px;
+          height: 36px;
+          right: 20px;
+          top: 12px;
+        }
+        .jk-curvy-earwig-toggle:focus,
+        .jk-curvy-earwig-toggle:focus-visible {
+          border: none;
+          outline: none;
+        }
+        .jk-curvy-earwig-toggle:disabled {
+          cursor: not-allowed;
         }
         .jk-curvy-earwig-shell {
-          background: color-mix(in oklab, var(--jk-card) 88%, var(--jk-muted));
-          box-shadow:
-            inset 0 0 0 1px var(--jk-border),
-            0 8px 22px color-mix(in oklab, var(--jk-foreground), transparent 88%);
+          position: relative;
+          display: flex;
+          flex-direction: row-reverse;
+          align-items: center;
+          justify-content: center;
+          width: 230px;
+          height: 50px;
+          border: none;
+          border-radius: 160px;
+          background: var(--jk-foreground);
         }
-        .jk-curvy-earwig:hover .jk-curvy-earwig-shell,
-        .jk-curvy-earwig:focus-within .jk-curvy-earwig-shell,
-        .jk-curvy-earwig[data-expanded="true"] .jk-curvy-earwig-shell {
-          box-shadow:
-            inset 0 0 0 1px color-mix(in oklab, var(--jk-ring) 55%, var(--jk-border)),
-            0 10px 26px color-mix(in oklab, var(--jk-foreground), transparent 84%);
+        .jk-curvy-earwig[data-size="sm"] .jk-curvy-earwig-shell {
+          width: 184px;
+          height: 40px;
+        }
+        .jk-curvy-earwig[data-size="lg"] .jk-curvy-earwig-shell {
+          width: 276px;
+          height: 60px;
+        }
+        .jk-curvy-earwig-toggle:checked {
+          right: 10px;
+        }
+        .jk-curvy-earwig[data-size="sm"] .jk-curvy-earwig-toggle:checked {
+          right: 8px;
+        }
+        .jk-curvy-earwig[data-size="lg"] .jk-curvy-earwig-toggle:checked {
+          right: 12px;
+        }
+        .jk-curvy-earwig-toggle:checked ~ .jk-curvy-earwig-shell {
+          width: 50px;
+        }
+        .jk-curvy-earwig[data-size="sm"] .jk-curvy-earwig-toggle:checked ~ .jk-curvy-earwig-shell {
+          width: 40px;
+        }
+        .jk-curvy-earwig[data-size="lg"] .jk-curvy-earwig-toggle:checked ~ .jk-curvy-earwig-shell {
+          width: 60px;
+        }
+        .jk-curvy-earwig-toggle:checked ~ .jk-curvy-earwig-shell .jk-curvy-earwig-field {
+          width: 0;
+          height: 0;
+          padding: 0;
+        }
+        .jk-curvy-earwig-icon {
+          width: fit-content;
+          padding-top: 5px;
+          color: var(--jk-background);
+        }
+        .jk-curvy-earwig-toggle:checked ~ .jk-curvy-earwig-shell .jk-curvy-earwig-icon {
+          padding-right: 8px;
+        }
+        .jk-curvy-earwig[data-size="sm"] .jk-curvy-earwig-toggle:checked ~ .jk-curvy-earwig-shell .jk-curvy-earwig-icon {
+          padding-right: 6px;
+        }
+        .jk-curvy-earwig[data-size="lg"] .jk-curvy-earwig-toggle:checked ~ .jk-curvy-earwig-shell .jk-curvy-earwig-icon {
+          padding-right: 10px;
+        }
+        .jk-curvy-earwig-glyph {
+          display: block;
+          width: 1.3em;
+          height: 1.3em;
+          fill: currentColor;
         }
         .jk-curvy-earwig-field {
-          color: var(--jk-foreground);
-          font-size: var(--jk-curvy-earwig-text);
-          opacity: 0;
+          width: 170px;
+          height: 100%;
+          padding-bottom: 4px;
+          padding-left: 10px;
+          border: none;
+          outline: none;
+          background: transparent;
+          color: var(--jk-background);
+          font-family: var(--jk-font-body);
+          font-size: 1.2em;
+        }
+        .jk-curvy-earwig[data-size="sm"] .jk-curvy-earwig-field {
+          width: 136px;
+          font-size: 1em;
+        }
+        .jk-curvy-earwig[data-size="lg"] .jk-curvy-earwig-field {
+          width: 204px;
+          font-size: 1.3em;
         }
         .jk-curvy-earwig-field::placeholder {
-          color: var(--jk-muted-foreground);
+          color: color-mix(in oklab, var(--jk-background) 78%, transparent);
         }
-        .jk-curvy-earwig:hover .jk-curvy-earwig-field,
-        .jk-curvy-earwig:focus-within .jk-curvy-earwig-field,
-        .jk-curvy-earwig[data-expanded="true"] .jk-curvy-earwig-field {
-          opacity: 1;
-        }
-        .jk-curvy-earwig-lens {
-          border: 2px solid var(--jk-muted-foreground);
-        }
-        .jk-curvy-earwig-handle {
-          background: var(--jk-muted-foreground);
-        }
-        .jk-curvy-earwig:hover .jk-curvy-earwig-lens,
-        .jk-curvy-earwig:focus-within .jk-curvy-earwig-lens,
-        .jk-curvy-earwig[data-expanded="true"] .jk-curvy-earwig-lens {
-          border-color: var(--jk-primary);
-        }
-        .jk-curvy-earwig:hover .jk-curvy-earwig-handle,
-        .jk-curvy-earwig:focus-within .jk-curvy-earwig-handle,
-        .jk-curvy-earwig[data-expanded="true"] .jk-curvy-earwig-handle {
-          background: var(--jk-primary);
+        .jk-curvy-earwig-field:disabled {
+          cursor: not-allowed;
         }
         .jk-curvy-earwig:focus-within .jk-curvy-earwig-shell {
-          outline: 2px solid transparent;
           box-shadow:
-            inset 0 0 0 1px var(--jk-ring),
-            0 0 0 3px color-mix(in oklab, var(--jk-ring), transparent 62%),
-            0 10px 26px color-mix(in oklab, var(--jk-foreground), transparent 84%);
+            0 0 0 2px var(--jk-background),
+            0 0 0 4px var(--jk-ring);
         }
         @media (prefers-reduced-motion: no-preference) {
-          .jk-curvy-earwig[data-animate="true"] {
-            transition: width 320ms cubic-bezier(0.22, 1, 0.36, 1);
-          }
-          .jk-curvy-earwig[data-animate="true"] .jk-curvy-earwig-shell {
-            transition: box-shadow 220ms ease;
-          }
-          .jk-curvy-earwig[data-animate="true"] .jk-curvy-earwig-field {
-            transition: opacity 180ms ease;
-          }
-          .jk-curvy-earwig[data-animate="true"] .jk-curvy-earwig-lens,
-          .jk-curvy-earwig[data-animate="true"] .jk-curvy-earwig-handle {
-            transition:
-              border-color 180ms ease,
-              background-color 180ms ease;
+          .jk-curvy-earwig[data-animate="true"] .jk-curvy-earwig-shell,
+          .jk-curvy-earwig[data-animate="true"] .jk-curvy-earwig-field,
+          .jk-curvy-earwig[data-animate="true"] .jk-curvy-earwig-icon,
+          .jk-curvy-earwig[data-animate="true"] .jk-curvy-earwig-toggle {
+            transition: all 0.3s ease;
           }
         }
         @media (prefers-reduced-motion: reduce) {
-          .jk-curvy-earwig,
           .jk-curvy-earwig-shell,
           .jk-curvy-earwig-field,
-          .jk-curvy-earwig-lens,
-          .jk-curvy-earwig-handle {
+          .jk-curvy-earwig-icon,
+          .jk-curvy-earwig-toggle {
             transition: none;
           }
         }
       `}</style>
-      <span
-        aria-hidden="true"
-        className="jk-curvy-earwig-shell pointer-events-none absolute inset-0 overflow-hidden rounded-full"
-      />
       <input
-        aria-label={label}
-        className="jk-curvy-earwig-field relative z-10 h-full w-full min-w-0 appearance-none border-0 bg-transparent pr-[var(--jk-curvy-earwig-box)] pl-3.5 outline-none disabled:cursor-not-allowed"
+        aria-controls={fieldId}
+        aria-label={toggleLabel}
+        className="jk-curvy-earwig-toggle"
+        defaultChecked={!expanded}
         disabled={disabled}
-        type={type}
-        {...props}
+        id={toggleId}
+        type="checkbox"
       />
-      <span
-        aria-hidden="true"
-        className="jk-curvy-earwig-glyph pointer-events-none absolute top-0 right-0 z-20 block h-[var(--jk-curvy-earwig-box)] w-[var(--jk-curvy-earwig-box)]"
-      >
-        <span className="jk-curvy-earwig-lens absolute top-[26%] left-[24%] block size-[38%] rounded-full" />
-        <span className="jk-curvy-earwig-handle absolute top-[62%] left-[54%] block h-0.5 w-[28%] origin-left rotate-45 rounded-full" />
-      </span>
-    </label>
+      <div className="jk-curvy-earwig-shell">
+        <div aria-hidden="true" className="jk-curvy-earwig-icon">
+          <svg
+            className="jk-curvy-earwig-glyph"
+            height="1em"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d={searchPath} />
+          </svg>
+        </div>
+        <input
+          {...props}
+          aria-label={label}
+          className="jk-curvy-earwig-field"
+          disabled={disabled}
+          id={fieldId}
+          type={type}
+        />
+      </div>
+    </div>
   );
 }
