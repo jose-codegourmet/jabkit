@@ -1,0 +1,121 @@
+{
+  "name": "ride-booking-form",
+  "displayName": "RideBookingForm",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Marketing booking card with a city photo, pickup and dropoff fields, date and time, and a search CTA.",
+  "sectionCategory": "form",
+  "purpose": "Lets a mobility landing page collect a ride request without sending visitors into a full app checkout.",
+  "bestFor": [
+    "taxi and rideshare landing pages",
+    "airport transfer campaigns",
+    "scheduled fleet booking"
+  ],
+  "avoidFor": [
+    "multi-step checkout with payment",
+    "live map dispatch consoles"
+  ],
+  "tone": [
+    "clean",
+    "professional",
+    "confident"
+  ],
+  "industries": [
+    "transportation",
+    "travel",
+    "mobility"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "high",
+  "layout": {
+    "type": "card",
+    "alignment": "center",
+    "columns": 1
+  },
+  "slots": [
+    "cityMedia",
+    "headline",
+    "description",
+    "pickupField",
+    "dropoffField",
+    "dateField",
+    "timeField",
+    "searchCTA"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "features"
+  ],
+  "recommendedBefore": [
+    "testimonials",
+    "cta"
+  ],
+  "tags": [
+    "ride",
+    "booking",
+    "form",
+    "marketing",
+    "mobility",
+    "taxi",
+    "conversion"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button",
+    "input",
+    "label"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "ride-booking-form/RideBookingForm.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  ArrowRightLeftIcon,\n  CalendarIcon,\n  ClockIcon,\n  MapPinIcon,\n  SearchIcon,\n} from \"lucide-react\";\nimport { type FormEvent, type ReactNode, useId, useState } from \"react\";\nimport { Button } from \"@/components/jabkit/button\";\nimport { Input } from \"@/components/jabkit/input\";\nimport { Label } from \"@/components/jabkit/label\";\nimport { cn } from \"@/lib/cn\";\nimport type { RideBookingFormProps } from \"./RideBookingForm.types\";\n\nconst defaults = {\n  city: \"Portland, OR\",\n  imageSrc: \"/assets/e9d88fab9e45c86f.webp\",\n  imageAlt: \"Glass towers along a downtown street at dusk\",\n  title: \"Book a ride across town\",\n  description:\n    \"Set pickup, dropoff, and a time. Harbor finds a car that can meet you there.\",\n  pickupLabel: \"Pickup\",\n  pickupPlaceholder: \"Pearl District, 12th and Lovejoy\",\n  defaultPickup: \"\",\n  dropoffLabel: \"Dropoff\",\n  dropoffPlaceholder: \"Airport, hotel, or street\",\n  defaultDropoff: \"\",\n  dateLabel: \"Date\",\n  defaultDate: \"\",\n  timeLabel: \"Time\",\n  defaultTime: \"\",\n  submitLabel: \"Find a ride\",\n  swapLabel: \"Swap pickup and dropoff\",\n} as const;\n\nfunction FieldShell({\n  id,\n  label,\n  icon,\n  children,\n}: {\n  id: string;\n  label: string;\n  icon: ReactNode;\n  children: ReactNode;\n}) {\n  return (\n    <div className=\"space-y-2\">\n      <Label htmlFor={id}>{label}</Label>\n      <div className=\"relative\">\n        <span\n          aria-hidden=\"true\"\n          className=\"pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-muted-foreground\"\n        >\n          {icon}\n        </span>\n        {children}\n      </div>\n    </div>\n  );\n}\n\nexport function RideBookingForm({\n  className,\n  city = defaults.city,\n  imageSrc = defaults.imageSrc,\n  imageAlt = defaults.imageAlt,\n  title = defaults.title,\n  description = defaults.description,\n  pickupLabel = defaults.pickupLabel,\n  pickupPlaceholder = defaults.pickupPlaceholder,\n  defaultPickup = defaults.defaultPickup,\n  dropoffLabel = defaults.dropoffLabel,\n  dropoffPlaceholder = defaults.dropoffPlaceholder,\n  defaultDropoff = defaults.defaultDropoff,\n  dateLabel = defaults.dateLabel,\n  defaultDate = defaults.defaultDate,\n  timeLabel = defaults.timeLabel,\n  defaultTime = defaults.defaultTime,\n  submitLabel = defaults.submitLabel,\n  swapLabel = defaults.swapLabel,\n  onSearch,\n  onSubmit,\n  ...props\n}: RideBookingFormProps) {\n  const headingId = useId();\n  const pickupId = useId();\n  const dropoffId = useId();\n  const dateId = useId();\n  const timeId = useId();\n  const [pickup, setPickup] = useState(defaultPickup);\n  const [dropoff, setDropoff] = useState(defaultDropoff);\n  const [date, setDate] = useState(defaultDate);\n  const [time, setTime] = useState(defaultTime);\n\n  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {\n    onSubmit?.(event);\n    if (event.defaultPrevented) return;\n    event.preventDefault();\n    onSearch?.({\n      pickup: pickup.trim(),\n      dropoff: dropoff.trim(),\n      date,\n      time,\n    });\n  };\n\n  const swapStops = () => {\n    setPickup(dropoff);\n    setDropoff(pickup);\n  };\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-slot=\"ride-booking-form\"\n      {...props}\n    >\n      <div className=\"mx-auto flex min-h-[32rem] max-w-5xl items-center justify-center px-5 py-16 sm:px-8 sm:py-20\">\n        <article\n          className={cn(\n            \"w-full max-w-md overflow-hidden rounded-[calc(var(--radius)+0.4rem)] border border-border bg-card text-card-foreground shadow-sm\",\n            \"motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500\",\n          )}\n        >\n          <figure className=\"relative h-44 overflow-hidden bg-muted sm:h-52\">\n            <img\n              alt={imageAlt}\n              className=\"absolute inset-0 size-full object-cover\"\n              src={imageSrc}\n            />\n            <figcaption className=\"dark absolute inset-x-0 bottom-0 flex items-end bg-gradient-to-t from-background via-background/70 to-transparent px-5 pb-4 pt-16\">\n              <span className=\"inline-flex items-center gap-2 text-sm font-medium text-foreground\">\n                <MapPinIcon aria-hidden=\"true\" className=\"size-4 shrink-0\" />\n                {city}\n              </span>\n            </figcaption>\n          </figure>\n\n          <form className=\"flex flex-col gap-5 p-5 sm:p-6\" onSubmit={handleSubmit}>\n            <header className=\"space-y-2\">\n              <h2\n                className=\"text-xl font-semibold tracking-tight text-balance sm:text-2xl\"\n                id={headingId}\n              >\n                {title}\n              </h2>\n              {description ? (\n                <p className=\"text-sm leading-6 text-muted-foreground\">\n                  {description}\n                </p>\n              ) : null}\n            </header>\n\n            <div className=\"space-y-3\">\n              <FieldShell\n                icon={<MapPinIcon className=\"size-4\" />}\n                id={pickupId}\n                label={pickupLabel}\n              >\n                <Input\n                  autoComplete=\"street-address\"\n                  className=\"h-12 rounded-[--radius] bg-background pl-9\"\n                  id={pickupId}\n                  name=\"pickup\"\n                  onChange={(event) => setPickup(event.target.value)}\n                  placeholder={pickupPlaceholder}\n                  required\n                  type=\"text\"\n                  value={pickup}\n                />\n              </FieldShell>\n\n              <div className=\"-my-1 flex justify-end\">\n                <button\n                  aria-label={swapLabel}\n                  className=\"grid size-9 place-items-center rounded-full border border-border bg-background text-foreground shadow-sm outline-none transition-[transform,background-color] duration-200 ease-out hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.98] motion-reduce:transition-none\"\n                  onClick={swapStops}\n                  type=\"button\"\n                >\n                  <ArrowRightLeftIcon aria-hidden=\"true\" className=\"size-4\" />\n                </button>\n              </div>\n\n              <FieldShell\n                icon={<MapPinIcon className=\"size-4\" />}\n                id={dropoffId}\n                label={dropoffLabel}\n              >\n                <Input\n                  autoComplete=\"off\"\n                  className=\"h-12 rounded-[--radius] bg-background pl-9\"\n                  id={dropoffId}\n                  name=\"dropoff\"\n                  onChange={(event) => setDropoff(event.target.value)}\n                  placeholder={dropoffPlaceholder}\n                  required\n                  type=\"text\"\n                  value={dropoff}\n                />\n              </FieldShell>\n            </div>\n\n            <div className=\"grid gap-3 sm:grid-cols-2\">\n              <FieldShell\n                icon={<CalendarIcon className=\"size-4\" />}\n                id={dateId}\n                label={dateLabel}\n              >\n                <Input\n                  className=\"h-12 rounded-[--radius] bg-background pl-9\"\n                  id={dateId}\n                  name=\"date\"\n                  onChange={(event) => setDate(event.target.value)}\n                  required\n                  type=\"date\"\n                  value={date}\n                />\n              </FieldShell>\n              <FieldShell\n                icon={<ClockIcon className=\"size-4\" />}\n                id={timeId}\n                label={timeLabel}\n              >\n                <Input\n                  className=\"h-12 rounded-[--radius] bg-background pl-9\"\n                  id={timeId}\n                  name=\"time\"\n                  onChange={(event) => setTime(event.target.value)}\n                  required\n                  type=\"time\"\n                  value={time}\n                />\n              </FieldShell>\n            </div>\n\n            <Button className=\"h-12 w-full gap-2\" size=\"lg\" type=\"submit\">\n              <SearchIcon aria-hidden=\"true\" className=\"size-4\" />\n              {submitLabel}\n            </Button>\n          </form>\n        </article>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "ride-booking-form/RideBookingForm.types.ts",
+      "type": "types",
+      "content": "import type { FormEventHandler, HTMLAttributes } from \"react\";\n\nexport interface RideBookingFormSearchDetails {\n  pickup: string;\n  dropoff: string;\n  date: string;\n  time: string;\n}\n\nexport interface RideBookingFormProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\" | \"onSubmit\"> {\n  city?: string;\n  imageSrc?: string;\n  imageAlt?: string;\n  title?: string;\n  description?: string;\n  pickupLabel?: string;\n  pickupPlaceholder?: string;\n  defaultPickup?: string;\n  dropoffLabel?: string;\n  dropoffPlaceholder?: string;\n  defaultDropoff?: string;\n  dateLabel?: string;\n  defaultDate?: string;\n  timeLabel?: string;\n  defaultTime?: string;\n  submitLabel?: string;\n  swapLabel?: string;\n  onSearch?: (details: RideBookingFormSearchDetails) => void;\n  onSubmit?: FormEventHandler<HTMLFormElement>;\n}\n"
+    },
+    {
+      "path": "ride-booking-form/index.ts",
+      "type": "index",
+      "content": "export { RideBookingForm } from \"./RideBookingForm\";\nexport type {\n  RideBookingFormProps,\n  RideBookingFormSearchDetails,\n} from \"./RideBookingForm.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <RideBookingForm {...rideBookingFormMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <RideBookingForm {...rideBookingFormMocks.alternate} />\n    </div>"
+    }
+  ]
+}

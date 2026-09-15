@@ -1,0 +1,121 @@
+{
+  "name": "form",
+  "displayName": "Form",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Compact stay-booking card with destination, check-in and check-out dates, room and guest steppers, and a search CTA.",
+  "sectionCategory": "form",
+  "purpose": "Lets a travel or lodging landing page collect a stay request without sending visitors into a full reservation checkout.",
+  "bestFor": [
+    "hotel and inn landing pages",
+    "short-stay rental campaigns",
+    "lodge and cabin booking"
+  ],
+  "avoidFor": [
+    "ride or transfer booking",
+    "multi-step checkout with payment",
+    "account sign-in forms"
+  ],
+  "tone": [
+    "clean",
+    "professional",
+    "warm"
+  ],
+  "industries": [
+    "travel",
+    "hospitality"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "card",
+    "alignment": "center",
+    "columns": 1
+  },
+  "slots": [
+    "headline",
+    "description",
+    "destinationField",
+    "checkInField",
+    "checkOutField",
+    "roomsStepper",
+    "guestsStepper",
+    "searchCTA"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "features"
+  ],
+  "recommendedBefore": [
+    "testimonials",
+    "cta"
+  ],
+  "tags": [
+    "form",
+    "booking",
+    "stay",
+    "hotel",
+    "marketing",
+    "travel",
+    "conversion"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button",
+    "input",
+    "label"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "form/Form.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  BedDoubleIcon,\n  CalendarIcon,\n  MapPinIcon,\n  MinusIcon,\n  PlusIcon,\n  SearchIcon,\n  UsersIcon,\n} from \"lucide-react\";\nimport { type FormEvent, type ReactNode, useId, useState } from \"react\";\nimport { Button } from \"@/components/jabkit/button\";\nimport { Input } from \"@/components/jabkit/input\";\nimport { Label } from \"@/components/jabkit/label\";\nimport { cn } from \"@/lib/cn\";\nimport type { FormProps } from \"./Form.types\";\n\nconst defaults = {\n  title: \"Hold a stay for the trip\",\n  description:\n    \"Choose a town, check-in, check-out, rooms, and guests. We keep the dates until you confirm.\",\n  destinationLabel: \"Destination\",\n  destinationPlaceholder: \"City, inn, or neighborhood\",\n  defaultDestination: \"\",\n  checkInLabel: \"Check-in\",\n  defaultCheckIn: \"\",\n  checkOutLabel: \"Check-out\",\n  defaultCheckOut: \"\",\n  roomsLabel: \"Rooms\",\n  defaultRooms: 1,\n  minRooms: 1,\n  maxRooms: 8,\n  guestsLabel: \"Guests\",\n  defaultGuests: 2,\n  minGuests: 1,\n  maxGuests: 16,\n  decreaseLabel: \"Decrease\",\n  increaseLabel: \"Increase\",\n  submitLabel: \"Check availability\",\n} as const;\n\nfunction clamp(value: number, min: number, max: number) {\n  return Math.min(max, Math.max(min, value));\n}\n\nfunction FieldGroup({\n  children,\n  className,\n}: {\n  children: ReactNode;\n  className?: string;\n}) {\n  return (\n    <div\n      className={cn(\n        \"rounded-[--radius] border border-border bg-background p-3 sm:p-4\",\n        className,\n      )}\n    >\n      {children}\n    </div>\n  );\n}\n\nfunction FieldShell({\n  id,\n  label,\n  icon,\n  children,\n}: {\n  id: string;\n  label: string;\n  icon: ReactNode;\n  children: ReactNode;\n}) {\n  return (\n    <div className=\"space-y-2\">\n      <Label htmlFor={id}>{label}</Label>\n      <div className=\"relative\">\n        <span\n          aria-hidden=\"true\"\n          className=\"pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-muted-foreground\"\n        >\n          {icon}\n        </span>\n        {children}\n      </div>\n    </div>\n  );\n}\n\nfunction CountStepper({\n  id,\n  name,\n  label,\n  icon,\n  value,\n  min,\n  max,\n  decreaseLabel,\n  increaseLabel,\n  onChange,\n}: {\n  id: string;\n  name: string;\n  label: string;\n  icon: ReactNode;\n  value: number;\n  min: number;\n  max: number;\n  decreaseLabel: string;\n  increaseLabel: string;\n  onChange: (next: number) => void;\n}) {\n  const liveId = `${id}-value`;\n\n  return (\n    <div className=\"flex items-center justify-between gap-3\">\n      <div className=\"min-w-0 space-y-1\">\n        <Label htmlFor={id}>\n          <span aria-hidden=\"true\" className=\"text-muted-foreground\">\n            {icon}\n          </span>\n          {label}\n        </Label>\n        <p\n          className=\"text-lg font-semibold tabular-nums tracking-tight\"\n          id={liveId}\n        >\n          {value}\n        </p>\n      </div>\n      <div className=\"flex items-center gap-1.5\">\n        <button\n          aria-controls={liveId}\n          aria-label={`${decreaseLabel} ${label.toLowerCase()}`}\n          className=\"grid size-9 place-items-center rounded-full border border-border bg-card text-foreground outline-none transition-[transform,background-color] duration-200 ease-out hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.98] disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none\"\n          disabled={value <= min}\n          onClick={() => onChange(clamp(value - 1, min, max))}\n          type=\"button\"\n        >\n          <MinusIcon aria-hidden=\"true\" className=\"size-4\" />\n        </button>\n        <button\n          aria-controls={liveId}\n          aria-label={`${increaseLabel} ${label.toLowerCase()}`}\n          className=\"grid size-9 place-items-center rounded-full border border-border bg-card text-foreground outline-none transition-[transform,background-color] duration-200 ease-out hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.98] disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none\"\n          disabled={value >= max}\n          onClick={() => onChange(clamp(value + 1, min, max))}\n          type=\"button\"\n        >\n          <PlusIcon aria-hidden=\"true\" className=\"size-4\" />\n        </button>\n      </div>\n      <input id={id} name={name} type=\"hidden\" value={value} />\n    </div>\n  );\n}\n\nexport function Form({\n  className,\n  title = defaults.title,\n  description = defaults.description,\n  destinationLabel = defaults.destinationLabel,\n  destinationPlaceholder = defaults.destinationPlaceholder,\n  defaultDestination = defaults.defaultDestination,\n  checkInLabel = defaults.checkInLabel,\n  defaultCheckIn = defaults.defaultCheckIn,\n  checkOutLabel = defaults.checkOutLabel,\n  defaultCheckOut = defaults.defaultCheckOut,\n  roomsLabel = defaults.roomsLabel,\n  defaultRooms = defaults.defaultRooms,\n  minRooms = defaults.minRooms,\n  maxRooms = defaults.maxRooms,\n  guestsLabel = defaults.guestsLabel,\n  defaultGuests = defaults.defaultGuests,\n  minGuests = defaults.minGuests,\n  maxGuests = defaults.maxGuests,\n  decreaseLabel = defaults.decreaseLabel,\n  increaseLabel = defaults.increaseLabel,\n  submitLabel = defaults.submitLabel,\n  onSearch,\n  onSubmit,\n  ...props\n}: FormProps) {\n  const headingId = useId();\n  const destinationId = useId();\n  const checkInId = useId();\n  const checkOutId = useId();\n  const roomsId = useId();\n  const guestsId = useId();\n  const [destination, setDestination] = useState(defaultDestination);\n  const [checkIn, setCheckIn] = useState(defaultCheckIn);\n  const [checkOut, setCheckOut] = useState(defaultCheckOut);\n  const [rooms, setRooms] = useState(clamp(defaultRooms, minRooms, maxRooms));\n  const [guests, setGuests] = useState(\n    clamp(defaultGuests, minGuests, maxGuests),\n  );\n\n  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {\n    onSubmit?.(event);\n    if (event.defaultPrevented) return;\n    event.preventDefault();\n    onSearch?.({\n      destination: destination.trim(),\n      checkIn,\n      checkOut,\n      rooms,\n      guests,\n    });\n  };\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-slot=\"form\"\n      {...props}\n    >\n      <div className=\"mx-auto flex min-h-[32rem] max-w-5xl items-center justify-center px-5 py-16 sm:px-8 sm:py-20\">\n        <article\n          className={cn(\n            \"w-full max-w-md overflow-hidden rounded-[calc(var(--radius)+0.4rem)] border border-border bg-card text-card-foreground shadow-sm\",\n            \"motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500\",\n          )}\n        >\n          <form\n            className=\"flex flex-col gap-5 p-5 sm:p-6\"\n            onSubmit={handleSubmit}\n          >\n            <header className=\"space-y-2\">\n              <h2\n                className=\"text-xl font-semibold tracking-tight text-balance sm:text-2xl\"\n                id={headingId}\n              >\n                {title}\n              </h2>\n              {description ? (\n                <p className=\"text-sm leading-6 text-muted-foreground\">\n                  {description}\n                </p>\n              ) : null}\n            </header>\n\n            <FieldGroup>\n              <FieldShell\n                icon={<MapPinIcon className=\"size-4\" />}\n                id={destinationId}\n                label={destinationLabel}\n              >\n                <Input\n                  autoComplete=\"address-level2\"\n                  className=\"h-12 rounded-[--radius] bg-card pl-9\"\n                  id={destinationId}\n                  name=\"destination\"\n                  onChange={(event) => setDestination(event.target.value)}\n                  placeholder={destinationPlaceholder}\n                  required\n                  type=\"text\"\n                  value={destination}\n                />\n              </FieldShell>\n            </FieldGroup>\n\n            <div className=\"grid gap-3 sm:grid-cols-2\">\n              <FieldGroup>\n                <FieldShell\n                  icon={<CalendarIcon className=\"size-4\" />}\n                  id={checkInId}\n                  label={checkInLabel}\n                >\n                  <Input\n                    className=\"h-12 rounded-[--radius] bg-card pl-9\"\n                    id={checkInId}\n                    max={checkOut || undefined}\n                    name=\"checkIn\"\n                    onChange={(event) => setCheckIn(event.target.value)}\n                    required\n                    type=\"date\"\n                    value={checkIn}\n                  />\n                </FieldShell>\n              </FieldGroup>\n              <FieldGroup>\n                <FieldShell\n                  icon={<CalendarIcon className=\"size-4\" />}\n                  id={checkOutId}\n                  label={checkOutLabel}\n                >\n                  <Input\n                    className=\"h-12 rounded-[--radius] bg-card pl-9\"\n                    id={checkOutId}\n                    min={checkIn || undefined}\n                    name=\"checkOut\"\n                    onChange={(event) => setCheckOut(event.target.value)}\n                    required\n                    type=\"date\"\n                    value={checkOut}\n                  />\n                </FieldShell>\n              </FieldGroup>\n            </div>\n\n            <div className=\"grid gap-3 sm:grid-cols-2\">\n              <FieldGroup>\n                <CountStepper\n                  decreaseLabel={decreaseLabel}\n                  icon={<BedDoubleIcon className=\"size-4\" />}\n                  id={roomsId}\n                  increaseLabel={increaseLabel}\n                  label={roomsLabel}\n                  name=\"rooms\"\n                  max={maxRooms}\n                  min={minRooms}\n                  onChange={setRooms}\n                  value={rooms}\n                />\n              </FieldGroup>\n              <FieldGroup>\n                <CountStepper\n                  decreaseLabel={decreaseLabel}\n                  icon={<UsersIcon className=\"size-4\" />}\n                  id={guestsId}\n                  increaseLabel={increaseLabel}\n                  label={guestsLabel}\n                  name=\"guests\"\n                  max={maxGuests}\n                  min={minGuests}\n                  onChange={setGuests}\n                  value={guests}\n                />\n              </FieldGroup>\n            </div>\n\n            <Button className=\"h-12 w-full gap-2\" size=\"lg\" type=\"submit\">\n              <SearchIcon aria-hidden=\"true\" className=\"size-4\" />\n              {submitLabel}\n            </Button>\n          </form>\n        </article>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "form/Form.types.ts",
+      "type": "types",
+      "content": "import type { FormEventHandler, HTMLAttributes } from \"react\";\n\nexport interface FormSearchDetails {\n  destination: string;\n  checkIn: string;\n  checkOut: string;\n  rooms: number;\n  guests: number;\n}\n\nexport interface FormProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\" | \"onSubmit\"> {\n  title?: string;\n  description?: string;\n  destinationLabel?: string;\n  destinationPlaceholder?: string;\n  defaultDestination?: string;\n  checkInLabel?: string;\n  defaultCheckIn?: string;\n  checkOutLabel?: string;\n  defaultCheckOut?: string;\n  roomsLabel?: string;\n  defaultRooms?: number;\n  minRooms?: number;\n  maxRooms?: number;\n  guestsLabel?: string;\n  defaultGuests?: number;\n  minGuests?: number;\n  maxGuests?: number;\n  decreaseLabel?: string;\n  increaseLabel?: string;\n  submitLabel?: string;\n  onSearch?: (details: FormSearchDetails) => void;\n  onSubmit?: FormEventHandler<HTMLFormElement>;\n}\n"
+    },
+    {
+      "path": "form/index.ts",
+      "type": "index",
+      "content": "export { Form } from \"./Form\";\nexport type { FormProps, FormSearchDetails } from \"./Form.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Form {...formMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Form {...formMocks.alternate} />\n    </div>"
+    }
+  ]
+}
