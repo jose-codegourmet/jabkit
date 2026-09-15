@@ -4,77 +4,90 @@ import { cn } from "@/lib/cn";
 import type { StupidInsectProps } from "./StupidInsect.types";
 
 const cellSizes = {
-  sm: "6.5rem",
-  md: "9.5rem",
-  lg: "12.5rem",
+  sm: "100px",
+  md: "150px",
+  lg: "200px",
+} as const;
+
+const palettes = {
+  sand: {
+    a: "color-mix(in oklab, var(--jk-warning) 58%, var(--jk-card))",
+    b: "color-mix(in oklab, var(--jk-chart-1) 38%, var(--jk-foreground))",
+  },
+  dusk: {
+    a: "color-mix(in oklab, var(--jk-chart-3) 42%, var(--jk-card))",
+    b: "color-mix(in oklab, var(--jk-chart-1) 62%, var(--jk-primary))",
+  },
 } as const;
 
 export function StupidInsect({
   className,
   children,
   cellSize = "md",
-  tone = "primary",
-  animated = true,
+  tone = "sand",
+  animated = false,
+  label = "Concentric ring field",
+  style,
   ...props
 }: StupidInsectProps) {
+  const inks = palettes[tone];
+
   return (
     <div
-      className={cn(
-        "jk-stupid-insect relative isolate overflow-hidden rounded-[--radius] border border-border",
-        className,
-      )}
-      data-animated={animated ? "true" : "false"}
+      aria-label={children ? undefined : label}
+      className={cn("jk-stupid-insect", animated && "jk-stupid-insect-live", className)}
       data-slot="stupid-insect"
       data-tone={tone}
-      style={{
-        ["--jk-stupid-insect-cell" as string]: cellSizes[cellSize],
-      }}
+      role={children ? undefined : "img"}
+      style={
+        {
+          "--jk-stupid-insect-a": inks.a,
+          "--jk-stupid-insect-b": inks.b,
+          "--jk-stupid-insect-cell": cellSizes[cellSize],
+          ...style,
+        } as React.CSSProperties
+      }
       {...props}
     >
       <style href="jk-stupid-insect" precedence="default">{`
         .jk-stupid-insect {
-          min-height: 12rem;
-          min-width: 12rem;
-        }
-        .jk-stupid-insect-field {
-          --jk-stupid-insect-a: var(--jk-card);
-          --jk-stupid-insect-b: var(--jk-primary);
           --jk-stupid-insect-rings:
-            var(--jk-stupid-insect-a) 0 7%,
-            var(--jk-stupid-insect-b) 8% 17%,
-            var(--jk-stupid-insect-a) 18% 27%,
-            var(--jk-stupid-insect-b) 28% 37%,
-            var(--jk-stupid-insect-a) 38% 47%,
-            var(--jk-stupid-insect-b) 48% 57%,
-            var(--jk-stupid-insect-a) 58% 67%,
-            var(--jk-stupid-insect-b) 68% 77%,
-            var(--jk-stupid-insect-a) 78% 87%,
-            var(--jk-stupid-insect-b) 88% 94%,
-            transparent 95%;
-          background-color: var(--jk-stupid-insect-a);
-          background-image:
+            var(--jk-stupid-insect-a) 0% 5%,
+            var(--jk-stupid-insect-b) 6% 15%,
+            var(--jk-stupid-insect-a) 16% 25%,
+            var(--jk-stupid-insect-b) 26% 35%,
+            var(--jk-stupid-insect-a) 36% 45%,
+            var(--jk-stupid-insect-b) 46% 55%,
+            var(--jk-stupid-insect-a) 56% 65%,
+            var(--jk-stupid-insect-b) 66% 75%,
+            var(--jk-stupid-insect-a) 76% 85%,
+            var(--jk-stupid-insect-b) 86% 95%,
+            transparent 96%;
+          position: relative;
+          isolation: isolate;
+          width: 100%;
+          height: 100%;
+          min-height: 10rem;
+          overflow: hidden;
+          border: 0;
+          border-radius: 0;
+          background:
             radial-gradient(50% 50% at 100% 0, var(--jk-stupid-insect-rings)),
             radial-gradient(50% 50% at 0 100%, var(--jk-stupid-insect-rings)),
-            radial-gradient(50% 50% at 50% 50%, var(--jk-stupid-insect-rings)),
-            radial-gradient(50% 50% at 50% 50%, var(--jk-stupid-insect-rings));
-          background-position:
-            0 0,
-            0 0,
-            0 0,
-            calc(var(--jk-stupid-insect-cell) / 2) calc(var(--jk-stupid-insect-cell) / 2);
+            radial-gradient(50% 50%, var(--jk-stupid-insect-rings)),
+            radial-gradient(50% 50%, var(--jk-stupid-insect-rings))
+              calc(var(--jk-stupid-insect-cell) / 2)
+              calc(var(--jk-stupid-insect-cell) / 2)
+              var(--jk-stupid-insect-a);
           background-size: var(--jk-stupid-insect-cell) var(--jk-stupid-insect-cell);
         }
-        .jk-stupid-insect[data-tone="chart"] .jk-stupid-insect-field {
-          --jk-stupid-insect-a: var(--jk-chart-3);
-          --jk-stupid-insect-b: var(--jk-chart-1);
-        }
         @media (prefers-reduced-motion: no-preference) {
-          .jk-stupid-insect[data-animated="true"] .jk-stupid-insect-field {
+          .jk-stupid-insect-live {
             animation: jk-stupid-insect-drift 18s linear infinite;
           }
         }
         @media (prefers-reduced-motion: reduce) {
-          .jk-stupid-insect-field {
+          .jk-stupid-insect-live {
             animation: none;
           }
         }
@@ -89,15 +102,9 @@ export function StupidInsect({
           }
         }
       `}</style>
-      <div
-        aria-hidden="true"
-        className="jk-stupid-insect-field pointer-events-none absolute inset-0"
-      />
       {children ? (
-        <div className="relative z-10 flex h-full min-h-12 w-full items-end p-4">
-          <div className="rounded-[--radius] bg-background/80 px-3 py-2 text-sm text-foreground shadow-[var(--jk-shadow-control)] ring-1 ring-border backdrop-blur-sm">
-            {children}
-          </div>
+        <div className="relative z-10 flex h-full min-h-40 items-center justify-center p-6 text-card-foreground">
+          {children}
         </div>
       ) : null}
     </div>

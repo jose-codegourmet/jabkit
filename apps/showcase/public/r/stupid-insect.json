@@ -1,19 +1,19 @@
 {
   "name": "stupid-insect",
   "displayName": "StupidInsect",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "addedAt": "2026-09-15",
-  "description": "A tiled concentric-ring field built from semantic tokens, with an optional slow drift that stops under reduced motion.",
+  "description": "A square-corner concentric-ring tile at 150px, with sand and navy inks mapped to semantic tokens.",
   "sectionCategory": "content",
-  "purpose": "Gives a surface a repeating radial-ring texture without leaving the token set or introducing vendor hex colors.",
+  "purpose": "Fills a region with the Uiverse stupid-insect radial weave without rounding the field to the shared control radius.",
   "bestFor": [
-    "hero or card backdrop texture",
-    "catalogue pattern tiles",
-    "playful empty-state backgrounds"
+    "section covers and empty-state backdrops",
+    "card or banner texture behind a short caption",
+    "catalogue samples that need a decorative field"
   ],
   "avoidFor": [
-    "dense data surfaces that need quiet chrome",
-    "text-heavy reading columns"
+    "text-heavy reading panes",
+    "controls that need a quiet, solid surface"
   ],
   "tone": [
     "playful",
@@ -26,7 +26,8 @@
     "alignment": "center"
   },
   "slots": [
-    "overlay"
+    "field",
+    "caption"
   ],
   "capabilities": {
     "supportsImage": false,
@@ -37,8 +38,9 @@
   },
   "tags": [
     "pattern",
-    "background",
     "texture",
+    "rings",
+    "background",
     "atom"
   ],
   "dependencies": [
@@ -60,17 +62,17 @@
     {
       "path": "stupid-insect/StupidInsect.tsx",
       "type": "component",
-      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { StupidInsectProps } from \"./StupidInsect.types\";\n\nconst cellSizes = {\n  sm: \"6.5rem\",\n  md: \"9.5rem\",\n  lg: \"12.5rem\",\n} as const;\n\nexport function StupidInsect({\n  className,\n  children,\n  cellSize = \"md\",\n  tone = \"primary\",\n  animated = true,\n  ...props\n}: StupidInsectProps) {\n  return (\n    <div\n      className={cn(\n        \"jk-stupid-insect relative isolate overflow-hidden rounded-[--radius] border border-border\",\n        className,\n      )}\n      data-animated={animated ? \"true\" : \"false\"}\n      data-slot=\"stupid-insect\"\n      data-tone={tone}\n      style={{\n        [\"--jk-stupid-insect-cell\" as string]: cellSizes[cellSize],\n      }}\n      {...props}\n    >\n      <style href=\"jk-stupid-insect\" precedence=\"default\">{`\n        .jk-stupid-insect {\n          min-height: 12rem;\n          min-width: 12rem;\n        }\n        .jk-stupid-insect-field {\n          --jk-stupid-insect-a: var(--jk-card);\n          --jk-stupid-insect-b: var(--jk-primary);\n          --jk-stupid-insect-rings:\n            var(--jk-stupid-insect-a) 0 7%,\n            var(--jk-stupid-insect-b) 8% 17%,\n            var(--jk-stupid-insect-a) 18% 27%,\n            var(--jk-stupid-insect-b) 28% 37%,\n            var(--jk-stupid-insect-a) 38% 47%,\n            var(--jk-stupid-insect-b) 48% 57%,\n            var(--jk-stupid-insect-a) 58% 67%,\n            var(--jk-stupid-insect-b) 68% 77%,\n            var(--jk-stupid-insect-a) 78% 87%,\n            var(--jk-stupid-insect-b) 88% 94%,\n            transparent 95%;\n          background-color: var(--jk-stupid-insect-a);\n          background-image:\n            radial-gradient(50% 50% at 100% 0, var(--jk-stupid-insect-rings)),\n            radial-gradient(50% 50% at 0 100%, var(--jk-stupid-insect-rings)),\n            radial-gradient(50% 50% at 50% 50%, var(--jk-stupid-insect-rings)),\n            radial-gradient(50% 50% at 50% 50%, var(--jk-stupid-insect-rings));\n          background-position:\n            0 0,\n            0 0,\n            0 0,\n            calc(var(--jk-stupid-insect-cell) / 2) calc(var(--jk-stupid-insect-cell) / 2);\n          background-size: var(--jk-stupid-insect-cell) var(--jk-stupid-insect-cell);\n        }\n        .jk-stupid-insect[data-tone=\"chart\"] .jk-stupid-insect-field {\n          --jk-stupid-insect-a: var(--jk-chart-3);\n          --jk-stupid-insect-b: var(--jk-chart-1);\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-stupid-insect[data-animated=\"true\"] .jk-stupid-insect-field {\n            animation: jk-stupid-insect-drift 18s linear infinite;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-stupid-insect-field {\n            animation: none;\n          }\n        }\n        @keyframes jk-stupid-insect-drift {\n          to {\n            background-position:\n              var(--jk-stupid-insect-cell) 0,\n              calc(var(--jk-stupid-insect-cell) * -1) 0,\n              0 var(--jk-stupid-insect-cell),\n              calc(var(--jk-stupid-insect-cell) * 1.5)\n                calc(var(--jk-stupid-insect-cell) * 1.5);\n          }\n        }\n      `}</style>\n      <div\n        aria-hidden=\"true\"\n        className=\"jk-stupid-insect-field pointer-events-none absolute inset-0\"\n      />\n      {children ? (\n        <div className=\"relative z-10 flex h-full min-h-12 w-full items-end p-4\">\n          <div className=\"rounded-[--radius] bg-background/80 px-3 py-2 text-sm text-foreground shadow-[var(--jk-shadow-control)] ring-1 ring-border backdrop-blur-sm\">\n            {children}\n          </div>\n        </div>\n      ) : null}\n    </div>\n  );\n}\n"
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { StupidInsectProps } from \"./StupidInsect.types\";\n\nconst cellSizes = {\n  sm: \"100px\",\n  md: \"150px\",\n  lg: \"200px\",\n} as const;\n\nconst palettes = {\n  sand: {\n    a: \"color-mix(in oklab, var(--jk-warning) 58%, var(--jk-card))\",\n    b: \"color-mix(in oklab, var(--jk-chart-1) 38%, var(--jk-foreground))\",\n  },\n  dusk: {\n    a: \"color-mix(in oklab, var(--jk-chart-3) 42%, var(--jk-card))\",\n    b: \"color-mix(in oklab, var(--jk-chart-1) 62%, var(--jk-primary))\",\n  },\n} as const;\n\nexport function StupidInsect({\n  className,\n  children,\n  cellSize = \"md\",\n  tone = \"sand\",\n  animated = false,\n  label = \"Concentric ring field\",\n  style,\n  ...props\n}: StupidInsectProps) {\n  const inks = palettes[tone];\n\n  return (\n    <div\n      aria-label={children ? undefined : label}\n      className={cn(\"jk-stupid-insect\", animated && \"jk-stupid-insect-live\", className)}\n      data-slot=\"stupid-insect\"\n      data-tone={tone}\n      role={children ? undefined : \"img\"}\n      style={\n        {\n          \"--jk-stupid-insect-a\": inks.a,\n          \"--jk-stupid-insect-b\": inks.b,\n          \"--jk-stupid-insect-cell\": cellSizes[cellSize],\n          ...style,\n        } as React.CSSProperties\n      }\n      {...props}\n    >\n      <style href=\"jk-stupid-insect\" precedence=\"default\">{`\n        .jk-stupid-insect {\n          --jk-stupid-insect-rings:\n            var(--jk-stupid-insect-a) 0% 5%,\n            var(--jk-stupid-insect-b) 6% 15%,\n            var(--jk-stupid-insect-a) 16% 25%,\n            var(--jk-stupid-insect-b) 26% 35%,\n            var(--jk-stupid-insect-a) 36% 45%,\n            var(--jk-stupid-insect-b) 46% 55%,\n            var(--jk-stupid-insect-a) 56% 65%,\n            var(--jk-stupid-insect-b) 66% 75%,\n            var(--jk-stupid-insect-a) 76% 85%,\n            var(--jk-stupid-insect-b) 86% 95%,\n            transparent 96%;\n          position: relative;\n          isolation: isolate;\n          width: 100%;\n          height: 100%;\n          min-height: 10rem;\n          overflow: hidden;\n          border: 0;\n          border-radius: 0;\n          background:\n            radial-gradient(50% 50% at 100% 0, var(--jk-stupid-insect-rings)),\n            radial-gradient(50% 50% at 0 100%, var(--jk-stupid-insect-rings)),\n            radial-gradient(50% 50%, var(--jk-stupid-insect-rings)),\n            radial-gradient(50% 50%, var(--jk-stupid-insect-rings))\n              calc(var(--jk-stupid-insect-cell) / 2)\n              calc(var(--jk-stupid-insect-cell) / 2)\n              var(--jk-stupid-insect-a);\n          background-size: var(--jk-stupid-insect-cell) var(--jk-stupid-insect-cell);\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-stupid-insect-live {\n            animation: jk-stupid-insect-drift 18s linear infinite;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-stupid-insect-live {\n            animation: none;\n          }\n        }\n        @keyframes jk-stupid-insect-drift {\n          to {\n            background-position:\n              var(--jk-stupid-insect-cell) 0,\n              calc(var(--jk-stupid-insect-cell) * -1) 0,\n              0 var(--jk-stupid-insect-cell),\n              calc(var(--jk-stupid-insect-cell) * 1.5)\n                calc(var(--jk-stupid-insect-cell) * 1.5);\n          }\n        }\n      `}</style>\n      {children ? (\n        <div className=\"relative z-10 flex h-full min-h-40 items-center justify-center p-6 text-card-foreground\">\n          {children}\n        </div>\n      ) : null}\n    </div>\n  );\n}\n"
     },
     {
       "path": "stupid-insect/StupidInsect.types.ts",
       "type": "types",
-      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type StupidInsectCellSize = \"sm\" | \"md\" | \"lg\";\n\nexport type StupidInsectTone = \"primary\" | \"chart\";\n\nexport interface StupidInsectProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n  cellSize?: StupidInsectCellSize;\n  tone?: StupidInsectTone;\n  animated?: boolean;\n}\n"
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type StupidInsectCellSize = \"sm\" | \"md\" | \"lg\";\n\nexport type StupidInsectTone = \"sand\" | \"dusk\";\n\nexport interface StupidInsectProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n  /** Tile size. `md` is the inspo 150px cell. */\n  cellSize?: StupidInsectCellSize;\n  /** Token pairing for the sand/navy ring inks. */\n  tone?: StupidInsectTone;\n  /** Slow tile drift. Off by default to match the static inspo. */\n  animated?: boolean;\n  /** Accessible name for the decorative field. */\n  label?: string;\n}\n"
     },
     {
       "path": "stupid-insect/index.ts",
       "type": "index",
-      "content": "export { StupidInsect } from \"./StupidInsect\";\nexport type * from \"./StupidInsect.types\";\n"
+      "content": "export { StupidInsect } from \"./StupidInsect\";\nexport type {\n  StupidInsectCellSize,\n  StupidInsectProps,\n  StupidInsectTone,\n} from \"./StupidInsect.types\";\n"
     },
     {
       "path": "lib/cn.ts",
@@ -81,11 +83,11 @@
   "examples": [
     {
       "name": "Default",
-      "code": "<StupidInsect\n      className=\"h-64 w-80\"\n      {...stupidInsectMocks.default}\n    />"
+      "code": "<div className=\"h-64 w-80 bg-background text-foreground\">\n      <StupidInsect {...stupidInsectMocks.default} />\n    </div>"
     },
     {
-      "name": "ChartTone",
-      "code": "<StupidInsect\n      className=\"h-64 w-80\"\n      {...stupidInsectMocks.chart}\n    />"
+      "name": "Tones",
+      "code": "<div className=\"flex w-80 flex-col gap-4 bg-background text-foreground\">\n      <div className=\"h-56\">\n        <StupidInsect {...stupidInsectMocks.default} />\n      </div>\n      <div className=\"h-56\">\n        <StupidInsect {...stupidInsectMocks.dusk} />\n      </div>\n    </div>"
     }
   ]
 }
