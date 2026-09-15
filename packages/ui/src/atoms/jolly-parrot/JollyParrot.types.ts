@@ -9,6 +9,6 @@ export interface JollyParrotProps extends HTMLAttributes<HTMLDivElement> {
   label?: string;
   size?: JollyParrotSize;
   tone?: JollyParrotTone;
-  /** Slow tile drift. Honors prefers-reduced-motion. */
+  /** Optional tile drift. Off by default to match the still inspo. Honors prefers-reduced-motion. */
   animated?: boolean;
 }
