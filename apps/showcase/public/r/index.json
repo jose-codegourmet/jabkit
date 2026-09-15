@@ -8361,12 +8361,12 @@
     "name": "ticket-confirmation-card",
     "displayName": "TicketConfirmationCard",
     "category": "marketing",
-    "description": "Digital receipt-style booking confirmation with success status, ticket ID, payment ledger, perforated stub, and scan barcode.",
+    "description": "Digital receipt-style confirmation with success status, ticket ID, payment details, and barcode.",
     "sectionCategory": "content",
-    "purpose": "Gives an event or travel landing a trusted confirmation slip visitors can read, save, and scan without leaving the page.",
+    "purpose": "Shows a booking or payment confirmation as a perforated ticket slip visitors can read and scan on the page.",
     "bestFor": [
       "event booking confirmation",
-      "travel and ferry passes",
+      "travel tickets",
       "payment receipts that need a scan code"
     ],
     "avoidFor": [
@@ -8392,21 +8392,18 @@
       "columns": 1
     },
     "slots": [
-      "headline",
-      "description",
       "successStatus",
       "ticketId",
-      "eventName",
-      "details",
-      "payment",
-      "barcode",
-      "cta"
+      "amount",
+      "dateTime",
+      "paymentCard",
+      "barcode"
     ],
     "capabilities": {
       "supportsImage": false,
       "supportsVideo": false,
       "supportsForm": false,
-      "supportsCTA": true,
+      "supportsCTA": false,
       "supportsDarkMode": true
     },
     "recommendedAfter": [
@@ -8441,7 +8438,7 @@
     "preview": {
       "layout": "fit",
       "width": 1440,
-      "height": 980
+      "height": 900
     }
   },
   {

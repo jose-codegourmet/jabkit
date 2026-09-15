@@ -1,2 +1,2 @@
 export { TicketConfirmationCard } from "./TicketConfirmationCard";
-export type * from "./TicketConfirmationCard.types";
+export type { TicketConfirmationCardProps } from "./TicketConfirmationCard.types";
