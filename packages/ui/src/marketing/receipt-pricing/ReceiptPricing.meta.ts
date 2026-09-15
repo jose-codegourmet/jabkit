@@ -3,10 +3,10 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "receipt-pricing",
   displayName: "ReceiptPricing",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Pricing section that prints each plan as a thermal receipt with a ledger, yearly discount line, barcode, and serrated edges.",
+    "Pricing section that prints each plan as a thermal receipt with a monospace ledger, yearly discount, barcode, and serrated edges.",
   sectionCategory: "pricing",
   purpose:
     "Lets a landing page compare subscriptions as shop tickets so visitors can read line items, the subtotal, and the yearly discount in one glance.",
@@ -60,7 +60,7 @@ export default {
     "yearly",
   ],
   dependencies: [],
-  registryDependencies: ["button"],
+  registryDependencies: [],
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: { layout: "fit", width: 1440, height: 1100 },
 } satisfies ComponentMeta;
