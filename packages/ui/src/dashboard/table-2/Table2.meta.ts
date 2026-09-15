@@ -15,10 +15,7 @@ export default {
     "accounts receivable queues",
     "invoice ledgers",
   ],
-  avoidFor: [
-    "marketing pricing tables",
-    "spreadsheet-style cell editing",
-  ],
+  avoidFor: ["marketing pricing tables", "spreadsheet-style cell editing"],
   tone: ["professional", "structured"],
   industries: ["saas", "finance", "logistics"],
   contentDensity: "high",

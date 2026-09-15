@@ -293,9 +293,8 @@ export function Table2({
     React.useState<Table2Invoice[]>(defaultInvoices);
   const invoices = isControlled ? invoicesProp : uncontrolled;
   const [query, setQuery] = React.useState(defaultSearch);
-  const [statusFilter, setStatusFilter] = React.useState<
-    Table2InvoiceStatus | null
-  >(defaultStatusFilter);
+  const [statusFilter, setStatusFilter] =
+    React.useState<Table2InvoiceStatus | null>(defaultStatusFilter);
   const [page, setPage] = React.useState(Math.max(1, defaultPage));
   const [selected, setSelected] = React.useState<string[]>([]);
   const [notice, setNotice] = React.useState("");
@@ -681,9 +680,7 @@ export function Table2({
               variant="secondary"
               className="gap-1"
               disabled={currentPage >= pageCount}
-              onClick={() =>
-                setPage((value) => Math.min(pageCount, value + 1))
-              }
+              onClick={() => setPage((value) => Math.min(pageCount, value + 1))}
             >
               {nextLabel}
               <ChevronRightIcon className="size-3.5" />

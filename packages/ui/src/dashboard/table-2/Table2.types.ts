@@ -23,7 +23,8 @@ export interface Table2Invoice {
   status: Table2InvoiceStatus;
 }
 
-export interface Table2Props extends Omit<HTMLAttributes<HTMLElement>, "title"> {
+export interface Table2Props
+  extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   title?: string;
   description?: string;
   searchPlaceholder?: string;
