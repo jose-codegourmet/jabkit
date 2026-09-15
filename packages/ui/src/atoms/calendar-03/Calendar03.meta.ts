@@ -3,7 +3,7 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "calendar-03",
   displayName: "Calendar03",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
     "Single-month appointment calendar paired with a scrollable list of time slots.",
@@ -24,22 +24,22 @@ export default {
     alignment: "left",
     columns: 2,
   },
-  slots: ["headline", "monthGrid", "timeList", "confirmAction"],
+  slots: ["monthGrid", "timeList"],
   capabilities: {
     supportsImage: false,
     supportsVideo: false,
     supportsForm: true,
-    supportsCTA: true,
+    supportsCTA: false,
     supportsDarkMode: true,
   },
   tags: ["calendar", "appointment", "time", "booking", "atom"],
   dependencies: ["lucide-react"],
-  registryDependencies: ["button", "scroll-area"],
+  registryDependencies: ["scroll-area"],
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: {
     layout: "center",
-    width: 720,
-    height: 520,
-    capture: { viewport: { width: 840, height: 560 } },
+    width: 560,
+    height: 380,
+    capture: { viewport: { width: 640, height: 420 } },
   },
 } satisfies ComponentMeta;

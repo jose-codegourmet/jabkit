@@ -7,12 +7,9 @@ export interface Calendar03Slot {
 }
 
 export interface Calendar03Copy {
-  title: string;
-  description: string;
   timesLabel: string;
   previousMonth: string;
   nextMonth: string;
-  confirmLabel: string;
   emptyTimes: string;
 }
 
@@ -29,5 +26,4 @@ export interface Calendar03Props
   copy?: Partial<Calendar03Copy>;
   locale?: string;
   weekStartsOn?: 0 | 1;
-  onConfirm?: (selection: { date: Date; time: string }) => void;
 }

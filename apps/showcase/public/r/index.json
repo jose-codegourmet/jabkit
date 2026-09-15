@@ -453,16 +453,14 @@
       "columns": 2
     },
     "slots": [
-      "headline",
       "monthGrid",
-      "timeList",
-      "confirmAction"
+      "timeList"
     ],
     "capabilities": {
       "supportsImage": false,
       "supportsVideo": false,
       "supportsForm": true,
-      "supportsCTA": true,
+      "supportsCTA": false,
       "supportsDarkMode": true
     },
     "tags": [
@@ -484,8 +482,8 @@
     },
     "preview": {
       "layout": "center",
-      "width": 720,
-      "height": 520
+      "width": 560,
+      "height": 380
     }
   },
   {

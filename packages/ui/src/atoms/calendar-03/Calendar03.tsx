@@ -2,7 +2,6 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import * as React from "react";
-import { Button } from "@/atoms/button";
 import { ScrollArea } from "@/atoms/scroll-area";
 import { cn } from "@/lib/cn";
 import type {
@@ -12,26 +11,27 @@ import type {
 } from "./Calendar03.types";
 
 const DEFAULT_COPY: Calendar03Copy = {
-  title: "Book an appointment",
-  description: "Choose a date, then pick an open time.",
-  timesLabel: "Available times",
+  timesLabel: "Available Times",
   previousMonth: "Previous month",
   nextMonth: "Next month",
-  confirmLabel: "Continue",
   emptyTimes: "No times are open on this date.",
 };
 
 const DEFAULT_SLOTS: Calendar03Slot[] = [
-  { value: "09:00", label: "9:00 AM" },
-  { value: "09:30", label: "9:30 AM" },
+  { value: "09:00", label: "09:00 AM" },
+  { value: "09:30", label: "09:30 AM" },
   { value: "10:00", label: "10:00 AM" },
   { value: "10:30", label: "10:30 AM" },
   { value: "11:00", label: "11:00 AM" },
-  { value: "13:00", label: "1:00 PM" },
-  { value: "13:30", label: "1:30 PM" },
-  { value: "14:00", label: "2:00 PM" },
-  { value: "15:00", label: "3:00 PM" },
-  { value: "16:00", label: "4:00 PM" },
+  { value: "11:30", label: "11:30 AM" },
+  { value: "13:00", label: "01:00 PM" },
+  { value: "13:30", label: "01:30 PM" },
+  { value: "14:00", label: "02:00 PM" },
+  { value: "14:30", label: "02:30 PM" },
+  { value: "15:00", label: "03:00 PM" },
+  { value: "15:30", label: "03:30 PM" },
+  { value: "16:00", label: "04:00 PM" },
+  { value: "16:30", label: "04:30 PM" },
 ];
 
 function startOfDay(date: Date) {
@@ -87,16 +87,29 @@ function monthCells(month: Date, startWeekday: number) {
     month.getMonth() + 1,
     0,
   ).getDate();
-  const cells: Array<{ key: string; date?: Date }> = [];
+  const cells: Date[] = [];
+
   for (let i = 0; i < offset; i++) {
-    cells.push({ key: `pad-${dayKey(first)}-${i}` });
+    cells.push(new Date(month.getFullYear(), month.getMonth(), i - offset + 1));
   }
   for (let day = 1; day <= daysInMonth; day++) {
-    const date = new Date(month.getFullYear(), month.getMonth(), day);
-    cells.push({ key: dayKey(date), date });
+    cells.push(new Date(month.getFullYear(), month.getMonth(), day));
   }
+  const remainder = cells.length % 7;
+  if (remainder !== 0) {
+    const last = cells[cells.length - 1];
+    for (let i = 1; i <= 7 - remainder; i++) {
+      cells.push(
+        new Date(last.getFullYear(), last.getMonth(), last.getDate() + i),
+      );
+    }
+  }
+
   return cells;
 }
+
+const controlFocus =
+  "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none";
 
 export function Calendar03({
   className,
@@ -111,11 +124,9 @@ export function Calendar03({
   copy,
   locale = "en-US",
   weekStartsOn = 0,
-  onConfirm,
   ...props
 }: Calendar03Props) {
   const headingId = React.useId();
-  const descriptionId = React.useId();
   const timesId = React.useId();
   const strings = { ...DEFAULT_COPY, ...copy };
   const weekdays = weekdayLabels(locale, weekStartsOn);
@@ -127,19 +138,24 @@ export function Calendar03({
     Date | undefined
   >(() => (defaultSelected ? startOfDay(defaultSelected) : undefined));
   const [uncontrolledTime, setUncontrolledTime] = React.useState(
-    defaultTime ?? slots.find((slot) => slot.available !== false)?.value ?? "",
+    defaultTime ?? "",
   );
 
   const selected = selectedProp
     ? startOfDay(selectedProp)
     : uncontrolledSelected;
   const time = timeProp ?? uncontrolledTime;
-  const selectedSlot = slots.find((slot) => slot.value === time);
   const cells = monthCells(viewMonth, weekStartsOn);
+  const weeks = Array.from({ length: cells.length / 7 }, (_, index) =>
+    cells.slice(index * 7, index * 7 + 7),
+  );
 
   const pickDay = (day: Date) => {
     const next = startOfDay(day);
     if (selectedProp === undefined) setUncontrolledSelected(next);
+    if (!isSameMonth(next, viewMonth)) {
+      setViewMonth(startOfMonth(next));
+    }
     onSelect?.(next);
   };
 
@@ -148,167 +164,159 @@ export function Calendar03({
     onTimeChange?.(value);
   };
 
-  const confirm = () => {
-    if (!selected || !time) return;
-    onConfirm?.({ date: selected, time });
-  };
-
   return (
     <section
       data-slot="calendar-03"
       aria-labelledby={headingId}
-      aria-describedby={descriptionId}
       className={cn(
-        "w-full max-w-[40rem] overflow-hidden rounded-[--radius] border border-border bg-card text-card-foreground shadow-sm",
+        "flex w-fit divide-x divide-border overflow-hidden rounded-md border border-border bg-background text-foreground",
         className,
       )}
       {...props}
     >
-      <header className="border-b border-border px-5 py-4">
-        <h2 id={headingId} className="text-base font-semibold tracking-tight">
-          {strings.title}
-        </h2>
-        <p id={descriptionId} className="mt-1 text-sm text-muted-foreground">
-          {strings.description}
-        </p>
-      </header>
-
-      <div className="grid md:grid-cols-[minmax(0,1.15fr)_minmax(11rem,0.85fr)]">
-        <div className="border-b border-border p-4 md:border-r md:border-b-0">
-          <div className="mb-3 flex items-center justify-between gap-2">
-            <Button
+      <div
+        data-slot="calendar"
+        className="bg-background p-2 [--cell-size:1.75rem]"
+      >
+        <div className="relative flex w-fit flex-col gap-4">
+          <div className="absolute inset-x-0 top-0 flex w-full items-center justify-between gap-1">
+            <button
               type="button"
-              variant="ghost"
-              size="sm"
-              className="size-8 p-0"
               aria-label={strings.previousMonth}
               onClick={() => setViewMonth(addMonths(viewMonth, -1))}
+              className={cn(
+                "inline-flex size-[var(--cell-size)] items-center justify-center rounded-lg p-0 text-foreground transition-colors select-none hover:bg-muted hover:text-foreground motion-reduce:transition-none",
+                controlFocus,
+              )}
             >
               <ChevronLeftIcon className="size-4" />
-            </Button>
-            <p className="text-sm font-medium capitalize">
-              {monthTitle(viewMonth, locale)}
-            </p>
-            <Button
+            </button>
+            <button
               type="button"
-              variant="ghost"
-              size="sm"
-              className="size-8 p-0"
               aria-label={strings.nextMonth}
               onClick={() => setViewMonth(addMonths(viewMonth, 1))}
+              className={cn(
+                "inline-flex size-[var(--cell-size)] items-center justify-center rounded-lg p-0 text-foreground transition-colors select-none hover:bg-muted hover:text-foreground motion-reduce:transition-none",
+                controlFocus,
+              )}
             >
               <ChevronRightIcon className="size-4" />
-            </Button>
+            </button>
           </div>
-          <div className="grid grid-cols-7 gap-1 text-center">
-            {weekdays.map((label) => (
-              <span
-                key={`${locale}-${label}`}
-                className="text-[10px] font-medium tracking-wide text-muted-foreground uppercase"
-              >
-                {label}
-              </span>
-            ))}
-            {cells.map((cell) => {
-              if (!cell.date) {
-                return <span key={cell.key} />;
-              }
-              const day = cell.date;
-              const isSelected = selected ? isSameDay(day, selected) : false;
-              const isToday = isSameDay(day, startOfDay(new Date()));
-              return (
-                <button
-                  key={cell.key}
-                  type="button"
-                  onClick={() => pickDay(day)}
-                  aria-pressed={isSelected}
-                  aria-label={day.toLocaleDateString(locale, {
-                    weekday: "long",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                  className={cn(
-                    "h-8 rounded-md text-xs tabular-nums transition-colors motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
-                    isSameMonth(day, viewMonth)
-                      ? "text-foreground"
-                      : "text-muted-foreground",
-                    isSelected && "bg-primary text-primary-foreground",
-                    !isSelected && isToday && "ring-1 ring-ring",
-                    !isSelected && "hover:bg-accent",
-                  )}
+          <div className="flex h-[var(--cell-size)] w-full items-center justify-center px-[var(--cell-size)]">
+            <h2
+              id={headingId}
+              className="text-sm font-medium capitalize select-none"
+            >
+              {monthTitle(viewMonth, locale)}
+            </h2>
+          </div>
+          <div className="w-full">
+            <div className="flex">
+              {weekdays.map((label) => (
+                <span
+                  key={`${locale}-${label}`}
+                  className="flex-1 rounded-md text-center text-[0.8rem] font-normal text-muted-foreground select-none"
                 >
-                  {day.getDate()}
-                </button>
-              );
-            })}
+                  {label}
+                </span>
+              ))}
+            </div>
+            {weeks.map((week) => (
+              <div key={dayKey(week[0])} className="mt-2 flex w-full">
+                {week.map((day) => {
+                  const isSelected = selected ? isSameDay(day, selected) : false;
+                  const isToday = isSameDay(day, startOfDay(new Date()));
+                  const inMonth = isSameMonth(day, viewMonth);
+                  return (
+                    <div
+                      key={dayKey(day)}
+                      className="group/day relative aspect-square h-full w-full rounded-md p-0 text-center select-none"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => pickDay(day)}
+                        aria-pressed={isSelected}
+                        aria-current={isToday ? "date" : undefined}
+                        aria-label={day.toLocaleDateString(locale, {
+                          weekday: "long",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                        className={cn(
+                          "relative isolate z-10 flex aspect-square size-auto w-full min-w-[var(--cell-size)] items-center justify-center rounded-md border border-transparent p-0 text-sm leading-none font-normal transition-colors motion-reduce:transition-none",
+                          controlFocus,
+                          inMonth
+                            ? "text-foreground"
+                            : "text-muted-foreground",
+                          isSelected &&
+                            "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground",
+                          !isSelected && isToday && "bg-muted text-foreground",
+                          !isSelected && "hover:bg-muted hover:text-foreground",
+                        )}
+                      >
+                        {day.getDate()}
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
           </div>
         </div>
+      </div>
 
-        <div className="flex min-h-[17rem] flex-col p-4">
-          <p
-            id={timesId}
-            className="mb-2 text-xs font-medium tracking-wide text-muted-foreground"
+      <div className="relative w-[249px] self-stretch overflow-hidden">
+        <div className="absolute inset-0 grid min-h-0 grid-rows-[auto_minmax(0,1fr)] gap-4">
+          <div className="space-y-2 px-4 pt-4">
+            <p
+              id={timesId}
+              className="text-center text-sm font-medium"
+            >
+              {strings.timesLabel}
+            </p>
+          </div>
+          <ScrollArea
+            aria-labelledby={timesId}
+            className="h-full overflow-y-auto"
           >
-            {strings.timesLabel}
-          </p>
-          <ScrollArea aria-labelledby={timesId} className="min-h-0 flex-1 pr-1">
             {slots.length === 0 ? (
-              <p className="text-sm text-muted-foreground">
+              <p className="px-4 pb-4 text-center text-sm text-muted-foreground">
                 {strings.emptyTimes}
               </p>
             ) : (
-              <ul className="flex flex-col gap-1.5">
+              <div className="grid grid-cols-1 gap-2 px-4 pb-4">
                 {slots.map((slot) => {
                   const taken = slot.available === false;
                   const active = slot.value === time && !taken;
                   return (
-                    <li key={slot.value}>
-                      <button
-                        type="button"
-                        disabled={taken}
-                        aria-pressed={active}
-                        onClick={() => pickTime(slot.value)}
-                        className={cn(
-                          "flex h-9 w-full items-center justify-center rounded-[--radius] border text-sm transition-colors motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
-                          active &&
-                            "border-primary bg-primary text-primary-foreground",
-                          !active &&
-                            !taken &&
-                            "border-border bg-background text-foreground hover:bg-accent",
-                          taken &&
-                            "cursor-not-allowed border-border bg-muted text-muted-foreground",
-                        )}
-                      >
-                        {slot.label}
-                      </button>
-                    </li>
+                    <button
+                      key={slot.value}
+                      type="button"
+                      disabled={taken}
+                      aria-pressed={active}
+                      onClick={() => pickTime(slot.value)}
+                      className={cn(
+                        "inline-flex h-7 w-full items-center justify-center rounded-md border px-2.5 text-[0.8rem] font-medium whitespace-nowrap transition-all select-none motion-reduce:transition-none disabled:pointer-events-none disabled:opacity-50",
+                        controlFocus,
+                        active &&
+                          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+                        !active &&
+                          !taken &&
+                          "border-border bg-background hover:bg-muted hover:text-foreground",
+                        taken &&
+                          "border-border bg-muted text-muted-foreground",
+                      )}
+                    >
+                      {slot.label}
+                    </button>
                   );
                 })}
-              </ul>
+              </div>
             )}
           </ScrollArea>
         </div>
       </div>
-
-      <footer className="flex flex-col gap-3 border-t border-border px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-muted-foreground">
-          {selected
-            ? `${selected.toLocaleDateString(locale, {
-                weekday: "short",
-                month: "short",
-                day: "numeric",
-              })}${selectedSlot ? ` · ${selectedSlot.label}` : ""}`
-            : strings.description}
-        </p>
-        <Button
-          type="button"
-          size="sm"
-          disabled={!selected || !time}
-          onClick={confirm}
-        >
-          {strings.confirmLabel}
-        </Button>
-      </footer>
     </section>
   );
 }
