@@ -1,0 +1,110 @@
+{
+  "name": "footer-18",
+  "displayName": "Footer18",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Full-viewport agency footer with a newsletter card, pill trial CTA, three link columns, uppercase utility links, and an oversized muted wordmark.",
+  "sectionCategory": "footer",
+  "purpose": "Closes a marketing page with a subscribe card, compact navigation, a pill conversion path, and a giant brand lockup.",
+  "bestFor": [
+    "studio and fintech landings that need a subscribe close",
+    "pages that want a pill trial CTA beside link columns",
+    "full-height endings with a giant muted wordmark"
+  ],
+  "avoidFor": [
+    "compact legal-only footers",
+    "product shells that should not collect email"
+  ],
+  "tone": [
+    "editorial",
+    "agency",
+    "quiet"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "high",
+  "layout": {
+    "type": "split",
+    "alignment": "left",
+    "columns": 4
+  },
+  "slots": [
+    "newsletter",
+    "linkColumns",
+    "trial",
+    "address",
+    "explore",
+    "bottomNav",
+    "social",
+    "wordmark"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "cta",
+    "contact",
+    "faq",
+    "content"
+  ],
+  "tags": [
+    "footer",
+    "marketing",
+    "newsletter",
+    "wordmark",
+    "landing",
+    "social",
+    "pill"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 1100
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "footer-18/Footer18.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ArrowRightIcon, ArrowUpRightIcon } from \"lucide-react\";\nimport {\n  type CSSProperties,\n  type FormEvent,\n  useEffect,\n  useId,\n  useRef,\n  useState,\n} from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  Footer18LinkColumn,\n  Footer18NavLink,\n  Footer18Props,\n} from \"./Footer18.types\";\n\nconst defaultFeatureColumn: Footer18LinkColumn = {\n  title: \"Features\",\n  links: [\n    { label: \"Accounts payable\", href: \"#payable\" },\n    { label: \"Approval workflows\", href: \"#approvals\" },\n    { label: \"Bulk payments\", href: \"#bulk\" },\n    { label: \"Global receivables\", href: \"#receivables\" },\n    { label: \"Currency conversions\", href: \"#currency\" },\n    { label: \"Corporate cards\", href: \"#cards\" },\n    { label: \"Integrations\", href: \"#integrations\" },\n  ],\n};\n\nconst defaultReciteColumn: Footer18LinkColumn = {\n  title: \"Recites\",\n  links: [\n    { label: \"Journal\", href: \"#journal\" },\n    { label: \"Masterclass\", href: \"#masterclass\" },\n    { label: \"Tools\", href: \"#tools\" },\n    { label: \"Changelog\", href: \"#changelog\" },\n  ],\n};\n\nconst defaultPricingColumn: Footer18LinkColumn = {\n  title: \"Pricing\",\n  links: [{ label: \"Security\", href: \"#security\" }],\n};\n\nconst defaultBottomNav: Footer18NavLink[] = [\n  { label: \"Work\", href: \"#work\" },\n  { label: \"Studio\", href: \"#studio\" },\n  { label: \"Services\", href: \"#services\" },\n  { label: \"Partnerships\", href: \"#partnerships\" },\n  { label: \"Monopage\", href: \"#monopage\" },\n  { label: \"Contact\", href: \"#contact\" },\n];\n\nconst defaultSocialLinks: Footer18NavLink[] = [\n  { label: \"Instagram\", href: \"#instagram\" },\n  { label: \"Facebook\", href: \"#facebook\" },\n  { label: \"Twitter\", href: \"#twitter\" },\n  { label: \"Behance\", href: \"#behance\" },\n];\n\nconst defaults = {\n  newsletterHeading: \"Subscribe to our\\nnewsletter\",\n  newsletterPlaceholder: \"Email address\",\n  brandName: \"Kestrel\",\n  exploreText: \"Explore\",\n  exploreHref: \"#explore\",\n  trialText: \"Start free trial\",\n  trialHref: \"#trial\",\n  address: \"18 Harbor Lane, Suite 400\\n\\nPortland, Oregon\\n97204, United States\",\n} as const;\n\nconst focusRing =\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\";\n\nfunction useOnceInView<T extends HTMLElement>(threshold = 0.15) {\n  const ref = useRef<T | null>(null);\n  const [inView, setInView] = useState(false);\n\n  useEffect(() => {\n    const node = ref.current;\n    if (!node) return;\n\n    const reduce = window.matchMedia(\n      \"(prefers-reduced-motion: reduce)\",\n    ).matches;\n    if (reduce) {\n      setInView(true);\n      return;\n    }\n\n    const observer = new IntersectionObserver(\n      ([entry]) => {\n        if (entry?.isIntersecting) {\n          setInView(true);\n          observer.disconnect();\n        }\n      },\n      { threshold },\n    );\n    observer.observe(node);\n    return () => observer.disconnect();\n  }, [threshold]);\n\n  return { ref, inView };\n}\n\nfunction ColumnLinks({\n  column,\n  className,\n}: {\n  column: Footer18LinkColumn;\n  className?: string;\n}) {\n  return (\n    <div className={cn(\"flex flex-col gap-4\", className)}>\n      <h3 className=\"text-base font-medium text-foreground\">{column.title}</h3>\n      <ul className=\"flex list-none flex-col gap-3 p-0\">\n        {column.links.map((link) => (\n          <li key={`${column.title}-${link.label}`}>\n            <a\n              href={link.href}\n              className={cn(\n                \"inline-flex min-h-5 items-center rounded-none text-[15px] leading-tight text-muted-foreground\",\n                \"transition-colors duration-200 hover:text-foreground\",\n                focusRing,\n              )}\n            >\n              {link.label}\n            </a>\n          </li>\n        ))}\n      </ul>\n    </div>\n  );\n}\n\nexport function Footer18({\n  className,\n  newsletterHeading = defaults.newsletterHeading,\n  newsletterPlaceholder = defaults.newsletterPlaceholder,\n  onSubscribe,\n  brandName = defaults.brandName,\n  featureColumn = defaultFeatureColumn,\n  reciteColumn = defaultReciteColumn,\n  pricingColumn = defaultPricingColumn,\n  exploreText = defaults.exploreText,\n  exploreHref = defaults.exploreHref,\n  trialText = defaults.trialText,\n  trialHref = defaults.trialHref,\n  address = defaults.address,\n  bottomNav = defaultBottomNav,\n  socialLinks = defaultSocialLinks,\n  ...props\n}: Footer18Props) {\n  const emailFieldId = useId();\n  const [email, setEmail] = useState(\"\");\n  const { ref, inView } = useOnceInView<HTMLElement>(0.15);\n  const wordmarkWidth = Math.max(brandName.length * 90, 400);\n  const exploreLabel =\n    exploreText === \"Explore\" ? `Explore ${brandName}` : exploreText;\n\n  function handleSubscribeSubmit(event: FormEvent<HTMLFormElement>) {\n    event.preventDefault();\n    const next = email.trim();\n    if (!next) return;\n    onSubscribe?.(next);\n  }\n\n  return (\n    <footer\n      ref={ref}\n      data-slot=\"footer-18\"\n      className={cn(\n        \"jk-footer18 relative flex min-h-[100dvh] w-full flex-col justify-between overflow-hidden bg-background font-sans text-muted-foreground antialiased\",\n        inView && \"jk-footer18-in\",\n        className,\n      )}\n      {...props}\n    >\n      <style href=\"jk-footer-18\" precedence=\"default\">{`\n        .jk-footer18-noise {\n          background-image: url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='jkFooter18Noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23jkFooter18Noise)'/%3E%3C/svg%3E\");\n        }\n        .jk-footer18-rise,\n        .jk-footer18-word {\n          opacity: 0;\n          transform: translateY(20px);\n          filter: blur(4px);\n        }\n        .jk-footer18-word {\n          transform: translateY(30px);\n          filter: blur(8px);\n        }\n        .jk-footer18-in .jk-footer18-rise {\n          animation: jk-footer18-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;\n          animation-delay: var(--jk-footer18-delay, 50ms);\n        }\n        .jk-footer18-in .jk-footer18-word {\n          animation: jk-footer18-word 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;\n          animation-delay: var(--jk-footer18-delay, 280ms);\n        }\n        @keyframes jk-footer18-rise {\n          to {\n            opacity: 1;\n            transform: translateY(0);\n            filter: blur(0);\n          }\n        }\n        @keyframes jk-footer18-word {\n          to {\n            opacity: 1;\n            transform: translateY(0);\n            filter: blur(0);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-footer18-rise,\n          .jk-footer18-word,\n          .jk-footer18-in .jk-footer18-rise,\n          .jk-footer18-in .jk-footer18-word {\n            opacity: 1;\n            transform: none;\n            filter: none;\n            animation: none;\n          }\n        }\n      `}</style>\n\n      <div\n        className=\"jk-footer18-noise pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-multiply dark:opacity-[0.04] dark:mix-blend-overlay\"\n        aria-hidden=\"true\"\n      />\n\n      <div className=\"relative z-10 mx-auto flex w-full max-w-[1500px] flex-col px-6 pt-16 md:px-12 md:pt-20 lg:px-20\">\n        <div className=\"mb-12 flex flex-col gap-12 lg:flex-row lg:gap-24\">\n          <div\n            className=\"jk-footer18-rise flex min-h-[300px] w-full shrink-0 flex-col justify-between rounded-md border border-border bg-card p-6 shadow-sm md:min-h-[420px] md:p-8 lg:w-[450px]\"\n            style={{ \"--jk-footer18-delay\": \"50ms\" } as CSSProperties}\n          >\n            <h2 className=\"text-3xl leading-[1.1] font-medium tracking-tight whitespace-pre-line text-foreground md:text-4xl\">\n              {newsletterHeading}\n            </h2>\n\n            <form\n              className=\"relative mt-12 w-full md:mt-16\"\n              onSubmit={handleSubscribeSubmit}\n            >\n              <label className=\"sr-only\" htmlFor={emailFieldId}>\n                {newsletterPlaceholder}\n              </label>\n              <input\n                id={emailFieldId}\n                name=\"email\"\n                type=\"email\"\n                value={email}\n                onChange={(event) => setEmail(event.target.value)}\n                placeholder={newsletterPlaceholder}\n                required\n                autoComplete=\"email\"\n                className={cn(\n                  \"w-full rounded-none border-0 border-b border-border bg-transparent pb-4 pr-10 text-sm text-foreground\",\n                  \"placeholder:text-muted-foreground\",\n                  \"transition-colors duration-200 focus:border-foreground focus:outline-none\",\n                )}\n              />\n              <button\n                type=\"submit\"\n                aria-label=\"Submit newsletter subscription\"\n                className={cn(\n                  \"absolute top-0 right-0 flex cursor-pointer items-center justify-center rounded-none pb-4 text-muted-foreground\",\n                  \"transition-colors duration-200 hover:text-foreground\",\n                  focusRing,\n                )}\n              >\n                <ArrowRightIcon aria-hidden=\"true\" className=\"size-5\" />\n              </button>\n            </form>\n          </div>\n\n          <nav\n            aria-label=\"Footer navigation\"\n            className=\"grid flex-1 grid-cols-1 gap-12 pt-4 sm:grid-cols-2 md:grid-cols-3 md:gap-8\"\n          >\n            <div\n              className=\"jk-footer18-rise flex flex-col gap-10 md:gap-12\"\n              style={{ \"--jk-footer18-delay\": \"150ms\" } as CSSProperties}\n            >\n              <ColumnLinks column={featureColumn} />\n              <div className=\"mt-2 flex flex-col gap-6 md:mt-4\">\n                <a\n                  href={trialHref}\n                  className={cn(\n                    \"inline-flex w-fit items-center justify-center rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background\",\n                    \"transition-[opacity,transform] duration-200 ease-out hover:opacity-90 active:scale-[0.98]\",\n                    \"motion-reduce:transition-none motion-reduce:active:scale-100\",\n                    focusRing,\n                  )}\n                >\n                  {trialText}\n                </a>\n                <p className=\"max-w-2xl text-sm leading-relaxed whitespace-pre-line text-muted-foreground\">\n                  {address}\n                </p>\n              </div>\n            </div>\n\n            <div\n              className=\"jk-footer18-rise\"\n              style={{ \"--jk-footer18-delay\": \"250ms\" } as CSSProperties}\n            >\n              <ColumnLinks column={reciteColumn} />\n            </div>\n\n            <div\n              className=\"jk-footer18-rise flex h-full flex-col justify-between gap-12\"\n              style={{ \"--jk-footer18-delay\": \"350ms\" } as CSSProperties}\n            >\n              <ColumnLinks column={pricingColumn} />\n              <div className=\"mt-8 md:mt-auto\">\n                <a\n                  href={exploreHref}\n                  className={cn(\n                    \"group inline-flex items-center gap-2 rounded-none text-[22px] text-foreground\",\n                    \"transition-colors duration-200 hover:text-muted-foreground\",\n                    focusRing,\n                  )}\n                >\n                  {exploreLabel}\n                  <ArrowUpRightIcon\n                    aria-hidden=\"true\"\n                    className=\"size-[22px] text-muted-foreground transition-colors duration-200 group-hover:text-foreground\"\n                  />\n                </a>\n              </div>\n            </div>\n          </nav>\n        </div>\n      </div>\n\n      <div className=\"relative z-10 mt-auto flex w-full flex-col\">\n        <div className=\"mx-auto mb-8 flex w-full max-w-[1500px] flex-col items-start justify-between gap-8 px-6 md:mb-4 md:flex-row md:items-center md:px-12 lg:px-20\">\n          <div\n            className=\"jk-footer18-rise flex flex-wrap gap-x-8 gap-y-4\"\n            style={{ \"--jk-footer18-delay\": \"420ms\" } as CSSProperties}\n          >\n            {bottomNav.map((link) => (\n              <a\n                key={link.label}\n                href={link.href}\n                className={cn(\n                  \"text-[11px] font-medium tracking-widest text-muted-foreground uppercase\",\n                  \"transition-colors duration-200 hover:text-foreground\",\n                  focusRing,\n                )}\n              >\n                {link.label}\n              </a>\n            ))}\n          </div>\n\n          <div\n            className=\"jk-footer18-rise flex flex-wrap gap-x-8 gap-y-4\"\n            style={{ \"--jk-footer18-delay\": \"500ms\" } as CSSProperties}\n          >\n            {socialLinks.map((link) => (\n              <a\n                key={link.label}\n                href={link.href}\n                className={cn(\n                  \"group inline-flex items-center gap-1.5 text-[11px] font-medium tracking-widest text-muted-foreground uppercase\",\n                  \"transition-colors duration-200 hover:text-foreground\",\n                  focusRing,\n                )}\n              >\n                {link.label}\n                <ArrowUpRightIcon\n                  aria-hidden=\"true\"\n                  className=\"size-3 text-muted-foreground transition-colors duration-200 group-hover:text-foreground\"\n                />\n              </a>\n            ))}\n          </div>\n        </div>\n\n        <div\n          className=\"jk-footer18-word w-full\"\n          style={{ \"--jk-footer18-delay\": \"280ms\" } as CSSProperties}\n        >\n          <svg\n            className=\"h-auto w-full select-none text-muted-foreground/40 dark:text-foreground/20\"\n            viewBox={`0 0 ${wordmarkWidth} 110`}\n            preserveAspectRatio=\"xMidYMid meet\"\n            aria-hidden=\"true\"\n          >\n            <text\n              x=\"0\"\n              y=\"105\"\n              dominantBaseline=\"alphabetic\"\n              textAnchor=\"start\"\n              textLength=\"100%\"\n              lengthAdjust=\"spacing\"\n              className=\"fill-current font-sans font-bold tracking-tighter\"\n              fontSize=\"140\"\n            >\n              {brandName.toUpperCase()}\n            </text>\n          </svg>\n          <span className=\"sr-only\">{brandName}</span>\n        </div>\n      </div>\n    </footer>\n  );\n}\n"
+    },
+    {
+      "path": "footer-18/Footer18.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface Footer18NavLink {\n  label: string;\n  href: string;\n}\n\nexport interface Footer18LinkColumn {\n  title: string;\n  links: Footer18NavLink[];\n}\n\nexport interface Footer18Props extends HTMLAttributes<HTMLElement> {\n  newsletterHeading?: string;\n  newsletterPlaceholder?: string;\n  onSubscribe?: (email: string) => void;\n  brandName?: string;\n  featureColumn?: Footer18LinkColumn;\n  reciteColumn?: Footer18LinkColumn;\n  pricingColumn?: Footer18LinkColumn;\n  exploreText?: string;\n  exploreHref?: string;\n  trialText?: string;\n  trialHref?: string;\n  address?: string;\n  bottomNav?: Footer18NavLink[];\n  socialLinks?: Footer18NavLink[];\n}\n"
+    },
+    {
+      "path": "footer-18/index.ts",
+      "type": "index",
+      "content": "export { Footer18 } from \"./Footer18\";\nexport type { Footer18LinkColumn } from \"./Footer18.types\";\nexport type { Footer18NavLink } from \"./Footer18.types\";\nexport type { Footer18Props } from \"./Footer18.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Footer18 {...footer18Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Footer18 {...footer18Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
