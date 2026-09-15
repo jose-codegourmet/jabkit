@@ -1,0 +1,90 @@
+{
+  "name": "light-eagle",
+  "displayName": "LightEagle",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A token-tinted chevron wing field with an optional caption and a slow glide that pauses under reduced motion.",
+  "sectionCategory": "content",
+  "purpose": "Gives empty states, catalogue cards, and section backdrops a feathered chevron texture that stays on semantic tokens in light and dark.",
+  "bestFor": [
+    "decorative tiles behind captions",
+    "catalogue or story frames that need a light geometric field",
+    "quiet pattern fills on product surfaces"
+  ],
+  "avoidFor": [
+    "primary actions or form controls",
+    "dense data that needs a plain surface"
+  ],
+  "tone": [
+    "playful",
+    "clean"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "caption"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "pattern",
+    "chevron",
+    "background",
+    "texture",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "light-eagle/LightEagle.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { LightEagleProps } from \"./LightEagle.types\";\n\nconst sizes = {\n  sm: \"h-28 w-44\",\n  md: \"h-40 w-64\",\n  lg: \"h-52 w-80\",\n} as const;\n\nconst tile = {\n  sm: \"1.35rem\",\n  md: \"1.75rem\",\n  lg: \"2.15rem\",\n} as const;\n\nconst tones = {\n  dawn: {\n    field: \"color-mix(in oklab, var(--jk-card) 82%, var(--jk-warning))\",\n    bar: \"color-mix(in oklab, var(--jk-warning) 42%, var(--jk-card))\",\n    lift: \"color-mix(in oklab, var(--jk-primary) 28%, var(--jk-card))\",\n  },\n  sky: {\n    field: \"color-mix(in oklab, var(--jk-card) 78%, var(--jk-chart-2))\",\n    bar: \"color-mix(in oklab, var(--jk-chart-2) 48%, var(--jk-muted))\",\n    lift: \"color-mix(in oklab, var(--jk-primary) 36%, var(--jk-card))\",\n  },\n  chart: {\n    field: \"color-mix(in oklab, var(--jk-muted) 70%, var(--jk-chart-1))\",\n    bar: \"color-mix(in oklab, var(--jk-chart-1) 55%, var(--jk-card))\",\n    lift: \"color-mix(in oklab, var(--jk-chart-4) 40%, var(--jk-card))\",\n  },\n} as const;\n\nexport function LightEagle({\n  className,\n  children,\n  label = \"Wing field\",\n  size = \"md\",\n  tone = \"dawn\",\n  animate = true,\n  style,\n  ...props\n}: LightEagleProps) {\n  const palette = tones[tone];\n  const content = children ?? label;\n\n  return (\n    <div\n      aria-label={children ? undefined : label}\n      className={cn(\n        \"jk-light-eagle relative overflow-hidden rounded-[--radius] border border-border bg-card text-card-foreground shadow-[var(--jk-shadow-control)]\",\n        sizes[size],\n        className,\n      )}\n      data-animate={animate ? \"true\" : \"false\"}\n      data-size={size}\n      data-slot=\"light-eagle\"\n      data-tone={tone}\n      role={children ? undefined : \"img\"}\n      style={\n        {\n          \"--jk-light-eagle-field\": palette.field,\n          \"--jk-light-eagle-bar\": palette.bar,\n          \"--jk-light-eagle-lift\": palette.lift,\n          \"--jk-light-eagle-tile\": tile[size],\n          ...style,\n        } as React.CSSProperties\n      }\n      {...props}\n    >\n      <style href=\"jk-light-eagle\" precedence=\"default\">{`\n        .jk-light-eagle-field {\n          --le-s: var(--jk-light-eagle-tile);\n          background-color: var(--jk-light-eagle-field);\n          background-image:\n            linear-gradient(\n              180deg,\n              color-mix(in oklab, var(--jk-light-eagle-lift), transparent 42%) 0%,\n              transparent 46%,\n              color-mix(in oklab, var(--jk-card), transparent 35%) 100%\n            ),\n            repeating-linear-gradient(\n              135deg,\n              var(--jk-light-eagle-bar) 0 calc(var(--le-s) * 0.22),\n              transparent calc(var(--le-s) * 0.22) calc(var(--le-s) * 0.5)\n            ),\n            repeating-linear-gradient(\n              45deg,\n              color-mix(in oklab, var(--jk-light-eagle-bar), transparent 28%) 0\n                calc(var(--le-s) * 0.18),\n              transparent calc(var(--le-s) * 0.18) calc(var(--le-s) * 0.5)\n            );\n          background-size:\n            100% 100%,\n            calc(var(--le-s) * 1.4) calc(var(--le-s) * 1.4),\n            calc(var(--le-s) * 1.4) calc(var(--le-s) * 1.4);\n          background-position: 0 0, 0 0, calc(var(--le-s) * 0.35) 0;\n        }\n        @keyframes jk-light-eagle-glide {\n          to {\n            background-position:\n              0 0,\n              calc(var(--le-s) * 1.4) calc(var(--le-s) * 1.4),\n              calc(var(--le-s) * 1.75) calc(var(--le-s) * 1.4);\n          }\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-light-eagle[data-animate=\"true\"] .jk-light-eagle-field {\n            animation: jk-light-eagle-glide 22s linear infinite;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-light-eagle-field {\n            animation: none;\n          }\n        }\n      `}</style>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-light-eagle-field pointer-events-none absolute inset-0\"\n      />\n      <p className=\"relative z-10 flex h-full items-end px-4 pb-3 text-sm font-medium tracking-tight\">\n        {content}\n      </p>\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "light-eagle/LightEagle.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type LightEagleSize = \"sm\" | \"md\" | \"lg\";\nexport type LightEagleTone = \"dawn\" | \"sky\" | \"chart\";\n\nexport interface LightEagleProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n  label?: string;\n  size?: LightEagleSize;\n  tone?: LightEagleTone;\n  animate?: boolean;\n}\n"
+    },
+    {
+      "path": "light-eagle/index.ts",
+      "type": "index",
+      "content": "export { LightEagle } from \"./LightEagle\";\nexport type * from \"./LightEagle.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<LightEagle {...lightEagleMocks.default} />"
+    },
+    {
+      "name": "Tones",
+      "code": "<div className=\"flex flex-wrap items-end gap-3 bg-background p-8 text-foreground\">\n      <LightEagle {...lightEagleMocks.compact} />\n      <LightEagle {...lightEagleMocks.default} />\n      <LightEagle {...lightEagleMocks.sky} size=\"lg\" />\n    </div>"
+    }
+  ]
+}
