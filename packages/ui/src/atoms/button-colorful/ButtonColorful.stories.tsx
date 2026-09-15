@@ -20,14 +20,10 @@ export const Default: Story = {
   ),
 };
 
-export const Sizes: Story = {
-  args: { ...buttonColorfulMocks.alternate },
+export const LabelOnly: Story = {
+  args: { ...buttonColorfulMocks.labelOnly },
   render: () => (
-    <div className="flex flex-wrap items-center gap-3 bg-background p-8 text-foreground">
-      <ButtonColorful {...buttonColorfulMocks.compact} />
-      <ButtonColorful {...buttonColorfulMocks.default} />
-      <ButtonColorful label={buttonColorfulMocks.alternate.label} size="lg" />
-    </div>
+    <ButtonColorful {...buttonColorfulMocks.labelOnly} />
   ),
 };
 

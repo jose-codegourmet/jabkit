@@ -1,5 +1,5 @@
 export const buttonColorfulMocks = {
-  default: { label: "Explore components" },
+  default: { label: "Explore Components" },
   alternate: { label: "Get started" },
-  compact: { label: "Continue", size: "sm" as const },
+  labelOnly: { label: "Continue", showIcon: false },
 } as const;

@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "button-colorful",
   displayName: "ButtonColorful",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A compact CTA with a chart-token gradient wash that brightens on hover and a sliding arrow.",
+    "A compact rounded-md CTA with a chart-token indigo-to-pink wash that brightens on hover.",
   sectionCategory: "action",
   purpose:
-    "Marks a primary explore or continue action when a standard solid button needs more color without leaving the token set.",
+    "Marks a primary explore action when a solid button needs a colorful hover wash without leaving the token set.",
   bestFor: [
     "hero or section explore CTAs",
     "catalogue and demo entry points",
