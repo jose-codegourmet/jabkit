@@ -1,16 +1,15 @@
 export const shyRattlesnakeMocks = {
   default: {
-    brand: "JabKit",
+    brand: "UIVERSE",
     badge: "Dev Pass",
-    title: "North Loop 26",
-    subtitle: "Global developer conference",
+    subtitle: "Global Developer Conference",
     details: [
-      { label: "Name", value: "Mira Chen" },
+      { label: "Name", value: "Alex Developer" },
       { label: "Date", value: "Oct 24, 2026" },
-      { label: "Venue", value: "Harbor Pier Hall" },
-      { label: "Gate", value: "Dock 7" },
+      { label: "Venue", value: "Neon Nexus Arena" },
+      { label: "Gateway", value: "Sector 7G" },
     ],
-    barcode: "JK-77-9X04-DEV",
+    barcode: "UI-77-9X04-DEV",
     seatLabel: "Seat",
     seat: "42",
   },

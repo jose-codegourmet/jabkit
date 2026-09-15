@@ -3,10 +3,10 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "shy-rattlesnake",
   displayName: "ShyRattlesnake",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A perforated event pass with a 3D hover tilt, drifting grid, barcode stub, and seat mark.",
+    "A perforated conference pass with 1em ticket notches, a pill badge, drifting grid, and a 3D hover tilt.",
   sectionCategory: "content",
   purpose:
     "Turns admission details into a tactile ticket instead of a flat card, while staying on semantic tokens.",
