@@ -1,0 +1,113 @@
+{
+  "name": "coverflow-carousel",
+  "displayName": "CoverflowCarousel",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Marketing gallery of square covers in an inverse 3D rack: the centre face is square, side plates swing their outer edges forward, and the caption follows drag or keyboard.",
+  "sectionCategory": "gallery",
+  "purpose": "Lets a landing show a short catalogue of sleeves, portraits, or stills as a tactile rack instead of a flat strip.",
+  "bestFor": [
+    "album or edition launches",
+    "studio portfolio landings",
+    "campaign galleries with a handful of hero stills"
+  ],
+  "avoidFor": [
+    "long catalogues that need search and filters",
+    "product grids that must show every item at once",
+    "dashboards where 3D motion would fight the task"
+  ],
+  "tone": [
+    "editorial",
+    "modern",
+    "confident"
+  ],
+  "industries": [
+    "media",
+    "ecommerce",
+    "entertainment"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "high",
+  "layout": {
+    "type": "carousel",
+    "alignment": "center",
+    "columns": 5
+  },
+  "slots": [
+    "headline",
+    "covers",
+    "caption"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "logos"
+  ],
+  "recommendedBefore": [
+    "testimonials",
+    "pricing",
+    "cta"
+  ],
+  "tags": [
+    "coverflow",
+    "carousel",
+    "gallery",
+    "covers",
+    "3d",
+    "marketing",
+    "drag"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "coverflow-carousel/CoverflowCarousel.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  type PointerEvent,\n  useCallback,\n  useEffect,\n  useId,\n  useRef,\n  useState,\n  useSyncExternalStore,\n} from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  CoverflowCarouselItem,\n  CoverflowCarouselProps,\n} from \"./CoverflowCarousel.types\";\n\nconst DEFAULT_EYEBROW = \"Listening room\";\nconst DEFAULT_HEADING = \"Covers that open toward you.\";\nconst DEFAULT_DESCRIPTION =\n  \"The centre plate sits square. Neighbors swing their outer edges forward so the rack leans in, not away. Drag to change the cut.\";\n\nconst DEFAULT_ITEMS: CoverflowCarouselItem[] = [\n  {\n    id: \"harbor-cut\",\n    image: \"/assets/d3f9bde61c9a29e7.webp\",\n    imageAlt: \"Glass rooms along an empty daylight corridor\",\n    title: \"Harbor Cut\",\n    subtitle: \"Northline · 2024\",\n  },\n  {\n    id: \"plant-room\",\n    image: \"/assets/462c849dc9a41e59.webp\",\n    imageAlt: \"Sunlit studio desks with plants and open notebooks\",\n    title: \"Plant Room\",\n    subtitle: \"Fieldwork · 2025\",\n  },\n  {\n    id: \"arc-study\",\n    image: \"/assets/6cc11e462a9aaded.webp\",\n    imageAlt: \"Arc floor lamp lighting a quiet corner\",\n    title: \"Arc Study\",\n    subtitle: \"Lumen · 2023\",\n  },\n  {\n    id: \"yard-stairs\",\n    image: \"/assets/97c532d558fa4fbc.webp\",\n    imageAlt: \"Concrete structure photographed from the ground\",\n    title: \"Yard Stairs\",\n    subtitle: \"Helio · 2024\",\n  },\n  {\n    id: \"oak-hour\",\n    image: \"/assets/462a1be29787cd8e.webp\",\n    imageAlt: \"Low oak lounge chair on a pale floor\",\n    title: \"Oak Hour\",\n    subtitle: \"Harbor · 2025\",\n  },\n  {\n    id: \"stone-table\",\n    image: \"/assets/488fa5330da1224c.webp\",\n    imageAlt: \"Sculptural stone side table in a sunlit room\",\n    title: \"Stone Table\",\n    subtitle: \"Orbit · 2026\",\n  },\n];\n\nconst DRAG_STEP_PX = 72;\nconst VISIBLE_SPAN = 2;\n\nfunction subscribeReducedMotion(onChange: () => void) {\n  const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n  media.addEventListener(\"change\", onChange);\n  return () => media.removeEventListener(\"change\", onChange);\n}\n\nfunction getReducedMotion() {\n  return window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;\n}\n\nfunction useReducedMotion() {\n  return useSyncExternalStore(\n    subscribeReducedMotion,\n    getReducedMotion,\n    () => false,\n  );\n}\n\nfunction wrapIndex(index: number, length: number) {\n  if (length <= 0) return 0;\n  return ((index % length) + length) % length;\n}\n\nfunction shortestOffset(index: number, active: number, length: number) {\n  let offset = index - active;\n  const half = length / 2;\n  if (offset > half) offset -= length;\n  if (offset < -half) offset += length;\n  return offset;\n}\n\nfunction CoverPlate({\n  item,\n  offset,\n  reducedMotion,\n  onSelect,\n}: {\n  item: CoverflowCarouselItem;\n  offset: number;\n  reducedMotion: boolean;\n  onSelect: () => void;\n}) {\n  const hidden = Math.abs(offset) > VISIBLE_SPAN;\n  const active = offset === 0;\n\n  return (\n    <button\n      aria-current={active ? \"true\" : undefined}\n      aria-hidden={hidden || undefined}\n      aria-label={item.title}\n      className={cn(\n        \"absolute overflow-hidden rounded-[calc(var(--radius)+0.2rem)] border border-border bg-muted text-left shadow-[0_24px_48px_-28px_color-mix(in_oklab,var(--jk-foreground),transparent_42%)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        reducedMotion\n          ? \"transition-opacity duration-200\"\n          : \"transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]\",\n      )}\n      data-slot=\"coverflow-carousel-item\"\n      onClick={onSelect}\n      style={\n        reducedMotion\n          ? {\n              opacity: active ? 1 : 0,\n              pointerEvents: active ? \"auto\" : \"none\",\n              zIndex: active ? 6 : 0,\n            }\n          : {\n              transform: `translate3d(${offset * 7.75}rem, 0, ${Math.abs(offset) * 2.4}rem) rotateY(${offset * -40}deg) scale(${1 - Math.abs(offset) * 0.06})`,\n              opacity: hidden ? 0 : 1,\n              pointerEvents: hidden ? \"none\" : \"auto\",\n              zIndex: 8 - Math.abs(offset),\n            }\n      }\n      tabIndex={hidden ? -1 : 0}\n      type=\"button\"\n    >\n      <img\n        alt={item.imageAlt}\n        className=\"size-44 object-cover sm:size-52\"\n        height={208}\n        src={item.image}\n        width={208}\n      />\n    </button>\n  );\n}\n\nexport function CoverflowCarousel({\n  className,\n  eyebrow = DEFAULT_EYEBROW,\n  heading = DEFAULT_HEADING,\n  description = DEFAULT_DESCRIPTION,\n  items,\n  autoplay = false,\n  autoplayMs = 4000,\n  ...props\n}: CoverflowCarouselProps) {\n  const headingId = useId();\n  const stageId = useId();\n  const reduceMotion = useReducedMotion();\n  const covers = items && items.length > 0 ? items : DEFAULT_ITEMS;\n  const count = covers.length;\n  const [active, setActive] = useState(0);\n  const [paused, setPaused] = useState(false);\n  const dragRef = useRef<{\n    pointerId: number;\n    startX: number;\n    origin: number;\n    moved: boolean;\n  } | null>(null);\n  const current = covers[active];\n\n  const move = useCallback(\n    (step: number) => {\n      setActive((index) => wrapIndex(index + step, count));\n    },\n    [count],\n  );\n\n  useEffect(() => {\n    if (!autoplay || reduceMotion || paused || count < 2) return;\n    const timer = window.setInterval(() => move(1), autoplayMs);\n    return () => window.clearInterval(timer);\n  }, [autoplay, autoplayMs, count, move, paused, reduceMotion]);\n\n  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {\n    if (event.button !== 0) return;\n    event.currentTarget.setPointerCapture(event.pointerId);\n    dragRef.current = {\n      pointerId: event.pointerId,\n      startX: event.clientX,\n      origin: active,\n      moved: false,\n    };\n    setPaused(true);\n  };\n\n  const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {\n    const drag = dragRef.current;\n    if (!drag || drag.pointerId !== event.pointerId) return;\n    const delta = event.clientX - drag.startX;\n    if (Math.abs(delta) > 8) drag.moved = true;\n    setActive(wrapIndex(drag.origin - Math.round(delta / DRAG_STEP_PX), count));\n  };\n\n  const endDrag = (event: PointerEvent<HTMLDivElement>) => {\n    const drag = dragRef.current;\n    if (!drag || drag.pointerId !== event.pointerId) return;\n    if (event.currentTarget.hasPointerCapture(event.pointerId)) {\n      event.currentTarget.releasePointerCapture(event.pointerId);\n    }\n    dragRef.current = null;\n    setPaused(false);\n  };\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-slot=\"coverflow-carousel\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24\">\n        <header className=\"mx-auto mb-10 max-w-2xl text-center sm:mb-12\">\n          {eyebrow ? (\n            <p className=\"mb-3 text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase\">\n              {eyebrow}\n            </p>\n          ) : null}\n          <h2\n            className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl lg:text-5xl\"\n            id={headingId}\n          >\n            {heading}\n          </h2>\n          {description ? (\n            <p className=\"mt-3 text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7\">\n              {description}\n            </p>\n          ) : null}\n        </header>\n        <div\n          className=\"rounded-[calc(var(--radius)+0.45rem)] border border-border bg-card px-4 py-10 text-card-foreground sm:px-8 sm:py-12\"\n          onBlur={(event) => {\n            if (!event.currentTarget.contains(event.relatedTarget)) {\n              setPaused(false);\n            }\n          }}\n          onFocus={() => setPaused(true)}\n          onMouseEnter={() => setPaused(true)}\n          onMouseLeave={() => setPaused(false)}\n        >\n          <div\n            aria-label=\"Cover rack\"\n            aria-roledescription=\"carousel\"\n            className=\"relative mx-auto h-56 w-full max-w-3xl touch-pan-y select-none [perspective:1200px] sm:h-64\"\n            id={stageId}\n            onKeyDown={(event) => {\n              if (event.key === \"ArrowRight\") {\n                event.preventDefault();\n                move(1);\n              }\n              if (event.key === \"ArrowLeft\") {\n                event.preventDefault();\n                move(-1);\n              }\n            }}\n            onPointerCancel={endDrag}\n            onPointerDown={onPointerDown}\n            onPointerMove={onPointerMove}\n            onPointerUp={endDrag}\n          >\n            <div className=\"absolute inset-0 flex items-center justify-center [transform-style:preserve-3d]\">\n              {covers.map((item, index) => (\n                <CoverPlate\n                  item={item}\n                  key={item.id}\n                  offset={shortestOffset(index, active, count)}\n                  onSelect={() => {\n                    if (dragRef.current?.moved) return;\n                    setActive(index);\n                  }}\n                  reducedMotion={reduceMotion}\n                />\n              ))}\n            </div>\n          </div>\n          {current ? (\n            <div\n              aria-live=\"polite\"\n              className=\"mt-8 text-center\"\n              data-slot=\"coverflow-carousel-caption\"\n            >\n              <p className=\"text-lg font-semibold tracking-tight\">\n                {current.title}\n              </p>\n              {current.subtitle ? (\n                <p className=\"mt-1 text-sm text-muted-foreground\">\n                  {current.subtitle}\n                </p>\n              ) : null}\n            </div>\n          ) : null}\n          {count > 1 ? (\n            <div className=\"mt-6 flex justify-center gap-2\">\n              {covers.map((item, index) => (\n                <button\n                  aria-controls={stageId}\n                  aria-current={index === active ? \"true\" : undefined}\n                  aria-label={`Show ${item.title}`}\n                  className={cn(\n                    \"size-2.5 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card\",\n                    index === active\n                      ? \"bg-foreground\"\n                      : \"bg-border hover:bg-muted-foreground\",\n                  )}\n                  key={`dot-${item.id}`}\n                  onClick={() => setActive(index)}\n                  type=\"button\"\n                />\n              ))}\n            </div>\n          ) : null}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "coverflow-carousel/CoverflowCarousel.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface CoverflowCarouselItem {\n  id: string;\n  image: string;\n  imageAlt: string;\n  title: string;\n  subtitle?: string;\n}\n\nexport interface CoverflowCarouselProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  eyebrow?: string;\n  heading?: string;\n  description?: string;\n  items?: CoverflowCarouselItem[];\n  /**\n   * Advance the rack on an interval. Off by default. Honors reduced motion.\n   */\n  autoplay?: boolean;\n  autoplayMs?: number;\n}\n"
+    },
+    {
+      "path": "coverflow-carousel/index.ts",
+      "type": "index",
+      "content": "export { CoverflowCarousel } from \"./CoverflowCarousel\";\nexport type * from \"./CoverflowCarousel.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <CoverflowCarousel {...coverflowCarouselMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <CoverflowCarousel {...coverflowCarouselMocks.alternate} />\n    </div>"
+    }
+  ]
+}
