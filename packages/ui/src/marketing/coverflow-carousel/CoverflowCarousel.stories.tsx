@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: { ...coverflowCarouselMocks.default },
   render: () => (
-    <div className="bg-background text-foreground">
+    <div className="w-full overflow-hidden bg-background py-6 text-foreground">
       <CoverflowCarousel {...coverflowCarouselMocks.default} />
     </div>
   ),
@@ -25,7 +25,7 @@ export const Default: Story = {
 export const Variants: Story = {
   args: { ...coverflowCarouselMocks.alternate },
   render: () => (
-    <div className="bg-background text-foreground">
+    <div className="w-full overflow-hidden bg-background py-6 text-foreground">
       <CoverflowCarousel {...coverflowCarouselMocks.alternate} />
     </div>
   ),
@@ -35,10 +35,10 @@ export const ThemeComparison: Story = {
   args: { ...coverflowCarouselMocks.default },
   render: () => (
     <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border lg:grid-cols-2">
-      <div className="bg-background">
+      <div className="bg-background py-6">
         <CoverflowCarousel {...coverflowCarouselMocks.default} />
       </div>
-      <div className="dark bg-background">
+      <div className="dark bg-background py-6">
         <CoverflowCarousel {...coverflowCarouselMocks.default} />
       </div>
     </div>

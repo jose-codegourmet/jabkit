@@ -5,10 +5,10 @@ import { coverflowCarouselMocks } from "./CoverflowCarousel.mocks";
 
 const ThemeComparison = () => (
   <div className="grid gap-px overflow-hidden border-border bg-border lg:grid-cols-2">
-    <div className="bg-background">
+    <div className="bg-background py-6">
       <CoverflowCarousel {...coverflowCarouselMocks.default} />
     </div>
-    <div className="dark bg-background">
+    <div className="dark bg-background py-6">
       <CoverflowCarousel {...coverflowCarouselMocks.default} />
     </div>
   </div>
@@ -16,12 +16,12 @@ const ThemeComparison = () => (
 
 export default {
   Default: () => (
-    <div className="w-full">
+    <div className="w-full overflow-hidden bg-background py-6">
       <CoverflowCarousel {...coverflowCarouselMocks.default} />
     </div>
   ),
   Variants: () => (
-    <div className="w-full">
+    <div className="w-full overflow-hidden bg-background py-6">
       <CoverflowCarousel {...coverflowCarouselMocks.alternate} />
     </div>
   ),
