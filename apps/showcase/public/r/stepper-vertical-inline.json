@@ -1,0 +1,97 @@
+{
+  "name": "stepper-vertical-inline",
+  "displayName": "StepperVerticalInline",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Vertical progress stepper with a numbered rail and inline titles plus descriptions.",
+  "sectionCategory": "navigation",
+  "purpose": "Shows where someone is in a short sequential flow without hiding the remaining steps.",
+  "bestFor": [
+    "account onboarding",
+    "checkout or setup wizards",
+    "multi-step forms with few stages"
+  ],
+  "avoidFor": [
+    "horizontal compact toolbars",
+    "long processes with more than about eight stages",
+    "branching workflows that are not linear"
+  ],
+  "tone": [
+    "professional",
+    "clean"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "indicator",
+    "title",
+    "description",
+    "connector"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "stepper",
+    "progress",
+    "onboarding",
+    "wizard",
+    "atom"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center",
+    "width": 480,
+    "height": 440
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "stepper-vertical-inline/StepperVerticalInline.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { CheckIcon } from \"lucide-react\";\nimport { cn } from \"@/lib/cn\";\nimport type { StepperVerticalInlineProps } from \"./StepperVerticalInline.types\";\n\nfunction stepState(index: number, currentStep: number) {\n  const step = index + 1;\n  if (currentStep > step) return \"complete\" as const;\n  if (currentStep === step) return \"current\" as const;\n  return \"upcoming\" as const;\n}\n\nexport function StepperVerticalInline({\n  className,\n  steps,\n  currentStep = 1,\n  onStepChange,\n  ...props\n}: StepperVerticalInlineProps) {\n  return (\n    <ol\n      className={cn(\"flex w-full max-w-md flex-col\", className)}\n      data-slot=\"stepper-vertical-inline\"\n      {...props}\n    >\n      {steps.map((item, index) => {\n        const step = index + 1;\n        const state = stepState(index, currentStep);\n        const isLast = index === steps.length - 1;\n        const Indicator = onStepChange ? \"button\" : \"span\";\n\n        return (\n          <li\n            aria-current={state === \"current\" ? \"step\" : undefined}\n            className=\"flex gap-4\"\n            data-slot=\"stepper-vertical-inline-item\"\n            data-state={state}\n            key={item.id}\n          >\n            <div className=\"flex flex-col items-center\">\n              <Indicator\n                aria-label={\n                  onStepChange\n                    ? `Go to ${item.title}, step ${step} of ${steps.length}`\n                    : undefined\n                }\n                className={cn(\n                  \"flex size-8 shrink-0 items-center justify-center rounded-full border-2 text-sm font-medium transition-[background-color,border-color,color,transform] duration-200 ease-out motion-reduce:transition-none\",\n                  onStepChange &&\n                    \"cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none active:scale-95 motion-reduce:active:scale-100\",\n                  state === \"upcoming\" &&\n                    \"border-border bg-background text-muted-foreground\",\n                  state !== \"upcoming\" &&\n                    \"border-primary bg-primary text-primary-foreground\",\n                )}\n                data-slot=\"stepper-vertical-inline-indicator\"\n                {...(onStepChange\n                  ? { onClick: () => onStepChange(step), type: \"button\" as const }\n                  : {})}\n              >\n                {state === \"complete\" ? (\n                  <CheckIcon aria-hidden=\"true\" className=\"size-4\" />\n                ) : (\n                  step\n                )}\n              </Indicator>\n              {isLast ? null : (\n                <span\n                  aria-hidden=\"true\"\n                  className={cn(\n                    \"mt-2 w-px flex-1 min-h-6\",\n                    currentStep > step ? \"bg-primary\" : \"bg-border\",\n                  )}\n                  data-slot=\"stepper-vertical-inline-connector\"\n                />\n              )}\n            </div>\n            <div className={cn(\"min-w-0 pt-1\", !isLast && \"pb-8\")}>\n              <p\n                className={cn(\n                  \"text-sm font-medium leading-5\",\n                  state === \"upcoming\"\n                    ? \"text-muted-foreground\"\n                    : \"text-foreground\",\n                )}\n              >\n                {item.title}\n              </p>\n              {item.description ? (\n                <p className=\"mt-1 text-sm leading-6 text-muted-foreground\">\n                  {item.description}\n                </p>\n              ) : null}\n            </div>\n          </li>\n        );\n      })}\n    </ol>\n  );\n}\n"
+    },
+    {
+      "path": "stepper-vertical-inline/StepperVerticalInline.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface StepperVerticalInlineStep {\n  id: string;\n  title: string;\n  description?: string;\n}\n\nexport interface StepperVerticalInlineProps\n  extends Omit<HTMLAttributes<HTMLOListElement>, \"onChange\"> {\n  steps: readonly StepperVerticalInlineStep[];\n  /** 1-based index of the active step. */\n  currentStep?: number;\n  onStepChange?: (step: number) => void;\n}\n"
+    },
+    {
+      "path": "stepper-vertical-inline/index.ts",
+      "type": "index",
+      "content": "export { StepperVerticalInline } from \"./StepperVerticalInline\";\nexport type * from \"./StepperVerticalInline.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background p-8 text-foreground\">\n      <StepperVerticalInline {...stepperVerticalInlineMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background p-8 text-foreground\">\n      <StepperVerticalInline {...stepperVerticalInlineMocks.alternate} />\n    </div>"
+    }
+  ]
+}
