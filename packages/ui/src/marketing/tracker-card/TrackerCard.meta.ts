@@ -1,0 +1,66 @@
+import type { ComponentMeta } from "@jabkit/build-registry";
+
+export default {
+  name: "tracker-card",
+  displayName: "TrackerCard",
+  version: "1.0.0",
+  addedAt: "2026-09-15",
+  description:
+    "Shipment waybill card with live status, copyable tracking number, origin-to-destination route, checkpoint timeline, and a pickup scan mark.",
+  sectionCategory: "content",
+  purpose:
+    "Gives an ecommerce or logistics landing a trusted in-transit moment shoppers can read, copy, and act on without opening an account dashboard.",
+  bestFor: [
+    "post-checkout tracking pages",
+    "same-day delivery landings",
+    "campaign pages that preview a live parcel",
+  ],
+  avoidFor: [
+    "carrier operations dashboards with hundreds of shipments",
+    "checkout that still needs a payment form",
+    "event tickets that need a real barcode scanner",
+  ],
+  tone: ["professional", "commercial", "calm"],
+  industries: ["ecommerce", "retail", "logistics"],
+  contentDensity: "medium",
+  visualWeight: "medium",
+  layout: {
+    type: "card",
+    alignment: "center",
+    columns: 1,
+  },
+  slots: [
+    "headline",
+    "description",
+    "status",
+    "trackingNumber",
+    "route",
+    "checkpoints",
+    "courier",
+    "scanMark",
+    "primaryCTA",
+    "secondaryCTA",
+  ],
+  capabilities: {
+    supportsImage: false,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: true,
+    supportsDarkMode: true,
+  },
+  recommendedAfter: ["hero", "product", "pricing"],
+  recommendedBefore: ["faq", "testimonials", "footer"],
+  tags: [
+    "tracker",
+    "shipping",
+    "parcel",
+    "waybill",
+    "logistics",
+    "ecommerce",
+    "marketing",
+  ],
+  dependencies: ["lucide-react"],
+  registryDependencies: ["button"],
+  a11y: { keyboardNav: true, reducedMotion: true },
+  preview: { layout: "fit", width: 1440, height: 1100 },
+} satisfies ComponentMeta;

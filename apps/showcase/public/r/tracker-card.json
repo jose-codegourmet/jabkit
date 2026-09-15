@@ -1,0 +1,129 @@
+{
+  "name": "tracker-card",
+  "displayName": "TrackerCard",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Shipment waybill card with live status, copyable tracking number, origin-to-destination route, checkpoint timeline, and a pickup scan mark.",
+  "sectionCategory": "content",
+  "purpose": "Gives an ecommerce or logistics landing a trusted in-transit moment shoppers can read, copy, and act on without opening an account dashboard.",
+  "bestFor": [
+    "post-checkout tracking pages",
+    "same-day delivery landings",
+    "campaign pages that preview a live parcel"
+  ],
+  "avoidFor": [
+    "carrier operations dashboards with hundreds of shipments",
+    "checkout that still needs a payment form",
+    "event tickets that need a real barcode scanner"
+  ],
+  "tone": [
+    "professional",
+    "commercial",
+    "calm"
+  ],
+  "industries": [
+    "ecommerce",
+    "retail",
+    "logistics"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "card",
+    "alignment": "center",
+    "columns": 1
+  },
+  "slots": [
+    "headline",
+    "description",
+    "status",
+    "trackingNumber",
+    "route",
+    "checkpoints",
+    "courier",
+    "scanMark",
+    "primaryCTA",
+    "secondaryCTA"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "product",
+    "pricing"
+  ],
+  "recommendedBefore": [
+    "faq",
+    "testimonials",
+    "footer"
+  ],
+  "tags": [
+    "tracker",
+    "shipping",
+    "parcel",
+    "waybill",
+    "logistics",
+    "ecommerce",
+    "marketing"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 1100
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "tracker-card/TrackerCard.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  CheckIcon,\n  CopyIcon,\n  MapPinIcon,\n  PackageIcon,\n  TruckIcon,\n} from \"lucide-react\";\nimport { useId, useState } from \"react\";\nimport { Button } from \"@/components/jabkit/button\";\nimport { cn } from \"@/lib/cn\";\nimport { trackerCardMocks } from \"./TrackerCard.mocks\";\nimport type {\n  TrackerCardPlace,\n  TrackerCardProps,\n  TrackerCardStatus,\n  TrackerCardStep,\n} from \"./TrackerCard.types\";\n\nfunction scanCells(seed: string) {\n  let n = 2166136261;\n  for (let i = 0; i < seed.length; i++) {\n    n ^= seed.charCodeAt(i);\n    n = Math.imul(n, 16777619);\n  }\n  return Array.from({ length: 81 }, (_, position) => {\n    n = Math.imul(n ^ (n >>> 13), 1274126177);\n    const row = Math.floor(position / 9);\n    const col = position % 9;\n    const finder =\n      (row < 3 && col < 3) ||\n      (row < 3 && col > 5) ||\n      (row > 5 && col < 3);\n    return {\n      id: `${seed}-${position}-${n >>> 0}`,\n      on: finder || (n & 1) === 1,\n    };\n  });\n}\n\nfunction statusTone(status: TrackerCardStatus | undefined) {\n  if (status === \"delivered\") {\n    return \"bg-success text-success-foreground\";\n  }\n  if (status === \"out-for-delivery\") {\n    return \"bg-primary text-primary-foreground\";\n  }\n  if (status === \"packed\") {\n    return \"bg-secondary text-secondary-foreground\";\n  }\n  return \"bg-warning text-warning-foreground\";\n}\n\nfunction PlaceBlock({\n  label,\n  place,\n}: {\n  label: string;\n  place: TrackerCardPlace;\n}) {\n  return (\n    <div className=\"min-w-0\">\n      <p className=\"text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase\">\n        {label}\n      </p>\n      <p className=\"mt-1 text-base font-semibold tracking-tight\">{place.city}</p>\n      <p className=\"mt-0.5 text-xs leading-5 text-muted-foreground text-pretty\">\n        {place.region}\n      </p>\n      <p className=\"mt-1 font-mono text-[11px] tracking-[0.16em] text-foreground\">\n        {place.code}\n      </p>\n    </div>\n  );\n}\n\nfunction Checkpoint({ step }: { step: TrackerCardStep }) {\n  const done = Boolean(step.complete);\n  const current = Boolean(step.current);\n\n  return (\n    <li className=\"grid grid-cols-[auto_1fr] gap-x-3 pb-4 last:pb-0\">\n      <span className=\"relative flex w-4 flex-col items-center\">\n        <span\n          className={cn(\n            \"relative z-10 mt-0.5 grid size-4 place-items-center rounded-full border\",\n            done || current\n              ? \"border-primary bg-primary text-primary-foreground\"\n              : \"border-border bg-card text-muted-foreground\",\n          )}\n        >\n          {done && !current ? (\n            <CheckIcon aria-hidden=\"true\" className=\"size-2.5\" />\n          ) : (\n            <span\n              aria-hidden=\"true\"\n              className={cn(\n                \"size-1.5 rounded-full\",\n                current ? \"bg-primary-foreground\" : \"bg-muted-foreground/50\",\n                current &&\n                  \"motion-safe:animate-pulse motion-reduce:animate-none\",\n              )}\n            />\n          )}\n        </span>\n        <span aria-hidden=\"true\" className=\"min-h-6 w-px flex-1 bg-border\" />\n      </span>\n      <div>\n        <p\n          className={cn(\n            \"text-sm tracking-tight\",\n            current ? \"font-semibold text-foreground\" : \"font-medium\",\n          )}\n        >\n          {step.label}\n        </p>\n        <p className=\"mt-0.5 font-mono text-[11px] text-muted-foreground\">\n          {step.time}\n        </p>\n      </div>\n    </li>\n  );\n}\n\nexport function TrackerCard({\n  className,\n  eyebrow = trackerCardMocks.default.eyebrow,\n  heading = trackerCardMocks.default.heading,\n  description = trackerCardMocks.default.description,\n  status = trackerCardMocks.default.status,\n  statusLabel = trackerCardMocks.default.statusLabel,\n  statusDetail = trackerCardMocks.default.statusDetail,\n  trackingLabel = trackerCardMocks.default.trackingLabel,\n  trackingNumber = trackerCardMocks.default.trackingNumber,\n  copyLabel = trackerCardMocks.default.copyLabel,\n  copiedLabel = trackerCardMocks.default.copiedLabel,\n  courierLabel = trackerCardMocks.default.courierLabel,\n  courier = trackerCardMocks.default.courier,\n  etaLabel = trackerCardMocks.default.etaLabel,\n  eta = trackerCardMocks.default.eta,\n  originLabel = trackerCardMocks.default.originLabel,\n  destinationLabel = trackerCardMocks.default.destinationLabel,\n  origin = trackerCardMocks.default.origin,\n  destination = trackerCardMocks.default.destination,\n  stepsHeading = trackerCardMocks.default.stepsHeading,\n  steps = trackerCardMocks.default.steps,\n  scanLabel = trackerCardMocks.default.scanLabel,\n  showScan = trackerCardMocks.default.showScan,\n  primaryAction = trackerCardMocks.default.primaryAction,\n  secondaryAction = trackerCardMocks.default.secondaryAction,\n  ...props\n}: TrackerCardProps) {\n  const headingId = useId();\n  const descriptionId = useId();\n  const [copied, setCopied] = useState(false);\n  const checkpoints = steps ?? [];\n  const code = trackingNumber ?? \"TRACK\";\n  const cells = scanCells(code);\n\n  const copyTracking = async () => {\n    if (!trackingNumber) return;\n    try {\n      await navigator.clipboard.writeText(trackingNumber);\n      setCopied(true);\n      window.setTimeout(() => setCopied(false), 1600);\n    } catch {\n      setCopied(false);\n    }\n  };\n\n  return (\n    <section\n      aria-describedby={description ? descriptionId : undefined}\n      aria-labelledby={headingId}\n      className={cn(\"bg-muted text-foreground\", className)}\n      data-slot=\"tracker-card\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20\">\n        <header className=\"mx-auto max-w-xl text-center\">\n          {eyebrow ? (\n            <p className=\"text-xs font-medium tracking-[0.16em] text-muted-foreground uppercase\">\n              {eyebrow}\n            </p>\n          ) : null}\n          <h2\n            className=\"mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-5xl sm:leading-[1.1]\"\n            id={headingId}\n          >\n            {heading}\n          </h2>\n          {description ? (\n            <p\n              className=\"mt-3 text-sm leading-6 text-muted-foreground text-pretty sm:text-base\"\n              id={descriptionId}\n            >\n              {description}\n            </p>\n          ) : null}\n        </header>\n\n        <article\n          className={cn(\n            \"relative mx-auto mt-10 w-full max-w-md overflow-hidden rounded-[calc(var(--radius)+0.35rem)] border border-border bg-card text-card-foreground shadow-[0_22px_48px_-28px_color-mix(in_oklab,var(--jk-foreground),transparent_68%)]\",\n            \"motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500\",\n          )}\n        >\n          <div className=\"px-6 pt-7 pb-5\">\n            <div className=\"flex items-start justify-between gap-3\">\n              <span\n                className={cn(\n                  \"inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold tracking-tight\",\n                  statusTone(status),\n                )}\n              >\n                {status === \"delivered\" ? (\n                  <PackageIcon aria-hidden=\"true\" className=\"size-3.5\" />\n                ) : (\n                  <TruckIcon aria-hidden=\"true\" className=\"size-3.5\" />\n                )}\n                {statusLabel}\n              </span>\n              {eta ? (\n                <p className=\"text-right font-mono text-[11px] text-muted-foreground\">\n                  <span className=\"block tracking-[0.12em] uppercase\">\n                    {etaLabel}\n                  </span>\n                  <span className=\"mt-0.5 block text-foreground\">{eta}</span>\n                </p>\n              ) : null}\n            </div>\n            {statusDetail ? (\n              <p className=\"mt-3 text-sm leading-6 text-muted-foreground text-pretty\">\n                {statusDetail}\n              </p>\n            ) : null}\n\n            <div className=\"mt-5 rounded-[--radius] border border-border bg-muted/70 px-3 py-2.5\">\n              <div className=\"flex items-center justify-between gap-3\">\n                <div className=\"min-w-0\">\n                  <span className=\"block text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase\">\n                    {trackingLabel}\n                  </span>\n                  <span className=\"mt-1 block truncate font-mono text-sm tracking-[0.12em] text-foreground\">\n                    {trackingNumber}\n                  </span>\n                </div>\n                {trackingNumber ? (\n                  <Button\n                    className=\"shrink-0\"\n                    onClick={copyTracking}\n                    size=\"sm\"\n                    type=\"button\"\n                    variant=\"secondary\"\n                  >\n                    {copied ? (\n                      <CheckIcon aria-hidden=\"true\" className=\"size-3.5\" />\n                    ) : (\n                      <CopyIcon aria-hidden=\"true\" className=\"size-3.5\" />\n                    )}\n                    <span className=\"ml-1.5\">\n                      {copied ? copiedLabel : copyLabel}\n                    </span>\n                  </Button>\n                ) : null}\n              </div>\n            </div>\n          </div>\n\n          {origin || destination ? (\n            <div className=\"border-t border-border px-6 py-5\">\n              <div className=\"grid grid-cols-[1fr_auto_1fr] items-start gap-3\">\n                {origin ? (\n                  <PlaceBlock label={originLabel ?? \"From\"} place={origin} />\n                ) : (\n                  <span />\n                )}\n                <span\n                  aria-hidden=\"true\"\n                  className=\"mt-6 flex flex-col items-center gap-1 text-muted-foreground\"\n                >\n                  <MapPinIcon className=\"size-4\" />\n                  <span className=\"h-8 w-px bg-border\" />\n                </span>\n                {destination ? (\n                  <PlaceBlock\n                    label={destinationLabel ?? \"To\"}\n                    place={destination}\n                  />\n                ) : (\n                  <span />\n                )}\n              </div>\n            </div>\n          ) : null}\n\n          {checkpoints.length > 0 ? (\n            <div className=\"border-t border-border px-6 py-5\">\n              {stepsHeading ? (\n                <p className=\"mb-3 text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase\">\n                  {stepsHeading}\n                </p>\n              ) : null}\n              <ol className=\"[&>li:last-child>span>span:last-child]:hidden\">\n                {checkpoints.map((step) => (\n                  <Checkpoint key={step.id} step={step} />\n                ))}\n              </ol>\n            </div>\n          ) : null}\n\n          <div className=\"border-t border-border px-6 pt-5 pb-6\">\n            <div className=\"flex items-end justify-between gap-4\">\n              <div className=\"min-w-0\">\n                {courier ? (\n                  <p>\n                    <span className=\"block text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase\">\n                      {courierLabel}\n                    </span>\n                    <span className=\"mt-1 block text-sm font-medium\">\n                      {courier}\n                    </span>\n                  </p>\n                ) : null}\n              </div>\n              {showScan ? (\n                <figure className=\"shrink-0 text-center\">\n                  <div\n                    aria-hidden=\"true\"\n                    className=\"grid size-[4.5rem] grid-cols-9 gap-px rounded-[calc(var(--radius)-0.15rem)] border border-border bg-card p-1.5\"\n                  >\n                    {cells.map((cell) => (\n                      <span\n                        className={cn(\n                          \"rounded-[1px]\",\n                          cell.on ? \"bg-foreground\" : \"bg-transparent\",\n                        )}\n                        key={cell.id}\n                      />\n                    ))}\n                  </div>\n                  {scanLabel ? (\n                    <figcaption className=\"mt-1.5 max-w-[4.75rem] text-[10px] leading-4 text-muted-foreground\">\n                      {scanLabel}\n                    </figcaption>\n                  ) : null}\n                </figure>\n              ) : null}\n            </div>\n\n            {primaryAction || secondaryAction ? (\n              <div className=\"mt-5 flex flex-col gap-2\">\n                {primaryAction ? (\n                  <Button asChild className=\"w-full\" size=\"lg\">\n                    <a href={primaryAction.href}>{primaryAction.label}</a>\n                  </Button>\n                ) : null}\n                {secondaryAction ? (\n                  <Button\n                    asChild\n                    className=\"w-full\"\n                    size=\"lg\"\n                    variant=\"secondary\"\n                  >\n                    <a href={secondaryAction.href}>{secondaryAction.label}</a>\n                  </Button>\n                ) : null}\n              </div>\n            ) : null}\n          </div>\n        </article>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "tracker-card/TrackerCard.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type TrackerCardStatus =\n  | \"packed\"\n  | \"in-transit\"\n  | \"out-for-delivery\"\n  | \"delivered\";\n\nexport interface TrackerCardPlace {\n  city: string;\n  region: string;\n  code: string;\n}\n\nexport interface TrackerCardStep {\n  id: string;\n  label: string;\n  time: string;\n  complete?: boolean;\n  current?: boolean;\n}\n\nexport interface TrackerCardAction {\n  label: string;\n  href: string;\n}\n\nexport interface TrackerCardProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  eyebrow?: string;\n  heading?: string;\n  description?: string;\n  status?: TrackerCardStatus;\n  statusLabel?: string;\n  statusDetail?: string;\n  trackingLabel?: string;\n  trackingNumber?: string;\n  copyLabel?: string;\n  copiedLabel?: string;\n  courierLabel?: string;\n  courier?: string;\n  etaLabel?: string;\n  eta?: string;\n  originLabel?: string;\n  destinationLabel?: string;\n  origin?: TrackerCardPlace;\n  destination?: TrackerCardPlace;\n  stepsHeading?: string;\n  steps?: TrackerCardStep[];\n  scanLabel?: string;\n  showScan?: boolean;\n  primaryAction?: TrackerCardAction;\n  secondaryAction?: TrackerCardAction;\n}\n"
+    },
+    {
+      "path": "tracker-card/index.ts",
+      "type": "index",
+      "content": "export { TrackerCard } from \"./TrackerCard\";\nexport type * from \"./TrackerCard.types\";\n"
+    },
+    {
+      "path": "tracker-card/TrackerCard.mocks.ts",
+      "type": "mocks",
+      "content": "import type { TrackerCardProps } from \"./TrackerCard.types\";\n\nexport const trackerCardMocks = {\n  default: {\n    eyebrow: \"Live shipment\",\n    heading: \"Your parcel is on the water.\",\n    description:\n      \"A waybill card for Harbor Atelier, with route, checkpoints, and a scan mark shoppers can keep on their phone.\",\n    status: \"in-transit\",\n    statusLabel: \"In transit\",\n    statusDetail: \"Left Lisbon atelier. Next scan at Harbor District.\",\n    trackingLabel: \"Tracking\",\n    trackingNumber: \"HA 20418 991 LIS\",\n    copyLabel: \"Copy\",\n    copiedLabel: \"Copied\",\n    courierLabel: \"Courier\",\n    courier: \"Northline Freight\",\n    etaLabel: \"Arrives\",\n    eta: \"Wed 23 Sep\",\n    originLabel: \"From\",\n    destinationLabel: \"To\",\n    origin: {\n      city: \"Lisbon\",\n      region: \"Atelier yard\",\n      code: \"LIS\",\n    },\n    destination: {\n      city: \"New York\",\n      region: \"Harbor District\",\n      code: \"HDN\",\n    },\n    stepsHeading: \"Checkpoints\",\n    steps: [\n      {\n        id: \"packed\",\n        label: \"Packed at atelier\",\n        time: \"Fri 19 Sep, 14:20\",\n        complete: true,\n      },\n      {\n        id: \"cleared\",\n        label: \"Cleared Lisbon dock\",\n        time: \"Sat 20 Sep, 08:05\",\n        complete: true,\n      },\n      {\n        id: \"sea\",\n        label: \"On the Atlantic crossing\",\n        time: \"Mon 22 Sep, 06:40\",\n        complete: true,\n        current: true,\n      },\n      {\n        id: \"harbor\",\n        label: \"Harbor District inbound\",\n        time: \"Expected Tue 23 Sep\",\n      },\n      {\n        id: \"door\",\n        label: \"Out for delivery\",\n        time: \"Expected Wed 23 Sep\",\n      },\n    ],\n    scanLabel: \"Scan at pickup\",\n    showScan: true,\n    primaryAction: { label: \"Open full track\", href: \"#track\" },\n    secondaryAction: { label: \"View order\", href: \"#order\" },\n  },\n  alternate: {\n    eyebrow: \"Same-day drop\",\n    heading: \"Out for the last mile.\",\n    description:\n      \"A compact tracker for a gift jacket heading to Halden Quay, with the courier already on the dock road.\",\n    status: \"out-for-delivery\",\n    statusLabel: \"Out for delivery\",\n    statusDetail: \"Mira has the parcel. Window is 16:00 to 18:00.\",\n    trackingLabel: \"Tracking\",\n    trackingNumber: \"HA G 7712 HDN\",\n    copyLabel: \"Copy\",\n    copiedLabel: \"Copied\",\n    courierLabel: \"Courier\",\n    courier: \"Dock Runner 4\",\n    etaLabel: \"Window\",\n    eta: \"Today, 16:00-18:00\",\n    originLabel: \"From\",\n    destinationLabel: \"To\",\n    origin: {\n      city: \"Harbor District\",\n      region: \"Sort hub\",\n      code: \"HDN\",\n    },\n    destination: {\n      city: \"Halden Quay\",\n      region: \"Dock 2, hold for pickup\",\n      code: \"HQ2\",\n    },\n    stepsHeading: \"Checkpoints\",\n    steps: [\n      {\n        id: \"hub\",\n        label: \"Sorted at Harbor hub\",\n        time: \"Today, 09:12\",\n        complete: true,\n      },\n      {\n        id: \"loaded\",\n        label: \"Loaded onto Dock Runner 4\",\n        time: \"Today, 14:48\",\n        complete: true,\n      },\n      {\n        id: \"route\",\n        label: \"On the quay road\",\n        time: \"Today, 15:21\",\n        complete: true,\n        current: true,\n      },\n      {\n        id: \"ready\",\n        label: \"Ready at Dock 2\",\n        time: \"Expected 16:10\",\n      },\n    ],\n    scanLabel: \"Show at Dock 2\",\n    showScan: true,\n    primaryAction: { label: \"Share pickup code\", href: \"#share\" },\n    secondaryAction: { label: \"Change window\", href: \"#window\" },\n  },\n} satisfies Record<\"default\" | \"alternate\", TrackerCardProps>;\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <TrackerCard {...trackerCardMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <TrackerCard {...trackerCardMocks.alternate} />\n    </div>"
+    }
+  ]
+}
