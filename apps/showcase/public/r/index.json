@@ -4313,13 +4313,13 @@
     "name": "coverflow-carousel",
     "displayName": "CoverflowCarousel",
     "category": "marketing",
-    "description": "Marketing gallery of square covers in an inverse 3D rack: the centre face is square, side plates swing their outer edges forward, and the caption follows drag or keyboard.",
+    "description": "Edge-to-edge rack of square covers with inverse 3D perspective: the centre sits square while neighbours swing their outer edges forward. Drag, flick, or arrow through; the caption follows.",
     "sectionCategory": "gallery",
-    "purpose": "Lets a landing show a short catalogue of sleeves, portraits, or stills as a tactile rack instead of a flat strip.",
+    "purpose": "Lets a landing show a catalogue of sleeves, portraits, or stills as a tactile inverse coverflow instead of a flat strip.",
     "bestFor": [
       "album or edition launches",
       "studio portfolio landings",
-      "campaign galleries with a handful of hero stills"
+      "campaign galleries with a short stack of hero stills"
     ],
     "avoidFor": [
       "long catalogues that need search and filters",
@@ -4344,9 +4344,9 @@
       "columns": 5
     },
     "slots": [
-      "headline",
       "covers",
-      "caption"
+      "caption",
+      "controls"
     ],
     "capabilities": {
       "supportsImage": true,
@@ -4375,6 +4375,7 @@
     ],
     "addedAt": "2026-09-15",
     "dependencies": [
+      "lucide-react",
       "clsx",
       "tailwind-merge"
     ],

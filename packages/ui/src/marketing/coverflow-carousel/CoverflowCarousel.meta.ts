@@ -3,17 +3,17 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "coverflow-carousel",
   displayName: "CoverflowCarousel",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Marketing gallery of square covers in an inverse 3D rack: the centre face is square, side plates swing their outer edges forward, and the caption follows drag or keyboard.",
+    "Edge-to-edge rack of square covers with inverse 3D perspective: the centre sits square while neighbours swing their outer edges forward. Drag, flick, or arrow through; the caption follows.",
   sectionCategory: "gallery",
   purpose:
-    "Lets a landing show a short catalogue of sleeves, portraits, or stills as a tactile rack instead of a flat strip.",
+    "Lets a landing show a catalogue of sleeves, portraits, or stills as a tactile inverse coverflow instead of a flat strip.",
   bestFor: [
     "album or edition launches",
     "studio portfolio landings",
-    "campaign galleries with a handful of hero stills",
+    "campaign galleries with a short stack of hero stills",
   ],
   avoidFor: [
     "long catalogues that need search and filters",
@@ -29,7 +29,7 @@ export default {
     alignment: "center",
     columns: 5,
   },
-  slots: ["headline", "covers", "caption"],
+  slots: ["covers", "caption", "controls"],
   capabilities: {
     supportsImage: true,
     supportsVideo: false,
@@ -48,7 +48,7 @@ export default {
     "marketing",
     "drag",
   ],
-  dependencies: [],
+  dependencies: ["lucide-react"],
   registryDependencies: [],
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: { layout: "fit", width: 1440, height: 900 },

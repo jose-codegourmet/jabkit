@@ -1,10 +1,12 @@
 "use client";
 
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import {
+  type CSSProperties,
   type PointerEvent,
   useCallback,
   useEffect,
-  useId,
+  useLayoutEffect,
   useRef,
   useState,
   useSyncExternalStore,
@@ -15,58 +17,162 @@ import type {
   CoverflowCarouselProps,
 } from "./CoverflowCarousel.types";
 
-const DEFAULT_EYEBROW = "Listening room";
-const DEFAULT_HEADING = "Covers that open toward you.";
-const DEFAULT_DESCRIPTION =
-  "The centre plate sits square. Neighbors swing their outer edges forward so the rack leans in, not away. Drag to change the cut.";
+const DEFAULT_CARD_WIDTH = "clamp(148px, 22vw, 260px)";
+const SETTLE_GAIN = 0.16;
+const SETTLE_EPSILON = 0.0004;
+const THROW_GAIN = 0.18;
+const THROW_CAP = 2;
+const TILT_CAP = 82;
 
 const DEFAULT_ITEMS: CoverflowCarouselItem[] = [
   {
-    id: "harbor-cut",
+    id: "tidewater",
     image: "/assets/d3f9bde61c9a29e7.webp",
     imageAlt: "Glass rooms along an empty daylight corridor",
-    title: "Harbor Cut",
-    subtitle: "Northline · 2024",
+    title: "Tidewater",
+    subtitle: "Long Player",
+    meta: [
+      { label: "Year", value: "2019" },
+      { label: "Producer", value: "Ada Ferrow" },
+      { label: "Length", value: "3:42" },
+    ],
   },
   {
-    id: "plant-room",
+    id: "nightshift",
     image: "/assets/462c849dc9a41e59.webp",
     imageAlt: "Sunlit studio desks with plants and open notebooks",
-    title: "Plant Room",
-    subtitle: "Fieldwork · 2025",
+    title: "Nightshift",
+    subtitle: "Long Player",
+    meta: [
+      { label: "Year", value: "2021" },
+      { label: "Producer", value: "Kell Mora" },
+      { label: "Length", value: "4:08" },
+    ],
   },
   {
-    id: "arc-study",
+    id: "overexposed",
     image: "/assets/6cc11e462a9aaded.webp",
     imageAlt: "Arc floor lamp lighting a quiet corner",
-    title: "Arc Study",
-    subtitle: "Lumen · 2023",
+    title: "Overexposed",
+    subtitle: "Single",
+    meta: [
+      { label: "Year", value: "2018" },
+      { label: "Producer", value: "Juno Vale" },
+      { label: "Length", value: "2:57" },
+    ],
   },
   {
-    id: "yard-stairs",
+    id: "slow-bloom",
     image: "/assets/97c532d558fa4fbc.webp",
     imageAlt: "Concrete structure photographed from the ground",
-    title: "Yard Stairs",
-    subtitle: "Helio · 2024",
+    title: "Slow Bloom",
+    subtitle: "EP",
+    meta: [
+      { label: "Year", value: "2022" },
+      { label: "Producer", value: "Rue Alcott" },
+      { label: "Length", value: "3:15" },
+    ],
   },
   {
-    id: "oak-hour",
+    id: "open-palm",
     image: "/assets/462a1be29787cd8e.webp",
     imageAlt: "Low oak lounge chair on a pale floor",
-    title: "Oak Hour",
-    subtitle: "Harbor · 2025",
+    title: "Open Palm",
+    subtitle: "Single",
+    meta: [
+      { label: "Year", value: "2020" },
+      { label: "Producer", value: "Ada Ferrow" },
+      { label: "Length", value: "3:01" },
+    ],
   },
   {
-    id: "stone-table",
+    id: "low-country",
     image: "/assets/488fa5330da1224c.webp",
     imageAlt: "Sculptural stone side table in a sunlit room",
-    title: "Stone Table",
-    subtitle: "Orbit · 2026",
+    title: "Low Country",
+    subtitle: "Long Player",
+    meta: [
+      { label: "Year", value: "2017" },
+      { label: "Producer", value: "Sim Oyo" },
+      { label: "Length", value: "5:20" },
+    ],
+  },
+  {
+    id: "dry-season",
+    image: "/assets/66859c6f46cc742b.webp",
+    imageAlt: "Quiet interior still with a pale wall and a single chair",
+    title: "Dry Season",
+    subtitle: "EP",
+    meta: [
+      { label: "Year", value: "2016" },
+      { label: "Producer", value: "Juno Vale" },
+      { label: "Length", value: "2:44" },
+    ],
+  },
+  {
+    id: "understory",
+    image: "/assets/1fd89b6a1d45ac75.webp",
+    imageAlt: "Soft daylight across a timber-lined room",
+    title: "Understory",
+    subtitle: "Single",
+    meta: [
+      { label: "Year", value: "2023" },
+      { label: "Producer", value: "Kell Mora" },
+      { label: "Length", value: "3:38" },
+    ],
+  },
+  {
+    id: "paper-lantern",
+    image: "/assets/e8b49d7b4617a825.webp",
+    imageAlt: "Abstract still of folded paper and warm light",
+    title: "Paper Lantern",
+    subtitle: "Single",
+    meta: [
+      { label: "Year", value: "2021" },
+      { label: "Producer", value: "Rue Alcott" },
+      { label: "Length", value: "2:19" },
+    ],
+  },
+  {
+    id: "still-water",
+    image: "/assets/c21dbcfeac157c9b.webp",
+    imageAlt: "Portrait still used as a sleeve for Still Water",
+    title: "Still Water",
+    subtitle: "Long Player",
+    meta: [
+      { label: "Year", value: "2015" },
+      { label: "Producer", value: "Ada Ferrow" },
+      { label: "Length", value: "4:51" },
+    ],
+  },
+  {
+    id: "third-rail",
+    image: "/assets/1391b53bc91d2127.webp",
+    imageAlt: "Portrait still used as a sleeve for Third Rail",
+    title: "Third Rail",
+    subtitle: "EP",
+    meta: [
+      { label: "Year", value: "2024" },
+      { label: "Producer", value: "Sim Oyo" },
+      { label: "Length", value: "3:07" },
+    ],
+  },
+  {
+    id: "undertow",
+    image: "/assets/c65cd8af6df1b122.webp",
+    imageAlt: "Portrait still used as a sleeve for Undertow",
+    title: "Undertow",
+    subtitle: "Single",
+    meta: [
+      { label: "Year", value: "2020" },
+      { label: "Producer", value: "Juno Vale" },
+      { label: "Length", value: "3:29" },
+    ],
   },
 ];
 
-const DRAG_STEP_PX = 72;
-const VISIBLE_SPAN = 2;
+const useIsoLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 function subscribeReducedMotion(onChange: () => void) {
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -91,247 +197,345 @@ function wrapIndex(index: number, length: number) {
   return ((index % length) + length) % length;
 }
 
-function shortestOffset(index: number, active: number, length: number) {
-  let offset = index - active;
-  const half = length / 2;
-  if (offset > half) offset -= length;
-  if (offset < -half) offset += length;
-  return offset;
-}
-
-function CoverPlate({
-  item,
-  offset,
-  reducedMotion,
-  onSelect,
-}: {
-  item: CoverflowCarouselItem;
-  offset: number;
-  reducedMotion: boolean;
-  onSelect: () => void;
-}) {
-  const hidden = Math.abs(offset) > VISIBLE_SPAN;
-  const active = offset === 0;
-
-  return (
-    <button
-      aria-current={active ? "true" : undefined}
-      aria-hidden={hidden || undefined}
-      aria-label={item.title}
-      className={cn(
-        "absolute overflow-hidden rounded-[calc(var(--radius)+0.2rem)] border border-border bg-muted text-left shadow-[0_24px_48px_-28px_color-mix(in_oklab,var(--jk-foreground),transparent_42%)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        reducedMotion
-          ? "transition-opacity duration-200"
-          : "transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-      )}
-      data-slot="coverflow-carousel-item"
-      onClick={onSelect}
-      style={
-        reducedMotion
-          ? {
-              opacity: active ? 1 : 0,
-              pointerEvents: active ? "auto" : "none",
-              zIndex: active ? 6 : 0,
-            }
-          : {
-              transform: `translate3d(${offset * 7.75}rem, 0, ${Math.abs(offset) * 2.4}rem) rotateY(${offset * -40}deg) scale(${1 - Math.abs(offset) * 0.06})`,
-              opacity: hidden ? 0 : 1,
-              pointerEvents: hidden ? "none" : "auto",
-              zIndex: 8 - Math.abs(offset),
-            }
-      }
-      tabIndex={hidden ? -1 : 0}
-      type="button"
-    >
-      <img
-        alt={item.imageAlt}
-        className="size-44 object-cover sm:size-52"
-        height={208}
-        src={item.image}
-        width={208}
-      />
-    </button>
-  );
-}
-
 export function CoverflowCarousel({
   className,
-  eyebrow = DEFAULT_EYEBROW,
-  heading = DEFAULT_HEADING,
-  description = DEFAULT_DESCRIPTION,
   items,
-  autoplay = false,
-  autoplayMs = 4000,
+  rotate = 44,
+  depth = 0.6,
+  perspective = 3,
+  falloff = 0.56,
+  fade = 0.1,
+  cardWidth = DEFAULT_CARD_WIDTH,
+  gap = 0.05,
+  loop = true,
+  showCaption = false,
+  showPagination = false,
+  showNavigation = false,
+  label = "Cover carousel",
+  cardClassName,
+  style,
   ...props
 }: CoverflowCarouselProps) {
-  const headingId = useId();
-  const stageId = useId();
-  const reduceMotion = useReducedMotion();
   const covers = items && items.length > 0 ? items : DEFAULT_ITEMS;
   const count = covers.length;
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const dragRef = useRef<{
-    pointerId: number;
-    startX: number;
-    origin: number;
-    moved: boolean;
-  } | null>(null);
-  const current = covers[active];
+  const reduceMotion = useReducedMotion();
 
-  const move = useCallback(
-    (step: number) => {
-      setActive((index) => wrapIndex(index + step, count));
-    },
+  const frameRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const posRef = useRef(0);
+  const targetRef = useRef(0);
+  const widthRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
+  const dragRef = useRef<{
+    id: number;
+    x: number;
+    pos: number;
+    v: number;
+    t: number;
+  } | null>(null);
+
+  const [selected, setSelected] = useState(0);
+
+  const indexAt = useCallback(
+    (pos: number) => wrapIndex(Math.round(pos), count),
     [count],
   );
 
-  useEffect(() => {
-    if (!autoplay || reduceMotion || paused || count < 2) return;
-    const timer = window.setInterval(() => move(1), autoplayMs);
-    return () => window.clearInterval(timer);
-  }, [autoplay, autoplayMs, count, move, paused, reduceMotion]);
+  const paint = useCallback(() => {
+    const width = widthRef.current;
+    if (!width) return;
+    const pitch = width * (1 + gap);
+    const pos = posRef.current;
+
+    cardRefs.current.forEach((card, index) => {
+      if (!card) return;
+
+      let offset = index - pos;
+      if (loop) {
+        offset = ((offset % count) + count) % count;
+        if (offset > count / 2) offset -= count;
+      }
+
+      const distance = Math.abs(offset);
+
+      if (reduceMotion) {
+        const active = distance < 0.5;
+        card.style.transform = "translateX(-50%)";
+        card.style.opacity = active ? "1" : "0";
+        card.style.zIndex = active ? "100" : "0";
+        card.style.pointerEvents = active ? "auto" : "none";
+        return;
+      }
+
+      const ramp = distance === 0 ? 0 : distance ** falloff;
+      const tilt = Math.min(rotate * ramp, TILT_CAP) * Math.sign(offset);
+      const edge = loop ? Math.min(1, Math.max(0, count / 2 - distance)) : 1;
+
+      card.style.transform =
+        `translateX(calc(-50% + ${offset * pitch}px)) ` +
+        `translateZ(${-depth * width * ramp}px) rotateY(${-tilt}deg)`;
+      card.style.opacity = String(Math.max(0, 1 - fade * distance) * edge);
+      card.style.zIndex = String(100 - Math.round(distance));
+      card.style.pointerEvents = "auto";
+    });
+  }, [count, depth, fade, falloff, gap, loop, reduceMotion, rotate]);
+
+  const settle = useCallback(
+    (target: number) => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      targetRef.current = target;
+      setSelected(indexAt(target));
+
+      if (reduceMotion) {
+        posRef.current = target;
+        paint();
+        rafRef.current = null;
+        return;
+      }
+
+      const step = () => {
+        const remaining = target - posRef.current;
+        if (Math.abs(remaining) < SETTLE_EPSILON) {
+          posRef.current = target;
+          paint();
+          rafRef.current = null;
+          return;
+        }
+        posRef.current += remaining * SETTLE_GAIN;
+        paint();
+        rafRef.current = requestAnimationFrame(step);
+      };
+      rafRef.current = requestAnimationFrame(step);
+    },
+    [indexAt, paint, reduceMotion],
+  );
+
+  const clampPos = useCallback(
+    (pos: number) => (loop ? pos : Math.max(0, Math.min(count - 1, pos))),
+    [count, loop],
+  );
+
+  const goTo = useCallback(
+    (index: number) => {
+      const target = loop
+        ? index + Math.round((targetRef.current - index) / count) * count
+        : index;
+      settle(clampPos(target));
+    },
+    [clampPos, count, loop, settle],
+  );
+
+  const nudge = useCallback(
+    (by: number) => settle(clampPos(Math.round(targetRef.current) + by)),
+    [clampPos, settle],
+  );
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if (event.button !== 0) return;
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
     event.currentTarget.setPointerCapture(event.pointerId);
+    targetRef.current = posRef.current;
     dragRef.current = {
-      pointerId: event.pointerId,
-      startX: event.clientX,
-      origin: active,
-      moved: false,
+      id: event.pointerId,
+      x: event.clientX,
+      pos: posRef.current,
+      v: 0,
+      t: performance.now(),
     };
-    setPaused(true);
   };
 
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
     const drag = dragRef.current;
-    if (!drag || drag.pointerId !== event.pointerId) return;
-    const delta = event.clientX - drag.startX;
-    if (Math.abs(delta) > 8) drag.moved = true;
-    setActive(wrapIndex(drag.origin - Math.round(delta / DRAG_STEP_PX), count));
+    if (!drag || drag.id !== event.pointerId) return;
+
+    const pitch = widthRef.current * (1 + gap);
+    if (!pitch) return;
+
+    const now = performance.now();
+    const previous = posRef.current;
+    posRef.current = clampPos(drag.pos - (event.clientX - drag.x) / pitch);
+    drag.v = ((posRef.current - previous) / Math.max(now - drag.t, 1)) * 1000;
+    drag.t = now;
+
+    const index = indexAt(posRef.current);
+    if (index !== selected) setSelected(index);
+    paint();
   };
 
   const endDrag = (event: PointerEvent<HTMLDivElement>) => {
     const drag = dragRef.current;
-    if (!drag || drag.pointerId !== event.pointerId) return;
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId);
-    }
+    if (!drag || drag.id !== event.pointerId) return;
     dragRef.current = null;
-    setPaused(false);
+    const carried = Math.max(
+      -THROW_CAP,
+      Math.min(THROW_CAP, drag.v * THROW_GAIN),
+    );
+    settle(clampPos(Math.round(posRef.current + carried)));
   };
+
+  useIsoLayoutEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return;
+
+    const measure = () => {
+      const card = cardRefs.current[0];
+      if (!card) return;
+      widthRef.current = card.offsetWidth;
+      paint();
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, [paint]);
+
+  useEffect(
+    () => () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    },
+    [],
+  );
+
+  const active = covers[selected];
+  const rootStyle = {
+    ...style,
+    "--cf-card": cardWidth,
+  } as CSSProperties;
 
   return (
     <section
-      aria-labelledby={headingId}
-      className={cn("bg-background text-foreground", className)}
+      aria-label={label}
+      aria-roledescription="carousel"
+      className={cn("w-full bg-background text-foreground", className)}
       data-slot="coverflow-carousel"
+      role="region"
+      style={rootStyle}
       {...props}
     >
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
-        <header className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
-          {eyebrow ? (
-            <p className="mb-3 text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
-              {eyebrow}
-            </p>
-          ) : null}
-          <h2
-            className="text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl lg:text-5xl"
-            id={headingId}
-          >
-            {heading}
-          </h2>
-          {description ? (
-            <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
-              {description}
-            </p>
-          ) : null}
-        </header>
+      <div className="relative">
         <div
-          className="rounded-[calc(var(--radius)+0.45rem)] border border-border bg-card px-4 py-10 text-card-foreground sm:px-8 sm:py-12"
-          onBlur={(event) => {
-            if (!event.currentTarget.contains(event.relatedTarget)) {
-              setPaused(false);
+          className="cursor-grab overflow-hidden py-10 outline-none ring-ring focus-visible:ring-2 active:cursor-grabbing"
+          onKeyDown={(event) => {
+            if (event.key === "ArrowLeft") {
+              event.preventDefault();
+              nudge(-1);
+            } else if (event.key === "ArrowRight") {
+              event.preventDefault();
+              nudge(1);
             }
           }}
-          onFocus={() => setPaused(true)}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
+          onPointerCancel={endDrag}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          ref={frameRef}
+          style={{
+            perspective: `calc(var(--cf-card) * ${perspective})`,
+            touchAction: "pan-y",
+          }}
+          tabIndex={0}
         >
           <div
-            aria-label="Cover rack"
-            aria-roledescription="carousel"
-            className="relative mx-auto h-56 w-full max-w-3xl touch-pan-y select-none [perspective:1200px] sm:h-64"
-            id={stageId}
-            onKeyDown={(event) => {
-              if (event.key === "ArrowRight") {
-                event.preventDefault();
-                move(1);
-              }
-              if (event.key === "ArrowLeft") {
-                event.preventDefault();
-                move(-1);
-              }
-            }}
-            onPointerCancel={endDrag}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={endDrag}
+            className="relative select-none [transform-style:preserve-3d]"
+            style={{ height: "var(--cf-card)" }}
           >
-            <div className="absolute inset-0 flex items-center justify-center [transform-style:preserve-3d]">
-              {covers.map((item, index) => (
-                <CoverPlate
-                  item={item}
-                  key={item.id}
-                  offset={shortestOffset(index, active, count)}
-                  onSelect={() => {
-                    if (dragRef.current?.moved) return;
-                    setActive(index);
-                  }}
-                  reducedMotion={reduceMotion}
+            {covers.map((item, index) => (
+              <div
+                aria-label={`${index + 1} of ${count}`}
+                aria-roledescription="slide"
+                className={cn(
+                  "absolute top-0 left-1/2 aspect-square overflow-hidden rounded-2xl bg-muted shadow-xl will-change-transform",
+                  cardClassName,
+                )}
+                key={item.id}
+                ref={(node) => {
+                  cardRefs.current[index] = node;
+                }}
+                role="group"
+                style={{ width: "var(--cf-card)" }}
+              >
+                <img
+                  alt={item.imageAlt}
+                  className="size-full select-none object-cover"
+                  draggable={false}
+                  src={item.image}
                 />
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-          {current ? (
-            <div
-              aria-live="polite"
-              className="mt-8 text-center"
-              data-slot="coverflow-carousel-caption"
+        </div>
+
+        {showNavigation && count > 1 ? (
+          <>
+            <button
+              aria-label="Previous slide"
+              className="absolute top-1/2 left-3 z-[200] -translate-y-1/2 rounded-full bg-background/70 p-2 text-foreground backdrop-blur transition hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              onClick={() => nudge(-1)}
+              type="button"
             >
-              <p className="text-lg font-semibold tracking-tight">
-                {current.title}
-              </p>
-              {current.subtitle ? (
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {current.subtitle}
-                </p>
-              ) : null}
-            </div>
+              <ChevronLeftIcon className="size-5" />
+            </button>
+            <button
+              aria-label="Next slide"
+              className="absolute top-1/2 right-3 z-[200] -translate-y-1/2 rounded-full bg-background/70 p-2 text-foreground backdrop-blur transition hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              onClick={() => nudge(1)}
+              type="button"
+            >
+              <ChevronRightIcon className="size-5" />
+            </button>
+          </>
+        ) : null}
+      </div>
+
+      {showCaption && active?.title ? (
+        <div
+          aria-live="polite"
+          className="mt-2 flex flex-col items-center px-6 motion-safe:animate-in motion-safe:fade-in motion-safe:duration-300 motion-reduce:animate-none"
+          data-slot="coverflow-carousel-caption"
+          key={selected}
+        >
+          <p className="text-[15px] font-semibold tracking-tight text-foreground">
+            {active.title}
+          </p>
+          {active.subtitle ? (
+            <p className="mt-1 text-[13px] text-muted-foreground">
+              {active.subtitle}
+            </p>
           ) : null}
-          {count > 1 ? (
-            <div className="mt-6 flex justify-center gap-2">
-              {covers.map((item, index) => (
-                <button
-                  aria-controls={stageId}
-                  aria-current={index === active ? "true" : undefined}
-                  aria-label={`Show ${item.title}`}
-                  className={cn(
-                    "size-2.5 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card",
-                    index === active
-                      ? "bg-foreground"
-                      : "bg-border hover:bg-muted-foreground",
-                  )}
-                  key={`dot-${item.id}`}
-                  onClick={() => setActive(index)}
-                  type="button"
-                />
+          {active.meta && active.meta.length > 0 ? (
+            <dl className="mt-10 w-full max-w-[230px] text-[12px]">
+              {active.meta.map((row) => (
+                <div className="flex justify-between py-[5px]" key={row.label}>
+                  <dt className="text-muted-foreground">{row.label}</dt>
+                  <dd className="font-medium text-foreground">{row.value}</dd>
+                </div>
               ))}
-            </div>
+            </dl>
           ) : null}
         </div>
-      </div>
+      ) : null}
+
+      {showPagination && count > 1 ? (
+        <div className="mt-6 flex items-center justify-center gap-2">
+          {covers.map((item, index) => (
+            <button
+              aria-current={index === selected ? "true" : undefined}
+              aria-label={`Go to slide ${index + 1}`}
+              className={cn(
+                "size-2 rounded-full bg-foreground transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                index === selected ? "opacity-100" : "opacity-30",
+              )}
+              key={`dot-${item.id}`}
+              onClick={() => goTo(index)}
+              type="button"
+            />
+          ))}
+        </div>
+      ) : null}
     </section>
   );
 }
