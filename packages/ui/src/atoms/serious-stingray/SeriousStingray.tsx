@@ -4,12 +4,6 @@ import * as React from "react";
 import { cn } from "@/lib/cn";
 import type { SeriousStingrayProps } from "./SeriousStingray.types";
 
-const sizes = {
-  sm: "gap-1 text-sm",
-  md: "gap-1.5 text-xl",
-  lg: "gap-2 text-2xl",
-} as const;
-
 export function SeriousStingray({
   className,
   children,
@@ -25,11 +19,7 @@ export function SeriousStingray({
 
   return (
     <Component
-      className={cn(
-        "jk-serious-stingray inline-flex shrink-0 flex-col items-stretch bg-transparent font-semibold text-foreground whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
-        sizes[size],
-        className,
-      )}
+      className={cn("jk-serious-stingray", className)}
       data-accent={accent}
       data-size={size}
       data-slot="serious-stingray"
@@ -37,43 +27,79 @@ export function SeriousStingray({
       {...props}
     >
       <style href="jk-serious-stingray" precedence="default">{`
-        .jk-serious-stingray-rail {
-          display: block;
-          height: 2px;
-          width: 0;
-          background: var(--jk-primary);
+        .jk-serious-stingray {
+          --jk-ss-ink: var(--jk-primary);
+          --jk-ss-on: var(--jk-primary-foreground);
+          position: relative;
+          z-index: 1;
+          display: inline-block;
+          width: 6em;
+          height: 2.6em;
+          padding: 0;
+          overflow: hidden;
+          border: 2px solid var(--jk-ss-ink);
+          border-radius: 6px;
+          background: transparent;
+          color: var(--jk-ss-ink);
+          font-family: inherit;
+          font-size: 17px;
+          font-weight: 500;
+          line-height: 2.5em;
+          text-align: center;
+          white-space: nowrap;
+          cursor: pointer;
         }
-        .jk-serious-stingray[data-accent="destructive"] .jk-serious-stingray-rail {
-          background: var(--jk-destructive);
+        .jk-serious-stingray[data-size="sm"] {
+          font-size: 13px;
         }
-        .jk-serious-stingray-rail-start {
-          margin-inline-start: auto;
+        .jk-serious-stingray[data-size="lg"] {
+          font-size: 21px;
+        }
+        .jk-serious-stingray[data-accent="destructive"] {
+          --jk-ss-ink: var(--jk-destructive);
+          --jk-ss-on: var(--jk-destructive-foreground);
+        }
+        .jk-serious-stingray:disabled {
+          pointer-events: none;
+          cursor: not-allowed;
+          opacity: 0.5;
+        }
+        .jk-serious-stingray:focus-visible {
+          outline: 2px solid var(--jk-ring);
+          outline-offset: 2px;
+        }
+        .jk-serious-stingray::before {
+          position: absolute;
+          top: 100%;
+          left: 100%;
+          z-index: -1;
+          width: 150px;
+          height: 200px;
+          border-radius: 50%;
+          background: var(--jk-ss-ink);
+          content: "";
+        }
+        .jk-serious-stingray:hover,
+        .jk-serious-stingray:focus-visible {
+          color: var(--jk-ss-on);
+        }
+        .jk-serious-stingray:hover::before,
+        .jk-serious-stingray:focus-visible::before {
+          top: -30px;
+          left: -30px;
         }
         @media (prefers-reduced-motion: no-preference) {
-          .jk-serious-stingray-rail {
-            transition: width 500ms ease;
-          }
-          .jk-serious-stingray:hover .jk-serious-stingray-rail,
-          .jk-serious-stingray:focus-visible .jk-serious-stingray-rail {
-            width: 100%;
-          }
-          .jk-serious-stingray:active {
-            transform: translateY(1px);
+          .jk-serious-stingray::before {
+            transition: 0.3s all;
           }
         }
         @media (prefers-reduced-motion: reduce) {
-          .jk-serious-stingray-rail {
-            width: 100%;
+          .jk-serious-stingray::before {
             transition: none;
           }
         }
       `}</style>
-      <span
-        aria-hidden="true"
-        className="jk-serious-stingray-rail jk-serious-stingray-rail-start"
-      />
-      <span className="text-center">{content}</span>
-      <span aria-hidden="true" className="jk-serious-stingray-rail" />
+      {content}
     </Component>
   );
 }

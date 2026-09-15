@@ -3,21 +3,21 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "serious-stingray",
   displayName: "SeriousStingray",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A text CTA whose accent rails grow from opposite edges on hover and focus.",
+    "A 6px-rounded outline CTA whose circular fill sweeps in from the far corner on hover.",
   sectionCategory: "action",
   purpose:
-    "Marks a quiet text action when a filled button would be too heavy but the control still needs a clear hover cue.",
+    "Recreates a compact outlined action whose hover fill arrives as a circle from the opposite corner, without flattening the 6px radius through the shared Button atom.",
   bestFor: [
-    "inline navigation or continue links styled as buttons",
-    "editorial or marketing text actions",
-    "secondary CTAs next to a solid primary",
+    "compact secondary actions that still need a clear hover fill",
+    "toolbar or card CTAs that should stay outlined at rest",
+    "pairs of outline actions next to a solid primary",
   ],
   avoidFor: [
-    "primary form submit actions that need a filled hit target",
-    "destructive confirms that need a solid warning surface",
+    "full-width form submits that need a filled hit target at rest",
+    "icon-only controls that cannot use the 6em by 2.6em frame",
   ],
   tone: ["clean", "professional"],
   contentDensity: "low",
@@ -34,7 +34,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
-  tags: ["button", "cta", "action", "underline", "atom"],
+  tags: ["button", "cta", "action", "outline", "wipe", "atom"],
   dependencies: ["@radix-ui/react-slot"],
   registryDependencies: [],
   a11y: { keyboardNav: true, reducedMotion: true },

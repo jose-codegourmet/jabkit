@@ -1,19 +1,19 @@
 {
   "name": "serious-stingray",
   "displayName": "SeriousStingray",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "addedAt": "2026-09-15",
-  "description": "A text CTA whose accent rails grow from opposite edges on hover and focus.",
+  "description": "A 6px-rounded outline CTA whose circular fill sweeps in from the far corner on hover.",
   "sectionCategory": "action",
-  "purpose": "Marks a quiet text action when a filled button would be too heavy but the control still needs a clear hover cue.",
+  "purpose": "Recreates a compact outlined action whose hover fill arrives as a circle from the opposite corner, without flattening the 6px radius through the shared Button atom.",
   "bestFor": [
-    "inline navigation or continue links styled as buttons",
-    "editorial or marketing text actions",
-    "secondary CTAs next to a solid primary"
+    "compact secondary actions that still need a clear hover fill",
+    "toolbar or card CTAs that should stay outlined at rest",
+    "pairs of outline actions next to a solid primary"
   ],
   "avoidFor": [
-    "primary form submit actions that need a filled hit target",
-    "destructive confirms that need a solid warning surface"
+    "full-width form submits that need a filled hit target at rest",
+    "icon-only controls that cannot use the 6em by 2.6em frame"
   ],
   "tone": [
     "clean",
@@ -39,7 +39,8 @@
     "button",
     "cta",
     "action",
-    "underline",
+    "outline",
+    "wipe",
     "atom"
   ],
   "dependencies": [
@@ -60,7 +61,7 @@
     {
       "path": "serious-stingray/SeriousStingray.tsx",
       "type": "component",
-      "content": "import { Slot } from \"@radix-ui/react-slot\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { SeriousStingrayProps } from \"./SeriousStingray.types\";\n\nconst sizes = {\n  sm: \"gap-1 text-sm\",\n  md: \"gap-1.5 text-xl\",\n  lg: \"gap-2 text-2xl\",\n} as const;\n\nexport function SeriousStingray({\n  className,\n  children,\n  label = \"Button\",\n  size = \"md\",\n  accent = \"primary\",\n  asChild = false,\n  type,\n  ...props\n}: SeriousStingrayProps) {\n  const Component = asChild ? Slot : \"button\";\n  const content = children ?? label;\n\n  return (\n    <Component\n      className={cn(\n        \"jk-serious-stingray inline-flex shrink-0 flex-col items-stretch bg-transparent font-semibold text-foreground whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50\",\n        sizes[size],\n        className,\n      )}\n      data-accent={accent}\n      data-size={size}\n      data-slot=\"serious-stingray\"\n      type={asChild ? undefined : (type ?? \"button\")}\n      {...props}\n    >\n      <style href=\"jk-serious-stingray\" precedence=\"default\">{`\n        .jk-serious-stingray-rail {\n          display: block;\n          height: 2px;\n          width: 0;\n          background: var(--jk-primary);\n        }\n        .jk-serious-stingray[data-accent=\"destructive\"] .jk-serious-stingray-rail {\n          background: var(--jk-destructive);\n        }\n        .jk-serious-stingray-rail-start {\n          margin-inline-start: auto;\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-serious-stingray-rail {\n            transition: width 500ms ease;\n          }\n          .jk-serious-stingray:hover .jk-serious-stingray-rail,\n          .jk-serious-stingray:focus-visible .jk-serious-stingray-rail {\n            width: 100%;\n          }\n          .jk-serious-stingray:active {\n            transform: translateY(1px);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-serious-stingray-rail {\n            width: 100%;\n            transition: none;\n          }\n        }\n      `}</style>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-serious-stingray-rail jk-serious-stingray-rail-start\"\n      />\n      <span className=\"text-center\">{content}</span>\n      <span aria-hidden=\"true\" className=\"jk-serious-stingray-rail\" />\n    </Component>\n  );\n}\n"
+      "content": "import { Slot } from \"@radix-ui/react-slot\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { SeriousStingrayProps } from \"./SeriousStingray.types\";\n\nexport function SeriousStingray({\n  className,\n  children,\n  label = \"Button\",\n  size = \"md\",\n  accent = \"primary\",\n  asChild = false,\n  type,\n  ...props\n}: SeriousStingrayProps) {\n  const Component = asChild ? Slot : \"button\";\n  const content = children ?? label;\n\n  return (\n    <Component\n      className={cn(\"jk-serious-stingray\", className)}\n      data-accent={accent}\n      data-size={size}\n      data-slot=\"serious-stingray\"\n      type={asChild ? undefined : (type ?? \"button\")}\n      {...props}\n    >\n      <style href=\"jk-serious-stingray\" precedence=\"default\">{`\n        .jk-serious-stingray {\n          --jk-ss-ink: var(--jk-primary);\n          --jk-ss-on: var(--jk-primary-foreground);\n          position: relative;\n          z-index: 1;\n          display: inline-block;\n          width: 6em;\n          height: 2.6em;\n          padding: 0;\n          overflow: hidden;\n          border: 2px solid var(--jk-ss-ink);\n          border-radius: 6px;\n          background: transparent;\n          color: var(--jk-ss-ink);\n          font-family: inherit;\n          font-size: 17px;\n          font-weight: 500;\n          line-height: 2.5em;\n          text-align: center;\n          white-space: nowrap;\n          cursor: pointer;\n        }\n        .jk-serious-stingray[data-size=\"sm\"] {\n          font-size: 13px;\n        }\n        .jk-serious-stingray[data-size=\"lg\"] {\n          font-size: 21px;\n        }\n        .jk-serious-stingray[data-accent=\"destructive\"] {\n          --jk-ss-ink: var(--jk-destructive);\n          --jk-ss-on: var(--jk-destructive-foreground);\n        }\n        .jk-serious-stingray:disabled {\n          pointer-events: none;\n          cursor: not-allowed;\n          opacity: 0.5;\n        }\n        .jk-serious-stingray:focus-visible {\n          outline: 2px solid var(--jk-ring);\n          outline-offset: 2px;\n        }\n        .jk-serious-stingray::before {\n          position: absolute;\n          top: 100%;\n          left: 100%;\n          z-index: -1;\n          width: 150px;\n          height: 200px;\n          border-radius: 50%;\n          background: var(--jk-ss-ink);\n          content: \"\";\n        }\n        .jk-serious-stingray:hover,\n        .jk-serious-stingray:focus-visible {\n          color: var(--jk-ss-on);\n        }\n        .jk-serious-stingray:hover::before,\n        .jk-serious-stingray:focus-visible::before {\n          top: -30px;\n          left: -30px;\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-serious-stingray::before {\n            transition: 0.3s all;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-serious-stingray::before {\n            transition: none;\n          }\n        }\n      `}</style>\n      {content}\n    </Component>\n  );\n}\n"
     },
     {
       "path": "serious-stingray/SeriousStingray.types.ts",
