@@ -1,0 +1,113 @@
+{
+  "name": "skiper-52",
+  "displayName": "Skiper52",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Horizontal image rack that expands the hovered or focused strip and reveals a plate code overlay.",
+  "sectionCategory": "gallery",
+  "purpose": "Lets a landing page show many photographs in one row without losing a readable hero frame for the active image.",
+  "bestFor": [
+    "editorial or studio lookbooks",
+    "product plate galleries",
+    "cast or campaign stills on a marketing page"
+  ],
+  "avoidFor": [
+    "dense documentation",
+    "galleries that need equal tile sizes at all times",
+    "pages where hover is the only way to see image text"
+  ],
+  "tone": [
+    "modern",
+    "confident",
+    "editorial"
+  ],
+  "industries": [
+    "media",
+    "fashion",
+    "design"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "high",
+  "layout": {
+    "type": "row",
+    "alignment": "center",
+    "columns": 1
+  },
+  "slots": [
+    "headline",
+    "content",
+    "featureVisuals"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "logos"
+  ],
+  "recommendedBefore": [
+    "testimonials",
+    "cta"
+  ],
+  "tags": [
+    "gallery",
+    "hover",
+    "expand",
+    "images",
+    "marketing",
+    "interactive",
+    "lookbook",
+    "skiper"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "skiper-52/Skiper52.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { useId, useState } from \"react\";\n// biome-ignore lint/correctness/noUnusedImports: packages/ui uses the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { Skiper52Image, Skiper52Props } from \"./Skiper52.types\";\n\nconst DEFAULT_EYEBROW = \"Hover expand\";\nconst DEFAULT_HEADING = \"Plates that open when you linger.\";\nconst DEFAULT_DESCRIPTION =\n  \"Idle strips stay narrow. The one under the pointer grows so the photograph can be read, then the rest close back in.\";\n\nconst DEFAULT_IMAGES: Skiper52Image[] = [\n  {\n    src: \"/assets/462a1be29787cd8e.webp\",\n    alt: \"Low oak lounge chair on a pale floor\",\n    code: \"# 01\",\n  },\n  {\n    src: \"/assets/6cc11e462a9aaded.webp\",\n    alt: \"Arc floor lamp lighting a quiet corner\",\n    code: \"# 02\",\n  },\n  {\n    src: \"/assets/488fa5330da1224c.webp\",\n    alt: \"Sculptural stone side table in a sunlit room\",\n    code: \"# 03\",\n  },\n  {\n    src: \"/assets/7cb36691e11ed9af.webp\",\n    alt: \"Linen daybed against a plaster wall\",\n    code: \"# 04\",\n  },\n  {\n    src: \"/assets/4f6410f5452c0ba5.webp\",\n    alt: \"Hand-thrown ceramic pendant light\",\n    code: \"# 05\",\n  },\n  {\n    src: \"/assets/97c532d558fa4fbc.webp\",\n    alt: \"Concrete structure photographed from the ground\",\n    code: \"# 06\",\n  },\n  {\n    src: \"/assets/d3f9bde61c9a29e7.webp\",\n    alt: \"Glass rooms along an empty daylight corridor\",\n    code: \"# 07\",\n  },\n];\n\nfunction clampIndex(index: number, length: number) {\n  if (length <= 0) return 0;\n  return Math.min(Math.max(0, index), length - 1);\n}\n\nexport function Skiper52({\n  className,\n  eyebrow = DEFAULT_EYEBROW,\n  heading = DEFAULT_HEADING,\n  description = DEFAULT_DESCRIPTION,\n  images = DEFAULT_IMAGES,\n  initialActive = 1,\n  ...props\n}: Skiper52Props) {\n  const headingId = useId();\n  const groupId = useId();\n  const [active, setActive] = useState(() =>\n    clampIndex(initialActive, images.length),\n  );\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-slot=\"skiper-52\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24\">\n        <header className=\"mx-auto mb-10 max-w-2xl text-center sm:mb-14\">\n          {eyebrow ? (\n            <p className=\"mb-3 text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase\">\n              {eyebrow}\n            </p>\n          ) : null}\n          <h2\n            className=\"text-3xl font-semibold tracking-[-0.05em] text-balance sm:text-4xl lg:text-5xl\"\n            id={headingId}\n          >\n            {heading}\n          </h2>\n          {description ? (\n            <p className=\"mt-3 text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7\">\n              {description}\n            </p>\n          ) : null}\n        </header>\n        <div\n          aria-labelledby={headingId}\n          className=\"flex h-[20rem] w-full items-stretch justify-center gap-2 sm:h-96 sm:gap-3\"\n          role=\"radiogroup\"\n        >\n          {images.map((image, index) => {\n            const selected = index === clampIndex(active, images.length);\n            const optionId = `${groupId}-${index}`;\n            return (\n              <button\n                aria-checked={selected}\n                className={cn(\n                  \"relative isolate overflow-hidden rounded-[calc(var(--radius)+0.85rem)] border border-border bg-muted text-left outline-none\",\n                  \"focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n                  \"transition-[flex-grow,flex-basis,min-width] duration-300 ease-in-out motion-reduce:transition-none\",\n                  selected\n                    ? \"min-w-[10.5rem] flex-[6_1_14rem] sm:min-w-[18rem] sm:flex-[8_1_22rem]\"\n                    : \"min-w-[2.5rem] flex-[0_0_2.75rem] sm:min-w-[4.5rem] sm:flex-[0_0_5rem]\",\n                )}\n                id={optionId}\n                key={`${image.src}-${image.code}`}\n                onClick={() => setActive(index)}\n                onFocus={() => setActive(index)}\n                onMouseEnter={() => setActive(index)}\n                role=\"radio\"\n                type=\"button\"\n              >\n                <img\n                  alt={image.alt}\n                  className=\"absolute inset-0 size-full object-cover\"\n                  src={image.src}\n                />\n                <span\n                  aria-hidden=\"true\"\n                  className={cn(\n                    \"pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/55 to-transparent\",\n                    \"transition-opacity duration-300 ease-in-out motion-reduce:transition-none\",\n                    selected ? \"opacity-100\" : \"opacity-0\",\n                  )}\n                />\n                <span\n                  className={cn(\n                    \"pointer-events-none absolute right-3 bottom-3 font-mono text-xs tracking-wide text-background sm:right-4 sm:bottom-4 sm:text-sm\",\n                    \"transition-opacity duration-300 ease-in-out motion-reduce:transition-none\",\n                    selected ? \"opacity-100\" : \"opacity-0\",\n                  )}\n                >\n                  {image.code}\n                </span>\n              </button>\n            );\n          })}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "skiper-52/Skiper52.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface Skiper52Image {\n  src: string;\n  alt: string;\n  code: string;\n}\n\nexport interface Skiper52Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  eyebrow?: string;\n  heading?: string;\n  description?: string;\n  images?: Skiper52Image[];\n  initialActive?: number;\n}\n"
+    },
+    {
+      "path": "skiper-52/index.ts",
+      "type": "index",
+      "content": "export { Skiper52 } from \"./Skiper52\";\nexport type * from \"./Skiper52.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Skiper52 {...skiper52Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Skiper52 {...skiper52Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
