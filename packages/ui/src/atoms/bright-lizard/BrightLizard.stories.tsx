@@ -24,9 +24,9 @@ export const Sizes: Story = {
   args: { ...brightLizardMocks.labeled },
   render: () => (
     <div className="flex flex-wrap items-end gap-8 bg-background p-10 text-foreground">
-      <BrightLizard {...brightLizardMocks.compact} showLabel />
-      <BrightLizard {...brightLizardMocks.default} showLabel />
-      <BrightLizard label="Almost ready" showLabel size="lg" />
+      <BrightLizard {...brightLizardMocks.compact} />
+      <BrightLizard {...brightLizardMocks.default} />
+      <BrightLizard label="READY" size="lg" />
     </div>
   ),
 };

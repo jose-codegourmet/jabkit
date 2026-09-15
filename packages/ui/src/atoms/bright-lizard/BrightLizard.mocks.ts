@@ -1,5 +1,5 @@
 export const brightLizardMocks = {
-  default: { label: "Loading" },
-  labeled: { label: "Syncing workspace", showLabel: true },
-  compact: { label: "Loading", size: "sm" as const },
+  default: { label: "LOADING" },
+  labeled: { label: "SYNCING" },
+  compact: { label: "WAIT", size: "sm" as const },
 } as const;
