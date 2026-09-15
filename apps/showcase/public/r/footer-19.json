@@ -1,0 +1,108 @@
+{
+  "name": "footer-19",
+  "displayName": "Footer19",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Dark dotted-grid footer with a square newsletter join, status badge, three uppercase link columns, and a location time strip.",
+  "sectionCategory": "footer",
+  "purpose": "Closes a marketing page with a weekly subscribe path, compact company navigation, and studio meta in one full-width band.",
+  "bestFor": [
+    "product landings that need a newsletter close without a giant wordmark",
+    "pages that want a square joined subscribe control",
+    "studio sites that keep location and socials in the footer rail"
+  ],
+  "avoidFor": [
+    "compact legal-only footers",
+    "product shells that should not collect email"
+  ],
+  "tone": [
+    "dark",
+    "product",
+    "quiet"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "split",
+    "alignment": "left",
+    "columns": 3
+  },
+  "slots": [
+    "badge",
+    "newsletter",
+    "brand",
+    "linkColumns",
+    "copyright",
+    "location",
+    "social"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "cta",
+    "contact",
+    "faq",
+    "content"
+  ],
+  "tags": [
+    "footer",
+    "marketing",
+    "newsletter",
+    "landing",
+    "social",
+    "dotted-grid"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "footer-19/Footer19.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ArrowUpRightIcon, GlobeIcon, SparklesIcon } from \"lucide-react\";\nimport {\n  type CSSProperties,\n  type FormEvent,\n  useEffect,\n  useId,\n  useRef,\n  useState,\n} from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  Footer19LinkColumn,\n  Footer19NavLink,\n  Footer19Props,\n} from \"./Footer19.types\";\n\nconst defaultNavColumns: Footer19LinkColumn[] = [\n  {\n    title: \"Company\",\n    links: [\n      { label: \"About Us\", href: \"#about\" },\n      { label: \"Guides\", href: \"#guides\" },\n      { label: \"Careers\", href: \"#careers\" },\n      { label: \"Blog\", href: \"#blog\" },\n    ],\n  },\n  {\n    title: \"Products\",\n    links: [\n      { label: \"Software\", href: \"#software\" },\n      { label: \"Hardware\", href: \"#hardware\" },\n      { label: \"Accessories\", href: \"#accessories\" },\n      { label: \"Licensing\", href: \"#licensing\" },\n    ],\n  },\n  {\n    title: \"Contact\",\n    links: [\n      { label: \"Email\", href: \"#email\" },\n      { label: \"Phone\", href: \"#phone\" },\n      { label: \"Locations\", href: \"#locations\" },\n      { label: \"FAQ\", href: \"#faq\" },\n    ],\n  },\n];\n\nconst defaultSocialLinks: Footer19NavLink[] = [\n  { label: \"Instagram\", href: \"#instagram\" },\n  { label: \"Linkedin\", href: \"#linkedin\" },\n];\n\nconst defaults = {\n  badgeText: \"Trusted by Thousands\",\n  newsletterHeading:\n    \"The latest news,\\narticles, and resources,\\nin your inbox weekly.\",\n  newsletterPlaceholder: \"Enter your email\",\n  newsletterButtonText: \"Stay Updated\",\n  brandName: \"Northline\",\n  copyright: \"Copyright© Northline Studio\",\n  location: \"Brooklyn, NY\",\n  time: \"07:23:14 AM\",\n} as const;\n\nconst focusRing =\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\";\n\nfunction DefaultBrandMark({ className }: { className?: string }) {\n  return (\n    <SparklesIcon\n      aria-hidden=\"true\"\n      className={cn(\"size-6 fill-primary/20 text-primary\", className)}\n    />\n  );\n}\n\nfunction useOnceInView<T extends HTMLElement>(threshold = 0.15) {\n  const ref = useRef<T | null>(null);\n  const [inView, setInView] = useState(false);\n\n  useEffect(() => {\n    const node = ref.current;\n    if (!node) return;\n\n    const reduce = window.matchMedia(\n      \"(prefers-reduced-motion: reduce)\",\n    ).matches;\n    if (reduce) {\n      setInView(true);\n      return;\n    }\n\n    const observer = new IntersectionObserver(\n      ([entry]) => {\n        if (entry?.isIntersecting) {\n          setInView(true);\n          observer.disconnect();\n        }\n      },\n      { threshold },\n    );\n    observer.observe(node);\n    return () => observer.disconnect();\n  }, [threshold]);\n\n  return { ref, inView };\n}\n\nexport function Footer19({\n  className,\n  badgeText = defaults.badgeText,\n  newsletterHeading = defaults.newsletterHeading,\n  newsletterPlaceholder = defaults.newsletterPlaceholder,\n  newsletterButtonText = defaults.newsletterButtonText,\n  onSubscribe,\n  brandName = defaults.brandName,\n  brandLogo,\n  navColumns = defaultNavColumns,\n  copyright = defaults.copyright,\n  location = defaults.location,\n  time = defaults.time,\n  socialLinks = defaultSocialLinks,\n  ...props\n}: Footer19Props) {\n  const emailFieldId = useId();\n  const [email, setEmail] = useState(\"\");\n  const { ref, inView } = useOnceInView<HTMLElement>(0.15);\n\n  function handleSubscribeSubmit(event: FormEvent<HTMLFormElement>) {\n    event.preventDefault();\n    const next = email.trim();\n    if (!next) return;\n    onSubscribe?.(next);\n  }\n\n  return (\n    <footer\n      ref={ref}\n      data-slot=\"footer-19\"\n      className={cn(\n        \"jk-footer19 relative flex min-h-[500px] w-full flex-col overflow-hidden bg-background font-sans text-muted-foreground antialiased\",\n        inView && \"jk-footer19-in\",\n        className,\n      )}\n      {...props}\n    >\n      <style href=\"jk-footer-19\" precedence=\"default\">{`\n        .jk-footer19-grid {\n          background-image: radial-gradient(\n            circle at 2px 2px,\n            color-mix(in oklab, var(--jk-foreground) 100%, transparent) 1.5px,\n            transparent 0\n          );\n          background-size: 24px 24px;\n        }\n        .jk-footer19-rise {\n          opacity: 0;\n          transform: translateY(20px);\n          filter: blur(4px);\n        }\n        .jk-footer19-in .jk-footer19-rise {\n          animation: jk-footer19-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;\n          animation-delay: var(--jk-footer19-delay, 50ms);\n        }\n        @keyframes jk-footer19-rise {\n          to {\n            opacity: 1;\n            transform: translateY(0);\n            filter: blur(0);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-footer19-rise,\n          .jk-footer19-in .jk-footer19-rise {\n            opacity: 1;\n            transform: none;\n            filter: none;\n            animation: none;\n          }\n        }\n      `}</style>\n\n      <div className=\"pointer-events-none absolute inset-0\" aria-hidden=\"true\">\n        <div className=\"absolute bottom-[-20%] left-[-10%] h-[50%] w-[50%] rounded-full bg-primary/20 blur-[120px]\" />\n        <div className=\"jk-footer19-grid absolute inset-0 opacity-[0.07]\" />\n      </div>\n\n      <div className=\"relative z-10 mx-auto flex min-h-[500px] w-full max-w-7xl flex-col justify-between px-6 pt-20 pb-10 md:px-12\">\n        <div className=\"mb-24 flex flex-col items-start justify-between gap-12 lg:flex-row lg:gap-24\">\n          <div\n            className=\"jk-footer19-rise max-w-xl\"\n            style={{ \"--jk-footer19-delay\": \"50ms\" } as CSSProperties}\n          >\n            <div className=\"mb-6 flex items-center gap-3\">\n              <span\n                className=\"size-2.5 rounded-full bg-primary shadow-[0_0_12px_color-mix(in_oklab,var(--jk-primary)_80%,transparent)]\"\n                aria-hidden=\"true\"\n              />\n              <span className=\"text-sm font-medium text-foreground\">\n                {badgeText}\n              </span>\n            </div>\n            <h2 className=\"text-4xl leading-[1.1] font-light tracking-tight whitespace-pre-line text-foreground md:text-5xl\">\n              {newsletterHeading}\n            </h2>\n          </div>\n\n          <form\n            className=\"jk-footer19-rise flex h-14 w-full max-w-md lg:mt-auto\"\n            style={{ \"--jk-footer19-delay\": \"150ms\" } as CSSProperties}\n            onSubmit={handleSubscribeSubmit}\n          >\n            <label className=\"sr-only\" htmlFor={emailFieldId}>\n              {newsletterPlaceholder}\n            </label>\n            <input\n              id={emailFieldId}\n              name=\"email\"\n              type=\"email\"\n              value={email}\n              onChange={(event) => setEmail(event.target.value)}\n              placeholder={newsletterPlaceholder}\n              required\n              autoComplete=\"email\"\n              className={cn(\n                \"h-full min-w-0 flex-1 rounded-none border border-r-0 border-border bg-card px-5 text-sm text-foreground\",\n                \"placeholder:text-muted-foreground\",\n                \"transition-shadow duration-200 focus:outline-none focus:ring-1 focus:ring-primary\",\n              )}\n            />\n            <button\n              type=\"submit\"\n              className={cn(\n                \"inline-flex h-full cursor-pointer items-center justify-center gap-2 rounded-none border border-primary bg-primary px-6 text-sm font-medium text-primary-foreground\",\n                \"transition-[opacity,transform] duration-200 ease-out hover:opacity-90 active:scale-[0.98]\",\n                \"motion-reduce:transition-none motion-reduce:active:scale-100\",\n                focusRing,\n              )}\n            >\n              {newsletterButtonText}\n              <ArrowUpRightIcon aria-hidden=\"true\" className=\"size-4\" />\n            </button>\n          </form>\n        </div>\n\n        <div className=\"mb-24 flex flex-col items-start justify-between gap-16 md:flex-row\">\n          <div\n            className=\"jk-footer19-rise flex items-center gap-2 text-foreground\"\n            style={{ \"--jk-footer19-delay\": \"250ms\" } as CSSProperties}\n          >\n            {brandLogo ?? <DefaultBrandMark />}\n            <span className=\"text-xl font-medium tracking-tight md:text-2xl\">\n              {brandName}\n            </span>\n          </div>\n\n          <nav\n            aria-label=\"Footer navigation\"\n            className=\"grid grid-cols-2 gap-12 md:grid-cols-3 md:gap-24 lg:gap-32\"\n          >\n            {navColumns.map((column, columnIndex) => (\n              <div\n                key={column.title}\n                className=\"jk-footer19-rise flex flex-col gap-6\"\n                style={\n                  {\n                    \"--jk-footer19-delay\": `${350 + columnIndex * 100}ms`,\n                  } as CSSProperties\n                }\n              >\n                <h3 className=\"text-xs font-semibold tracking-wider text-foreground uppercase\">\n                  {column.title}\n                </h3>\n                <ul className=\"flex list-none flex-col gap-4 p-0\">\n                  {column.links.map((link) => (\n                    <li key={`${column.title}-${link.label}`}>\n                      <a\n                        href={link.href}\n                        className={cn(\n                          \"inline-flex min-h-5 items-center rounded-none text-sm text-muted-foreground\",\n                          \"transition-colors duration-200 hover:text-foreground\",\n                          focusRing,\n                        )}\n                      >\n                        {link.label}\n                      </a>\n                    </li>\n                  ))}\n                </ul>\n              </div>\n            ))}\n          </nav>\n        </div>\n\n        <div\n          className=\"jk-footer19-rise flex flex-col items-center justify-between gap-6 pt-8 text-xs text-muted-foreground md:flex-row\"\n          style={{ \"--jk-footer19-delay\": \"650ms\" } as CSSProperties}\n        >\n          <p>{copyright}</p>\n\n          <div className=\"flex flex-col items-center gap-6 md:flex-row md:gap-16\">\n            <p className=\"flex items-center gap-2\">\n              <GlobeIcon aria-hidden=\"true\" className=\"size-4\" />\n              <span>{location}</span>\n            </p>\n            <p className=\"tracking-widest tabular-nums\">{time}</p>\n          </div>\n\n          <div className=\"flex items-center gap-6\">\n            {socialLinks.map((link) => (\n              <a\n                key={link.label}\n                href={link.href}\n                className={cn(\n                  \"rounded-none transition-colors duration-200 hover:text-foreground\",\n                  focusRing,\n                )}\n              >\n                {link.label}\n              </a>\n            ))}\n          </div>\n        </div>\n      </div>\n    </footer>\n  );\n}\n"
+    },
+    {
+      "path": "footer-19/Footer19.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport interface Footer19NavLink {\n  label: string;\n  href: string;\n}\n\nexport interface Footer19LinkColumn {\n  title: string;\n  links: Footer19NavLink[];\n}\n\nexport interface Footer19Props extends HTMLAttributes<HTMLElement> {\n  badgeText?: string;\n  newsletterHeading?: string;\n  newsletterPlaceholder?: string;\n  newsletterButtonText?: string;\n  onSubscribe?: (email: string) => void;\n  brandName?: string;\n  brandLogo?: ReactNode;\n  navColumns?: Footer19LinkColumn[];\n  copyright?: string;\n  location?: string;\n  time?: string;\n  socialLinks?: Footer19NavLink[];\n}\n"
+    },
+    {
+      "path": "footer-19/index.ts",
+      "type": "index",
+      "content": "export { Footer19 } from \"./Footer19\";\nexport type {\n  Footer19LinkColumn,\n  Footer19NavLink,\n  Footer19Props,\n} from \"./Footer19.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Footer19 {...footer19Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Footer19 {...footer19Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
