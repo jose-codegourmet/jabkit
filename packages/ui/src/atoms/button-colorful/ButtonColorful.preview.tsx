@@ -5,5 +5,5 @@ import { buttonColorfulMocks } from "./ButtonColorful.mocks";
 
 export default {
   Default: () => <ButtonColorful {...buttonColorfulMocks.default} />,
-  Sizes: () => <ButtonColorful {...buttonColorfulMocks.alternate} />,
+  LabelOnly: () => <ButtonColorful {...buttonColorfulMocks.labelOnly} />,
 };
