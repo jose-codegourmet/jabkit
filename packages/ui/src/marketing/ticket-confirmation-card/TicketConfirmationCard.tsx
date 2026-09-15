@@ -1,238 +1,310 @@
 "use client";
 
 import { CircleCheckIcon } from "lucide-react";
-import { useId } from "react";
-import { Button } from "@/atoms/button";
+import { useEffect, useId, useState } from "react";
 import { cn } from "@/lib/cn";
-import { ticketConfirmationCardMocks } from "./TicketConfirmationCard.mocks";
-import type {
-  TicketConfirmationCardProps,
-  TicketConfirmationDetail,
-  TicketConfirmationPaymentLine,
-} from "./TicketConfirmationCard.types";
+import type { TicketConfirmationCardProps } from "./TicketConfirmationCard.types";
 
-function barcodeBars(seed: string) {
-  let n = 2166136261;
-  for (let i = 0; i < seed.length; i++) {
-    n ^= seed.charCodeAt(i);
-    n = Math.imul(n, 16777619);
-  }
-  return Array.from({ length: 42 }, (_, position) => {
-    n = Math.imul(n ^ (n >>> 13), 1274126177);
+const defaults = {
+  heading: "Thank you!",
+  description: "Your ticket has been issued successfully",
+  ticketIdLabel: "Ticket ID",
+  ticketId: "TCK-8821",
+  amountLabel: "Amount",
+  amount: "$150.00",
+  dateTimeLabel: "Date & Time",
+  dateTime: "15 Sep 2026 • 14:30",
+  cardHolder: "Mira Solano",
+  last4Digits: "4418",
+  barcodeValue: "TCK8821928374",
+} as const;
+
+const CONFETTI_COUNT = 100;
+const CONFETTI_COLORS = [
+  "var(--jk-destructive)",
+  "var(--jk-chart-1)",
+  "var(--jk-success)",
+  "var(--jk-warning)",
+  "var(--jk-chart-4)",
+  "var(--jk-chart-3)",
+] as const;
+
+function hashCode(value: string) {
+  return value.split("").reduce((acc, char) => {
+    acc = (acc << 5) - acc + char.charCodeAt(0);
+    return acc & acc;
+  }, 0);
+}
+
+function unitRandom(seed: number) {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
+function barcodeBars(value: string) {
+  const seed = hashCode(value);
+  return Array.from({ length: 60 }, (_, index) => {
+    const rand = unitRandom(seed + index);
+    return { width: rand > 0.7 ? 2.5 : 1.5 };
+  });
+}
+
+function confettiPieces(seedValue: string) {
+  const seed = hashCode(seedValue);
+  return Array.from({ length: CONFETTI_COUNT }, (_, index) => {
+    const a = unitRandom(seed + index * 7 + 1);
+    const b = unitRandom(seed + index * 11 + 3);
+    const c = unitRandom(seed + index * 13 + 5);
+    const d = unitRandom(seed + index * 17 + 7);
+    const e = unitRandom(seed + index * 19 + 9);
     return {
-      id: `${seed}-${position}-${n >>> 0}`,
-      width: 1 + (Math.abs(n) % 3),
+      id: `${seedValue}-${index}`,
+      left: `${a * 100}%`,
+      top: `${-20 + b * 10}%`,
+      rotate: `${c * 360}deg`,
+      duration: `${2.5 + d * 2.5}s`,
+      delay: `${e * 2}s`,
+      color: CONFETTI_COLORS[index % CONFETTI_COLORS.length],
     };
   });
 }
 
-function LedgerRow({
-  label,
-  value,
-  strong = false,
-}: {
-  label: string;
-  value: string;
-  strong?: boolean;
-}) {
+function CardBrandMark() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-6 w-9 shrink-0"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle className="fill-destructive" cx="8" cy="12" r="7" />
+      <circle className="fill-warning opacity-80" cx="16" cy="12" r="7" />
+    </svg>
+  );
+}
+
+function DashedLine() {
   return (
     <div
-      className={cn(
-        "flex items-baseline gap-2 font-mono text-[11px] leading-5 sm:text-xs",
-        strong ? "font-semibold text-card-foreground" : "text-muted-foreground",
-      )}
-    >
-      <span className="shrink-0">{label}</span>
-      <span
+      aria-hidden="true"
+      className="w-full border-border border-t-2 border-dashed"
+    />
+  );
+}
+
+function TicketBarcode({ value }: { value: string }) {
+  const bars = barcodeBars(value);
+  const spacing = 1.5;
+  const totalWidth =
+    bars.reduce((acc, bar) => acc + bar.width + spacing, 0) - spacing;
+  const svgWidth = 250;
+  const svgHeight = 70;
+  let currentX = (svgWidth - totalWidth) / 2;
+
+  return (
+    <div className="flex flex-col items-center py-2">
+      <svg
         aria-hidden="true"
-        className="min-w-3 flex-1 border-b border-dotted border-border"
-      />
-      <span className="shrink-0 tabular-nums text-card-foreground">
+        className="fill-current text-foreground"
+        height={svgHeight}
+        viewBox={`0 0 ${svgWidth} ${svgHeight}`}
+        width={svgWidth}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {bars.map((bar, index) => {
+          const x = currentX;
+          currentX += bar.width + spacing;
+          return (
+            <rect
+              height="50"
+              key={`${value}-${index}`}
+              width={bar.width}
+              x={x}
+              y="10"
+            />
+          );
+        })}
+      </svg>
+      <p className="mt-2 text-sm tracking-[0.3em] text-muted-foreground">
         {value}
-      </span>
+      </p>
+    </div>
+  );
+}
+
+function ConfettiBurst({ seed }: { seed: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+    >
+      {confettiPieces(seed).map((piece) => (
+        <span
+          className="jk-ticket-confirmation-confetti absolute h-4 w-2"
+          key={piece.id}
+          style={{
+            left: piece.left,
+            top: piece.top,
+            backgroundColor: piece.color,
+            transform: `rotate(${piece.rotate})`,
+            animationDuration: piece.duration,
+            animationDelay: piece.delay,
+          }}
+        />
+      ))}
     </div>
   );
 }
 
 export function TicketConfirmationCard({
   className,
-  eyebrow = ticketConfirmationCardMocks.default.eyebrow,
-  heading = ticketConfirmationCardMocks.default.heading,
-  description = ticketConfirmationCardMocks.default.description,
-  statusLabel = ticketConfirmationCardMocks.default.statusLabel,
-  statusDetail = ticketConfirmationCardMocks.default.statusDetail,
-  ticketIdLabel = ticketConfirmationCardMocks.default.ticketIdLabel,
-  ticketId = ticketConfirmationCardMocks.default.ticketId,
-  eventName = ticketConfirmationCardMocks.default.eventName,
-  details = ticketConfirmationCardMocks.default.details,
-  paymentHeading = ticketConfirmationCardMocks.default.paymentHeading,
-  paymentLines = ticketConfirmationCardMocks.default.paymentLines,
-  totalLabel = ticketConfirmationCardMocks.default.totalLabel,
-  total = ticketConfirmationCardMocks.default.total,
-  paymentMethodLabel = ticketConfirmationCardMocks.default.paymentMethodLabel,
-  paymentMethod = ticketConfirmationCardMocks.default.paymentMethod,
-  barcodeLabel = ticketConfirmationCardMocks.default.barcodeLabel,
-  showBarcode = ticketConfirmationCardMocks.default.showBarcode,
-  ctaLabel = ticketConfirmationCardMocks.default.ctaLabel,
-  ctaHref = ticketConfirmationCardMocks.default.ctaHref,
+  heading = defaults.heading,
+  description = defaults.description,
+  ticketIdLabel = defaults.ticketIdLabel,
+  ticketId = defaults.ticketId,
+  amountLabel = defaults.amountLabel,
+  amount = defaults.amount,
+  dateTimeLabel = defaults.dateTimeLabel,
+  dateTime = defaults.dateTime,
+  cardHolder = defaults.cardHolder,
+  last4Digits = defaults.last4Digits,
+  barcodeValue = defaults.barcodeValue,
+  showBarcode = true,
+  showConfetti = true,
   ...props
 }: TicketConfirmationCardProps) {
   const headingId = useId();
   const descriptionId = useId();
-  const detailList = details ?? [];
-  const lineItems = paymentLines ?? [];
-  const code = ticketId ?? "TICKET";
+  const barcode = barcodeValue || ticketId;
+  const [burst, setBurst] = useState(false);
+
+  useEffect(() => {
+    if (!showConfetti) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const mountTimer = window.setTimeout(() => setBurst(true), 100);
+    const unmountTimer = window.setTimeout(() => setBurst(false), 6000);
+    return () => {
+      window.clearTimeout(mountTimer);
+      window.clearTimeout(unmountTimer);
+    };
+  }, [showConfetti]);
 
   return (
     <section
       aria-describedby={description ? descriptionId : undefined}
       aria-labelledby={headingId}
-      className={cn("bg-muted text-foreground", className)}
+      className={cn(
+        "relative isolate overflow-hidden bg-background text-foreground",
+        className,
+      )}
       data-slot="ticket-confirmation-card"
       {...props}
     >
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-        <header className="mx-auto max-w-xl text-center">
-          {eyebrow ? (
-            <p className="text-xs font-medium tracking-[0.16em] text-muted-foreground uppercase">
-              {eyebrow}
-            </p>
-          ) : null}
-          <h2
-            className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-5xl sm:leading-[1.1]"
-            id={headingId}
-          >
-            {heading}
-          </h2>
-          {description ? (
-            <p
-              className="mt-3 text-sm leading-6 text-muted-foreground text-pretty sm:text-base"
-              id={descriptionId}
-            >
-              {description}
-            </p>
-          ) : null}
-        </header>
-
+      <style>
+        {`
+          @keyframes jk-ticket-confirmation-fall {
+            0% {
+              transform: translateY(-10vh) rotate(0deg);
+              opacity: 1;
+            }
+            100% {
+              transform: translateY(110vh) rotate(720deg);
+              opacity: 0;
+            }
+          }
+          .jk-ticket-confirmation-confetti {
+            animation-name: jk-ticket-confirmation-fall;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .jk-ticket-confirmation-confetti {
+              animation: none;
+              opacity: 0;
+            }
+          }
+        `}
+      </style>
+      {burst ? <ConfettiBurst seed={barcode} /> : null}
+      <div className="relative z-10 flex w-full items-center justify-center p-6">
         <article
           className={cn(
-            "relative mx-auto mt-10 w-full max-w-md overflow-hidden rounded-[calc(var(--radius)+0.35rem)] border border-border bg-card text-card-foreground shadow-[0_22px_48px_-28px_color-mix(in_oklab,var(--jk-foreground),transparent_68%)]",
-            "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500",
+            "relative w-full max-w-sm rounded-2xl bg-card font-sans text-card-foreground shadow-lg",
+            "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95 motion-safe:duration-500 motion-reduce:animate-none",
           )}
         >
-          <div className="px-6 pt-7 pb-6 text-center">
-            <span
+          <div
+            aria-hidden="true"
+            className="absolute top-1/2 -left-4 size-8 -translate-y-1/2 rounded-full bg-background"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute top-1/2 -right-4 size-8 -translate-y-1/2 rounded-full bg-background"
+          />
+
+          <div className="flex flex-col items-center p-8 text-center">
+            <div
               className={cn(
-                "mx-auto grid size-14 place-items-center rounded-full bg-success text-success-foreground",
-                "motion-safe:animate-in motion-safe:zoom-in-95 motion-safe:duration-500",
+                "rounded-full bg-primary/10 p-3",
+                "motion-safe:animate-in motion-safe:zoom-in-50 motion-safe:delay-300 motion-safe:duration-500 motion-reduce:animate-none",
               )}
             >
-              <CircleCheckIcon aria-hidden="true" className="size-7" />
-            </span>
-            <p className="mt-4 text-lg font-semibold tracking-tight">
-              {statusLabel}
-            </p>
-            {statusDetail ? (
-              <p className="mt-1 text-sm leading-6 text-muted-foreground text-pretty">
-                {statusDetail}
+              <CircleCheckIcon
+                aria-hidden="true"
+                className={cn(
+                  "size-10 text-primary",
+                  "motion-safe:animate-in motion-safe:zoom-in-75 motion-safe:delay-500 motion-safe:duration-500 motion-reduce:animate-none",
+                )}
+              />
+            </div>
+            <h2 className="mt-4 text-2xl font-semibold" id={headingId}>
+              {heading}
+            </h2>
+            {description ? (
+              <p className="mt-1 text-muted-foreground" id={descriptionId}>
+                {description}
               </p>
-            ) : null}
-
-            <p className="mt-5 rounded-[--radius] border border-border bg-muted/70 px-3 py-2.5">
-              <span className="block text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase">
-                {ticketIdLabel}
-              </span>
-              <span className="mt-1 block font-mono text-sm tracking-[0.14em] text-foreground">
-                {ticketId}
-              </span>
-            </p>
-
-            {eventName ? (
-              <h3 className="mt-5 text-xl font-semibold tracking-tight text-balance">
-                {eventName}
-              </h3>
-            ) : null}
-
-            {detailList.length > 0 ? (
-              <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 text-left">
-                {detailList.map((item: TicketConfirmationDetail) => (
-                  <div key={`${item.label}-${item.value}`}>
-                    <dt className="text-[10px] font-medium tracking-[0.14em] text-muted-foreground uppercase">
-                      {item.label}
-                    </dt>
-                    <dd className="mt-1 text-sm font-medium text-pretty">
-                      {item.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
             ) : null}
           </div>
 
-          <div className="relative" aria-hidden="true">
-            <span className="absolute top-1/2 -left-3 size-6 -translate-y-1/2 rounded-full bg-muted ring-1 ring-border" />
-            <span className="absolute top-1/2 -right-3 size-6 -translate-y-1/2 rounded-full bg-muted ring-1 ring-border" />
-            <div className="mx-6 border-t border-dashed border-border" />
-          </div>
+          <div className="space-y-6 px-8 pb-8">
+            <DashedLine />
 
-          <div className="px-6 pt-5 pb-6">
-            {paymentHeading ? (
-              <p className="mb-3 text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase">
-                {paymentHeading}
-              </p>
-            ) : null}
-            <div className="space-y-1.5">
-              {lineItems.map((line: TicketConfirmationPaymentLine) => (
-                <LedgerRow
-                  key={`${line.label}-${line.value}`}
-                  label={line.label}
-                  value={line.value}
-                />
-              ))}
-              {total ? (
-                <LedgerRow label={totalLabel ?? "Paid"} strong value={total} />
-              ) : null}
-              {paymentMethod ? (
-                <LedgerRow
-                  label={paymentMethodLabel ?? "Method"}
-                  value={paymentMethod}
-                />
-              ) : null}
+            <div className="grid grid-cols-2 gap-4 text-left">
+              <div>
+                <p className="text-xs text-muted-foreground uppercase">
+                  {ticketIdLabel}
+                </p>
+                <p className="font-mono font-medium">{ticketId}</p>
+              </div>
+              <div className="text-right">
+                <p className="text-xs text-muted-foreground uppercase">
+                  {amountLabel}
+                </p>
+                <p className="text-lg font-semibold">{amount}</p>
+              </div>
             </div>
 
-            {showBarcode ? (
-              <div className="mt-5 border-t border-dashed border-border pt-4">
-                <div
-                  aria-hidden="true"
-                  className="flex h-11 items-end justify-center gap-px"
-                >
-                  {barcodeBars(code).map((bar) => (
-                    <span
-                      className="bg-foreground"
-                      key={bar.id}
-                      style={{
-                        width: bar.width,
-                        height: bar.width > 1 ? "100%" : "70%",
-                      }}
-                    />
-                  ))}
-                </div>
-                <p className="mt-2 text-center font-mono text-[10px] tracking-[0.24em] text-muted-foreground">
-                  {code.replaceAll("-", "")}
-                </p>
-                {barcodeLabel ? (
-                  <p className="mt-1 text-center text-xs text-muted-foreground">
-                    {barcodeLabel}
-                  </p>
-                ) : null}
-              </div>
-            ) : null}
+            <div>
+              <p className="text-xs text-muted-foreground uppercase">
+                {dateTimeLabel}
+              </p>
+              <p className="font-medium">{dateTime}</p>
+            </div>
 
-            {ctaLabel && ctaHref ? (
-              <Button asChild className="mt-5 w-full" size="lg">
-                <a href={ctaHref}>{ctaLabel}</a>
-              </Button>
-            ) : null}
+            <div className="flex items-center space-x-4 rounded-lg bg-muted/50 p-4">
+              <CardBrandMark />
+              <div>
+                <p className="font-semibold">{cardHolder}</p>
+                <p className="font-mono text-sm tracking-wider text-muted-foreground">
+                  •••• {last4Digits}
+                </p>
+              </div>
+            </div>
+
+            <DashedLine />
+
+            {showBarcode ? <TicketBarcode value={barcode} /> : null}
           </div>
         </article>
       </div>

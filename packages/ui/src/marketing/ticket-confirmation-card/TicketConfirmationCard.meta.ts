@@ -3,16 +3,16 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "ticket-confirmation-card",
   displayName: "TicketConfirmationCard",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Digital receipt-style booking confirmation with success status, ticket ID, payment ledger, perforated stub, and scan barcode.",
+    "Digital receipt-style confirmation with success status, ticket ID, payment details, and barcode.",
   sectionCategory: "content",
   purpose:
-    "Gives an event or travel landing a trusted confirmation slip visitors can read, save, and scan without leaving the page.",
+    "Shows a booking or payment confirmation as a perforated ticket slip visitors can read and scan on the page.",
   bestFor: [
     "event booking confirmation",
-    "travel and ferry passes",
+    "travel tickets",
     "payment receipts that need a scan code",
   ],
   avoidFor: [
@@ -30,21 +30,18 @@ export default {
     columns: 1,
   },
   slots: [
-    "headline",
-    "description",
     "successStatus",
     "ticketId",
-    "eventName",
-    "details",
-    "payment",
+    "amount",
+    "dateTime",
+    "paymentCard",
     "barcode",
-    "cta",
   ],
   capabilities: {
     supportsImage: false,
     supportsVideo: false,
     supportsForm: false,
-    supportsCTA: true,
+    supportsCTA: false,
     supportsDarkMode: true,
   },
   recommendedAfter: ["hero", "form", "pricing"],
@@ -59,7 +56,7 @@ export default {
     "marketing",
   ],
   dependencies: ["lucide-react"],
-  registryDependencies: ["button"],
+  registryDependencies: [],
   a11y: { keyboardNav: true, reducedMotion: true },
-  preview: { layout: "fit", width: 1440, height: 980 },
+  preview: { layout: "fit", width: 1440, height: 900 },
 } satisfies ComponentMeta;
