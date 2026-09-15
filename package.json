@@ -8,13 +8,16 @@
     "node": ">=24"
   },
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build --filter=!@jabkit/minimal --filter=!@jabkit/neo-brutalism --filter=!@jabkit/editorial --filter=!@jabkit/luxury --filter=!@jabkit/retro",
+    "build:design-systems": "turbo run build --filter=@jabkit/minimal --filter=@jabkit/neo-brutalism --filter=@jabkit/editorial --filter=@jabkit/luxury --filter=@jabkit/retro",
+    "build:design-systems:affected": "tsx scripts/build-affected-design-systems.ts",
     "dev": "pnpm --parallel --filter @jabkit/showcase --filter @jabkit/minimal --filter @jabkit/neo-brutalism --filter @jabkit/editorial --filter @jabkit/luxury --filter @jabkit/retro dev",
     "storybook": "pnpm --filter @jabkit/ui storybook",
     "storybook:build": "pnpm --filter @jabkit/ui storybook:build",
     "lint": "biome check .",
     "format": "biome format --write .",
-    "typecheck": "turbo run typecheck",
+    "typecheck": "turbo run typecheck --filter=!@jabkit/minimal --filter=!@jabkit/neo-brutalism --filter=!@jabkit/editorial --filter=!@jabkit/luxury --filter=!@jabkit/retro",
+    "typecheck:design-systems": "turbo run typecheck --filter=@jabkit/minimal --filter=@jabkit/neo-brutalism --filter=@jabkit/editorial --filter=@jabkit/luxury --filter=@jabkit/retro",
     "check:conventions": "tsx scripts/check-conventions.ts",
     "check:design-system-assets": "tsx scripts/check-design-system-assets.ts",
     "registry:build": "pnpm --filter @jabkit/build-registry build",

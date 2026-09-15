@@ -23,7 +23,7 @@ Root `design-systems/` contains authored specifications for five website styles,
 | `apps/verify` | `@jabkit/verify` | External-consumer harness. `pnpm --filter @jabkit/verify sync` runs the CLI `add --all --force` against a local registry. Installed files under `src/components/jabkit` are gitignored. |
 | `apps/minimal`, `apps/neo-brutalism`, `apps/editorial`, `apps/luxury`, `apps/retro` | `@jabkit/<system>` | Independent websites, Tailwind v4 configuration, app-local tokens and public imagery. See [standalone apps](standalone-design-systems.md). |
 
-Root scripts that matter (`package.json`): `dev` (showcase and all five independent websites in parallel), `dev:design-systems` (only the five independent websites), `storybook`, `lint`, `typecheck`, `check:conventions`, `check:design-system-assets`, `registry:build`, `registry:verify`, `previews:build`, `previews:verify`, and the composite gate `check`.
+Root scripts that matter (`package.json`): `dev` (showcase and all five independent websites in parallel), `dev:design-systems` (only the five independent websites), `build:design-systems` (all five production builds), `build:design-systems:affected` (only samples touched by an app or its imported UI source), `storybook`, `lint`, `typecheck`, `check:conventions`, `check:design-system-assets`, `registry:build`, `registry:verify`, `previews:build`, `previews:verify`, and the composite gate `check`. Root `build` and `typecheck` deliberately exclude standalone design-system apps.
 
 ## Dependency direction
 
@@ -92,7 +92,7 @@ The showcase alias is the one that surprises people. Inside `apps/showcase`, `@/
 
 ## Tooling
 
-- **Turbo** (`turbo.json`): `build` depends on `^build` with outputs `.next/**` and `dist/**`; `typecheck` depends on `^typecheck`; `dev` is persistent and uncached.
+- **Turbo** (`turbo.json`): `build` depends on `^build` with outputs `.next/**` and `dist/**`; `typecheck` depends on `^typecheck`; `dev` is persistent and uncached. Root build/typecheck filters exclude the five independent websites. `scripts/build-affected-design-systems.ts` performs their source-aware selection: an app rebuilds for its own files, UI files reachable through its actual imports, tokens, lockfile, or workspace configuration. A newly added but unused component does not schedule sample builds.
 - **Biome** is the only lint and format tool. `biome.json` excludes `.next`, `.turbo`, `node_modules`, `storybook-static`, `apps/showcase/public/r`, and `.shadcn-src`.
 - **Husky:** `pre-commit` runs `pnpm biome check --staged`; `commit-msg` runs commitlint with `@commitlint/config-conventional`.
 - **GitHub Actions:** `.github/workflows/publish-cli.yml` is the only workflow. It is manual `workflow_dispatch` only; nothing runs on push or pull request. There is no PR template and no issue template. `pnpm check` at the repo root is the whole quality gate.

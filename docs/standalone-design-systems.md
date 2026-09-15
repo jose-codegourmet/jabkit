@@ -18,6 +18,24 @@ Run from the repository root with the repository's Node/pnpm versions and `pnpm 
 
 `pnpm dev` starts the JabKit catalogue on port 3000 and all five websites in parallel. `pnpm dev:design-systems` starts only the five websites; `pnpm --filter @jabkit/showcase dev` starts only the catalogue. Each app supports `build`, `start`, and `typecheck`; unlike showcase, its build does not regenerate the component registry. Use `pnpm --filter @jabkit/minimal build` and `pnpm --filter @jabkit/minimal start`, changing the package name for the other sites. Production `start` uses Next’s standard port behavior (`PORT`, or 3000 by default). For simultaneous local production previews, pass `--port 3101` through the individual start command and use the other listed ports for the remaining apps.
 
+## Affected build selection
+
+The independent websites are excluded from root `pnpm build` and `pnpm typecheck`. Those commands validate the library, registry, catalogue, CLI, and consumer harness without paying to rebuild five unrelated sites after a component is added.
+
+Use these commands when working on the sample websites:
+
+```bash
+pnpm build:design-systems                    # deliberately rebuild all five
+pnpm typecheck:design-systems                # deliberately typecheck all five
+pnpm build:design-systems:affected -- --base main
+```
+
+The affected-build command compares the current `HEAD` to the supplied Git ref and includes staged, unstaged, and untracked worktree files. It selects a website when that app changed, when a UI source file in its actual import graph changed, or when workspace configuration, the lockfile, or shared tokens changed. A new JabKit component that no sample imports selects no website. To inspect a selection without running Next builds, use `--dry`; `--files` is available for deterministic local checks:
+
+```bash
+pnpm build:design-systems:affected -- --files packages/ui/src/marketing/new-component/NewComponent.tsx --dry
+```
+
 ## Local styling ownership
 
 Each app contains:
@@ -77,7 +95,7 @@ The implementation agent can optimize approved outputs and integrate them; it mu
 
 ## Verification
 
-- Run each app's `typecheck` and production `build`; root `pnpm check` includes all five via Turbo.
+- Run each app's `typecheck` and production `build` for a full design-system release. Root `pnpm check` does not build or typecheck the five standalone apps; use the affected-build command during component work and the explicit all-app commands before a broad release.
 - `pnpm check:design-system-assets` reads each app's own public directory and `app/assets.ts`. Component preview/registry verification still targets showcase.
 - Review home and secondary pages at desktop/mobile, test theme and open menus/dialogs, confirm fonts/colors are local, and check image requests for accidental dependencies on showcase assets.
 - Crawl internal links, known detail slugs, unknown slugs, and direct query URLs. Check the form/calendar/cropper journeys after URL changes.
