@@ -1,0 +1,106 @@
+{
+  "name": "announcement-4",
+  "displayName": "Announcement4",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Slim launch bar with clipped primary blooms, a small-radius glass CTA, and a dismiss control.",
+  "sectionCategory": "content",
+  "purpose": "Surfaces a temporary product update above the page without stealing the hero, using a tinted strip and a glass action.",
+  "bestFor": [
+    "version launches and changelog teasers",
+    "thin site-wide notices above a hero",
+    "pages that need a dismissible update without a modal"
+  ],
+  "avoidFor": [
+    "legal consent banners",
+    "multi-step upgrade flows",
+    "full-width campaign heroes"
+  ],
+  "tone": [
+    "confident",
+    "clean",
+    "product"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "message",
+    "cta",
+    "dismiss"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "navbar"
+  ],
+  "recommendedBefore": [
+    "hero",
+    "features"
+  ],
+  "tags": [
+    "announcement",
+    "banner",
+    "marketing",
+    "cta",
+    "dismiss",
+    "launch",
+    "changelog"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 240
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "announcement-4/Announcement4.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ArrowRightIcon, XIcon } from \"lucide-react\";\nimport { useState } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { Announcement4Props } from \"./Announcement4.types\";\n\nconst defaults = {\n  message:\n    \"A better version is here. Faster, cleaner, and built to scale with you.\",\n  ctaLabel: \"See what's new\",\n  ctaHref: \"#whats-new\",\n  dismissLabel: \"Dismiss announcement\",\n};\n\nconst bloomClip =\n  \"polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)\";\n\nfunction Bloom({ className }: { className?: string }) {\n  return (\n    <div\n      aria-hidden=\"true\"\n      className={cn(\n        \"absolute top-1/2 -z-10 -translate-y-1/2 transform-gpu blur-2xl\",\n        className,\n      )}\n    >\n      <div\n        className=\"aspect-[577/310] w-[36rem] bg-gradient-to-r from-primary to-primary/60 opacity-30\"\n        style={{ clipPath: bloomClip }}\n      />\n    </div>\n  );\n}\n\nexport function Announcement4({\n  className,\n  message = defaults.message,\n  ctaLabel = defaults.ctaLabel,\n  ctaHref = defaults.ctaHref,\n  dismissLabel = defaults.dismissLabel,\n  onCtaClick,\n  onDismiss,\n  ...props\n}: Announcement4Props) {\n  const [open, setOpen] = useState(true);\n\n  if (!open) return null;\n\n  return (\n    <section\n      data-slot=\"announcement-4\"\n      aria-label={message}\n      className={cn(\n        \"flex items-center justify-center bg-background p-4 text-foreground\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"relative isolate flex w-full items-center justify-center overflow-hidden rounded-sm border border-primary/20 bg-primary/10 px-4 py-1.5 tracking-tight\">\n        <Bloom className=\"left-[max(-7rem,calc(50%-52rem))]\" />\n        <Bloom className=\"left-[max(45rem,calc(50%+8rem))]\" />\n\n        <div className=\"relative z-10 flex flex-col items-center space-y-2 pr-10 text-sm sm:flex-row sm:gap-3 sm:space-y-0 sm:pr-12\">\n          <p className=\"text-center font-medium text-pretty text-foreground sm:text-left\">\n            {message}\n          </p>\n\n          <div className=\"group flex items-center gap-3\">\n            <span\n              aria-hidden=\"true\"\n              className=\"hidden size-1 rounded-full bg-primary sm:block\"\n            />\n\n            <a\n              href={ctaHref}\n              onClick={onCtaClick}\n              className={cn(\n                \"inline-flex items-center justify-center gap-2 rounded-sm border border-foreground/20 bg-background/40 px-3 py-1.5 text-sm font-medium whitespace-nowrap text-foreground\",\n                \"shadow-[inset_0_2px_4px_color-mix(in_oklab,var(--jk-background),transparent_50%),inset_0_-2px_5px_color-mix(in_oklab,var(--jk-foreground),transparent_90%),0_8px_20px_color-mix(in_oklab,var(--jk-foreground),transparent_90%)]\",\n                \"dark:border-foreground/20 dark:bg-foreground/10 dark:shadow-[inset_0_2px_4px_color-mix(in_oklab,var(--jk-foreground),transparent_90%),inset_0_-2px_4px_color-mix(in_oklab,var(--jk-background),transparent_70%),0_8px_20px_color-mix(in_oklab,var(--jk-background),transparent_75%)]\",\n                \"transition-[transform,box-shadow,filter] duration-200 hover:brightness-110 active:scale-[0.98]\",\n                \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n                \"motion-reduce:transition-none motion-reduce:active:scale-100\",\n              )}\n            >\n              {ctaLabel}\n              <ArrowRightIcon\n                aria-hidden=\"true\"\n                className=\"size-4 transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0\"\n                strokeWidth={2}\n              />\n            </a>\n          </div>\n        </div>\n\n        <button\n          type=\"button\"\n          aria-label={dismissLabel}\n          onClick={(event) => {\n            onDismiss?.(event);\n            if (event.defaultPrevented) return;\n            setOpen(false);\n          }}\n          className={cn(\n            \"absolute right-2 inline-flex size-8 items-center justify-center rounded-lg text-foreground\",\n            \"hover:bg-transparent hover:text-foreground/70\",\n            \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n          )}\n        >\n          <XIcon aria-hidden=\"true\" className=\"size-4\" strokeWidth={2} />\n        </button>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "announcement-4/Announcement4.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, MouseEventHandler } from \"react\";\n\nexport interface Announcement4Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"onDismiss\"> {\n  message?: string;\n  ctaLabel?: string;\n  ctaHref?: string;\n  dismissLabel?: string;\n  onCtaClick?: MouseEventHandler<HTMLAnchorElement>;\n  onDismiss?: MouseEventHandler<HTMLButtonElement>;\n}\n"
+    },
+    {
+      "path": "announcement-4/index.ts",
+      "type": "index",
+      "content": "export { Announcement4 } from \"./Announcement4\";\nexport type { Announcement4Props } from \"./Announcement4.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Announcement4 {...announcement4Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Announcement4 {...announcement4Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
