@@ -1783,33 +1783,35 @@
     "name": "odd-fish",
     "displayName": "OddFish",
     "category": "atoms",
-    "description": "A compact content card with a token-mixed fin, hover sheen, and room for a title, body, and action.",
+    "description": "A square neo-brutalist profile plate: striped header, hard offset shadow, three counts, and a full-width follow.",
     "sectionCategory": "content",
-    "purpose": "Gives a single idea a readable surface that lifts on hover without leaving semantic tokens in light or dark.",
+    "purpose": "Keeps the inspo card square and hatched instead of flattening it to the control radius, while mapping ink and fill to semantic tokens.",
     "bestFor": [
-      "catalogue tiles and note cards",
-      "short feature blurbs beside other atoms",
-      "empty or placeholder slots that still need a headline"
+      "profile or member tiles",
+      "catalogue cards that need a hard frame",
+      "compact identity blocks beside other atoms"
     ],
     "avoidFor": [
-      "primary form controls",
-      "full-bleed marketing sections",
-      "dense data that needs a plain table"
+      "soft rounded marketing heroes",
+      "dense data that needs a plain table",
+      "primary form controls"
     ],
     "tone": [
       "playful",
-      "clean"
+      "bold"
     ],
-    "contentDensity": "low",
-    "visualWeight": "medium",
+    "contentDensity": "medium",
+    "visualWeight": "high",
     "layout": {
       "type": "stack",
       "alignment": "left"
     },
     "slots": [
-      "eyebrow",
-      "title",
-      "description",
+      "header",
+      "handle",
+      "name",
+      "bio",
+      "stats",
       "action"
     ],
     "capabilities": {
@@ -1821,7 +1823,8 @@
     },
     "tags": [
       "card",
-      "content",
+      "profile",
+      "brutalist",
       "hover",
       "atom"
     ],
@@ -1831,7 +1834,7 @@
       "tailwind-merge"
     ],
     "a11y": {
-      "keyboardNav": false,
+      "keyboardNav": true,
       "reducedMotion": true
     },
     "preview": {

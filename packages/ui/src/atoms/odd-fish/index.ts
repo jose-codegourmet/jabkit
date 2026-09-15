@@ -1,2 +1,2 @@
 export { OddFish } from "./OddFish";
-export type * from "./OddFish.types";
+export type { OddFishProps, OddFishSize, OddFishStat, OddFishTone } from "./OddFish.types";
