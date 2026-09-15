@@ -1,0 +1,109 @@
+{
+  "name": "hero-31",
+  "displayName": "Hero31",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Full-bleed cinematic hero with a glowing curtain plate, italic wordmark, square metal CTAs, word-staggered headline, and a trusted-by logo row.",
+  "sectionCategory": "hero",
+  "purpose": "Opens a landing page with atmosphere first, then a short offer and square actions that keep the original sharp geometry.",
+  "bestFor": [
+    "brand-led homepages",
+    "product launches",
+    "campaign landing pages"
+  ],
+  "avoidFor": [
+    "dense application screens",
+    "pages that need an understated opening"
+  ],
+  "tone": [
+    "bold",
+    "premium",
+    "editorial"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "high",
+  "layout": {
+    "type": "overlay",
+    "alignment": "left"
+  },
+  "slots": [
+    "brand",
+    "navigation",
+    "headline",
+    "description",
+    "primaryCTA",
+    "customerLogos"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "navbar"
+  ],
+  "recommendedBefore": [
+    "logos",
+    "stats",
+    "features",
+    "about"
+  ],
+  "tags": [
+    "hero",
+    "marketing",
+    "cta",
+    "landing",
+    "curtain",
+    "logos"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "hero-31/Hero31.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  ArrowRightIcon,\n  BlocksIcon,\n  CommandIcon,\n  SparklesIcon,\n  WorkflowIcon,\n  ZapIcon,\n} from \"lucide-react\";\nimport { useId, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  Hero31Action,\n  Hero31Logo,\n  Hero31LogoIcon,\n  Hero31LogoWeight,\n  Hero31Props,\n} from \"./Hero31.types\";\n\nconst defaults = {\n  brand: \"Northline\",\n  brandHref: \"#top\",\n  title: \"Innovation that Drives Impact.\",\n  subtitle:\n    \"Northline empowers teams to build, scale, and transform with technology that drives real results.\",\n  trustedByText: \"TRUSTED BY AMBITIOUS TEAMS\",\n  backgroundImage: \"/assets/5f56206b8544c593.webp\",\n  backgroundAlt: \"Soft glowing curtain of light across a dark field\",\n} as const;\n\nconst defaultNavItems = [\n  { label: \"Product\", href: \"#product\" },\n  { label: \"About Us\", href: \"#about\" },\n  { label: \"Features\", href: \"#features\" },\n  { label: \"FAQ\", href: \"#faq\" },\n  { label: \"Contact\", href: \"#contact\" },\n];\n\nconst defaultSignUp: Hero31Action = { label: \"Sign up\", href: \"#signup\" };\nconst defaultCta: Hero31Action = { label: \"Request a Demo\", href: \"#demo\" };\n\nconst defaultLogos: Hero31Logo[] = [\n  { icon: \"command\", name: \"novo\", weight: \"tight\" },\n  { icon: \"workflow\", name: \"Telia Cygate\", weight: \"medium\" },\n  { icon: \"blocks\", name: \"customer.io\", weight: \"bold\" },\n  { icon: \"sparkles\", name: \"Fastmail\", weight: \"medium\" },\n  { icon: \"zap\", name: \"Medtronic\", weight: \"tight\" },\n];\n\nconst logoIcons: Record<\n  Hero31LogoIcon,\n  (props: { className?: string }) => ReactNode\n> = {\n  command: (props) => <CommandIcon {...props} />,\n  workflow: (props) => <WorkflowIcon {...props} />,\n  blocks: (props) => <BlocksIcon {...props} />,\n  sparkles: (props) => <SparklesIcon {...props} />,\n  zap: (props) => <ZapIcon {...props} />,\n};\n\nconst logoWeights: Record<Hero31LogoWeight, string> = {\n  tight: \"font-bold tracking-tighter\",\n  medium: \"font-medium tracking-tight\",\n  bold: \"font-bold tracking-tight\",\n};\n\nconst metal =\n  \"rounded-none bg-[color-mix(in_oklab,var(--jk-foreground),var(--jk-background)_14%)] text-background shadow-[inset_0_2px_0_color-mix(in_oklab,var(--jk-background),transparent_8%),inset_0_-2px_0_color-mix(in_oklab,var(--jk-foreground),transparent_80%)]\";\n\nfunction SquareAction({\n  action,\n  size,\n}: {\n  action: Hero31Action;\n  size: \"nav\" | \"hero\";\n}) {\n  const className = cn(\n    \"group inline-flex items-center font-medium transition-transform duration-200 ease-out\",\n    \"active:scale-[0.96] motion-reduce:active:scale-100\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n    metal,\n    size === \"nav\" ? \"h-10 gap-2 px-5 text-sm\" : \"h-14 gap-3 px-8 text-base\",\n  );\n  const arrow = (\n    <ArrowRightIcon\n      aria-hidden=\"true\"\n      className={cn(\n        \"transition-transform duration-200 ease-out group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0\",\n        size === \"nav\" ? \"size-4\" : \"size-5\",\n      )}\n    />\n  );\n\n  if (action.href) {\n    return (\n      <a href={action.href} className={className}>\n        {action.label}\n        {arrow}\n      </a>\n    );\n  }\n\n  return (\n    <button type=\"button\" className={className} onClick={action.onClick}>\n      {action.label}\n      {arrow}\n    </button>\n  );\n}\n\nfunction BrandMark({ className }: { className?: string }) {\n  return (\n    <span\n      aria-hidden=\"true\"\n      className={cn(\n        \"relative grid size-8 shrink-0 place-items-center text-foreground\",\n        className,\n      )}\n    >\n      <SparklesIcon className=\"size-8\" />\n    </span>\n  );\n}\n\nexport function Hero31({\n  className,\n  brand = defaults.brand,\n  brandHref = defaults.brandHref,\n  brandMark,\n  navItems = defaultNavItems,\n  signUp = defaultSignUp,\n  title = defaults.title,\n  subtitle = defaults.subtitle,\n  cta = defaultCta,\n  trustedByText = defaults.trustedByText,\n  logos = defaultLogos,\n  backgroundImage = defaults.backgroundImage,\n  backgroundAlt = defaults.backgroundAlt,\n  ...props\n}: Hero31Props) {\n  const headingId = useId();\n  const titleWords = title.split(\" \").filter(Boolean);\n\n  return (\n    <section\n      data-slot=\"hero-31\"\n      aria-labelledby={headingId}\n      className={cn(\n        \"relative min-h-[100dvh] w-full overflow-hidden bg-background font-sans text-foreground antialiased\",\n        className,\n      )}\n      {...props}\n    >\n      <style href=\"jk-hero-31\" precedence=\"default\">{`\n        @keyframes jk-hero31-nav {\n          from { opacity: 0; transform: translateY(-16px); filter: blur(6px); }\n          to { opacity: 1; transform: translateY(0); filter: blur(0); }\n        }\n        @keyframes jk-hero31-word {\n          from { opacity: 0; transform: translateY(28px) rotateX(12deg); filter: blur(5px); }\n          to { opacity: 1; transform: translateY(0) rotateX(0deg); filter: blur(0); }\n        }\n        @keyframes jk-hero31-body {\n          from { opacity: 0; transform: translateY(14px); filter: blur(4px); }\n          to { opacity: 1; transform: translateY(0); filter: blur(0); }\n        }\n        @keyframes jk-hero31-logo {\n          from { opacity: 0; transform: translateY(10px) scale(0.94); }\n          to { opacity: 1; transform: translateY(0) scale(1); }\n        }\n        .jk-hero31-nav {\n          animation: jk-hero31-nav 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;\n          animation-delay: calc(0.1s + (var(--jk-hero31-i, 0) * 80ms));\n        }\n        .jk-hero31-word {\n          animation: jk-hero31-word 0.72s cubic-bezier(0.16, 1, 0.3, 1) both;\n          animation-delay: calc(0.45s + (var(--jk-hero31-i, 0) * 70ms));\n        }\n        .jk-hero31-body {\n          animation: jk-hero31-body 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;\n          animation-delay: calc(0.85s + (var(--jk-hero31-i, 0) * 120ms));\n        }\n        .jk-hero31-logo {\n          animation: jk-hero31-logo 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;\n          animation-delay: calc(1.2s + (var(--jk-hero31-i, 0) * 60ms));\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-hero31-nav,\n          .jk-hero31-word,\n          .jk-hero31-body,\n          .jk-hero31-logo {\n            animation: none;\n          }\n        }\n      `}</style>\n\n      <div className=\"pointer-events-none absolute inset-0 z-0 select-none\">\n        <img\n          src={backgroundImage}\n          alt=\"\"\n          className=\"absolute inset-0 size-full object-cover opacity-60\"\n        />\n        <div\n          aria-hidden=\"true\"\n          className=\"absolute inset-0 bg-[linear-gradient(to_right,color-mix(in_oklab,var(--jk-background),transparent_22%)_0%,color-mix(in_oklab,var(--jk-background),transparent_58%)_48%,transparent_100%)]\"\n        />\n        <div\n          aria-hidden=\"true\"\n          className=\"absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_oklab,var(--jk-background),transparent_18%)_0%,transparent_42%)]\"\n        />\n      </div>\n      <p className=\"sr-only\">{backgroundAlt}</p>\n\n      <div className=\"relative z-10 mx-auto flex min-h-[100dvh] max-w-7xl flex-col px-6 py-8 md:px-12\">\n        <nav className=\"flex items-center justify-between\">\n          <a\n            href={brandHref}\n            className=\"jk-hero31-nav flex items-center gap-2 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"\n            style={{ [\"--jk-hero31-i\" as string]: 0 }}\n          >\n            {brandMark ?? <BrandMark />}\n            <span className=\"font-serif text-2xl tracking-wide italic\">\n              {brand}\n            </span>\n          </a>\n\n          {navItems.length ? (\n            <div\n              className=\"jk-hero31-nav hidden items-center gap-10 md:flex\"\n              style={{ [\"--jk-hero31-i\" as string]: 1 }}\n            >\n              {navItems.map((item) => (\n                <a\n                  key={item.href}\n                  href={item.href}\n                  className=\"text-sm font-medium text-foreground/70 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"\n                >\n                  {item.label}\n                </a>\n              ))}\n            </div>\n          ) : null}\n\n          {signUp ? (\n            <div\n              className=\"jk-hero31-nav\"\n              style={{ [\"--jk-hero31-i\" as string]: 2 }}\n            >\n              <SquareAction action={signUp} size=\"nav\" />\n            </div>\n          ) : null}\n        </nav>\n\n        <div\n          className=\"mt-32 flex max-w-[42rem] flex-col gap-6 md:mt-40\"\n          style={{ perspective: \"800px\" }}\n        >\n          <h1\n            id={headingId}\n            className=\"text-5xl font-medium tracking-tight text-balance text-foreground md:text-5xl lg:text-7xl lg:leading-[1.1]\"\n          >\n            {titleWords.map((word, index) => (\n              <span\n                key={`${word}-${index}`}\n                className=\"jk-hero31-word mr-[0.25em] inline-block last:mr-0\"\n                style={{ [\"--jk-hero31-i\" as string]: index }}\n              >\n                {word}\n              </span>\n            ))}\n          </h1>\n\n          <div className=\"flex flex-col gap-6\">\n            {subtitle ? (\n              <p\n                className=\"jk-hero31-body text-lg leading-relaxed font-light text-pretty text-foreground/80 md:text-xl\"\n                style={{ [\"--jk-hero31-i\" as string]: 0 }}\n              >\n                {subtitle}\n              </p>\n            ) : null}\n            {cta ? (\n              <div\n                className=\"jk-hero31-body mt-4\"\n                style={{ [\"--jk-hero31-i\" as string]: 1 }}\n              >\n                <SquareAction action={cta} size=\"hero\" />\n              </div>\n            ) : null}\n          </div>\n        </div>\n\n        {logos.length || trustedByText ? (\n          <div className=\"mt-auto flex flex-col gap-8 pt-32 pb-8 md:flex-row md:items-center md:gap-12 lg:gap-16\">\n            {trustedByText ? (\n              <span\n                className=\"jk-hero31-logo shrink-0 text-sm font-bold tracking-wide text-foreground/50 tabular-nums\"\n                style={{ [\"--jk-hero31-i\" as string]: 0 }}\n              >\n                {trustedByText}\n              </span>\n            ) : null}\n            {logos.length ? (\n              <div className=\"flex flex-wrap items-center gap-8 md:gap-12 lg:gap-16\">\n                {logos.map((logo, index) => {\n                  const Icon = logo.icon ? logoIcons[logo.icon] : null;\n                  const weight = logoWeights[logo.weight ?? \"medium\"];\n                  const content = (\n                    <>\n                      {Icon ? <Icon className=\"size-6\" /> : null}\n                      <span className={cn(\"text-xl\", weight)}>{logo.name}</span>\n                    </>\n                  );\n                  const sharedClass = cn(\n                    \"jk-hero31-logo flex items-center gap-2 text-foreground opacity-60 grayscale transition-all duration-300\",\n                    \"hover:opacity-100 hover:grayscale-0\",\n                  );\n                  const style = { [\"--jk-hero31-i\" as string]: index + 1 };\n                  if (logo.href) {\n                    return (\n                      <a\n                        key={logo.name}\n                        href={logo.href}\n                        className={sharedClass}\n                        style={style}\n                      >\n                        {content}\n                      </a>\n                    );\n                  }\n                  return (\n                    <div key={logo.name} className={sharedClass} style={style}>\n                      {content}\n                    </div>\n                  );\n                })}\n              </div>\n            ) : null}\n          </div>\n        ) : null}\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "hero-31/Hero31.types.ts",
+      "type": "types",
+      "content": "import type {\n  HTMLAttributes,\n  MouseEventHandler,\n  ReactNode,\n} from \"react\";\n\nexport interface Hero31Action {\n  label: string;\n  href?: string;\n  onClick?: MouseEventHandler<HTMLButtonElement>;\n}\n\nexport interface Hero31NavItem {\n  label: string;\n  href: string;\n}\n\nexport type Hero31LogoIcon =\n  | \"command\"\n  | \"workflow\"\n  | \"blocks\"\n  | \"sparkles\"\n  | \"zap\";\n\nexport type Hero31LogoWeight = \"tight\" | \"medium\" | \"bold\";\n\nexport interface Hero31Logo {\n  name: string;\n  href?: string;\n  icon?: Hero31LogoIcon;\n  weight?: Hero31LogoWeight;\n}\n\nexport interface Hero31Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  brand?: string;\n  brandHref?: string;\n  brandMark?: ReactNode;\n  navItems?: Hero31NavItem[];\n  signUp?: Hero31Action;\n  title?: string;\n  subtitle?: string;\n  cta?: Hero31Action;\n  trustedByText?: string;\n  logos?: Hero31Logo[];\n  backgroundImage?: string;\n  backgroundAlt?: string;\n}\n"
+    },
+    {
+      "path": "hero-31/index.ts",
+      "type": "index",
+      "content": "export { Hero31 } from \"./Hero31\";\nexport type {\n  Hero31Action,\n  Hero31Logo,\n  Hero31LogoIcon,\n  Hero31LogoWeight,\n  Hero31NavItem,\n  Hero31Props,\n} from \"./Hero31.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Hero31 {...hero31Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Hero31 {...hero31Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
