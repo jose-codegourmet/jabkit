@@ -1,0 +1,91 @@
+{
+  "name": "stupid-insect",
+  "displayName": "StupidInsect",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A tiled concentric-ring field built from semantic tokens, with an optional slow drift that stops under reduced motion.",
+  "sectionCategory": "content",
+  "purpose": "Gives a surface a repeating radial-ring texture without leaving the token set or introducing vendor hex colors.",
+  "bestFor": [
+    "hero or card backdrop texture",
+    "catalogue pattern tiles",
+    "playful empty-state backgrounds"
+  ],
+  "avoidFor": [
+    "dense data surfaces that need quiet chrome",
+    "text-heavy reading columns"
+  ],
+  "tone": [
+    "playful",
+    "bold"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "high",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "overlay"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "pattern",
+    "background",
+    "texture",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center",
+    "width": 440,
+    "height": 280
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "stupid-insect/StupidInsect.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { StupidInsectProps } from \"./StupidInsect.types\";\n\nconst cellSizes = {\n  sm: \"6.5rem\",\n  md: \"9.5rem\",\n  lg: \"12.5rem\",\n} as const;\n\nexport function StupidInsect({\n  className,\n  children,\n  cellSize = \"md\",\n  tone = \"primary\",\n  animated = true,\n  ...props\n}: StupidInsectProps) {\n  return (\n    <div\n      className={cn(\n        \"jk-stupid-insect relative isolate overflow-hidden rounded-[--radius] border border-border\",\n        className,\n      )}\n      data-animated={animated ? \"true\" : \"false\"}\n      data-slot=\"stupid-insect\"\n      data-tone={tone}\n      style={{\n        [\"--jk-stupid-insect-cell\" as string]: cellSizes[cellSize],\n      }}\n      {...props}\n    >\n      <style href=\"jk-stupid-insect\" precedence=\"default\">{`\n        .jk-stupid-insect {\n          min-height: 12rem;\n          min-width: 12rem;\n        }\n        .jk-stupid-insect-field {\n          --jk-stupid-insect-a: var(--jk-card);\n          --jk-stupid-insect-b: var(--jk-primary);\n          --jk-stupid-insect-rings:\n            var(--jk-stupid-insect-a) 0 7%,\n            var(--jk-stupid-insect-b) 8% 17%,\n            var(--jk-stupid-insect-a) 18% 27%,\n            var(--jk-stupid-insect-b) 28% 37%,\n            var(--jk-stupid-insect-a) 38% 47%,\n            var(--jk-stupid-insect-b) 48% 57%,\n            var(--jk-stupid-insect-a) 58% 67%,\n            var(--jk-stupid-insect-b) 68% 77%,\n            var(--jk-stupid-insect-a) 78% 87%,\n            var(--jk-stupid-insect-b) 88% 94%,\n            transparent 95%;\n          background-color: var(--jk-stupid-insect-a);\n          background-image:\n            radial-gradient(50% 50% at 100% 0, var(--jk-stupid-insect-rings)),\n            radial-gradient(50% 50% at 0 100%, var(--jk-stupid-insect-rings)),\n            radial-gradient(50% 50% at 50% 50%, var(--jk-stupid-insect-rings)),\n            radial-gradient(50% 50% at 50% 50%, var(--jk-stupid-insect-rings));\n          background-position:\n            0 0,\n            0 0,\n            0 0,\n            calc(var(--jk-stupid-insect-cell) / 2) calc(var(--jk-stupid-insect-cell) / 2);\n          background-size: var(--jk-stupid-insect-cell) var(--jk-stupid-insect-cell);\n        }\n        .jk-stupid-insect[data-tone=\"chart\"] .jk-stupid-insect-field {\n          --jk-stupid-insect-a: var(--jk-chart-3);\n          --jk-stupid-insect-b: var(--jk-chart-1);\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-stupid-insect[data-animated=\"true\"] .jk-stupid-insect-field {\n            animation: jk-stupid-insect-drift 18s linear infinite;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-stupid-insect-field {\n            animation: none;\n          }\n        }\n        @keyframes jk-stupid-insect-drift {\n          to {\n            background-position:\n              var(--jk-stupid-insect-cell) 0,\n              calc(var(--jk-stupid-insect-cell) * -1) 0,\n              0 var(--jk-stupid-insect-cell),\n              calc(var(--jk-stupid-insect-cell) * 1.5)\n                calc(var(--jk-stupid-insect-cell) * 1.5);\n          }\n        }\n      `}</style>\n      <div\n        aria-hidden=\"true\"\n        className=\"jk-stupid-insect-field pointer-events-none absolute inset-0\"\n      />\n      {children ? (\n        <div className=\"relative z-10 flex h-full min-h-12 w-full items-end p-4\">\n          <div className=\"rounded-[--radius] bg-background/80 px-3 py-2 text-sm text-foreground shadow-[var(--jk-shadow-control)] ring-1 ring-border backdrop-blur-sm\">\n            {children}\n          </div>\n        </div>\n      ) : null}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "stupid-insect/StupidInsect.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type StupidInsectCellSize = \"sm\" | \"md\" | \"lg\";\n\nexport type StupidInsectTone = \"primary\" | \"chart\";\n\nexport interface StupidInsectProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n  cellSize?: StupidInsectCellSize;\n  tone?: StupidInsectTone;\n  animated?: boolean;\n}\n"
+    },
+    {
+      "path": "stupid-insect/index.ts",
+      "type": "index",
+      "content": "export { StupidInsect } from \"./StupidInsect\";\nexport type * from \"./StupidInsect.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<StupidInsect\n      className=\"h-64 w-80\"\n      {...stupidInsectMocks.default}\n    />"
+    },
+    {
+      "name": "ChartTone",
+      "code": "<StupidInsect\n      className=\"h-64 w-80\"\n      {...stupidInsectMocks.chart}\n    />"
+    }
+  ]
+}
