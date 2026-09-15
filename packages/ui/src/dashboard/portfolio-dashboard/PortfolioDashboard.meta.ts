@@ -1,0 +1,60 @@
+import type { ComponentMeta } from "@jabkit/build-registry";
+
+export default {
+  name: "portfolio-dashboard",
+  displayName: "PortfolioDashboard",
+  version: "1.0.0",
+  addedAt: "2026-09-15",
+  description:
+    "Insurance book workspace for policies, claims, renewals, and broker insights.",
+  sectionCategory: "application-shell",
+  purpose:
+    "Frames a broker operations console with a 256px sidebar, policy cards, and risk activity.",
+  bestFor: [
+    "insurance brokerage consoles",
+    "policy book-of-business views",
+    "claims and renewal operations",
+  ],
+  avoidFor: ["marketing landing pages", "single-purpose auth forms"],
+  tone: ["professional", "structured"],
+  industries: ["insurance", "financial services"],
+  contentDensity: "high",
+  visualWeight: "high",
+  layout: {
+    type: "sidebar",
+    alignment: "left",
+    columns: 2,
+  },
+  slots: [
+    "brand",
+    "sidebarNavigation",
+    "usageCard",
+    "appearanceToggle",
+    "accountMenu",
+    "workspaceSearch",
+    "statStrip",
+    "policyGrid",
+    "insights",
+    "activityFeed",
+  ],
+  capabilities: {
+    supportsImage: true,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: true,
+    supportsDarkMode: true,
+  },
+  tags: [
+    "dashboard",
+    "portfolio",
+    "insurance",
+    "policies",
+    "claims",
+    "renewals",
+    "sidebar",
+  ],
+  dependencies: ["lucide-react"],
+  registryDependencies: ["avatar", "dropdown-menu"],
+  a11y: { keyboardNav: true, reducedMotion: true },
+  preview: { layout: "fit", width: 1440, height: 900 },
+} satisfies ComponentMeta;
