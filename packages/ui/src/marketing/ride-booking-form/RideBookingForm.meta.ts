@@ -15,10 +15,7 @@ export default {
     "airport transfer campaigns",
     "scheduled fleet booking",
   ],
-  avoidFor: [
-    "multi-step checkout with payment",
-    "live map dispatch consoles",
-  ],
+  avoidFor: ["multi-step checkout with payment", "live map dispatch consoles"],
   tone: ["clean", "professional", "confident"],
   industries: ["transportation", "travel", "mobility"],
   contentDensity: "medium",
