@@ -1,29 +1,29 @@
 {
   "name": "kind-panther",
   "displayName": "KindPanther",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "addedAt": "2026-09-15",
-  "description": "A token-tinted isometric tessellation tile with an optional caption and a slow drift that pauses under reduced motion.",
-  "sectionCategory": "content",
-  "purpose": "Gives empty states, catalogue cards, and section backdrops a geometric field that stays on semantic tokens in light and dark.",
+  "description": "A square honeycomb field of 120deg hex cells at 37px, with token-mapped fill and ground.",
+  "sectionCategory": "background",
+  "purpose": "Drops the inspo hexagon tessellation behind a caption or empty state without rounding it to the control radius.",
   "bestFor": [
-    "decorative tiles behind captions",
-    "catalogue or story frames that need texture",
-    "quiet pattern fills on marketing or product surfaces"
+    "decorative catalogue tiles",
+    "empty-state or wait-list backdrops",
+    "small marketing accents that stay in atoms"
   ],
   "avoidFor": [
-    "primary actions or form controls",
-    "dense data that needs a plain surface"
+    "data-dense charts that need a quiet canvas",
+    "text-heavy reading surfaces"
   ],
   "tone": [
     "playful",
-    "clean"
+    "bold"
   ],
   "contentDensity": "low",
   "visualWeight": "medium",
   "layout": {
     "type": "stack",
-    "alignment": "left"
+    "alignment": "center"
   },
   "slots": [
     "caption"
@@ -37,9 +37,9 @@
   },
   "tags": [
     "pattern",
-    "tessellation",
+    "honeycomb",
+    "hexagon",
     "background",
-    "texture",
     "atom"
   ],
   "dependencies": [
@@ -59,12 +59,12 @@
     {
       "path": "kind-panther/KindPanther.tsx",
       "type": "component",
-      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { KindPantherProps } from \"./KindPanther.types\";\n\nconst sizes = {\n  sm: \"h-28 w-44\",\n  md: \"h-40 w-64\",\n  lg: \"h-52 w-80\",\n} as const;\n\nexport function KindPanther({\n  className,\n  children,\n  label = \"Kind tessellation\",\n  size = \"md\",\n  density = \"regular\",\n  animate = true,\n  ...props\n}: KindPantherProps) {\n  const content = children ?? label;\n\n  return (\n    <div\n      className={cn(\n        \"jk-kind-panther relative overflow-hidden rounded-[--radius] border border-border bg-card text-card-foreground shadow-[var(--jk-shadow-control)]\",\n        sizes[size],\n        className,\n      )}\n      data-animate={animate ? \"true\" : \"false\"}\n      data-density={density}\n      data-size={size}\n      data-slot=\"kind-panther\"\n      {...props}\n    >\n      <style href=\"jk-kind-panther\" precedence=\"default\">{`\n        .jk-kind-panther-field {\n          --kp-s: 1.85rem;\n          background:\n            repeating-conic-gradient(\n              from 30deg,\n              transparent 0 120deg,\n              color-mix(in oklab, var(--jk-primary), transparent 78%) 0 180deg\n            )\n              calc(var(--kp-s) * 0.5) calc(var(--kp-s) * 0.2885),\n            repeating-conic-gradient(\n              from 30deg,\n              color-mix(in oklab, var(--jk-card), var(--jk-muted) 40%) 0 60deg,\n              color-mix(in oklab, var(--jk-muted), var(--jk-background) 15%) 0 120deg,\n              color-mix(in oklab, var(--jk-secondary), var(--jk-accent) 35%) 0 180deg\n            );\n          background-size: var(--kp-s) calc(var(--kp-s) * 0.577);\n        }\n        .jk-kind-panther[data-density=\"dense\"] .jk-kind-panther-field {\n          --kp-s: 1.15rem;\n        }\n        .jk-kind-panther-veil {\n          background: linear-gradient(\n            180deg,\n            color-mix(in oklab, var(--jk-card), transparent 55%) 0%,\n            color-mix(in oklab, var(--jk-card), transparent 88%) 42%,\n            color-mix(in oklab, var(--jk-card), transparent 28%) 100%\n          );\n        }\n        @keyframes jk-kind-panther-drift {\n          to {\n            background-position:\n              calc(var(--kp-s) * 0.5) calc(var(--kp-s) * 0.2885),\n              var(--kp-s) calc(var(--kp-s) * 0.577);\n          }\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-kind-panther[data-animate=\"true\"] .jk-kind-panther-field {\n            animation: jk-kind-panther-drift 18s linear infinite;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-kind-panther-field {\n            animation: none;\n          }\n        }\n      `}</style>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-kind-panther-field pointer-events-none absolute inset-0\"\n      />\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-kind-panther-veil pointer-events-none absolute inset-0\"\n      />\n      <p className=\"relative z-10 flex h-full items-end px-4 pb-3 text-sm font-medium tracking-tight\">\n        {content}\n      </p>\n    </div>\n  );\n}\n"
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { KindPantherProps } from \"./KindPanther.types\";\n\nconst sizes = {\n  sm: \"jk-kind-panther-sm\",\n  md: \"jk-kind-panther-md\",\n  lg: \"jk-kind-panther-lg\",\n} as const;\n\nconst toneVars = {\n  honey: {\n    cell: \"var(--jk-chart-5)\",\n    field: \"var(--jk-warning)\",\n  },\n  primary: {\n    cell: \"var(--jk-primary)\",\n    field: \"var(--jk-accent)\",\n  },\n  muted: {\n    cell: \"color-mix(in oklab, var(--jk-muted-foreground) 72%, var(--jk-foreground))\",\n    field: \"var(--jk-muted)\",\n  },\n} as const;\n\nexport function KindPanther({\n  className,\n  children,\n  label = \"Honeycomb field\",\n  size = \"md\",\n  tone = \"honey\",\n  animated = false,\n  style,\n  ...props\n}: KindPantherProps) {\n  const palette = toneVars[tone];\n\n  return (\n    <div\n      aria-label={label}\n      className={cn(\"jk-kind-panther relative\", sizes[size], className)}\n      data-animated={animated ? \"true\" : \"false\"}\n      data-size={size}\n      data-slot=\"kind-panther\"\n      data-tone={tone}\n      role=\"img\"\n      style={\n        {\n          \"--jk-kind-cell\": palette.cell,\n          \"--jk-kind-field\": palette.field,\n          ...style,\n        } as React.CSSProperties\n      }\n      {...props}\n    >\n      <style href=\"jk-kind-panther\" precedence=\"default\">{`\n        .jk-kind-panther {\n          --jk-kind-s: 37px;\n          box-sizing: border-box;\n          width: 14rem;\n          height: 14rem;\n          overflow: hidden;\n          border: 0;\n          border-radius: 0;\n          --jk-kind-stroke: transparent, var(--jk-kind-cell) 0.5deg 119.5deg, transparent 120deg;\n          --jk-kind-g1: conic-gradient(\n            from 60deg at 56.25% calc(425% / 6),\n            var(--jk-kind-stroke)\n          );\n          --jk-kind-g2: conic-gradient(\n            from 180deg at 43.75% calc(425% / 6),\n            var(--jk-kind-stroke)\n          );\n          --jk-kind-g3: conic-gradient(\n            from -60deg at 50% calc(175% / 12),\n            var(--jk-kind-stroke)\n          );\n          background-color: var(--jk-kind-field);\n          background-image:\n            var(--jk-kind-g1),\n            var(--jk-kind-g1),\n            var(--jk-kind-g2),\n            var(--jk-kind-g2),\n            var(--jk-kind-g3),\n            var(--jk-kind-g3);\n          background-position:\n            0 0,\n            var(--jk-kind-s) calc(1.73 * var(--jk-kind-s)),\n            0 0,\n            var(--jk-kind-s) calc(1.73 * var(--jk-kind-s)),\n            var(--jk-kind-s) 0,\n            0 calc(1.73 * var(--jk-kind-s));\n          background-size: calc(2 * var(--jk-kind-s)) calc(3.46 * var(--jk-kind-s));\n        }\n        .jk-kind-panther-sm {\n          --jk-kind-s: 28px;\n          width: 10rem;\n          height: 10rem;\n        }\n        .jk-kind-panther-lg {\n          --jk-kind-s: 52px;\n          width: 18rem;\n          height: 18rem;\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-kind-panther[data-animated=\"true\"] {\n            animation: jk-kind-panther-drift 18s linear infinite;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-kind-panther {\n            animation: none;\n          }\n        }\n        @keyframes jk-kind-panther-drift {\n          to {\n            background-position:\n              calc(2 * var(--jk-kind-s)) 0,\n              calc(3 * var(--jk-kind-s)) calc(1.73 * var(--jk-kind-s)),\n              calc(2 * var(--jk-kind-s)) 0,\n              calc(3 * var(--jk-kind-s)) calc(1.73 * var(--jk-kind-s)),\n              calc(3 * var(--jk-kind-s)) 0,\n              calc(2 * var(--jk-kind-s)) calc(1.73 * var(--jk-kind-s));\n          }\n        }\n      `}</style>\n      {children ? (\n        <div className=\"relative z-10 flex h-full items-end p-4 text-sm font-medium text-primary-foreground\">\n          {children}\n        </div>\n      ) : null}\n    </div>\n  );\n}\n"
     },
     {
       "path": "kind-panther/KindPanther.types.ts",
       "type": "types",
-      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type KindPantherSize = \"sm\" | \"md\" | \"lg\";\nexport type KindPantherDensity = \"regular\" | \"dense\";\n\nexport interface KindPantherProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n  label?: string;\n  size?: KindPantherSize;\n  density?: KindPantherDensity;\n  animate?: boolean;\n}\n"
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type KindPantherSize = \"sm\" | \"md\" | \"lg\";\nexport type KindPantherTone = \"honey\" | \"primary\" | \"muted\";\n\nexport interface KindPantherProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n  /** Accessible name for the decorative honeycomb field. */\n  label?: string;\n  size?: KindPantherSize;\n  tone?: KindPantherTone;\n  /** Optional tile drift. Off by default to match the still inspo. Honors prefers-reduced-motion. */\n  animated?: boolean;\n}\n"
     },
     {
       "path": "kind-panther/index.ts",
@@ -83,8 +83,8 @@
       "code": "<KindPanther {...kindPantherMocks.default} />"
     },
     {
-      "name": "Dense",
-      "code": "<div className=\"flex flex-wrap items-end gap-3 bg-background p-8 text-foreground\">\n      <KindPanther {...kindPantherMocks.compact} />\n      <KindPanther {...kindPantherMocks.default} />\n      <KindPanther {...kindPantherMocks.dense} size=\"lg\" />\n    </div>"
+      "name": "Tones",
+      "code": "<div className=\"flex flex-wrap items-end gap-3 bg-background p-8 text-foreground\">\n      <KindPanther {...kindPantherMocks.muted} />\n      <KindPanther {...kindPantherMocks.default} />\n      <KindPanther {...kindPantherMocks.primary} size=\"lg\" />\n    </div>"
     }
   ]
 }

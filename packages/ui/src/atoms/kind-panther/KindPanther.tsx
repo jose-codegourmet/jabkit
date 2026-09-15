@@ -4,93 +4,132 @@ import { cn } from "@/lib/cn";
 import type { KindPantherProps } from "./KindPanther.types";
 
 const sizes = {
-  sm: "h-28 w-44",
-  md: "h-40 w-64",
-  lg: "h-52 w-80",
+  sm: "jk-kind-panther-sm",
+  md: "jk-kind-panther-md",
+  lg: "jk-kind-panther-lg",
+} as const;
+
+const toneVars = {
+  honey: {
+    cell: "var(--jk-chart-5)",
+    field: "var(--jk-warning)",
+  },
+  primary: {
+    cell: "var(--jk-primary)",
+    field: "var(--jk-accent)",
+  },
+  muted: {
+    cell: "color-mix(in oklab, var(--jk-muted-foreground) 72%, var(--jk-foreground))",
+    field: "var(--jk-muted)",
+  },
 } as const;
 
 export function KindPanther({
   className,
   children,
-  label = "Kind tessellation",
+  label = "Honeycomb field",
   size = "md",
-  density = "regular",
-  animate = true,
+  tone = "honey",
+  animated = false,
+  style,
   ...props
 }: KindPantherProps) {
-  const content = children ?? label;
+  const palette = toneVars[tone];
 
   return (
     <div
-      className={cn(
-        "jk-kind-panther relative overflow-hidden rounded-[--radius] border border-border bg-card text-card-foreground shadow-[var(--jk-shadow-control)]",
-        sizes[size],
-        className,
-      )}
-      data-animate={animate ? "true" : "false"}
-      data-density={density}
+      aria-label={label}
+      className={cn("jk-kind-panther relative", sizes[size], className)}
+      data-animated={animated ? "true" : "false"}
       data-size={size}
       data-slot="kind-panther"
+      data-tone={tone}
+      role="img"
+      style={
+        {
+          "--jk-kind-cell": palette.cell,
+          "--jk-kind-field": palette.field,
+          ...style,
+        } as React.CSSProperties
+      }
       {...props}
     >
       <style href="jk-kind-panther" precedence="default">{`
-        .jk-kind-panther-field {
-          --kp-s: 1.85rem;
-          background:
-            repeating-conic-gradient(
-              from 30deg,
-              transparent 0 120deg,
-              color-mix(in oklab, var(--jk-primary), transparent 78%) 0 180deg
-            )
-              calc(var(--kp-s) * 0.5) calc(var(--kp-s) * 0.2885),
-            repeating-conic-gradient(
-              from 30deg,
-              color-mix(in oklab, var(--jk-card), var(--jk-muted) 40%) 0 60deg,
-              color-mix(in oklab, var(--jk-muted), var(--jk-background) 15%) 0 120deg,
-              color-mix(in oklab, var(--jk-secondary), var(--jk-accent) 35%) 0 180deg
-            );
-          background-size: var(--kp-s) calc(var(--kp-s) * 0.577);
-        }
-        .jk-kind-panther[data-density="dense"] .jk-kind-panther-field {
-          --kp-s: 1.15rem;
-        }
-        .jk-kind-panther-veil {
-          background: linear-gradient(
-            180deg,
-            color-mix(in oklab, var(--jk-card), transparent 55%) 0%,
-            color-mix(in oklab, var(--jk-card), transparent 88%) 42%,
-            color-mix(in oklab, var(--jk-card), transparent 28%) 100%
+        .jk-kind-panther {
+          --jk-kind-s: 37px;
+          box-sizing: border-box;
+          width: 14rem;
+          height: 14rem;
+          overflow: hidden;
+          border: 0;
+          border-radius: 0;
+          --jk-kind-stroke: transparent, var(--jk-kind-cell) 0.5deg 119.5deg, transparent 120deg;
+          --jk-kind-g1: conic-gradient(
+            from 60deg at 56.25% calc(425% / 6),
+            var(--jk-kind-stroke)
           );
+          --jk-kind-g2: conic-gradient(
+            from 180deg at 43.75% calc(425% / 6),
+            var(--jk-kind-stroke)
+          );
+          --jk-kind-g3: conic-gradient(
+            from -60deg at 50% calc(175% / 12),
+            var(--jk-kind-stroke)
+          );
+          background-color: var(--jk-kind-field);
+          background-image:
+            var(--jk-kind-g1),
+            var(--jk-kind-g1),
+            var(--jk-kind-g2),
+            var(--jk-kind-g2),
+            var(--jk-kind-g3),
+            var(--jk-kind-g3);
+          background-position:
+            0 0,
+            var(--jk-kind-s) calc(1.73 * var(--jk-kind-s)),
+            0 0,
+            var(--jk-kind-s) calc(1.73 * var(--jk-kind-s)),
+            var(--jk-kind-s) 0,
+            0 calc(1.73 * var(--jk-kind-s));
+          background-size: calc(2 * var(--jk-kind-s)) calc(3.46 * var(--jk-kind-s));
         }
-        @keyframes jk-kind-panther-drift {
-          to {
-            background-position:
-              calc(var(--kp-s) * 0.5) calc(var(--kp-s) * 0.2885),
-              var(--kp-s) calc(var(--kp-s) * 0.577);
-          }
+        .jk-kind-panther-sm {
+          --jk-kind-s: 28px;
+          width: 10rem;
+          height: 10rem;
+        }
+        .jk-kind-panther-lg {
+          --jk-kind-s: 52px;
+          width: 18rem;
+          height: 18rem;
         }
         @media (prefers-reduced-motion: no-preference) {
-          .jk-kind-panther[data-animate="true"] .jk-kind-panther-field {
+          .jk-kind-panther[data-animated="true"] {
             animation: jk-kind-panther-drift 18s linear infinite;
           }
         }
         @media (prefers-reduced-motion: reduce) {
-          .jk-kind-panther-field {
+          .jk-kind-panther {
             animation: none;
           }
         }
+        @keyframes jk-kind-panther-drift {
+          to {
+            background-position:
+              calc(2 * var(--jk-kind-s)) 0,
+              calc(3 * var(--jk-kind-s)) calc(1.73 * var(--jk-kind-s)),
+              calc(2 * var(--jk-kind-s)) 0,
+              calc(3 * var(--jk-kind-s)) calc(1.73 * var(--jk-kind-s)),
+              calc(3 * var(--jk-kind-s)) 0,
+              calc(2 * var(--jk-kind-s)) calc(1.73 * var(--jk-kind-s));
+          }
+        }
       `}</style>
-      <span
-        aria-hidden="true"
-        className="jk-kind-panther-field pointer-events-none absolute inset-0"
-      />
-      <span
-        aria-hidden="true"
-        className="jk-kind-panther-veil pointer-events-none absolute inset-0"
-      />
-      <p className="relative z-10 flex h-full items-end px-4 pb-3 text-sm font-medium tracking-tight">
-        {content}
-      </p>
+      {children ? (
+        <div className="relative z-10 flex h-full items-end p-4 text-sm font-medium text-primary-foreground">
+          {children}
+        </div>
+      ) : null}
     </div>
   );
 }

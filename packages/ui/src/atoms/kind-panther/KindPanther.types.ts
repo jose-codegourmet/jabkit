@@ -1,12 +1,14 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
 export type KindPantherSize = "sm" | "md" | "lg";
-export type KindPantherDensity = "regular" | "dense";
+export type KindPantherTone = "honey" | "primary" | "muted";
 
 export interface KindPantherProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
+  /** Accessible name for the decorative honeycomb field. */
   label?: string;
   size?: KindPantherSize;
-  density?: KindPantherDensity;
-  animate?: boolean;
+  tone?: KindPantherTone;
+  /** Optional tile drift. Off by default to match the still inspo. Honors prefers-reduced-motion. */
+  animated?: boolean;
 }

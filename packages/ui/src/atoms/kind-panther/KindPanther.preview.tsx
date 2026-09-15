@@ -5,5 +5,5 @@ import { kindPantherMocks } from "./KindPanther.mocks";
 
 export default {
   Default: () => <KindPanther {...kindPantherMocks.default} />,
-  Dense: () => <KindPanther {...kindPantherMocks.dense} />,
+  Tones: () => <KindPanther {...kindPantherMocks.primary} />,
 };
