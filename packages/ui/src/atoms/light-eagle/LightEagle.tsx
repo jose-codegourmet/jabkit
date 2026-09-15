@@ -3,127 +3,111 @@ import * as React from "react";
 import { cn } from "@/lib/cn";
 import type { LightEagleProps } from "./LightEagle.types";
 
-const sizes = {
-  sm: "h-28 w-44",
-  md: "h-40 w-64",
-  lg: "h-52 w-80",
+const cellSizes = {
+  sm: "140px",
+  md: "200px",
+  lg: "260px",
 } as const;
 
-const tile = {
-  sm: "1.35rem",
-  md: "1.75rem",
-  lg: "2.15rem",
-} as const;
-
-const tones = {
-  dawn: {
-    field: "color-mix(in oklab, var(--jk-card) 82%, var(--jk-warning))",
-    bar: "color-mix(in oklab, var(--jk-warning) 42%, var(--jk-card))",
-    lift: "color-mix(in oklab, var(--jk-primary) 28%, var(--jk-card))",
+const palettes = {
+  frost: {
+    a: "color-mix(in oklab, var(--jk-foreground) 72%, var(--jk-muted))",
+    b: "color-mix(in oklab, var(--jk-muted-foreground) 38%, var(--jk-card))",
+    c: "var(--jk-card)",
   },
-  sky: {
-    field: "color-mix(in oklab, var(--jk-card) 78%, var(--jk-chart-2))",
-    bar: "color-mix(in oklab, var(--jk-chart-2) 48%, var(--jk-muted))",
-    lift: "color-mix(in oklab, var(--jk-primary) 36%, var(--jk-card))",
+  slate: {
+    a: "color-mix(in oklab, var(--jk-foreground) 58%, var(--jk-secondary))",
+    b: "color-mix(in oklab, var(--jk-muted) 42%, var(--jk-muted-foreground))",
+    c: "color-mix(in oklab, var(--jk-card) 86%, var(--jk-background))",
   },
-  chart: {
-    field: "color-mix(in oklab, var(--jk-muted) 70%, var(--jk-chart-1))",
-    bar: "color-mix(in oklab, var(--jk-chart-1) 55%, var(--jk-card))",
-    lift: "color-mix(in oklab, var(--jk-chart-4) 40%, var(--jk-card))",
+  ink: {
+    a: "color-mix(in oklab, var(--jk-foreground) 88%, var(--jk-primary))",
+    b: "color-mix(in oklab, var(--jk-muted-foreground) 64%, var(--jk-secondary))",
+    c: "color-mix(in oklab, var(--jk-background) 70%, var(--jk-card))",
   },
 } as const;
 
 export function LightEagle({
   className,
   children,
-  label = "Wing field",
-  size = "md",
-  tone = "dawn",
-  animate = true,
+  cellSize = "md",
+  tone = "frost",
+  animated = false,
+  label = "Isometric cube field",
   style,
   ...props
 }: LightEagleProps) {
-  const palette = tones[tone];
-  const content = children ?? label;
+  const faces = palettes[tone];
 
   return (
     <div
       aria-label={children ? undefined : label}
-      className={cn(
-        "jk-light-eagle relative overflow-hidden rounded-[--radius] border border-border bg-card text-card-foreground shadow-[var(--jk-shadow-control)]",
-        sizes[size],
-        className,
-      )}
-      data-animate={animate ? "true" : "false"}
-      data-size={size}
+      className={cn("jk-light-eagle", animated && "jk-light-eagle-live", className)}
       data-slot="light-eagle"
       data-tone={tone}
       role={children ? undefined : "img"}
       style={
         {
-          "--jk-light-eagle-field": palette.field,
-          "--jk-light-eagle-bar": palette.bar,
-          "--jk-light-eagle-lift": palette.lift,
-          "--jk-light-eagle-tile": tile[size],
+          "--jk-light-eagle-a": faces.a,
+          "--jk-light-eagle-b": faces.b,
+          "--jk-light-eagle-c": faces.c,
+          "--jk-light-eagle-cell": cellSizes[cellSize],
           ...style,
         } as React.CSSProperties
       }
       {...props}
     >
       <style href="jk-light-eagle" precedence="default">{`
-        .jk-light-eagle-field {
-          --le-s: var(--jk-light-eagle-tile);
-          background-color: var(--jk-light-eagle-field);
-          background-image:
-            linear-gradient(
-              180deg,
-              color-mix(in oklab, var(--jk-light-eagle-lift), transparent 42%) 0%,
-              transparent 46%,
-              color-mix(in oklab, var(--jk-card), transparent 35%) 100%
-            ),
-            repeating-linear-gradient(
-              135deg,
-              var(--jk-light-eagle-bar) 0 calc(var(--le-s) * 0.22),
-              transparent calc(var(--le-s) * 0.22) calc(var(--le-s) * 0.5)
-            ),
-            repeating-linear-gradient(
-              45deg,
-              color-mix(in oklab, var(--jk-light-eagle-bar), transparent 28%) 0
-                calc(var(--le-s) * 0.18),
-              transparent calc(var(--le-s) * 0.18) calc(var(--le-s) * 0.5)
+        .jk-light-eagle {
+          --jk-light-eagle-s: var(--jk-light-eagle-cell);
+          position: relative;
+          isolation: isolate;
+          width: 100%;
+          height: 100%;
+          min-height: 10rem;
+          overflow: hidden;
+          border: 0;
+          border-radius: 0;
+          background:
+            repeating-conic-gradient(
+              from 30deg,
+              transparent 0 120deg,
+              var(--jk-light-eagle-c) 0 180deg
+            )
+            calc(0.5 * var(--jk-light-eagle-s))
+            calc(0.5 * var(--jk-light-eagle-s) * 0.577),
+            repeating-conic-gradient(
+              from 30deg,
+              var(--jk-light-eagle-a) 0 60deg,
+              var(--jk-light-eagle-b) 0 120deg,
+              var(--jk-light-eagle-c) 0 180deg
             );
-          background-size:
-            100% 100%,
-            calc(var(--le-s) * 1.4) calc(var(--le-s) * 1.4),
-            calc(var(--le-s) * 1.4) calc(var(--le-s) * 1.4);
-          background-position: 0 0, 0 0, calc(var(--le-s) * 0.35) 0;
-        }
-        @keyframes jk-light-eagle-glide {
-          to {
-            background-position:
-              0 0,
-              calc(var(--le-s) * 1.4) calc(var(--le-s) * 1.4),
-              calc(var(--le-s) * 1.75) calc(var(--le-s) * 1.4);
-          }
+          background-size: var(--jk-light-eagle-s) calc(var(--jk-light-eagle-s) * 0.577);
         }
         @media (prefers-reduced-motion: no-preference) {
-          .jk-light-eagle[data-animate="true"] .jk-light-eagle-field {
-            animation: jk-light-eagle-glide 22s linear infinite;
+          .jk-light-eagle-live {
+            animation: jk-light-eagle-drift 22s linear infinite;
           }
         }
         @media (prefers-reduced-motion: reduce) {
-          .jk-light-eagle-field {
+          .jk-light-eagle-live {
             animation: none;
           }
         }
+        @keyframes jk-light-eagle-drift {
+          to {
+            background-position:
+              calc(var(--jk-light-eagle-s) * 1.5)
+                calc(var(--jk-light-eagle-s) * 0.577),
+              var(--jk-light-eagle-s) calc(var(--jk-light-eagle-s) * 0.577);
+          }
+        }
       `}</style>
-      <span
-        aria-hidden="true"
-        className="jk-light-eagle-field pointer-events-none absolute inset-0"
-      />
-      <p className="relative z-10 flex h-full items-end px-4 pb-3 text-sm font-medium tracking-tight">
-        {content}
-      </p>
+      {children ? (
+        <div className="relative z-10 flex h-full min-h-40 items-center justify-center p-6 text-card-foreground">
+          {children}
+        </div>
+      ) : null}
     </div>
   );
 }

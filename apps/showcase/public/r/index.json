@@ -1534,29 +1534,30 @@
     "name": "light-eagle",
     "displayName": "LightEagle",
     "category": "atoms",
-    "description": "A token-tinted chevron wing field with an optional caption and a slow glide that pauses under reduced motion.",
+    "description": "A square-corner isometric cube tessellation at 200px, with three face inks mapped to semantic tokens.",
     "sectionCategory": "content",
-    "purpose": "Gives empty states, catalogue cards, and section backdrops a feathered chevron texture that stays on semantic tokens in light and dark.",
+    "purpose": "Fills a region with the Uiverse light-eagle hexagonal cube weave without rounding the field to the shared control radius.",
     "bestFor": [
-      "decorative tiles behind captions",
-      "catalogue or story frames that need a light geometric field",
-      "quiet pattern fills on product surfaces"
+      "section covers and empty-state backdrops",
+      "card or banner texture behind a short caption",
+      "catalogue samples that need a geometric field"
     ],
     "avoidFor": [
-      "primary actions or form controls",
-      "dense data that needs a plain surface"
+      "text-heavy reading panes",
+      "controls that need a quiet, solid surface"
     ],
     "tone": [
       "playful",
       "clean"
     ],
     "contentDensity": "low",
-    "visualWeight": "medium",
+    "visualWeight": "high",
     "layout": {
       "type": "stack",
-      "alignment": "left"
+      "alignment": "center"
     },
     "slots": [
+      "field",
       "caption"
     ],
     "capabilities": {
@@ -1568,9 +1569,10 @@
     },
     "tags": [
       "pattern",
-      "chevron",
+      "hexagon",
+      "cube",
+      "geometric",
       "background",
-      "texture",
       "atom"
     ],
     "addedAt": "2026-09-15",
@@ -1583,7 +1585,9 @@
       "reducedMotion": true
     },
     "preview": {
-      "layout": "center"
+      "layout": "center",
+      "width": 440,
+      "height": 280
     }
   },
   {

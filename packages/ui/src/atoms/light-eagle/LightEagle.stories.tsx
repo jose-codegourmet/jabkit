@@ -16,17 +16,25 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: { ...lightEagleMocks.default },
   render: () => (
-    <LightEagle {...lightEagleMocks.default} />
+    <div className="h-64 w-80 bg-background text-foreground">
+      <LightEagle {...lightEagleMocks.default} />
+    </div>
   ),
 };
 
 export const Tones: Story = {
-  args: { ...lightEagleMocks.sky },
+  args: { ...lightEagleMocks.slate },
   render: () => (
-    <div className="flex flex-wrap items-end gap-3 bg-background p-8 text-foreground">
-      <LightEagle {...lightEagleMocks.compact} />
-      <LightEagle {...lightEagleMocks.default} />
-      <LightEagle {...lightEagleMocks.sky} size="lg" />
+    <div className="flex w-80 flex-col gap-4 bg-background text-foreground">
+      <div className="h-56">
+        <LightEagle {...lightEagleMocks.default} />
+      </div>
+      <div className="h-56">
+        <LightEagle {...lightEagleMocks.slate} />
+      </div>
+      <div className="h-56">
+        <LightEagle {...lightEagleMocks.ink} />
+      </div>
     </div>
   ),
 };
@@ -36,10 +44,14 @@ export const ThemeComparison: Story = {
   render: () => (
     <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border sm:grid-cols-2">
       <div className="bg-background p-8">
-        <LightEagle {...lightEagleMocks.default} />
+        <div className="h-56">
+          <LightEagle {...lightEagleMocks.default} />
+        </div>
       </div>
       <div className="dark bg-background p-8">
-        <LightEagle {...lightEagleMocks.sky} />
+        <div className="h-56">
+          <LightEagle {...lightEagleMocks.default} />
+        </div>
       </div>
     </div>
   ),
