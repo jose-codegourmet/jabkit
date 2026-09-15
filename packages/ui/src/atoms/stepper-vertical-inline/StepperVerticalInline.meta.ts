@@ -3,10 +3,10 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "stepper-vertical-inline",
   displayName: "StepperVerticalInline",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Vertical progress stepper with a numbered rail and inline titles plus descriptions.",
+    "Vertical stepper with numbered pill markers and inline titles plus descriptions.",
   sectionCategory: "navigation",
   purpose:
     "Shows where someone is in a short sequential flow without hiding the remaining steps.",
@@ -27,7 +27,7 @@ export default {
     type: "stack",
     alignment: "left",
   },
-  slots: ["indicator", "title", "description", "connector"],
+  slots: ["indicator", "title", "description", "separator", "caption"],
   capabilities: {
     supportsImage: false,
     supportsVideo: false,

@@ -16,12 +16,12 @@ const ThemeComparison = () => (
 
 export default {
   Default: () => (
-    <div className="w-full max-w-md">
+    <div className="w-full min-w-[300px]">
       <StepperVerticalInline {...stepperVerticalInlineMocks.default} />
     </div>
   ),
   Variants: () => (
-    <div className="w-full max-w-md">
+    <div className="w-full min-w-[300px]">
       <StepperVerticalInline {...stepperVerticalInlineMocks.alternate} />
     </div>
   ),

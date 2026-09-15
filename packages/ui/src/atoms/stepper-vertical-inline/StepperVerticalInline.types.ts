@@ -1,15 +1,16 @@
 import type { HTMLAttributes } from "react";
 
 export interface StepperVerticalInlineStep {
-  id: string;
   title: string;
   description?: string;
+  disabled?: boolean;
 }
 
 export interface StepperVerticalInlineProps
-  extends Omit<HTMLAttributes<HTMLOListElement>, "onChange"> {
+  extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
   steps: readonly StepperVerticalInlineStep[];
-  /** 1-based index of the active step. */
-  currentStep?: number;
-  onStepChange?: (step: number) => void;
+  value?: number;
+  defaultValue?: number;
+  onValueChange?: (step: number) => void;
+  caption?: string;
 }
