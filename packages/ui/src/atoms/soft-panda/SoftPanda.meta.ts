@@ -1,0 +1,44 @@
+import type { ComponentMeta } from "@jabkit/build-registry";
+
+export default {
+  name: "soft-panda",
+  displayName: "SoftPanda",
+  version: "1.0.0",
+  addedAt: "2026-09-15",
+  description:
+    "A token-colored dual-tone mosaic tile for decorative fills, swatches, and quiet section backdrops.",
+  sectionCategory: "content",
+  purpose:
+    "Gives a page a repeating high-contrast field without photographs or hardcoded palette colors.",
+  bestFor: [
+    "decorative section fills",
+    "catalogue swatches",
+    "empty-state or card backgrounds",
+  ],
+  avoidFor: [
+    "text-heavy regions that need a flat reading surface",
+    "controls that must stay visually quiet",
+  ],
+  tone: ["playful", "clean"],
+  contentDensity: "low",
+  visualWeight: "medium",
+  layout: {
+    type: "stack",
+    alignment: "center",
+  },
+  slots: ["field", "content"],
+  capabilities: {
+    supportsImage: false,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: false,
+    supportsDarkMode: true,
+  },
+  tags: ["pattern", "mosaic", "background", "decorative", "atom"],
+  dependencies: [],
+  registryDependencies: [],
+  a11y: { keyboardNav: false, reducedMotion: true },
+  preview: {
+    layout: "center",
+  },
+} satisfies ComponentMeta;

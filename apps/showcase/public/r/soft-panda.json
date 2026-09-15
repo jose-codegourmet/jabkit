@@ -1,0 +1,91 @@
+{
+  "name": "soft-panda",
+  "displayName": "SoftPanda",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A token-colored dual-tone mosaic tile for decorative fills, swatches, and quiet section backdrops.",
+  "sectionCategory": "content",
+  "purpose": "Gives a page a repeating high-contrast field without photographs or hardcoded palette colors.",
+  "bestFor": [
+    "decorative section fills",
+    "catalogue swatches",
+    "empty-state or card backgrounds"
+  ],
+  "avoidFor": [
+    "text-heavy regions that need a flat reading surface",
+    "controls that must stay visually quiet"
+  ],
+  "tone": [
+    "playful",
+    "clean"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "field",
+    "content"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "pattern",
+    "mosaic",
+    "background",
+    "decorative",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "soft-panda/SoftPanda.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { SoftPandaProps } from \"./SoftPanda.types\";\n\nconst frameSizes = {\n  sm: \"h-24 w-36\",\n  md: \"h-40 w-64\",\n  lg: \"h-56 w-80\",\n} as const;\n\nconst cellSizes = {\n  sm: \"2.25rem\",\n  md: \"3.5rem\",\n  lg: \"4.5rem\",\n} as const;\n\nconst tones = {\n  default: {\n    a: \"var(--jk-accent)\",\n    b: \"var(--jk-foreground)\",\n  },\n  muted: {\n    a: \"var(--jk-muted)\",\n    b: \"var(--jk-muted-foreground)\",\n  },\n  chart: {\n    a: \"var(--jk-chart-4)\",\n    b: \"var(--jk-chart-2)\",\n  },\n} as const;\n\nexport function SoftPanda({\n  className,\n  children,\n  label = \"Decorative mosaic\",\n  size = \"md\",\n  tone = \"default\",\n  animate = true,\n  ...props\n}: SoftPandaProps) {\n  const pair = tones[tone];\n\n  return (\n    <div\n      aria-label={children ? undefined : label}\n      className={cn(\n        \"jk-soft-panda relative overflow-hidden rounded-[--radius] border border-border\",\n        !children && frameSizes[size],\n        children && \"min-h-40 w-full\",\n        className,\n      )}\n      data-animate={animate ? \"true\" : \"false\"}\n      data-size={size}\n      data-slot=\"soft-panda\"\n      data-tone={tone}\n      role={children ? undefined : \"img\"}\n      style={\n        {\n          \"--jk-soft-panda-a\": pair.a,\n          \"--jk-soft-panda-b\": pair.b,\n          \"--jk-soft-panda-cell\": cellSizes[size],\n        } as React.CSSProperties\n      }\n      {...props}\n    >\n      <style href=\"jk-soft-panda\" precedence=\"default\">{`\n        .jk-soft-panda-field {\n          background-color: var(--jk-soft-panda-b);\n          background-image:\n            linear-gradient(\n              45deg,\n              var(--jk-soft-panda-a) 0 25%,\n              transparent 25% 75%,\n              var(--jk-soft-panda-a) 75% 100%\n            ),\n            linear-gradient(\n              135deg,\n              var(--jk-soft-panda-a) 0 25%,\n              var(--jk-soft-panda-b) 25% 75%,\n              var(--jk-soft-panda-a) 75% 100%\n            );\n          background-size:\n            var(--jk-soft-panda-cell) var(--jk-soft-panda-cell),\n            var(--jk-soft-panda-cell) var(--jk-soft-panda-cell);\n          background-position: 0 0, calc(var(--jk-soft-panda-cell) * 0.5) calc(var(--jk-soft-panda-cell) * 0.5);\n        }\n        @keyframes jk-soft-panda-drift {\n          to {\n            background-position:\n              var(--jk-soft-panda-cell) var(--jk-soft-panda-cell),\n              calc(var(--jk-soft-panda-cell) * 1.5) calc(var(--jk-soft-panda-cell) * 1.5);\n          }\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-soft-panda[data-animate=\"true\"] .jk-soft-panda-field {\n            animation: jk-soft-panda-drift 18s linear infinite;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-soft-panda-field {\n            animation: none;\n          }\n        }\n      `}</style>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-soft-panda-field pointer-events-none absolute inset-0\"\n      />\n      {children ? (\n        <div className=\"relative z-10 p-6 text-card-foreground\">{children}</div>\n      ) : null}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "soft-panda/SoftPanda.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type SoftPandaSize = \"sm\" | \"md\" | \"lg\";\nexport type SoftPandaTone = \"default\" | \"muted\" | \"chart\";\n\nexport interface SoftPandaProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n  label?: string;\n  size?: SoftPandaSize;\n  tone?: SoftPandaTone;\n  animate?: boolean;\n}\n"
+    },
+    {
+      "path": "soft-panda/index.ts",
+      "type": "index",
+      "content": "export { SoftPanda } from \"./SoftPanda\";\nexport type * from \"./SoftPanda.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background p-8 text-foreground\">\n      <SoftPanda {...softPandaMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Tones",
+      "code": "<div className=\"flex flex-wrap items-end gap-6 bg-background p-8 text-foreground\">\n      <SoftPanda {...softPandaMocks.compact} />\n      <SoftPanda {...softPandaMocks.muted} />\n      <SoftPanda {...softPandaMocks.chart} />\n    </div>"
+    }
+  ]
+}
