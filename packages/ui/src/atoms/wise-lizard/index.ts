@@ -1,2 +1,2 @@
 export { WiseLizard } from "./WiseLizard";
-export type * from "./WiseLizard.types";
+export type { WiseLizardProps, WiseLizardSize } from "./WiseLizard.types";

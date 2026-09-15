@@ -1,6 +1,6 @@
 export const wiseLizardMocks = {
   default: {
-    badge: "Username",
+    badge: "USERNAME",
     placeholder: "Enter username",
     "aria-label": "Username",
   },

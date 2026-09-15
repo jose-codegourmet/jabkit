@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "wise-lizard",
   displayName: "WiseLizard",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A tilted brutalist username field with a warning plaque, hard offset shadow, and a user mark.",
+    "A square brutalist 3D username field: hard offset shadow, warning plaque, and a native text input that lifts on hover.",
   sectionCategory: "form",
   purpose:
-    "Collects a short identity value with a 3D poster frame that still reads as a native text input.",
+    "Collects a short identity value with a tilted poster frame while keeping a native text control and square corners.",
   bestFor: [
     "sign-in or handle fields that can afford visual weight",
     "neo-brutalist forms and catalogue demos",
@@ -35,7 +35,7 @@ export default {
     supportsDarkMode: true,
   },
   tags: ["input", "username", "brutalism", "form", "atom"],
-  dependencies: ["lucide-react"],
+  dependencies: [],
   registryDependencies: [],
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: {
