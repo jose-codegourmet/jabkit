@@ -1,0 +1,124 @@
+{
+  "name": "v-form-8",
+  "displayName": "VForm8",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Three-step onboarding wizard with account details, plan cards and a newsletter opt-in, a review summary, and a success state.",
+  "sectionCategory": "form",
+  "purpose": "Lets a product landing page collect a new account, a plan choice, and confirmation without sending visitors into a full checkout.",
+  "bestFor": [
+    "SaaS sign-up landings",
+    "workspace and membership onboarding",
+    "plan-first account creation"
+  ],
+  "avoidFor": [
+    "payment checkout with billing details",
+    "single-field waitlists",
+    "signed-in settings pages"
+  ],
+  "tone": [
+    "clean",
+    "professional",
+    "confident"
+  ],
+  "industries": [
+    "technology",
+    "media",
+    "productivity"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "card",
+    "alignment": "center",
+    "columns": 1
+  },
+  "slots": [
+    "headline",
+    "description",
+    "stepper",
+    "accountFields",
+    "planCards",
+    "newsletterOptIn",
+    "reviewSummary",
+    "successState",
+    "navigation"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "features"
+  ],
+  "recommendedBefore": [
+    "testimonials",
+    "cta"
+  ],
+  "tags": [
+    "form",
+    "onboarding",
+    "wizard",
+    "signup",
+    "plans",
+    "marketing",
+    "conversion"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button",
+    "checkbox",
+    "input",
+    "label"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "v-form-8/VForm8.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { CheckIcon, CircleCheckIcon } from \"lucide-react\";\nimport {\n  type FormEvent,\n  type ReactNode,\n  useId,\n  useMemo,\n  useState,\n} from \"react\";\nimport { Button } from \"@/components/jabkit/button\";\nimport { Checkbox } from \"@/components/jabkit/checkbox\";\nimport { Input } from \"@/components/jabkit/input\";\nimport { Label } from \"@/components/jabkit/label\";\nimport { cn } from \"@/lib/cn\";\nimport type { VForm8Plan, VForm8Props, VForm8Step } from \"./VForm8.types\";\n\nconst defaultPlans = [\n  {\n    id: \"starter\",\n    name: \"Starter\",\n    price: \"$0 / month\",\n    description: \"One desk, local files, and a quiet inbox.\",\n  },\n  {\n    id: \"studio\",\n    name: \"Studio\",\n    price: \"$18 / month\",\n    description: \"Shared boards, guest seats, and weekly backups.\",\n  },\n  {\n    id: \"desk\",\n    name: \"Desk\",\n    price: \"$42 / month\",\n    description: \"Client rooms, archive search, and priority support.\",\n  },\n] as const satisfies readonly VForm8Plan[];\n\nconst defaults = {\n  title: \"Open a Kestrel desk\",\n  description:\n    \"Three short steps. Name the account, pick a plan, then confirm before we send the invite.\",\n  accountStepLabel: \"Account\",\n  planStepLabel: \"Plan\",\n  reviewStepLabel: \"Review\",\n  nameLabel: \"Full name\",\n  namePlaceholder: \"Mira Solano\",\n  defaultName: \"\",\n  emailLabel: \"Work email\",\n  emailPlaceholder: \"you@studio.work\",\n  defaultEmail: \"\",\n  passwordLabel: \"Password\",\n  passwordPlaceholder: \"At least 8 characters\",\n  defaultPassword: \"\",\n  defaultPlanId: \"studio\",\n  newsletterLabel: \"Send the Sunday field notes\",\n  defaultNewsletter: true,\n  continueLabel: \"Continue\",\n  backLabel: \"Back\",\n  submitLabel: \"Create account\",\n  successTitle: \"Desk is ready\",\n  successDescription: \"We sent a confirm link. Open it to finish the invite.\",\n  passwordSetLabel: \"Password set\",\n  newsletterYesLabel: \"Sunday notes on\",\n  newsletterNoLabel: \"No newsletter\",\n  defaultStep: \"account\" as VForm8Step,\n};\n\nconst wizardSteps = [\"account\", \"plan\", \"review\"] as const;\n\nfunction FieldShell({\n  id,\n  label,\n  children,\n}: {\n  id: string;\n  label: string;\n  children: ReactNode;\n}) {\n  return (\n    <div className=\"space-y-2\">\n      <Label htmlFor={id}>{label}</Label>\n      {children}\n    </div>\n  );\n}\n\nfunction ReviewRow({ label, value }: { label: string; value: string }) {\n  return (\n    <div className=\"flex items-start justify-between gap-4 border-b border-border py-3 last:border-b-0\">\n      <dt className=\"text-sm text-muted-foreground\">{label}</dt>\n      <dd className=\"text-right text-sm font-medium text-balance\">{value}</dd>\n    </div>\n  );\n}\n\nexport function VForm8({\n  className,\n  title = defaults.title,\n  description = defaults.description,\n  accountStepLabel = defaults.accountStepLabel,\n  planStepLabel = defaults.planStepLabel,\n  reviewStepLabel = defaults.reviewStepLabel,\n  nameLabel = defaults.nameLabel,\n  namePlaceholder = defaults.namePlaceholder,\n  defaultName = defaults.defaultName,\n  emailLabel = defaults.emailLabel,\n  emailPlaceholder = defaults.emailPlaceholder,\n  defaultEmail = defaults.defaultEmail,\n  passwordLabel = defaults.passwordLabel,\n  passwordPlaceholder = defaults.passwordPlaceholder,\n  defaultPassword = defaults.defaultPassword,\n  plans = defaultPlans,\n  defaultPlanId = defaults.defaultPlanId,\n  newsletterLabel = defaults.newsletterLabel,\n  defaultNewsletter = defaults.defaultNewsletter,\n  continueLabel = defaults.continueLabel,\n  backLabel = defaults.backLabel,\n  submitLabel = defaults.submitLabel,\n  successTitle = defaults.successTitle,\n  successDescription = defaults.successDescription,\n  passwordSetLabel = defaults.passwordSetLabel,\n  newsletterYesLabel = defaults.newsletterYesLabel,\n  newsletterNoLabel = defaults.newsletterNoLabel,\n  defaultStep = defaults.defaultStep,\n  onComplete,\n  onSubmit,\n  ...props\n}: VForm8Props) {\n  const headingId = useId();\n  const nameId = useId();\n  const emailId = useId();\n  const passwordId = useId();\n  const newsletterId = useId();\n  const planGroupId = useId();\n  const [step, setStep] = useState<VForm8Step>(\n    defaultStep === \"success\" ? \"success\" : defaultStep,\n  );\n  const [name, setName] = useState(defaultName);\n  const [email, setEmail] = useState(defaultEmail);\n  const [password, setPassword] = useState(defaultPassword);\n  const [planId, setPlanId] = useState(\n    plans.some((plan) => plan.id === defaultPlanId)\n      ? defaultPlanId\n      : (plans[0]?.id ?? \"\"),\n  );\n  const [newsletter, setNewsletter] = useState(defaultNewsletter);\n\n  const selectedPlan = useMemo(\n    () => plans.find((plan) => plan.id === planId) ?? plans[0],\n    [planId, plans],\n  );\n\n  const stepIndex = wizardSteps.indexOf(step === \"success\" ? \"review\" : step);\n\n  const goBack = () => {\n    if (step === \"plan\") setStep(\"account\");\n    if (step === \"review\") setStep(\"plan\");\n  };\n\n  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {\n    onSubmit?.(event);\n    if (event.defaultPrevented) return;\n    event.preventDefault();\n\n    if (step === \"account\") {\n      if (!name.trim() || !email.trim() || password.length < 8) return;\n      setStep(\"plan\");\n      return;\n    }\n\n    if (step === \"plan\") {\n      if (!planId) return;\n      setStep(\"review\");\n      return;\n    }\n\n    if (step === \"review\") {\n      onComplete?.({\n        name: name.trim(),\n        email: email.trim(),\n        planId,\n        newsletter,\n      });\n      setStep(\"success\");\n    }\n  };\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-slot=\"v-form-8\"\n      {...props}\n    >\n      <div className=\"mx-auto flex min-h-[32rem] max-w-5xl items-center justify-center px-5 py-16 sm:px-8 sm:py-20\">\n        <article\n          className={cn(\n            \"w-full max-w-lg overflow-hidden rounded-[calc(var(--radius)+0.4rem)] border border-border bg-card text-card-foreground shadow-sm\",\n            \"motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500\",\n          )}\n        >\n          {step === \"success\" ? (\n            <div className=\"flex flex-col items-center gap-4 px-5 py-12 text-center sm:px-8\">\n              <span className=\"grid size-14 place-items-center rounded-full bg-primary text-primary-foreground\">\n                <CircleCheckIcon aria-hidden=\"true\" className=\"size-7\" />\n              </span>\n              <h2\n                className=\"text-xl font-semibold tracking-tight text-balance sm:text-2xl\"\n                id={headingId}\n              >\n                {successTitle}\n              </h2>\n              <p className=\"max-w-sm text-sm leading-6 text-muted-foreground\">\n                {successDescription}\n              </p>\n            </div>\n          ) : (\n            <form\n              className=\"flex flex-col gap-6 p-5 sm:p-6\"\n              onSubmit={handleSubmit}\n            >\n              <header className=\"space-y-2\">\n                <h2\n                  className=\"text-xl font-semibold tracking-tight text-balance sm:text-2xl\"\n                  id={headingId}\n                >\n                  {title}\n                </h2>\n                {description ? (\n                  <p className=\"text-sm leading-6 text-muted-foreground\">\n                    {description}\n                  </p>\n                ) : null}\n              </header>\n\n              <ol\n                aria-label=\"Onboarding steps\"\n                className=\"grid grid-cols-3 gap-2\"\n              >\n                {(\n                  [\n                    [\"account\", accountStepLabel],\n                    [\"plan\", planStepLabel],\n                    [\"review\", reviewStepLabel],\n                  ] as const\n                ).map(([key, label], index) => {\n                  const complete = index < stepIndex;\n                  const current = key === step;\n                  return (\n                    <li key={key} className=\"min-w-0\">\n                      <div\n                        aria-current={current ? \"step\" : undefined}\n                        className={cn(\n                          \"flex items-center gap-2 rounded-[--radius] border px-2 py-2 sm:px-3\",\n                          current\n                            ? \"border-primary bg-accent\"\n                            : \"border-border bg-background\",\n                        )}\n                      >\n                        <span\n                          aria-hidden=\"true\"\n                          className={cn(\n                            \"grid size-6 shrink-0 place-items-center rounded-full text-xs font-semibold\",\n                            current || complete\n                              ? \"bg-primary text-primary-foreground\"\n                              : \"bg-muted text-muted-foreground\",\n                          )}\n                        >\n                          {complete ? (\n                            <CheckIcon className=\"size-3.5\" />\n                          ) : (\n                            index + 1\n                          )}\n                        </span>\n                        <span\n                          className={cn(\n                            \"truncate text-xs font-medium sm:text-sm\",\n                            current\n                              ? \"text-foreground\"\n                              : \"text-muted-foreground\",\n                          )}\n                        >\n                          {label}\n                        </span>\n                      </div>\n                    </li>\n                  );\n                })}\n              </ol>\n\n              {step === \"account\" ? (\n                <div className=\"space-y-4\">\n                  <FieldShell id={nameId} label={nameLabel}>\n                    <Input\n                      autoComplete=\"name\"\n                      className=\"h-12 rounded-[--radius] bg-background\"\n                      id={nameId}\n                      name=\"name\"\n                      onChange={(event) => setName(event.target.value)}\n                      placeholder={namePlaceholder}\n                      required\n                      type=\"text\"\n                      value={name}\n                    />\n                  </FieldShell>\n                  <FieldShell id={emailId} label={emailLabel}>\n                    <Input\n                      autoComplete=\"email\"\n                      className=\"h-12 rounded-[--radius] bg-background\"\n                      id={emailId}\n                      name=\"email\"\n                      onChange={(event) => setEmail(event.target.value)}\n                      placeholder={emailPlaceholder}\n                      required\n                      type=\"email\"\n                      value={email}\n                    />\n                  </FieldShell>\n                  <FieldShell id={passwordId} label={passwordLabel}>\n                    <Input\n                      autoComplete=\"new-password\"\n                      className=\"h-12 rounded-[--radius] bg-background\"\n                      id={passwordId}\n                      minLength={8}\n                      name=\"password\"\n                      onChange={(event) => setPassword(event.target.value)}\n                      placeholder={passwordPlaceholder}\n                      required\n                      type=\"password\"\n                      value={password}\n                    />\n                  </FieldShell>\n                </div>\n              ) : null}\n\n              {step === \"plan\" ? (\n                <div className=\"space-y-4\">\n                  <fieldset className=\"space-y-3\">\n                    <legend className=\"sr-only\" id={planGroupId}>\n                      {planStepLabel}\n                    </legend>\n                    {plans.map((plan) => {\n                      const selected = plan.id === planId;\n                      return (\n                        <label\n                          className={cn(\n                            \"flex cursor-pointer items-start gap-3 rounded-[--radius] border p-4 outline-none transition-[border-color,background-color,transform] duration-200 ease-out motion-reduce:transition-none\",\n                            selected\n                              ? \"border-primary bg-accent\"\n                              : \"border-border bg-background hover:bg-muted/40\",\n                          )}\n                          key={plan.id}\n                        >\n                          <input\n                            checked={selected}\n                            className=\"sr-only\"\n                            name=\"plan\"\n                            onChange={() => setPlanId(plan.id)}\n                            type=\"radio\"\n                            value={plan.id}\n                          />\n                          <span\n                            aria-hidden=\"true\"\n                            className={cn(\n                              \"mt-0.5 grid size-4 shrink-0 place-items-center rounded-full border\",\n                              selected\n                                ? \"border-primary bg-primary text-primary-foreground\"\n                                : \"border-input bg-background\",\n                            )}\n                          >\n                            {selected ? (\n                              <span className=\"size-1.5 rounded-full bg-primary-foreground\" />\n                            ) : null}\n                          </span>\n                          <span className=\"min-w-0 flex-1 space-y-1\">\n                            <span className=\"flex items-baseline justify-between gap-3\">\n                              <span className=\"text-sm font-semibold\">\n                                {plan.name}\n                              </span>\n                              <span className=\"text-sm text-muted-foreground\">\n                                {plan.price}\n                              </span>\n                            </span>\n                            <span className=\"block text-sm leading-6 text-muted-foreground\">\n                              {plan.description}\n                            </span>\n                          </span>\n                        </label>\n                      );\n                    })}\n                  </fieldset>\n\n                  <div className=\"flex items-start gap-3 rounded-[--radius] border border-border bg-background p-4\">\n                    <Checkbox\n                      checked={newsletter}\n                      id={newsletterId}\n                      name=\"newsletter\"\n                      onCheckedChange={(value) => setNewsletter(value === true)}\n                    />\n                    <Label\n                      className=\"text-sm leading-6 font-normal\"\n                      htmlFor={newsletterId}\n                    >\n                      {newsletterLabel}\n                    </Label>\n                  </div>\n                </div>\n              ) : null}\n\n              {step === \"review\" ? (\n                <dl className=\"rounded-[--radius] border border-border bg-background px-4\">\n                  <ReviewRow label={nameLabel} value={name.trim()} />\n                  <ReviewRow label={emailLabel} value={email.trim()} />\n                  <ReviewRow label={passwordLabel} value={passwordSetLabel} />\n                  <ReviewRow\n                    label={planStepLabel}\n                    value={\n                      selectedPlan\n                        ? `${selectedPlan.name} (${selectedPlan.price})`\n                        : \"\"\n                    }\n                  />\n                  <ReviewRow\n                    label={newsletterLabel}\n                    value={newsletter ? newsletterYesLabel : newsletterNoLabel}\n                  />\n                </dl>\n              ) : null}\n\n              <div className=\"flex flex-col-reverse gap-2 sm:flex-row sm:justify-between\">\n                {step === \"account\" ? (\n                  <span className=\"hidden sm:block\" />\n                ) : (\n                  <Button\n                    onClick={goBack}\n                    size=\"lg\"\n                    type=\"button\"\n                    variant=\"secondary\"\n                  >\n                    {backLabel}\n                  </Button>\n                )}\n                <Button className=\"sm:min-w-40\" size=\"lg\" type=\"submit\">\n                  {step === \"review\" ? submitLabel : continueLabel}\n                </Button>\n              </div>\n            </form>\n          )}\n        </article>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "v-form-8/VForm8.types.ts",
+      "type": "types",
+      "content": "import type { FormEventHandler, HTMLAttributes } from \"react\";\n\nexport type VForm8Step = \"account\" | \"plan\" | \"review\" | \"success\";\n\nexport interface VForm8Plan {\n  id: string;\n  name: string;\n  price: string;\n  description: string;\n}\n\nexport interface VForm8CompleteDetails {\n  name: string;\n  email: string;\n  planId: string;\n  newsletter: boolean;\n}\n\nexport interface VForm8Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\" | \"onSubmit\"> {\n  title?: string;\n  description?: string;\n  accountStepLabel?: string;\n  planStepLabel?: string;\n  reviewStepLabel?: string;\n  nameLabel?: string;\n  namePlaceholder?: string;\n  defaultName?: string;\n  emailLabel?: string;\n  emailPlaceholder?: string;\n  defaultEmail?: string;\n  passwordLabel?: string;\n  passwordPlaceholder?: string;\n  defaultPassword?: string;\n  plans?: readonly VForm8Plan[];\n  defaultPlanId?: string;\n  newsletterLabel?: string;\n  defaultNewsletter?: boolean;\n  continueLabel?: string;\n  backLabel?: string;\n  submitLabel?: string;\n  successTitle?: string;\n  successDescription?: string;\n  passwordSetLabel?: string;\n  newsletterYesLabel?: string;\n  newsletterNoLabel?: string;\n  defaultStep?: VForm8Step;\n  onComplete?: (details: VForm8CompleteDetails) => void;\n  onSubmit?: FormEventHandler<HTMLFormElement>;\n}\n"
+    },
+    {
+      "path": "v-form-8/index.ts",
+      "type": "index",
+      "content": "export { VForm8 } from \"./VForm8\";\nexport type * from \"./VForm8.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <VForm8 {...vForm8Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <VForm8 {...vForm8Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
