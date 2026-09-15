@@ -793,6 +793,62 @@
     }
   },
   {
+    "name": "horrible-shrimp",
+    "displayName": "HorribleShrimp",
+    "category": "atoms",
+    "description": "A compact settings switch with a hard-outline track and a lifted circular thumb that slides when on.",
+    "sectionCategory": "form",
+    "purpose": "Toggles a persistent on or off preference with a tactile, outlined control that stays readable in light and dark.",
+    "bestFor": [
+      "settings rows that need a visible on and off state",
+      "notification or feature flags in compact forms",
+      "demo surfaces that want a physical switch without extra chrome"
+    ],
+    "avoidFor": [
+      "multi-option choices that need a radio group",
+      "destructive confirmations that should use a button"
+    ],
+    "tone": [
+      "playful",
+      "bold"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "label",
+      "control"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "switch",
+      "toggle",
+      "form",
+      "atom"
+    ],
+    "addedAt": "2026-09-15",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "image-cropper",
     "displayName": "ImageCropper",
     "category": "atoms",
