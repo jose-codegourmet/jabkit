@@ -5,5 +5,5 @@ import { lovelyYakMocks } from "./LovelyYak.mocks";
 
 export default {
   Default: () => <LovelyYak {...lovelyYakMocks.default} />,
-  WithAction: () => <LovelyYak {...lovelyYakMocks.withAction} />,
+  WeeklyPulse: () => <LovelyYak {...lovelyYakMocks.weeklyPulse} />,
 };

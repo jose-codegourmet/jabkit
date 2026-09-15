@@ -1651,32 +1651,34 @@
     "name": "lovely-yak",
     "displayName": "LovelyYak",
     "category": "atoms",
-    "description": "A lifted profile card with an accent banner, overlapping mark, brief copy, and an optional action.",
+    "description": "A compact analytics card with a token gradient rim, two stats, a seven-bar spark, and a local-radius details action.",
     "sectionCategory": "content",
-    "purpose": "Presents a person, plan, or snippet in a compact card that stays on semantic tokens in light and dark.",
+    "purpose": "Presents a live performance snapshot in the same stacked dashboard-card shape as the Uiverse inspo, without flattening radii through Button.",
     "bestFor": [
-      "directory or roster tiles",
-      "short bios with one follow-up action",
-      "catalogue previews that need a friendly card"
+      "catalogue or dashboard snapshot tiles",
+      "weekly views and conversion summaries",
+      "compact live-metric cards with one follow-up action"
     ],
     "avoidFor": [
       "dense data tables",
-      "primary site navigation"
+      "full analytics pages"
     ],
     "tone": [
-      "playful",
+      "professional",
       "clean"
     ],
-    "contentDensity": "low",
+    "contentDensity": "medium",
     "visualWeight": "medium",
     "layout": {
       "type": "stack",
-      "alignment": "center"
+      "alignment": "left"
     },
     "slots": [
-      "kicker",
       "title",
-      "description",
+      "live",
+      "stats",
+      "chart",
+      "period",
       "action"
     ],
     "capabilities": {
@@ -1688,8 +1690,8 @@
     },
     "tags": [
       "card",
-      "profile",
-      "content",
+      "analytics",
+      "dashboard",
       "cta",
       "atom"
     ],
