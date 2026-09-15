@@ -118,30 +118,35 @@
     "name": "average-swan",
     "displayName": "AverageSwan",
     "category": "atoms",
-    "description": "A soft neumorphic action button that sits raised at rest and presses into the surface on activate.",
+    "description": "A four-key sampler pad with square chassis wells, oversized 10px-radius keys, and a hard press-in shadow.",
     "sectionCategory": "action",
-    "purpose": "Gives a tactile, inset-press control for quiet confirmations without leaving the semantic token set.",
+    "purpose": "Recreates a compact hardware pad (minus, plus, record, play) with native buttons and local radii instead of the shared Button shape.",
     "bestFor": [
-      "soft confirm and continue actions",
-      "settings and preference panels",
-      "playful product UI that still needs a native button"
+      "sampler, transport, or device-style controls",
+      "tactile record and play actions",
+      "product UI that needs a recessed square well"
     ],
     "avoidFor": [
-      "destructive or irreversible actions",
-      "dense toolbars that cannot spare the raised shadow"
+      "generic form submit buttons",
+      "dense toolbars that cannot spare the 2x2 pad"
     ],
     "tone": [
       "playful",
-      "clean"
+      "bold"
     ],
     "contentDensity": "low",
-    "visualWeight": "medium",
+    "visualWeight": "high",
     "layout": {
-      "type": "stack",
+      "type": "grid",
+      "columns": 2,
       "alignment": "center"
     },
     "slots": [
-      "actionLabel"
+      "minus",
+      "plus",
+      "record",
+      "play",
+      "caption"
     ],
     "capabilities": {
       "supportsImage": false,
@@ -152,14 +157,13 @@
     },
     "tags": [
       "button",
-      "cta",
-      "action",
+      "pad",
+      "sampler",
       "neumorphic",
       "atom"
     ],
     "addedAt": "2026-09-15",
     "dependencies": [
-      "@radix-ui/react-slot",
       "clsx",
       "tailwind-merge"
     ],
