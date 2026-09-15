@@ -1,0 +1,91 @@
+{
+  "name": "average-swan",
+  "displayName": "AverageSwan",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A soft neumorphic action button that sits raised at rest and presses into the surface on activate.",
+  "sectionCategory": "action",
+  "purpose": "Gives a tactile, inset-press control for quiet confirmations without leaving the semantic token set.",
+  "bestFor": [
+    "soft confirm and continue actions",
+    "settings and preference panels",
+    "playful product UI that still needs a native button"
+  ],
+  "avoidFor": [
+    "destructive or irreversible actions",
+    "dense toolbars that cannot spare the raised shadow"
+  ],
+  "tone": [
+    "playful",
+    "clean"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "actionLabel"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "button",
+    "cta",
+    "action",
+    "neumorphic",
+    "atom"
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "average-swan/AverageSwan.tsx",
+      "type": "component",
+      "content": "import { Slot } from \"@radix-ui/react-slot\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { AverageSwanProps } from \"./AverageSwan.types\";\n\nconst sizes = {\n  sm: \"h-9 px-4 text-xs tracking-[0.16em]\",\n  md: \"h-11 px-7 text-sm tracking-[0.18em]\",\n  lg: \"h-12 px-9 text-base tracking-[0.2em]\",\n} as const;\n\nexport function AverageSwan({\n  className,\n  children,\n  label = \"Press\",\n  size = \"md\",\n  asChild = false,\n  type,\n  ...props\n}: AverageSwanProps) {\n  const Component = asChild ? Slot : \"button\";\n  const content = children ?? label;\n\n  return (\n    <Component\n      className={cn(\n        \"jk-average-swan inline-flex shrink-0 items-center justify-center rounded-[0.5em] font-medium uppercase whitespace-nowrap text-secondary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50\",\n        sizes[size],\n        className,\n      )}\n      data-size={size}\n      data-slot=\"average-swan\"\n      type={asChild ? undefined : (type ?? \"button\")}\n      {...props}\n    >\n      <style href=\"jk-average-swan\" precedence=\"default\">{`\n        .jk-average-swan {\n          background: var(--jk-secondary);\n          border: 1px solid var(--jk-secondary);\n          box-shadow:\n            6px 6px 12px color-mix(in oklch, var(--jk-foreground) 16%, transparent),\n            -6px -6px 12px color-mix(in oklch, var(--jk-background) 92%, var(--jk-card));\n        }\n        .jk-average-swan:hover:not(:disabled) {\n          color: var(--jk-foreground);\n        }\n        .jk-average-swan:active:not(:disabled) {\n          color: var(--jk-muted-foreground);\n          box-shadow:\n            inset 4px 4px 12px color-mix(in oklch, var(--jk-foreground) 16%, transparent),\n            inset -4px -4px 12px color-mix(in oklch, var(--jk-background) 92%, var(--jk-card));\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-average-swan {\n            transition:\n              box-shadow 200ms ease,\n              color 200ms ease,\n              transform 200ms ease;\n          }\n          .jk-average-swan:active:not(:disabled) {\n            transform: translateY(1px);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-average-swan {\n            transition: none;\n          }\n        }\n      `}</style>\n      {content}\n    </Component>\n  );\n}\n"
+    },
+    {
+      "path": "average-swan/AverageSwan.types.ts",
+      "type": "types",
+      "content": "import type { ButtonHTMLAttributes, ReactNode } from \"react\";\n\nexport type AverageSwanSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface AverageSwanProps\n  extends ButtonHTMLAttributes<HTMLButtonElement> {\n  children?: ReactNode;\n  label?: string;\n  size?: AverageSwanSize;\n  asChild?: boolean;\n}\n"
+    },
+    {
+      "path": "average-swan/index.ts",
+      "type": "index",
+      "content": "export { AverageSwan } from \"./AverageSwan\";\nexport type * from \"./AverageSwan.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<AverageSwan {...averageSwanMocks.default} />"
+    },
+    {
+      "name": "Sizes",
+      "code": "<div className=\"flex flex-wrap items-center gap-4 bg-background p-8 text-foreground\">\n      <AverageSwan {...averageSwanMocks.compact} />\n      <AverageSwan {...averageSwanMocks.default} />\n      <AverageSwan label={averageSwanMocks.alternate.label} size=\"lg\" />\n    </div>"
+    }
+  ]
+}
