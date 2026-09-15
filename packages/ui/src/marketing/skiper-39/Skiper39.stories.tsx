@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 // biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.
 import * as React from "react";
-import { CrowdCanvas, Skiper39 } from "./Skiper39";
+import { CrowdCanvas, SKIPER39_PEEPS_SRC, Skiper39 } from "./Skiper39";
 import { skiper39Mocks } from "./Skiper39.mocks";
 
 const meta = {
@@ -22,7 +22,7 @@ export const Default: Story = {
   ),
 };
 
-export const PackedSidewalk: Story = {
+export const Variants: Story = {
   args: { ...skiper39Mocks.alternate },
   render: () => (
     <div className="bg-background text-foreground">
@@ -34,8 +34,8 @@ export const PackedSidewalk: Story = {
 export const CanvasOnly: Story = {
   args: { ...skiper39Mocks.default },
   render: () => (
-    <div className="relative min-h-[100dvh] w-full bg-background">
-      <CrowdCanvas walkerCount={56} />
+    <div className="relative min-h-[100dvh] w-full overflow-hidden bg-background">
+      <CrowdCanvas cols={7} rows={15} src={SKIPER39_PEEPS_SRC} />
     </div>
   ),
 };

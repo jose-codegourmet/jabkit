@@ -3,16 +3,16 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "skiper-39",
   displayName: "Skiper39",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Full-bleed marketing stage with a canvas crowd of walking figures, optional sprite sheets, and a still reading when motion is reduced.",
+    "Full-bleed crowd canvas with a centered uppercase label and walking Open Peeps figures along the lower stage.",
   sectionCategory: "hero",
   purpose:
-    "Gives a landing a living sidewalk so the headline sits over motion instead of an empty field.",
+    "Fills a landing viewport with a living sidewalk so the page feels occupied before the next section.",
   bestFor: [
-    "event and community landings",
     "creative studio heroes",
+    "event and community landings",
     "campaign pages that want a populated street without photography",
   ],
   avoidFor: [
@@ -27,7 +27,7 @@ export default {
     type: "full-width",
     alignment: "center",
   },
-  slots: ["eyebrow", "headline", "description", "crowd"],
+  slots: ["label", "crowd"],
   capabilities: {
     supportsImage: true,
     supportsVideo: false,
@@ -43,7 +43,7 @@ export default {
     "canvas",
     "crowd",
     "animation",
-    "walkers",
+    "open-peeps",
     "skiper",
   ],
   dependencies: [],

@@ -1,6 +1,6 @@
 // biome-ignore lint/correctness/noUnusedImports: packages/ui uses the classic JSX runtime.
 import * as React from "react";
-import { CrowdCanvas, Skiper39 } from "./Skiper39";
+import { CrowdCanvas, SKIPER39_PEEPS_SRC, Skiper39 } from "./Skiper39";
 import { skiper39Mocks } from "./Skiper39.mocks";
 
 const ThemeComparison = () => (
@@ -20,14 +20,14 @@ export default {
       <Skiper39 {...skiper39Mocks.default} />
     </div>
   ),
-  PackedSidewalk: () => (
+  Variants: () => (
     <div className="w-full">
       <Skiper39 {...skiper39Mocks.alternate} />
     </div>
   ),
   CanvasOnly: () => (
-    <div className="relative min-h-[100dvh] w-full bg-background">
-      <CrowdCanvas walkerCount={56} />
+    <div className="relative min-h-[100dvh] w-full overflow-hidden bg-background">
+      <CrowdCanvas cols={7} rows={15} src={SKIPER39_PEEPS_SRC} />
     </div>
   ),
   ThemeComparison,
