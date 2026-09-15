@@ -29,6 +29,7 @@ export const Tones: Story = {
       <SoftPanda {...softPandaMocks.compact} />
       <SoftPanda {...softPandaMocks.muted} />
       <SoftPanda {...softPandaMocks.chart} />
+      <SoftPanda {...softPandaMocks.live} />
     </div>
   ),
 };

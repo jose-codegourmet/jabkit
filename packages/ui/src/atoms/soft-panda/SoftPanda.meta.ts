@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "soft-panda",
   displayName: "SoftPanda",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A token-colored dual-tone mosaic tile for decorative fills, swatches, and quiet section backdrops.",
+    "A square dual-tone mosaic field with 45-degree tiles, token-mapped ink and lemon, and an optional slow drift.",
   sectionCategory: "content",
   purpose:
-    "Gives a page a repeating high-contrast field without photographs or hardcoded palette colors.",
+    "Fills a region with a high-contrast diamond mosaic without photographs or palette hex colors.",
   bestFor: [
     "decorative section fills",
     "catalogue swatches",

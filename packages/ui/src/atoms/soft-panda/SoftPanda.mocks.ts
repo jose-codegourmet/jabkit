@@ -18,6 +18,11 @@ export const softPandaMocks = {
     label: "Compact mosaic swatch",
     size: "sm" as const,
     tone: "default" as const,
-    animate: false,
+  },
+  live: {
+    label: "Drifting mosaic field",
+    size: "md" as const,
+    tone: "default" as const,
+    animate: true,
   },
 } as const;
