@@ -1110,6 +1110,61 @@
     }
   },
   {
+    "name": "jolly-parrot",
+    "displayName": "JollyParrot",
+    "category": "atoms",
+    "description": "A compact diamond tessellation field painted with chart and primary tokens.",
+    "sectionCategory": "background",
+    "purpose": "Drops a playful tiled surface behind a caption or empty state without leaving the semantic token set.",
+    "bestFor": [
+      "decorative catalogue tiles",
+      "empty-state or wait-list backdrops",
+      "small marketing accents that stay in atoms"
+    ],
+    "avoidFor": [
+      "data-dense charts that need a quiet canvas",
+      "text-heavy reading surfaces"
+    ],
+    "tone": [
+      "playful",
+      "bold"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "stack",
+      "alignment": "center"
+    },
+    "slots": [
+      "caption"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "pattern",
+      "diamond",
+      "background",
+      "atom"
+    ],
+    "addedAt": "2026-09-15",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "label",
     "displayName": "Label",
     "category": "atoms",

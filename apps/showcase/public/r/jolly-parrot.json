@@ -1,0 +1,89 @@
+{
+  "name": "jolly-parrot",
+  "displayName": "JollyParrot",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A compact diamond tessellation field painted with chart and primary tokens.",
+  "sectionCategory": "background",
+  "purpose": "Drops a playful tiled surface behind a caption or empty state without leaving the semantic token set.",
+  "bestFor": [
+    "decorative catalogue tiles",
+    "empty-state or wait-list backdrops",
+    "small marketing accents that stay in atoms"
+  ],
+  "avoidFor": [
+    "data-dense charts that need a quiet canvas",
+    "text-heavy reading surfaces"
+  ],
+  "tone": [
+    "playful",
+    "bold"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "caption"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "pattern",
+    "diamond",
+    "background",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "jolly-parrot/JollyParrot.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { JollyParrotProps } from \"./JollyParrot.types\";\n\nconst sizes = {\n  sm: \"h-32 w-48\",\n  md: \"h-44 w-64\",\n  lg: \"h-56 w-80\",\n} as const;\n\nconst tile = {\n  sm: \"1.5rem\",\n  md: \"2rem\",\n  lg: \"2.5rem\",\n} as const;\n\nconst toneVars = {\n  plum: {\n    field: \"var(--jk-chart-4)\",\n    mark: \"color-mix(in oklab, var(--jk-primary) 55%, var(--jk-chart-4))\",\n  },\n  primary: {\n    field: \"var(--jk-primary)\",\n    mark: \"color-mix(in oklab, var(--jk-chart-4) 70%, var(--jk-primary))\",\n  },\n  chart: {\n    field: \"var(--jk-chart-1)\",\n    mark: \"color-mix(in oklab, var(--jk-chart-4) 65%, var(--jk-chart-1))\",\n  },\n} as const;\n\nexport function JollyParrot({\n  className,\n  children,\n  label = \"Diamond field\",\n  size = \"md\",\n  tone = \"plum\",\n  animated = true,\n  style,\n  ...props\n}: JollyParrotProps) {\n  const palette = toneVars[tone];\n\n  return (\n    <div\n      aria-label={label}\n      className={cn(\n        \"jk-jolly-parrot relative overflow-hidden rounded-[--radius] border border-border shadow-sm\",\n        sizes[size],\n        className,\n      )}\n      data-animated={animated ? \"true\" : \"false\"}\n      data-size={size}\n      data-slot=\"jolly-parrot\"\n      data-tone={tone}\n      role=\"img\"\n      style={\n        {\n          \"--jk-jolly-field\": palette.field,\n          \"--jk-jolly-mark\": palette.mark,\n          \"--jk-jolly-tile\": tile[size],\n          ...style,\n        } as React.CSSProperties\n      }\n      {...props}\n    >\n      <style href=\"jk-jolly-parrot\" precedence=\"default\">{`\n        .jk-jolly-parrot-field {\n          background-color: var(--jk-jolly-field);\n          background-image:\n            linear-gradient(\n              60deg,\n              var(--jk-jolly-mark) 25%,\n              transparent 25.5%\n            ),\n            linear-gradient(\n              120deg,\n              var(--jk-jolly-mark) 25%,\n              transparent 25.5%\n            ),\n            linear-gradient(\n              60deg,\n              transparent 74.5%,\n              var(--jk-jolly-mark) 75%\n            ),\n            linear-gradient(\n              120deg,\n              transparent 74.5%,\n              var(--jk-jolly-mark) 75%\n            );\n          background-size: var(--jk-jolly-tile) var(--jk-jolly-tile);\n          background-position:\n            0 0,\n            0 calc(var(--jk-jolly-tile) / 2),\n            calc(var(--jk-jolly-tile) / 2) calc(var(--jk-jolly-tile) / -2),\n            calc(var(--jk-jolly-tile) / -2) 0;\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-jolly-parrot[data-animated=\"true\"] .jk-jolly-parrot-field {\n            animation: jk-jolly-parrot-drift 18s linear infinite;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-jolly-parrot-field {\n            animation: none;\n          }\n        }\n        @keyframes jk-jolly-parrot-drift {\n          to {\n            background-position:\n              var(--jk-jolly-tile) var(--jk-jolly-tile),\n              var(--jk-jolly-tile) calc(var(--jk-jolly-tile) * 1.5),\n              calc(var(--jk-jolly-tile) * 1.5) calc(var(--jk-jolly-tile) / 2),\n              calc(var(--jk-jolly-tile) / 2) var(--jk-jolly-tile);\n          }\n        }\n      `}</style>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-jolly-parrot-field pointer-events-none absolute inset-0\"\n      />\n      {children ? (\n        <div className=\"relative z-10 flex h-full items-end p-4 text-sm font-medium text-primary-foreground\">\n          {children}\n        </div>\n      ) : null}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "jolly-parrot/JollyParrot.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type JollyParrotSize = \"sm\" | \"md\" | \"lg\";\nexport type JollyParrotTone = \"plum\" | \"primary\" | \"chart\";\n\nexport interface JollyParrotProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n  /** Accessible name for the decorative field. */\n  label?: string;\n  size?: JollyParrotSize;\n  tone?: JollyParrotTone;\n  /** Slow tile drift. Honors prefers-reduced-motion. */\n  animated?: boolean;\n}\n"
+    },
+    {
+      "path": "jolly-parrot/index.ts",
+      "type": "index",
+      "content": "export { JollyParrot } from \"./JollyParrot\";\nexport type * from \"./JollyParrot.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<JollyParrot {...jollyParrotMocks.default} />"
+    },
+    {
+      "name": "Tones",
+      "code": "<div className=\"flex flex-wrap items-center gap-4 bg-background p-8\">\n      <JollyParrot {...jollyParrotMocks.default} />\n      <JollyParrot {...jollyParrotMocks.alternate} />\n      <JollyParrot {...jollyParrotMocks.chart} />\n    </div>"
+    }
+  ]
+}
