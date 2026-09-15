@@ -1,0 +1,65 @@
+import type { ComponentMeta } from "@jabkit/build-registry";
+
+export default {
+  name: "order-confirmation-card",
+  displayName: "OrderConfirmationCard",
+  version: "1.0.0",
+  addedAt: "2026-09-15",
+  description:
+    "Post-checkout receipt card with success status, order ID, product line items, ship-to, paid total, and dual actions.",
+  sectionCategory: "content",
+  purpose:
+    "Gives an ecommerce landing a trusted order-complete moment shoppers can read, save, and act on without opening a dashboard.",
+  bestFor: [
+    "ecommerce thank-you pages",
+    "gift and pickup confirmations",
+    "campaign landings that preview a packed order",
+  ],
+  avoidFor: [
+    "live checkout that still needs a payment form",
+    "account order history with many past carts",
+    "event tickets that need a scan barcode",
+  ],
+  tone: ["professional", "commercial", "calm"],
+  industries: ["ecommerce", "retail", "fashion"],
+  contentDensity: "medium",
+  visualWeight: "medium",
+  layout: {
+    type: "card",
+    alignment: "center",
+    columns: 1,
+  },
+  slots: [
+    "headline",
+    "description",
+    "successStatus",
+    "orderId",
+    "lineItems",
+    "shipping",
+    "totals",
+    "primaryCTA",
+    "secondaryCTA",
+  ],
+  capabilities: {
+    supportsImage: true,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: true,
+    supportsDarkMode: true,
+  },
+  recommendedAfter: ["hero", "product", "pricing"],
+  recommendedBefore: ["faq", "testimonials", "footer"],
+  tags: [
+    "order",
+    "confirmation",
+    "receipt",
+    "checkout",
+    "ecommerce",
+    "cart",
+    "marketing",
+  ],
+  dependencies: ["lucide-react"],
+  registryDependencies: ["button"],
+  a11y: { keyboardNav: true, reducedMotion: true },
+  preview: { layout: "fit", width: 1440, height: 980 },
+} satisfies ComponentMeta;
