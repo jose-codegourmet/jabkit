@@ -1,0 +1,91 @@
+{
+  "name": "fast-puma",
+  "displayName": "FastPuma",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A pill CTA that throws a chart-token particle burst on hover and focus.",
+  "sectionCategory": "action",
+  "purpose": "Gives a primary launch action extra kinetic energy without leaving semantic tokens.",
+  "bestFor": [
+    "hero or demo launch CTAs",
+    "playful product actions that still need a real button",
+    "catalogue and preview entry points"
+  ],
+  "avoidFor": [
+    "destructive or irreversible actions",
+    "dense toolbars where motion would distract"
+  ],
+  "tone": [
+    "playful",
+    "bold"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "actionLabel"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "button",
+    "cta",
+    "action",
+    "particles",
+    "atom"
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "fast-puma/FastPuma.tsx",
+      "type": "component",
+      "content": "import { Slot } from \"@radix-ui/react-slot\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { FastPumaProps } from \"./FastPuma.types\";\n\nconst sizes = {\n  sm: \"h-9 px-4 text-sm\",\n  md: \"h-11 px-5 text-sm\",\n  lg: \"h-12 px-6 text-base\",\n} as const;\n\nconst tones = {\n  solid: \"bg-primary text-primary-foreground\",\n  outline:\n    \"border border-border bg-card text-card-foreground hover:bg-accent hover:text-accent-foreground\",\n} as const;\n\nconst PARTICLE_COUNT = 12;\n\nexport function FastPuma({\n  className,\n  children,\n  label = \"Launch\",\n  size = \"md\",\n  tone = \"solid\",\n  asChild = false,\n  type,\n  ...props\n}: FastPumaProps) {\n  const Component = asChild ? Slot : \"button\";\n  const content = children ?? label;\n\n  return (\n    <Component\n      className={cn(\n        \"jk-fast-puma group relative inline-flex shrink-0 items-center justify-center overflow-visible rounded-full font-medium whitespace-nowrap shadow-[var(--jk-shadow-control)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50\",\n        sizes[size],\n        tones[tone],\n        className,\n      )}\n      data-size={size}\n      data-slot=\"fast-puma\"\n      data-tone={tone}\n      type={asChild ? undefined : (type ?? \"button\")}\n      {...props}\n    >\n      <style href=\"jk-fast-puma\" precedence=\"default\">{`\n        .jk-fast-puma-dot {\n          position: absolute;\n          left: 50%;\n          top: 50%;\n          width: 0.375rem;\n          height: 0.375rem;\n          margin: -0.1875rem 0 0 -0.1875rem;\n          border-radius: 999px;\n          background: var(--jk-chart-1);\n          opacity: 0;\n          pointer-events: none;\n          transform: rotate(calc(var(--jk-fast-puma-i) * 30deg)) translateY(0)\n            scale(0.35);\n        }\n        .jk-fast-puma-dot:nth-child(5n + 2) { background: var(--jk-chart-2); }\n        .jk-fast-puma-dot:nth-child(5n + 3) { background: var(--jk-chart-3); }\n        .jk-fast-puma-dot:nth-child(5n + 4) { background: var(--jk-chart-4); }\n        .jk-fast-puma-dot:nth-child(5n + 5) { background: var(--jk-chart-5); }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-fast-puma-dot {\n            transition:\n              transform 420ms cubic-bezier(0.16, 1, 0.3, 1),\n              opacity 280ms ease;\n          }\n          .jk-fast-puma:hover .jk-fast-puma-dot,\n          .jk-fast-puma:focus-visible .jk-fast-puma-dot {\n            opacity: 1;\n            transform: rotate(calc(var(--jk-fast-puma-i) * 30deg))\n              translateY(-1.65rem) scale(1);\n          }\n          .jk-fast-puma:active {\n            transform: translateY(1px) scale(0.98);\n          }\n          .jk-fast-puma:active .jk-fast-puma-dot {\n            transform: rotate(calc(var(--jk-fast-puma-i) * 30deg))\n              translateY(-2.15rem) scale(0.85);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-fast-puma-dot {\n            opacity: 0.55;\n            transform: rotate(calc(var(--jk-fast-puma-i) * 30deg))\n              translateY(-1.15rem) scale(0.7);\n            transition: none;\n          }\n        }\n      `}</style>\n      <span aria-hidden=\"true\" className=\"jk-fast-puma-burst pointer-events-none absolute inset-0\">\n        {Array.from({ length: PARTICLE_COUNT }, (_, index) => (\n          <span\n            className=\"jk-fast-puma-dot\"\n            key={index}\n            style={\n              {\n                \"--jk-fast-puma-i\": index,\n              } as React.CSSProperties\n            }\n          />\n        ))}\n      </span>\n      <span className=\"relative z-10\">{content}</span>\n    </Component>\n  );\n}\n"
+    },
+    {
+      "path": "fast-puma/FastPuma.types.ts",
+      "type": "types",
+      "content": "import type { ButtonHTMLAttributes, ReactNode } from \"react\";\n\nexport type FastPumaSize = \"sm\" | \"md\" | \"lg\";\n\nexport type FastPumaTone = \"solid\" | \"outline\";\n\nexport interface FastPumaProps extends ButtonHTMLAttributes<HTMLButtonElement> {\n  children?: ReactNode;\n  label?: string;\n  size?: FastPumaSize;\n  tone?: FastPumaTone;\n  asChild?: boolean;\n}\n"
+    },
+    {
+      "path": "fast-puma/index.ts",
+      "type": "index",
+      "content": "export { FastPuma } from \"./FastPuma\";\nexport type * from \"./FastPuma.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<FastPuma {...fastPumaMocks.default} />"
+    },
+    {
+      "name": "Tones",
+      "code": "<div className=\"flex flex-wrap items-center gap-8 bg-background p-10 text-foreground\">\n      <FastPuma {...fastPumaMocks.compact} />\n      <FastPuma {...fastPumaMocks.default} />\n      <FastPuma {...fastPumaMocks.alternate} />\n    </div>"
+    }
+  ]
+}
