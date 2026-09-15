@@ -1,0 +1,90 @@
+{
+  "name": "horrible-shrimp",
+  "displayName": "HorribleShrimp",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A compact settings switch with a hard-outline track and a lifted circular thumb that slides when on.",
+  "sectionCategory": "form",
+  "purpose": "Toggles a persistent on or off preference with a tactile, outlined control that stays readable in light and dark.",
+  "bestFor": [
+    "settings rows that need a visible on and off state",
+    "notification or feature flags in compact forms",
+    "demo surfaces that want a physical switch without extra chrome"
+  ],
+  "avoidFor": [
+    "multi-option choices that need a radio group",
+    "destructive confirmations that should use a button"
+  ],
+  "tone": [
+    "playful",
+    "bold"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "label",
+    "control"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "switch",
+    "toggle",
+    "form",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "horrible-shrimp/HorribleShrimp.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { HorribleShrimpProps } from \"./HorribleShrimp.types\";\n\nconst sizes = {\n  sm: \"text-[13px]\",\n  md: \"text-[17px]\",\n  lg: \"text-[21px]\",\n} as const;\n\nexport function HorribleShrimp({\n  className,\n  label = \"Notifications\",\n  size = \"md\",\n  disabled,\n  id,\n  ...props\n}: HorribleShrimpProps) {\n  const generatedId = React.useId();\n  const inputId = id ?? generatedId;\n\n  return (\n    <div\n      className={cn(\n        \"jk-horrible-shrimp inline-flex items-center gap-3 text-foreground\",\n        sizes[size],\n        className,\n      )}\n      data-disabled={disabled ? \"true\" : \"false\"}\n      data-size={size}\n      data-slot=\"horrible-shrimp\"\n    >\n      <style href=\"jk-horrible-shrimp\" precedence=\"default\">{`\n        .jk-horrible-shrimp-track {\n          width: 2em;\n          height: 1em;\n          border-radius: 999px;\n          border: 2px solid var(--jk-foreground);\n          background: var(--jk-muted);\n        }\n        .jk-horrible-shrimp-thumb {\n          width: 1em;\n          height: 1em;\n          border-radius: 999px;\n          border: 2px solid var(--jk-foreground);\n          background: var(--jk-card);\n          box-shadow: 0 0.22em 0 var(--jk-foreground);\n          transform: translate(-2px, calc(-0.22em - 2px));\n        }\n        .jk-horrible-shrimp-input:checked + .jk-horrible-shrimp-track {\n          background: var(--jk-primary);\n        }\n        .jk-horrible-shrimp-input:checked + .jk-horrible-shrimp-track .jk-horrible-shrimp-thumb {\n          transform: translate(calc(1em - 2px), calc(-0.22em - 2px));\n        }\n        .jk-horrible-shrimp-input:focus-visible + .jk-horrible-shrimp-track {\n          outline: 2px solid var(--jk-ring);\n          outline-offset: 3px;\n        }\n        .jk-horrible-shrimp[data-disabled=\"true\"] {\n          opacity: 0.5;\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-horrible-shrimp-track,\n          .jk-horrible-shrimp-thumb {\n            transition:\n              background-color 160ms ease,\n              transform 160ms ease,\n              box-shadow 160ms ease;\n          }\n          .jk-horrible-shrimp:hover .jk-horrible-shrimp-input:not(:disabled) + .jk-horrible-shrimp-track .jk-horrible-shrimp-thumb {\n            transform: translate(-2px, calc(-0.32em - 2px));\n            box-shadow: 0 0.32em 0 var(--jk-foreground);\n          }\n          .jk-horrible-shrimp:hover .jk-horrible-shrimp-input:checked:not(:disabled) + .jk-horrible-shrimp-track .jk-horrible-shrimp-thumb {\n            transform: translate(calc(1em - 2px), calc(-0.32em - 2px));\n          }\n          .jk-horrible-shrimp-input:active:not(:disabled) + .jk-horrible-shrimp-track .jk-horrible-shrimp-thumb {\n            transform: translate(-2px, calc(-0.12em - 2px));\n            box-shadow: 0 0.12em 0 var(--jk-foreground);\n          }\n          .jk-horrible-shrimp-input:checked:active:not(:disabled) + .jk-horrible-shrimp-track .jk-horrible-shrimp-thumb {\n            transform: translate(calc(1em - 2px), calc(-0.12em - 2px));\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-horrible-shrimp-track,\n          .jk-horrible-shrimp-thumb {\n            transition: none;\n          }\n        }\n      `}</style>\n      <label\n        className={cn(\n          \"inline-flex cursor-pointer items-center gap-3\",\n          disabled && \"cursor-not-allowed\",\n        )}\n        htmlFor={inputId}\n      >\n        <span className=\"relative inline-flex pb-[0.34em]\">\n          <input\n            className=\"jk-horrible-shrimp-input peer sr-only\"\n            disabled={disabled}\n            id={inputId}\n            role=\"switch\"\n            type=\"checkbox\"\n            {...props}\n          />\n          <span\n            aria-hidden=\"true\"\n            className=\"jk-horrible-shrimp-track relative inline-block shrink-0\"\n          >\n            <span className=\"jk-horrible-shrimp-thumb absolute left-0 top-0 block\" />\n          </span>\n        </span>\n        <span className=\"text-[0.85em] font-medium leading-none\">{label}</span>\n      </label>\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "horrible-shrimp/HorribleShrimp.types.ts",
+      "type": "types",
+      "content": "import type { InputHTMLAttributes } from \"react\";\n\nexport type HorribleShrimpSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface HorribleShrimpProps\n  extends Omit<InputHTMLAttributes<HTMLInputElement>, \"size\" | \"type\"> {\n  label?: string;\n  size?: HorribleShrimpSize;\n}\n"
+    },
+    {
+      "path": "horrible-shrimp/index.ts",
+      "type": "index",
+      "content": "export { HorribleShrimp } from \"./HorribleShrimp\";\nexport type * from \"./HorribleShrimp.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<HorribleShrimp {...horribleShrimpMocks.default} />"
+    },
+    {
+      "name": "Checked",
+      "code": "<HorribleShrimp {...horribleShrimpMocks.alternate} />"
+    }
+  ]
+}
