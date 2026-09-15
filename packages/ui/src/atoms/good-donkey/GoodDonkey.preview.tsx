@@ -6,4 +6,5 @@ import { goodDonkeyMocks } from "./GoodDonkey.mocks";
 export default {
   Default: () => <GoodDonkey {...goodDonkeyMocks.default} />,
   Filled: () => <GoodDonkey {...goodDonkeyMocks.filled} />,
+  Compact: () => <GoodDonkey {...goodDonkeyMocks.compact} />,
 };

@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "good-donkey",
   displayName: "GoodDonkey",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A compact message composer with file attach, a text field, and a send control.",
+    "A 40px, 10px-radius message bar with a plus-circle attach control, a 200px field, and a paper-plane send mark.",
   sectionCategory: "form",
   purpose:
-    "Gives chat, comment, and support surfaces a short compose bar that stays on semantic tokens.",
+    "Gives chat and comment rows the compact composer shape from the source inspo, mapped onto semantic tokens.",
   bestFor: [
     "inline chat or comment composers",
     "support reply fields",
@@ -35,7 +35,7 @@ export default {
     supportsDarkMode: true,
   },
   tags: ["input", "composer", "chat", "file", "send", "atom"],
-  dependencies: ["lucide-react"],
+  dependencies: [],
   registryDependencies: [],
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: {

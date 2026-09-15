@@ -1,32 +1,84 @@
-import { PaperclipIcon, SendIcon } from "lucide-react";
 // biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.
 import * as React from "react";
 import { cn } from "@/lib/cn";
 import type { GoodDonkeyProps } from "./GoodDonkey.types";
 
 const sizes = {
-  sm: "h-9 text-xs",
-  md: "h-10 text-sm",
-  lg: "h-12 text-base",
+  sm: "jk-good-donkey-sm",
+  md: "jk-good-donkey-md",
+  lg: "jk-good-donkey-lg",
 } as const;
+
+function AttachMark() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="jk-good-donkey-attach-mark"
+      fill="none"
+      viewBox="0 0 337 337"
+    >
+      <circle
+        className="jk-good-donkey-attach-ring"
+        cx="168.5"
+        cy="168.5"
+        r="158.5"
+        strokeWidth="20"
+      />
+      <path
+        className="jk-good-donkey-attach-plus"
+        d="M167.759 79V259"
+        strokeLinecap="round"
+        strokeWidth="25"
+      />
+      <path
+        className="jk-good-donkey-attach-plus"
+        d="M79 167.138H259"
+        strokeLinecap="round"
+        strokeWidth="25"
+      />
+    </svg>
+  );
+}
+
+function SendMark() {
+  const plane =
+    "M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888";
+
+  return (
+    <svg
+      aria-hidden="true"
+      className="jk-good-donkey-send-mark"
+      fill="none"
+      viewBox="0 0 664 663"
+    >
+      <path d={plane} fill="none" />
+      <path
+        d={plane}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="33.67"
+      />
+    </svg>
+  );
+}
 
 export function GoodDonkey({
   className,
   size = "md",
-  placeholder = "Write a message",
+  placeholder = "Message...",
   defaultValue,
   disabled,
-  attachLabel = "Attach a file",
-  sendLabel = "Send message",
+  attachLabel = "Add an image",
+  sendLabel = "Send",
   accept,
   ...props
 }: GoodDonkeyProps) {
   return (
     <form
       className={cn(
-        "jk-good-donkey inline-flex max-w-full items-center rounded-[--radius] border border-border bg-card px-3 text-card-foreground shadow-[var(--jk-shadow-control)]",
+        "jk-good-donkey",
         sizes[size],
-        disabled && "pointer-events-none opacity-50",
+        disabled && "jk-good-donkey-disabled",
         className,
       )}
       data-size={size}
@@ -35,148 +87,193 @@ export function GoodDonkey({
     >
       <style href="jk-good-donkey" precedence="default">{`
         .jk-good-donkey {
+          --jk-good-donkey-face: var(--jk-card);
+          --jk-good-donkey-ink: var(--jk-card-foreground);
+          --jk-good-donkey-line: var(--jk-border);
+          --jk-good-donkey-line-focus: color-mix(
+            in oklab,
+            var(--jk-muted-foreground) 55%,
+            var(--jk-border)
+          );
+          --jk-good-donkey-icon: var(--jk-muted-foreground);
+          --jk-good-donkey-icon-active: var(--jk-foreground);
+          --jk-good-donkey-icon-fill: var(--jk-muted);
+          --jk-good-donkey-tip-face: var(--jk-foreground);
+          --jk-good-donkey-tip-ink: var(--jk-background);
+          --jk-good-donkey-tip-line: var(--jk-border);
+          --jk-good-donkey-tip-shadow: 0 5px 10px
+            color-mix(in oklab, var(--jk-foreground) 60%, transparent);
+          box-sizing: border-box;
+          display: flex;
+          width: fit-content;
+          max-width: 100%;
+          height: 40px;
+          align-items: center;
+          justify-content: center;
+          padding: 0 15px;
+          border: 1px solid var(--jk-good-donkey-line);
+          border-radius: 10px;
+          background: var(--jk-good-donkey-face);
+          color: var(--jk-good-donkey-ink);
           outline: none;
         }
+        .jk-good-donkey-sm {
+          transform: scale(0.8);
+          transform-origin: center center;
+        }
+        .jk-good-donkey-lg {
+          transform: scale(1.25);
+          transform-origin: center center;
+        }
+        .jk-good-donkey-disabled {
+          pointer-events: none;
+          opacity: 0.5;
+        }
         .jk-good-donkey:focus-within {
-          border-color: color-mix(in oklab, var(--jk-ring), var(--jk-border) 35%);
-          box-shadow:
-            var(--jk-shadow-control),
-            0 0 0 1px color-mix(in oklab, var(--jk-ring), transparent 55%);
+          border: 1px solid var(--jk-good-donkey-line-focus);
+        }
+        .jk-good-donkey-upload {
+          display: flex;
+          width: fit-content;
+          height: 100%;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--jk-font-label);
+        }
+        .jk-good-donkey-file {
+          display: none;
         }
         .jk-good-donkey-attach {
           position: relative;
-          display: inline-flex;
-          flex-shrink: 0;
+          display: flex;
+          width: fit-content;
+          height: fit-content;
+          cursor: pointer;
           align-items: center;
           justify-content: center;
-          color: var(--jk-muted-foreground);
         }
-        .jk-good-donkey-attach input {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          opacity: 0;
-          cursor: pointer;
+        .jk-good-donkey-attach-mark {
+          height: 18px;
+          width: auto;
         }
-        .jk-good-donkey-attach svg {
-          width: 1.05em;
-          height: 1.05em;
+        .jk-good-donkey-attach-ring,
+        .jk-good-donkey-attach-plus {
+          fill: none;
+          stroke: var(--jk-good-donkey-icon);
+        }
+        .jk-good-donkey-attach:hover .jk-good-donkey-attach-plus,
+        .jk-good-donkey-attach:focus-within .jk-good-donkey-attach-plus {
+          stroke: var(--jk-good-donkey-icon-active);
+        }
+        .jk-good-donkey-attach:hover .jk-good-donkey-attach-ring,
+        .jk-good-donkey-attach:focus-within .jk-good-donkey-attach-ring {
+          fill: var(--jk-good-donkey-icon-fill);
+          stroke: var(--jk-good-donkey-icon-active);
         }
         .jk-good-donkey-tooltip {
           position: absolute;
-          bottom: calc(100% + 0.55rem);
+          top: -40px;
           left: 50%;
           z-index: 1;
-          padding: 0.3rem 0.5rem;
-          border: 1px solid var(--jk-border);
-          border-radius: calc(var(--radius) - 2px);
-          background: var(--jk-popover);
-          color: var(--jk-popover-foreground);
-          font-size: 0.625rem;
+          display: none;
+          padding: 6px 10px;
+          border: 1px solid var(--jk-good-donkey-tip-line);
+          border-radius: 5px;
+          background: var(--jk-good-donkey-tip-face);
+          box-shadow: var(--jk-good-donkey-tip-shadow);
+          color: var(--jk-good-donkey-tip-ink);
+          font-size: 10px;
           line-height: 1;
-          letter-spacing: 0.01em;
           white-space: nowrap;
           opacity: 0;
           pointer-events: none;
-          transform: translateX(-50%) translateY(0.2rem);
+          text-wrap: nowrap;
+          transform: translateX(-50%);
+        }
+        .jk-good-donkey-attach:hover .jk-good-donkey-tooltip,
+        .jk-good-donkey-attach:focus-within .jk-good-donkey-tooltip {
+          display: block;
+          opacity: 1;
         }
         .jk-good-donkey-field {
+          width: 200px;
           min-width: 0;
+          max-width: 100%;
           height: 100%;
-          flex: 1 1 auto;
-          border: 0;
+          border: none;
           background: transparent;
-          padding-inline: 0.65rem;
-          color: var(--jk-foreground);
+          padding-left: 10px;
+          color: var(--jk-good-donkey-ink);
           outline: none;
         }
-        .jk-good-donkey[data-size="sm"] .jk-good-donkey-field {
-          width: 10.5rem;
-        }
-        .jk-good-donkey[data-size="md"] .jk-good-donkey-field {
-          width: 13.5rem;
-        }
-        .jk-good-donkey[data-size="lg"] .jk-good-donkey-field {
-          width: 16.5rem;
-        }
         .jk-good-donkey-field::placeholder {
-          color: var(--jk-muted-foreground);
+          color: var(--jk-good-donkey-icon);
         }
         .jk-good-donkey-send {
-          display: inline-flex;
-          flex-shrink: 0;
+          display: flex;
+          width: fit-content;
+          height: 100%;
+          cursor: pointer;
           align-items: center;
           justify-content: center;
-          height: 100%;
-          border: 0;
+          border: none;
           background: transparent;
           padding: 0;
-          color: var(--jk-muted-foreground);
-          cursor: pointer;
+          outline: none;
         }
-        .jk-good-donkey-send svg {
-          width: 1.05em;
-          height: 1.05em;
+        .jk-good-donkey-send-mark {
+          height: 18px;
+          width: auto;
+        }
+        .jk-good-donkey-send-mark path {
+          fill: none;
+          stroke: var(--jk-good-donkey-icon);
+        }
+        .jk-good-donkey-field:focus ~ .jk-good-donkey-send .jk-good-donkey-send-mark path,
+        .jk-good-donkey-field:valid ~ .jk-good-donkey-send .jk-good-donkey-send-mark path,
+        .jk-good-donkey-send:hover .jk-good-donkey-send-mark path {
+          fill: var(--jk-good-donkey-icon-fill);
+          stroke: var(--jk-good-donkey-icon-active);
         }
         .jk-good-donkey-send:focus-visible,
         .jk-good-donkey-attach:focus-within {
-          color: var(--jk-foreground);
-          outline: none;
-          border-radius: calc(var(--radius) - 2px);
+          border-radius: 5px;
           box-shadow: 0 0 0 2px var(--jk-background), 0 0 0 4px var(--jk-ring);
         }
-        .jk-good-donkey-attach:hover,
-        .jk-good-donkey-send:hover,
-        .jk-good-donkey:focus-within .jk-good-donkey-send,
-        .jk-good-donkey-field:valid ~ .jk-good-donkey-send {
-          color: var(--jk-foreground);
-        }
-        .jk-good-donkey-field:valid ~ .jk-good-donkey-send svg {
-          fill: color-mix(in oklab, var(--jk-primary), transparent 70%);
-        }
         @media (prefers-reduced-motion: no-preference) {
-          .jk-good-donkey,
-          .jk-good-donkey-attach,
+          .jk-good-donkey-attach-ring,
+          .jk-good-donkey-attach-plus,
+          .jk-good-donkey-tooltip,
           .jk-good-donkey-send,
-          .jk-good-donkey-tooltip {
-            transition:
-              border-color 180ms ease,
-              box-shadow 180ms ease,
-              color 180ms ease,
-              opacity 180ms ease,
-              transform 180ms ease;
-          }
-          .jk-good-donkey-attach:hover .jk-good-donkey-tooltip,
-          .jk-good-donkey-attach:focus-within .jk-good-donkey-tooltip {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
+          .jk-good-donkey-send-mark,
+          .jk-good-donkey-send-mark path {
+            transition: all 0.3s;
           }
         }
         @media (prefers-reduced-motion: reduce) {
-          .jk-good-donkey,
-          .jk-good-donkey-attach,
+          .jk-good-donkey-attach-ring,
+          .jk-good-donkey-attach-plus,
+          .jk-good-donkey-tooltip,
           .jk-good-donkey-send,
-          .jk-good-donkey-tooltip {
+          .jk-good-donkey-send-mark,
+          .jk-good-donkey-send-mark path {
             transition: none;
-          }
-          .jk-good-donkey-attach:hover .jk-good-donkey-tooltip,
-          .jk-good-donkey-attach:focus-within .jk-good-donkey-tooltip {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
           }
         }
       `}</style>
-      <label className="jk-good-donkey-attach">
-        <span className="jk-good-donkey-tooltip">{attachLabel}</span>
-        <PaperclipIcon aria-hidden="true" />
-        <input
-          accept={accept}
-          aria-label={attachLabel}
-          disabled={disabled}
-          type="file"
-        />
-      </label>
+      <div className="jk-good-donkey-upload">
+        <label className="jk-good-donkey-attach">
+          <AttachMark />
+          <span className="jk-good-donkey-tooltip">{attachLabel}</span>
+          <input
+            accept={accept}
+            aria-label={attachLabel}
+            className="jk-good-donkey-file"
+            disabled={disabled}
+            type="file"
+          />
+        </label>
+      </div>
       <input
         className="jk-good-donkey-field"
         defaultValue={defaultValue}
@@ -191,7 +288,7 @@ export function GoodDonkey({
         disabled={disabled}
         type="submit"
       >
-        <SendIcon aria-hidden="true" />
+        <SendMark />
       </button>
     </form>
   );
