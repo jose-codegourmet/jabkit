@@ -34,7 +34,7 @@ export const Variants: Story = {
 export const ThemeComparison: Story = {
   args: { ...calendar03Mocks.default },
   render: () => (
-    <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border sm:grid-cols-2">
+    <div className="grid gap-px overflow-hidden rounded-md border border-border bg-border sm:grid-cols-2">
       <div className="bg-background p-6">
         <Calendar03 {...calendar03Mocks.default} />
       </div>

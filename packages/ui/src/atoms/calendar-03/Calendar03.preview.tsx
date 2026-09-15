@@ -16,12 +16,12 @@ const ThemeComparison = () => (
 
 export default {
   Default: () => (
-    <div className="w-full max-w-[40rem]">
+    <div className="flex items-center justify-center px-4">
       <Calendar03 {...calendar03Mocks.default} />
     </div>
   ),
   Variants: () => (
-    <div className="w-full max-w-[40rem]">
+    <div className="flex items-center justify-center px-4">
       <Calendar03 {...calendar03Mocks.alternate} />
     </div>
   ),
