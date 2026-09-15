@@ -7087,7 +7087,7 @@
     "name": "receipt-pricing",
     "displayName": "ReceiptPricing",
     "category": "marketing",
-    "description": "Pricing section that prints each plan as a thermal receipt with a ledger, yearly discount line, barcode, and serrated edges.",
+    "description": "Pricing section that prints each plan as a thermal receipt with a monospace ledger, yearly discount, barcode, and serrated edges.",
     "sectionCategory": "pricing",
     "purpose": "Lets a landing page compare subscriptions as shop tickets so visitors can read line items, the subtotal, and the yearly discount in one glance.",
     "bestFor": [
