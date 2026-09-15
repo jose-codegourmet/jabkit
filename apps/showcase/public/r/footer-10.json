@@ -1,0 +1,109 @@
+{
+  "name": "footer-10",
+  "displayName": "Footer10",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Blush-plate marketing footer with a photographic banner CTA, large email, underline newsletter, and four link columns.",
+  "sectionCategory": "footer",
+  "purpose": "Closes a marketing page with a conversion banner, a single email path, a subscribe field, and grouped legal and product links.",
+  "bestFor": [
+    "SaaS and platform landings",
+    "pages that need a banner close plus newsletter",
+    "multi-column service footers with a contact email"
+  ],
+  "avoidFor": [
+    "minimal wordmark-only endings",
+    "product shells that should not collect email"
+  ],
+  "tone": [
+    "confident",
+    "editorial",
+    "warm"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "high",
+  "layout": {
+    "type": "split",
+    "alignment": "left",
+    "columns": 12
+  },
+  "slots": [
+    "banner",
+    "headline",
+    "cta",
+    "contact",
+    "newsletter",
+    "linkColumns",
+    "brand",
+    "copyright"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "cta",
+    "contact",
+    "faq",
+    "content"
+  ],
+  "tags": [
+    "footer",
+    "marketing",
+    "contact",
+    "newsletter",
+    "landing",
+    "banner"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 980
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "footer-10/Footer10.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ArrowRightIcon } from \"lucide-react\";\nimport { type FormEvent, useId, useState } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { Footer10LinkColumn, Footer10Props } from \"./Footer10.types\";\n\nconst defaultLinkColumns: Footer10LinkColumn[] = [\n  {\n    title: \"Platform\",\n    links: [\n      { label: \"Overview\", href: \"#overview\" },\n      { label: \"Features\", href: \"#features\" },\n      { label: \"Integrations\", href: \"#integrations\" },\n      { label: \"Pricing\", href: \"#pricing\" },\n    ],\n  },\n  {\n    title: \"Resources\",\n    links: [\n      { label: \"Documentation\", href: \"#docs\" },\n      { label: \"Journal\", href: \"#journal\" },\n      { label: \"Community\", href: \"#community\" },\n      { label: \"Support\", href: \"#support\" },\n    ],\n  },\n  {\n    title: \"Company\",\n    links: [\n      { label: \"About\", href: \"#about\" },\n      { label: \"Careers\", href: \"#careers\" },\n      { label: \"Press\", href: \"#press\" },\n      { label: \"Contact\", href: \"#contact\" },\n    ],\n  },\n  {\n    title: \"Legal\",\n    links: [\n      { label: \"Privacy Policy\", href: \"#privacy\" },\n      { label: \"Terms of Service\", href: \"#terms\" },\n      { label: \"Cookie Policy\", href: \"#cookies\" },\n    ],\n  },\n];\n\nconst defaults = {\n  bannerTagline: \"Trusted by Thousands\",\n  bannerHeading:\n    \"Interested in working together, trying out the platform or simply learning more?\",\n  bannerCtaLabel: \"Learn Our Approach\",\n  bannerCtaHref: \"#approach\",\n  bannerBackgroundImage: \"/assets/67ac039d3bfb4ac9.webp\",\n  contactLabel: \"Reach out :\",\n  contactEmail: \"hello@fieldline.studio\",\n  contactEmailHref: \"mailto:hello@fieldline.studio\",\n  description:\n    \"Next-generation cloud platform delivering unmatched speed, security, and scalability. Designed for developers. Engineered for the future.\",\n  newsletterPlaceholder: \"Email address\",\n  brandName: \"Fieldline\",\n  copyright: \"© 2026 Fieldline. All rights reserved.\",\n} as const;\n\nconst plate =\n  \"bg-[color-mix(in_oklab,var(--jk-primary),var(--jk-background)_94%)]\";\nconst focusRing =\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\";\n\nexport function Footer10({\n  className,\n  bannerTagline = defaults.bannerTagline,\n  bannerHeading = defaults.bannerHeading,\n  bannerCtaLabel = defaults.bannerCtaLabel,\n  bannerCtaHref = defaults.bannerCtaHref,\n  bannerBackgroundImage = defaults.bannerBackgroundImage,\n  contactLabel = defaults.contactLabel,\n  contactEmail = defaults.contactEmail,\n  contactEmailHref = defaults.contactEmailHref,\n  description = defaults.description,\n  newsletterPlaceholder = defaults.newsletterPlaceholder,\n  onSubscribe,\n  linkColumns = defaultLinkColumns,\n  brandName = defaults.brandName,\n  copyright = defaults.copyright,\n  ...props\n}: Footer10Props) {\n  const headingId = useId();\n  const emailFieldId = useId();\n  const [email, setEmail] = useState(\"\");\n\n  const handleSubscribeSubmit = (event: FormEvent<HTMLFormElement>) => {\n    event.preventDefault();\n    const next = email.trim();\n    if (!next) return;\n    onSubscribe?.(next);\n    setEmail(\"\");\n  };\n\n  return (\n    <footer\n      data-slot=\"footer-10\"\n      className={cn(\n        \"w-full font-sans text-foreground antialiased selection:bg-primary/20\",\n        className,\n      )}\n      {...props}\n    >\n      <style href=\"jk-footer-10\" precedence=\"default\">{`\n        .jk-footer10-arrow {\n          transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);\n        }\n        .jk-footer10-cta:hover .jk-footer10-arrow,\n        .jk-footer10-cta:focus-visible .jk-footer10-arrow {\n          transform: translateX(4px);\n        }\n        .jk-footer10-mail:hover .jk-footer10-arrow,\n        .jk-footer10-mail:focus-visible .jk-footer10-arrow {\n          transform: translateX(8px);\n        }\n        .jk-footer10-submit:hover .jk-footer10-arrow,\n        .jk-footer10-submit:focus-visible .jk-footer10-arrow {\n          transform: translateX(2px);\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-footer10-arrow {\n            transition: none;\n          }\n          .jk-footer10-cta:hover .jk-footer10-arrow,\n          .jk-footer10-cta:focus-visible .jk-footer10-arrow,\n          .jk-footer10-mail:hover .jk-footer10-arrow,\n          .jk-footer10-mail:focus-visible .jk-footer10-arrow,\n          .jk-footer10-submit:hover .jk-footer10-arrow,\n          .jk-footer10-submit:focus-visible .jk-footer10-arrow {\n            transform: none;\n          }\n        }\n      `}</style>\n\n      <div className={cn(\"mx-auto w-full max-w-7xl pb-10\", plate)}>\n        <div className=\"relative overflow-hidden rounded-none bg-primary px-6 py-12 text-primary-foreground sm:px-12 sm:py-16 md:px-16 lg:py-20\">\n          {bannerBackgroundImage ? (\n            <img\n              src={bannerBackgroundImage}\n              alt=\"\"\n              aria-hidden=\"true\"\n              className=\"pointer-events-none absolute inset-0 h-full w-full object-cover opacity-90 outline outline-offset-[-1px] outline-primary-foreground/20 select-none\"\n            />\n          ) : null}\n\n          <div className=\"relative z-10 flex flex-col justify-between gap-6\">\n            <p className=\"inline-flex items-center gap-1.5 rounded-full py-1 text-xs font-medium tracking-wide\">\n              <span\n                aria-hidden=\"true\"\n                className=\"size-2 shrink-0 rounded-full bg-primary-foreground\"\n              />\n              <span className=\"font-medium text-primary-foreground/80\">\n                {bannerTagline}\n              </span>\n            </p>\n\n            <div className=\"flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12\">\n              <h2\n                id={headingId}\n                className=\"max-w-2xl text-2xl leading-tight font-light tracking-tight sm:text-3xl md:text-4xl\"\n              >\n                {bannerHeading}\n              </h2>\n\n              <a\n                href={bannerCtaHref}\n                className={cn(\n                  \"jk-footer10-cta inline-flex shrink-0 items-center gap-2.5 rounded-full bg-background px-6 py-3 text-sm font-semibold text-foreground\",\n                  \"transition-opacity duration-200 hover:opacity-90\",\n                  focusRing,\n                )}\n              >\n                <span>{bannerCtaLabel}</span>\n                <ArrowRightIcon\n                  aria-hidden=\"true\"\n                  className=\"jk-footer10-arrow size-3.5\"\n                />\n              </a>\n            </div>\n          </div>\n        </div>\n\n        <div className=\"mt-8 grid grid-cols-1 gap-12 px-8 lg:grid-cols-12 lg:gap-16\">\n          <div className=\"flex flex-col justify-between gap-8 lg:col-span-5\">\n            <div>\n              <p className=\"text-lg font-medium text-muted-foreground\">\n                {contactLabel}\n              </p>\n              <a\n                href={contactEmailHref}\n                className={cn(\n                  \"jk-footer10-mail mt-1 inline-flex items-baseline gap-2.5 rounded-sm text-2xl font-medium tracking-tight text-foreground\",\n                  \"transition-opacity duration-200 hover:opacity-70\",\n                  \"sm:text-3xl\",\n                  focusRing,\n                )}\n              >\n                <span>{contactEmail}</span>\n                <ArrowRightIcon\n                  aria-hidden=\"true\"\n                  className=\"jk-footer10-arrow size-6\"\n                />\n              </a>\n            </div>\n\n            <p className=\"max-w-md text-sm leading-relaxed text-muted-foreground\">\n              {description}\n            </p>\n          </div>\n\n          <div className=\"flex flex-col gap-12 lg:col-span-7\">\n            <form\n              onSubmit={handleSubscribeSubmit}\n              className=\"w-full max-w-md self-end\"\n            >\n              <div className=\"flex items-center justify-between border-b-2 border-border pb-1 transition-colors duration-200 focus-within:border-foreground\">\n                <input\n                  id={emailFieldId}\n                  type=\"email\"\n                  value={email}\n                  onChange={(event) => setEmail(event.target.value)}\n                  placeholder={newsletterPlaceholder}\n                  required\n                  autoComplete=\"email\"\n                  aria-label=\"Subscribe to our newsletter\"\n                  className=\"h-10 w-full rounded-none border-0 bg-transparent px-0 text-base text-foreground placeholder:text-muted-foreground/60 outline-none focus-visible:ring-0\"\n                />\n                <button\n                  type=\"submit\"\n                  className={cn(\n                    \"jk-footer10-submit rounded-sm p-2 text-muted-foreground transition-colors duration-200 hover:text-primary\",\n                    focusRing,\n                  )}\n                  aria-label=\"Submit newsletter subscription\"\n                >\n                  <ArrowRightIcon\n                    aria-hidden=\"true\"\n                    className=\"jk-footer10-arrow size-4\"\n                  />\n                </button>\n              </div>\n            </form>\n\n            {linkColumns.length > 0 ? (\n              <nav aria-label=\"Footer\">\n                <div className=\"grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-6\">\n                  {linkColumns.map((column) => (\n                    <div key={column.title} className=\"flex flex-col\">\n                      <h3 className=\"text-sm font-medium tracking-wide text-foreground uppercase\">\n                        {column.title}\n                      </h3>\n                      <ul className=\"mt-4 flex list-none flex-col gap-3 p-0\">\n                        {column.links.map((link) => (\n                          <li key={`${column.title}-${link.label}`}>\n                            <a\n                              href={link.href}\n                              className={cn(\n                                \"rounded-sm text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground\",\n                                focusRing,\n                              )}\n                            >\n                              {link.label}\n                            </a>\n                          </li>\n                        ))}\n                      </ul>\n                    </div>\n                  ))}\n                </div>\n              </nav>\n            ) : null}\n          </div>\n        </div>\n\n        <div className=\"mt-16 flex flex-col gap-4 px-6 sm:flex-row sm:items-center sm:justify-between\">\n          <span className=\"text-base font-medium text-foreground\">\n            {brandName}\n          </span>\n          <span className=\"text-base font-semibold text-foreground\">\n            {copyright}\n          </span>\n        </div>\n      </div>\n    </footer>\n  );\n}\n"
+    },
+    {
+      "path": "footer-10/Footer10.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface Footer10NavLink {\n  label: string;\n  href: string;\n}\n\nexport interface Footer10LinkColumn {\n  title: string;\n  links: Footer10NavLink[];\n}\n\nexport interface Footer10Props extends HTMLAttributes<HTMLElement> {\n  bannerTagline?: string;\n  bannerHeading?: string;\n  bannerCtaLabel?: string;\n  bannerCtaHref?: string;\n  bannerBackgroundImage?: string;\n  contactLabel?: string;\n  contactEmail?: string;\n  contactEmailHref?: string;\n  description?: string;\n  newsletterPlaceholder?: string;\n  onSubscribe?: (email: string) => void;\n  linkColumns?: Footer10LinkColumn[];\n  brandName?: string;\n  copyright?: string;\n}\n"
+    },
+    {
+      "path": "footer-10/index.ts",
+      "type": "index",
+      "content": "export { Footer10 } from \"./Footer10\";\nexport type { Footer10LinkColumn } from \"./Footer10.types\";\nexport type { Footer10NavLink } from \"./Footer10.types\";\nexport type { Footer10Props } from \"./Footer10.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Footer10 {...footer10Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Footer10 {...footer10Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
