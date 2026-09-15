@@ -12,14 +12,11 @@ export interface VCheckbox11Slot {
 
 export interface VCheckbox11Copy {
   title: string;
-  description: string;
   selectedLabel: string;
-  clearLabel: string;
-  toggleDayLabel: string;
 }
 
 export interface VCheckbox11Props
-  extends Omit<HTMLAttributes<HTMLElement>, "defaultValue"> {
+  extends Omit<HTMLAttributes<HTMLDivElement>, "defaultValue"> {
   days?: readonly VCheckbox11Day[];
   slots?: readonly VCheckbox11Slot[];
   value?: readonly string[];
@@ -29,6 +26,6 @@ export interface VCheckbox11Props
   disabled?: boolean;
 }
 
-export function vCheckbox11CellKey(dayId: string, slotId: string) {
-  return `${dayId}:${slotId}`;
+export function vCheckbox11CellKey(slotId: string, dayId: string) {
+  return `${slotId}-${dayId}`;
 }

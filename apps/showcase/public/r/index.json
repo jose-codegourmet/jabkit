@@ -2800,7 +2800,7 @@
       "clean"
     ],
     "contentDensity": "medium",
-    "visualWeight": "medium",
+    "visualWeight": "low",
     "layout": {
       "type": "grid",
       "alignment": "left",
@@ -2810,8 +2810,7 @@
       "headline",
       "selectedCount",
       "dayHeaders",
-      "timeRows",
-      "clearAction"
+      "timeRows"
     ],
     "capabilities": {
       "supportsImage": false,
@@ -2840,8 +2839,8 @@
     },
     "preview": {
       "layout": "center",
-      "width": 960,
-      "height": 460
+      "width": 480,
+      "height": 260
     }
   },
   {

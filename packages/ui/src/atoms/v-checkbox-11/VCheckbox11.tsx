@@ -12,29 +12,24 @@ import {
 } from "./VCheckbox11.types";
 
 const DEFAULT_DAYS: VCheckbox11Day[] = [
-  { id: "mon", label: "Mon" },
-  { id: "tue", label: "Tue" },
-  { id: "wed", label: "Wed" },
-  { id: "thu", label: "Thu" },
-  { id: "fri", label: "Fri" },
-  { id: "sat", label: "Sat" },
-  { id: "sun", label: "Sun" },
+  { id: "Mon", label: "Mon" },
+  { id: "Tue", label: "Tue" },
+  { id: "Wed", label: "Wed" },
+  { id: "Thu", label: "Thu" },
+  { id: "Fri", label: "Fri" },
+  { id: "Sat", label: "Sat" },
+  { id: "Sun", label: "Sun" },
 ];
 
 const DEFAULT_SLOTS: VCheckbox11Slot[] = [
-  { id: "09:00", label: "9:00 AM" },
-  { id: "11:00", label: "11:00 AM" },
-  { id: "13:00", label: "1:00 PM" },
-  { id: "15:00", label: "3:00 PM" },
-  { id: "17:00", label: "5:00 PM" },
+  { id: "Morning", label: "Morning" },
+  { id: "Afternoon", label: "Afternoon" },
+  { id: "Evening", label: "Evening" },
 ];
 
 const DEFAULT_COPY: VCheckbox11Copy = {
-  title: "Weekly availability",
-  description: "Tick the hours you can take calls this week.",
-  selectedLabel: "selected",
-  clearLabel: "Clear",
-  toggleDayLabel: "Toggle all hours for",
+  title: "Weekly Availability",
+  selectedLabel: "slots selected",
 };
 
 function uniqueKeys(keys: readonly string[]) {
@@ -52,15 +47,14 @@ export function VCheckbox11({
   disabled = false,
   ...props
 }: VCheckbox11Props) {
-  const headingId = React.useId();
-  const descriptionId = React.useId();
+  const reactId = React.useId();
+  const headingId = `${reactId}-title`;
   const strings = { ...DEFAULT_COPY, ...copy };
   const [uncontrolled, setUncontrolled] = React.useState(() =>
     uniqueKeys(defaultValue ?? []),
   );
   const selected = uniqueKeys(value ?? uncontrolled);
   const selectedSet = new Set(selected);
-  const total = days.length * slots.length;
 
   const commit = (next: string[]) => {
     const unique = uniqueKeys(next);
@@ -76,73 +70,35 @@ export function VCheckbox11({
     commit([...selected, key]);
   };
 
-  const toggleDay = (dayId: string) => {
-    const keys = slots.map((slot) => vCheckbox11CellKey(dayId, slot.id));
-    const allOn = keys.every((key) => selectedSet.has(key));
-    if (allOn) {
-      commit(selected.filter((item) => !keys.includes(item)));
-      return;
-    }
-    commit([...selected, ...keys]);
-  };
-
   return (
-    <section
-      aria-describedby={descriptionId}
-      aria-labelledby={headingId}
-      className={cn(
-        "w-full max-w-[40rem] overflow-hidden rounded-[--radius] border border-border bg-card text-card-foreground shadow-sm",
-        className,
-      )}
+    <div
+      className={cn("w-full max-w-md space-y-3", className)}
       data-slot="v-checkbox-11"
       {...props}
     >
-      <header className="flex flex-col gap-3 border-b border-border px-5 py-4 sm:flex-row sm:items-start sm:justify-between">
-        <div className="min-w-0">
-          <h2 className="text-base font-semibold tracking-tight" id={headingId}>
-            {strings.title}
-          </h2>
-          <p className="mt-1 text-sm text-muted-foreground" id={descriptionId}>
-            {strings.description}
-          </p>
-        </div>
-        <div className="flex shrink-0 items-center gap-2">
-          <p className="rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground tabular-nums">
-            {selected.length} {strings.selectedLabel}
-          </p>
-          <button
-            className="rounded-[--radius] px-2 py-1 text-xs font-medium text-muted-foreground transition-colors motion-reduce:transition-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-            disabled={disabled || selected.length === 0}
-            onClick={() => commit([])}
-            type="button"
-          >
-            {strings.clearLabel}
-          </button>
-        </div>
-      </header>
-
-      <div className="overflow-x-auto p-4">
-        <table className="w-full min-w-[28rem] border-separate border-spacing-y-1 text-sm">
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-semibold" id={headingId}>
+          {strings.title}
+        </p>
+        <span className="text-xs text-muted-foreground">
+          {selected.length} {strings.selectedLabel}
+        </span>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse text-xs">
           <caption className="sr-only">
-            {strings.title}. {selected.length} of {total}{" "}
-            {strings.selectedLabel}.
+            {strings.title}. {selected.length} {strings.selectedLabel}.
           </caption>
           <thead>
             <tr>
-              <th className="w-24 px-1 pb-2 text-left text-xs font-medium text-muted-foreground">
-                Time
-              </th>
+              <th className="w-24 pb-2 text-left font-medium text-muted-foreground" />
               {days.map((day) => (
-                <th className="px-1 pb-2 text-center" key={day.id} scope="col">
-                  <button
-                    aria-label={`${strings.toggleDayLabel} ${day.label}`}
-                    className="inline-flex min-w-10 items-center justify-center rounded-md px-1.5 py-1 text-xs font-medium tracking-wide text-muted-foreground uppercase transition-colors motion-reduce:transition-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-                    disabled={disabled}
-                    onClick={() => toggleDay(day.id)}
-                    type="button"
-                  >
-                    {day.label}
-                  </button>
+                <th
+                  className="pb-2 text-center font-medium text-muted-foreground"
+                  key={day.id}
+                  scope="col"
+                >
+                  {day.label}
                 </th>
               ))}
             </tr>
@@ -150,44 +106,41 @@ export function VCheckbox11({
           <tbody>
             {slots.map((slot) => (
               <tr key={slot.id}>
-                <th
-                  className="px-1 py-1 text-left text-xs font-medium text-muted-foreground tabular-nums"
-                  scope="row"
-                >
-                  {slot.label}
-                </th>
+                <td className="py-2 pr-3 text-muted-foreground">{slot.label}</td>
                 {days.map((day) => {
-                  const key = vCheckbox11CellKey(day.id, slot.id);
+                  const key = vCheckbox11CellKey(slot.id, day.id);
                   const checked = selectedSet.has(key);
+                  const inputId = `${reactId}-${key}`;
                   return (
-                    <td className="px-1 py-1 text-center" key={key}>
-                      <label className="relative mx-auto flex size-8 cursor-pointer items-center justify-center">
+                    <td className="py-2 text-center" key={key}>
+                      <label
+                        className="relative mx-auto inline-flex size-4.5 cursor-pointer items-center justify-center sm:size-4"
+                        htmlFor={inputId}
+                      >
                         <input
                           checked={checked}
                           className="peer sr-only"
                           disabled={disabled}
+                          id={inputId}
                           onChange={() => toggleCell(key)}
                           type="checkbox"
                         />
                         <span
+                          aria-hidden="true"
                           className={cn(
-                            "flex size-5 items-center justify-center rounded-[4px] border border-input bg-background text-primary-foreground shadow-sm transition-[transform,background-color,border-color,color] duration-150 ease-out motion-reduce:transition-none peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
-                            checked && "border-primary bg-primary",
-                            !checked &&
-                              "hover:border-ring hover:bg-accent peer-disabled:hover:border-input peer-disabled:hover:bg-background",
+                            "relative inline-flex size-4.5 shrink-0 items-center justify-center rounded-[0.25rem] border border-input bg-background text-primary-foreground shadow-xs outline-none transition-[box-shadow,background-color,border-color,color] duration-150 motion-reduce:transition-none sm:size-4 dark:bg-input/30",
+                            "peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-1 peer-focus-visible:ring-offset-background",
+                            "peer-disabled:cursor-not-allowed peer-disabled:opacity-[0.64]",
                             checked &&
-                              "peer-active:scale-95 motion-reduce:peer-active:scale-100",
+                              "border-primary bg-primary shadow-none dark:bg-primary",
                           )}
                         >
                           {checked ? (
-                            <CheckIcon
-                              aria-hidden="true"
-                              className="size-3.5"
-                            />
+                            <CheckIcon className="size-3" strokeWidth={2.5} />
                           ) : null}
                         </span>
                         <span className="sr-only">
-                          {day.label} {slot.label}
+                          {slot.label} {day.label}
                         </span>
                       </label>
                     </td>
@@ -198,6 +151,6 @@ export function VCheckbox11({
           </tbody>
         </table>
       </div>
-    </section>
+    </div>
   );
 }
