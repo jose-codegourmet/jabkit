@@ -4059,6 +4059,47 @@
           "format": "webp"
         }
       ]
+    },
+    "ticket-confirmation-card": {
+      "sourceHash": "fc65b994e3ab8ce222aa5eeef2a53d80648a14026854d5a2cf2419c5cf6f49c9",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "ticket-confirmation-card.Default.dark.webp",
+          "bytes": 13058,
+          "width": 960,
+          "height": 749,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "ticket-confirmation-card.Variants.dark.webp",
+          "bytes": 13998,
+          "width": 960,
+          "height": 733,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "ticket-confirmation-card.ThemeComparison.dark.webp",
+          "bytes": 24604,
+          "width": 960,
+          "height": 749,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
