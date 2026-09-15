@@ -1831,9 +1831,9 @@
     "name": "qr-code-generator",
     "displayName": "QrCodeGenerator",
     "category": "atoms",
-    "description": "Type a URL or short note and get a live QR mark you can copy or download as PNG.",
+    "description": "Card that encodes a URL or short note into a live QR mark and downloads it as PNG.",
     "sectionCategory": "form",
-    "purpose": "Turns a short payload into a scannable code without leaving the page or sending data to a server.",
+    "purpose": "Turns a short payload into a scannable code on the page, with a full-width save action.",
     "bestFor": [
       "share links on a landing page",
       "event check-in codes",
@@ -1856,10 +1856,9 @@
     },
     "slots": [
       "title",
-      "preview",
       "payload",
-      "download",
-      "copy"
+      "preview",
+      "download"
     ],
     "capabilities": {
       "supportsImage": true,
@@ -1868,10 +1867,6 @@
       "supportsCTA": true,
       "supportsDarkMode": true
     },
-    "recommendedAfter": [
-      "input",
-      "button"
-    ],
     "tags": [
       "qr",
       "code",
@@ -1891,8 +1886,8 @@
     },
     "preview": {
       "layout": "center",
-      "width": 420,
-      "height": 560
+      "width": 448,
+      "height": 640
     }
   },
   {

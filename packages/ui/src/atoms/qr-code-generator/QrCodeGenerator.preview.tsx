@@ -5,5 +5,10 @@ import { qrCodeGeneratorMocks } from "./QrCodeGenerator.mocks";
 
 export default {
   Default: () => <QrCodeGenerator {...qrCodeGeneratorMocks.default} />,
-  Variants: () => <QrCodeGenerator {...qrCodeGeneratorMocks.event} />,
+  Variants: () => (
+    <div className="flex flex-col gap-6">
+      <QrCodeGenerator {...qrCodeGeneratorMocks.event} />
+      <QrCodeGenerator {...qrCodeGeneratorMocks.empty} />
+    </div>
+  ),
 };

@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "qr-code-generator",
   displayName: "QrCodeGenerator",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Type a URL or short note and get a live QR mark you can copy or download as PNG.",
+    "Card that encodes a URL or short note into a live QR mark and downloads it as PNG.",
   sectionCategory: "form",
   purpose:
-    "Turns a short payload into a scannable code without leaving the page or sending data to a server.",
+    "Turns a short payload into a scannable code on the page, with a full-width save action.",
   bestFor: [
     "share links on a landing page",
     "event check-in codes",
@@ -27,7 +27,7 @@ export default {
     type: "stack",
     alignment: "center",
   },
-  slots: ["title", "preview", "payload", "download", "copy"],
+  slots: ["title", "payload", "preview", "download"],
   capabilities: {
     supportsImage: true,
     supportsVideo: false,
@@ -35,15 +35,14 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
-  recommendedAfter: ["input", "button"],
   tags: ["qr", "code", "download", "link", "atom"],
   dependencies: ["lucide-react"],
-  registryDependencies: ["button", "input", "label"],
+  registryDependencies: [],
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: {
     layout: "center",
-    width: 420,
-    height: 560,
-    capture: { viewport: { width: 520, height: 640 } },
+    width: 448,
+    height: 640,
+    capture: { viewport: { width: 520, height: 720 } },
   },
 } satisfies ComponentMeta;
