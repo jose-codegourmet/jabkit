@@ -3,21 +3,21 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "skiper-67",
   displayName: "Skiper67",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Marketing video teaser with a pointer-following play mark that opens a modal player with play, seek, and mute controls.",
+    "Square looping teaser with a cursor-following Play mark that expands into a full-bleed player overlay.",
   sectionCategory: "content",
   purpose:
-    "Turns a still into a showreel invitation: the play control tracks the pointer, then a focused overlay plays the cut with custom controls.",
+    "Mirrors Skiper video player 001: a sharp 180px loop, exclusion-blend Play that springs with the pointer, then a clip-path expand into overlay controls.",
   bestFor: [
     "studio and agency showreels",
     "product walkthrough landings",
-    "campaign pages that lead with motion",
+    "campaign pages that lead with a small motion still",
   ],
   avoidFor: [
     "pages that cannot host video",
-    "dense application chrome where a modal player would interrupt a task",
+    "dense application chrome where a viewport overlay would interrupt a task",
   ],
   tone: ["cinematic", "modern", "confident"],
   industries: ["media", "technology", "design"],
@@ -28,7 +28,7 @@ export default {
     alignment: "center",
     columns: 1,
   },
-  slots: ["headline", "videoTeaser", "modalPlayer"],
+  slots: ["hint", "videoTeaser", "overlayPlayer"],
   capabilities: {
     supportsImage: true,
     supportsVideo: true,
@@ -41,7 +41,7 @@ export default {
   tags: [
     "video",
     "player",
-    "modal",
+    "overlay",
     "showreel",
     "hover",
     "marketing",
@@ -49,7 +49,7 @@ export default {
     "landing",
   ],
   dependencies: ["lucide-react"],
-  registryDependencies: ["dialog"],
+  registryDependencies: [],
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: { layout: "fit", width: 1440, height: 900 },
 } satisfies ComponentMeta;

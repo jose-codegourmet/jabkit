@@ -7532,17 +7532,17 @@
     "name": "skiper-67",
     "displayName": "Skiper67",
     "category": "marketing",
-    "description": "Marketing video teaser with a pointer-following play mark that opens a modal player with play, seek, and mute controls.",
+    "description": "Square looping teaser with a cursor-following Play mark that expands into a full-bleed player overlay.",
     "sectionCategory": "content",
-    "purpose": "Turns a still into a showreel invitation: the play control tracks the pointer, then a focused overlay plays the cut with custom controls.",
+    "purpose": "Mirrors Skiper video player 001: a sharp 180px loop, exclusion-blend Play that springs with the pointer, then a clip-path expand into overlay controls.",
     "bestFor": [
       "studio and agency showreels",
       "product walkthrough landings",
-      "campaign pages that lead with motion"
+      "campaign pages that lead with a small motion still"
     ],
     "avoidFor": [
       "pages that cannot host video",
-      "dense application chrome where a modal player would interrupt a task"
+      "dense application chrome where a viewport overlay would interrupt a task"
     ],
     "tone": [
       "cinematic",
@@ -7562,9 +7562,9 @@
       "columns": 1
     },
     "slots": [
-      "headline",
+      "hint",
       "videoTeaser",
-      "modalPlayer"
+      "overlayPlayer"
     ],
     "capabilities": {
       "supportsImage": true,
@@ -7585,7 +7585,7 @@
     "tags": [
       "video",
       "player",
-      "modal",
+      "overlay",
       "showreel",
       "hover",
       "marketing",
