@@ -36,6 +36,16 @@ const plates: Skiper52Image[] = [
     alt: "Glass rooms along an empty daylight corridor",
     code: "# 07",
   },
+  {
+    src: "/assets/46d405deede5a407.webp",
+    alt: "Turned wood stool in a quiet studio",
+    code: "# 08",
+  },
+  {
+    src: "/assets/e40131b7fd7bf05b.webp",
+    alt: "Paper lantern hanging over a work table",
+    code: "# 09",
+  },
 ];
 
 const portraits: Skiper52Image[] = [
@@ -68,18 +78,14 @@ const portraits: Skiper52Image[] = [
 
 export const skiper52Mocks = {
   default: {
-    eyebrow: "Hover expand",
-    heading: "Plates that open when you linger.",
-    description:
-      "Idle strips stay narrow. The one under the pointer grows so the photograph can be read, then the rest close back in.",
     images: plates,
     initialActive: 1,
   },
   alternate: {
-    eyebrow: "Cast",
+    eyebrow: "Expand on hover",
     heading: "Five faces, one strip.",
     description:
-      "Same expand-on-hover rack, portraits instead of objects. Focus or tap a strip to hold it open.",
+      "Same rounded-3xl rack, portraits instead of objects. Focus or tap a strip to hold it open.",
     images: portraits,
     initialActive: 2,
   },

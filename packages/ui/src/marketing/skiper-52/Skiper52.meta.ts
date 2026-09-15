@@ -3,10 +3,10 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "skiper-52",
   displayName: "Skiper52",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Horizontal image rack that expands the hovered or focused strip and reveals a plate code overlay.",
+    "Rounded-3xl hover-expand image rack: idle strips stay 5rem, the active plate opens to 24rem.",
   sectionCategory: "gallery",
   purpose:
     "Lets a landing page show many photographs in one row without losing a readable hero frame for the active image.",

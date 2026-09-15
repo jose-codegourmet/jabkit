@@ -7453,7 +7453,7 @@
     "name": "skiper-52",
     "displayName": "Skiper52",
     "category": "marketing",
-    "description": "Horizontal image rack that expands the hovered or focused strip and reveals a plate code overlay.",
+    "description": "Rounded-3xl hover-expand image rack: idle strips stay 5rem, the active plate opens to 24rem.",
     "sectionCategory": "gallery",
     "purpose": "Lets a landing page show many photographs in one row without losing a readable hero frame for the active image.",
     "bestFor": [
