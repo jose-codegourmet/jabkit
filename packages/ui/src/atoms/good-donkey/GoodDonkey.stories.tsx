@@ -27,6 +27,13 @@ export const Filled: Story = {
   ),
 };
 
+export const Compact: Story = {
+  args: { ...goodDonkeyMocks.compact },
+  render: () => (
+    <GoodDonkey {...goodDonkeyMocks.compact} />
+  ),
+};
+
 export const ThemeComparison: Story = {
   args: { ...goodDonkeyMocks.default },
   render: () => (

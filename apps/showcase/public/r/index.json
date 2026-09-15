@@ -968,9 +968,9 @@
     "name": "good-donkey",
     "displayName": "GoodDonkey",
     "category": "atoms",
-    "description": "A compact message composer with file attach, a text field, and a send control.",
+    "description": "A 40px, 10px-radius message bar with a plus-circle attach control, a 200px field, and a paper-plane send mark.",
     "sectionCategory": "form",
-    "purpose": "Gives chat, comment, and support surfaces a short compose bar that stays on semantic tokens.",
+    "purpose": "Gives chat and comment rows the compact composer shape from the source inspo, mapped onto semantic tokens.",
     "bestFor": [
       "inline chat or comment composers",
       "support reply fields",
@@ -1012,7 +1012,6 @@
     ],
     "addedAt": "2026-09-15",
     "dependencies": [
-      "lucide-react",
       "clsx",
       "tailwind-merge"
     ],
