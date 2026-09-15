@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "young-dragon",
   displayName: "YoungDragon",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A wireframe cube loader that tumbles in space using outlined faces and semantic tokens.",
+    "A square-faced 3D cube loader that tumbles on two axes using outlined faces and semantic tokens.",
   sectionCategory: "feedback",
   purpose:
-    "Marks an in-progress wait with a geometric 3D cube instead of a flat ring, still reading in light and dark.",
+    "Marks an in-progress wait with a geometric 3D cube instead of a flat ring, keeping sharp square faces in light and dark.",
   bestFor: [
     "overlay and empty-state loading",
     "playful async waits that still need a status role",
