@@ -1,0 +1,128 @@
+{
+  "name": "order-confirmation-card",
+  "displayName": "OrderConfirmationCard",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Post-checkout receipt card with success status, order ID, product line items, ship-to, paid total, and dual actions.",
+  "sectionCategory": "content",
+  "purpose": "Gives an ecommerce landing a trusted order-complete moment shoppers can read, save, and act on without opening a dashboard.",
+  "bestFor": [
+    "ecommerce thank-you pages",
+    "gift and pickup confirmations",
+    "campaign landings that preview a packed order"
+  ],
+  "avoidFor": [
+    "live checkout that still needs a payment form",
+    "account order history with many past carts",
+    "event tickets that need a scan barcode"
+  ],
+  "tone": [
+    "professional",
+    "commercial",
+    "calm"
+  ],
+  "industries": [
+    "ecommerce",
+    "retail",
+    "fashion"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "card",
+    "alignment": "center",
+    "columns": 1
+  },
+  "slots": [
+    "headline",
+    "description",
+    "successStatus",
+    "orderId",
+    "lineItems",
+    "shipping",
+    "totals",
+    "primaryCTA",
+    "secondaryCTA"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "product",
+    "pricing"
+  ],
+  "recommendedBefore": [
+    "faq",
+    "testimonials",
+    "footer"
+  ],
+  "tags": [
+    "order",
+    "confirmation",
+    "receipt",
+    "checkout",
+    "ecommerce",
+    "cart",
+    "marketing"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 980
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "order-confirmation-card/OrderConfirmationCard.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { CircleCheckIcon } from \"lucide-react\";\nimport { useId } from \"react\";\nimport { Button } from \"@/components/jabkit/button\";\nimport { cn } from \"@/lib/cn\";\nimport { orderConfirmationCardMocks } from \"./OrderConfirmationCard.mocks\";\nimport type {\n  OrderConfirmationCardProps,\n  OrderConfirmationItem,\n  OrderConfirmationMeta,\n} from \"./OrderConfirmationCard.types\";\n\nfunction LedgerRow({\n  label,\n  value,\n  strong = false,\n}: {\n  label: string;\n  value: string;\n  strong?: boolean;\n}) {\n  return (\n    <div\n      className={cn(\n        \"flex items-baseline gap-2 font-mono text-[11px] leading-5 sm:text-xs\",\n        strong ? \"font-semibold text-card-foreground\" : \"text-muted-foreground\",\n      )}\n    >\n      <span className=\"shrink-0\">{label}</span>\n      <span\n        aria-hidden=\"true\"\n        className=\"min-w-3 flex-1 border-b border-dotted border-border\"\n      />\n      <span className=\"shrink-0 text-right tabular-nums text-card-foreground\">\n        {value}\n      </span>\n    </div>\n  );\n}\n\nfunction LineItem({\n  item,\n  quantityLabel,\n}: {\n  item: OrderConfirmationItem;\n  quantityLabel: string;\n}) {\n  return (\n    <li className=\"flex items-start gap-3\">\n      {item.image ? (\n        <img\n          alt={item.image.alt}\n          className=\"size-14 shrink-0 rounded-[calc(var(--radius)-0.25rem)] border border-border object-cover\"\n          src={item.image.src}\n        />\n      ) : (\n        <span\n          aria-hidden=\"true\"\n          className=\"grid size-14 shrink-0 place-items-center rounded-[calc(var(--radius)-0.25rem)] border border-border bg-muted text-[10px] font-medium tracking-[0.12em] text-muted-foreground uppercase\"\n        >\n          {item.name.slice(0, 2)}\n        </span>\n      )}\n      <div className=\"min-w-0 flex-1\">\n        <p className=\"text-sm font-medium text-pretty\">{item.name}</p>\n        {item.detail ? (\n          <p className=\"mt-0.5 text-xs leading-5 text-muted-foreground\">\n            {item.detail}\n          </p>\n        ) : null}\n        <p className=\"mt-1 font-mono text-[11px] text-muted-foreground\">\n          {quantityLabel} {item.quantity}\n        </p>\n      </div>\n      <p className=\"shrink-0 font-mono text-sm tabular-nums\">{item.price}</p>\n    </li>\n  );\n}\n\nexport function OrderConfirmationCard({\n  className,\n  eyebrow = orderConfirmationCardMocks.default.eyebrow,\n  heading = orderConfirmationCardMocks.default.heading,\n  description = orderConfirmationCardMocks.default.description,\n  statusLabel = orderConfirmationCardMocks.default.statusLabel,\n  statusDetail = orderConfirmationCardMocks.default.statusDetail,\n  orderIdLabel = orderConfirmationCardMocks.default.orderIdLabel,\n  orderId = orderConfirmationCardMocks.default.orderId,\n  itemsHeading = orderConfirmationCardMocks.default.itemsHeading,\n  items = orderConfirmationCardMocks.default.items,\n  quantityLabel = orderConfirmationCardMocks.default.quantityLabel,\n  shippingHeading = orderConfirmationCardMocks.default.shippingHeading,\n  shippingLines = orderConfirmationCardMocks.default.shippingLines,\n  summary = orderConfirmationCardMocks.default.summary,\n  totalLabel = orderConfirmationCardMocks.default.totalLabel,\n  total = orderConfirmationCardMocks.default.total,\n  paymentMethodLabel = orderConfirmationCardMocks.default.paymentMethodLabel,\n  paymentMethod = orderConfirmationCardMocks.default.paymentMethod,\n  primaryAction = orderConfirmationCardMocks.default.primaryAction,\n  secondaryAction = orderConfirmationCardMocks.default.secondaryAction,\n  ...props\n}: OrderConfirmationCardProps) {\n  const headingId = useId();\n  const descriptionId = useId();\n  const lineItems = items ?? [];\n  const shipTo = shippingLines ?? [];\n  const totals = summary ?? [];\n\n  return (\n    <section\n      aria-describedby={description ? descriptionId : undefined}\n      aria-labelledby={headingId}\n      className={cn(\"bg-muted text-foreground\", className)}\n      data-slot=\"order-confirmation-card\"\n      {...props}\n    >\n      <div className=\"mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20\">\n        <header className=\"mx-auto max-w-xl text-center\">\n          {eyebrow ? (\n            <p className=\"text-xs font-medium tracking-[0.16em] text-muted-foreground uppercase\">\n              {eyebrow}\n            </p>\n          ) : null}\n          <h2\n            className=\"mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-5xl sm:leading-[1.1]\"\n            id={headingId}\n          >\n            {heading}\n          </h2>\n          {description ? (\n            <p\n              className=\"mt-3 text-sm leading-6 text-muted-foreground text-pretty sm:text-base\"\n              id={descriptionId}\n            >\n              {description}\n            </p>\n          ) : null}\n        </header>\n\n        <article\n          className={cn(\n            \"relative mx-auto mt-10 w-full max-w-md overflow-hidden rounded-[calc(var(--radius)+0.35rem)] border border-border bg-card text-card-foreground shadow-[0_22px_48px_-28px_color-mix(in_oklab,var(--jk-foreground),transparent_68%)]\",\n            \"motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500\",\n          )}\n        >\n          <div className=\"px-6 pt-7 pb-6 text-center\">\n            <span\n              className={cn(\n                \"mx-auto grid size-14 place-items-center rounded-full bg-success text-success-foreground\",\n                \"motion-safe:animate-in motion-safe:zoom-in-95 motion-safe:duration-500\",\n              )}\n            >\n              <CircleCheckIcon aria-hidden=\"true\" className=\"size-7\" />\n            </span>\n            <p className=\"mt-4 text-lg font-semibold tracking-tight\">\n              {statusLabel}\n            </p>\n            {statusDetail ? (\n              <p className=\"mt-1 text-sm leading-6 text-muted-foreground text-pretty\">\n                {statusDetail}\n              </p>\n            ) : null}\n\n            <p className=\"mt-5 rounded-[--radius] border border-border bg-muted/70 px-3 py-2.5\">\n              <span className=\"block text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase\">\n                {orderIdLabel}\n              </span>\n              <span className=\"mt-1 block font-mono text-sm tracking-[0.14em] text-foreground\">\n                {orderId}\n              </span>\n            </p>\n          </div>\n\n          {lineItems.length > 0 ? (\n            <div className=\"border-t border-border px-6 py-5 text-left\">\n              {itemsHeading ? (\n                <p className=\"mb-3 text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase\">\n                  {itemsHeading}\n                </p>\n              ) : null}\n              <ul className=\"space-y-4\">\n                {lineItems.map((item) => (\n                  <LineItem\n                    item={item}\n                    key={item.id}\n                    quantityLabel={quantityLabel ?? \"Qty\"}\n                  />\n                ))}\n              </ul>\n            </div>\n          ) : null}\n\n          {shipTo.length > 0 ? (\n            <div className=\"border-t border-border px-6 py-5 text-left\">\n              {shippingHeading ? (\n                <p className=\"mb-2 text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase\">\n                  {shippingHeading}\n                </p>\n              ) : null}\n              <p className=\"text-sm leading-6 text-pretty\">\n                {shipTo.map((line) => (\n                  <span className=\"block\" key={line}>\n                    {line}\n                  </span>\n                ))}\n              </p>\n            </div>\n          ) : null}\n\n          <div className=\"border-t border-border px-6 pt-5 pb-6\">\n            <div className=\"space-y-1.5\">\n              {totals.map((row: OrderConfirmationMeta) => (\n                <LedgerRow\n                  key={`${row.label}-${row.value}`}\n                  label={row.label}\n                  value={row.value}\n                />\n              ))}\n              {total ? (\n                <LedgerRow label={totalLabel ?? \"Paid\"} strong value={total} />\n              ) : null}\n              {paymentMethod ? (\n                <LedgerRow\n                  label={paymentMethodLabel ?? \"Method\"}\n                  value={paymentMethod}\n                />\n              ) : null}\n            </div>\n\n            {primaryAction || secondaryAction ? (\n              <div className=\"mt-5 flex flex-col gap-2\">\n                {primaryAction ? (\n                  <Button asChild className=\"w-full\" size=\"lg\">\n                    <a href={primaryAction.href}>{primaryAction.label}</a>\n                  </Button>\n                ) : null}\n                {secondaryAction ? (\n                  <Button\n                    asChild\n                    className=\"w-full\"\n                    size=\"lg\"\n                    variant=\"secondary\"\n                  >\n                    <a href={secondaryAction.href}>{secondaryAction.label}</a>\n                  </Button>\n                ) : null}\n              </div>\n            ) : null}\n          </div>\n        </article>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "order-confirmation-card/OrderConfirmationCard.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface OrderConfirmationItem {\n  id: string;\n  name: string;\n  detail?: string;\n  quantity: number;\n  price: string;\n  image?: {\n    src: string;\n    alt: string;\n  };\n}\n\nexport interface OrderConfirmationMeta {\n  label: string;\n  value: string;\n}\n\nexport interface OrderConfirmationAction {\n  label: string;\n  href: string;\n}\n\nexport interface OrderConfirmationCardProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  eyebrow?: string;\n  heading?: string;\n  description?: string;\n  statusLabel?: string;\n  statusDetail?: string;\n  orderIdLabel?: string;\n  orderId?: string;\n  itemsHeading?: string;\n  items?: OrderConfirmationItem[];\n  quantityLabel?: string;\n  shippingHeading?: string;\n  shippingLines?: string[];\n  summary?: OrderConfirmationMeta[];\n  totalLabel?: string;\n  total?: string;\n  paymentMethodLabel?: string;\n  paymentMethod?: string;\n  primaryAction?: OrderConfirmationAction;\n  secondaryAction?: OrderConfirmationAction;\n}\n"
+    },
+    {
+      "path": "order-confirmation-card/index.ts",
+      "type": "index",
+      "content": "export { OrderConfirmationCard } from \"./OrderConfirmationCard\";\nexport type * from \"./OrderConfirmationCard.types\";\n"
+    },
+    {
+      "path": "order-confirmation-card/OrderConfirmationCard.mocks.ts",
+      "type": "mocks",
+      "content": "import type { OrderConfirmationCardProps } from \"./OrderConfirmationCard.types\";\n\nexport const orderConfirmationCardMocks = {\n  default: {\n    eyebrow: \"Checkout complete\",\n    heading: \"Order on its way.\",\n    description:\n      \"A packed receipt for Harbor Atelier, with line items, ship-to, and the paid total on one card.\",\n    statusLabel: \"Order confirmed\",\n    statusDetail: \"We emailed this receipt to Mira Solano.\",\n    orderIdLabel: \"Order\",\n    orderId: \"HA-20418\",\n    itemsHeading: \"Items\",\n    items: [\n      {\n        id: \"overcoat\",\n        name: \"Studio wool overcoat\",\n        detail: \"Camel / M\",\n        quantity: 1,\n        price: \"$428.00\",\n        image: {\n          src: \"/assets/4ce360395e8f9d6e.webp\",\n          alt: \"Camel wool overcoat on a hanger\",\n        },\n      },\n      {\n        id: \"knit\",\n        name: \"Field knit\",\n        detail: \"Bone / S\",\n        quantity: 1,\n        price: \"$148.00\",\n        image: {\n          src: \"/assets/5fa1d074c0baca15.webp\",\n          alt: \"Cream knit sweater laid flat\",\n        },\n      },\n    ],\n    quantityLabel: \"Qty\",\n    shippingHeading: \"Ship to\",\n    shippingLines: [\"Mira Solano\", \"14 Pier Lane\", \"Harbor District, NY 10013\"],\n    summary: [\n      { label: \"Subtotal\", value: \"$576.00\" },\n      { label: \"Shipping\", value: \"$18.00\" },\n      { label: \"Arrives\", value: \"Wed 23 Sep\" },\n    ],\n    totalLabel: \"Paid\",\n    total: \"$594.00\",\n    paymentMethodLabel: \"Method\",\n    paymentMethod: \"Visa 4418\",\n    primaryAction: { label: \"Track order\", href: \"#track\" },\n    secondaryAction: { label: \"Continue shopping\", href: \"#shop\" },\n  },\n  alternate: {\n    eyebrow: \"Gift sent\",\n    heading: \"Packed for Halden.\",\n    description:\n      \"A short gift order with one jacket and a note on the slip.\",\n    statusLabel: \"Gift confirmed\",\n    statusDetail: \"Receipt sent to Jonas Rhee. The jacket goes to Halden Quay.\",\n    orderIdLabel: \"Order\",\n    orderId: \"HA-G-7712\",\n    itemsHeading: \"Items\",\n    items: [\n      {\n        id: \"bomber\",\n        name: \"Night bomber\",\n        detail: \"Ink / L\",\n        quantity: 1,\n        price: \"$312.00\",\n        image: {\n          src: \"/assets/6baa48de9bbbdb4b.webp\",\n          alt: \"Black bomber jacket on a studio background\",\n        },\n      },\n    ],\n    quantityLabel: \"Qty\",\n    shippingHeading: \"Ship to\",\n    shippingLines: [\"Jonas Rhee\", \"Halden Quay Dock 2\", \"Hold for pickup\"],\n    summary: [\n      { label: \"Subtotal\", value: \"$312.00\" },\n      { label: \"Shipping\", value: \"Pickup\" },\n      { label: \"Note\", value: \"Wear it on the night crossing.\" },\n    ],\n    totalLabel: \"Paid\",\n    total: \"$312.00\",\n    paymentMethodLabel: \"Method\",\n    paymentMethod: \"Mastercard 9021\",\n    primaryAction: { label: \"View receipt\", href: \"#receipt\" },\n    secondaryAction: { label: \"Shop again\", href: \"#shop\" },\n  },\n} satisfies Record<\"default\" | \"alternate\", OrderConfirmationCardProps>;\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <OrderConfirmationCard {...orderConfirmationCardMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <OrderConfirmationCard {...orderConfirmationCardMocks.alternate} />\n    </div>"
+    }
+  ]
+}
