@@ -1,0 +1,59 @@
+import type { ComponentMeta } from "@jabkit/build-registry";
+
+export default {
+  name: "gridline-dashboard",
+  displayName: "GridlineDashboard",
+  version: "1.0.0",
+  addedAt: "2026-09-15",
+  description:
+    "Electrical-grid workspace for network modelling, asset flexibility, and operator workflows.",
+  sectionCategory: "application-shell",
+  purpose:
+    "Frames a DSO operations product with an icon rail, model status strip, workspace cards, and map-led modelling or flexibility views.",
+  bestFor: [
+    "utility and energy operations consoles",
+    "network modelling workspaces",
+    "asset flexibility maps",
+  ],
+  avoidFor: ["marketing landing pages", "single-purpose auth forms"],
+  tone: ["technical", "structured", "professional"],
+  industries: ["energy", "utilities"],
+  contentDensity: "high",
+  visualWeight: "high",
+  layout: {
+    type: "sidebar",
+    alignment: "left",
+    columns: 2,
+  },
+  slots: [
+    "brand",
+    "sidebarNavigation",
+    "modelStatus",
+    "appearanceToggle",
+    "accountMenu",
+    "workspaceSearch",
+    "workspaceCards",
+    "networkMap",
+    "assetBrowser",
+  ],
+  capabilities: {
+    supportsImage: false,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: true,
+    supportsDarkMode: true,
+  },
+  tags: [
+    "dashboard",
+    "gridline",
+    "electrical-grid",
+    "modelling",
+    "flexibility",
+    "map",
+    "sidebar",
+  ],
+  dependencies: ["lucide-react"],
+  registryDependencies: ["dropdown-menu", "switch", "tooltip"],
+  a11y: { keyboardNav: true, reducedMotion: true },
+  preview: { layout: "fit", width: 1440, height: 900 },
+} satisfies ComponentMeta;
