@@ -3,17 +3,17 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "bright-lizard",
   displayName: "BrightLizard",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A bright orbital loading indicator with a token-colored arc and a pulsing core.",
+    "A circular letter-bounce loader with a token-mapped inset-shadow ring.",
   sectionCategory: "feedback",
   purpose:
-    "Signals an in-progress wait with a compact spinner that stays on semantic tokens in light and dark.",
+    "Signals an in-progress wait with the Uiverse bright-lizard letter ring, remapped onto semantic tokens.",
   bestFor: [
-    "inline async waits",
+    "full-panel async waits",
     "empty-state and overlay loading",
-    "button or panel pending states",
+    "route or workspace sync indicators",
   ],
   avoidFor: [
     "progress that has a known percentage",
@@ -21,7 +21,7 @@ export default {
   ],
   tone: ["playful", "clean"],
   contentDensity: "low",
-  visualWeight: "low",
+  visualWeight: "medium",
   layout: {
     type: "stack",
     alignment: "center",
