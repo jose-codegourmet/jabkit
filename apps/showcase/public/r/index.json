@@ -736,6 +736,63 @@
     }
   },
   {
+    "name": "empty-penguin",
+    "displayName": "EmptyPenguin",
+    "category": "atoms",
+    "description": "A compact on/off switch with a sliding thumb, token-colored track, and a quiet unused state.",
+    "sectionCategory": "form",
+    "purpose": "Lets people flip a single persistent setting without a labeled checkbox or a full settings row.",
+    "bestFor": [
+      "settings and preference toggles",
+      "compact form rows",
+      "feature flags in light product UI"
+    ],
+    "avoidFor": [
+      "multi-select choices",
+      "actions that submit or navigate",
+      "destructive confirmations"
+    ],
+    "tone": [
+      "clean",
+      "playful"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "center"
+    },
+    "slots": [
+      "control"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "switch",
+      "toggle",
+      "form",
+      "control",
+      "atom"
+    ],
+    "addedAt": "2026-09-15",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "fast-puma",
     "displayName": "FastPuma",
     "category": "atoms",
