@@ -3273,9 +3273,9 @@
     "name": "admit-one-ticket",
     "displayName": "AdmitOneTicket",
     "category": "marketing",
-    "description": "Dithered event ticket with a perforated admit-one stub, pointer-driven 3D tilt, and a moving glare over customizable show details.",
+    "description": "Notched event ticket with a perforated admit-one stub, dithered stock, pointer tilt, and a glare that tracks the pointer.",
     "sectionCategory": "content",
-    "purpose": "Turns an event landing into a physical door pass visitors can inspect, with stub, serial, and venue copy that stay on semantic tokens.",
+    "purpose": "Puts a physical door pass on an event landing so visitors can read presenter, guest, venue, and stub copy at ticket proportions.",
     "bestFor": [
       "concert and festival landings",
       "conference or school-day announcements",
@@ -3304,16 +3304,13 @@
       "columns": 1
     },
     "slots": [
-      "headline",
-      "description",
-      "stub",
       "presenter",
       "event",
       "attendee",
       "venue",
       "dates",
-      "watermark",
-      "serial"
+      "stub",
+      "watermark"
     ],
     "capabilities": {
       "supportsImage": false,
