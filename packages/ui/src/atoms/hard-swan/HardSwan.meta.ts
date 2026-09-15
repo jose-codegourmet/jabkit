@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "hard-swan",
   displayName: "HardSwan",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A dual-tone diagonal hatch field for covers, banners, and empty surfaces.",
+    "A square-corner 45-degree dual-tone hatch tiled at 95px by 15px with a 135px offset.",
   sectionCategory: "content",
   purpose:
-    "Fills a region with a token-mapped weave so a page can show texture without a photo or a flat fill.",
+    "Fills a region with the Uiverse hard-swan weave, mapped to tokens, without rounding the field to the shared control radius.",
   bestFor: [
     "section covers and empty-state backdrops",
     "card or banner texture behind a short caption",
