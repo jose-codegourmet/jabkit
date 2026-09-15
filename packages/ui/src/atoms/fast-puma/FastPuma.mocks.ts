@@ -1,5 +1,9 @@
 export const fastPumaMocks = {
-  default: { label: "Launch" },
-  alternate: { label: "Fire", tone: "outline" as const },
-  compact: { label: "Go", size: "sm" as const },
+  default: {},
+  compact: { size: "sm" as const },
+  spacious: { size: "lg" as const },
+  inverted: {
+    defaultPlusPressed: true,
+    defaultMinusPressed: false,
+  },
 } as const;
