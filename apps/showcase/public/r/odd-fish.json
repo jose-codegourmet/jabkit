@@ -1,0 +1,93 @@
+{
+  "name": "odd-fish",
+  "displayName": "OddFish",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A compact content card with a token-mixed fin, hover sheen, and room for a title, body, and action.",
+  "sectionCategory": "content",
+  "purpose": "Gives a single idea a readable surface that lifts on hover without leaving semantic tokens in light or dark.",
+  "bestFor": [
+    "catalogue tiles and note cards",
+    "short feature blurbs beside other atoms",
+    "empty or placeholder slots that still need a headline"
+  ],
+  "avoidFor": [
+    "primary form controls",
+    "full-bleed marketing sections",
+    "dense data that needs a plain table"
+  ],
+  "tone": [
+    "playful",
+    "clean"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "eyebrow",
+    "title",
+    "description",
+    "action"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "card",
+    "content",
+    "hover",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "odd-fish/OddFish.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { OddFishProps } from \"./OddFish.types\";\n\nconst sizes = {\n  sm: \"max-w-[16rem] gap-2 p-4\",\n  md: \"max-w-[20rem] gap-2.5 p-5\",\n  lg: \"max-w-[24rem] gap-3 p-6\",\n} as const;\n\nconst titleSizes = {\n  sm: \"text-base\",\n  md: \"text-lg\",\n  lg: \"text-xl\",\n} as const;\n\nexport function OddFish({\n  className,\n  children,\n  eyebrow = \"Note\",\n  title = \"OddFish\",\n  description = \"A compact card for a single idea, still on semantic tokens.\",\n  action,\n  size = \"md\",\n  tone = \"default\",\n  ...props\n}: OddFishProps) {\n  return (\n    <article\n      className={cn(\n        \"jk-odd-fish relative isolate flex flex-col overflow-hidden rounded-[--radius] border border-border text-card-foreground shadow-[var(--jk-shadow-control)]\",\n        sizes[size],\n        className,\n      )}\n      data-size={size}\n      data-slot=\"odd-fish\"\n      data-tone={tone}\n      {...props}\n    >\n      <style href=\"jk-odd-fish\" precedence=\"default\">{`\n        .jk-odd-fish {\n          background: var(--jk-card);\n        }\n        .jk-odd-fish[data-tone=\"muted\"] {\n          background: color-mix(in oklab, var(--jk-muted) 72%, var(--jk-card));\n        }\n        .jk-odd-fish[data-tone=\"accent\"] {\n          background: color-mix(in oklab, var(--jk-accent) 64%, var(--jk-card));\n        }\n        .jk-odd-fish-fin {\n          background: linear-gradient(\n            90deg,\n            var(--jk-primary),\n            var(--jk-chart-5),\n            var(--jk-chart-1)\n          );\n        }\n        .jk-odd-fish-sheen {\n          background: linear-gradient(\n            115deg,\n            transparent 28%,\n            color-mix(in oklab, var(--jk-primary-foreground) 28%, transparent) 46%,\n            transparent 64%\n          );\n          opacity: 0;\n        }\n        .jk-odd-fish:hover .jk-odd-fish-sheen,\n        .jk-odd-fish:focus-within .jk-odd-fish-sheen {\n          opacity: 1;\n        }\n        .jk-odd-fish-action {\n          color: var(--jk-primary);\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-odd-fish {\n            transition:\n              transform 220ms cubic-bezier(0.22, 1, 0.36, 1),\n              box-shadow 220ms ease,\n              background-color 220ms ease;\n          }\n          .jk-odd-fish:hover,\n          .jk-odd-fish:focus-within {\n            transform: translateY(-3px);\n          }\n          .jk-odd-fish-sheen {\n            transform: translateX(-40%);\n            transition:\n              opacity 280ms ease,\n              transform 520ms cubic-bezier(0.22, 1, 0.36, 1);\n          }\n          .jk-odd-fish:hover .jk-odd-fish-sheen,\n          .jk-odd-fish:focus-within .jk-odd-fish-sheen {\n            transform: translateX(28%);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-odd-fish,\n          .jk-odd-fish-sheen {\n            transition: none;\n            transform: none;\n          }\n          .jk-odd-fish-sheen {\n            opacity: 0.18;\n          }\n        }\n      `}</style>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-odd-fish-fin pointer-events-none absolute inset-x-0 top-0 h-1\"\n      />\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-odd-fish-sheen pointer-events-none absolute inset-0\"\n      />\n      {children ?? (\n        <div className=\"relative z-10 flex flex-col gap-[inherit]\">\n          {eyebrow ? (\n            <p className=\"text-xs font-medium text-muted-foreground\">{eyebrow}</p>\n          ) : null}\n          {title ? (\n            <h3\n              className={cn(\n                \"font-semibold tracking-tight text-card-foreground\",\n                titleSizes[size],\n              )}\n            >\n              {title}\n            </h3>\n          ) : null}\n          {description ? (\n            <p className=\"text-sm leading-relaxed text-muted-foreground\">\n              {description}\n            </p>\n          ) : null}\n          {action ? (\n            <p className=\"jk-odd-fish-action pt-1 text-sm font-medium\">{action}</p>\n          ) : null}\n        </div>\n      )}\n    </article>\n  );\n}\n"
+    },
+    {
+      "path": "odd-fish/OddFish.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type OddFishSize = \"sm\" | \"md\" | \"lg\";\nexport type OddFishTone = \"default\" | \"muted\" | \"accent\";\n\nexport interface OddFishProps extends HTMLAttributes<HTMLElement> {\n  children?: ReactNode;\n  eyebrow?: string;\n  title?: string;\n  description?: string;\n  action?: string;\n  size?: OddFishSize;\n  tone?: OddFishTone;\n}\n"
+    },
+    {
+      "path": "odd-fish/index.ts",
+      "type": "index",
+      "content": "export { OddFish } from \"./OddFish\";\nexport type * from \"./OddFish.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<OddFish {...oddFishMocks.default} />"
+    },
+    {
+      "name": "Accent",
+      "code": "<OddFish {...oddFishMocks.accent} />"
+    }
+  ]
+}
