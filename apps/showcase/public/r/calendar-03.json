@@ -1,0 +1,100 @@
+{
+  "name": "calendar-03",
+  "displayName": "Calendar03",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Single-month appointment calendar paired with a scrollable list of time slots.",
+  "sectionCategory": "calendar",
+  "purpose": "Lets a user choose a visit date and an open time in one compact picker instead of stepping through separate screens.",
+  "bestFor": [
+    "clinic and salon booking",
+    "consult scheduling",
+    "service appointment flows"
+  ],
+  "avoidFor": [
+    "multi-month range selection",
+    "full-page operations calendars"
+  ],
+  "tone": [
+    "professional",
+    "clean"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "split",
+    "alignment": "left",
+    "columns": 2
+  },
+  "slots": [
+    "headline",
+    "monthGrid",
+    "timeList",
+    "confirmAction"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "calendar",
+    "appointment",
+    "time",
+    "booking",
+    "atom"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button",
+    "scroll-area"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center",
+    "width": 720,
+    "height": 520
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "calendar-03/Calendar03.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ChevronLeftIcon, ChevronRightIcon } from \"lucide-react\";\nimport * as React from \"react\";\nimport { Button } from \"@/components/jabkit/button\";\nimport { ScrollArea } from \"@/components/jabkit/scroll-area\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  Calendar03Copy,\n  Calendar03Props,\n  Calendar03Slot,\n} from \"./Calendar03.types\";\n\nconst DEFAULT_COPY: Calendar03Copy = {\n  title: \"Book an appointment\",\n  description: \"Choose a date, then pick an open time.\",\n  timesLabel: \"Available times\",\n  previousMonth: \"Previous month\",\n  nextMonth: \"Next month\",\n  confirmLabel: \"Continue\",\n  emptyTimes: \"No times are open on this date.\",\n};\n\nconst DEFAULT_SLOTS: Calendar03Slot[] = [\n  { value: \"09:00\", label: \"9:00 AM\" },\n  { value: \"09:30\", label: \"9:30 AM\" },\n  { value: \"10:00\", label: \"10:00 AM\" },\n  { value: \"10:30\", label: \"10:30 AM\" },\n  { value: \"11:00\", label: \"11:00 AM\" },\n  { value: \"13:00\", label: \"1:00 PM\" },\n  { value: \"13:30\", label: \"1:30 PM\" },\n  { value: \"14:00\", label: \"2:00 PM\" },\n  { value: \"15:00\", label: \"3:00 PM\" },\n  { value: \"16:00\", label: \"4:00 PM\" },\n];\n\nfunction startOfDay(date: Date) {\n  return new Date(date.getFullYear(), date.getMonth(), date.getDate());\n}\n\nfunction startOfMonth(date: Date) {\n  return new Date(date.getFullYear(), date.getMonth(), 1);\n}\n\nfunction addMonths(date: Date, amount: number) {\n  return new Date(date.getFullYear(), date.getMonth() + amount, 1);\n}\n\nfunction isSameDay(a: Date, b: Date) {\n  return (\n    a.getFullYear() === b.getFullYear() &&\n    a.getMonth() === b.getMonth() &&\n    a.getDate() === b.getDate()\n  );\n}\n\nfunction isSameMonth(a: Date, b: Date) {\n  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth();\n}\n\nfunction dayKey(date: Date) {\n  const month = String(date.getMonth() + 1).padStart(2, \"0\");\n  const day = String(date.getDate()).padStart(2, \"0\");\n  return `${date.getFullYear()}-${month}-${day}`;\n}\n\nfunction monthTitle(date: Date, locale: string) {\n  return new Intl.DateTimeFormat(locale, {\n    month: \"long\",\n    year: \"numeric\",\n  }).format(date);\n}\n\nfunction weekdayLabels(locale: string, start: number) {\n  const formatter = new Intl.DateTimeFormat(locale, { weekday: \"short\" });\n  return Array.from({ length: 7 }, (_, index) => {\n    const day = new Date(2024, 0, 7 + start + index);\n    return formatter.format(day);\n  });\n}\n\nfunction monthCells(month: Date, startWeekday: number) {\n  const first = startOfMonth(month);\n  const offset = (first.getDay() - startWeekday + 7) % 7;\n  const daysInMonth = new Date(\n    month.getFullYear(),\n    month.getMonth() + 1,\n    0,\n  ).getDate();\n  const cells: Array<{ key: string; date?: Date }> = [];\n  for (let i = 0; i < offset; i++) {\n    cells.push({ key: `pad-${dayKey(first)}-${i}` });\n  }\n  for (let day = 1; day <= daysInMonth; day++) {\n    const date = new Date(month.getFullYear(), month.getMonth(), day);\n    cells.push({ key: dayKey(date), date });\n  }\n  return cells;\n}\n\nexport function Calendar03({\n  className,\n  defaultMonth,\n  defaultSelected,\n  selected: selectedProp,\n  onSelect,\n  defaultTime,\n  time: timeProp,\n  onTimeChange,\n  slots = DEFAULT_SLOTS,\n  copy,\n  locale = \"en-US\",\n  weekStartsOn = 0,\n  onConfirm,\n  ...props\n}: Calendar03Props) {\n  const headingId = React.useId();\n  const descriptionId = React.useId();\n  const timesId = React.useId();\n  const strings = { ...DEFAULT_COPY, ...copy };\n  const weekdays = weekdayLabels(locale, weekStartsOn);\n\n  const [viewMonth, setViewMonth] = React.useState(() =>\n    startOfMonth(defaultMonth ?? defaultSelected ?? new Date()),\n  );\n  const [uncontrolledSelected, setUncontrolledSelected] = React.useState<\n    Date | undefined\n  >(() => (defaultSelected ? startOfDay(defaultSelected) : undefined));\n  const [uncontrolledTime, setUncontrolledTime] = React.useState(\n    defaultTime ?? slots.find((slot) => slot.available !== false)?.value ?? \"\",\n  );\n\n  const selected = selectedProp\n    ? startOfDay(selectedProp)\n    : uncontrolledSelected;\n  const time = timeProp ?? uncontrolledTime;\n  const selectedSlot = slots.find((slot) => slot.value === time);\n  const cells = monthCells(viewMonth, weekStartsOn);\n\n  const pickDay = (day: Date) => {\n    const next = startOfDay(day);\n    if (selectedProp === undefined) setUncontrolledSelected(next);\n    onSelect?.(next);\n  };\n\n  const pickTime = (value: string) => {\n    if (timeProp === undefined) setUncontrolledTime(value);\n    onTimeChange?.(value);\n  };\n\n  const confirm = () => {\n    if (!selected || !time) return;\n    onConfirm?.({ date: selected, time });\n  };\n\n  return (\n    <section\n      data-slot=\"calendar-03\"\n      aria-labelledby={headingId}\n      aria-describedby={descriptionId}\n      className={cn(\n        \"w-full max-w-[40rem] overflow-hidden rounded-[--radius] border border-border bg-card text-card-foreground shadow-sm\",\n        className,\n      )}\n      {...props}\n    >\n      <header className=\"border-b border-border px-5 py-4\">\n        <h2 id={headingId} className=\"text-base font-semibold tracking-tight\">\n          {strings.title}\n        </h2>\n        <p id={descriptionId} className=\"mt-1 text-sm text-muted-foreground\">\n          {strings.description}\n        </p>\n      </header>\n\n      <div className=\"grid md:grid-cols-[minmax(0,1.15fr)_minmax(11rem,0.85fr)]\">\n        <div className=\"border-b border-border p-4 md:border-r md:border-b-0\">\n          <div className=\"mb-3 flex items-center justify-between gap-2\">\n            <Button\n              type=\"button\"\n              variant=\"ghost\"\n              size=\"sm\"\n              className=\"size-8 p-0\"\n              aria-label={strings.previousMonth}\n              onClick={() => setViewMonth(addMonths(viewMonth, -1))}\n            >\n              <ChevronLeftIcon className=\"size-4\" />\n            </Button>\n            <p className=\"text-sm font-medium capitalize\">\n              {monthTitle(viewMonth, locale)}\n            </p>\n            <Button\n              type=\"button\"\n              variant=\"ghost\"\n              size=\"sm\"\n              className=\"size-8 p-0\"\n              aria-label={strings.nextMonth}\n              onClick={() => setViewMonth(addMonths(viewMonth, 1))}\n            >\n              <ChevronRightIcon className=\"size-4\" />\n            </Button>\n          </div>\n          <div className=\"grid grid-cols-7 gap-1 text-center\">\n            {weekdays.map((label) => (\n              <span\n                key={`${locale}-${label}`}\n                className=\"text-[10px] font-medium tracking-wide text-muted-foreground uppercase\"\n              >\n                {label}\n              </span>\n            ))}\n            {cells.map((cell) => {\n              if (!cell.date) {\n                return <span key={cell.key} />;\n              }\n              const day = cell.date;\n              const isSelected = selected ? isSameDay(day, selected) : false;\n              const isToday = isSameDay(day, startOfDay(new Date()));\n              return (\n                <button\n                  key={cell.key}\n                  type=\"button\"\n                  onClick={() => pickDay(day)}\n                  aria-pressed={isSelected}\n                  aria-label={day.toLocaleDateString(locale, {\n                    weekday: \"long\",\n                    month: \"long\",\n                    day: \"numeric\",\n                  })}\n                  className={cn(\n                    \"h-8 rounded-md text-xs tabular-nums transition-colors motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none\",\n                    isSameMonth(day, viewMonth)\n                      ? \"text-foreground\"\n                      : \"text-muted-foreground\",\n                    isSelected && \"bg-primary text-primary-foreground\",\n                    !isSelected && isToday && \"ring-1 ring-ring\",\n                    !isSelected && \"hover:bg-accent\",\n                  )}\n                >\n                  {day.getDate()}\n                </button>\n              );\n            })}\n          </div>\n        </div>\n\n        <div className=\"flex min-h-[17rem] flex-col p-4\">\n          <p\n            id={timesId}\n            className=\"mb-2 text-xs font-medium tracking-wide text-muted-foreground\"\n          >\n            {strings.timesLabel}\n          </p>\n          <ScrollArea aria-labelledby={timesId} className=\"min-h-0 flex-1 pr-1\">\n            {slots.length === 0 ? (\n              <p className=\"text-sm text-muted-foreground\">\n                {strings.emptyTimes}\n              </p>\n            ) : (\n              <ul className=\"flex flex-col gap-1.5\">\n                {slots.map((slot) => {\n                  const taken = slot.available === false;\n                  const active = slot.value === time && !taken;\n                  return (\n                    <li key={slot.value}>\n                      <button\n                        type=\"button\"\n                        disabled={taken}\n                        aria-pressed={active}\n                        onClick={() => pickTime(slot.value)}\n                        className={cn(\n                          \"flex h-9 w-full items-center justify-center rounded-[--radius] border text-sm transition-colors motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none\",\n                          active &&\n                            \"border-primary bg-primary text-primary-foreground\",\n                          !active &&\n                            !taken &&\n                            \"border-border bg-background text-foreground hover:bg-accent\",\n                          taken &&\n                            \"cursor-not-allowed border-border bg-muted text-muted-foreground\",\n                        )}\n                      >\n                        {slot.label}\n                      </button>\n                    </li>\n                  );\n                })}\n              </ul>\n            )}\n          </ScrollArea>\n        </div>\n      </div>\n\n      <footer className=\"flex flex-col gap-3 border-t border-border px-5 py-4 sm:flex-row sm:items-center sm:justify-between\">\n        <p className=\"text-sm text-muted-foreground\">\n          {selected\n            ? `${selected.toLocaleDateString(locale, {\n                weekday: \"short\",\n                month: \"short\",\n                day: \"numeric\",\n              })}${selectedSlot ? ` · ${selectedSlot.label}` : \"\"}`\n            : strings.description}\n        </p>\n        <Button\n          type=\"button\"\n          size=\"sm\"\n          disabled={!selected || !time}\n          onClick={confirm}\n        >\n          {strings.confirmLabel}\n        </Button>\n      </footer>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "calendar-03/Calendar03.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface Calendar03Slot {\n  value: string;\n  label: string;\n  available?: boolean;\n}\n\nexport interface Calendar03Copy {\n  title: string;\n  description: string;\n  timesLabel: string;\n  previousMonth: string;\n  nextMonth: string;\n  confirmLabel: string;\n  emptyTimes: string;\n}\n\nexport interface Calendar03Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"onSelect\"> {\n  defaultMonth?: Date;\n  defaultSelected?: Date;\n  selected?: Date;\n  onSelect?: (date: Date) => void;\n  defaultTime?: string;\n  time?: string;\n  onTimeChange?: (time: string) => void;\n  slots?: Calendar03Slot[];\n  copy?: Partial<Calendar03Copy>;\n  locale?: string;\n  weekStartsOn?: 0 | 1;\n  onConfirm?: (selection: { date: Date; time: string }) => void;\n}\n"
+    },
+    {
+      "path": "calendar-03/index.ts",
+      "type": "index",
+      "content": "export { Calendar03 } from \"./Calendar03\";\nexport type * from \"./Calendar03.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background p-6 text-foreground\">\n      <Calendar03 {...calendar03Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background p-6 text-foreground\">\n      <Calendar03 {...calendar03Mocks.alternate} />\n    </div>"
+    }
+  ]
+}

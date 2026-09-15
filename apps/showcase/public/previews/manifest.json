@@ -3854,6 +3854,47 @@
           "format": "webp"
         }
       ]
+    },
+    "calendar-03": {
+      "sourceHash": "2e9b00a69c0bb88a4deb569f6d2f590a22739ce81864ffc6efbec4b5420310e9",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "calendar-03.Default.dark.webp",
+          "bytes": 17382,
+          "width": 840,
+          "height": 796,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "calendar-03.Variants.dark.webp",
+          "bytes": 14156,
+          "width": 840,
+          "height": 560,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "calendar-03.ThemeComparison.dark.webp",
+          "bytes": 32498,
+          "width": 840,
+          "height": 844,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
