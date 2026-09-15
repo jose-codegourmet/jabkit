@@ -9483,9 +9483,9 @@
     "name": "table-2",
     "displayName": "Table2",
     "category": "dashboard",
-    "description": "Filterable invoices table with row selection, bulk actions, status badges, and pagination.",
+    "description": "Filterable invoices table with client search, row selection, bulk actions, status badges, and pagination.",
     "sectionCategory": "billing",
-    "purpose": "Lets operators search invoices, select rows, and run mark-paid, reminder, and download actions.",
+    "purpose": "Lets operators filter invoices by client, select rows, and run mark-paid, reminder, and download actions.",
     "bestFor": [
       "billing dashboards",
       "accounts receivable queues",
@@ -9511,7 +9511,8 @@
       "alignment": "left"
     },
     "slots": [
-      "tableHeader",
+      "pageHeader",
+      "outstanding",
       "search",
       "bulkActions",
       "invoiceRows",
@@ -9519,7 +9520,7 @@
       "pagination"
     ],
     "capabilities": {
-      "supportsImage": false,
+      "supportsImage": true,
       "supportsVideo": false,
       "supportsForm": true,
       "supportsCTA": true,

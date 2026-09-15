@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "table-2",
   displayName: "Table2",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Filterable invoices table with row selection, bulk actions, status badges, and pagination.",
+    "Filterable invoices table with client search, row selection, bulk actions, status badges, and pagination.",
   sectionCategory: "billing",
   purpose:
-    "Lets operators search invoices, select rows, and run mark-paid, reminder, and download actions.",
+    "Lets operators filter invoices by client, select rows, and run mark-paid, reminder, and download actions.",
   bestFor: [
     "billing dashboards",
     "accounts receivable queues",
@@ -25,7 +25,8 @@ export default {
     alignment: "left",
   },
   slots: [
-    "tableHeader",
+    "pageHeader",
+    "outstanding",
     "search",
     "bulkActions",
     "invoiceRows",
@@ -33,7 +34,7 @@ export default {
     "pagination",
   ],
   capabilities: {
-    supportsImage: false,
+    supportsImage: true,
     supportsVideo: false,
     supportsForm: true,
     supportsCTA: true,
@@ -49,13 +50,7 @@ export default {
     "selection",
   ],
   dependencies: ["lucide-react"],
-  registryDependencies: [
-    "badge",
-    "button",
-    "checkbox",
-    "dropdown-menu",
-    "input",
-  ],
+  registryDependencies: ["avatar", "badge", "dropdown-menu"],
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: { layout: "fit", width: 1440, height: 900 },
 } satisfies ComponentMeta;
