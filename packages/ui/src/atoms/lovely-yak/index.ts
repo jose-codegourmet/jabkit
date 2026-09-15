@@ -1,2 +1,7 @@
 export { LovelyYak } from "./LovelyYak";
-export type * from "./LovelyYak.types";
+export type {
+  LovelyYakBar,
+  LovelyYakProps,
+  LovelyYakSize,
+  LovelyYakStat,
+} from "./LovelyYak.types";

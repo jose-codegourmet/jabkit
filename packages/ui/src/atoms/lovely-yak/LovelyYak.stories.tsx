@@ -20,10 +20,10 @@ export const Default: Story = {
   ),
 };
 
-export const WithAction: Story = {
-  args: { ...lovelyYakMocks.withAction },
+export const WeeklyPulse: Story = {
+  args: { ...lovelyYakMocks.weeklyPulse },
   render: () => (
-    <LovelyYak {...lovelyYakMocks.withAction} />
+    <LovelyYak {...lovelyYakMocks.weeklyPulse} />
   ),
 };
 
@@ -35,7 +35,7 @@ export const ThemeComparison: Story = {
         <LovelyYak {...lovelyYakMocks.default} />
       </div>
       <div className="dark flex items-center justify-center bg-background p-8">
-        <LovelyYak {...lovelyYakMocks.withAction} />
+        <LovelyYak {...lovelyYakMocks.weeklyPulse} />
       </div>
     </div>
   ),
