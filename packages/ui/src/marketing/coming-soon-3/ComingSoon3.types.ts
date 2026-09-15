@@ -1,11 +1,5 @@
 import type { FormEventHandler, HTMLAttributes } from "react";
 
-export interface ComingSoon3Logo {
-  name: string;
-  href?: string;
-  src?: string;
-}
-
 export interface ComingSoon3UnitLabels {
   days: string;
   hours: string;
@@ -15,7 +9,6 @@ export interface ComingSoon3UnitLabels {
 
 export interface ComingSoon3Props
   extends Omit<HTMLAttributes<HTMLElement>, "title" | "onSubmit"> {
-  logo?: ComingSoon3Logo;
   badge?: string;
   title?: string;
   description?: string;
@@ -29,7 +22,6 @@ export interface ComingSoon3Props
   successDescription?: string;
   launchedTitle?: string;
   launchedDescription?: string;
-  footnote?: string;
   onSubscribe?: (email: string) => void;
   onSubmit?: FormEventHandler<HTMLFormElement>;
 }
