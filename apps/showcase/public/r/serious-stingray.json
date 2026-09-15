@@ -1,0 +1,91 @@
+{
+  "name": "serious-stingray",
+  "displayName": "SeriousStingray",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A text CTA whose accent rails grow from opposite edges on hover and focus.",
+  "sectionCategory": "action",
+  "purpose": "Marks a quiet text action when a filled button would be too heavy but the control still needs a clear hover cue.",
+  "bestFor": [
+    "inline navigation or continue links styled as buttons",
+    "editorial or marketing text actions",
+    "secondary CTAs next to a solid primary"
+  ],
+  "avoidFor": [
+    "primary form submit actions that need a filled hit target",
+    "destructive confirms that need a solid warning surface"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "actionLabel"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "button",
+    "cta",
+    "action",
+    "underline",
+    "atom"
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "serious-stingray/SeriousStingray.tsx",
+      "type": "component",
+      "content": "import { Slot } from \"@radix-ui/react-slot\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { SeriousStingrayProps } from \"./SeriousStingray.types\";\n\nconst sizes = {\n  sm: \"gap-1 text-sm\",\n  md: \"gap-1.5 text-xl\",\n  lg: \"gap-2 text-2xl\",\n} as const;\n\nexport function SeriousStingray({\n  className,\n  children,\n  label = \"Button\",\n  size = \"md\",\n  accent = \"primary\",\n  asChild = false,\n  type,\n  ...props\n}: SeriousStingrayProps) {\n  const Component = asChild ? Slot : \"button\";\n  const content = children ?? label;\n\n  return (\n    <Component\n      className={cn(\n        \"jk-serious-stingray inline-flex shrink-0 flex-col items-stretch bg-transparent font-semibold text-foreground whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50\",\n        sizes[size],\n        className,\n      )}\n      data-accent={accent}\n      data-size={size}\n      data-slot=\"serious-stingray\"\n      type={asChild ? undefined : (type ?? \"button\")}\n      {...props}\n    >\n      <style href=\"jk-serious-stingray\" precedence=\"default\">{`\n        .jk-serious-stingray-rail {\n          display: block;\n          height: 2px;\n          width: 0;\n          background: var(--jk-primary);\n        }\n        .jk-serious-stingray[data-accent=\"destructive\"] .jk-serious-stingray-rail {\n          background: var(--jk-destructive);\n        }\n        .jk-serious-stingray-rail-start {\n          margin-inline-start: auto;\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-serious-stingray-rail {\n            transition: width 500ms ease;\n          }\n          .jk-serious-stingray:hover .jk-serious-stingray-rail,\n          .jk-serious-stingray:focus-visible .jk-serious-stingray-rail {\n            width: 100%;\n          }\n          .jk-serious-stingray:active {\n            transform: translateY(1px);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-serious-stingray-rail {\n            width: 100%;\n            transition: none;\n          }\n        }\n      `}</style>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-serious-stingray-rail jk-serious-stingray-rail-start\"\n      />\n      <span className=\"text-center\">{content}</span>\n      <span aria-hidden=\"true\" className=\"jk-serious-stingray-rail\" />\n    </Component>\n  );\n}\n"
+    },
+    {
+      "path": "serious-stingray/SeriousStingray.types.ts",
+      "type": "types",
+      "content": "import type { ButtonHTMLAttributes, ReactNode } from \"react\";\n\nexport type SeriousStingraySize = \"sm\" | \"md\" | \"lg\";\n\nexport type SeriousStingrayAccent = \"primary\" | \"destructive\";\n\nexport interface SeriousStingrayProps\n  extends ButtonHTMLAttributes<HTMLButtonElement> {\n  children?: ReactNode;\n  label?: string;\n  size?: SeriousStingraySize;\n  accent?: SeriousStingrayAccent;\n  asChild?: boolean;\n}\n"
+    },
+    {
+      "path": "serious-stingray/index.ts",
+      "type": "index",
+      "content": "export { SeriousStingray } from \"./SeriousStingray\";\nexport type * from \"./SeriousStingray.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<SeriousStingray {...seriousStingrayMocks.default} />"
+    },
+    {
+      "name": "Accents",
+      "code": "<div className=\"flex flex-wrap items-center gap-8 bg-background p-8 text-foreground\">\n      <SeriousStingray {...seriousStingrayMocks.compact} />\n      <SeriousStingray {...seriousStingrayMocks.default} />\n      <SeriousStingray {...seriousStingrayMocks.alternate} size=\"lg\" />\n    </div>"
+    }
+  ]
+}
