@@ -8685,7 +8685,7 @@
     "name": "v-form-8",
     "displayName": "VForm8",
     "category": "marketing",
-    "description": "Three-step onboarding wizard with account details, plan cards and a newsletter opt-in, a review summary, and a success state.",
+    "description": "Three-step onboarding wizard with account details, plan cards and a newsletter opt-in, a confirm summary, and a success state.",
     "sectionCategory": "form",
     "purpose": "Lets a product landing page collect a new account, a plan choice, and confirmation without sending visitors into a full checkout.",
     "bestFor": [
@@ -8716,8 +8716,6 @@
       "columns": 1
     },
     "slots": [
-      "headline",
-      "description",
       "stepper",
       "accountFields",
       "planCards",
