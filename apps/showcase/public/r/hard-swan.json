@@ -1,0 +1,97 @@
+{
+  "name": "hard-swan",
+  "displayName": "HardSwan",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A dual-tone diagonal hatch field for covers, banners, and empty surfaces.",
+  "sectionCategory": "content",
+  "purpose": "Fills a region with a token-mapped weave so a page can show texture without a photo or a flat fill.",
+  "bestFor": [
+    "section covers and empty-state backdrops",
+    "card or banner texture behind a short caption",
+    "catalogue samples that need a decorative field"
+  ],
+  "avoidFor": [
+    "text-heavy reading panes",
+    "controls that need a quiet, solid surface"
+  ],
+  "tone": [
+    "playful",
+    "bold"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "high",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "field",
+    "caption"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "pattern",
+    "texture",
+    "hatch",
+    "background",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center",
+    "width": 560,
+    "height": 280
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "hard-swan/HardSwan.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { HardSwanProps } from \"./HardSwan.types\";\n\nconst scales = {\n  fine: { x: \"3.4rem\", y: \"0.62rem\", shift: \"4.8rem\" },\n  regular: { x: \"5.6rem\", y: \"0.88rem\", shift: \"7.6rem\" },\n  coarse: { x: \"8.2rem\", y: \"1.2rem\", shift: \"11rem\" },\n} as const;\n\nconst palettes = {\n  field: {\n    band: \"var(--jk-chart-2)\",\n    ink: \"var(--jk-primary)\",\n  },\n  dusk: {\n    band: \"var(--jk-chart-5)\",\n    ink: \"var(--jk-chart-4)\",\n  },\n} as const;\n\nexport function HardSwan({\n  className,\n  children,\n  scale = \"regular\",\n  palette = \"field\",\n  animated = false,\n  label = \"Hatch field\",\n  style,\n  ...props\n}: HardSwanProps) {\n  const grain = scales[scale];\n  const tones = palettes[palette];\n\n  return (\n    <div\n      aria-label={label}\n      className={cn(\n        \"jk-hard-swan relative isolate min-h-40 w-full overflow-hidden rounded-[--radius] border border-border\",\n        animated && \"jk-hard-swan-live\",\n        className,\n      )}\n      data-palette={palette}\n      data-scale={scale}\n      data-slot=\"hard-swan\"\n      role=\"img\"\n      style={\n        {\n          \"--jk-hard-swan-a\": tones.band,\n          \"--jk-hard-swan-b\": tones.ink,\n          \"--jk-hard-swan-x\": grain.x,\n          \"--jk-hard-swan-y\": grain.y,\n          \"--jk-hard-swan-shift\": grain.shift,\n          ...style,\n        } as React.CSSProperties\n      }\n      {...props}\n    >\n      <style href=\"jk-hard-swan\" precedence=\"default\">{`\n        .jk-hard-swan {\n          background-color: var(--jk-hard-swan-a);\n          background-image:\n            linear-gradient(\n              42deg,\n              var(--jk-hard-swan-a) 0 22%,\n              transparent 22% 78%,\n              var(--jk-hard-swan-a) 78% 100%\n            ),\n            linear-gradient(\n              42deg,\n              var(--jk-hard-swan-b) 0 22%,\n              var(--jk-hard-swan-a) 22% 78%,\n              var(--jk-hard-swan-b) 78% 100%\n            );\n          background-position: 0 0, var(--jk-hard-swan-shift) var(--jk-hard-swan-shift);\n          background-size: var(--jk-hard-swan-x) var(--jk-hard-swan-y);\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-hard-swan-live {\n            animation: jk-hard-swan-drift 18s linear infinite;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-hard-swan-live {\n            animation: none;\n          }\n        }\n        @keyframes jk-hard-swan-drift {\n          to {\n            background-position:\n              var(--jk-hard-swan-x) 0,\n              calc(var(--jk-hard-swan-shift) + var(--jk-hard-swan-x)) var(--jk-hard-swan-shift);\n          }\n        }\n      `}</style>\n      {children ? (\n        <div className=\"relative z-10 flex h-full min-h-40 items-center justify-center p-6\">\n          {children}\n        </div>\n      ) : null}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "hard-swan/HardSwan.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type HardSwanScale = \"fine\" | \"regular\" | \"coarse\";\n\nexport type HardSwanPalette = \"field\" | \"dusk\";\n\nexport interface HardSwanProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n  /** Tile grain of the hatch. */\n  scale?: HardSwanScale;\n  /** Token pairing for the two bands. */\n  palette?: HardSwanPalette;\n  /** Slow hatch drift. Disabled when the user prefers reduced motion. */\n  animated?: boolean;\n  /** Accessible name for the decorative field. */\n  label?: string;\n}\n"
+    },
+    {
+      "path": "hard-swan/index.ts",
+      "type": "index",
+      "content": "export { HardSwan } from \"./HardSwan\";\nexport type * from \"./HardSwan.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"w-[28rem] bg-background p-6 text-foreground\">\n      <HardSwan {...hardSwanMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Palettes",
+      "code": "<div className=\"flex w-[28rem] flex-col gap-4 bg-background p-6 text-foreground\">\n      <HardSwan {...hardSwanMocks.default} />\n      <HardSwan {...hardSwanMocks.dusk} />\n    </div>"
+    },
+    {
+      "name": "WithCaption",
+      "code": "<div className=\"w-[28rem] bg-background p-6 text-foreground\">\n      <HardSwan {...hardSwanMocks.overlay}>\n        <p className=\"rounded-[--radius] bg-card/90 px-4 py-2 text-sm font-medium text-card-foreground shadow-sm\">\n          Open studio hours\n        </p>\n      </HardSwan>\n    </div>"
+    }
+  ]
+}
