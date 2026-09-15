@@ -4018,6 +4018,47 @@
           "format": "webp"
         }
       ]
+    },
+    "table-2": {
+      "sourceHash": "26762506f9bfd9d49d64f870ab0f97523249312a5a188605f52039d90f15faef",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "table-2.Default.dark.webp",
+          "bytes": 17044,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "table-2.Variants.dark.webp",
+          "bytes": 7898,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "table-2.ThemeComparison.dark.webp",
+          "bytes": 33162,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
