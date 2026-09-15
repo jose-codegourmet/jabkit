@@ -1,0 +1,93 @@
+{
+  "name": "lovely-yak",
+  "displayName": "LovelyYak",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A lifted profile card with an accent banner, overlapping mark, brief copy, and an optional action.",
+  "sectionCategory": "content",
+  "purpose": "Presents a person, plan, or snippet in a compact card that stays on semantic tokens in light and dark.",
+  "bestFor": [
+    "directory or roster tiles",
+    "short bios with one follow-up action",
+    "catalogue previews that need a friendly card"
+  ],
+  "avoidFor": [
+    "dense data tables",
+    "primary site navigation"
+  ],
+  "tone": [
+    "playful",
+    "clean"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "kicker",
+    "title",
+    "description",
+    "action"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "card",
+    "profile",
+    "content",
+    "cta",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "lovely-yak/LovelyYak.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { LovelyYakProps } from \"./LovelyYak.types\";\n\nconst sizes = {\n  sm: \"w-56\",\n  md: \"w-72\",\n  lg: \"w-80\",\n} as const;\n\nexport function LovelyYak({\n  className,\n  children,\n  title = \"Field notes\",\n  description = \"A compact card for a name, a short brief, and one next step.\",\n  kicker = \"Profile\",\n  actionLabel,\n  size = \"md\",\n  animate = true,\n  onAction,\n  ...props\n}: LovelyYakProps) {\n  return (\n    <article\n      className={cn(\n        \"jk-lovely-yak relative overflow-hidden rounded-[1.35rem] border border-border bg-card text-card-foreground shadow-[var(--jk-shadow-control)]\",\n        sizes[size],\n        className,\n      )}\n      data-animate={animate ? \"true\" : \"false\"}\n      data-size={size}\n      data-slot=\"lovely-yak\"\n      {...props}\n    >\n      <style href=\"jk-lovely-yak\" precedence=\"default\">{`\n        .jk-lovely-yak-banner {\n          background:\n            linear-gradient(\n              135deg,\n              color-mix(in oklab, var(--jk-primary), var(--jk-accent) 28%) 0%,\n              color-mix(in oklab, var(--jk-chart-2), var(--jk-primary) 35%) 100%\n            );\n        }\n        .jk-lovely-yak-mark {\n          background: color-mix(in oklab, var(--jk-card) 88%, var(--jk-primary));\n          box-shadow:\n            0 0 0 0.35rem color-mix(in oklab, var(--jk-card), transparent 12%),\n            0 10px 24px color-mix(in oklab, var(--jk-foreground), transparent 86%);\n        }\n        .jk-lovely-yak-horn {\n          background: color-mix(in oklab, var(--jk-primary), var(--jk-accent) 40%);\n        }\n        .jk-lovely-yak-action {\n          background: var(--jk-primary);\n          color: var(--jk-primary-foreground);\n        }\n        .jk-lovely-yak-action:hover {\n          background: color-mix(in oklab, var(--jk-primary), var(--jk-foreground) 10%);\n        }\n        .jk-lovely-yak-action:focus-visible {\n          outline: 2px solid var(--jk-ring);\n          outline-offset: 2px;\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-lovely-yak[data-animate=\"true\"] {\n            transition:\n              transform 220ms ease,\n              box-shadow 220ms ease;\n          }\n          .jk-lovely-yak[data-animate=\"true\"]:hover {\n            transform: translateY(-0.35rem);\n            box-shadow:\n              0 18px 36px color-mix(in oklab, var(--jk-foreground), transparent 86%),\n              var(--jk-shadow-control);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-lovely-yak {\n            transition: none;\n            transform: none;\n          }\n        }\n      `}</style>\n      <div aria-hidden=\"true\" className=\"jk-lovely-yak-banner h-20\" />\n      <div\n        aria-hidden=\"true\"\n        className=\"jk-lovely-yak-mark relative z-10 mx-auto -mt-8 flex size-16 items-center justify-center rounded-full\"\n      >\n        <span className=\"jk-lovely-yak-horn absolute top-2 left-3 h-3 w-2 -rotate-25 rounded-t-full\" />\n        <span className=\"jk-lovely-yak-horn absolute top-2 right-3 h-3 w-2 rotate-25 rounded-t-full\" />\n        <span className=\"size-2 rounded-full bg-foreground\" />\n      </div>\n      <div className=\"flex flex-col gap-2 px-5 pt-3 pb-5 text-center\">\n        {children ?? (\n          <>\n            {kicker ? (\n              <p className=\"text-xs font-medium tracking-wide text-muted-foreground\">\n                {kicker}\n              </p>\n            ) : null}\n            <h3 className=\"text-lg font-semibold tracking-tight text-card-foreground\">\n              {title}\n            </h3>\n            {description ? (\n              <p className=\"text-sm leading-relaxed text-muted-foreground\">\n                {description}\n              </p>\n            ) : null}\n          </>\n        )}\n        {actionLabel ? (\n          <button\n            className=\"jk-lovely-yak-action mt-2 inline-flex h-9 items-center justify-center rounded-full px-4 text-sm font-medium\"\n            type=\"button\"\n            onClick={onAction}\n          >\n            {actionLabel}\n          </button>\n        ) : null}\n      </div>\n    </article>\n  );\n}\n"
+    },
+    {
+      "path": "lovely-yak/LovelyYak.types.ts",
+      "type": "types",
+      "content": "import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from \"react\";\n\nexport type LovelyYakSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface LovelyYakProps extends HTMLAttributes<HTMLElement> {\n  children?: ReactNode;\n  title?: string;\n  description?: string;\n  kicker?: string;\n  actionLabel?: string;\n  size?: LovelyYakSize;\n  animate?: boolean;\n  onAction?: ButtonHTMLAttributes<HTMLButtonElement>[\"onClick\"];\n}\n"
+    },
+    {
+      "path": "lovely-yak/index.ts",
+      "type": "index",
+      "content": "export { LovelyYak } from \"./LovelyYak\";\nexport type * from \"./LovelyYak.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<LovelyYak {...lovelyYakMocks.default} />"
+    },
+    {
+      "name": "WithAction",
+      "code": "<LovelyYak {...lovelyYakMocks.withAction} />"
+    }
+  ]
+}
