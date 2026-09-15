@@ -1,0 +1,109 @@
+{
+  "name": "newsletter-5",
+  "displayName": "Newsletter5",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Newsletter capture on a large-radius muted plate with a radial grid, square email field, and a sharp subscribe action.",
+  "sectionCategory": "cta",
+  "purpose": "Closes a marketing page with a focused email capture that keeps the grid and type as the visual, not a pill form.",
+  "bestFor": [
+    "product landings that need a mid-page or closing newsletter",
+    "editorial product letters",
+    "pages that want a square form on a soft plate"
+  ],
+  "avoidFor": [
+    "footers that already own the email field",
+    "dense multi-field subscribe flows"
+  ],
+  "tone": [
+    "editorial",
+    "confident",
+    "clean"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "split",
+    "alignment": "left",
+    "columns": 5
+  },
+  "slots": [
+    "eyebrow",
+    "headline",
+    "description",
+    "newsletterForm",
+    "reassurance"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "features",
+    "blog",
+    "testimonials"
+  ],
+  "recommendedBefore": [
+    "footer"
+  ],
+  "tags": [
+    "newsletter",
+    "marketing",
+    "subscribe",
+    "form",
+    "cta",
+    "landing",
+    "grid"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 720
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "newsletter-5/Newsletter5.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ArrowRightIcon, CircleCheckIcon, SendIcon } from \"lucide-react\";\nimport { type FormEvent, useId, useState } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { Newsletter5Props } from \"./Newsletter5.types\";\n\nconst defaults = {\n  eyebrow: \"Friday dispatch\",\n  title: \"One useful product letter every week\",\n  description:\n    \"A short read on launches, retention loops, design systems, and the small interface choices that help teams ship with more clarity.\",\n  emailLabel: \"Email address\",\n  emailPlaceholder: \"you@studio.work\",\n  subscribeLabel: \"Subscribe\",\n  reassurance: \"No spam, no daily drip, and no sponsored clutter.\",\n};\n\nconst GRID_CELLS = Array.from({ length: 12 * 6 }, (_, cell) => `cell-${cell}`);\n\nfunction BackgroundGrid() {\n  return (\n    <div\n      aria-hidden=\"true\"\n      className=\"absolute inset-0 z-0 overflow-hidden rounded-[2rem] [mask-image:radial-gradient(circle_at_center,black,transparent_72%)] [mask-size:19rem] [mask-position:center] [mask-repeat:no-repeat]\"\n    >\n      <div className=\"grid h-full w-full grid-cols-12 grid-rows-6\">\n        {GRID_CELLS.map((cellId, index) => (\n          <div\n            key={cellId}\n            className={cn(\n              \"aspect-square border border-border/50 bg-background/90 transition-colors duration-300 motion-reduce:transition-none motion-safe:hover:bg-primary/20\",\n              index % 8 === 0 && \"bg-primary/10\",\n              index % 13 === 0 && \"bg-background/80\",\n            )}\n          />\n        ))}\n      </div>\n    </div>\n  );\n}\n\nexport function Newsletter5({\n  className,\n  eyebrow = defaults.eyebrow,\n  title = defaults.title,\n  description = defaults.description,\n  emailLabel = defaults.emailLabel,\n  emailPlaceholder = defaults.emailPlaceholder,\n  subscribeLabel = defaults.subscribeLabel,\n  reassurance = defaults.reassurance,\n  onSubscribe,\n  onSubmit,\n  ...props\n}: Newsletter5Props) {\n  const headingId = useId();\n  const emailId = useId();\n  const [email, setEmail] = useState(\"\");\n\n  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {\n    onSubmit?.(event);\n    if (event.defaultPrevented) return;\n    event.preventDefault();\n    const next = email.trim();\n    onSubscribe?.(next);\n    setEmail(\"\");\n  };\n\n  return (\n    <section\n      data-slot=\"newsletter-5\"\n      aria-labelledby={headingId}\n      className={cn(\n        \"flex items-center justify-center bg-background p-4 text-foreground sm:p-6 md:p-8\",\n        className,\n      )}\n      {...props}\n    >\n      <div\n        className={cn(\n          \"relative w-full max-w-5xl overflow-hidden rounded-[2rem] border border-border bg-muted px-4 py-6 sm:px-8 lg:px-14\",\n          \"shadow-[inset_0_10px_20px_10px_color-mix(in_oklab,var(--jk-background),transparent_30%),inset_0_-10px_20px_10px_color-mix(in_oklab,var(--jk-foreground),transparent_95%)]\",\n          \"dark:shadow-[inset_0_-10px_20px_0_color-mix(in_oklab,var(--jk-foreground),transparent_90%),inset_0_10px_20px_0_color-mix(in_oklab,var(--jk-background),transparent_95%)]\",\n        )}\n      >\n        <BackgroundGrid />\n\n        <div className=\"pointer-events-none relative z-10 grid min-h-96 grid-cols-1 gap-10 p-0 md:grid-cols-5 md:items-center\">\n          <div className=\"flex max-w-2xl flex-col justify-center gap-7 text-center md:col-span-3 md:text-left\">\n            <div className=\"space-y-2\">\n              <p className=\"mx-auto flex h-9 w-fit items-center gap-2 rounded-none bg-background/70 px-3 text-sm font-semibold text-foreground backdrop-blur-2xl md:mx-0\">\n                <SendIcon\n                  aria-hidden=\"true\"\n                  className=\"size-5 text-primary\"\n                  strokeWidth={2}\n                />\n                {eyebrow}\n              </p>\n\n              <div className=\"space-y-4\">\n                <h2\n                  id={headingId}\n                  className=\"text-4xl font-bold tracking-tight text-balance text-foreground sm:text-5xl lg:text-6xl\"\n                >\n                  {title}\n                </h2>\n                <p className=\"text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg\">\n                  {description}\n                </p>\n              </div>\n            </div>\n\n            <form\n              className=\"pointer-events-auto mx-auto w-full max-w-xl space-y-3 md:mx-0\"\n              onSubmit={handleSubmit}\n            >\n              <label className=\"sr-only\" htmlFor={emailId}>\n                {emailLabel}\n              </label>\n              <div className=\"flex flex-col items-center gap-0 rounded-none bg-background/70 shadow-[0_1px_2px_color-mix(in_oklab,var(--jk-foreground),transparent_92%)] backdrop-blur-2xl focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-muted sm:flex-row sm:gap-2\">\n                <input\n                  id={emailId}\n                  name=\"email\"\n                  type=\"email\"\n                  required\n                  autoComplete=\"email\"\n                  value={email}\n                  onChange={(event) => setEmail(event.target.value)}\n                  placeholder={emailPlaceholder}\n                  className=\"h-12 w-full rounded-none border-0 bg-transparent px-4 text-base text-foreground shadow-none outline-none placeholder:text-muted-foreground\"\n                />\n                <button\n                  type=\"submit\"\n                  className={cn(\n                    \"group mr-0 flex h-10 w-full shrink-0 items-center justify-center gap-2 rounded-none bg-primary px-5 text-sm font-semibold text-primary-foreground sm:mr-1 sm:w-auto\",\n                    \"shadow-[0_0_4px_1px_color-mix(in_oklab,var(--jk-foreground),transparent_95%),inset_0_0_4px_1px_color-mix(in_oklab,var(--jk-background),transparent_55%),inset_0_1px_0_color-mix(in_oklab,var(--jk-background),transparent_65%)]\",\n                    \"transition-transform duration-200 hover:brightness-110 active:scale-[0.96] motion-reduce:transition-none motion-reduce:active:scale-100\",\n                    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-muted\",\n                  )}\n                >\n                  {subscribeLabel}\n                  <ArrowRightIcon\n                    aria-hidden=\"true\"\n                    className=\"size-4 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0\"\n                    strokeWidth={2}\n                  />\n                </button>\n              </div>\n\n              <p className=\"flex items-start gap-2 text-left text-sm leading-relaxed text-muted-foreground\">\n                <CircleCheckIcon\n                  aria-hidden=\"true\"\n                  className=\"mt-0.5 size-4 shrink-0 text-primary\"\n                  strokeWidth={2}\n                />\n                <span>{reassurance}</span>\n              </p>\n            </form>\n          </div>\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "newsletter-5/Newsletter5.types.ts",
+      "type": "types",
+      "content": "import type { FormEventHandler, HTMLAttributes } from \"react\";\n\nexport interface Newsletter5Props\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\" | \"onSubmit\"> {\n  eyebrow?: string;\n  title?: string;\n  description?: string;\n  emailLabel?: string;\n  emailPlaceholder?: string;\n  subscribeLabel?: string;\n  reassurance?: string;\n  onSubscribe?: (email: string) => void;\n  onSubmit?: FormEventHandler<HTMLFormElement>;\n}\n"
+    },
+    {
+      "path": "newsletter-5/index.ts",
+      "type": "index",
+      "content": "export { Newsletter5 } from \"./Newsletter5\";\nexport type { Newsletter5Props } from \"./Newsletter5.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Newsletter5 {...newsletter5Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Newsletter5 {...newsletter5Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
