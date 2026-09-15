@@ -1,0 +1,93 @@
+{
+  "name": "button-colorful",
+  "displayName": "ButtonColorful",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A compact CTA with a chart-token gradient wash that brightens on hover and a sliding arrow.",
+  "sectionCategory": "action",
+  "purpose": "Marks a primary explore or continue action when a standard solid button needs more color without leaving the token set.",
+  "bestFor": [
+    "hero or section explore CTAs",
+    "catalogue and demo entry points",
+    "marketing actions that still live in an atom"
+  ],
+  "avoidFor": [
+    "destructive or irreversible actions",
+    "dense toolbars that need a quiet control"
+  ],
+  "tone": [
+    "playful",
+    "clean"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "actionLabel",
+    "trailingIcon"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "button",
+    "cta",
+    "action",
+    "gradient",
+    "atom"
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "button-colorful/ButtonColorful.tsx",
+      "type": "component",
+      "content": "import { Slot } from \"@radix-ui/react-slot\";\nimport { ArrowRightIcon } from \"lucide-react\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { ButtonColorfulProps } from \"./ButtonColorful.types\";\n\nconst sizes = {\n  sm: \"h-9 px-3 text-sm\",\n  md: \"h-10 px-4 text-sm\",\n  lg: \"h-12 px-5 text-base\",\n} as const;\n\nexport function ButtonColorful({\n  className,\n  children,\n  label = \"Explore components\",\n  size = \"md\",\n  showIcon = true,\n  asChild = false,\n  type,\n  ...props\n}: ButtonColorfulProps) {\n  const Component = asChild ? Slot : \"button\";\n  const content = children ?? label;\n\n  return (\n    <Component\n      className={cn(\n        \"jk-button-colorful group relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[--radius] bg-foreground font-medium whitespace-nowrap text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50\",\n        sizes[size],\n        className,\n      )}\n      data-size={size}\n      data-slot=\"button-colorful\"\n      type={asChild ? undefined : (type ?? \"button\")}\n      {...props}\n    >\n      <style href=\"jk-button-colorful\" precedence=\"default\">{`\n        .jk-button-colorful-wash {\n          background: linear-gradient(\n            105deg,\n            var(--jk-chart-1),\n            var(--jk-chart-4),\n            var(--jk-chart-3)\n          );\n          opacity: 0.72;\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-button-colorful-wash {\n            transition: opacity 400ms ease;\n          }\n          .jk-button-colorful:hover .jk-button-colorful-wash,\n          .jk-button-colorful:focus-visible .jk-button-colorful-wash {\n            opacity: 1;\n          }\n          .jk-button-colorful-icon {\n            transition: transform 200ms ease;\n          }\n          .jk-button-colorful:hover .jk-button-colorful-icon,\n          .jk-button-colorful:focus-visible .jk-button-colorful-icon {\n            transform: translateX(0.2rem);\n          }\n          .jk-button-colorful:active {\n            transform: translateY(1px);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-button-colorful-wash,\n          .jk-button-colorful-icon {\n            transition: none;\n          }\n          .jk-button-colorful-icon {\n            transform: none;\n          }\n        }\n      `}</style>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-button-colorful-wash pointer-events-none absolute inset-0\"\n      />\n      <span className=\"relative z-10 inline-flex items-center justify-center gap-2\">\n        <span>{content}</span>\n        {showIcon ? (\n          <ArrowRightIcon\n            aria-hidden=\"true\"\n            className=\"jk-button-colorful-icon size-3.5 shrink-0 opacity-90\"\n          />\n        ) : null}\n      </span>\n    </Component>\n  );\n}\n"
+    },
+    {
+      "path": "button-colorful/ButtonColorful.types.ts",
+      "type": "types",
+      "content": "import type { ButtonHTMLAttributes, ReactNode } from \"react\";\n\nexport type ButtonColorfulSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface ButtonColorfulProps\n  extends ButtonHTMLAttributes<HTMLButtonElement> {\n  children?: ReactNode;\n  label?: string;\n  size?: ButtonColorfulSize;\n  showIcon?: boolean;\n  asChild?: boolean;\n}\n"
+    },
+    {
+      "path": "button-colorful/index.ts",
+      "type": "index",
+      "content": "export { ButtonColorful } from \"./ButtonColorful\";\nexport type * from \"./ButtonColorful.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<ButtonColorful {...buttonColorfulMocks.default} />"
+    },
+    {
+      "name": "Sizes",
+      "code": "<div className=\"flex flex-wrap items-center gap-3 bg-background p-8 text-foreground\">\n      <ButtonColorful {...buttonColorfulMocks.compact} />\n      <ButtonColorful {...buttonColorfulMocks.default} />\n      <ButtonColorful label={buttonColorfulMocks.alternate.label} size=\"lg\" />\n    </div>"
+    }
+  ]
+}
