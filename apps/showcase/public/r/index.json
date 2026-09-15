@@ -913,17 +913,17 @@
     "name": "fast-puma",
     "displayName": "FastPuma",
     "category": "atoms",
-    "description": "A pill CTA that throws a chart-token particle burst on hover and focus.",
+    "description": "A pair of squishy plus and minus pads in square wells with circular knobs.",
     "sectionCategory": "action",
-    "purpose": "Gives a primary launch action extra kinetic energy without leaving semantic tokens.",
+    "purpose": "Gives quantity or polarity controls the raised-to-pressed pad feel without flattening the inspo radii.",
     "bestFor": [
-      "hero or demo launch CTAs",
-      "playful product actions that still need a real button",
+      "quantity steppers that need a tactile plus and minus pair",
+      "playful settings pads that stay on semantic tokens",
       "catalogue and preview entry points"
     ],
     "avoidFor": [
-      "destructive or irreversible actions",
-      "dense toolbars where motion would distract"
+      "dense toolbars where the 140px wells would crowd the row",
+      "destructive or irreversible actions"
     ],
     "tone": [
       "playful",
@@ -936,25 +936,26 @@
       "alignment": "center"
     },
     "slots": [
-      "actionLabel"
+      "plus",
+      "minus"
     ],
     "capabilities": {
       "supportsImage": false,
       "supportsVideo": false,
-      "supportsForm": false,
-      "supportsCTA": true,
+      "supportsForm": true,
+      "supportsCTA": false,
       "supportsDarkMode": true
     },
     "tags": [
       "button",
-      "cta",
-      "action",
-      "particles",
+      "toggle",
+      "plus",
+      "minus",
+      "neumorphic",
       "atom"
     ],
     "addedAt": "2026-09-15",
     "dependencies": [
-      "@radix-ui/react-slot",
       "clsx",
       "tailwind-merge"
     ],

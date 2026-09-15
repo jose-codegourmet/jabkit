@@ -5,5 +5,5 @@ import { fastPumaMocks } from "./FastPuma.mocks";
 
 export default {
   Default: () => <FastPuma {...fastPumaMocks.default} />,
-  Tones: () => <FastPuma {...fastPumaMocks.alternate} />,
+  Sizes: () => <FastPuma {...fastPumaMocks.compact} />,
 };

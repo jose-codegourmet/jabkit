@@ -20,13 +20,13 @@ export const Default: Story = {
   ),
 };
 
-export const Tones: Story = {
-  args: { ...fastPumaMocks.alternate },
+export const Sizes: Story = {
+  args: { ...fastPumaMocks.compact },
   render: () => (
-    <div className="flex flex-wrap items-center gap-8 bg-background p-10 text-foreground">
+    <div className="flex flex-wrap items-center gap-10 bg-background p-10 text-foreground">
       <FastPuma {...fastPumaMocks.compact} />
       <FastPuma {...fastPumaMocks.default} />
-      <FastPuma {...fastPumaMocks.alternate} />
+      <FastPuma {...fastPumaMocks.spacious} />
     </div>
   ),
 };
@@ -35,10 +35,10 @@ export const ThemeComparison: Story = {
   args: { ...fastPumaMocks.default },
   render: () => (
     <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border sm:grid-cols-2">
-      <div className="bg-background p-10">
+      <div className="flex items-center justify-center bg-background p-10">
         <FastPuma {...fastPumaMocks.default} />
       </div>
-      <div className="dark bg-background p-10">
+      <div className="dark flex items-center justify-center bg-background p-10">
         <FastPuma {...fastPumaMocks.default} />
       </div>
     </div>
