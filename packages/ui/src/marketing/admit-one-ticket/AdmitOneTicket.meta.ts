@@ -1,0 +1,68 @@
+import type { ComponentMeta } from "@jabkit/build-registry";
+
+export default {
+  name: "admit-one-ticket",
+  displayName: "AdmitOneTicket",
+  version: "1.0.0",
+  addedAt: "2026-09-15",
+  description:
+    "Dithered event ticket with a perforated admit-one stub, pointer-driven 3D tilt, and a moving glare over customizable show details.",
+  sectionCategory: "content",
+  purpose:
+    "Turns an event landing into a physical door pass visitors can inspect, with stub, serial, and venue copy that stay on semantic tokens.",
+  bestFor: [
+    "concert and festival landings",
+    "conference or school-day announcements",
+    "limited-entry drops that need a memorable pass",
+  ],
+  avoidFor: [
+    "booking confirmation with payment ledgers",
+    "dense calendars of many shows",
+    "task-heavy product UI where pointer tilt would compete with controls",
+  ],
+  tone: ["playful", "confident", "experimental"],
+  industries: ["events", "media", "entertainment"],
+  contentDensity: "low",
+  visualWeight: "high",
+  layout: {
+    type: "card",
+    alignment: "center",
+    columns: 1,
+  },
+  slots: [
+    "headline",
+    "description",
+    "stub",
+    "presenter",
+    "event",
+    "attendee",
+    "venue",
+    "dates",
+    "watermark",
+    "serial",
+  ],
+  capabilities: {
+    supportsImage: false,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: false,
+    supportsDarkMode: true,
+  },
+  recommendedAfter: ["hero", "logos"],
+  recommendedBefore: ["pricing", "cta", "faq"],
+  tags: [
+    "ticket",
+    "admit-one",
+    "event",
+    "dither",
+    "stub",
+    "tilt",
+    "glare",
+    "marketing",
+    "landing",
+  ],
+  dependencies: [],
+  registryDependencies: [],
+  a11y: { keyboardNav: false, reducedMotion: true },
+  preview: { layout: "fit", width: 1440, height: 900 },
+} satisfies ComponentMeta;
