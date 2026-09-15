@@ -6,7 +6,7 @@ import { stepperWithTitlesMocks } from "./StepperWithTitles.mocks";
 export default {
   Default: () => (
     <div className="w-[36rem] bg-background p-8 text-foreground">
-      <StepperWithTitles {...stepperWithTitlesMocks.checkout} />
+      <StepperWithTitles {...stepperWithTitlesMocks.default} />
     </div>
   ),
   Onboarding: () => (

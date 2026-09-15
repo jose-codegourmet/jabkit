@@ -6,7 +6,7 @@ export default {
   version: "1.0.0",
   addedAt: "2026-09-15",
   description:
-    "A horizontal progress stepper with numbered markers, titles, and supporting descriptions.",
+    "Horizontal stepper with circular markers, titles stacked below, and descriptions.",
   sectionCategory: "navigation",
   purpose:
     "Shows where a person is in a short linear flow and lets them jump to a completed or upcoming step.",
