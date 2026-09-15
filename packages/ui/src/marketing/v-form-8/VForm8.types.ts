@@ -1,11 +1,10 @@
 import type { FormEventHandler, HTMLAttributes } from "react";
 
-export type VForm8Step = "account" | "plan" | "review" | "success";
+export type VForm8Step = "account" | "plan" | "confirm" | "success";
 
 export interface VForm8Plan {
   id: string;
-  name: string;
-  price: string;
+  label: string;
   description: string;
 }
 
@@ -19,19 +18,16 @@ export interface VForm8CompleteDetails {
 export interface VForm8Props
   extends Omit<HTMLAttributes<HTMLElement>, "title" | "onSubmit"> {
   title?: string;
-  description?: string;
   accountStepLabel?: string;
   planStepLabel?: string;
-  reviewStepLabel?: string;
+  confirmStepLabel?: string;
   nameLabel?: string;
   namePlaceholder?: string;
   defaultName?: string;
   emailLabel?: string;
   emailPlaceholder?: string;
   defaultEmail?: string;
-  passwordLabel?: string;
-  passwordPlaceholder?: string;
-  defaultPassword?: string;
+  planFieldLabel?: string;
   plans?: readonly VForm8Plan[];
   defaultPlanId?: string;
   newsletterLabel?: string;
@@ -39,11 +35,14 @@ export interface VForm8Props
   continueLabel?: string;
   backLabel?: string;
   submitLabel?: string;
+  reviewNameLabel?: string;
+  reviewEmailLabel?: string;
+  reviewPlanLabel?: string;
+  reviewUpdatesLabel?: string;
+  updatesYesLabel?: string;
+  updatesNoLabel?: string;
   successTitle?: string;
   successDescription?: string;
-  passwordSetLabel?: string;
-  newsletterYesLabel?: string;
-  newsletterNoLabel?: string;
   defaultStep?: VForm8Step;
   onComplete?: (details: VForm8CompleteDetails) => void;
   onSubmit?: FormEventHandler<HTMLFormElement>;

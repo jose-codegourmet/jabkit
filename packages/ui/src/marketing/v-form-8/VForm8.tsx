@@ -1,14 +1,14 @@
 "use client";
 
-import { CheckIcon, CircleCheckIcon } from "lucide-react";
+import { CheckCircle2Icon, Loader2Icon } from "lucide-react";
 import {
   type FormEvent,
-  type ReactNode,
+  useEffect,
   useId,
   useMemo,
+  useRef,
   useState,
 } from "react";
-import { Button } from "@/atoms/button";
 import { Checkbox } from "@/atoms/checkbox";
 import { Input } from "@/atoms/input";
 import { Label } from "@/atoms/label";
@@ -17,99 +17,87 @@ import type { VForm8Plan, VForm8Props, VForm8Step } from "./VForm8.types";
 
 const defaultPlans = [
   {
-    id: "starter",
-    name: "Starter",
-    price: "$0 / month",
-    description: "One desk, local files, and a quiet inbox.",
+    id: "hobby",
+    label: "Hobby",
+    description: "Free forever, up to 3 projects",
   },
   {
-    id: "studio",
-    name: "Studio",
-    price: "$18 / month",
-    description: "Shared boards, guest seats, and weekly backups.",
+    id: "pro",
+    label: "Pro",
+    description: "$12/mo - unlimited projects",
   },
   {
-    id: "desk",
-    name: "Desk",
-    price: "$42 / month",
-    description: "Client rooms, archive search, and priority support.",
+    id: "team",
+    label: "Team",
+    description: "$49/mo - collaboration tools",
   },
 ] as const satisfies readonly VForm8Plan[];
 
 const defaults = {
-  title: "Open a Kestrel desk",
-  description:
-    "Three short steps. Name the account, pick a plan, then confirm before we send the invite.",
   accountStepLabel: "Account",
   planStepLabel: "Plan",
-  reviewStepLabel: "Review",
+  confirmStepLabel: "Confirm",
   nameLabel: "Full name",
-  namePlaceholder: "Mira Solano",
+  namePlaceholder: "Alex Rivera",
   defaultName: "",
-  emailLabel: "Work email",
-  emailPlaceholder: "you@studio.work",
+  emailLabel: "Email",
+  emailPlaceholder: "you@example.com",
   defaultEmail: "",
-  passwordLabel: "Password",
-  passwordPlaceholder: "At least 8 characters",
-  defaultPassword: "",
-  defaultPlanId: "studio",
-  newsletterLabel: "Send the Sunday field notes",
+  planFieldLabel: "Choose a plan",
+  defaultPlanId: "hobby",
+  newsletterLabel: "Send me product updates and tips",
   defaultNewsletter: true,
   continueLabel: "Continue",
   backLabel: "Back",
   submitLabel: "Create account",
-  successTitle: "Desk is ready",
-  successDescription: "We sent a confirm link. Open it to finish the invite.",
-  passwordSetLabel: "Password set",
-  newsletterYesLabel: "Sunday notes on",
-  newsletterNoLabel: "No newsletter",
+  reviewNameLabel: "Name",
+  reviewEmailLabel: "Email",
+  reviewPlanLabel: "Plan",
+  reviewUpdatesLabel: "Updates",
+  updatesYesLabel: "Yes",
+  updatesNoLabel: "No",
+  successTitle: "Account created!",
+  successDescription:
+    "Welcome, {name}. Check your inbox to verify your email.",
   defaultStep: "account" as VForm8Step,
 };
 
-const wizardSteps = ["account", "plan", "review"] as const;
+const wizardSteps = ["account", "plan", "confirm"] as const;
 
-function FieldShell({
-  id,
-  label,
-  children,
-}: {
-  id: string;
-  label: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className="space-y-2">
-      <Label htmlFor={id}>{label}</Label>
-      {children}
-    </div>
-  );
-}
+const fieldInputClassName =
+  "h-9 rounded-lg bg-background shadow-xs sm:h-8 dark:bg-input/30";
 
-function ReviewRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-start justify-between gap-4 border-b border-border py-3 last:border-b-0">
-      <dt className="text-sm text-muted-foreground">{label}</dt>
-      <dd className="text-right text-sm font-medium text-balance">{value}</dd>
-    </div>
-  );
+const actionButtonClassName =
+  "relative inline-flex h-9 shrink-0 items-center justify-center rounded-lg border px-3 text-sm font-medium outline-none transition-colors motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 sm:h-8";
+
+const primaryButtonClassName = cn(
+  actionButtonClassName,
+  "border-primary bg-primary text-primary-foreground hover:bg-primary/90",
+);
+
+const outlineButtonClassName = cn(
+  actionButtonClassName,
+  "border-input bg-card text-foreground hover:bg-accent/50",
+);
+
+function prefersReducedMotion() {
+  if (typeof window === "undefined" || !window.matchMedia) return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 export function VForm8({
   className,
-  title = defaults.title,
-  description = defaults.description,
+  title,
   accountStepLabel = defaults.accountStepLabel,
   planStepLabel = defaults.planStepLabel,
-  reviewStepLabel = defaults.reviewStepLabel,
+  confirmStepLabel = defaults.confirmStepLabel,
   nameLabel = defaults.nameLabel,
   namePlaceholder = defaults.namePlaceholder,
   defaultName = defaults.defaultName,
   emailLabel = defaults.emailLabel,
   emailPlaceholder = defaults.emailPlaceholder,
   defaultEmail = defaults.defaultEmail,
-  passwordLabel = defaults.passwordLabel,
-  passwordPlaceholder = defaults.passwordPlaceholder,
-  defaultPassword = defaults.defaultPassword,
+  planFieldLabel = defaults.planFieldLabel,
   plans = defaultPlans,
   defaultPlanId = defaults.defaultPlanId,
   newsletterLabel = defaults.newsletterLabel,
@@ -117,11 +105,14 @@ export function VForm8({
   continueLabel = defaults.continueLabel,
   backLabel = defaults.backLabel,
   submitLabel = defaults.submitLabel,
+  reviewNameLabel = defaults.reviewNameLabel,
+  reviewEmailLabel = defaults.reviewEmailLabel,
+  reviewPlanLabel = defaults.reviewPlanLabel,
+  reviewUpdatesLabel = defaults.reviewUpdatesLabel,
+  updatesYesLabel = defaults.updatesYesLabel,
+  updatesNoLabel = defaults.updatesNoLabel,
   successTitle = defaults.successTitle,
   successDescription = defaults.successDescription,
-  passwordSetLabel = defaults.passwordSetLabel,
-  newsletterYesLabel = defaults.newsletterYesLabel,
-  newsletterNoLabel = defaults.newsletterNoLabel,
   defaultStep = defaults.defaultStep,
   onComplete,
   onSubmit,
@@ -130,7 +121,6 @@ export function VForm8({
   const headingId = useId();
   const nameId = useId();
   const emailId = useId();
-  const passwordId = useId();
   const newsletterId = useId();
   const planGroupId = useId();
   const [step, setStep] = useState<VForm8Step>(
@@ -138,24 +128,55 @@ export function VForm8({
   );
   const [name, setName] = useState(defaultName);
   const [email, setEmail] = useState(defaultEmail);
-  const [password, setPassword] = useState(defaultPassword);
   const [planId, setPlanId] = useState(
     plans.some((plan) => plan.id === defaultPlanId)
       ? defaultPlanId
       : (plans[0]?.id ?? ""),
   );
   const [newsletter, setNewsletter] = useState(defaultNewsletter);
+  const [loading, setLoading] = useState(false);
+  const confirmTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (confirmTimer.current !== null) {
+        window.clearTimeout(confirmTimer.current);
+      }
+    };
+  }, []);
 
   const selectedPlan = useMemo(
     () => plans.find((plan) => plan.id === planId) ?? plans[0],
     [planId, plans],
   );
 
-  const stepIndex = wizardSteps.indexOf(step === "success" ? "review" : step);
+  const stepIndex = wizardSteps.indexOf(step === "success" ? "confirm" : step);
+
+  const stepItems = [
+    ["account", accountStepLabel],
+    ["plan", planStepLabel],
+    ["confirm", confirmStepLabel],
+  ] as const;
+
+  const resolvedSuccessDescription = successDescription.replaceAll(
+    "{name}",
+    name.trim() || "there",
+  );
 
   const goBack = () => {
     if (step === "plan") setStep("account");
-    if (step === "review") setStep("plan");
+    if (step === "confirm") setStep("plan");
+  };
+
+  const finish = () => {
+    onComplete?.({
+      name: name.trim(),
+      email: email.trim(),
+      planId,
+      newsletter,
+    });
+    setLoading(false);
+    setStep("success");
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -164,26 +185,25 @@ export function VForm8({
     event.preventDefault();
 
     if (step === "account") {
-      if (!name.trim() || !email.trim() || password.length < 8) return;
+      if (!name.trim() || !email.trim()) return;
       setStep("plan");
       return;
     }
 
     if (step === "plan") {
       if (!planId) return;
-      setStep("review");
+      setStep("confirm");
+    }
+  };
+
+  const handleConfirm = () => {
+    if (loading) return;
+    if (prefersReducedMotion()) {
+      finish();
       return;
     }
-
-    if (step === "review") {
-      onComplete?.({
-        name: name.trim(),
-        email: email.trim(),
-        planId,
-        newsletter,
-      });
-      setStep("success");
-    }
+    setLoading(true);
+    confirmTimer.current = window.setTimeout(finish, 1000);
   };
 
   return (
@@ -193,261 +213,287 @@ export function VForm8({
       data-slot="v-form-8"
       {...props}
     >
-      <div className="mx-auto flex min-h-[32rem] max-w-5xl items-center justify-center px-5 py-16 sm:px-8 sm:py-20">
-        <article
-          className={cn(
-            "w-full max-w-lg overflow-hidden rounded-[calc(var(--radius)+0.4rem)] border border-border bg-card text-card-foreground shadow-sm",
-            "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500",
-          )}
-        >
-          {step === "success" ? (
-            <div className="flex flex-col items-center gap-4 px-5 py-12 text-center sm:px-8">
-              <span className="grid size-14 place-items-center rounded-full bg-primary text-primary-foreground">
-                <CircleCheckIcon aria-hidden="true" className="size-7" />
-              </span>
-              <h2
-                className="text-xl font-semibold tracking-tight text-balance sm:text-2xl"
-                id={headingId}
-              >
+      <div className="flex justify-center px-4 py-16 sm:py-20">
+        {step === "success" ? (
+          <div className="flex w-full max-w-sm flex-col items-center gap-4 py-10 text-center">
+            <div className="flex size-12 items-center justify-center rounded-full bg-success/10">
+              <CheckCircle2Icon
+                aria-hidden="true"
+                className="size-6 text-success"
+              />
+            </div>
+            <div className="space-y-1">
+              <p className="font-semibold" id={headingId}>
                 {successTitle}
-              </h2>
-              <p className="max-w-sm text-sm leading-6 text-muted-foreground">
-                {successDescription}
+              </p>
+              <p className="text-sm text-muted-foreground">
+                {resolvedSuccessDescription}
               </p>
             </div>
-          ) : (
-            <form
-              className="flex flex-col gap-6 p-5 sm:p-6"
-              onSubmit={handleSubmit}
+          </div>
+        ) : (
+          <div className="w-full max-w-sm space-y-6">
+            <h2
+              className={
+                title ? "text-lg font-semibold tracking-tight" : "sr-only"
+              }
+              id={headingId}
             >
-              <header className="space-y-2">
-                <h2
-                  className="text-xl font-semibold tracking-tight text-balance sm:text-2xl"
-                  id={headingId}
-                >
-                  {title}
-                </h2>
-                {description ? (
-                  <p className="text-sm leading-6 text-muted-foreground">
-                    {description}
-                  </p>
-                ) : null}
-              </header>
+              {title ?? "Create your account"}
+            </h2>
 
-              <ol
-                aria-label="Onboarding steps"
-                className="grid grid-cols-3 gap-2"
-              >
-                {(
-                  [
-                    ["account", accountStepLabel],
-                    ["plan", planStepLabel],
-                    ["review", reviewStepLabel],
-                  ] as const
-                ).map(([key, label], index) => {
-                  const complete = index < stepIndex;
-                  const current = key === step;
-                  return (
-                    <li key={key} className="min-w-0">
-                      <div
+            <ol
+              aria-label="Onboarding steps"
+              className="flex w-full items-center gap-2"
+            >
+              {stepItems.map(([key, label], index) => {
+                const complete = index < stepIndex;
+                const current = key === step;
+                return (
+                  <li
+                    className={cn(
+                      "flex min-w-0 items-center gap-2",
+                      index < stepItems.length - 1 ? "flex-1" : "shrink-0",
+                    )}
+                    key={key}
+                  >
+                    <div className="flex items-center gap-1.5">
+                      <span
                         aria-current={current ? "step" : undefined}
+                        aria-hidden="true"
                         className={cn(
-                          "flex items-center gap-2 rounded-[--radius] border px-2 py-2 sm:px-3",
-                          current
-                            ? "border-primary bg-accent"
-                            : "border-border bg-background",
+                          "flex size-6 items-center justify-center rounded-full",
+                          "text-xs font-semibold motion-safe:transition-colors",
+                          complete
+                            ? "bg-primary text-primary-foreground"
+                            : current
+                              ? "border-2 border-primary text-primary"
+                              : "border border-border text-muted-foreground",
                         )}
                       >
-                        <span
-                          aria-hidden="true"
-                          className={cn(
-                            "grid size-6 shrink-0 place-items-center rounded-full text-xs font-semibold",
-                            current || complete
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-muted text-muted-foreground",
-                          )}
-                        >
-                          {complete ? (
-                            <CheckIcon className="size-3.5" />
-                          ) : (
-                            index + 1
-                          )}
-                        </span>
-                        <span
-                          className={cn(
-                            "truncate text-xs font-medium sm:text-sm",
-                            current
-                              ? "text-foreground"
-                              : "text-muted-foreground",
-                          )}
-                        >
-                          {label}
-                        </span>
+                        {complete ? (
+                          <CheckCircle2Icon className="size-3.5" />
+                        ) : (
+                          index + 1
+                        )}
+                      </span>
+                      <span
+                        className={cn(
+                          "text-xs font-medium",
+                          current
+                            ? "text-foreground"
+                            : "text-muted-foreground",
+                        )}
+                      >
+                        {label}
+                      </span>
+                    </div>
+                    {index < stepItems.length - 1 ? (
+                      <span
+                        aria-hidden="true"
+                        className={cn(
+                          "h-px min-w-6 flex-1",
+                          complete ? "bg-primary" : "bg-border",
+                        )}
+                      />
+                    ) : null}
+                  </li>
+                );
+              })}
+            </ol>
+
+            {step === "account" || step === "plan" ? (
+              <form className="grid gap-4" onSubmit={handleSubmit}>
+                {step === "account" ? (
+                  <>
+                    <div className="grid gap-2">
+                      <Label htmlFor={nameId}>{nameLabel}</Label>
+                      <Input
+                        autoComplete="name"
+                        className={fieldInputClassName}
+                        id={nameId}
+                        name="name"
+                        onChange={(event) => setName(event.target.value)}
+                        placeholder={namePlaceholder}
+                        required
+                        type="text"
+                        value={name}
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor={emailId}>{emailLabel}</Label>
+                      <Input
+                        autoComplete="email"
+                        className={fieldInputClassName}
+                        id={emailId}
+                        name="email"
+                        onChange={(event) => setEmail(event.target.value)}
+                        placeholder={emailPlaceholder}
+                        required
+                        type="email"
+                        value={email}
+                      />
+                    </div>
+                    <button
+                      className={cn(primaryButtonClassName, "w-full")}
+                      type="submit"
+                    >
+                      {continueLabel}
+                    </button>
+                  </>
+                ) : null}
+
+                {step === "plan" ? (
+                  <>
+                    <fieldset className="grid gap-2">
+                      <legend
+                        className="text-sm leading-none font-medium"
+                        id={planGroupId}
+                      >
+                        {planFieldLabel}
+                      </legend>
+                      <div className="grid gap-3">
+                        {plans.map((plan) => {
+                          const selected = plan.id === planId;
+                          const optionId = `${planGroupId}-${plan.id}`;
+                          return (
+                            <label
+                              className={cn(
+                                "flex cursor-pointer items-start gap-3 rounded-lg border p-3",
+                                "motion-safe:transition-colors",
+                                selected
+                                  ? "border-primary/40 bg-accent/50"
+                                  : "border-border hover:bg-accent/50",
+                              )}
+                              htmlFor={optionId}
+                              key={plan.id}
+                            >
+                              <span className="relative mt-0.5 grid size-4 shrink-0 place-items-center">
+                                <input
+                                  checked={selected}
+                                  className="peer absolute inset-0 cursor-pointer opacity-0"
+                                  id={optionId}
+                                  name="plan"
+                                  onChange={() => setPlanId(plan.id)}
+                                  type="radio"
+                                  value={plan.id}
+                                />
+                                <span
+                                  aria-hidden="true"
+                                  className={cn(
+                                    "grid size-4 place-items-center rounded-full border",
+                                    selected
+                                      ? "border-primary"
+                                      : "border-input bg-background",
+                                  )}
+                                >
+                                  {selected ? (
+                                    <span className="size-2 rounded-full bg-primary" />
+                                  ) : null}
+                                </span>
+                              </span>
+                              <span className="flex flex-col gap-0.5">
+                                <span className="text-sm font-medium">
+                                  {plan.label}
+                                </span>
+                                <span className="text-xs text-muted-foreground">
+                                  {plan.description}
+                                </span>
+                              </span>
+                            </label>
+                          );
+                        })}
                       </div>
-                    </li>
-                  );
-                })}
-              </ol>
+                    </fieldset>
 
-              {step === "account" ? (
-                <div className="space-y-4">
-                  <FieldShell id={nameId} label={nameLabel}>
-                    <Input
-                      autoComplete="name"
-                      className="h-12 rounded-[--radius] bg-background"
-                      id={nameId}
-                      name="name"
-                      onChange={(event) => setName(event.target.value)}
-                      placeholder={namePlaceholder}
-                      required
-                      type="text"
-                      value={name}
-                    />
-                  </FieldShell>
-                  <FieldShell id={emailId} label={emailLabel}>
-                    <Input
-                      autoComplete="email"
-                      className="h-12 rounded-[--radius] bg-background"
-                      id={emailId}
-                      name="email"
-                      onChange={(event) => setEmail(event.target.value)}
-                      placeholder={emailPlaceholder}
-                      required
-                      type="email"
-                      value={email}
-                    />
-                  </FieldShell>
-                  <FieldShell id={passwordId} label={passwordLabel}>
-                    <Input
-                      autoComplete="new-password"
-                      className="h-12 rounded-[--radius] bg-background"
-                      id={passwordId}
-                      minLength={8}
-                      name="password"
-                      onChange={(event) => setPassword(event.target.value)}
-                      placeholder={passwordPlaceholder}
-                      required
-                      type="password"
-                      value={password}
-                    />
-                  </FieldShell>
-                </div>
-              ) : null}
-
-              {step === "plan" ? (
-                <div className="space-y-4">
-                  <fieldset className="space-y-3">
-                    <legend className="sr-only" id={planGroupId}>
-                      {planStepLabel}
-                    </legend>
-                    {plans.map((plan) => {
-                      const selected = plan.id === planId;
-                      return (
-                        <label
-                          className={cn(
-                            "flex cursor-pointer items-start gap-3 rounded-[--radius] border p-4 outline-none transition-[border-color,background-color,transform] duration-200 ease-out motion-reduce:transition-none",
-                            selected
-                              ? "border-primary bg-accent"
-                              : "border-border bg-background hover:bg-muted/40",
-                          )}
-                          key={plan.id}
-                        >
-                          <input
-                            checked={selected}
-                            className="sr-only"
-                            name="plan"
-                            onChange={() => setPlanId(plan.id)}
-                            type="radio"
-                            value={plan.id}
-                          />
-                          <span
-                            aria-hidden="true"
-                            className={cn(
-                              "mt-0.5 grid size-4 shrink-0 place-items-center rounded-full border",
-                              selected
-                                ? "border-primary bg-primary text-primary-foreground"
-                                : "border-input bg-background",
-                            )}
-                          >
-                            {selected ? (
-                              <span className="size-1.5 rounded-full bg-primary-foreground" />
-                            ) : null}
-                          </span>
-                          <span className="min-w-0 flex-1 space-y-1">
-                            <span className="flex items-baseline justify-between gap-3">
-                              <span className="text-sm font-semibold">
-                                {plan.name}
-                              </span>
-                              <span className="text-sm text-muted-foreground">
-                                {plan.price}
-                              </span>
-                            </span>
-                            <span className="block text-sm leading-6 text-muted-foreground">
-                              {plan.description}
-                            </span>
-                          </span>
-                        </label>
-                      );
-                    })}
-                  </fieldset>
-
-                  <div className="flex items-start gap-3 rounded-[--radius] border border-border bg-background p-4">
-                    <Checkbox
-                      checked={newsletter}
-                      id={newsletterId}
-                      name="newsletter"
-                      onCheckedChange={(value) => setNewsletter(value === true)}
-                    />
                     <Label
-                      className="text-sm leading-6 font-normal"
+                      className="font-normal"
                       htmlFor={newsletterId}
                     >
+                      <Checkbox
+                        checked={newsletter}
+                        id={newsletterId}
+                        name="newsletter"
+                        onCheckedChange={(value) =>
+                          setNewsletter(value === true)
+                        }
+                      />
                       {newsletterLabel}
                     </Label>
-                  </div>
+
+                    <div className="flex gap-3">
+                      <button
+                        className={cn(outlineButtonClassName, "flex-1")}
+                        onClick={goBack}
+                        type="button"
+                      >
+                        {backLabel}
+                      </button>
+                      <button
+                        className={cn(primaryButtonClassName, "flex-1")}
+                        type="submit"
+                      >
+                        {continueLabel}
+                      </button>
+                    </div>
+                  </>
+                ) : null}
+              </form>
+            ) : null}
+
+            {step === "confirm" ? (
+              <div className="space-y-4">
+                <div className="divide-y divide-border rounded-lg border border-border">
+                  {(
+                    [
+                      [reviewNameLabel, name.trim()],
+                      [reviewEmailLabel, email.trim()],
+                      [reviewPlanLabel, selectedPlan?.label ?? planId],
+                      [
+                        reviewUpdatesLabel,
+                        newsletter ? updatesYesLabel : updatesNoLabel,
+                      ],
+                    ] as const
+                  ).map(([label, value]) => (
+                    <div
+                      className="flex items-center justify-between px-4 py-3 text-sm"
+                      key={label}
+                    >
+                      <span className="text-muted-foreground">{label}</span>
+                      <span className="font-medium">{value}</span>
+                    </div>
+                  ))}
                 </div>
-              ) : null}
-
-              {step === "review" ? (
-                <dl className="rounded-[--radius] border border-border bg-background px-4">
-                  <ReviewRow label={nameLabel} value={name.trim()} />
-                  <ReviewRow label={emailLabel} value={email.trim()} />
-                  <ReviewRow label={passwordLabel} value={passwordSetLabel} />
-                  <ReviewRow
-                    label={planStepLabel}
-                    value={
-                      selectedPlan
-                        ? `${selectedPlan.name} (${selectedPlan.price})`
-                        : ""
-                    }
-                  />
-                  <ReviewRow
-                    label={newsletterLabel}
-                    value={newsletter ? newsletterYesLabel : newsletterNoLabel}
-                  />
-                </dl>
-              ) : null}
-
-              <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-between">
-                {step === "account" ? (
-                  <span className="hidden sm:block" />
-                ) : (
-                  <Button
+                <div className="flex gap-3">
+                  <button
+                    className={cn(outlineButtonClassName, "flex-1")}
                     onClick={goBack}
-                    size="lg"
                     type="button"
-                    variant="secondary"
                   >
                     {backLabel}
-                  </Button>
-                )}
-                <Button className="sm:min-w-40" size="lg" type="submit">
-                  {step === "review" ? submitLabel : continueLabel}
-                </Button>
+                  </button>
+                  <button
+                    aria-busy={loading || undefined}
+                    className={cn(primaryButtonClassName, "flex-1")}
+                    disabled={loading}
+                    onClick={handleConfirm}
+                    type="button"
+                  >
+                    <span className={cn(loading && "opacity-0")}>
+                      {submitLabel}
+                    </span>
+                    {loading ? (
+                      <Loader2Icon
+                        aria-hidden="true"
+                        className="absolute size-4 motion-safe:animate-spin"
+                      />
+                    ) : null}
+                  </button>
+                </div>
               </div>
-            </form>
-          )}
-        </article>
+            ) : null}
+          </div>
+        )}
       </div>
     </section>
   );

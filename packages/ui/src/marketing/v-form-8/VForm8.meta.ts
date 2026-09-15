@@ -3,10 +3,10 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "v-form-8",
   displayName: "VForm8",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Three-step onboarding wizard with account details, plan cards and a newsletter opt-in, a review summary, and a success state.",
+    "Three-step onboarding wizard with account details, plan cards and a newsletter opt-in, a confirm summary, and a success state.",
   sectionCategory: "form",
   purpose:
     "Lets a product landing page collect a new account, a plan choice, and confirmation without sending visitors into a full checkout.",
@@ -30,8 +30,6 @@ export default {
     columns: 1,
   },
   slots: [
-    "headline",
-    "description",
     "stepper",
     "accountFields",
     "planCards",
@@ -59,7 +57,7 @@ export default {
     "conversion",
   ],
   dependencies: ["lucide-react"],
-  registryDependencies: ["button", "checkbox", "input", "label"],
+  registryDependencies: ["checkbox", "input", "label"],
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: { layout: "fit", width: 1440, height: 900 },
 } satisfies ComponentMeta;
