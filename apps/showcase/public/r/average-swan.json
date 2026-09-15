@@ -1,32 +1,37 @@
 {
   "name": "average-swan",
   "displayName": "AverageSwan",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "addedAt": "2026-09-15",
-  "description": "A soft neumorphic action button that sits raised at rest and presses into the surface on activate.",
+  "description": "A four-key sampler pad with square chassis wells, oversized 10px-radius keys, and a hard press-in shadow.",
   "sectionCategory": "action",
-  "purpose": "Gives a tactile, inset-press control for quiet confirmations without leaving the semantic token set.",
+  "purpose": "Recreates a compact hardware pad (minus, plus, record, play) with native buttons and local radii instead of the shared Button shape.",
   "bestFor": [
-    "soft confirm and continue actions",
-    "settings and preference panels",
-    "playful product UI that still needs a native button"
+    "sampler, transport, or device-style controls",
+    "tactile record and play actions",
+    "product UI that needs a recessed square well"
   ],
   "avoidFor": [
-    "destructive or irreversible actions",
-    "dense toolbars that cannot spare the raised shadow"
+    "generic form submit buttons",
+    "dense toolbars that cannot spare the 2x2 pad"
   ],
   "tone": [
     "playful",
-    "clean"
+    "bold"
   ],
   "contentDensity": "low",
-  "visualWeight": "medium",
+  "visualWeight": "high",
   "layout": {
-    "type": "stack",
+    "type": "grid",
+    "columns": 2,
     "alignment": "center"
   },
   "slots": [
-    "actionLabel"
+    "minus",
+    "plus",
+    "record",
+    "play",
+    "caption"
   ],
   "capabilities": {
     "supportsImage": false,
@@ -37,13 +42,12 @@
   },
   "tags": [
     "button",
-    "cta",
-    "action",
+    "pad",
+    "sampler",
     "neumorphic",
     "atom"
   ],
   "dependencies": [
-    "@radix-ui/react-slot",
     "clsx",
     "tailwind-merge"
   ],
@@ -60,17 +64,17 @@
     {
       "path": "average-swan/AverageSwan.tsx",
       "type": "component",
-      "content": "import { Slot } from \"@radix-ui/react-slot\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { AverageSwanProps } from \"./AverageSwan.types\";\n\nconst sizes = {\n  sm: \"h-9 px-4 text-xs tracking-[0.16em]\",\n  md: \"h-11 px-7 text-sm tracking-[0.18em]\",\n  lg: \"h-12 px-9 text-base tracking-[0.2em]\",\n} as const;\n\nexport function AverageSwan({\n  className,\n  children,\n  label = \"Press\",\n  size = \"md\",\n  asChild = false,\n  type,\n  ...props\n}: AverageSwanProps) {\n  const Component = asChild ? Slot : \"button\";\n  const content = children ?? label;\n\n  return (\n    <Component\n      className={cn(\n        \"jk-average-swan inline-flex shrink-0 items-center justify-center rounded-[0.5em] font-medium uppercase whitespace-nowrap text-secondary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50\",\n        sizes[size],\n        className,\n      )}\n      data-size={size}\n      data-slot=\"average-swan\"\n      type={asChild ? undefined : (type ?? \"button\")}\n      {...props}\n    >\n      <style href=\"jk-average-swan\" precedence=\"default\">{`\n        .jk-average-swan {\n          background: var(--jk-secondary);\n          border: 1px solid var(--jk-secondary);\n          box-shadow:\n            6px 6px 12px color-mix(in oklch, var(--jk-foreground) 16%, transparent),\n            -6px -6px 12px color-mix(in oklch, var(--jk-background) 92%, var(--jk-card));\n        }\n        .jk-average-swan:hover:not(:disabled) {\n          color: var(--jk-foreground);\n        }\n        .jk-average-swan:active:not(:disabled) {\n          color: var(--jk-muted-foreground);\n          box-shadow:\n            inset 4px 4px 12px color-mix(in oklch, var(--jk-foreground) 16%, transparent),\n            inset -4px -4px 12px color-mix(in oklch, var(--jk-background) 92%, var(--jk-card));\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-average-swan {\n            transition:\n              box-shadow 200ms ease,\n              color 200ms ease,\n              transform 200ms ease;\n          }\n          .jk-average-swan:active:not(:disabled) {\n            transform: translateY(1px);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-average-swan {\n            transition: none;\n          }\n        }\n      `}</style>\n      {content}\n    </Component>\n  );\n}\n"
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { AverageSwanProps } from \"./AverageSwan.types\";\n\nexport function AverageSwan({\n  className,\n  size = \"md\",\n  caption = \"Teenage Engineering [EP-133 K.O. II] - Buttons\",\n  minusLabel = \"Minus\",\n  plusLabel = \"Plus\",\n  recordLabel = \"RECORD\",\n  playLabel = \"PLAY\",\n  onMinus,\n  onPlus,\n  onRecord,\n  onPlay,\n  disabled,\n  ...props\n}: AverageSwanProps) {\n  return (\n    <div\n      aria-label=\"Sampler pad\"\n      className={cn(\"jk-average-swan\", className)}\n      data-size={size}\n      data-slot=\"average-swan\"\n      role=\"group\"\n      {...props}\n    >\n      <style href=\"jk-average-swan\" precedence=\"default\">{`\n        .jk-average-swan {\n          display: flex;\n          flex-direction: column;\n          align-items: center;\n          justify-content: center;\n          row-gap: 1.25em;\n          font-family: var(--jk-font-label);\n          font-size: 1rem;\n          color: var(--jk-foreground);\n        }\n        .jk-average-swan[data-size=\"sm\"] {\n          font-size: 0.75rem;\n        }\n        .jk-average-swan[data-size=\"lg\"] {\n          font-size: 1.25rem;\n        }\n        .jk-average-swan-grid {\n          display: flex;\n          flex-direction: column;\n          row-gap: 1.5em;\n        }\n        .jk-average-swan-row {\n          display: flex;\n          column-gap: 1.5em;\n        }\n        .jk-average-swan-well {\n          display: flex;\n          align-items: center;\n          justify-content: center;\n          width: 5em;\n          height: 5em;\n          border-radius: 5px;\n          background: color-mix(in oklab, var(--jk-foreground) 92%, var(--jk-background));\n        }\n        .jk-average-swan-key {\n          display: inline-flex;\n          align-items: center;\n          justify-content: center;\n          width: 5.7em;\n          height: 5.7em;\n          padding: 0;\n          border: none;\n          border-radius: 10px;\n          cursor: pointer;\n          color: var(--jk-muted-foreground);\n        }\n        .jk-average-swan-key:focus-visible {\n          outline: none;\n          box-shadow:\n            0 0 0 2px var(--jk-background),\n            0 0 0 4px var(--jk-ring);\n        }\n        .jk-average-swan-key:disabled {\n          cursor: not-allowed;\n          opacity: 0.5;\n        }\n        .jk-average-swan-key-plastic {\n          background: color-mix(in oklab, var(--jk-muted-foreground) 22%, var(--jk-card));\n          box-shadow:\n            color-mix(in oklab, var(--jk-foreground) 38%, transparent) 10px 10px 8px,\n            var(--jk-card) 1.5px 1.5px 2px 0 inset,\n            color-mix(in oklab, var(--jk-muted-foreground) 22%, var(--jk-card)) -3.2px -3.2px 8px 0 inset;\n        }\n        .jk-average-swan-key-record {\n          align-items: flex-start;\n          justify-content: center;\n          background: var(--jk-destructive);\n          color: var(--jk-destructive-foreground);\n          box-shadow:\n            color-mix(in oklab, var(--jk-foreground) 38%, transparent) 10px 10px 8px,\n            color-mix(in oklab, var(--jk-warning) 70%, var(--jk-destructive)) 2px 2px 10px 0 inset,\n            var(--jk-destructive) -4px -4px 1px 0 inset;\n        }\n        .jk-average-swan-key-play {\n          align-items: flex-start;\n          justify-content: center;\n          background: color-mix(in oklab, var(--jk-foreground) 64%, var(--jk-muted));\n          color: var(--jk-background);\n          box-shadow:\n            color-mix(in oklab, var(--jk-foreground) 38%, transparent) 10px 10px 8px,\n            color-mix(in oklab, var(--jk-muted-foreground) 45%, var(--jk-card)) 1.5px 1.5px 1px 0 inset,\n            color-mix(in oklab, var(--jk-foreground) 64%, var(--jk-muted)) -3.2px -3.2px 8px 0 inset;\n        }\n        .jk-average-swan-glyph {\n          position: relative;\n          display: block;\n          width: 1.5625em;\n          height: 1.5625em;\n        }\n        .jk-average-swan-glyph::before,\n        .jk-average-swan-glyph::after {\n          content: \"\";\n          position: absolute;\n          background: currentColor;\n        }\n        .jk-average-swan-glyph-minus::before {\n          top: 50%;\n          left: 12.5%;\n          width: 75%;\n          height: 0.14em;\n          transform: translateY(-50%);\n        }\n        .jk-average-swan-glyph-plus::before {\n          top: 50%;\n          left: 12.5%;\n          width: 75%;\n          height: 0.14em;\n          transform: translateY(-50%);\n        }\n        .jk-average-swan-glyph-plus::after {\n          left: 50%;\n          top: 12.5%;\n          width: 0.14em;\n          height: 75%;\n          transform: translateX(-50%);\n        }\n        .jk-average-swan-label {\n          padding-top: 0.9em;\n          font-size: 0.85em;\n          letter-spacing: 0.075em;\n        }\n        .jk-average-swan-caption {\n          margin: 0;\n          text-align: center;\n          font-size: 0.65em;\n          color: var(--jk-muted-foreground);\n        }\n        .jk-average-swan-key-plastic:active:not(:disabled) {\n          box-shadow:\n            color-mix(in oklab, var(--jk-foreground) 38%, transparent) 0 0 0,\n            inset 0.5px 0.5px 4px var(--jk-foreground),\n            color-mix(in oklab, var(--jk-muted-foreground) 22%, var(--jk-card)) -3.2px -3.2px 8px 0 inset;\n        }\n        .jk-average-swan-key-plastic:active:not(:disabled) .jk-average-swan-glyph {\n          scale: 0.95;\n        }\n        .jk-average-swan-key-record:active:not(:disabled) {\n          box-shadow:\n            color-mix(in oklab, var(--jk-foreground) 38%, transparent) 0 0 0,\n            inset 0.5px 0.5px 4px var(--jk-foreground),\n            var(--jk-destructive) -3.2px -3.2px 8px 0 inset;\n        }\n        .jk-average-swan-key-play:active:not(:disabled) {\n          box-shadow:\n            color-mix(in oklab, var(--jk-foreground) 38%, transparent) 0 0 0,\n            inset 0.5px 0.5px 4px var(--jk-foreground),\n            color-mix(in oklab, var(--jk-foreground) 64%, var(--jk-muted)) -3.2px -3.2px 8px 0 inset;\n        }\n        .jk-average-swan-key-record:active:not(:disabled) .jk-average-swan-label,\n        .jk-average-swan-key-play:active:not(:disabled) .jk-average-swan-label {\n          transform: translateY(0.5px);\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-average-swan-key,\n          .jk-average-swan-glyph,\n          .jk-average-swan-label {\n            transition: 0.1s ease-in-out;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-average-swan-key,\n          .jk-average-swan-glyph,\n          .jk-average-swan-label {\n            transition: none;\n          }\n        }\n      `}</style>\n      <div className=\"jk-average-swan-grid\">\n        <div className=\"jk-average-swan-row\">\n          <div className=\"jk-average-swan-well\">\n            <button\n              aria-label={minusLabel}\n              className=\"jk-average-swan-key jk-average-swan-key-plastic\"\n              disabled={disabled}\n              onClick={onMinus}\n              type=\"button\"\n            >\n              <span aria-hidden=\"true\" className=\"jk-average-swan-glyph jk-average-swan-glyph-minus\" />\n            </button>\n          </div>\n          <div className=\"jk-average-swan-well\">\n            <button\n              aria-label={plusLabel}\n              className=\"jk-average-swan-key jk-average-swan-key-plastic\"\n              disabled={disabled}\n              onClick={onPlus}\n              type=\"button\"\n            >\n              <span aria-hidden=\"true\" className=\"jk-average-swan-glyph jk-average-swan-glyph-plus\" />\n            </button>\n          </div>\n        </div>\n        <div className=\"jk-average-swan-row\">\n          <div className=\"jk-average-swan-well\">\n            <button\n              className=\"jk-average-swan-key jk-average-swan-key-record\"\n              disabled={disabled}\n              onClick={onRecord}\n              type=\"button\"\n            >\n              <span className=\"jk-average-swan-label\">{recordLabel}</span>\n            </button>\n          </div>\n          <div className=\"jk-average-swan-well\">\n            <button\n              className=\"jk-average-swan-key jk-average-swan-key-play\"\n              disabled={disabled}\n              onClick={onPlay}\n              type=\"button\"\n            >\n              <span className=\"jk-average-swan-label\">{playLabel}</span>\n            </button>\n          </div>\n        </div>\n      </div>\n      {caption ? <p className=\"jk-average-swan-caption\">{caption}</p> : null}\n    </div>\n  );\n}\n"
     },
     {
       "path": "average-swan/AverageSwan.types.ts",
       "type": "types",
-      "content": "import type { ButtonHTMLAttributes, ReactNode } from \"react\";\n\nexport type AverageSwanSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface AverageSwanProps\n  extends ButtonHTMLAttributes<HTMLButtonElement> {\n  children?: ReactNode;\n  label?: string;\n  size?: AverageSwanSize;\n  asChild?: boolean;\n}\n"
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type AverageSwanSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface AverageSwanProps extends HTMLAttributes<HTMLDivElement> {\n  size?: AverageSwanSize;\n  caption?: string;\n  minusLabel?: string;\n  plusLabel?: string;\n  recordLabel?: string;\n  playLabel?: string;\n  onMinus?: () => void;\n  onPlus?: () => void;\n  onRecord?: () => void;\n  onPlay?: () => void;\n  disabled?: boolean;\n}\n"
     },
     {
       "path": "average-swan/index.ts",
       "type": "index",
-      "content": "export { AverageSwan } from \"./AverageSwan\";\nexport type * from \"./AverageSwan.types\";\n"
+      "content": "export { AverageSwan } from \"./AverageSwan\";\nexport type { AverageSwanProps, AverageSwanSize } from \"./AverageSwan.types\";\n"
     },
     {
       "path": "lib/cn.ts",
@@ -85,7 +89,7 @@
     },
     {
       "name": "Sizes",
-      "code": "<div className=\"flex flex-wrap items-center gap-4 bg-background p-8 text-foreground\">\n      <AverageSwan {...averageSwanMocks.compact} />\n      <AverageSwan {...averageSwanMocks.default} />\n      <AverageSwan label={averageSwanMocks.alternate.label} size=\"lg\" />\n    </div>"
+      "code": "<div className=\"flex flex-wrap items-end justify-center gap-8 bg-background p-8 text-foreground\">\n      <AverageSwan {...averageSwanMocks.compact} />\n      <AverageSwan {...averageSwanMocks.default} />\n      <AverageSwan {...averageSwanMocks.alternate} size=\"lg\" />\n    </div>"
     }
   ]
 }

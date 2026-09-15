@@ -1,2 +1,2 @@
 export { AverageSwan } from "./AverageSwan";
-export type * from "./AverageSwan.types";
+export type { AverageSwanProps, AverageSwanSize } from "./AverageSwan.types";

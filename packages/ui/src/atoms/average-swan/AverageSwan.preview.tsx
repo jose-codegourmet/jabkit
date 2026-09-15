@@ -5,5 +5,11 @@ import { averageSwanMocks } from "./AverageSwan.mocks";
 
 export default {
   Default: () => <AverageSwan {...averageSwanMocks.default} />,
-  Sizes: () => <AverageSwan {...averageSwanMocks.alternate} />,
+  Sizes: () => (
+    <div className="flex flex-wrap items-end justify-center gap-8 bg-background p-8 text-foreground">
+      <AverageSwan {...averageSwanMocks.compact} />
+      <AverageSwan {...averageSwanMocks.default} />
+      <AverageSwan {...averageSwanMocks.alternate} size="lg" />
+    </div>
+  ),
 };

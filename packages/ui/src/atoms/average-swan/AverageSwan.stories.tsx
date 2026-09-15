@@ -23,10 +23,10 @@ export const Default: Story = {
 export const Sizes: Story = {
   args: { ...averageSwanMocks.alternate },
   render: () => (
-    <div className="flex flex-wrap items-center gap-4 bg-background p-8 text-foreground">
+    <div className="flex flex-wrap items-end justify-center gap-8 bg-background p-8 text-foreground">
       <AverageSwan {...averageSwanMocks.compact} />
       <AverageSwan {...averageSwanMocks.default} />
-      <AverageSwan label={averageSwanMocks.alternate.label} size="lg" />
+      <AverageSwan {...averageSwanMocks.alternate} size="lg" />
     </div>
   ),
 };
