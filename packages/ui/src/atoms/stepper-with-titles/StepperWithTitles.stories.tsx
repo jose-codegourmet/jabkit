@@ -14,10 +14,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { ...stepperWithTitlesMocks.checkout },
+  args: { ...stepperWithTitlesMocks.default },
   render: () => (
     <div className="w-[36rem] bg-background p-8 text-foreground">
-      <StepperWithTitles {...stepperWithTitlesMocks.checkout} />
+      <StepperWithTitles {...stepperWithTitlesMocks.default} />
     </div>
   ),
 };
@@ -32,14 +32,14 @@ export const Onboarding: Story = {
 };
 
 export const ThemeComparison: Story = {
-  args: { ...stepperWithTitlesMocks.checkout },
+  args: { ...stepperWithTitlesMocks.default },
   render: () => (
     <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border sm:grid-cols-2">
       <div className="bg-background p-8">
-        <StepperWithTitles {...stepperWithTitlesMocks.checkout} />
+        <StepperWithTitles {...stepperWithTitlesMocks.default} />
       </div>
       <div className="dark bg-background p-8">
-        <StepperWithTitles {...stepperWithTitlesMocks.checkout} />
+        <StepperWithTitles {...stepperWithTitlesMocks.default} />
       </div>
     </div>
   ),

@@ -1,18 +1,18 @@
 export const stepperWithTitlesMocks = {
-  checkout: {
+  default: {
     defaultValue: 2,
     steps: [
       {
-        title: "Cart",
-        description: "Review items and quantities",
+        title: "Step One",
+        description: "Desc for step one",
       },
       {
-        title: "Shipping",
-        description: "Address and delivery window",
+        title: "Step Two",
+        description: "Desc for step two",
       },
       {
-        title: "Payment",
-        description: "Card or invoice details",
+        title: "Step Three",
+        description: "Desc for step three",
       },
     ],
   },

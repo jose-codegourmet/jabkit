@@ -2349,7 +2349,7 @@
     "name": "stepper-with-titles",
     "displayName": "StepperWithTitles",
     "category": "atoms",
-    "description": "A horizontal progress stepper with numbered markers, titles, and supporting descriptions.",
+    "description": "Horizontal stepper with circular markers, titles stacked below, and descriptions.",
     "sectionCategory": "navigation",
     "purpose": "Shows where a person is in a short linear flow and lets them jump to a completed or upcoming step.",
     "bestFor": [
