@@ -3807,7 +3807,7 @@
     "name": "coming-soon-3",
     "displayName": "ComingSoon3",
     "category": "marketing",
-    "description": "Centered coming-soon page with live day-hour-minute-second tiles above an email notify form.",
+    "description": "Centered coming-soon page with a live day-hour-minute-second countdown and an email notify form.",
     "sectionCategory": "form",
     "purpose": "Holds a pre-launch page with a readable countdown and a single email capture so visitors can wait for a fixed open date.",
     "bestFor": [
@@ -3830,13 +3830,11 @@
       "alignment": "center"
     },
     "slots": [
-      "brand",
       "launchStatus",
       "headline",
       "description",
       "countdown",
-      "emailForm",
-      "legalText"
+      "emailForm"
     ],
     "capabilities": {
       "supportsImage": false,

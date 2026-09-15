@@ -34,7 +34,7 @@ export const Variants: Story = {
 export const ThemeComparison: Story = {
   args: { ...comingSoon3Mocks.default },
   render: () => (
-    <div className="grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border lg:grid-cols-2">
+    <div className="grid gap-px overflow-hidden rounded-lg border border-border bg-border lg:grid-cols-2">
       <div className="bg-background">
         <ComingSoon3 {...comingSoon3Mocks.default} />
       </div>
