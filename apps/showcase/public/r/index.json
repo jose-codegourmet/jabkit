@@ -6452,18 +6452,18 @@
     "name": "order-confirmation-card",
     "displayName": "OrderConfirmationCard",
     "category": "marketing",
-    "description": "Post-checkout receipt card with success status, order ID, product line items, ship-to, paid total, and dual actions.",
+    "description": "Centered post-checkout card with a success mark, order id, payment, time, total, and a pill account action.",
     "sectionCategory": "content",
-    "purpose": "Gives an ecommerce landing a trusted order-complete moment shoppers can read, save, and act on without opening a dashboard.",
+    "purpose": "Gives an ecommerce landing a trusted order-complete moment shoppers can read and act on without opening a dashboard.",
     "bestFor": [
       "ecommerce thank-you pages",
-      "gift and pickup confirmations",
-      "campaign landings that preview a packed order"
+      "checkout success overlays",
+      "campaign landings that preview a paid order"
     ],
     "avoidFor": [
       "live checkout that still needs a payment form",
       "account order history with many past carts",
-      "event tickets that need a scan barcode"
+      "packed receipts that need line items and ship-to"
     ],
     "tone": [
       "professional",
@@ -6475,7 +6475,7 @@
       "retail",
       "fashion"
     ],
-    "contentDensity": "medium",
+    "contentDensity": "low",
     "visualWeight": "medium",
     "layout": {
       "type": "card",
@@ -6484,17 +6484,15 @@
     },
     "slots": [
       "headline",
-      "description",
-      "successStatus",
+      "successIcon",
       "orderId",
-      "lineItems",
-      "shipping",
-      "totals",
-      "primaryCTA",
-      "secondaryCTA"
+      "paymentMethod",
+      "dateTime",
+      "total",
+      "primaryCTA"
     ],
     "capabilities": {
-      "supportsImage": true,
+      "supportsImage": false,
       "supportsVideo": false,
       "supportsForm": false,
       "supportsCTA": true,
@@ -6516,7 +6514,7 @@
       "receipt",
       "checkout",
       "ecommerce",
-      "cart",
+      "success",
       "marketing"
     ],
     "addedAt": "2026-09-15",
@@ -6532,7 +6530,7 @@
     "preview": {
       "layout": "fit",
       "width": 1440,
-      "height": 980
+      "height": 900
     }
   },
   {
