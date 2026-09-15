@@ -5,5 +5,9 @@ import { cleverPantherMocks } from "./CleverPanther.mocks";
 
 export default {
   Default: () => <CleverPanther {...cleverPantherMocks.default} />,
-  WithAction: () => <CleverPanther {...cleverPantherMocks.action} />,
+  Tones: () => (
+    <CleverPanther {...cleverPantherMocks.raised} size="lg">
+      Night route
+    </CleverPanther>
+  ),
 };

@@ -1,16 +1,13 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
 export type CleverPantherSize = "sm" | "md" | "lg";
-export type CleverPantherTone = "ink" | "muted";
+export type CleverPantherTone = "field" | "raised";
 
 export interface CleverPantherProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
-  eyebrow?: string;
-  title?: string;
-  description?: string;
-  actionLabel?: string;
+  /** Accessible name for the empty neumorphic slab. */
+  label?: string;
   size?: CleverPantherSize;
+  /** `field` matches the page (inspo). `raised` sits on `--jk-card`. */
   tone?: CleverPantherTone;
-  /** Soft sheen on hover. Honors prefers-reduced-motion. */
-  animate?: boolean;
 }

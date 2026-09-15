@@ -1,22 +1,19 @@
 export const cleverPantherMocks = {
   default: {
-    eyebrow: "Night brief",
-    title: "Clever panther",
-    description:
-      "A compact note card with a token-tinted sheen that stays readable in light and dark.",
+    label: "Neumorphic slab",
   },
-  action: {
-    eyebrow: "Field note",
-    title: "Quiet tracking",
-    description: "A short blurb for a catalogue tile that still wants a next step.",
-    actionLabel: "Open note",
-    size: "lg" as const,
+  raised: {
+    label: "Raised slab",
+    tone: "raised" as const,
   },
-  muted: {
-    eyebrow: "Archive",
-    title: "Muted coat",
-    description: "The quieter tone for lists that already have a loud neighbor.",
-    tone: "muted" as const,
+  compact: {
+    label: "Compact slab",
+    tone: "field" as const,
     size: "sm" as const,
+  },
+  caption: {
+    label: "Captioned slab",
+    size: "lg" as const,
+    children: "Night route",
   },
 } as const;

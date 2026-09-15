@@ -4,139 +4,84 @@ import { cn } from "@/lib/cn";
 import type { CleverPantherProps } from "./CleverPanther.types";
 
 const sizes = {
-  sm: "w-56 gap-2 p-4 text-sm",
-  md: "w-72 gap-2.5 p-5 text-sm",
-  lg: "w-80 gap-3 p-6 text-base",
+  sm: "jk-clever-panther-sm",
+  md: "jk-clever-panther-md",
+  lg: "jk-clever-panther-lg",
+} as const;
+
+const toneVars = {
+  field: "var(--jk-background)",
+  raised: "var(--jk-card)",
 } as const;
 
 export function CleverPanther({
   className,
   children,
-  eyebrow = "Night brief",
-  title = "Clever panther",
-  description = "A compact note card with a token-tinted sheen that stays readable in light and dark.",
-  actionLabel,
+  label = "Neumorphic slab",
   size = "md",
-  tone = "ink",
-  animate = true,
+  tone = "field",
+  style,
   ...props
 }: CleverPantherProps) {
   return (
-    <article
-      className={cn(
-        "jk-clever-panther relative isolate flex flex-col overflow-hidden rounded-[--radius] border border-border text-card-foreground shadow-[var(--jk-shadow-control)]",
-        sizes[size],
-        className,
-      )}
-      data-animate={animate ? "true" : "false"}
+    <div
+      aria-label={children ? undefined : label}
+      className={cn("jk-clever-panther", sizes[size], className)}
       data-size={size}
       data-slot="clever-panther"
       data-tone={tone}
+      role={children ? undefined : "img"}
+      style={
+        {
+          "--jk-clever-face": toneVars[tone],
+          ...style,
+        } as React.CSSProperties
+      }
       {...props}
     >
       <style href="jk-clever-panther" precedence="default">{`
         .jk-clever-panther {
-          background: color-mix(in oklab, var(--jk-card) 88%, var(--jk-foreground) 12%);
+          --jk-clever-w: 190px;
+          --jk-clever-h: 254px;
+          --jk-clever-r: 30px;
+          --jk-clever-s: 15px;
+          --jk-clever-blur: 30px;
+          box-sizing: border-box;
+          position: relative;
+          isolation: isolate;
+          width: var(--jk-clever-w);
+          height: var(--jk-clever-h);
+          overflow: hidden;
+          border: 0;
+          border-radius: var(--jk-clever-r);
+          background: var(--jk-clever-face);
+          box-shadow:
+            var(--jk-clever-s) var(--jk-clever-s) var(--jk-clever-blur)
+              oklch(from var(--jk-clever-face) calc(l - 0.05) c h),
+            calc(var(--jk-clever-s) * -1) calc(var(--jk-clever-s) * -1)
+              var(--jk-clever-blur)
+              oklch(from var(--jk-clever-face) calc(l + 0.14) c h);
         }
-        .jk-clever-panther[data-tone="muted"] {
-          background: color-mix(in oklab, var(--jk-muted) 70%, var(--jk-card) 30%);
+        .jk-clever-panther-sm {
+          --jk-clever-w: 142.5px;
+          --jk-clever-h: 190.5px;
+          --jk-clever-r: 22.5px;
+          --jk-clever-s: 11.25px;
+          --jk-clever-blur: 22.5px;
         }
-        .jk-clever-panther-spot {
-          background:
-            radial-gradient(
-              18rem 10rem at 12% -10%,
-              color-mix(in oklab, var(--jk-primary), transparent 78%),
-              transparent 58%
-            ),
-            radial-gradient(
-              1.1rem 1.1rem at 82% 18%,
-              color-mix(in oklab, var(--jk-foreground), transparent 88%),
-              transparent 70%
-            ),
-            radial-gradient(
-              0.7rem 0.7rem at 74% 28%,
-              color-mix(in oklab, var(--jk-foreground), transparent 90%),
-              transparent 68%
-            );
-        }
-        .jk-clever-panther-sheen {
-          background: linear-gradient(
-            115deg,
-            transparent 28%,
-            color-mix(in oklab, var(--jk-primary-foreground), transparent 78%) 46%,
-            transparent 62%
-          );
-          opacity: 0;
-          transform: translateX(-36%);
-        }
-        .jk-clever-panther-rim {
-          box-shadow: inset 0 1px 0 color-mix(in oklab, var(--jk-primary-foreground), transparent 82%);
-        }
-        @media (prefers-reduced-motion: no-preference) {
-          .jk-clever-panther {
-            transition:
-              transform 220ms ease,
-              box-shadow 220ms ease;
-          }
-          .jk-clever-panther-sheen {
-            transition:
-              opacity 280ms ease,
-              transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
-          }
-          .jk-clever-panther[data-animate="true"]:hover,
-          .jk-clever-panther[data-animate="true"]:focus-visible {
-            transform: translateY(-2px);
-            box-shadow:
-              var(--jk-shadow-control),
-              0 16px 32px color-mix(in oklab, var(--jk-foreground), transparent 88%);
-          }
-          .jk-clever-panther[data-animate="true"]:hover .jk-clever-panther-sheen,
-          .jk-clever-panther[data-animate="true"]:focus-visible .jk-clever-panther-sheen {
-            opacity: 1;
-            transform: translateX(18%);
-          }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .jk-clever-panther,
-          .jk-clever-panther-sheen {
-            transition: none;
-            transform: none;
-          }
-          .jk-clever-panther-sheen {
-            opacity: 0.28;
-          }
+        .jk-clever-panther-lg {
+          --jk-clever-w: 237.5px;
+          --jk-clever-h: 317.5px;
+          --jk-clever-r: 37.5px;
+          --jk-clever-s: 18.75px;
+          --jk-clever-blur: 37.5px;
         }
       `}</style>
-      <span
-        aria-hidden="true"
-        className="jk-clever-panther-spot pointer-events-none absolute inset-0"
-      />
-      <span
-        aria-hidden="true"
-        className="jk-clever-panther-sheen pointer-events-none absolute inset-0"
-      />
-      <span
-        aria-hidden="true"
-        className="jk-clever-panther-rim pointer-events-none absolute inset-0 rounded-[inherit]"
-      />
-      {children ?? (
-        <div className="relative z-10 flex flex-col gap-[inherit]">
-          <p className="text-[0.7em] font-medium tracking-[0.16em] text-muted-foreground uppercase">
-            {eyebrow}
-          </p>
-          <h3 className="text-[1.15em] leading-tight font-semibold tracking-tight">
-            {title}
-          </h3>
-          <p className="text-[0.92em] leading-relaxed text-muted-foreground">
-            {description}
-          </p>
-          {actionLabel ? (
-            <p className="pt-1 text-[0.85em] font-medium text-primary">
-              {actionLabel}
-            </p>
-          ) : null}
+      {children ? (
+        <div className="relative z-10 flex h-full items-end p-5 text-sm leading-snug text-foreground">
+          {children}
         </div>
-      )}
-    </article>
+      ) : null}
+    </div>
   );
 }
