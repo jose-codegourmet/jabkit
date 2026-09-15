@@ -5209,9 +5209,9 @@
     "name": "form",
     "displayName": "Form",
     "category": "marketing",
-    "description": "Compact stay-booking card with destination, check-in and check-out dates, room and guest steppers, and a search CTA.",
+    "description": "Compact stay-booking card with a destination field, date-range chip, room and guest chips, and a check-availability CTA.",
     "sectionCategory": "form",
-    "purpose": "Lets a travel or lodging landing page collect a stay request without sending visitors into a full reservation checkout.",
+    "purpose": "Lets a travel or lodging landing page collect a stay request as a single compact card, matching a destination-plus-details booking control.",
     "bestFor": [
       "hotel and inn landing pages",
       "short-stay rental campaigns",
@@ -5224,8 +5224,7 @@
     ],
     "tone": [
       "clean",
-      "professional",
-      "warm"
+      "professional"
     ],
     "industries": [
       "travel",
@@ -5239,13 +5238,10 @@
       "columns": 1
     },
     "slots": [
-      "headline",
-      "description",
-      "destinationField",
-      "checkInField",
-      "checkOutField",
-      "roomsStepper",
-      "guestsStepper",
+      "destinationsField",
+      "dateRangeChip",
+      "roomsChip",
+      "guestsChip",
       "searchCTA"
     ],
     "capabilities": {

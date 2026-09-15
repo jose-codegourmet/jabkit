@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "form",
   displayName: "Form",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Compact stay-booking card with destination, check-in and check-out dates, room and guest steppers, and a search CTA.",
+    "Compact stay-booking card with a destination field, date-range chip, room and guest chips, and a check-availability CTA.",
   sectionCategory: "form",
   purpose:
-    "Lets a travel or lodging landing page collect a stay request without sending visitors into a full reservation checkout.",
+    "Lets a travel or lodging landing page collect a stay request as a single compact card, matching a destination-plus-details booking control.",
   bestFor: [
     "hotel and inn landing pages",
     "short-stay rental campaigns",
@@ -20,7 +20,7 @@ export default {
     "multi-step checkout with payment",
     "account sign-in forms",
   ],
-  tone: ["clean", "professional", "warm"],
+  tone: ["clean", "professional"],
   industries: ["travel", "hospitality"],
   contentDensity: "medium",
   visualWeight: "medium",
@@ -30,13 +30,10 @@ export default {
     columns: 1,
   },
   slots: [
-    "headline",
-    "description",
-    "destinationField",
-    "checkInField",
-    "checkOutField",
-    "roomsStepper",
-    "guestsStepper",
+    "destinationsField",
+    "dateRangeChip",
+    "roomsChip",
+    "guestsChip",
     "searchCTA",
   ],
   capabilities: {
@@ -58,7 +55,7 @@ export default {
     "conversion",
   ],
   dependencies: ["lucide-react"],
-  registryDependencies: ["button", "input", "label"],
+  registryDependencies: [],
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: { layout: "fit", width: 1440, height: 900 },
 } satisfies ComponentMeta;
