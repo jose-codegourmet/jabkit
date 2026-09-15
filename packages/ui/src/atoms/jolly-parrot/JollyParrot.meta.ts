@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "jolly-parrot",
   displayName: "JollyParrot",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A compact diamond tessellation field painted with chart and primary tokens.",
+    "A square diamond field using five angled tile gradients, 40px cells, and a -50px shift.",
   sectionCategory: "background",
   purpose:
-    "Drops a playful tiled surface behind a caption or empty state without leaving the semantic token set.",
+    "Drops the inspo tessellation behind a caption or empty state without rounding it to the control radius.",
   bestFor: [
     "decorative catalogue tiles",
     "empty-state or wait-list backdrops",

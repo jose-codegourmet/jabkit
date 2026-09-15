@@ -1352,9 +1352,9 @@
     "name": "jolly-parrot",
     "displayName": "JollyParrot",
     "category": "atoms",
-    "description": "A compact diamond tessellation field painted with chart and primary tokens.",
+    "description": "A square diamond field using five angled tile gradients, 40px cells, and a -50px shift.",
     "sectionCategory": "background",
-    "purpose": "Drops a playful tiled surface behind a caption or empty state without leaving the semantic token set.",
+    "purpose": "Drops the inspo tessellation behind a caption or empty state without rounding it to the control radius.",
     "bestFor": [
       "decorative catalogue tiles",
       "empty-state or wait-list backdrops",
