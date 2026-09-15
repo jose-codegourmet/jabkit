@@ -1,0 +1,96 @@
+{
+  "name": "good-donkey",
+  "displayName": "GoodDonkey",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A compact message composer with file attach, a text field, and a send control.",
+  "sectionCategory": "form",
+  "purpose": "Gives chat, comment, and support surfaces a short compose bar that stays on semantic tokens.",
+  "bestFor": [
+    "inline chat or comment composers",
+    "support reply fields",
+    "demo surfaces that need attach plus send in one row"
+  ],
+  "avoidFor": [
+    "long-form editors that need a toolbar",
+    "search fields that should stay a single input"
+  ],
+  "tone": [
+    "clean",
+    "playful"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "row",
+    "alignment": "center"
+  },
+  "slots": [
+    "attach",
+    "message",
+    "send"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "input",
+    "composer",
+    "chat",
+    "file",
+    "send",
+    "atom"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center",
+    "width": 420,
+    "height": 160
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "good-donkey/GoodDonkey.tsx",
+      "type": "component",
+      "content": "import { PaperclipIcon, SendIcon } from \"lucide-react\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { GoodDonkeyProps } from \"./GoodDonkey.types\";\n\nconst sizes = {\n  sm: \"h-9 text-xs\",\n  md: \"h-10 text-sm\",\n  lg: \"h-12 text-base\",\n} as const;\n\nexport function GoodDonkey({\n  className,\n  size = \"md\",\n  placeholder = \"Write a message\",\n  defaultValue,\n  disabled,\n  attachLabel = \"Attach a file\",\n  sendLabel = \"Send message\",\n  accept,\n  ...props\n}: GoodDonkeyProps) {\n  return (\n    <form\n      className={cn(\n        \"jk-good-donkey inline-flex max-w-full items-center rounded-[--radius] border border-border bg-card px-3 text-card-foreground shadow-[var(--jk-shadow-control)]\",\n        sizes[size],\n        disabled && \"pointer-events-none opacity-50\",\n        className,\n      )}\n      data-size={size}\n      data-slot=\"good-donkey\"\n      {...props}\n    >\n      <style href=\"jk-good-donkey\" precedence=\"default\">{`\n        .jk-good-donkey {\n          outline: none;\n        }\n        .jk-good-donkey:focus-within {\n          border-color: color-mix(in oklab, var(--jk-ring), var(--jk-border) 35%);\n          box-shadow:\n            var(--jk-shadow-control),\n            0 0 0 1px color-mix(in oklab, var(--jk-ring), transparent 55%);\n        }\n        .jk-good-donkey-attach {\n          position: relative;\n          display: inline-flex;\n          flex-shrink: 0;\n          align-items: center;\n          justify-content: center;\n          color: var(--jk-muted-foreground);\n        }\n        .jk-good-donkey-attach input {\n          position: absolute;\n          inset: 0;\n          width: 100%;\n          height: 100%;\n          opacity: 0;\n          cursor: pointer;\n        }\n        .jk-good-donkey-attach svg {\n          width: 1.05em;\n          height: 1.05em;\n        }\n        .jk-good-donkey-tooltip {\n          position: absolute;\n          bottom: calc(100% + 0.55rem);\n          left: 50%;\n          z-index: 1;\n          padding: 0.3rem 0.5rem;\n          border: 1px solid var(--jk-border);\n          border-radius: calc(var(--radius) - 2px);\n          background: var(--jk-popover);\n          color: var(--jk-popover-foreground);\n          font-size: 0.625rem;\n          line-height: 1;\n          letter-spacing: 0.01em;\n          white-space: nowrap;\n          opacity: 0;\n          pointer-events: none;\n          transform: translateX(-50%) translateY(0.2rem);\n        }\n        .jk-good-donkey-field {\n          min-width: 0;\n          height: 100%;\n          flex: 1 1 auto;\n          border: 0;\n          background: transparent;\n          padding-inline: 0.65rem;\n          color: var(--jk-foreground);\n          outline: none;\n        }\n        .jk-good-donkey[data-size=\"sm\"] .jk-good-donkey-field {\n          width: 10.5rem;\n        }\n        .jk-good-donkey[data-size=\"md\"] .jk-good-donkey-field {\n          width: 13.5rem;\n        }\n        .jk-good-donkey[data-size=\"lg\"] .jk-good-donkey-field {\n          width: 16.5rem;\n        }\n        .jk-good-donkey-field::placeholder {\n          color: var(--jk-muted-foreground);\n        }\n        .jk-good-donkey-send {\n          display: inline-flex;\n          flex-shrink: 0;\n          align-items: center;\n          justify-content: center;\n          height: 100%;\n          border: 0;\n          background: transparent;\n          padding: 0;\n          color: var(--jk-muted-foreground);\n          cursor: pointer;\n        }\n        .jk-good-donkey-send svg {\n          width: 1.05em;\n          height: 1.05em;\n        }\n        .jk-good-donkey-send:focus-visible,\n        .jk-good-donkey-attach:focus-within {\n          color: var(--jk-foreground);\n          outline: none;\n          border-radius: calc(var(--radius) - 2px);\n          box-shadow: 0 0 0 2px var(--jk-background), 0 0 0 4px var(--jk-ring);\n        }\n        .jk-good-donkey-attach:hover,\n        .jk-good-donkey-send:hover,\n        .jk-good-donkey:focus-within .jk-good-donkey-send,\n        .jk-good-donkey-field:valid ~ .jk-good-donkey-send {\n          color: var(--jk-foreground);\n        }\n        .jk-good-donkey-field:valid ~ .jk-good-donkey-send svg {\n          fill: color-mix(in oklab, var(--jk-primary), transparent 70%);\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-good-donkey,\n          .jk-good-donkey-attach,\n          .jk-good-donkey-send,\n          .jk-good-donkey-tooltip {\n            transition:\n              border-color 180ms ease,\n              box-shadow 180ms ease,\n              color 180ms ease,\n              opacity 180ms ease,\n              transform 180ms ease;\n          }\n          .jk-good-donkey-attach:hover .jk-good-donkey-tooltip,\n          .jk-good-donkey-attach:focus-within .jk-good-donkey-tooltip {\n            opacity: 1;\n            transform: translateX(-50%) translateY(0);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-good-donkey,\n          .jk-good-donkey-attach,\n          .jk-good-donkey-send,\n          .jk-good-donkey-tooltip {\n            transition: none;\n          }\n          .jk-good-donkey-attach:hover .jk-good-donkey-tooltip,\n          .jk-good-donkey-attach:focus-within .jk-good-donkey-tooltip {\n            opacity: 1;\n            transform: translateX(-50%) translateY(0);\n          }\n        }\n      `}</style>\n      <label className=\"jk-good-donkey-attach\">\n        <span className=\"jk-good-donkey-tooltip\">{attachLabel}</span>\n        <PaperclipIcon aria-hidden=\"true\" />\n        <input\n          accept={accept}\n          aria-label={attachLabel}\n          disabled={disabled}\n          type=\"file\"\n        />\n      </label>\n      <input\n        className=\"jk-good-donkey-field\"\n        defaultValue={defaultValue}\n        disabled={disabled}\n        placeholder={placeholder}\n        required\n        type=\"text\"\n      />\n      <button\n        aria-label={sendLabel}\n        className=\"jk-good-donkey-send\"\n        disabled={disabled}\n        type=\"submit\"\n      >\n        <SendIcon aria-hidden=\"true\" />\n      </button>\n    </form>\n  );\n}\n"
+    },
+    {
+      "path": "good-donkey/GoodDonkey.types.ts",
+      "type": "types",
+      "content": "import type { FormHTMLAttributes } from \"react\";\n\nexport type GoodDonkeySize = \"sm\" | \"md\" | \"lg\";\n\nexport interface GoodDonkeyProps extends FormHTMLAttributes<HTMLFormElement> {\n  size?: GoodDonkeySize;\n  placeholder?: string;\n  defaultValue?: string;\n  disabled?: boolean;\n  attachLabel?: string;\n  sendLabel?: string;\n  accept?: string;\n}\n"
+    },
+    {
+      "path": "good-donkey/index.ts",
+      "type": "index",
+      "content": "export { GoodDonkey } from \"./GoodDonkey\";\nexport type * from \"./GoodDonkey.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<GoodDonkey {...goodDonkeyMocks.default} />"
+    },
+    {
+      "name": "Filled",
+      "code": "<GoodDonkey {...goodDonkeyMocks.filled} />"
+    }
+  ]
+}
