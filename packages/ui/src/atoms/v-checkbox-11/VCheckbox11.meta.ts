@@ -3,7 +3,7 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "v-checkbox-11",
   displayName: "VCheckbox11",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
     "Weekly availability grid with a checkbox for each day and time slot, plus a live selected-count.",
@@ -22,13 +22,13 @@ export default {
   ],
   tone: ["professional", "clean"],
   contentDensity: "medium",
-  visualWeight: "medium",
+  visualWeight: "low",
   layout: {
     type: "grid",
     alignment: "left",
     columns: 8,
   },
-  slots: ["headline", "selectedCount", "dayHeaders", "timeRows", "clearAction"],
+  slots: ["headline", "selectedCount", "dayHeaders", "timeRows"],
   capabilities: {
     supportsImage: false,
     supportsVideo: false,
@@ -42,8 +42,8 @@ export default {
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: {
     layout: "center",
-    width: 960,
-    height: 460,
-    capture: { viewport: { width: 1100, height: 540 } },
+    width: 480,
+    height: 260,
+    capture: { viewport: { width: 560, height: 320 } },
   },
 } satisfies ComponentMeta;

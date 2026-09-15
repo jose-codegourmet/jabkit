@@ -16,12 +16,12 @@ const ThemeComparison = () => (
 
 export default {
   Default: () => (
-    <div className="w-full max-w-[40rem]">
+    <div className="w-full max-w-md">
       <VCheckbox11 {...vCheckbox11Mocks.default} />
     </div>
   ),
   Variants: () => (
-    <div className="w-full max-w-[40rem]">
+    <div className="w-full max-w-md">
       <VCheckbox11 {...vCheckbox11Mocks.alternate} />
     </div>
   ),
