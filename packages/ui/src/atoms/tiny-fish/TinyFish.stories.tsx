@@ -23,7 +23,7 @@ export const Default: Story = {
 export const Sizes: Story = {
   args: { ...tinyFishMocks.alternate },
   render: () => (
-    <div className="flex flex-col items-start gap-4 bg-background p-8 text-foreground">
+    <div className="flex flex-col items-start gap-6 bg-background p-8 text-foreground">
       <TinyFish {...tinyFishMocks.compact} />
       <TinyFish {...tinyFishMocks.default} />
       <TinyFish {...tinyFishMocks.alternate} size="lg" />
