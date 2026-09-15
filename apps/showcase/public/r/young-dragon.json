@@ -1,0 +1,91 @@
+{
+  "name": "young-dragon",
+  "displayName": "YoungDragon",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A wireframe cube loader that tumbles in space using outlined faces and semantic tokens.",
+  "sectionCategory": "feedback",
+  "purpose": "Marks an in-progress wait with a geometric 3D cube instead of a flat ring, still reading in light and dark.",
+  "bestFor": [
+    "overlay and empty-state loading",
+    "playful async waits that still need a status role",
+    "compact pending markers beside a short label"
+  ],
+  "avoidFor": [
+    "determinate progress with a known percentage",
+    "dense toolbars that need a hairline spinner"
+  ],
+  "tone": [
+    "playful",
+    "clean"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "statusLabel"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "loader",
+    "spinner",
+    "cube",
+    "3d",
+    "feedback",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "young-dragon/YoungDragon.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { YoungDragonProps } from \"./YoungDragon.types\";\n\nconst sizes = {\n  sm: \"gap-2 text-xs\",\n  md: \"gap-3 text-sm\",\n  lg: \"gap-3.5 text-base\",\n} as const;\n\nconst cubeSizes = {\n  sm: \"1.35rem\",\n  md: \"2.1rem\",\n  lg: \"2.85rem\",\n} as const;\n\nconst FACES = [\"front\", \"back\", \"left\", \"right\", \"top\", \"bottom\"] as const;\n\nexport function YoungDragon({\n  className,\n  label = \"Loading\",\n  size = \"md\",\n  showLabel = false,\n  ...props\n}: YoungDragonProps) {\n  return (\n    <div\n      aria-busy=\"true\"\n      aria-live=\"polite\"\n      className={cn(\n        \"jk-young-dragon inline-flex flex-col items-center justify-center text-muted-foreground\",\n        sizes[size],\n        className,\n      )}\n      data-size={size}\n      data-slot=\"young-dragon\"\n      role=\"status\"\n      style={\n        {\n          \"--jk-young-dragon-size\": cubeSizes[size],\n        } as React.CSSProperties\n      }\n      {...props}\n    >\n      <style href=\"jk-young-dragon\" precedence=\"default\">{`\n        .jk-young-dragon-scene {\n          width: calc(var(--jk-young-dragon-size) * 1.7);\n          height: calc(var(--jk-young-dragon-size) * 1.7);\n          perspective: calc(var(--jk-young-dragon-size) * 4.2);\n        }\n        .jk-young-dragon-cube {\n          position: relative;\n          width: var(--jk-young-dragon-size);\n          height: var(--jk-young-dragon-size);\n          margin: calc(var(--jk-young-dragon-size) * 0.35) auto 0;\n          transform-style: preserve-3d;\n          transform: rotateX(-28deg) rotateY(38deg);\n        }\n        .jk-young-dragon-face {\n          position: absolute;\n          inset: 0;\n          border: 2px solid color-mix(in oklab, var(--jk-primary) 78%, var(--jk-border));\n          background: color-mix(in oklab, var(--jk-primary) 10%, transparent);\n          backface-visibility: visible;\n        }\n        .jk-young-dragon-face[data-face=\"front\"] {\n          transform: translateZ(calc(var(--jk-young-dragon-size) / 2));\n        }\n        .jk-young-dragon-face[data-face=\"back\"] {\n          border-color: color-mix(in oklab, var(--jk-chart-1) 70%, var(--jk-border));\n          transform: rotateY(180deg) translateZ(calc(var(--jk-young-dragon-size) / 2));\n        }\n        .jk-young-dragon-face[data-face=\"right\"] {\n          border-color: color-mix(in oklab, var(--jk-primary) 92%, var(--jk-foreground));\n          transform: rotateY(90deg) translateZ(calc(var(--jk-young-dragon-size) / 2));\n        }\n        .jk-young-dragon-face[data-face=\"left\"] {\n          border-color: color-mix(in oklab, var(--jk-chart-5) 55%, var(--jk-primary));\n          transform: rotateY(-90deg) translateZ(calc(var(--jk-young-dragon-size) / 2));\n        }\n        .jk-young-dragon-face[data-face=\"top\"] {\n          border-color: color-mix(in oklab, var(--jk-primary) 55%, var(--jk-card));\n          transform: rotateX(90deg) translateZ(calc(var(--jk-young-dragon-size) / 2));\n        }\n        .jk-young-dragon-face[data-face=\"bottom\"] {\n          border-color: color-mix(in oklab, var(--jk-muted-foreground) 40%, var(--jk-primary));\n          transform: rotateX(-90deg) translateZ(calc(var(--jk-young-dragon-size) / 2));\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-young-dragon-cube {\n            animation: jk-young-dragon-tumble 2.4s linear infinite;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-young-dragon-cube {\n            animation: none;\n          }\n        }\n        @keyframes jk-young-dragon-tumble {\n          to {\n            transform: rotateX(332deg) rotateY(398deg);\n          }\n        }\n      `}</style>\n      <span aria-hidden=\"true\" className=\"jk-young-dragon-scene\">\n        <span className=\"jk-young-dragon-cube\">\n          {FACES.map((face) => (\n            <span className=\"jk-young-dragon-face\" data-face={face} key={face} />\n          ))}\n        </span>\n      </span>\n      <span className={showLabel ? \"font-medium\" : \"sr-only\"}>{label}</span>\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "young-dragon/YoungDragon.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type YoungDragonSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface YoungDragonProps extends HTMLAttributes<HTMLDivElement> {\n  label?: string;\n  size?: YoungDragonSize;\n  showLabel?: boolean;\n}\n"
+    },
+    {
+      "path": "young-dragon/index.ts",
+      "type": "index",
+      "content": "export { YoungDragon } from \"./YoungDragon\";\nexport type * from \"./YoungDragon.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<YoungDragon {...youngDragonMocks.default} />"
+    },
+    {
+      "name": "Sizes",
+      "code": "<div className=\"flex flex-wrap items-end gap-8 bg-background p-10 text-foreground\">\n      <YoungDragon {...youngDragonMocks.compact} showLabel />\n      <YoungDragon {...youngDragonMocks.default} showLabel />\n      <YoungDragon label=\"Almost ready\" showLabel size=\"lg\" />\n    </div>"
+    }
+  ]
+}
