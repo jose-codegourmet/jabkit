@@ -1,0 +1,97 @@
+{
+  "name": "strong-squid",
+  "displayName": "StrongSquid",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A day-to-night switch whose sun slides into a cratered moon while clouds drop and stars rise.",
+  "sectionCategory": "form",
+  "purpose": "Lets people flip a persistent on/off setting when the control itself should telegraph day versus night.",
+  "bestFor": [
+    "theme or appearance toggles",
+    "settings rows that need a memorable binary control",
+    "playful preference panels"
+  ],
+  "avoidFor": [
+    "dense data tables",
+    "destructive confirmations",
+    "forms that need a plain unlabeled checkbox"
+  ],
+  "tone": [
+    "playful",
+    "clean"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "control",
+    "dayScene",
+    "nightScene"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "switch",
+    "theme",
+    "toggle",
+    "atom",
+    "form"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "strong-squid/StrongSquid.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { StrongSquidProps } from \"./StrongSquid.types\";\n\nexport function StrongSquid({\n  className,\n  size = \"md\",\n  label = \"Toggle night mode\",\n  disabled,\n  ...props\n}: StrongSquidProps) {\n  return (\n    <label\n      className={cn(\n        \"jk-strong-squid relative inline-block cursor-pointer select-none\",\n        disabled && \"cursor-not-allowed opacity-50\",\n        className,\n      )}\n      data-size={size}\n      data-slot=\"strong-squid\"\n    >\n      <style href=\"jk-strong-squid\" precedence=\"default\">{`\n        .jk-strong-squid {\n          --jk-ss-unit: 1rem;\n          --jk-ss-track-w: calc(var(--jk-ss-unit) * 5.6);\n          --jk-ss-track-h: calc(var(--jk-ss-unit) * 2.5);\n          --jk-ss-orb: calc(var(--jk-ss-unit) * 2.1);\n          --jk-ss-pad: calc((var(--jk-ss-track-h) - var(--jk-ss-orb)) / 2);\n        }\n        .jk-strong-squid[data-size=\"sm\"] {\n          --jk-ss-unit: 0.75rem;\n        }\n        .jk-strong-squid-input {\n          position: absolute;\n          width: 1px;\n          height: 1px;\n          padding: 0;\n          margin: -1px;\n          overflow: hidden;\n          clip: rect(0, 0, 0, 0);\n          white-space: nowrap;\n          border: 0;\n        }\n        .jk-strong-squid-track {\n          position: relative;\n          display: block;\n          width: var(--jk-ss-track-w);\n          height: var(--jk-ss-track-h);\n          overflow: hidden;\n          border-radius: 999px;\n          background: var(--jk-chart-1);\n          box-shadow:\n            inset 0 calc(var(--jk-ss-unit) * 0.08) calc(var(--jk-ss-unit) * 0.2)\n              color-mix(in oklab, var(--jk-foreground) 28%, transparent),\n            0 calc(var(--jk-ss-unit) * 0.06) calc(var(--jk-ss-unit) * 0.12)\n              color-mix(in oklab, var(--jk-background) 80%, transparent);\n        }\n        .jk-strong-squid-track::after {\n          content: \"\";\n          position: absolute;\n          inset: 0;\n          border-radius: inherit;\n          box-shadow: inset 0 calc(var(--jk-ss-unit) * 0.05) calc(var(--jk-ss-unit) * 0.18)\n            color-mix(in oklab, var(--jk-foreground) 22%, transparent);\n          pointer-events: none;\n        }\n        .jk-strong-squid-clouds,\n        .jk-strong-squid-back-clouds {\n          position: absolute;\n          left: calc(var(--jk-ss-unit) * 0.2);\n          bottom: calc(var(--jk-ss-unit) * -0.55);\n          width: calc(var(--jk-ss-unit) * 1.2);\n          height: calc(var(--jk-ss-unit) * 1.2);\n          border-radius: 999px;\n          pointer-events: none;\n        }\n        .jk-strong-squid-clouds {\n          background: var(--jk-card);\n          box-shadow:\n            calc(var(--jk-ss-unit) * 0.95) calc(var(--jk-ss-unit) * 0.28) 0 var(--jk-card),\n            calc(var(--jk-ss-unit) * 1.5) calc(var(--jk-ss-unit) * 0.35) 0 var(--jk-card),\n            calc(var(--jk-ss-unit) * 2.25) 0 0 var(--jk-card),\n            calc(var(--jk-ss-unit) * 2.95) calc(var(--jk-ss-unit) * 0.28) 0 var(--jk-card),\n            calc(var(--jk-ss-unit) * 3.7) calc(var(--jk-ss-unit) * -0.08) 0 var(--jk-card),\n            calc(var(--jk-ss-unit) * 4.4) calc(var(--jk-ss-unit) * -0.28) 0 var(--jk-card),\n            calc(var(--jk-ss-unit) * 4.55) calc(var(--jk-ss-unit) * -1.7) 0\n              calc(var(--jk-ss-unit) * 0.42) var(--jk-card);\n        }\n        .jk-strong-squid-back-clouds {\n          background: var(--jk-accent);\n          box-shadow:\n            calc(var(--jk-ss-unit) * -0.28) calc(var(--jk-ss-unit) * -0.28) 0 var(--jk-accent),\n            calc(var(--jk-ss-unit) * 0.55) calc(var(--jk-ss-unit) * -0.1) 0 var(--jk-accent),\n            calc(var(--jk-ss-unit) * 1.3) calc(var(--jk-ss-unit) * -0.06) 0 var(--jk-accent),\n            calc(var(--jk-ss-unit) * 2.05) calc(var(--jk-ss-unit) * -0.28) 0 var(--jk-accent),\n            calc(var(--jk-ss-unit) * 2.7) 0 0 var(--jk-accent),\n            calc(var(--jk-ss-unit) * 3.4) calc(var(--jk-ss-unit) * -0.4) 0 var(--jk-accent),\n            calc(var(--jk-ss-unit) * 4.05) calc(var(--jk-ss-unit) * -2.05) 0\n              calc(var(--jk-ss-unit) * 0.42) var(--jk-accent);\n        }\n        .jk-strong-squid-stars {\n          position: absolute;\n          inset: 18% 12% auto auto;\n          width: 42%;\n          height: 58%;\n          opacity: 0;\n          pointer-events: none;\n        }\n        .jk-strong-squid-star {\n          position: absolute;\n          width: calc(var(--jk-ss-unit) * 0.12);\n          height: calc(var(--jk-ss-unit) * 0.12);\n          border-radius: 999px;\n          background: var(--jk-primary-foreground);\n        }\n        .jk-strong-squid-star:nth-child(1) { top: 12%; left: 18%; }\n        .jk-strong-squid-star:nth-child(2) { top: 38%; left: 62%; width: calc(var(--jk-ss-unit) * 0.18); height: calc(var(--jk-ss-unit) * 0.18); }\n        .jk-strong-squid-star:nth-child(3) { top: 8%; left: 72%; }\n        .jk-strong-squid-star:nth-child(4) { top: 64%; left: 28%; width: calc(var(--jk-ss-unit) * 0.09); height: calc(var(--jk-ss-unit) * 0.09); }\n        .jk-strong-squid-star:nth-child(5) { top: 72%; left: 78%; }\n        .jk-strong-squid-halo {\n          position: absolute;\n          top: 50%;\n          left: var(--jk-ss-pad);\n          display: grid;\n          place-items: center;\n          width: var(--jk-ss-orb);\n          height: var(--jk-ss-orb);\n          transform: translateY(-50%);\n          pointer-events: none;\n        }\n        .jk-strong-squid-halo::before {\n          content: \"\";\n          position: absolute;\n          inset: calc(var(--jk-ss-unit) * -0.55);\n          border-radius: 999px;\n          box-shadow:\n            0 0 0 calc(var(--jk-ss-unit) * 0.55)\n              color-mix(in oklab, var(--jk-card) 18%, transparent),\n            0 0 0 calc(var(--jk-ss-unit) * 1.1)\n              color-mix(in oklab, var(--jk-card) 12%, transparent);\n        }\n        .jk-strong-squid-orb {\n          position: relative;\n          z-index: 1;\n          width: var(--jk-ss-orb);\n          height: var(--jk-ss-orb);\n          overflow: hidden;\n          border-radius: 999px;\n          background: var(--jk-warning);\n          box-shadow:\n            inset calc(var(--jk-ss-unit) * 0.06) calc(var(--jk-ss-unit) * 0.06)\n              calc(var(--jk-ss-unit) * 0.08)\n              color-mix(in oklab, var(--jk-card) 55%, transparent),\n            inset 0 calc(var(--jk-ss-unit) * -0.06) calc(var(--jk-ss-unit) * 0.08)\n              color-mix(in oklab, var(--jk-warning-foreground) 28%, transparent),\n            0 calc(var(--jk-ss-unit) * 0.08) calc(var(--jk-ss-unit) * 0.16)\n              color-mix(in oklab, var(--jk-foreground) 22%, transparent);\n        }\n        .jk-strong-squid-moon {\n          position: absolute;\n          inset: 0;\n          border-radius: inherit;\n          background: var(--jk-muted);\n          transform: translateX(100%);\n          box-shadow:\n            inset calc(var(--jk-ss-unit) * 0.06) calc(var(--jk-ss-unit) * 0.06)\n              calc(var(--jk-ss-unit) * 0.08)\n              color-mix(in oklab, var(--jk-card) 40%, transparent),\n            inset 0 calc(var(--jk-ss-unit) * -0.06) calc(var(--jk-ss-unit) * 0.08)\n              color-mix(in oklab, var(--jk-muted-foreground) 35%, transparent);\n        }\n        .jk-strong-squid-crater {\n          position: absolute;\n          border-radius: 999px;\n          background: var(--jk-muted-foreground);\n          box-shadow: inset 0 calc(var(--jk-ss-unit) * 0.03) calc(var(--jk-ss-unit) * 0.06)\n            color-mix(in oklab, var(--jk-foreground) 25%, transparent);\n        }\n        .jk-strong-squid-crater:nth-child(1) {\n          top: 36%;\n          left: 18%;\n          width: 36%;\n          height: 36%;\n        }\n        .jk-strong-squid-crater:nth-child(2) {\n          top: 46%;\n          left: 62%;\n          width: 18%;\n          height: 18%;\n        }\n        .jk-strong-squid-crater:nth-child(3) {\n          top: 16%;\n          left: 40%;\n          width: 14%;\n          height: 14%;\n        }\n        .jk-strong-squid-input:checked + .jk-strong-squid-track {\n          background: var(--jk-foreground);\n        }\n        .jk-strong-squid-input:checked + .jk-strong-squid-track .jk-strong-squid-halo {\n          left: calc(100% - var(--jk-ss-orb) - var(--jk-ss-pad));\n        }\n        .jk-strong-squid-input:checked + .jk-strong-squid-track .jk-strong-squid-moon {\n          transform: translateX(0);\n        }\n        .jk-strong-squid-input:checked + .jk-strong-squid-track .jk-strong-squid-clouds,\n        .jk-strong-squid-input:checked + .jk-strong-squid-track .jk-strong-squid-back-clouds {\n          transform: translateY(calc(var(--jk-ss-unit) * 3.4));\n        }\n        .jk-strong-squid-input:checked + .jk-strong-squid-track .jk-strong-squid-stars {\n          opacity: 1;\n        }\n        .jk-strong-squid-input:focus-visible + .jk-strong-squid-track {\n          outline: 2px solid var(--jk-ring);\n          outline-offset: 3px;\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-strong-squid-track,\n          .jk-strong-squid-clouds,\n          .jk-strong-squid-back-clouds,\n          .jk-strong-squid-stars,\n          .jk-strong-squid-orb,\n          .jk-strong-squid-moon {\n            transition:\n              background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),\n              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1.2),\n              opacity 0.45s ease,\n              left 0.35s cubic-bezier(0.16, 1, 0.3, 1.15);\n          }\n          .jk-strong-squid:hover .jk-strong-squid-input:not(:checked) + .jk-strong-squid-track .jk-strong-squid-halo {\n            left: calc(var(--jk-ss-pad) + 0.18rem);\n          }\n          .jk-strong-squid:hover .jk-strong-squid-input:checked + .jk-strong-squid-track .jk-strong-squid-halo {\n            left: calc(100% - var(--jk-ss-orb) - var(--jk-ss-pad) - 0.18rem);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-strong-squid-track,\n          .jk-strong-squid-clouds,\n          .jk-strong-squid-back-clouds,\n          .jk-strong-squid-stars,\n          .jk-strong-squid-orb,\n          .jk-strong-squid-moon,\n          .jk-strong-squid-halo {\n            transition: none;\n          }\n        }\n      `}</style>\n      <input\n        className=\"jk-strong-squid-input\"\n        disabled={disabled}\n        role=\"switch\"\n        type=\"checkbox\"\n        {...props}\n      />\n      <span aria-hidden=\"true\" className=\"jk-strong-squid-track\">\n        <span className=\"jk-strong-squid-back-clouds\" />\n        <span className=\"jk-strong-squid-clouds\" />\n        <span className=\"jk-strong-squid-stars\">\n          <span className=\"jk-strong-squid-star\" />\n          <span className=\"jk-strong-squid-star\" />\n          <span className=\"jk-strong-squid-star\" />\n          <span className=\"jk-strong-squid-star\" />\n          <span className=\"jk-strong-squid-star\" />\n        </span>\n        <span className=\"jk-strong-squid-halo\">\n          <span className=\"jk-strong-squid-orb\">\n            <span className=\"jk-strong-squid-moon\">\n              <span className=\"jk-strong-squid-crater\" />\n              <span className=\"jk-strong-squid-crater\" />\n              <span className=\"jk-strong-squid-crater\" />\n            </span>\n          </span>\n        </span>\n      </span>\n      <span className=\"sr-only\">{label}</span>\n    </label>\n  );\n}\n"
+    },
+    {
+      "path": "strong-squid/StrongSquid.types.ts",
+      "type": "types",
+      "content": "import type { InputHTMLAttributes } from \"react\";\n\nexport type StrongSquidSize = \"sm\" | \"md\";\n\nexport interface StrongSquidProps\n  extends Omit<InputHTMLAttributes<HTMLInputElement>, \"size\" | \"type\"> {\n  size?: StrongSquidSize;\n  label?: string;\n}\n"
+    },
+    {
+      "path": "strong-squid/index.ts",
+      "type": "index",
+      "content": "export { StrongSquid } from \"./StrongSquid\";\nexport type * from \"./StrongSquid.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<StrongSquid {...strongSquidMocks.default} />"
+    },
+    {
+      "name": "Night",
+      "code": "<StrongSquid {...strongSquidMocks.night} />"
+    },
+    {
+      "name": "Sizes",
+      "code": "<div className=\"flex flex-wrap items-center gap-6 bg-background p-8 text-foreground\">\n      <StrongSquid {...strongSquidMocks.compact} />\n      <StrongSquid {...strongSquidMocks.default} />\n    </div>"
+    }
+  ]
+}
