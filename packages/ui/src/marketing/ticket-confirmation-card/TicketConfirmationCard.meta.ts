@@ -1,0 +1,65 @@
+import type { ComponentMeta } from "@jabkit/build-registry";
+
+export default {
+  name: "ticket-confirmation-card",
+  displayName: "TicketConfirmationCard",
+  version: "1.0.0",
+  addedAt: "2026-09-15",
+  description:
+    "Digital receipt-style booking confirmation with success status, ticket ID, payment ledger, perforated stub, and scan barcode.",
+  sectionCategory: "content",
+  purpose:
+    "Gives an event or travel landing a trusted confirmation slip visitors can read, save, and scan without leaving the page.",
+  bestFor: [
+    "event booking confirmation",
+    "travel and ferry passes",
+    "payment receipts that need a scan code",
+  ],
+  avoidFor: [
+    "live checkout that still needs a card form",
+    "multi-ticket carts that need a full order table",
+    "account dashboards that list many bookings",
+  ],
+  tone: ["professional", "structured", "calm"],
+  industries: ["events", "travel", "ecommerce"],
+  contentDensity: "medium",
+  visualWeight: "medium",
+  layout: {
+    type: "card",
+    alignment: "center",
+    columns: 1,
+  },
+  slots: [
+    "headline",
+    "description",
+    "successStatus",
+    "ticketId",
+    "eventName",
+    "details",
+    "payment",
+    "barcode",
+    "cta",
+  ],
+  capabilities: {
+    supportsImage: false,
+    supportsVideo: false,
+    supportsForm: false,
+    supportsCTA: true,
+    supportsDarkMode: true,
+  },
+  recommendedAfter: ["hero", "form", "pricing"],
+  recommendedBefore: ["faq", "testimonials", "footer"],
+  tags: [
+    "ticket",
+    "confirmation",
+    "receipt",
+    "barcode",
+    "booking",
+    "event",
+    "marketing",
+  ],
+  dependencies: ["lucide-react"],
+  registryDependencies: ["button"],
+  a11y: { keyboardNav: true, reducedMotion: true },
+  preview: { layout: "fit", width: 1440, height: 980 },
+} satisfies ComponentMeta;
