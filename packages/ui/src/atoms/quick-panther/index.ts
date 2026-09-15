@@ -1,2 +1,2 @@
 export { QuickPanther } from "./QuickPanther";
-export type * from "./QuickPanther.types";
+export type { QuickPantherOption, QuickPantherProps } from "./QuickPanther.types";

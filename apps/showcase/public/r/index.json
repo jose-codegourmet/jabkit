@@ -1899,13 +1899,13 @@
     "name": "quick-panther",
     "displayName": "QuickPanther",
     "category": "atoms",
-    "description": "Vertical subscription radio list with a glowing selected row and high-contrast plan details.",
+    "description": "Vertical radio stack with a 10px clip and a glowing rail that slides to the checked option.",
     "sectionCategory": "form",
-    "purpose": "Lets someone compare and pick one plan or billing option without leaving a compact, scannable stack.",
+    "purpose": "Lets someone pick one timing or status option in a compact stacked list with a moving highlight.",
     "bestFor": [
-      "pricing plan pickers",
-      "billing cycle radios",
-      "single-choice subscription settings"
+      "when-to-start pickers",
+      "single-choice status radios",
+      "compact settings lists"
     ],
     "avoidFor": [
       "multi-select add-ons",
@@ -1916,7 +1916,7 @@
       "professional",
       "clean"
     ],
-    "contentDensity": "medium",
+    "contentDensity": "low",
     "visualWeight": "medium",
     "layout": {
       "type": "stack",
@@ -1924,10 +1924,7 @@
     },
     "slots": [
       "legend",
-      "description",
-      "optionTitle",
-      "optionDescription",
-      "price"
+      "optionTitle"
     ],
     "capabilities": {
       "supportsImage": false,
@@ -1938,8 +1935,7 @@
     },
     "tags": [
       "radio",
-      "subscription",
-      "pricing",
+      "glider",
       "form",
       "glow",
       "atom"
@@ -1955,8 +1951,8 @@
     },
     "preview": {
       "layout": "center",
-      "width": 420,
-      "height": 360
+      "width": 320,
+      "height": 280
     }
   },
   {

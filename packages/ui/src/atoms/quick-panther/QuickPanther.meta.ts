@@ -3,17 +3,17 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "quick-panther",
   displayName: "QuickPanther",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Vertical subscription radio list with a glowing selected row and high-contrast plan details.",
+    "Vertical radio stack with a 10px clip and a glowing rail that slides to the checked option.",
   sectionCategory: "form",
   purpose:
-    "Lets someone compare and pick one plan or billing option without leaving a compact, scannable stack.",
+    "Lets someone pick one timing or status option in a compact stacked list with a moving highlight.",
   bestFor: [
-    "pricing plan pickers",
-    "billing cycle radios",
-    "single-choice subscription settings",
+    "when-to-start pickers",
+    "single-choice status radios",
+    "compact settings lists",
   ],
   avoidFor: [
     "multi-select add-ons",
@@ -21,13 +21,13 @@ export default {
     "binary on or off toggles",
   ],
   tone: ["professional", "clean"],
-  contentDensity: "medium",
+  contentDensity: "low",
   visualWeight: "medium",
   layout: {
     type: "stack",
     alignment: "left",
   },
-  slots: ["legend", "description", "optionTitle", "optionDescription", "price"],
+  slots: ["legend", "optionTitle"],
   capabilities: {
     supportsImage: false,
     supportsVideo: false,
@@ -35,13 +35,13 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
-  tags: ["radio", "subscription", "pricing", "form", "glow", "atom"],
+  tags: ["radio", "glider", "form", "glow", "atom"],
   dependencies: [],
   registryDependencies: [],
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: {
     layout: "center",
-    width: 420,
-    height: 360,
+    width: 320,
+    height: 280,
   },
 } satisfies ComponentMeta;
