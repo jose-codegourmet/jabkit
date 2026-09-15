@@ -1195,6 +1195,72 @@
     }
   },
   {
+    "name": "v-checkbox-11",
+    "displayName": "VCheckbox11",
+    "category": "atoms",
+    "description": "Weekly availability grid with a checkbox for each day and time slot, plus a live selected-count.",
+    "sectionCategory": "form",
+    "purpose": "Lets someone mark recurring weekly hours in one scan instead of stacking separate day pickers.",
+    "bestFor": [
+      "office hours and coaching availability",
+      "recurring weekly booking windows",
+      "support coverage grids"
+    ],
+    "avoidFor": [
+      "one-off calendar dates",
+      "single yes or no form fields",
+      "hourly calendars that span months"
+    ],
+    "tone": [
+      "professional",
+      "clean"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "grid",
+      "alignment": "left",
+      "columns": 8
+    },
+    "slots": [
+      "headline",
+      "selectedCount",
+      "dayHeaders",
+      "timeRows",
+      "clearAction"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "checkbox",
+      "availability",
+      "schedule",
+      "grid",
+      "form",
+      "atom"
+    ],
+    "addedAt": "2026-09-15",
+    "dependencies": [
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center",
+      "width": 640,
+      "height": 420
+    }
+  },
+  {
     "name": "about11",
     "displayName": "About11",
     "category": "marketing",
