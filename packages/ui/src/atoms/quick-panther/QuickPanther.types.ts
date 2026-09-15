@@ -3,8 +3,6 @@ import type { HTMLAttributes } from "react";
 export interface QuickPantherOption {
   value: string;
   title: string;
-  description?: string;
-  price?: string;
   disabled?: boolean;
 }
 
@@ -16,6 +14,5 @@ export interface QuickPantherProps
   name?: string;
   onValueChange?: (value: string) => void;
   legend?: string;
-  description?: string;
   disabled?: boolean;
 }
