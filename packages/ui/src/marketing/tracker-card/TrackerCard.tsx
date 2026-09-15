@@ -1,376 +1,310 @@
 "use client";
 
-import {
-  CheckIcon,
-  CopyIcon,
-  MapPinIcon,
-  PackageIcon,
-  TruckIcon,
-} from "lucide-react";
-import { useId, useState } from "react";
-import { Button } from "@/atoms/button";
+import { CheckCircle2Icon, QrCodeIcon } from "lucide-react";
+import { type CSSProperties, type ReactNode, useId } from "react";
 import { cn } from "@/lib/cn";
 import { trackerCardMocks } from "./TrackerCard.mocks";
 import type {
-  TrackerCardPlace,
+  TrackerCardFlagMark,
   TrackerCardProps,
-  TrackerCardStatus,
-  TrackerCardStep,
 } from "./TrackerCard.types";
 
 function scanCells(seed: string) {
+  const size = 21;
   let n = 2166136261;
   for (let i = 0; i < seed.length; i++) {
     n ^= seed.charCodeAt(i);
     n = Math.imul(n, 16777619);
   }
-  return Array.from({ length: 81 }, (_, position) => {
+  return Array.from({ length: size * size }, (_, position) => {
     n = Math.imul(n ^ (n >>> 13), 1274126177);
-    const row = Math.floor(position / 9);
-    const col = position % 9;
-    const finder =
-      (row < 3 && col < 3) ||
-      (row < 3 && col > 5) ||
-      (row > 5 && col < 3);
+    const row = Math.floor(position / size);
+    const col = position % size;
+    const finderOrigin =
+      row < 7 && col < 7
+        ? ([0, 0] as const)
+        : row < 7 && col > 13
+          ? ([0, 14] as const)
+          : row > 13 && col < 7
+            ? ([14, 0] as const)
+            : null;
+    const on = finderOrigin
+      ? (() => {
+          const localRow = row - finderOrigin[0];
+          const localCol = col - finderOrigin[1];
+          const ring =
+            localRow === 0 ||
+            localRow === 6 ||
+            localCol === 0 ||
+            localCol === 6;
+          const eye = localRow >= 2 && localRow <= 4 && localCol >= 2 && localCol <= 4;
+          return ring || eye;
+        })()
+      : (n & 1) === 1;
     return {
       id: `${seed}-${position}-${n >>> 0}`,
-      on: finder || (n & 1) === 1,
+      on,
     };
   });
 }
 
-function statusTone(status: TrackerCardStatus | undefined) {
-  if (status === "delivered") {
-    return "bg-success text-success-foreground";
+function DestinationFlag({ mark }: { mark: TrackerCardFlagMark }) {
+  if (mark === "JP") {
+    return (
+      <svg
+        aria-hidden="true"
+        className="h-4 w-6 rounded-sm border border-border"
+        viewBox="0 0 6 4"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect fill="var(--jk-card)" height="4" width="6" />
+        <circle cx="3" cy="2" fill="var(--jk-destructive)" r="1.15" />
+      </svg>
+    );
   }
-  if (status === "out-for-delivery") {
-    return "bg-primary text-primary-foreground";
-  }
-  if (status === "packed") {
-    return "bg-secondary text-secondary-foreground";
-  }
-  return "bg-warning text-warning-foreground";
+
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-4 w-6 rounded-sm border border-border"
+      viewBox="0 0 5 3"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect fill="var(--jk-card)" height="3" width="5" />
+      <rect fill="var(--jk-destructive)" height="1.5" width="5" y="1.5" />
+    </svg>
+  );
 }
 
-function PlaceBlock({
-  label,
-  place,
-}: {
-  label: string;
-  place: TrackerCardPlace;
-}) {
+function ParcelFigure() {
   return (
-    <div className="min-w-0">
-      <p className="text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase">
-        {label}
-      </p>
-      <p className="mt-1 text-base font-semibold tracking-tight">{place.city}</p>
-      <p className="mt-0.5 text-xs leading-5 text-muted-foreground text-pretty">
-        {place.region}
-      </p>
-      <p className="mt-1 font-mono text-[11px] tracking-[0.16em] text-foreground">
-        {place.code}
-      </p>
+    <div
+      aria-hidden="true"
+      className="relative h-[11.5rem] w-[11.5rem] drop-shadow-[0_18px_22px_color-mix(in_oklab,var(--jk-foreground),transparent_72%)]"
+    >
+      <span className="absolute top-[2.4rem] left-[1.35rem] h-[6.4rem] w-[8.6rem] rounded-[0.35rem] bg-warning" />
+      <span className="absolute top-[1.55rem] left-[1.95rem] h-[2.1rem] w-[7.4rem] rounded-t-[0.35rem] bg-[color-mix(in_oklab,var(--jk-warning),var(--jk-foreground)_18%)]" />
+      <span className="absolute top-[2.35rem] left-[5.4rem] h-[6.45rem] w-[0.42rem] bg-[color-mix(in_oklab,var(--jk-warning),var(--jk-foreground)_28%)]" />
+      <span className="absolute top-[3.15rem] left-[2.55rem] flex h-[3.4rem] w-[5.1rem] items-center justify-center rounded-[0.28rem] bg-card shadow-[0_1px_0_color-mix(in_oklab,var(--jk-foreground),transparent_86%)]">
+        <span className="h-2 w-8 rounded-[1px] bg-foreground/70" />
+      </span>
     </div>
   );
 }
 
-function Checkpoint({ step }: { step: TrackerCardStep }) {
-  const done = Boolean(step.complete);
-  const current = Boolean(step.current);
+function riseStyle(order: number): CSSProperties {
+  return { animationDelay: `${order * 100}ms` };
+}
+
+function TrackControl({
+  href,
+  label,
+  onClick,
+}: {
+  href?: string;
+  label: string;
+  onClick?: () => void;
+}) {
+  const className =
+    "flex w-full items-center justify-center gap-2 rounded-full bg-muted/50 px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card";
+
+  const body = (
+    <>
+      <CheckCircle2Icon aria-hidden="true" className="size-4 text-success" />
+      {label}
+    </>
+  );
+
+  if (href) {
+    return (
+      <a className={className} href={href} onClick={onClick}>
+        {body}
+      </a>
+    );
+  }
 
   return (
-    <li className="grid grid-cols-[auto_1fr] gap-x-3 pb-4 last:pb-0">
-      <span className="relative flex w-4 flex-col items-center">
-        <span
-          className={cn(
-            "relative z-10 mt-0.5 grid size-4 place-items-center rounded-full border",
-            done || current
-              ? "border-primary bg-primary text-primary-foreground"
-              : "border-border bg-card text-muted-foreground",
-          )}
-        >
-          {done && !current ? (
-            <CheckIcon aria-hidden="true" className="size-2.5" />
-          ) : (
-            <span
-              aria-hidden="true"
-              className={cn(
-                "size-1.5 rounded-full",
-                current ? "bg-primary-foreground" : "bg-muted-foreground/50",
-                current &&
-                  "motion-safe:animate-pulse motion-reduce:animate-none",
-              )}
-            />
-          )}
-        </span>
-        <span aria-hidden="true" className="min-h-6 w-px flex-1 bg-border" />
-      </span>
-      <div>
-        <p
-          className={cn(
-            "text-sm tracking-tight",
-            current ? "font-semibold text-foreground" : "font-medium",
-          )}
-        >
-          {step.label}
-        </p>
-        <p className="mt-0.5 font-mono text-[11px] text-muted-foreground">
-          {step.time}
-        </p>
-      </div>
-    </li>
+    <button className={className} onClick={onClick} type="button">
+      {body}
+    </button>
   );
 }
 
 export function TrackerCard({
   className,
-  eyebrow = trackerCardMocks.default.eyebrow,
-  heading = trackerCardMocks.default.heading,
-  description = trackerCardMocks.default.description,
   status = trackerCardMocks.default.status,
-  statusLabel = trackerCardMocks.default.statusLabel,
-  statusDetail = trackerCardMocks.default.statusDetail,
-  trackingLabel = trackerCardMocks.default.trackingLabel,
-  trackingNumber = trackerCardMocks.default.trackingNumber,
-  copyLabel = trackerCardMocks.default.copyLabel,
-  copiedLabel = trackerCardMocks.default.copiedLabel,
-  courierLabel = trackerCardMocks.default.courierLabel,
-  courier = trackerCardMocks.default.courier,
-  etaLabel = trackerCardMocks.default.etaLabel,
-  eta = trackerCardMocks.default.eta,
-  originLabel = trackerCardMocks.default.originLabel,
-  destinationLabel = trackerCardMocks.default.destinationLabel,
-  origin = trackerCardMocks.default.origin,
+  packageNumber = trackerCardMocks.default.packageNumber,
+  packageNumberLabel = trackerCardMocks.default.packageNumberLabel,
   destination = trackerCardMocks.default.destination,
-  stepsHeading = trackerCardMocks.default.stepsHeading,
-  steps = trackerCardMocks.default.steps,
-  scanLabel = trackerCardMocks.default.scanLabel,
-  showScan = trackerCardMocks.default.showScan,
-  primaryAction = trackerCardMocks.default.primaryAction,
-  secondaryAction = trackerCardMocks.default.secondaryAction,
+  destinationFlag,
+  flagMark = trackerCardMocks.default.flagMark,
+  date = trackerCardMocks.default.date,
+  qrCodeValue = trackerCardMocks.default.qrCodeValue,
+  qrCodeImageSrc,
+  qrCodeImageAlt = "Package tracking code",
+  packageImage,
+  packageImageSrc,
+  packageImageAlt = "Parcel on the conveyor",
+  trackLabel = trackerCardMocks.default.trackLabel,
+  trackHref = trackerCardMocks.default.trackHref,
+  onTrackClick,
   ...props
 }: TrackerCardProps) {
   const headingId = useId();
-  const descriptionId = useId();
-  const [copied, setCopied] = useState(false);
-  const checkpoints = steps ?? [];
-  const code = trackingNumber ?? "TRACK";
+  const code = qrCodeValue || packageNumber || "TRACK";
   const cells = scanCells(code);
-
-  const copyTracking = async () => {
-    if (!trackingNumber) return;
-    try {
-      await navigator.clipboard.writeText(trackingNumber);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1600);
-    } catch {
-      setCopied(false);
-    }
-  };
+  const flag: ReactNode = destinationFlag ?? (
+    <DestinationFlag mark={flagMark ?? "PL"} />
+  );
+  const parcel: ReactNode = packageImage ??
+    (packageImageSrc ? (
+      <img
+        alt={packageImageAlt}
+        className="h-48 w-auto object-contain drop-shadow-lg"
+        height={200}
+        src={packageImageSrc}
+        width={200}
+      />
+    ) : (
+      <ParcelFigure />
+    ));
 
   return (
     <section
-      aria-describedby={description ? descriptionId : undefined}
       aria-labelledby={headingId}
-      className={cn("bg-muted text-foreground", className)}
+      className={cn(
+        "flex min-h-[100dvh] w-full items-center justify-center bg-background p-4 text-foreground",
+        className,
+      )}
       data-slot="tracker-card"
       {...props}
     >
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-        <header className="mx-auto max-w-xl text-center">
-          {eyebrow ? (
-            <p className="text-xs font-medium tracking-[0.16em] text-muted-foreground uppercase">
-              {eyebrow}
-            </p>
-          ) : null}
-          <h2
-            className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-5xl sm:leading-[1.1]"
-            id={headingId}
+      <style href="jk-tracker-card" precedence="default">{`
+        @keyframes jk-tracker-card-rise {
+          from { opacity: 0; transform: translateY(1.875rem); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes jk-tracker-card-item {
+          from { opacity: 0; transform: translateY(1.25rem); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes jk-tracker-card-conveyor {
+          from { background-position: 0 0; }
+          to { background-position: 80px 80px; }
+        }
+        .jk-tracker-card-rise {
+          animation: jk-tracker-card-rise 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .jk-tracker-card-item {
+          animation: jk-tracker-card-item 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .jk-tracker-card-conveyor {
+          animation: jk-tracker-card-conveyor 8s linear infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .jk-tracker-card-rise,
+          .jk-tracker-card-item,
+          .jk-tracker-card-conveyor {
+            animation: none;
+          }
+        }
+      `}</style>
+
+      <article className="jk-tracker-card-rise w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-card text-card-foreground shadow-lg">
+        <div className="jk-tracker-card-item p-4" style={riseStyle(0)}>
+          <TrackControl
+            href={trackHref}
+            label={trackLabel ?? "Show full tracking"}
+            onClick={onTrackClick}
+          />
+        </div>
+
+        <div className="jk-tracker-card-item" style={riseStyle(1)}>
+          <div className="relative flex h-48 w-full items-center justify-center overflow-hidden">
+            <div
+              aria-hidden="true"
+              className="jk-tracker-card-conveyor absolute inset-0 z-0 h-full w-full bg-[size:80px_80px] bg-muted/30"
+              style={{
+                backgroundImage: `
+                  repeating-linear-gradient(45deg, transparent, transparent 25px, color-mix(in oklab, var(--jk-muted) 80%, transparent) 25px, color-mix(in oklab, var(--jk-muted) 80%, transparent) 50px),
+                  repeating-linear-gradient(-45deg, transparent, transparent 25px, color-mix(in oklab, var(--jk-muted) 80%, transparent) 25px, color-mix(in oklab, var(--jk-muted) 80%, transparent) 50px)
+                `,
+              }}
+            />
+            <div className="relative z-10">{parcel}</div>
+          </div>
+        </div>
+
+        <div className="p-6">
+          <div
+            className="jk-tracker-card-item flex items-center gap-2"
+            style={riseStyle(2)}
           >
-            {heading}
+            {flag}
+            <span className="text-sm font-medium text-muted-foreground">
+              {destination}
+            </span>
+          </div>
+
+          <h2
+            className="jk-tracker-card-item mt-2 text-3xl font-bold tracking-tight"
+            id={headingId}
+            style={riseStyle(3)}
+          >
+            {status}
           </h2>
-          {description ? (
-            <p
-              className="mt-3 text-sm leading-6 text-muted-foreground text-pretty sm:text-base"
-              id={descriptionId}
+
+          <div className="mt-6 flex items-end justify-between gap-4">
+            <div
+              className="jk-tracker-card-item space-y-1"
+              style={riseStyle(4)}
             >
-              {description}
-            </p>
-          ) : null}
-        </header>
-
-        <article
-          className={cn(
-            "relative mx-auto mt-10 w-full max-w-md overflow-hidden rounded-[calc(var(--radius)+0.35rem)] border border-border bg-card text-card-foreground shadow-[0_22px_48px_-28px_color-mix(in_oklab,var(--jk-foreground),transparent_68%)]",
-            "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500",
-          )}
-        >
-          <div className="px-6 pt-7 pb-5">
-            <div className="flex items-start justify-between gap-3">
-              <span
-                className={cn(
-                  "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold tracking-tight",
-                  statusTone(status),
-                )}
-              >
-                {status === "delivered" ? (
-                  <PackageIcon aria-hidden="true" className="size-3.5" />
-                ) : (
-                  <TruckIcon aria-hidden="true" className="size-3.5" />
-                )}
-                {statusLabel}
-              </span>
-              {eta ? (
-                <p className="text-right font-mono text-[11px] text-muted-foreground">
-                  <span className="block tracking-[0.12em] uppercase">
-                    {etaLabel}
-                  </span>
-                  <span className="mt-0.5 block text-foreground">{eta}</span>
-                </p>
-              ) : null}
-            </div>
-            {statusDetail ? (
-              <p className="mt-3 text-sm leading-6 text-muted-foreground text-pretty">
-                {statusDetail}
+              <p className="text-xs text-muted-foreground">
+                {packageNumberLabel}
               </p>
-            ) : null}
-
-            <div className="mt-5 rounded-[--radius] border border-border bg-muted/70 px-3 py-2.5">
-              <div className="flex items-center justify-between gap-3">
-                <div className="min-w-0">
-                  <span className="block text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase">
-                    {trackingLabel}
-                  </span>
-                  <span className="mt-1 block truncate font-mono text-sm tracking-[0.12em] text-foreground">
-                    {trackingNumber}
-                  </span>
-                </div>
-                {trackingNumber ? (
-                  <Button
-                    className="shrink-0"
-                    onClick={copyTracking}
-                    size="sm"
-                    type="button"
-                    variant="secondary"
-                  >
-                    {copied ? (
-                      <CheckIcon aria-hidden="true" className="size-3.5" />
-                    ) : (
-                      <CopyIcon aria-hidden="true" className="size-3.5" />
-                    )}
-                    <span className="ml-1.5">
-                      {copied ? copiedLabel : copyLabel}
-                    </span>
-                  </Button>
-                ) : null}
-              </div>
+              <p className="font-mono text-sm">{packageNumber}</p>
+              <p className="text-xs text-muted-foreground">{date}</p>
             </div>
-          </div>
 
-          {origin || destination ? (
-            <div className="border-t border-border px-6 py-5">
-              <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-3">
-                {origin ? (
-                  <PlaceBlock label={originLabel ?? "From"} place={origin} />
-                ) : (
-                  <span />
-                )}
-                <span
+            <div
+              className="jk-tracker-card-item rounded-lg border border-border p-1"
+              style={riseStyle(5)}
+            >
+              {qrCodeImageSrc ? (
+                <img
+                  alt={qrCodeImageAlt}
+                  className="size-16"
+                  height={64}
+                  src={qrCodeImageSrc}
+                  width={64}
+                />
+              ) : qrCodeValue || packageNumber ? (
+                <div
                   aria-hidden="true"
-                  className="mt-6 flex flex-col items-center gap-1 text-muted-foreground"
+                  className="grid size-16 grid-cols-[repeat(21,minmax(0,1fr))] gap-px"
                 >
-                  <MapPinIcon className="size-4" />
-                  <span className="h-8 w-px bg-border" />
-                </span>
-                {destination ? (
-                  <PlaceBlock
-                    label={destinationLabel ?? "To"}
-                    place={destination}
-                  />
-                ) : (
-                  <span />
-                )}
-              </div>
-            </div>
-          ) : null}
-
-          {checkpoints.length > 0 ? (
-            <div className="border-t border-border px-6 py-5">
-              {stepsHeading ? (
-                <p className="mb-3 text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase">
-                  {stepsHeading}
-                </p>
-              ) : null}
-              <ol className="[&>li:last-child>span>span:last-child]:hidden">
-                {checkpoints.map((step) => (
-                  <Checkpoint key={step.id} step={step} />
-                ))}
-              </ol>
-            </div>
-          ) : null}
-
-          <div className="border-t border-border px-6 pt-5 pb-6">
-            <div className="flex items-end justify-between gap-4">
-              <div className="min-w-0">
-                {courier ? (
-                  <p>
-                    <span className="block text-[10px] font-medium tracking-[0.16em] text-muted-foreground uppercase">
-                      {courierLabel}
-                    </span>
-                    <span className="mt-1 block text-sm font-medium">
-                      {courier}
-                    </span>
-                  </p>
-                ) : null}
-              </div>
-              {showScan ? (
-                <figure className="shrink-0 text-center">
-                  <div
+                  {cells.map((cell) => (
+                    <span
+                      className={cn(
+                        "min-h-0 min-w-0",
+                        cell.on ? "bg-foreground" : "bg-transparent",
+                      )}
+                      key={cell.id}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="flex size-16 items-center justify-center bg-muted">
+                  <QrCodeIcon
                     aria-hidden="true"
-                    className="grid size-[4.5rem] grid-cols-9 gap-px rounded-[calc(var(--radius)-0.15rem)] border border-border bg-card p-1.5"
-                  >
-                    {cells.map((cell) => (
-                      <span
-                        className={cn(
-                          "rounded-[1px]",
-                          cell.on ? "bg-foreground" : "bg-transparent",
-                        )}
-                        key={cell.id}
-                      />
-                    ))}
-                  </div>
-                  {scanLabel ? (
-                    <figcaption className="mt-1.5 max-w-[4.75rem] text-[10px] leading-4 text-muted-foreground">
-                      {scanLabel}
-                    </figcaption>
-                  ) : null}
-                </figure>
-              ) : null}
+                    className="size-8 text-muted-foreground"
+                  />
+                </div>
+              )}
             </div>
-
-            {primaryAction || secondaryAction ? (
-              <div className="mt-5 flex flex-col gap-2">
-                {primaryAction ? (
-                  <Button asChild className="w-full" size="lg">
-                    <a href={primaryAction.href}>{primaryAction.label}</a>
-                  </Button>
-                ) : null}
-                {secondaryAction ? (
-                  <Button
-                    asChild
-                    className="w-full"
-                    size="lg"
-                    variant="secondary"
-                  >
-                    <a href={secondaryAction.href}>{secondaryAction.label}</a>
-                  </Button>
-                ) : null}
-              </div>
-            ) : null}
           </div>
-        </article>
-      </div>
+        </div>
+      </article>
     </section>
   );
 }
