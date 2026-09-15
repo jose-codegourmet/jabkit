@@ -5,10 +5,10 @@ import { rideBookingFormMocks } from "./RideBookingForm.mocks";
 
 const ThemeComparison = () => (
   <div className="grid gap-px overflow-hidden border-border bg-border lg:grid-cols-2">
-    <div className="bg-background">
+    <div className="flex min-h-svh items-center bg-muted">
       <RideBookingForm {...rideBookingFormMocks.default} />
     </div>
-    <div className="dark bg-background">
+    <div className="dark flex min-h-svh items-center bg-muted">
       <RideBookingForm {...rideBookingFormMocks.default} />
     </div>
   </div>
@@ -16,12 +16,12 @@ const ThemeComparison = () => (
 
 export default {
   Default: () => (
-    <div className="w-full">
+    <div className="flex min-h-svh w-full items-center justify-center bg-muted">
       <RideBookingForm {...rideBookingFormMocks.default} />
     </div>
   ),
   Variants: () => (
-    <div className="w-full">
+    <div className="flex min-h-svh w-full items-center justify-center bg-muted">
       <RideBookingForm {...rideBookingFormMocks.alternate} />
     </div>
   ),
