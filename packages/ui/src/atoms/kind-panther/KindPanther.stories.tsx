@@ -20,13 +20,13 @@ export const Default: Story = {
   ),
 };
 
-export const Dense: Story = {
-  args: { ...kindPantherMocks.dense },
+export const Tones: Story = {
+  args: { ...kindPantherMocks.primary },
   render: () => (
     <div className="flex flex-wrap items-end gap-3 bg-background p-8 text-foreground">
-      <KindPanther {...kindPantherMocks.compact} />
+      <KindPanther {...kindPantherMocks.muted} />
       <KindPanther {...kindPantherMocks.default} />
-      <KindPanther {...kindPantherMocks.dense} size="lg" />
+      <KindPanther {...kindPantherMocks.primary} size="lg" />
     </div>
   ),
 };

@@ -3,28 +3,28 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "kind-panther",
   displayName: "KindPanther",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A token-tinted isometric tessellation tile with an optional caption and a slow drift that pauses under reduced motion.",
-  sectionCategory: "content",
+    "A square honeycomb field of 120deg hex cells at 37px, with token-mapped fill and ground.",
+  sectionCategory: "background",
   purpose:
-    "Gives empty states, catalogue cards, and section backdrops a geometric field that stays on semantic tokens in light and dark.",
+    "Drops the inspo hexagon tessellation behind a caption or empty state without rounding it to the control radius.",
   bestFor: [
-    "decorative tiles behind captions",
-    "catalogue or story frames that need texture",
-    "quiet pattern fills on marketing or product surfaces",
+    "decorative catalogue tiles",
+    "empty-state or wait-list backdrops",
+    "small marketing accents that stay in atoms",
   ],
   avoidFor: [
-    "primary actions or form controls",
-    "dense data that needs a plain surface",
+    "data-dense charts that need a quiet canvas",
+    "text-heavy reading surfaces",
   ],
-  tone: ["playful", "clean"],
+  tone: ["playful", "bold"],
   contentDensity: "low",
   visualWeight: "medium",
   layout: {
     type: "stack",
-    alignment: "left",
+    alignment: "center",
   },
   slots: ["caption"],
   capabilities: {
@@ -34,7 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
-  tags: ["pattern", "tessellation", "background", "texture", "atom"],
+  tags: ["pattern", "honeycomb", "hexagon", "background", "atom"],
   dependencies: [],
   registryDependencies: [],
   a11y: { keyboardNav: false, reducedMotion: true },

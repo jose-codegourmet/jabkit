@@ -1407,27 +1407,27 @@
     "name": "kind-panther",
     "displayName": "KindPanther",
     "category": "atoms",
-    "description": "A token-tinted isometric tessellation tile with an optional caption and a slow drift that pauses under reduced motion.",
-    "sectionCategory": "content",
-    "purpose": "Gives empty states, catalogue cards, and section backdrops a geometric field that stays on semantic tokens in light and dark.",
+    "description": "A square honeycomb field of 120deg hex cells at 37px, with token-mapped fill and ground.",
+    "sectionCategory": "background",
+    "purpose": "Drops the inspo hexagon tessellation behind a caption or empty state without rounding it to the control radius.",
     "bestFor": [
-      "decorative tiles behind captions",
-      "catalogue or story frames that need texture",
-      "quiet pattern fills on marketing or product surfaces"
+      "decorative catalogue tiles",
+      "empty-state or wait-list backdrops",
+      "small marketing accents that stay in atoms"
     ],
     "avoidFor": [
-      "primary actions or form controls",
-      "dense data that needs a plain surface"
+      "data-dense charts that need a quiet canvas",
+      "text-heavy reading surfaces"
     ],
     "tone": [
       "playful",
-      "clean"
+      "bold"
     ],
     "contentDensity": "low",
     "visualWeight": "medium",
     "layout": {
       "type": "stack",
-      "alignment": "left"
+      "alignment": "center"
     },
     "slots": [
       "caption"
@@ -1441,9 +1441,9 @@
     },
     "tags": [
       "pattern",
-      "tessellation",
+      "honeycomb",
+      "hexagon",
       "background",
-      "texture",
       "atom"
     ],
     "addedAt": "2026-09-15",
