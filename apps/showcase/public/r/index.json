@@ -2641,22 +2641,21 @@
     "name": "tiny-fish",
     "displayName": "TinyFish",
     "category": "atoms",
-    "description": "A playful on-off switch whose thumb is a tiny fish that swims across a token-colored current.",
+    "description": "A compact neo-brutalist switch with a 5px-radius track, hard offset shadow, and a matching square knob.",
     "sectionCategory": "form",
-    "purpose": "Toggles a binary setting with a memorable motion cue when a quiet switch would disappear on a playful surface.",
+    "purpose": "Toggles a binary setting with the Uiverse hard-edge switch silhouette instead of a pill thumb.",
     "bestFor": [
-      "settings with a light or playful voice",
-      "feature flags on demo and catalogue pages",
-      "ambient or notification toggles"
+      "settings rows that need a stamped, offset-shadow control",
+      "playful forms that stay on semantic tokens",
+      "catalogue and preview entry points"
     ],
     "avoidFor": [
-      "dense toolbars that need a quiet control",
-      "destructive or irreversible confirms",
-      "forms that must match a standard switch exactly"
+      "dense toolbars that need a quiet iOS-style pill",
+      "destructive or irreversible confirms"
     ],
     "tone": [
       "playful",
-      "clean"
+      "bold"
     ],
     "contentDensity": "low",
     "visualWeight": "medium",
@@ -2666,7 +2665,7 @@
     },
     "slots": [
       "control",
-      "fish",
+      "knob",
       "label"
     ],
     "capabilities": {
@@ -2679,7 +2678,8 @@
     "tags": [
       "switch",
       "toggle",
-      "fish",
+      "checkbox",
+      "neo-brutalist",
       "form",
       "atom"
     ],
