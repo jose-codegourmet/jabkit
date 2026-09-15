@@ -3774,7 +3774,7 @@
       ]
     },
     "ride-booking-form": {
-      "sourceHash": "9c4c1c3d846b937fbf7d88bd303dc51510aa3a7cf4c430429d78a29a64bfd5e2",
+      "sourceHash": "e382d6b3ea62f26915e1022272c9d370d8d27e46f283d887337aae9a5648709e",
       "pipelineVersion": 1,
       "stories": [
         "Default",
