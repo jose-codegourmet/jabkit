@@ -3,10 +3,10 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "strong-squid",
   displayName: "StrongSquid",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A day-to-night switch whose sun slides into a cratered moon while clouds drop and stars rise.",
+    "A pill day-to-night switch whose sun slides into a cratered moon while clouds drop and stars rise.",
   sectionCategory: "form",
   purpose:
     "Lets people flip a persistent on/off setting when the control itself should telegraph day versus night.",

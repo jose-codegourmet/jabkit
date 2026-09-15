@@ -2413,7 +2413,7 @@
     "name": "strong-squid",
     "displayName": "StrongSquid",
     "category": "atoms",
-    "description": "A day-to-night switch whose sun slides into a cratered moon while clouds drop and stars rise.",
+    "description": "A pill day-to-night switch whose sun slides into a cratered moon while clouds drop and stars rise.",
     "sectionCategory": "form",
     "purpose": "Lets people flip a persistent on/off setting when the control itself should telegraph day versus night.",
     "bestFor": [
