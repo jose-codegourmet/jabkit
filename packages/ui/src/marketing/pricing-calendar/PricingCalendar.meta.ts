@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "pricing-calendar",
   displayName: "PricingCalendar",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "Two-month booking calendar that shows a nightly rate on each day and highlights lower-priced nights.",
+    "Two-month DayPicker-style calendar with a nightly price on each day and a lower-rate highlight.",
   sectionCategory: "pricing",
   purpose:
-    "Lets a lodging or event landing page show real nightly rates on a calendar so visitors pick a date with the price already in view.",
+    "Lets a lodging or event landing page show nightly rates on a two-month calendar so visitors pick a date with the price already in view.",
   bestFor: [
     "hotel and lodge landing pages",
     "cabin and short-stay booking",
@@ -20,7 +20,7 @@ export default {
     "multi-guest stay forms without rates",
     "dense operations calendars",
   ],
-  tone: ["clean", "professional", "warm"],
+  tone: ["clean", "professional"],
   industries: ["travel", "hospitality"],
   contentDensity: "medium",
   visualWeight: "medium",
@@ -29,20 +29,12 @@ export default {
     alignment: "center",
     columns: 2,
   },
-  slots: [
-    "headline",
-    "description",
-    "calendarMonths",
-    "nightlyRates",
-    "priceLegend",
-    "selectedNight",
-    "reserveCTA",
-  ],
+  slots: ["calendarMonths", "nightlyRates", "attribution"],
   capabilities: {
     supportsImage: false,
     supportsVideo: false,
-    supportsForm: true,
-    supportsCTA: true,
+    supportsForm: false,
+    supportsCTA: false,
     supportsDarkMode: true,
   },
   recommendedAfter: ["hero", "features"],
@@ -57,7 +49,7 @@ export default {
     "travel",
   ],
   dependencies: ["lucide-react"],
-  registryDependencies: ["button"],
+  registryDependencies: [],
   a11y: { keyboardNav: true, reducedMotion: true },
   preview: { layout: "fit", width: 1440, height: 900 },
 } satisfies ComponentMeta;

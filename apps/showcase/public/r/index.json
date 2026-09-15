@@ -6547,9 +6547,9 @@
     "name": "pricing-calendar",
     "displayName": "PricingCalendar",
     "category": "marketing",
-    "description": "Two-month booking calendar that shows a nightly rate on each day and highlights lower-priced nights.",
+    "description": "Two-month DayPicker-style calendar with a nightly price on each day and a lower-rate highlight.",
     "sectionCategory": "pricing",
-    "purpose": "Lets a lodging or event landing page show real nightly rates on a calendar so visitors pick a date with the price already in view.",
+    "purpose": "Lets a lodging or event landing page show nightly rates on a two-month calendar so visitors pick a date with the price already in view.",
     "bestFor": [
       "hotel and lodge landing pages",
       "cabin and short-stay booking",
@@ -6562,8 +6562,7 @@
     ],
     "tone": [
       "clean",
-      "professional",
-      "warm"
+      "professional"
     ],
     "industries": [
       "travel",
@@ -6577,19 +6576,15 @@
       "columns": 2
     },
     "slots": [
-      "headline",
-      "description",
       "calendarMonths",
       "nightlyRates",
-      "priceLegend",
-      "selectedNight",
-      "reserveCTA"
+      "attribution"
     ],
     "capabilities": {
       "supportsImage": false,
       "supportsVideo": false,
-      "supportsForm": true,
-      "supportsCTA": true,
+      "supportsForm": false,
+      "supportsCTA": false,
       "supportsDarkMode": true
     },
     "recommendedAfter": [
