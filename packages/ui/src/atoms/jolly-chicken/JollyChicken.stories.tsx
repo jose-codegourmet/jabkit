@@ -27,6 +27,17 @@ export const Night: Story = {
   ),
 };
 
+export const Sizes: Story = {
+  args: { ...jollyChickenMocks.default },
+  render: () => (
+    <div className="flex items-end gap-6">
+      <JollyChicken {...jollyChickenMocks.compact} />
+      <JollyChicken {...jollyChickenMocks.default} />
+      <JollyChicken {...jollyChickenMocks.large} />
+    </div>
+  ),
+};
+
 export const ThemeComparison: Story = {
   args: { ...jollyChickenMocks.default },
   render: () => (
