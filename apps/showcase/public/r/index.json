@@ -3139,6 +3139,89 @@
     }
   },
   {
+    "name": "form",
+    "displayName": "Form",
+    "category": "marketing",
+    "description": "Compact stay-booking card with destination, check-in and check-out dates, room and guest steppers, and a search CTA.",
+    "sectionCategory": "form",
+    "purpose": "Lets a travel or lodging landing page collect a stay request without sending visitors into a full reservation checkout.",
+    "bestFor": [
+      "hotel and inn landing pages",
+      "short-stay rental campaigns",
+      "lodge and cabin booking"
+    ],
+    "avoidFor": [
+      "ride or transfer booking",
+      "multi-step checkout with payment",
+      "account sign-in forms"
+    ],
+    "tone": [
+      "clean",
+      "professional",
+      "warm"
+    ],
+    "industries": [
+      "travel",
+      "hospitality"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "card",
+      "alignment": "center",
+      "columns": 1
+    },
+    "slots": [
+      "headline",
+      "description",
+      "destinationField",
+      "checkInField",
+      "checkOutField",
+      "roomsStepper",
+      "guestsStepper",
+      "searchCTA"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "features"
+    ],
+    "recommendedBefore": [
+      "testimonials",
+      "cta"
+    ],
+    "tags": [
+      "form",
+      "booking",
+      "stay",
+      "hotel",
+      "marketing",
+      "travel",
+      "conversion"
+    ],
+    "addedAt": "2026-09-15",
+    "dependencies": [
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
     "name": "gallery31",
     "displayName": "Gallery31",
     "category": "marketing",
@@ -4772,6 +4855,89 @@
       "layout": "fit",
       "width": 1440,
       "height": 420
+    }
+  },
+  {
+    "name": "ride-booking-form",
+    "displayName": "RideBookingForm",
+    "category": "marketing",
+    "description": "Marketing booking card with a city photo, pickup and dropoff fields, date and time, and a search CTA.",
+    "sectionCategory": "form",
+    "purpose": "Lets a mobility landing page collect a ride request without sending visitors into a full app checkout.",
+    "bestFor": [
+      "taxi and rideshare landing pages",
+      "airport transfer campaigns",
+      "scheduled fleet booking"
+    ],
+    "avoidFor": [
+      "multi-step checkout with payment",
+      "live map dispatch consoles"
+    ],
+    "tone": [
+      "clean",
+      "professional",
+      "confident"
+    ],
+    "industries": [
+      "transportation",
+      "travel",
+      "mobility"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "card",
+      "alignment": "center",
+      "columns": 1
+    },
+    "slots": [
+      "cityMedia",
+      "headline",
+      "description",
+      "pickupField",
+      "dropoffField",
+      "dateField",
+      "timeField",
+      "searchCTA"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero",
+      "features"
+    ],
+    "recommendedBefore": [
+      "testimonials",
+      "cta"
+    ],
+    "tags": [
+      "ride",
+      "booking",
+      "form",
+      "marketing",
+      "mobility",
+      "taxi",
+      "conversion"
+    ],
+    "addedAt": "2026-09-15",
+    "dependencies": [
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
     }
   },
   {
