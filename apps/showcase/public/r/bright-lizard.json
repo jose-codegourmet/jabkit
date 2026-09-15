@@ -1,0 +1,90 @@
+{
+  "name": "bright-lizard",
+  "displayName": "BrightLizard",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A bright orbital loading indicator with a token-colored arc and a pulsing core.",
+  "sectionCategory": "feedback",
+  "purpose": "Signals an in-progress wait with a compact spinner that stays on semantic tokens in light and dark.",
+  "bestFor": [
+    "inline async waits",
+    "empty-state and overlay loading",
+    "button or panel pending states"
+  ],
+  "avoidFor": [
+    "progress that has a known percentage",
+    "skeleton layouts that should hold content shape"
+  ],
+  "tone": [
+    "playful",
+    "clean"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "statusLabel"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "loader",
+    "spinner",
+    "feedback",
+    "status",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "bright-lizard/BrightLizard.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { BrightLizardProps } from \"./BrightLizard.types\";\n\nconst sizes = {\n  sm: \"gap-2 text-xs\",\n  md: \"gap-3 text-sm\",\n  lg: \"gap-3.5 text-base\",\n} as const;\n\nconst orbSizes = {\n  sm: \"1.5rem\",\n  md: \"2.5rem\",\n  lg: \"3.25rem\",\n} as const;\n\nexport function BrightLizard({\n  className,\n  label = \"Loading\",\n  size = \"md\",\n  showLabel = false,\n  ...props\n}: BrightLizardProps) {\n  return (\n    <div\n      aria-busy=\"true\"\n      aria-live=\"polite\"\n      className={cn(\n        \"jk-bright-lizard inline-flex flex-col items-center justify-center text-muted-foreground\",\n        sizes[size],\n        className,\n      )}\n      data-size={size}\n      data-slot=\"bright-lizard\"\n      role=\"status\"\n      style={\n        {\n          \"--jk-bright-lizard-size\": orbSizes[size],\n        } as React.CSSProperties\n      }\n      {...props}\n    >\n      <style href=\"jk-bright-lizard\" precedence=\"default\">{`\n        .jk-bright-lizard-orb {\n          position: relative;\n          width: var(--jk-bright-lizard-size);\n          height: var(--jk-bright-lizard-size);\n        }\n        .jk-bright-lizard-track,\n        .jk-bright-lizard-arc,\n        .jk-bright-lizard-core {\n          position: absolute;\n          inset: 0;\n          border-radius: 999px;\n        }\n        .jk-bright-lizard-track {\n          border: 3px solid color-mix(in oklab, var(--jk-border) 80%, transparent);\n        }\n        .jk-bright-lizard-arc {\n          inset: 1px;\n          border: 3px solid transparent;\n          border-top-color: var(--jk-primary);\n          border-right-color: var(--jk-chart-1);\n          filter: drop-shadow(\n            0 0 0.45rem color-mix(in oklab, var(--jk-primary), transparent 45%)\n          );\n        }\n        .jk-bright-lizard-core {\n          inset: 32%;\n          background: color-mix(in oklab, var(--jk-primary) 55%, var(--jk-background));\n          box-shadow:\n            0 0 0.55rem color-mix(in oklab, var(--jk-primary), transparent 35%);\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-bright-lizard-arc {\n            animation: jk-bright-lizard-spin 0.85s linear infinite;\n          }\n          .jk-bright-lizard-core {\n            animation: jk-bright-lizard-pulse 1.2s ease-in-out infinite;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-bright-lizard-arc {\n            transform: rotate(42deg);\n            animation: none;\n          }\n          .jk-bright-lizard-core {\n            animation: none;\n            opacity: 0.85;\n          }\n        }\n        @keyframes jk-bright-lizard-spin {\n          to {\n            transform: rotate(360deg);\n          }\n        }\n        @keyframes jk-bright-lizard-pulse {\n          0%,\n          100% {\n            transform: scale(0.72);\n            opacity: 0.55;\n          }\n          50% {\n            transform: scale(1);\n            opacity: 1;\n          }\n        }\n      `}</style>\n      <span aria-hidden=\"true\" className=\"jk-bright-lizard-orb\">\n        <span className=\"jk-bright-lizard-track\" />\n        <span className=\"jk-bright-lizard-arc\" />\n        <span className=\"jk-bright-lizard-core\" />\n      </span>\n      <span className={showLabel ? \"font-medium\" : \"sr-only\"}>{label}</span>\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "bright-lizard/BrightLizard.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type BrightLizardSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface BrightLizardProps extends HTMLAttributes<HTMLDivElement> {\n  label?: string;\n  size?: BrightLizardSize;\n  showLabel?: boolean;\n}\n"
+    },
+    {
+      "path": "bright-lizard/index.ts",
+      "type": "index",
+      "content": "export { BrightLizard } from \"./BrightLizard\";\nexport type * from \"./BrightLizard.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<BrightLizard {...brightLizardMocks.default} />"
+    },
+    {
+      "name": "Sizes",
+      "code": "<div className=\"flex flex-wrap items-end gap-8 bg-background p-10 text-foreground\">\n      <BrightLizard {...brightLizardMocks.compact} showLabel />\n      <BrightLizard {...brightLizardMocks.default} showLabel />\n      <BrightLizard label=\"Almost ready\" showLabel size=\"lg\" />\n    </div>"
+    }
+  ]
+}
