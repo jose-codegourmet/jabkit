@@ -1,15 +1,10 @@
 import type { HTMLAttributes } from "react";
 
 export interface PricingCalendarProps
-  extends Omit<HTMLAttributes<HTMLElement>, "title" | "onSelect"> {
-  title?: string;
-  description?: string;
-  currency?: string;
+  extends Omit<HTMLAttributes<HTMLElement>, "onSelect"> {
   locale?: string;
   goodPriceThreshold?: number;
   prices?: Record<string, number>;
-  unavailableDates?: string[];
-  minDate?: Date;
   defaultMonth?: Date;
   numberOfMonths?: number;
   defaultSelected?: Date;
@@ -17,11 +12,7 @@ export interface PricingCalendarProps
   onSelect?: (date: Date | undefined) => void;
   previousMonthLabel?: string;
   nextMonthLabel?: string;
-  selectedLabel?: string;
-  emptySelectionLabel?: string;
-  unavailableLabel?: string;
-  goodPriceLabel?: string;
-  standardPriceLabel?: string;
-  submitLabel?: string;
-  onReserve?: (date: Date) => void;
+  attributionLabel?: string;
+  attributionHref?: string;
+  attributionName?: string;
 }

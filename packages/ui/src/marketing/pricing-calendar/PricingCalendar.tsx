@@ -1,8 +1,7 @@
 "use client";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { useId, useState } from "react";
-import { Button } from "@/atoms/button";
+import { useState } from "react";
 import { cn } from "@/lib/cn";
 import { pricingCalendarMocks } from "./PricingCalendar.mocks";
 import type { PricingCalendarProps } from "./PricingCalendar.types";
@@ -31,10 +30,6 @@ function dayKey(date: Date) {
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${date.getFullYear()}-${month}-${day}`;
-}
-
-function compareDays(a: Date, b: Date) {
-  return dayKey(a).localeCompare(dayKey(b));
 }
 
 function monthTitle(date: Date, locale: string) {
@@ -71,49 +66,37 @@ function monthCells(month: Date) {
   return cells;
 }
 
-function formatRate(amount: number, currency: string, locale: string) {
-  return new Intl.NumberFormat(locale, {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
+const navButtonClassName = cn(
+  "inline-flex size-9 items-center justify-center rounded-md p-0 text-muted-foreground/80 outline-none",
+  "hover:bg-accent hover:text-foreground",
+  "focus-visible:ring-[3px] focus-visible:ring-ring/50",
+  "disabled:pointer-events-none disabled:opacity-50",
+);
 
 export function PricingCalendar({
   className,
-  title = pricingCalendarMocks.default.title,
-  description = pricingCalendarMocks.default.description,
-  currency = "USD",
   locale = "en-US",
-  goodPriceThreshold = 149,
+  goodPriceThreshold = 100,
   prices = pricingCalendarMocks.default.prices,
-  unavailableDates = pricingCalendarMocks.default.unavailableDates,
-  minDate,
   defaultMonth,
   numberOfMonths = 2,
   defaultSelected,
   selected: selectedProp,
   onSelect,
-  previousMonthLabel = "Previous month",
-  nextMonthLabel = "Next month",
-  selectedLabel = "Selected night",
-  emptySelectionLabel = "Choose a night to see the rate.",
-  unavailableLabel = "Taken",
-  goodPriceLabel = "Lower rate",
-  standardPriceLabel = "Standard rate",
-  submitLabel = "Reserve this night",
-  onReserve,
+  previousMonthLabel = "Go to the previous month",
+  nextMonthLabel = "Go to the next month",
+  attributionLabel = "Pricing calendar",
+  attributionHref = "https://daypicker.dev/",
+  attributionName = "React DayPicker",
   ...props
 }: PricingCalendarProps) {
-  const headingId = useId();
-  const descriptionId = useId();
-  const selectionId = useId();
   const weekdays = weekdayLabels(locale);
-  const blocked = new Set(unavailableDates ?? []);
+  const monthCount = Math.max(1, numberOfMonths);
+  const priceMap = prices ?? {};
 
   const [viewMonth, setViewMonth] = useState(() =>
     startOfMonth(
-      defaultMonth ?? defaultSelected ?? selectedProp ?? new Date(2026, 9, 1),
+      defaultMonth ?? defaultSelected ?? selectedProp ?? new Date(2026, 8, 15),
     ),
   );
   const [uncontrolledSelected, setUncontrolledSelected] = useState<
@@ -123,7 +106,7 @@ export function PricingCalendar({
     ? startOfDay(selectedProp)
     : uncontrolledSelected;
 
-  const months = Array.from({ length: Math.max(1, numberOfMonths) }, (_, i) =>
+  const months = Array.from({ length: monthCount }, (_, i) =>
     addMonths(viewMonth, i),
   );
 
@@ -135,140 +118,64 @@ export function PricingCalendar({
     onSelect?.(value);
   };
 
-  const selectedKey = selected ? dayKey(selected) : undefined;
-  const selectedPrice = selectedKey && prices ? prices[selectedKey] : undefined;
-  const selectedCopy = selected
-    ? `${new Intl.DateTimeFormat(locale, {
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-      }).format(selected)}${
-        selectedPrice !== undefined
-          ? ` · ${formatRate(selectedPrice, currency, locale)}`
-          : ""
-      }`
-    : emptySelectionLabel;
-
   return (
     <section
-      aria-describedby={description ? descriptionId : undefined}
-      aria-labelledby={headingId}
       className={cn("bg-background text-foreground", className)}
       data-slot="pricing-calendar"
       {...props}
     >
-      <div className="mx-auto flex max-w-5xl flex-col items-center px-5 py-16 sm:px-8 sm:py-20">
-        <header className="mx-auto max-w-2xl text-center">
-          <h2
-            className="text-3xl font-semibold tracking-[-0.04em] text-balance sm:text-4xl"
-            id={headingId}
-          >
-            {title}
-          </h2>
-          {description ? (
-            <p
-              className="mt-3 text-sm leading-6 text-muted-foreground text-pretty sm:text-base"
-              id={descriptionId}
-            >
-              {description}
-            </p>
-          ) : null}
-        </header>
+      <div className="flex justify-center px-5 py-16 sm:px-8 sm:py-20">
+        <div>
+          <div className="relative w-fit rounded-lg border border-border bg-background p-2">
+            <div className="absolute top-0 z-10 flex w-full justify-between">
+              <button
+                aria-label={previousMonthLabel}
+                className={navButtonClassName}
+                onClick={() => setViewMonth(addMonths(viewMonth, -monthCount))}
+                type="button"
+              >
+                <ChevronLeftIcon className="size-4" />
+              </button>
+              <button
+                aria-label={nextMonthLabel}
+                className={navButtonClassName}
+                onClick={() => setViewMonth(addMonths(viewMonth, monthCount))}
+                type="button"
+              >
+                <ChevronRightIcon className="size-4" />
+              </button>
+            </div>
 
-        <article
-          className={cn(
-            "mt-10 w-full overflow-hidden rounded-[calc(var(--radius)+0.45rem)] border border-border bg-card text-card-foreground shadow-sm",
-            "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500",
-          )}
-        >
-          <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3 sm:px-5">
-            <Button
-              aria-label={previousMonthLabel}
-              className="size-9 p-0"
-              onClick={() => setViewMonth(addMonths(viewMonth, -1))}
-              size="sm"
-              type="button"
-              variant="ghost"
-            >
-              <ChevronLeftIcon className="size-4" />
-            </Button>
-            <p className="text-sm font-medium capitalize">
-              {months.length === 1
-                ? monthTitle(months[0], locale)
-                : `${monthTitle(months[0], locale)} / ${monthTitle(months[months.length - 1], locale)}`}
-            </p>
-            <Button
-              aria-label={nextMonthLabel}
-              className="size-9 p-0"
-              onClick={() => setViewMonth(addMonths(viewMonth, 1))}
-              size="sm"
-              type="button"
-              variant="ghost"
-            >
-              <ChevronRightIcon className="size-4" />
-            </Button>
+            <div className="relative flex flex-col gap-8 sm:flex-col md:flex-row">
+              {months.map((month) => (
+                <MonthGrid
+                  goodPriceThreshold={goodPriceThreshold}
+                  key={dayKey(month)}
+                  locale={locale}
+                  month={month}
+                  onPick={pickDay}
+                  prices={priceMap}
+                  selected={selected}
+                  weekdays={weekdays}
+                />
+              ))}
+            </div>
           </div>
-
-          <div className="grid gap-8 p-4 sm:p-5 md:grid-cols-2 md:gap-0">
-            {months.map((month, index) => (
-              <MonthGrid
-                blocked={blocked}
-                currency={currency}
-                goodPriceThreshold={goodPriceThreshold}
-                key={dayKey(month)}
-                locale={locale}
-                minDate={minDate}
-                month={month}
-                onPick={pickDay}
-                prices={prices ?? {}}
-                selected={selected}
-                separated={index > 0}
-                unavailableLabel={unavailableLabel}
-                weekdays={weekdays}
-              />
-            ))}
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t border-border px-4 py-3 text-xs text-muted-foreground sm:px-5">
-            <span className="inline-flex items-center gap-1.5">
-              <span
-                aria-hidden="true"
-                className="size-1.5 rounded-full bg-success"
-              />
-              {goodPriceLabel}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <span
-                aria-hidden="true"
-                className="size-1.5 rounded-full bg-muted-foreground/50"
-              />
-              {standardPriceLabel}
-            </span>
-          </div>
-        </article>
-
-        <div className="mt-8 flex w-full max-w-md flex-col items-center gap-3 text-center">
-          <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-            {selectedLabel}
-          </p>
           <p
-            className="text-base font-medium tracking-tight"
-            id={selectionId}
-            role="status"
+            aria-live="polite"
+            className="mt-4 text-center text-xs text-muted-foreground"
+            role="region"
           >
-            {selectedCopy}
+            {attributionLabel} -{" "}
+            <a
+              className="underline hover:text-foreground"
+              href={attributionHref}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {attributionName}
+            </a>
           </p>
-          <Button
-            className="h-12 w-full max-w-xs"
-            disabled={!selected}
-            onClick={() => {
-              if (selected) onReserve?.(selected);
-            }}
-            size="lg"
-            type="button"
-          >
-            {submitLabel}
-          </Button>
         </div>
       </div>
     </section>
@@ -279,41 +186,39 @@ function MonthGrid({
   month,
   weekdays,
   locale,
-  currency,
   prices,
-  blocked,
-  minDate,
   selected,
   goodPriceThreshold,
-  separated,
-  unavailableLabel,
   onPick,
 }: {
   month: Date;
   weekdays: string[];
   locale: string;
-  currency: string;
   prices: Record<string, number>;
-  blocked: Set<string>;
-  minDate?: Date;
   selected?: Date;
   goodPriceThreshold: number;
-  separated: boolean;
-  unavailableLabel: string;
   onPick: (day: Date) => void;
 }) {
   const cells = monthCells(month);
-  const floor = minDate ? startOfDay(minDate) : undefined;
 
   return (
-    <div className={cn("md:px-5", separated && "md:border-l md:border-border")}>
-      <p className="mb-3 text-center text-sm font-medium capitalize">
-        {monthTitle(month, locale)}
-      </p>
-      <div className="grid grid-cols-7 gap-1 text-center">
+    <div
+      className={cn(
+        "relative w-full first-of-type:before:hidden",
+        "before:absolute before:bg-border",
+        "max-md:before:inset-x-2 max-md:before:-top-4 max-md:before:h-px",
+        "md:before:-left-4 md:before:inset-y-2 md:before:w-px",
+      )}
+    >
+      <div className="relative z-20 mx-10 mb-1 flex h-9 items-center justify-center">
+        <p className="text-sm font-medium capitalize">
+          {monthTitle(month, locale)}
+        </p>
+      </div>
+      <div className="grid w-fit grid-cols-7">
         {weekdays.map((label) => (
           <span
-            className="pb-1 text-[10px] font-medium tracking-wide text-muted-foreground"
+            className="flex w-12 items-center justify-center p-0 text-xs font-medium text-muted-foreground/80"
             key={`${dayKey(month)}-${label}`}
           >
             {label}
@@ -321,59 +226,61 @@ function MonthGrid({
         ))}
         {cells.map((cell) => {
           if (!cell.date) {
-            return <span key={cell.key} />;
+            return <span className="size-12" key={cell.key} />;
           }
 
           const day = cell.date;
           const key = dayKey(day);
           const price = prices[key];
-          const taken = blocked.has(key);
-          const tooEarly = floor ? compareDays(day, floor) < 0 : false;
-          const disabled = taken || tooEarly || price === undefined;
+          const disabled = price === undefined;
           const isSelected = selected ? isSameDay(day, selected) : false;
-          const isGood =
+          const isGoodPrice =
             price !== undefined && price < goodPriceThreshold && !isSelected;
 
           return (
-            <button
-              aria-disabled={disabled}
-              aria-label={`${day.toLocaleDateString(locale, {
-                weekday: "long",
-                month: "long",
-                day: "numeric",
-              })}${
-                price !== undefined
-                  ? `, ${formatRate(price, currency, locale)}`
-                  : ""
-              }${taken ? `, ${unavailableLabel}` : ""}`}
-              aria-pressed={isSelected}
-              className={cn(
-                "flex h-12 flex-col items-center justify-center rounded-[--radius] text-xs tabular-nums transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none motion-reduce:transition-none",
-                isSelected && "bg-primary text-primary-foreground",
-                !isSelected && !disabled && "hover:bg-accent",
-                disabled && "cursor-not-allowed opacity-40",
-              )}
-              disabled={disabled}
+            <div
+              className="group"
+              data-disabled={disabled ? "" : undefined}
+              data-selected={isSelected ? "" : undefined}
               key={cell.key}
-              onClick={() => onPick(day)}
-              type="button"
             >
-              <span className="leading-none">{day.getDate()}</span>
-              {price !== undefined ? (
-                <span
-                  className={cn(
-                    "mt-1 text-[10px] font-medium leading-none",
-                    isSelected
-                      ? "text-primary-foreground/70"
-                      : isGood
-                        ? "text-success"
-                        : "text-muted-foreground",
-                  )}
-                >
-                  {formatRate(price, currency, locale)}
+              <button
+                aria-disabled={disabled}
+                aria-label={`${day.toLocaleDateString(locale, {
+                  weekday: "long",
+                  month: "long",
+                  day: "numeric",
+                })}${price !== undefined ? `, $${price}` : ""}`}
+                aria-pressed={isSelected}
+                className={cn(
+                  "relative flex size-12 flex-col items-center justify-center rounded-md p-0 text-sm whitespace-nowrap text-foreground outline-none",
+                  "hover:bg-accent hover:text-foreground",
+                  "group-data-selected:bg-primary group-data-selected:text-primary-foreground group-data-selected:hover:bg-primary",
+                  "group-data-disabled:pointer-events-none group-data-disabled:text-foreground/30 group-data-disabled:line-through",
+                  "focus-visible:z-10 focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                  "motion-safe:group-data-selected:duration-150 motion-reduce:transition-none",
+                )}
+                disabled={disabled}
+                onClick={() => onPick(day)}
+                type="button"
+              >
+                <span className="flex flex-col items-center leading-none">
+                  {day.getDate()}
+                  {price !== undefined ? (
+                    <span
+                      className={cn(
+                        "mt-0.5 text-[10px] font-medium",
+                        isGoodPrice
+                          ? "text-success"
+                          : "text-muted-foreground group-data-selected:text-primary-foreground/70",
+                      )}
+                    >
+                      ${price}
+                    </span>
+                  ) : null}
                 </span>
-              ) : null}
-            </button>
+              </button>
+            </div>
           );
         })}
       </div>
