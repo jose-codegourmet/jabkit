@@ -2853,9 +2853,9 @@
     "name": "wise-lizard",
     "displayName": "WiseLizard",
     "category": "atoms",
-    "description": "A tilted brutalist username field with a warning plaque, hard offset shadow, and a user mark.",
+    "description": "A square brutalist 3D username field: hard offset shadow, warning plaque, and a native text input that lifts on hover.",
     "sectionCategory": "form",
-    "purpose": "Collects a short identity value with a 3D poster frame that still reads as a native text input.",
+    "purpose": "Collects a short identity value with a tilted poster frame while keeping a native text control and square corners.",
     "bestFor": [
       "sign-in or handle fields that can afford visual weight",
       "neo-brutalist forms and catalogue demos",
@@ -2896,7 +2896,6 @@
     ],
     "addedAt": "2026-09-15",
     "dependencies": [
-      "lucide-react",
       "clsx",
       "tailwind-merge"
     ],
