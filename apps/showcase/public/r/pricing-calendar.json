@@ -1,0 +1,124 @@
+{
+  "name": "pricing-calendar",
+  "displayName": "PricingCalendar",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Two-month booking calendar that shows a nightly rate on each day and highlights lower-priced nights.",
+  "sectionCategory": "pricing",
+  "purpose": "Lets a lodging or event landing page show real nightly rates on a calendar so visitors pick a date with the price already in view.",
+  "bestFor": [
+    "hotel and lodge landing pages",
+    "cabin and short-stay booking",
+    "ticketed nights with date-based rates"
+  ],
+  "avoidFor": [
+    "subscription plan comparison",
+    "multi-guest stay forms without rates",
+    "dense operations calendars"
+  ],
+  "tone": [
+    "clean",
+    "professional",
+    "warm"
+  ],
+  "industries": [
+    "travel",
+    "hospitality"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "card",
+    "alignment": "center",
+    "columns": 2
+  },
+  "slots": [
+    "headline",
+    "description",
+    "calendarMonths",
+    "nightlyRates",
+    "priceLegend",
+    "selectedNight",
+    "reserveCTA"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "features"
+  ],
+  "recommendedBefore": [
+    "testimonials",
+    "faq",
+    "cta"
+  ],
+  "tags": [
+    "pricing",
+    "calendar",
+    "booking",
+    "marketing",
+    "lodging",
+    "rates",
+    "travel"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "pricing-calendar/PricingCalendar.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ChevronLeftIcon, ChevronRightIcon } from \"lucide-react\";\nimport { useId, useState } from \"react\";\nimport { Button } from \"@/components/jabkit/button\";\nimport { cn } from \"@/lib/cn\";\nimport { pricingCalendarMocks } from \"./PricingCalendar.mocks\";\nimport type { PricingCalendarProps } from \"./PricingCalendar.types\";\n\nfunction startOfDay(date: Date) {\n  return new Date(date.getFullYear(), date.getMonth(), date.getDate());\n}\n\nfunction startOfMonth(date: Date) {\n  return new Date(date.getFullYear(), date.getMonth(), 1);\n}\n\nfunction addMonths(date: Date, amount: number) {\n  return new Date(date.getFullYear(), date.getMonth() + amount, 1);\n}\n\nfunction isSameDay(a: Date, b: Date) {\n  return (\n    a.getFullYear() === b.getFullYear() &&\n    a.getMonth() === b.getMonth() &&\n    a.getDate() === b.getDate()\n  );\n}\n\nfunction dayKey(date: Date) {\n  const month = String(date.getMonth() + 1).padStart(2, \"0\");\n  const day = String(date.getDate()).padStart(2, \"0\");\n  return `${date.getFullYear()}-${month}-${day}`;\n}\n\nfunction compareDays(a: Date, b: Date) {\n  return dayKey(a).localeCompare(dayKey(b));\n}\n\nfunction monthTitle(date: Date, locale: string) {\n  return new Intl.DateTimeFormat(locale, {\n    month: \"long\",\n    year: \"numeric\",\n  }).format(date);\n}\n\nfunction weekdayLabels(locale: string) {\n  const formatter = new Intl.DateTimeFormat(locale, { weekday: \"short\" });\n  return Array.from({ length: 7 }, (_, index) => {\n    const day = new Date(2026, 1, 1 + index);\n    return formatter.format(day);\n  });\n}\n\nfunction monthCells(month: Date) {\n  const first = startOfMonth(month);\n  const offset = first.getDay();\n  const daysInMonth = new Date(\n    month.getFullYear(),\n    month.getMonth() + 1,\n    0,\n  ).getDate();\n  const cells: Array<{ key: string; date?: Date }> = [];\n  for (let i = 0; i < offset; i++) {\n    cells.push({ key: `pad-${dayKey(first)}-${i}` });\n  }\n  for (let day = 1; day <= daysInMonth; day++) {\n    const date = new Date(month.getFullYear(), month.getMonth(), day);\n    cells.push({ key: dayKey(date), date });\n  }\n  return cells;\n}\n\nfunction formatRate(amount: number, currency: string, locale: string) {\n  return new Intl.NumberFormat(locale, {\n    style: \"currency\",\n    currency,\n    maximumFractionDigits: 0,\n  }).format(amount);\n}\n\nexport function PricingCalendar({\n  className,\n  title = pricingCalendarMocks.default.title,\n  description = pricingCalendarMocks.default.description,\n  currency = \"USD\",\n  locale = \"en-US\",\n  goodPriceThreshold = 149,\n  prices = pricingCalendarMocks.default.prices,\n  unavailableDates = pricingCalendarMocks.default.unavailableDates,\n  minDate,\n  defaultMonth,\n  numberOfMonths = 2,\n  defaultSelected,\n  selected: selectedProp,\n  onSelect,\n  previousMonthLabel = \"Previous month\",\n  nextMonthLabel = \"Next month\",\n  selectedLabel = \"Selected night\",\n  emptySelectionLabel = \"Choose a night to see the rate.\",\n  unavailableLabel = \"Taken\",\n  goodPriceLabel = \"Lower rate\",\n  standardPriceLabel = \"Standard rate\",\n  submitLabel = \"Reserve this night\",\n  onReserve,\n  ...props\n}: PricingCalendarProps) {\n  const headingId = useId();\n  const descriptionId = useId();\n  const selectionId = useId();\n  const weekdays = weekdayLabels(locale);\n  const blocked = new Set(unavailableDates ?? []);\n\n  const [viewMonth, setViewMonth] = useState(() =>\n    startOfMonth(\n      defaultMonth ?? defaultSelected ?? selectedProp ?? new Date(2026, 9, 1),\n    ),\n  );\n  const [uncontrolledSelected, setUncontrolledSelected] = useState<\n    Date | undefined\n  >(() => (defaultSelected ? startOfDay(defaultSelected) : undefined));\n  const selected = selectedProp\n    ? startOfDay(selectedProp)\n    : uncontrolledSelected;\n\n  const months = Array.from({ length: Math.max(1, numberOfMonths) }, (_, i) =>\n    addMonths(viewMonth, i),\n  );\n\n  const pickDay = (day: Date) => {\n    const next = startOfDay(day);\n    const same = selected ? isSameDay(selected, next) : false;\n    const value = same ? undefined : next;\n    if (selectedProp === undefined) setUncontrolledSelected(value);\n    onSelect?.(value);\n  };\n\n  const selectedKey = selected ? dayKey(selected) : undefined;\n  const selectedPrice = selectedKey && prices ? prices[selectedKey] : undefined;\n  const selectedCopy = selected\n    ? `${new Intl.DateTimeFormat(locale, {\n        weekday: \"long\",\n        month: \"long\",\n        day: \"numeric\",\n      }).format(selected)}${\n        selectedPrice !== undefined\n          ? ` · ${formatRate(selectedPrice, currency, locale)}`\n          : \"\"\n      }`\n    : emptySelectionLabel;\n\n  return (\n    <section\n      aria-describedby={description ? descriptionId : undefined}\n      aria-labelledby={headingId}\n      className={cn(\"bg-background text-foreground\", className)}\n      data-slot=\"pricing-calendar\"\n      {...props}\n    >\n      <div className=\"mx-auto flex max-w-5xl flex-col items-center px-5 py-16 sm:px-8 sm:py-20\">\n        <header className=\"mx-auto max-w-2xl text-center\">\n          <h2\n            className=\"text-3xl font-semibold tracking-[-0.04em] text-balance sm:text-4xl\"\n            id={headingId}\n          >\n            {title}\n          </h2>\n          {description ? (\n            <p\n              className=\"mt-3 text-sm leading-6 text-muted-foreground text-pretty sm:text-base\"\n              id={descriptionId}\n            >\n              {description}\n            </p>\n          ) : null}\n        </header>\n\n        <article\n          className={cn(\n            \"mt-10 w-full overflow-hidden rounded-[calc(var(--radius)+0.45rem)] border border-border bg-card text-card-foreground shadow-sm\",\n            \"motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500\",\n          )}\n        >\n          <div className=\"flex items-center justify-between gap-3 border-b border-border px-4 py-3 sm:px-5\">\n            <Button\n              aria-label={previousMonthLabel}\n              className=\"size-9 p-0\"\n              onClick={() => setViewMonth(addMonths(viewMonth, -1))}\n              size=\"sm\"\n              type=\"button\"\n              variant=\"ghost\"\n            >\n              <ChevronLeftIcon className=\"size-4\" />\n            </Button>\n            <p className=\"text-sm font-medium capitalize\">\n              {months.length === 1\n                ? monthTitle(months[0], locale)\n                : `${monthTitle(months[0], locale)} / ${monthTitle(months[months.length - 1], locale)}`}\n            </p>\n            <Button\n              aria-label={nextMonthLabel}\n              className=\"size-9 p-0\"\n              onClick={() => setViewMonth(addMonths(viewMonth, 1))}\n              size=\"sm\"\n              type=\"button\"\n              variant=\"ghost\"\n            >\n              <ChevronRightIcon className=\"size-4\" />\n            </Button>\n          </div>\n\n          <div className=\"grid gap-8 p-4 sm:p-5 md:grid-cols-2 md:gap-0\">\n            {months.map((month, index) => (\n              <MonthGrid\n                blocked={blocked}\n                currency={currency}\n                goodPriceThreshold={goodPriceThreshold}\n                key={dayKey(month)}\n                locale={locale}\n                minDate={minDate}\n                month={month}\n                onPick={pickDay}\n                prices={prices ?? {}}\n                selected={selected}\n                separated={index > 0}\n                unavailableLabel={unavailableLabel}\n                weekdays={weekdays}\n              />\n            ))}\n          </div>\n\n          <div className=\"flex flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t border-border px-4 py-3 text-xs text-muted-foreground sm:px-5\">\n            <span className=\"inline-flex items-center gap-1.5\">\n              <span\n                aria-hidden=\"true\"\n                className=\"size-1.5 rounded-full bg-success\"\n              />\n              {goodPriceLabel}\n            </span>\n            <span className=\"inline-flex items-center gap-1.5\">\n              <span\n                aria-hidden=\"true\"\n                className=\"size-1.5 rounded-full bg-muted-foreground/50\"\n              />\n              {standardPriceLabel}\n            </span>\n          </div>\n        </article>\n\n        <div className=\"mt-8 flex w-full max-w-md flex-col items-center gap-3 text-center\">\n          <p className=\"text-xs font-medium tracking-wide text-muted-foreground uppercase\">\n            {selectedLabel}\n          </p>\n          <p\n            className=\"text-base font-medium tracking-tight\"\n            id={selectionId}\n            role=\"status\"\n          >\n            {selectedCopy}\n          </p>\n          <Button\n            className=\"h-12 w-full max-w-xs\"\n            disabled={!selected}\n            onClick={() => {\n              if (selected) onReserve?.(selected);\n            }}\n            size=\"lg\"\n            type=\"button\"\n          >\n            {submitLabel}\n          </Button>\n        </div>\n      </div>\n    </section>\n  );\n}\n\nfunction MonthGrid({\n  month,\n  weekdays,\n  locale,\n  currency,\n  prices,\n  blocked,\n  minDate,\n  selected,\n  goodPriceThreshold,\n  separated,\n  unavailableLabel,\n  onPick,\n}: {\n  month: Date;\n  weekdays: string[];\n  locale: string;\n  currency: string;\n  prices: Record<string, number>;\n  blocked: Set<string>;\n  minDate?: Date;\n  selected?: Date;\n  goodPriceThreshold: number;\n  separated: boolean;\n  unavailableLabel: string;\n  onPick: (day: Date) => void;\n}) {\n  const cells = monthCells(month);\n  const floor = minDate ? startOfDay(minDate) : undefined;\n\n  return (\n    <div className={cn(\"md:px-5\", separated && \"md:border-l md:border-border\")}>\n      <p className=\"mb-3 text-center text-sm font-medium capitalize\">\n        {monthTitle(month, locale)}\n      </p>\n      <div className=\"grid grid-cols-7 gap-1 text-center\">\n        {weekdays.map((label) => (\n          <span\n            className=\"pb-1 text-[10px] font-medium tracking-wide text-muted-foreground\"\n            key={`${dayKey(month)}-${label}`}\n          >\n            {label}\n          </span>\n        ))}\n        {cells.map((cell) => {\n          if (!cell.date) {\n            return <span key={cell.key} />;\n          }\n\n          const day = cell.date;\n          const key = dayKey(day);\n          const price = prices[key];\n          const taken = blocked.has(key);\n          const tooEarly = floor ? compareDays(day, floor) < 0 : false;\n          const disabled = taken || tooEarly || price === undefined;\n          const isSelected = selected ? isSameDay(day, selected) : false;\n          const isGood =\n            price !== undefined && price < goodPriceThreshold && !isSelected;\n\n          return (\n            <button\n              aria-disabled={disabled}\n              aria-label={`${day.toLocaleDateString(locale, {\n                weekday: \"long\",\n                month: \"long\",\n                day: \"numeric\",\n              })}${\n                price !== undefined\n                  ? `, ${formatRate(price, currency, locale)}`\n                  : \"\"\n              }${taken ? `, ${unavailableLabel}` : \"\"}`}\n              aria-pressed={isSelected}\n              className={cn(\n                \"flex h-12 flex-col items-center justify-center rounded-[--radius] text-xs tabular-nums transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none motion-reduce:transition-none\",\n                isSelected && \"bg-primary text-primary-foreground\",\n                !isSelected && !disabled && \"hover:bg-accent\",\n                disabled && \"cursor-not-allowed opacity-40\",\n              )}\n              disabled={disabled}\n              key={cell.key}\n              onClick={() => onPick(day)}\n              type=\"button\"\n            >\n              <span className=\"leading-none\">{day.getDate()}</span>\n              {price !== undefined ? (\n                <span\n                  className={cn(\n                    \"mt-1 text-[10px] font-medium leading-none\",\n                    isSelected\n                      ? \"text-primary-foreground/70\"\n                      : isGood\n                        ? \"text-success\"\n                        : \"text-muted-foreground\",\n                  )}\n                >\n                  {formatRate(price, currency, locale)}\n                </span>\n              ) : null}\n            </button>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "pricing-calendar/PricingCalendar.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface PricingCalendarProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\" | \"onSelect\"> {\n  title?: string;\n  description?: string;\n  currency?: string;\n  locale?: string;\n  goodPriceThreshold?: number;\n  prices?: Record<string, number>;\n  unavailableDates?: string[];\n  minDate?: Date;\n  defaultMonth?: Date;\n  numberOfMonths?: number;\n  defaultSelected?: Date;\n  selected?: Date;\n  onSelect?: (date: Date | undefined) => void;\n  previousMonthLabel?: string;\n  nextMonthLabel?: string;\n  selectedLabel?: string;\n  emptySelectionLabel?: string;\n  unavailableLabel?: string;\n  goodPriceLabel?: string;\n  standardPriceLabel?: string;\n  submitLabel?: string;\n  onReserve?: (date: Date) => void;\n}\n"
+    },
+    {
+      "path": "pricing-calendar/index.ts",
+      "type": "index",
+      "content": "export { PricingCalendar } from \"./PricingCalendar\";\nexport type { PricingCalendarProps } from \"./PricingCalendar.types\";\n"
+    },
+    {
+      "path": "pricing-calendar/PricingCalendar.mocks.ts",
+      "type": "mocks",
+      "content": "import type { PricingCalendarProps } from \"./PricingCalendar.types\";\n\nfunction dayKey(date: Date) {\n  const month = String(date.getMonth() + 1).padStart(2, \"0\");\n  const day = String(date.getDate()).padStart(2, \"0\");\n  return `${date.getFullYear()}-${month}-${day}`;\n}\n\nfunction buildNightlyRates(start: Date, monthCount: number) {\n  const prices: Record<string, number> = {};\n  const first = new Date(start.getFullYear(), start.getMonth(), 1);\n  const last = new Date(first.getFullYear(), first.getMonth() + monthCount, 0);\n\n  for (\n    let cursor = new Date(first);\n    cursor <= last;\n    cursor.setDate(cursor.getDate() + 1)\n  ) {\n    const weekend = cursor.getDay() === 0 || cursor.getDay() === 6;\n    const wave = (cursor.getDate() * 5 + cursor.getMonth() * 3) % 6;\n    const base = weekend ? 184 : 128;\n    prices[dayKey(cursor)] = base + wave * 7;\n  }\n\n  return prices;\n}\n\nconst lodgeMonth = new Date(2026, 9, 1);\nconst lodgePrices = buildNightlyRates(lodgeMonth, 2);\n\nconst cabinMonth = new Date(2026, 11, 1);\nconst cabinPrices = buildNightlyRates(cabinMonth, 2);\n\nexport const pricingCalendarMocks = {\n  default: {\n    title: \"See the night before you book\",\n    description:\n      \"Two months of lodge rates. Lower nights are marked so a quiet midweek stay is easy to spot.\",\n    currency: \"USD\",\n    locale: \"en-US\",\n    goodPriceThreshold: 149,\n    prices: lodgePrices,\n    unavailableDates: [\"2026-10-14\", \"2026-10-15\", \"2026-11-06\"],\n    defaultMonth: lodgeMonth,\n    numberOfMonths: 2,\n    defaultSelected: new Date(2026, 9, 8),\n    previousMonthLabel: \"Previous month\",\n    nextMonthLabel: \"Next month\",\n    selectedLabel: \"Selected night\",\n    emptySelectionLabel: \"Choose a night to see the rate.\",\n    unavailableLabel: \"Taken\",\n    goodPriceLabel: \"Lower rate\",\n    standardPriceLabel: \"Standard rate\",\n    submitLabel: \"Reserve this night\",\n  },\n  alternate: {\n    title: \"Cabin nights through the holidays\",\n    description:\n      \"December and January on the ridge. Weekends run higher. Midweek nights stay closer to the floor.\",\n    currency: \"USD\",\n    locale: \"en-US\",\n    goodPriceThreshold: 149,\n    prices: cabinPrices,\n    unavailableDates: [\"2026-12-24\", \"2026-12-25\", \"2027-01-01\"],\n    defaultMonth: cabinMonth,\n    numberOfMonths: 2,\n    defaultSelected: new Date(2026, 11, 9),\n    previousMonthLabel: \"Previous month\",\n    nextMonthLabel: \"Next month\",\n    selectedLabel: \"Selected night\",\n    emptySelectionLabel: \"Choose a night to see the rate.\",\n    unavailableLabel: \"Taken\",\n    goodPriceLabel: \"Lower rate\",\n    standardPriceLabel: \"Standard rate\",\n    submitLabel: \"Hold this cabin\",\n  },\n} satisfies Record<\"default\" | \"alternate\", PricingCalendarProps>;\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <PricingCalendar {...pricingCalendarMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <PricingCalendar {...pricingCalendarMocks.alternate} />\n    </div>"
+    }
+  ]
+}
