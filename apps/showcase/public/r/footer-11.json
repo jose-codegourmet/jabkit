@@ -1,0 +1,106 @@
+{
+  "name": "footer-11",
+  "displayName": "Footer11",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Dark closing footer with a live badge, light headline, email CTA, text nav, and a stretched wordmark over a primary glow.",
+  "sectionCategory": "footer",
+  "purpose": "Closes a marketing page with one contact path, sparse navigation, and a large brand lockup.",
+  "bestFor": [
+    "product and studio landings",
+    "pages that need a single email close",
+    "dark full-width site endings"
+  ],
+  "avoidFor": [
+    "dense legal or multi-column service footers",
+    "forms that need a subscribe field"
+  ],
+  "tone": [
+    "confident",
+    "premium",
+    "minimal"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "high",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "badge",
+    "headline",
+    "contact",
+    "navigation",
+    "brandMark",
+    "wordmark"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "cta",
+    "contact",
+    "faq",
+    "content"
+  ],
+  "tags": [
+    "footer",
+    "marketing",
+    "contact",
+    "wordmark",
+    "landing",
+    "dark"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 820
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "footer-11/Footer11.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ArrowRightIcon, ArrowUpIcon } from \"lucide-react\";\nimport { useId } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { Footer11NavLink, Footer11Props } from \"./Footer11.types\";\n\nconst defaultNavLinks: Footer11NavLink[] = [\n  { label: \"Products\", href: \"#products\" },\n  { label: \"Company\", href: \"#company\" },\n  { label: \"Pricing\", href: \"#pricing\" },\n  { label: \"Contact\", href: \"#contact\" },\n];\n\nconst defaults = {\n  badgeText: \"Loved by Creators\",\n  heading:\n    \"Want to collaborate with us, explore our tools or just curious to know more?\",\n  contactLabel: \"Reach out at:\",\n  contactEmail: \"hello@northline.studio\",\n  contactEmailHref: \"mailto:hello@northline.studio\",\n  brandName: \"northline.io\",\n} as const;\n\nconst plate =\n  \"bg-[color-mix(in_oklab,var(--jk-foreground),var(--jk-background)_4%)] dark:bg-[color-mix(in_oklab,var(--jk-background),var(--jk-foreground)_3%)]\";\nconst ink = \"text-background dark:text-foreground\";\nconst inkSoft = \"text-background/50 dark:text-foreground/50\";\nconst inkStrong = \"text-background/90 dark:text-foreground/90\";\nconst markFill = \"fill-background/20 dark:fill-foreground/20\";\nconst markInk = \"text-background/20 dark:text-foreground/20\";\n\nconst focusRing =\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\";\n\nfunction DefaultBrandMark({ className }: { className?: string }) {\n  return (\n    <svg\n      aria-hidden=\"true\"\n      viewBox=\"0 0 80 80\"\n      className={className}\n      fill=\"currentColor\"\n    >\n      <rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" rx=\"20\" />\n      <path d=\"M28 22h10v36H28z\" opacity=\"0.35\" />\n    </svg>\n  );\n}\n\nfunction scrollPageToTop() {\n  const reduce =\n    typeof window !== \"undefined\" &&\n    window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;\n  window.scrollTo({ top: 0, behavior: reduce ? \"auto\" : \"smooth\" });\n}\n\nexport function Footer11({\n  className,\n  badgeText = defaults.badgeText,\n  heading = defaults.heading,\n  contactLabel = defaults.contactLabel,\n  contactEmail = defaults.contactEmail,\n  contactEmailHref = defaults.contactEmailHref,\n  navLinks = defaultNavLinks,\n  brandName = defaults.brandName,\n  brandLogo,\n  onScrollToTop,\n  ...props\n}: Footer11Props) {\n  const headingId = useId();\n  const wordmarkWidth = Math.max(brandName.length * 90, 400);\n\n  const handleScrollToTop = (\n    event: Parameters<NonNullable<Footer11Props[\"onScrollToTop\"]>>[0],\n  ) => {\n    if (onScrollToTop) {\n      onScrollToTop(event);\n      return;\n    }\n    scrollPageToTop();\n  };\n\n  return (\n    <footer\n      data-slot=\"footer-11\"\n      className={cn(\"w-full overflow-hidden font-sans antialiased\", className)}\n      {...props}\n    >\n      <style href=\"jk-footer-11\" precedence=\"default\">{`\n        .jk-footer11-arrow {\n          transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);\n        }\n        .jk-footer11-scroll:hover .jk-footer11-arrow,\n        .jk-footer11-scroll:focus-visible .jk-footer11-arrow {\n          transform: translateY(-2px);\n        }\n        .jk-footer11-mail:hover .jk-footer11-arrow,\n        .jk-footer11-mail:focus-visible .jk-footer11-arrow {\n          transform: translateX(4px);\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-footer11-arrow {\n            transition: none;\n          }\n          .jk-footer11-scroll:hover .jk-footer11-arrow,\n          .jk-footer11-scroll:focus-visible .jk-footer11-arrow,\n          .jk-footer11-mail:hover .jk-footer11-arrow,\n          .jk-footer11-mail:focus-visible .jk-footer11-arrow {\n            transform: none;\n          }\n        }\n      `}</style>\n\n      <div\n        className={cn(\n          \"relative px-6 pt-8 pb-10 sm:px-10 md:px-16 lg:px-20\",\n          plate,\n        )}\n      >\n        <div className=\"flex items-center justify-between gap-6\">\n          <p\n            className={cn(\n              \"inline-flex items-center gap-2 text-base font-light\",\n              ink,\n            )}\n          >\n            <span\n              aria-hidden=\"true\"\n              className=\"size-2 shrink-0 rounded-full bg-primary\"\n            />\n            <span>{badgeText}</span>\n          </p>\n\n          <button\n            type=\"button\"\n            onClick={handleScrollToTop}\n            className={cn(\n              \"jk-footer11-scroll inline-flex items-center gap-1.5 rounded-none text-base font-light tracking-wide\",\n              inkStrong,\n              \"transition-colors duration-200 hover:opacity-90\",\n              focusRing,\n            )}\n          >\n            <span>Scroll to Top</span>\n            <ArrowUpIcon\n              aria-hidden=\"true\"\n              className=\"jk-footer11-arrow size-4\"\n            />\n          </button>\n        </div>\n\n        <div className=\"mt-8 max-w-lg sm:mt-10 md:mt-12\">\n          <h2\n            id={headingId}\n            className={cn(\n              \"text-2xl leading-snug font-light tracking-tight sm:text-3xl md:text-4xl\",\n              ink,\n            )}\n          >\n            {heading}\n          </h2>\n        </div>\n\n        <div className=\"mt-20 flex flex-col gap-8 sm:mt-24 md:mt-28 lg:flex-row lg:items-end lg:justify-between\">\n          <div className=\"flex flex-col gap-1.5\">\n            <p className={cn(\"text-lg font-light tracking-wide\", inkSoft)}>\n              {contactLabel}\n            </p>\n            <a\n              href={contactEmailHref}\n              className={cn(\n                \"jk-footer11-mail inline-flex items-center gap-2 rounded-none text-2xl font-medium\",\n                inkStrong,\n                \"transition-colors duration-200 hover:opacity-100\",\n                focusRing,\n              )}\n            >\n              <span>{contactEmail}</span>\n              <ArrowRightIcon\n                aria-hidden=\"true\"\n                className=\"jk-footer11-arrow size-6\"\n              />\n            </a>\n          </div>\n\n          <nav aria-label=\"Footer\">\n            <ul className=\"m-0 flex list-none flex-wrap items-center gap-6 p-0 sm:gap-8 lg:gap-10\">\n              {navLinks.map((link) => (\n                <li key={`${link.href}-${link.label}`}>\n                  <a\n                    href={link.href}\n                    className={cn(\n                      \"rounded-none text-base font-medium\",\n                      inkStrong,\n                      \"transition-colors duration-200 hover:opacity-90\",\n                      focusRing,\n                    )}\n                  >\n                    {link.label}\n                  </a>\n                </li>\n              ))}\n            </ul>\n          </nav>\n        </div>\n      </div>\n\n      <div\n        className={cn(\n          \"relative px-6 pt-10 pb-12 sm:px-10 md:px-16 lg:px-20 lg:pt-14 lg:pb-16\",\n          plate,\n        )}\n      >\n        <div\n          aria-hidden=\"true\"\n          className=\"pointer-events-none absolute right-0 bottom-0 h-full w-3/4 blur-lg sm:w-2/3\"\n        >\n          <div className=\"absolute right-0 bottom-0 h-full w-full bg-gradient-to-tl from-primary/80 via-primary/30 to-transparent\" />\n          <div className=\"absolute -right-20 -bottom-20 h-80 w-80 rounded-full bg-primary/40 blur-3xl sm:h-96 sm:w-96\" />\n          <div className=\"absolute right-1/4 bottom-0 h-64 w-64 rounded-full bg-primary/20 blur-3xl\" />\n        </div>\n\n        <div className=\"relative z-10 flex w-full flex-col items-center justify-center gap-6 overflow-hidden sm:flex-row sm:gap-8\">\n          <div className={cn(\"hidden shrink-0 sm:block\", markInk)}>\n            {brandLogo ?? <DefaultBrandMark className=\"size-20 lg:size-32\" />}\n          </div>\n\n          <svg\n            className=\"h-auto w-full flex-1 select-none\"\n            viewBox={`0 0 ${wordmarkWidth} 100`}\n            preserveAspectRatio=\"xMidYMid meet\"\n            role=\"img\"\n            aria-label={brandName}\n          >\n            <title>{brandName}</title>\n            <text\n              x=\"0%\"\n              y=\"100%\"\n              dominantBaseline=\"alphabetic\"\n              textAnchor=\"start\"\n              textLength=\"90%\"\n              lengthAdjust=\"spacing\"\n              className={cn(\"font-sans font-bold tracking-tight\", markFill)}\n              fontSize=\"140\"\n            >\n              {brandName}\n            </text>\n          </svg>\n        </div>\n      </div>\n    </footer>\n  );\n}\n"
+    },
+    {
+      "path": "footer-11/Footer11.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, MouseEventHandler, ReactNode } from \"react\";\n\nexport interface Footer11NavLink {\n  label: string;\n  href: string;\n}\n\nexport interface Footer11Props extends HTMLAttributes<HTMLElement> {\n  badgeText?: string;\n  heading?: string;\n  contactLabel?: string;\n  contactEmail?: string;\n  contactEmailHref?: string;\n  navLinks?: Footer11NavLink[];\n  brandName?: string;\n  brandLogo?: ReactNode;\n  onScrollToTop?: MouseEventHandler<HTMLButtonElement>;\n}\n"
+    },
+    {
+      "path": "footer-11/index.ts",
+      "type": "index",
+      "content": "export { Footer11 } from \"./Footer11\";\nexport type { Footer11NavLink, Footer11Props } from \"./Footer11.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Footer11 {...footer11Mocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <Footer11 {...footer11Mocks.alternate} />\n    </div>"
+    }
+  ]
+}
