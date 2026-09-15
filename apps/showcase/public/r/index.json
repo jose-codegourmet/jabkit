@@ -609,6 +609,65 @@
     }
   },
   {
+    "name": "clever-panther",
+    "displayName": "CleverPanther",
+    "category": "atoms",
+    "description": "A compact note card with a token-tinted sheen and a quiet spotted field that stays readable in light and dark.",
+    "sectionCategory": "content",
+    "purpose": "Presents a short title, caption, and optional action on a dark-leaning card without leaving semantic tokens.",
+    "bestFor": [
+      "catalogue or story notes",
+      "compact feature blurbs",
+      "hoverable teaser cards on product or marketing surfaces"
+    ],
+    "avoidFor": [
+      "primary form controls",
+      "dense data that needs a plain table surface"
+    ],
+    "tone": [
+      "playful",
+      "clean"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "eyebrow",
+      "title",
+      "description",
+      "action"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "card",
+      "sheen",
+      "note",
+      "content",
+      "atom"
+    ],
+    "addedAt": "2026-09-15",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "dialog",
     "displayName": "Dialog",
     "category": "atoms",

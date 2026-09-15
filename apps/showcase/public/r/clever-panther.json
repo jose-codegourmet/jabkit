@@ -1,0 +1,93 @@
+{
+  "name": "clever-panther",
+  "displayName": "CleverPanther",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "A compact note card with a token-tinted sheen and a quiet spotted field that stays readable in light and dark.",
+  "sectionCategory": "content",
+  "purpose": "Presents a short title, caption, and optional action on a dark-leaning card without leaving semantic tokens.",
+  "bestFor": [
+    "catalogue or story notes",
+    "compact feature blurbs",
+    "hoverable teaser cards on product or marketing surfaces"
+  ],
+  "avoidFor": [
+    "primary form controls",
+    "dense data that needs a plain table surface"
+  ],
+  "tone": [
+    "playful",
+    "clean"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "eyebrow",
+    "title",
+    "description",
+    "action"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "card",
+    "sheen",
+    "note",
+    "content",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "clever-panther/CleverPanther.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { CleverPantherProps } from \"./CleverPanther.types\";\n\nconst sizes = {\n  sm: \"w-56 gap-2 p-4 text-sm\",\n  md: \"w-72 gap-2.5 p-5 text-sm\",\n  lg: \"w-80 gap-3 p-6 text-base\",\n} as const;\n\nexport function CleverPanther({\n  className,\n  children,\n  eyebrow = \"Night brief\",\n  title = \"Clever panther\",\n  description = \"A compact note card with a token-tinted sheen that stays readable in light and dark.\",\n  actionLabel,\n  size = \"md\",\n  tone = \"ink\",\n  animate = true,\n  ...props\n}: CleverPantherProps) {\n  return (\n    <article\n      className={cn(\n        \"jk-clever-panther relative isolate flex flex-col overflow-hidden rounded-[--radius] border border-border text-card-foreground shadow-[var(--jk-shadow-control)]\",\n        sizes[size],\n        className,\n      )}\n      data-animate={animate ? \"true\" : \"false\"}\n      data-size={size}\n      data-slot=\"clever-panther\"\n      data-tone={tone}\n      {...props}\n    >\n      <style href=\"jk-clever-panther\" precedence=\"default\">{`\n        .jk-clever-panther {\n          background: color-mix(in oklab, var(--jk-card) 88%, var(--jk-foreground) 12%);\n        }\n        .jk-clever-panther[data-tone=\"muted\"] {\n          background: color-mix(in oklab, var(--jk-muted) 70%, var(--jk-card) 30%);\n        }\n        .jk-clever-panther-spot {\n          background:\n            radial-gradient(\n              18rem 10rem at 12% -10%,\n              color-mix(in oklab, var(--jk-primary), transparent 78%),\n              transparent 58%\n            ),\n            radial-gradient(\n              1.1rem 1.1rem at 82% 18%,\n              color-mix(in oklab, var(--jk-foreground), transparent 88%),\n              transparent 70%\n            ),\n            radial-gradient(\n              0.7rem 0.7rem at 74% 28%,\n              color-mix(in oklab, var(--jk-foreground), transparent 90%),\n              transparent 68%\n            );\n        }\n        .jk-clever-panther-sheen {\n          background: linear-gradient(\n            115deg,\n            transparent 28%,\n            color-mix(in oklab, var(--jk-primary-foreground), transparent 78%) 46%,\n            transparent 62%\n          );\n          opacity: 0;\n          transform: translateX(-36%);\n        }\n        .jk-clever-panther-rim {\n          box-shadow: inset 0 1px 0 color-mix(in oklab, var(--jk-primary-foreground), transparent 82%);\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-clever-panther {\n            transition:\n              transform 220ms ease,\n              box-shadow 220ms ease;\n          }\n          .jk-clever-panther-sheen {\n            transition:\n              opacity 280ms ease,\n              transform 520ms cubic-bezier(0.22, 1, 0.36, 1);\n          }\n          .jk-clever-panther[data-animate=\"true\"]:hover,\n          .jk-clever-panther[data-animate=\"true\"]:focus-visible {\n            transform: translateY(-2px);\n            box-shadow:\n              var(--jk-shadow-control),\n              0 16px 32px color-mix(in oklab, var(--jk-foreground), transparent 88%);\n          }\n          .jk-clever-panther[data-animate=\"true\"]:hover .jk-clever-panther-sheen,\n          .jk-clever-panther[data-animate=\"true\"]:focus-visible .jk-clever-panther-sheen {\n            opacity: 1;\n            transform: translateX(18%);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-clever-panther,\n          .jk-clever-panther-sheen {\n            transition: none;\n            transform: none;\n          }\n          .jk-clever-panther-sheen {\n            opacity: 0.28;\n          }\n        }\n      `}</style>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-clever-panther-spot pointer-events-none absolute inset-0\"\n      />\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-clever-panther-sheen pointer-events-none absolute inset-0\"\n      />\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-clever-panther-rim pointer-events-none absolute inset-0 rounded-[inherit]\"\n      />\n      {children ?? (\n        <div className=\"relative z-10 flex flex-col gap-[inherit]\">\n          <p className=\"text-[0.7em] font-medium tracking-[0.16em] text-muted-foreground uppercase\">\n            {eyebrow}\n          </p>\n          <h3 className=\"text-[1.15em] leading-tight font-semibold tracking-tight\">\n            {title}\n          </h3>\n          <p className=\"text-[0.92em] leading-relaxed text-muted-foreground\">\n            {description}\n          </p>\n          {actionLabel ? (\n            <p className=\"pt-1 text-[0.85em] font-medium text-primary\">\n              {actionLabel}\n            </p>\n          ) : null}\n        </div>\n      )}\n    </article>\n  );\n}\n"
+    },
+    {
+      "path": "clever-panther/CleverPanther.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type CleverPantherSize = \"sm\" | \"md\" | \"lg\";\nexport type CleverPantherTone = \"ink\" | \"muted\";\n\nexport interface CleverPantherProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n  eyebrow?: string;\n  title?: string;\n  description?: string;\n  actionLabel?: string;\n  size?: CleverPantherSize;\n  tone?: CleverPantherTone;\n  /** Soft sheen on hover. Honors prefers-reduced-motion. */\n  animate?: boolean;\n}\n"
+    },
+    {
+      "path": "clever-panther/index.ts",
+      "type": "index",
+      "content": "export { CleverPanther } from \"./CleverPanther\";\nexport type * from \"./CleverPanther.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<CleverPanther {...cleverPantherMocks.default} />"
+    },
+    {
+      "name": "WithAction",
+      "code": "<div className=\"flex flex-wrap items-start gap-4 bg-background p-8\">\n      <CleverPanther {...cleverPantherMocks.muted} />\n      <CleverPanther {...cleverPantherMocks.default} />\n      <CleverPanther {...cleverPantherMocks.action} />\n    </div>"
+    }
+  ]
+}
