@@ -2285,7 +2285,7 @@
     "name": "stepper-vertical-inline",
     "displayName": "StepperVerticalInline",
     "category": "atoms",
-    "description": "Vertical progress stepper with a numbered rail and inline titles plus descriptions.",
+    "description": "Vertical stepper with numbered pill markers and inline titles plus descriptions.",
     "sectionCategory": "navigation",
     "purpose": "Shows where someone is in a short sequential flow without hiding the remaining steps.",
     "bestFor": [
@@ -2312,7 +2312,8 @@
       "indicator",
       "title",
       "description",
-      "connector"
+      "separator",
+      "caption"
     ],
     "capabilities": {
       "supportsImage": false,

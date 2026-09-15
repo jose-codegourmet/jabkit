@@ -1,35 +1,27 @@
 import type { StepperVerticalInlineProps } from "./StepperVerticalInline.types";
 
-const onboardingSteps = [
+const inlineSteps = [
   {
-    id: "account",
-    title: "Create account",
-    description: "Add your work email and choose a password for the workspace.",
+    title: "Step One",
+    description: "Desc for step one",
   },
   {
-    id: "profile",
-    title: "Set up profile",
-    description: "Write a short display name and pick the team you belong to.",
+    title: "Step Two",
+    description: "Desc for step two",
   },
   {
-    id: "billing",
-    title: "Add billing",
-    description: "Save a payment method so the workspace can issue invoices.",
-  },
-  {
-    id: "invite",
-    title: "Invite teammates",
-    description: "Send seats to the people who will review the first project.",
+    title: "Step Three",
+    description: "Desc for step three",
   },
 ] as const;
 
 export const stepperVerticalInlineMocks = {
   default: {
-    steps: onboardingSteps,
-    currentStep: 2,
+    defaultValue: 2,
+    steps: inlineSteps,
   },
   alternate: {
-    steps: onboardingSteps,
-    currentStep: 4,
+    defaultValue: 3,
+    steps: inlineSteps,
   },
 } satisfies Record<string, StepperVerticalInlineProps>;

@@ -1,101 +1,138 @@
+"use client";
+
+import { CheckIcon } from "lucide-react";
 // biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.
 import * as React from "react";
-import { CheckIcon } from "lucide-react";
+import { useState } from "react";
 import { cn } from "@/lib/cn";
 import type { StepperVerticalInlineProps } from "./StepperVerticalInline.types";
-
-function stepState(index: number, currentStep: number) {
-  const step = index + 1;
-  if (currentStep > step) return "complete" as const;
-  if (currentStep === step) return "current" as const;
-  return "upcoming" as const;
-}
 
 export function StepperVerticalInline({
   className,
   steps,
-  currentStep = 1,
-  onStepChange,
+  value,
+  defaultValue = 2,
+  onValueChange,
+  caption = "Vertical stepper with inline titles and descriptions",
   ...props
 }: StepperVerticalInlineProps) {
+  const [uncontrolled, setUncontrolled] = useState(defaultValue);
+  const activeStep = value ?? uncontrolled;
+
+  function setActiveStep(step: number) {
+    if (steps[step - 1]?.disabled) return;
+    if (value === undefined) setUncontrolled(step);
+    onValueChange?.(step);
+  }
+
   return (
-    <ol
-      className={cn("flex w-full max-w-md flex-col", className)}
+    <div
+      className={cn("min-w-[300px] space-y-8 text-center", className)}
       data-slot="stepper-vertical-inline"
       {...props}
     >
-      {steps.map((item, index) => {
-        const step = index + 1;
-        const state = stepState(index, currentStep);
-        const isLast = index === steps.length - 1;
-        const Indicator = onStepChange ? "button" : "span";
+      <div
+        className="group/stepper inline-flex w-full flex-col"
+        data-orientation="vertical"
+        data-slot="stepper-vertical-inline-list"
+      >
+        {steps.map((item, index) => {
+          const step = index + 1;
+          const state =
+            step < activeStep
+              ? "completed"
+              : activeStep === step
+                ? "active"
+                : "inactive";
+          const isLast = step === steps.length;
 
-        return (
-          <li
-            aria-current={state === "current" ? "step" : undefined}
-            className="flex gap-4"
-            data-slot="stepper-vertical-inline-item"
-            data-state={state}
-            key={item.id}
-          >
-            <div className="flex flex-col items-center">
-              <Indicator
-                aria-label={
-                  onStepChange
-                    ? `Go to ${item.title}, step ${step} of ${steps.length}`
-                    : undefined
-                }
+          return (
+            <div
+              className={cn(
+                "group/step relative flex items-start group-data-[orientation=vertical]/stepper:flex-col",
+                !isLast && "flex-1",
+              )}
+              data-slot="stepper-vertical-inline-item"
+              data-state={state}
+              key={`${item.title}-${step}`}
+            >
+              <button
+                aria-current={state === "active" ? "step" : undefined}
                 className={cn(
-                  "flex size-8 shrink-0 items-center justify-center rounded-full border-2 text-sm font-medium transition-[background-color,border-color,color,transform] duration-200 ease-out motion-reduce:transition-none",
-                  onStepChange &&
-                    "cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none active:scale-95 motion-reduce:active:scale-100",
-                  state === "upcoming" &&
-                    "border-border bg-background text-muted-foreground",
-                  state !== "upcoming" &&
-                    "border-primary bg-primary text-primary-foreground",
+                  "inline-flex items-start gap-3 rounded-full pb-12 outline-none last:pb-0",
+                  "focus-visible:z-10 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                  "disabled:pointer-events-none disabled:opacity-50",
                 )}
-                data-slot="stepper-vertical-inline-indicator"
-                {...(onStepChange
-                  ? { onClick: () => onStepChange(step), type: "button" as const }
-                  : {})}
+                data-slot="stepper-vertical-inline-trigger"
+                disabled={item.disabled}
+                onClick={() => setActiveStep(step)}
+                type="button"
               >
-                {state === "complete" ? (
-                  <CheckIcon aria-hidden="true" className="size-4" />
-                ) : (
-                  step
-                )}
-              </Indicator>
-              {isLast ? null : (
                 <span
+                  className={cn(
+                    "relative flex size-6 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground",
+                    "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
+                    "data-[state=completed]:bg-primary data-[state=completed]:text-primary-foreground",
+                  )}
+                  data-slot="stepper-vertical-inline-indicator"
+                  data-state={state}
+                >
+                  <span
+                    className={cn(
+                      "transition-all motion-reduce:transition-none",
+                      "group-data-[state=completed]/step:scale-0 group-data-[state=completed]/step:opacity-0",
+                    )}
+                  >
+                    {step}
+                  </span>
+                  <CheckIcon
+                    aria-hidden="true"
+                    className={cn(
+                      "absolute size-4 scale-0 opacity-0 transition-all motion-reduce:transition-none",
+                      "group-data-[state=completed]/step:scale-100 group-data-[state=completed]/step:opacity-100",
+                    )}
+                    size={16}
+                  />
+                </span>
+                <div className="mt-0.5 space-y-0.5 px-2 text-left">
+                  <h3
+                    className="text-sm font-medium"
+                    data-slot="stepper-vertical-inline-title"
+                  >
+                    {item.title}
+                  </h3>
+                  {item.description ? (
+                    <p
+                      className="text-sm text-muted-foreground"
+                      data-slot="stepper-vertical-inline-description"
+                    >
+                      {item.description}
+                    </p>
+                  ) : null}
+                </div>
+              </button>
+              {isLast ? null : (
+                <div
                   aria-hidden="true"
                   className={cn(
-                    "mt-2 w-px flex-1 min-h-6",
-                    currentStep > step ? "bg-primary" : "bg-border",
+                    "absolute inset-y-0 left-3 top-[calc(1.5rem+0.125rem)] -order-1 m-0 w-0.5 -translate-x-1/2 bg-muted",
+                    "group-data-[orientation=vertical]/stepper:h-[calc(100%-1.5rem-0.25rem)]",
+                    "group-data-[state=completed]/step:bg-primary",
                   )}
-                  data-slot="stepper-vertical-inline-connector"
+                  data-slot="stepper-vertical-inline-separator"
                 />
               )}
             </div>
-            <div className={cn("min-w-0 pt-1", !isLast && "pb-8")}>
-              <p
-                className={cn(
-                  "text-sm font-medium leading-5",
-                  state === "upcoming"
-                    ? "text-muted-foreground"
-                    : "text-foreground",
-                )}
-              >
-                {item.title}
-              </p>
-              {item.description ? (
-                <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                  {item.description}
-                </p>
-              ) : null}
-            </div>
-          </li>
-        );
-      })}
-    </ol>
+          );
+        })}
+      </div>
+      <p
+        aria-live="polite"
+        className="mt-2 text-xs text-muted-foreground"
+        role="region"
+      >
+        {caption}
+      </p>
+    </div>
   );
 }
