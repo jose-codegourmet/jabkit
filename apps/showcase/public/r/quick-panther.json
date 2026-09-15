@@ -1,0 +1,98 @@
+{
+  "name": "quick-panther",
+  "displayName": "QuickPanther",
+  "version": "1.0.0",
+  "addedAt": "2026-09-15",
+  "description": "Vertical subscription radio list with a glowing selected row and high-contrast plan details.",
+  "sectionCategory": "form",
+  "purpose": "Lets someone compare and pick one plan or billing option without leaving a compact, scannable stack.",
+  "bestFor": [
+    "pricing plan pickers",
+    "billing cycle radios",
+    "single-choice subscription settings"
+  ],
+  "avoidFor": [
+    "multi-select add-ons",
+    "long surveys with many radios",
+    "binary on or off toggles"
+  ],
+  "tone": [
+    "professional",
+    "clean"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "legend",
+    "description",
+    "optionTitle",
+    "optionDescription",
+    "price"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "radio",
+    "subscription",
+    "pricing",
+    "form",
+    "glow",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center",
+    "width": 420,
+    "height": 360
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "quick-panther/QuickPanther.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\n// biome-ignore lint/correctness/noUnusedImports: packages/ui uses the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { QuickPantherOption, QuickPantherProps } from \"./QuickPanther.types\";\n\nconst DEFAULT_OPTIONS: readonly QuickPantherOption[] = [\n  {\n    value: \"starter\",\n    title: \"Starter\",\n    description: \"Solo projects and weekend experiments.\",\n    price: \"$9\",\n  },\n  {\n    value: \"pro\",\n    title: \"Pro\",\n    description: \"Shared workspaces with priority support.\",\n    price: \"$24\",\n  },\n  {\n    value: \"studio\",\n    title: \"Studio\",\n    description: \"Unlimited seats and custom reviews.\",\n    price: \"$64\",\n  },\n];\n\nexport function QuickPanther({\n  className,\n  options = DEFAULT_OPTIONS,\n  value,\n  defaultValue,\n  name,\n  onValueChange,\n  legend = \"Choose a plan\",\n  description,\n  disabled = false,\n  ...props\n}: QuickPantherProps) {\n  const generatedName = React.useId();\n  const headingId = React.useId();\n  const descriptionId = React.useId();\n  const groupName = name ?? generatedName;\n  const fallback = defaultValue ?? options[0]?.value ?? \"\";\n  const [uncontrolled, setUncontrolled] = React.useState(fallback);\n  const selected = value ?? uncontrolled;\n\n  const commit = (next: string) => {\n    if (value === undefined) setUncontrolled(next);\n    onValueChange?.(next);\n  };\n\n  return (\n    <fieldset\n      aria-describedby={description ? descriptionId : undefined}\n      className={cn(\n        \"jk-quick-panther w-full max-w-[22rem] rounded-[--radius] border border-border bg-card p-2 text-card-foreground\",\n        className,\n      )}\n      data-slot=\"quick-panther\"\n      disabled={disabled}\n      {...props}\n    >\n      <style href=\"jk-quick-panther\" precedence=\"default\">{`\n        .jk-quick-panther-option {\n          box-shadow: inset 0 0 0 1px transparent;\n        }\n        .jk-quick-panther-option:hover {\n          background: color-mix(in oklch, var(--jk-accent) 72%, transparent);\n        }\n        .jk-quick-panther-option[data-checked=\"true\"] {\n          background: color-mix(in oklch, var(--jk-primary) 14%, var(--jk-card));\n          box-shadow:\n            inset 0 0 0 1px color-mix(in oklch, var(--jk-primary) 70%, var(--jk-border)),\n            0 0 22px color-mix(in oklch, var(--jk-ring) 38%, transparent);\n        }\n        .jk-quick-panther-dot {\n          box-shadow: inset 0 0 0 1.5px var(--jk-input);\n        }\n        .jk-quick-panther-option[data-checked=\"true\"] .jk-quick-panther-dot {\n          background: var(--jk-primary);\n          box-shadow:\n            inset 0 0 0 2px var(--jk-card),\n            0 0 0 2px var(--jk-primary),\n            0 0 16px color-mix(in oklch, var(--jk-ring) 55%, transparent);\n        }\n        .jk-quick-panther-option:has(:focus-visible) {\n          outline: 2px solid var(--jk-ring);\n          outline-offset: 2px;\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-quick-panther-option,\n          .jk-quick-panther-dot {\n            transition:\n              background-color 220ms ease,\n              box-shadow 220ms ease,\n              transform 180ms ease;\n          }\n          .jk-quick-panther-option[data-checked=\"true\"] {\n            transform: translateY(-1px);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-quick-panther-option,\n          .jk-quick-panther-dot {\n            transition: none;\n          }\n        }\n      `}</style>\n      <legend\n        className=\"px-2 pt-1 text-sm font-semibold tracking-tight text-foreground\"\n        id={headingId}\n      >\n        {legend}\n      </legend>\n      {description ? (\n        <p\n          className=\"px-2 pb-2 text-xs text-muted-foreground\"\n          id={descriptionId}\n        >\n          {description}\n        </p>\n      ) : null}\n      <div className=\"flex flex-col gap-1.5\" role=\"presentation\">\n        {options.map((option) => {\n          const checked = option.value === selected;\n          const optionDisabled = disabled || option.disabled;\n          return (\n            <label\n              className={cn(\n                \"jk-quick-panther-option relative flex cursor-pointer items-start gap-3 rounded-[calc(var(--radius)-2px)] px-3 py-2.5\",\n                optionDisabled && \"pointer-events-none opacity-50\",\n              )}\n              data-checked={checked ? \"true\" : \"false\"}\n              key={option.value}\n            >\n              <input\n                checked={checked}\n                className=\"sr-only\"\n                disabled={optionDisabled}\n                name={groupName}\n                onChange={() => commit(option.value)}\n                type=\"radio\"\n                value={option.value}\n              />\n              <span\n                aria-hidden=\"true\"\n                className=\"jk-quick-panther-dot mt-0.5 size-4 shrink-0 rounded-full bg-background\"\n              />\n              <span className=\"min-w-0 flex-1\">\n                <span className=\"flex items-baseline justify-between gap-3\">\n                  <span className=\"text-sm font-medium text-foreground\">\n                    {option.title}\n                  </span>\n                  {option.price ? (\n                    <span className=\"shrink-0 text-sm font-semibold tabular-nums text-foreground\">\n                      {option.price}\n                    </span>\n                  ) : null}\n                </span>\n                {option.description ? (\n                  <span className=\"mt-0.5 block text-xs leading-relaxed text-muted-foreground\">\n                    {option.description}\n                  </span>\n                ) : null}\n              </span>\n            </label>\n          );\n        })}\n      </div>\n    </fieldset>\n  );\n}\n"
+    },
+    {
+      "path": "quick-panther/QuickPanther.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface QuickPantherOption {\n  value: string;\n  title: string;\n  description?: string;\n  price?: string;\n  disabled?: boolean;\n}\n\nexport interface QuickPantherProps\n  extends Omit<HTMLAttributes<HTMLFieldSetElement>, \"defaultValue\" | \"onChange\"> {\n  options?: readonly QuickPantherOption[];\n  value?: string;\n  defaultValue?: string;\n  name?: string;\n  onValueChange?: (value: string) => void;\n  legend?: string;\n  description?: string;\n  disabled?: boolean;\n}\n"
+    },
+    {
+      "path": "quick-panther/index.ts",
+      "type": "index",
+      "content": "export { QuickPanther } from \"./QuickPanther\";\nexport type * from \"./QuickPanther.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background p-6 text-foreground\">\n      <QuickPanther {...quickPantherMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background p-6 text-foreground\">\n      <QuickPanther {...quickPantherMocks.alternate} />\n    </div>"
+    }
+  ]
+}
