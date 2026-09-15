@@ -10,6 +10,7 @@ export default {
       <SoftPanda {...softPandaMocks.compact} />
       <SoftPanda {...softPandaMocks.muted} />
       <SoftPanda {...softPandaMocks.chart} />
+      <SoftPanda {...softPandaMocks.live} />
     </div>
   ),
 };

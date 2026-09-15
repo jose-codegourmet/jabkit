@@ -4,109 +4,112 @@ import { cn } from "@/lib/cn";
 import type { SoftPandaProps } from "./SoftPanda.types";
 
 const frameSizes = {
-  sm: "h-24 w-36",
-  md: "h-40 w-64",
-  lg: "h-56 w-80",
+  sm: "size-36",
+  md: "size-56",
+  lg: "size-72",
 } as const;
 
-const cellSizes = {
-  sm: "2.25rem",
-  md: "3.5rem",
-  lg: "4.5rem",
+const cells = {
+  sm: { size: "3.75rem", shift: "5.625rem" },
+  md: { size: "5.625rem", shift: "8.4375rem" },
+  lg: { size: "7.5rem", shift: "11.25rem" },
 } as const;
 
 const tones = {
   default: {
-    a: "var(--jk-accent)",
-    b: "var(--jk-foreground)",
+    ink: "color-mix(in oklab, var(--jk-foreground) 92%, var(--jk-primary))",
+    tile: "color-mix(in oklab, var(--jk-warning) 68%, var(--jk-background))",
   },
   muted: {
-    a: "var(--jk-muted)",
-    b: "var(--jk-muted-foreground)",
+    ink: "var(--jk-muted-foreground)",
+    tile: "var(--jk-muted)",
   },
   chart: {
-    a: "var(--jk-chart-4)",
-    b: "var(--jk-chart-2)",
+    ink: "var(--jk-chart-2)",
+    tile: "var(--jk-chart-4)",
   },
 } as const;
 
 export function SoftPanda({
   className,
   children,
-  label = "Decorative mosaic",
+  label = "Dual-tone mosaic",
   size = "md",
   tone = "default",
-  animate = true,
+  animate = false,
+  style,
   ...props
 }: SoftPandaProps) {
   const pair = tones[tone];
+  const grain = cells[size];
 
   return (
     <div
       aria-label={children ? undefined : label}
       className={cn(
-        "jk-soft-panda relative overflow-hidden rounded-[--radius] border border-border",
+        "jk-soft-panda relative overflow-hidden rounded-none",
         !children && frameSizes[size],
-        children && "min-h-40 w-full",
+        children && "min-h-56 w-full",
+        animate && "jk-soft-panda-live",
         className,
       )}
-      data-animate={animate ? "true" : "false"}
       data-size={size}
       data-slot="soft-panda"
       data-tone={tone}
       role={children ? undefined : "img"}
       style={
         {
-          "--jk-soft-panda-a": pair.a,
-          "--jk-soft-panda-b": pair.b,
-          "--jk-soft-panda-cell": cellSizes[size],
+          "--jk-soft-panda-ink": pair.ink,
+          "--jk-soft-panda-tile": pair.tile,
+          "--jk-soft-panda-cell": grain.size,
+          "--jk-soft-panda-shift": grain.shift,
+          ...style,
         } as React.CSSProperties
       }
       {...props}
     >
       <style href="jk-soft-panda" precedence="default">{`
-        .jk-soft-panda-field {
-          background-color: var(--jk-soft-panda-b);
+        .jk-soft-panda {
+          border-radius: 0;
           background-image:
             linear-gradient(
               45deg,
-              var(--jk-soft-panda-a) 0 25%,
-              transparent 25% 75%,
-              var(--jk-soft-panda-a) 75% 100%
+              var(--jk-soft-panda-tile) 25%,
+              transparent 25%,
+              transparent 75%,
+              var(--jk-soft-panda-tile) 75%,
+              var(--jk-soft-panda-tile)
             ),
             linear-gradient(
               135deg,
-              var(--jk-soft-panda-a) 0 25%,
-              var(--jk-soft-panda-b) 25% 75%,
-              var(--jk-soft-panda-a) 75% 100%
+              var(--jk-soft-panda-tile) 25%,
+              var(--jk-soft-panda-ink) 25%,
+              var(--jk-soft-panda-ink) 75%,
+              var(--jk-soft-panda-tile) 75%,
+              var(--jk-soft-panda-tile)
             );
-          background-size:
-            var(--jk-soft-panda-cell) var(--jk-soft-panda-cell),
-            var(--jk-soft-panda-cell) var(--jk-soft-panda-cell);
-          background-position: 0 0, calc(var(--jk-soft-panda-cell) * 0.5) calc(var(--jk-soft-panda-cell) * 0.5);
+          background-position: 0 0, var(--jk-soft-panda-shift) var(--jk-soft-panda-shift);
+          background-size: var(--jk-soft-panda-cell) var(--jk-soft-panda-cell);
         }
         @keyframes jk-soft-panda-drift {
           to {
             background-position:
               var(--jk-soft-panda-cell) var(--jk-soft-panda-cell),
-              calc(var(--jk-soft-panda-cell) * 1.5) calc(var(--jk-soft-panda-cell) * 1.5);
+              calc(var(--jk-soft-panda-shift) + var(--jk-soft-panda-cell))
+                calc(var(--jk-soft-panda-shift) + var(--jk-soft-panda-cell));
           }
         }
         @media (prefers-reduced-motion: no-preference) {
-          .jk-soft-panda[data-animate="true"] .jk-soft-panda-field {
+          .jk-soft-panda-live {
             animation: jk-soft-panda-drift 18s linear infinite;
           }
         }
         @media (prefers-reduced-motion: reduce) {
-          .jk-soft-panda-field {
+          .jk-soft-panda-live {
             animation: none;
           }
         }
       `}</style>
-      <span
-        aria-hidden="true"
-        className="jk-soft-panda-field pointer-events-none absolute inset-0"
-      />
       {children ? (
         <div className="relative z-10 p-6 text-card-foreground">{children}</div>
       ) : null}
