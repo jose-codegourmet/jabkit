@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "horrible-shrimp",
   displayName: "HorribleShrimp",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-15",
   description:
-    "A compact settings switch with a hard-outline track and a lifted circular thumb that slides when on.",
+    "A compact outlined switch with a 1em pill track and a circular thumb that lifts on hover and slides when on.",
   sectionCategory: "form",
   purpose:
-    "Toggles a persistent on or off preference with a tactile, outlined control that stays readable in light and dark.",
+    "Toggles a persistent on or off preference with a tactile, hard-outline control that stays readable in light and dark.",
   bestFor: [
     "settings rows that need a visible on and off state",
     "notification or feature flags in compact forms",
