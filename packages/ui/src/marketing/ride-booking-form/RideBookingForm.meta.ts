@@ -1,0 +1,63 @@
+import type { ComponentMeta } from "@jabkit/build-registry";
+
+export default {
+  name: "ride-booking-form",
+  displayName: "RideBookingForm",
+  version: "1.0.0",
+  addedAt: "2026-09-15",
+  description:
+    "Marketing booking card with a city photo, pickup and dropoff fields, date and time, and a search CTA.",
+  sectionCategory: "form",
+  purpose:
+    "Lets a mobility landing page collect a ride request without sending visitors into a full app checkout.",
+  bestFor: [
+    "taxi and rideshare landing pages",
+    "airport transfer campaigns",
+    "scheduled fleet booking",
+  ],
+  avoidFor: [
+    "multi-step checkout with payment",
+    "live map dispatch consoles",
+  ],
+  tone: ["clean", "professional", "confident"],
+  industries: ["transportation", "travel", "mobility"],
+  contentDensity: "medium",
+  visualWeight: "high",
+  layout: {
+    type: "card",
+    alignment: "center",
+    columns: 1,
+  },
+  slots: [
+    "cityMedia",
+    "headline",
+    "description",
+    "pickupField",
+    "dropoffField",
+    "dateField",
+    "timeField",
+    "searchCTA",
+  ],
+  capabilities: {
+    supportsImage: true,
+    supportsVideo: false,
+    supportsForm: true,
+    supportsCTA: true,
+    supportsDarkMode: true,
+  },
+  recommendedAfter: ["hero", "features"],
+  recommendedBefore: ["testimonials", "cta"],
+  tags: [
+    "ride",
+    "booking",
+    "form",
+    "marketing",
+    "mobility",
+    "taxi",
+    "conversion",
+  ],
+  dependencies: ["lucide-react"],
+  registryDependencies: ["button", "input", "label"],
+  a11y: { keyboardNav: true, reducedMotion: true },
+  preview: { layout: "fit", width: 1440, height: 900 },
+} satisfies ComponentMeta;
