@@ -3861,13 +3861,14 @@
     "name": "cloud-shader",
     "displayName": "CloudShader",
     "category": "marketing",
-    "description": "Full-bleed marketing hero with a token-tinted procedural cloud field, pill CTAs, and either a SaaS ledger preview or a plane-window seat.",
-    "sectionCategory": "hero",
-    "purpose": "Opens a landing page with drifting sky atmosphere while keeping a clear offer, navigation, and conversion path on top of the field.",
+    "description": "Soft procedural clouds that drift across a sky. Tune speed, count, and colors, then draw any content above the field.",
+    "inspoUrl": "https://ui.aceternity.com/components/cloud-shader",
+    "sectionCategory": "background",
+    "purpose": "Gives a landing page or hero a living sky without shipping image assets, while leaving the offer and chrome to the consumer.",
     "bestFor": [
-      "fintech and travel landing heroes",
-      "campaign openers that need living weather",
-      "product launches that lead with atmosphere"
+      "travel and fintech heroes",
+      "campaign openers that need weather",
+      "full-bleed backgrounds behind marketing copy"
     ],
     "avoidFor": [
       "dense application screens",
@@ -3883,26 +3884,20 @@
       "travel",
       "saas"
     ],
-    "contentDensity": "medium",
+    "contentDensity": "low",
     "visualWeight": "high",
     "layout": {
-      "type": "overlay",
+      "type": "full-width",
       "alignment": "center"
     },
     "slots": [
-      "brand",
-      "navigation",
-      "headline",
-      "description",
-      "primaryCTA",
-      "dashboardPreview",
-      "socialProof"
+      "children"
     ],
     "capabilities": {
-      "supportsImage": true,
+      "supportsImage": false,
       "supportsVideo": false,
       "supportsForm": false,
-      "supportsCTA": true,
+      "supportsCTA": false,
       "supportsDarkMode": true
     },
     "recommendedAfter": [
@@ -3914,13 +3909,12 @@
       "cta"
     ],
     "tags": [
-      "hero",
+      "background",
       "marketing",
       "shader",
       "canvas",
       "clouds",
-      "cta",
-      "landing",
+      "sky",
       "webgl"
     ],
     "addedAt": "2026-09-16",
@@ -3929,7 +3923,7 @@
       "tailwind-merge"
     ],
     "a11y": {
-      "keyboardNav": true,
+      "keyboardNav": false,
       "reducedMotion": true
     },
     "preview": {

@@ -2163,7 +2163,7 @@
       ]
     },
     "cloud-shader": {
-      "sourceHash": "b8744d3a149e2044ef3c75c23c7607de2d987fea41de3ecb5380574e6df4a374",
+      "sourceHash": "8c75a5d5b028cec47c4c0aba4857ac3e190403f6d0b8415db9c48431ba559691",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2178,16 +2178,16 @@
           "story": "Default",
           "theme": "dark",
           "file": "cloud-shader.Default.dark.webp",
-          "bytes": 11110,
+          "bytes": 21368,
           "width": 960,
-          "height": 605,
+          "height": 609,
           "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
           "file": "cloud-shader.Variants.dark.webp",
-          "bytes": 9892,
+          "bytes": 12832,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -2196,9 +2196,9 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "cloud-shader.ThemeComparison.dark.webp",
-          "bytes": 17524,
+          "bytes": 11468,
           "width": 960,
-          "height": 626,
+          "height": 600,
           "format": "webp"
         }
       ]
