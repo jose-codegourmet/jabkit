@@ -1,0 +1,102 @@
+{
+  "name": "letter-cascade",
+  "displayName": "LetterCascade",
+  "version": "1.0.0",
+  "addedAt": "2026-09-16",
+  "description": "A 3D split-flap word where each glyph tilts back while its echo flips up in a staggered spring wave.",
+  "sectionCategory": "content",
+  "purpose": "Adds a kinetic wordmark or hover label when a line of text should feel mechanical and dimensional without leaving the token set.",
+  "bestFor": [
+    "interactive headlines and wordmarks",
+    "hover or click micro-copy on marketing heroes",
+    "demo labels that need a split-flap cascade"
+  ],
+  "avoidFor": [
+    "long body copy or paragraphs",
+    "critical form labels that must stay still"
+  ],
+  "tone": [
+    "playful",
+    "expressive"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "inline",
+    "alignment": "center"
+  },
+  "slots": [
+    "text"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "tags": [
+    "text",
+    "animation",
+    "split-flap",
+    "hover",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "letter-cascade/LetterCascade.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  LetterCascadeProps,\n  LetterCascadeStaggerFrom,\n} from \"./LetterCascade.types\";\n\nconst REST_FRONT = { rotateX: 0, y: 0, opacity: 1, scale: 1, blur: 0 };\nconst REST_ECHO = { rotateX: -90, y: 6, opacity: 0, scale: 0.8, blur: 4 };\n\nfunction staggerUnits(\n  index: number,\n  count: number,\n  from: LetterCascadeStaggerFrom,\n) {\n  if (count <= 1) return 0;\n  if (from === \"first\") return index;\n  if (from === \"last\") return count - 1 - index;\n  if (from === \"center\") return Math.abs(index - (count - 1) / 2);\n  return Math.abs(index - from);\n}\n\nfunction writeFace(\n  node: HTMLElement | null,\n  pose: {\n    rotateX: number;\n    y: number;\n    opacity: number;\n    scale: number;\n    blur: number;\n  },\n) {\n  if (!node) return;\n  node.style.transform = `translateY(${pose.y}px) rotateX(${pose.rotateX}deg) scale(${pose.scale})`;\n  node.style.opacity = String(pose.opacity);\n  node.style.filter = pose.blur > 0.02 ? `blur(${pose.blur}px)` : \"none\";\n}\n\nfunction writeProgress(\n  front: HTMLElement | null,\n  echo: HTMLElement | null,\n  progress: number,\n) {\n  const t = Math.min(1, Math.max(0, progress));\n  writeFace(front, {\n    rotateX: 90 * t,\n    y: -6 * t,\n    opacity: 1 - t,\n    scale: 1,\n    blur: 4 * t,\n  });\n  writeFace(echo, {\n    rotateX: -90 * (1 - t),\n    y: 6 * (1 - t),\n    opacity: t,\n    scale: 0.8 + 0.2 * t,\n    blur: 4 * (1 - t),\n  });\n}\n\nfunction prefersReducedMotion() {\n  if (typeof window === \"undefined\") return false;\n  return window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;\n}\n\nexport function LetterCascade({\n  text,\n  className,\n  letterClassName,\n  staggerDuration = 0.04,\n  staggerFrom = \"first\",\n  stiffness = 220,\n  damping = 16,\n  triggerOnClick = false,\n  onComplete,\n  type = \"button\",\n  onClick,\n  onPointerEnter,\n  ...props\n}: LetterCascadeProps) {\n  const rootRef = React.useRef<HTMLButtonElement>(null);\n  const frameRef = React.useRef(0);\n  const blockedRef = React.useRef(false);\n  const onCompleteRef = React.useRef(onComplete);\n  const letters = Array.from(text);\n\n  React.useEffect(() => {\n    onCompleteRef.current = onComplete;\n  }, [onComplete]);\n\n  React.useEffect(() => {\n    return () => {\n      if (frameRef.current) cancelAnimationFrame(frameRef.current);\n    };\n  }, []);\n\n  const play = React.useCallback(() => {\n    const root = rootRef.current;\n    if (!root || blockedRef.current || letters.length === 0) return;\n\n    if (prefersReducedMotion()) {\n      onCompleteRef.current?.();\n      return;\n    }\n\n    const cells = Array.from(\n      root.querySelectorAll<HTMLElement>(\"[data-slot='letter-cascade-cell']\"),\n    );\n    if (cells.length === 0) return;\n\n    blockedRef.current = true;\n\n    const springs = cells.map((cell, index) => ({\n      front: cell.querySelector<HTMLElement>(\"[data-face='front']\"),\n      echo: cell.querySelector<HTMLElement>(\"[data-face='echo']\"),\n      delay: staggerUnits(index, cells.length, staggerFrom) * staggerDuration,\n      value: 0,\n      velocity: 0,\n    }));\n\n    const startedAt = performance.now();\n    let lastTime: number | undefined;\n\n    const tick = (now: number) => {\n      const elapsed = (now - startedAt) / 1000;\n      const dt =\n        lastTime == null\n          ? 1 / 60\n          : Math.min(1 / 30, Math.max(1 / 120, (now - lastTime) / 1000));\n      lastTime = now;\n\n      let allSettled = true;\n\n      for (const spring of springs) {\n        if (elapsed < spring.delay) {\n          allSettled = false;\n          continue;\n        }\n        const force =\n          -stiffness * (spring.value - 1) - damping * spring.velocity;\n        spring.velocity += force * dt;\n        spring.value += spring.velocity * dt;\n\n        if (\n          Math.abs(spring.value - 1) < 0.004 &&\n          Math.abs(spring.velocity) < 0.04\n        ) {\n          spring.value = 1;\n          spring.velocity = 0;\n        } else {\n          allSettled = false;\n        }\n\n        writeProgress(spring.front, spring.echo, spring.value);\n      }\n\n      if (!allSettled) {\n        frameRef.current = requestAnimationFrame(tick);\n        return;\n      }\n\n      for (const spring of springs) {\n        writeFace(spring.front, REST_FRONT);\n        writeFace(spring.echo, REST_ECHO);\n      }\n      blockedRef.current = false;\n      onCompleteRef.current?.();\n    };\n\n    frameRef.current = requestAnimationFrame(tick);\n  }, [damping, letters.length, staggerDuration, staggerFrom, stiffness]);\n\n  return (\n    <button\n      aria-label={text}\n      className={cn(\n        \"jk-letter-cascade inline-flex cursor-pointer items-center justify-center border-0 bg-transparent p-0 font-inherit text-foreground select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        className,\n      )}\n      data-slot=\"letter-cascade\"\n      ref={rootRef}\n      type={type}\n      {...props}\n      onClick={(event) => {\n        onClick?.(event);\n        if (triggerOnClick && !event.defaultPrevented) play();\n      }}\n      onPointerEnter={(event) => {\n        onPointerEnter?.(event);\n        if (!triggerOnClick) play();\n      }}\n    >\n      <style href=\"jk-letter-cascade\" precedence=\"default\">{`\n        .jk-letter-cascade-cell {\n          perspective: 500px;\n          transform-style: preserve-3d;\n        }\n        .jk-letter-cascade-face {\n          backface-visibility: hidden;\n          will-change: transform, opacity, filter;\n        }\n        .jk-letter-cascade-front {\n          transform-origin: bottom center;\n        }\n        .jk-letter-cascade-echo {\n          transform-origin: top center;\n          transform: translateY(6px) rotateX(-90deg) scale(0.8);\n          opacity: 0;\n          filter: blur(4px);\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-letter-cascade-face {\n            transform: none !important;\n            filter: none !important;\n            opacity: 1 !important;\n          }\n          .jk-letter-cascade-echo {\n            display: none;\n          }\n        }\n      `}</style>\n      <span aria-hidden=\"true\" className=\"inline-flex items-center\">\n        {letters.map((letter, index) => (\n          <span\n            className=\"jk-letter-cascade-cell relative inline-flex whitespace-pre\"\n            data-slot=\"letter-cascade-cell\"\n            // Glyph order is the animation sequence; duplicate characters are expected.\n            // biome-ignore lint/suspicious/noArrayIndexKey: stable flap cells\n            key={`${letter}-${index}`}\n          >\n            <span\n              className={cn(\n                \"jk-letter-cascade-face jk-letter-cascade-front inline-block\",\n                letterClassName,\n              )}\n              data-face=\"front\"\n            >\n              {letter}\n            </span>\n            <span\n              className={cn(\n                \"jk-letter-cascade-face jk-letter-cascade-echo absolute inset-0 inline-block\",\n                letterClassName,\n              )}\n              data-face=\"echo\"\n            >\n              {letter}\n            </span>\n          </span>\n        ))}\n      </span>\n    </button>\n  );\n}\n"
+    },
+    {
+      "path": "letter-cascade/LetterCascade.types.ts",
+      "type": "types",
+      "content": "import type { ButtonHTMLAttributes } from \"react\";\n\nexport type LetterCascadeStaggerFrom = \"first\" | \"last\" | \"center\" | number;\n\nexport interface LetterCascadeProps\n  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, \"children\"> {\n  /** Text that splits into per-glyph flap faces. */\n  text: string;\n  /** Classes applied to each front and echo glyph. */\n  letterClassName?: string;\n  /** Seconds between each letter's spring start. */\n  staggerDuration?: number;\n  /** Origin of the stagger wave. */\n  staggerFrom?: LetterCascadeStaggerFrom;\n  /** Spring stiffness — higher values settle faster. */\n  stiffness?: number;\n  /** Spring damping — lower values bounce more. */\n  damping?: number;\n  /** Play the cascade on click instead of pointer enter. */\n  triggerOnClick?: boolean;\n  /** Fires after the flap cycle finishes and faces reset. */\n  onComplete?: () => void;\n}\n"
+    },
+    {
+      "path": "letter-cascade/index.ts",
+      "type": "index",
+      "content": "export { LetterCascade } from \"./LetterCascade\";\nexport type {\n  LetterCascadeProps,\n  LetterCascadeStaggerFrom,\n} from \"./LetterCascade.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background p-8 text-foreground\">\n      <LetterCascade {...letterCascadeMocks.default} />\n    </div>"
+    },
+    {
+      "name": "CenterWave",
+      "code": "<div className=\"bg-background p-8 text-foreground\">\n      <LetterCascade {...letterCascadeMocks.centerWave} />\n    </div>"
+    },
+    {
+      "name": "ExtraBouncy",
+      "code": "<div className=\"bg-background p-8 text-foreground\">\n      <LetterCascade {...letterCascadeMocks.extraBouncy} />\n    </div>"
+    },
+    {
+      "name": "ClickTrigger",
+      "code": "<div className=\"bg-background p-8 text-foreground\">\n      <LetterCascade {...letterCascadeMocks.clickTrigger} />\n    </div>"
+    },
+    {
+      "name": "Snappy",
+      "code": "<div className=\"bg-background p-8 text-foreground\">\n      <LetterCascade {...letterCascadeMocks.snappy} />\n    </div>"
+    }
+  ]
+}
