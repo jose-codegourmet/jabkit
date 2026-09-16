@@ -70,7 +70,7 @@
     {
       "path": "shy-rattlesnake/ShyRattlesnake.types.ts",
       "type": "types",
-      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport interface ShyRattlesnakeDetail {\n  label: string;\n  value: string;\n}\n\nexport interface ShyRattlesnakeProps extends HTMLAttributes<HTMLElement> {\n  brand?: string;\n  badge?: string;\n  title?: ReactNode;\n  subtitle?: string;\n  details?: readonly ShyRattlesnakeDetail[];\n  barcode?: string;\n  seatLabel?: string;\n  seat?: string;\n  animate?: boolean;\n}\n"
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport interface ShyRattlesnakeDetail {\n  label: string;\n  value: string;\n}\n\nexport interface ShyRattlesnakeProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  brand?: string;\n  badge?: string;\n  title?: ReactNode;\n  subtitle?: string;\n  details?: readonly ShyRattlesnakeDetail[];\n  barcode?: string;\n  seatLabel?: string;\n  seat?: string;\n  animate?: boolean;\n}\n"
     },
     {
       "path": "shy-rattlesnake/index.ts",

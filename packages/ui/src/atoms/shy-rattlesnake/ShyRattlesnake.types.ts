@@ -5,7 +5,8 @@ export interface ShyRattlesnakeDetail {
   value: string;
 }
 
-export interface ShyRattlesnakeProps extends HTMLAttributes<HTMLElement> {
+export interface ShyRattlesnakeProps
+  extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   brand?: string;
   badge?: string;
   title?: ReactNode;
