@@ -1,0 +1,115 @@
+{
+  "name": "orbit-card-stack",
+  "displayName": "OrbitCardStack",
+  "version": "1.0.0",
+  "addedAt": "2026-09-16",
+  "description": "Collapsed profile deck that fans into an orbit on hover, then lifts the active card without changing its color or angle.",
+  "sectionCategory": "team",
+  "purpose": "Lets a landing introduce a small studio or product team as a tactile stacked deck instead of a flat grid.",
+  "bestFor": [
+    "studio about pages",
+    "small product-team introductions",
+    "campaign landings that need one featured profile at a time"
+  ],
+  "avoidFor": [
+    "large directories that need search or filters",
+    "dashboards where hover fan-out would fight the task",
+    "pages that must show every biography at once"
+  ],
+  "tone": [
+    "editorial",
+    "confident",
+    "modern"
+  ],
+  "industries": [
+    "media",
+    "design",
+    "saas"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "high",
+  "layout": {
+    "type": "stack",
+    "alignment": "center",
+    "columns": 5
+  },
+  "slots": [
+    "caption",
+    "portraits",
+    "roles",
+    "bios"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "about"
+  ],
+  "recommendedBefore": [
+    "testimonials",
+    "cta"
+  ],
+  "tags": [
+    "team",
+    "cards",
+    "stack",
+    "orbit",
+    "hover",
+    "portraits",
+    "marketing"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "orbit-card-stack/OrbitCardStack.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ArrowUpRightIcon } from \"lucide-react\";\n// biome-ignore lint/correctness/noUnusedImports: packages/ui uses the classic JSX runtime.\nimport * as React from \"react\";\nimport {\n  type CSSProperties,\n  type FocusEvent,\n  useMemo,\n  useRef,\n  useState,\n  useSyncExternalStore,\n} from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport { orbitCardStackItems } from \"./OrbitCardStack.mocks\";\nimport type {\n  OrbitCardStackAccent,\n  OrbitCardStackItem,\n  OrbitCardStackProps,\n} from \"./OrbitCardStack.types\";\n\nconst OPEN_ARC = 8.5;\nconst CLOSED_ARC = 2.8;\nconst OPEN_DROP = 30;\nconst OPEN_DROP_TAIL = 10;\nconst CLOSED_SLIDE = 10;\nconst CLOSED_DROP = 5;\nconst OPEN_SCALE = 0.985;\nconst CLOSED_SCALE = 0.97;\nconst MOTION_MS = 420;\n\nconst ACCENT_WASH: Record<OrbitCardStackAccent, string> = {\n  primary: \"bg-primary/30\",\n  secondary: \"bg-secondary\",\n  accent: \"bg-accent\",\n  muted: \"bg-muted\",\n  warning: \"bg-warning/35\",\n  success: \"bg-success/30\",\n  destructive: \"bg-destructive/25\",\n};\n\nfunction clampIndex(index: number, length: number) {\n  return Math.min(Math.max(0, index), Math.max(0, length - 1));\n}\n\nfunction initialsFor(item: OrbitCardStackItem) {\n  if (item.initials) return item.initials;\n  return item.name\n    .split(/\\s+/)\n    .map((part) => part.at(0))\n    .join(\"\")\n    .slice(0, 2)\n    .toUpperCase();\n}\n\nfunction subscribeReducedMotion(onChange: () => void) {\n  const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n  media.addEventListener(\"change\", onChange);\n  return () => media.removeEventListener(\"change\", onChange);\n}\n\nfunction getReducedMotion() {\n  return window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;\n}\n\nfunction usePrefersReducedMotion() {\n  return useSyncExternalStore(\n    subscribeReducedMotion,\n    getReducedMotion,\n    () => false,\n  );\n}\n\nfunction Portrait({ item }: { item: OrbitCardStackItem }) {\n  const initials = initialsFor(item);\n  const wash = ACCENT_WASH[item.accent ?? \"muted\"];\n\n  return (\n    <div\n      className={cn(\n        \"relative flex aspect-[1.36] w-full overflow-hidden rounded-[1.45rem] border border-border bg-muted\",\n        !item.image && wash,\n      )}\n    >\n      {item.image ? (\n        <img\n          alt={item.imageAlt ?? item.name}\n          className=\"size-full object-cover\"\n          src={item.image}\n        />\n      ) : (\n        <span className=\"m-auto text-5xl font-semibold tracking-tight text-foreground/70\">\n          {initials}\n        </span>\n      )}\n      <span className=\"absolute right-4 bottom-4 rounded-full bg-foreground px-3 py-1 text-xs font-semibold tracking-[0.18em] text-background\">\n        {initials}\n      </span>\n    </div>\n  );\n}\n\nexport function OrbitCardStack({\n  className,\n  items,\n  defaultActiveIndex = 2,\n  spread = 168,\n  lift = 34,\n  onActiveChange,\n  cardClassName,\n  label = \"Profile card stack\",\n  showCaption = false,\n  ...props\n}: OrbitCardStackProps) {\n  const reduceMotion = usePrefersReducedMotion();\n  const cards = items && items.length > 0 ? items : orbitCardStackItems;\n  const restingIndex = clampIndex(defaultActiveIndex, cards.length);\n  const [activeIndex, setActiveIndex] = useState(restingIndex);\n  const [open, setOpen] = useState(false);\n  const stageRef = useRef<HTMLUListElement>(null);\n  const midpoint = (cards.length - 1) / 2;\n\n  const layouts = useMemo(\n    () =>\n      cards.map((_, index) => {\n        const orbit = index - midpoint;\n        const stack = index - restingIndex;\n        return {\n          open: {\n            x: orbit * spread,\n            y:\n              Math.abs(orbit) * OPEN_DROP +\n              Math.max(0, Math.abs(orbit) - 1) * OPEN_DROP_TAIL,\n            rotate: orbit * OPEN_ARC,\n          },\n          closed: {\n            x: stack * CLOSED_SLIDE,\n            y: Math.abs(stack) * CLOSED_DROP,\n            rotate: stack * CLOSED_ARC,\n          },\n        };\n      }),\n    [cards, midpoint, restingIndex, spread],\n  );\n\n  const activate = (index: number) => {\n    const next = clampIndex(index, cards.length);\n    const item = cards[next];\n    if (!item) return;\n    setOpen(true);\n    setActiveIndex(next);\n    onActiveChange?.(item, next);\n  };\n\n  const collapse = () => {\n    setOpen(false);\n    setActiveIndex(restingIndex);\n  };\n\n  const leaveStage = (event: FocusEvent<HTMLUListElement>) => {\n    if (!event.currentTarget.contains(event.relatedTarget)) collapse();\n  };\n\n  const active = cards[activeIndex] ?? cards[restingIndex];\n\n  return (\n    <section\n      className={cn(\n        \"relative w-full bg-background px-6 py-16 text-foreground\",\n        className,\n      )}\n      data-slot=\"orbit-card-stack\"\n      {...props}\n    >\n      {showCaption && active ? (\n        <div className=\"mx-auto mb-8 max-w-[980px] text-center\">\n          <p className=\"text-sm font-medium text-muted-foreground\">\n            Currently viewing\n          </p>\n          <h2 className=\"mt-1 text-2xl font-semibold tracking-tight text-foreground\">\n            {active.name}\n          </h2>\n        </div>\n      ) : null}\n\n      <div className=\"relative flex min-h-[32rem] w-full items-center justify-center overflow-hidden\">\n        <ul\n          aria-label={label}\n          className=\"relative m-0 h-[470px] w-full max-w-[980px] list-none p-0\"\n          onBlur={leaveStage}\n          onMouseLeave={collapse}\n          ref={stageRef}\n        >\n          {cards.map((item, index) => {\n            const pose = open ? layouts[index]?.open : layouts[index]?.closed;\n            const selected = index === activeIndex;\n            const rise = open && selected ? lift : 0;\n            const style: CSSProperties = {\n              zIndex: selected ? 80 : 50 - Math.abs(index - activeIndex),\n              transform: `translate(calc(-50% + ${pose?.x ?? 0}px), calc(-50% + ${\n                (pose?.y ?? 0) - rise\n              }px)) rotate(${pose?.rotate ?? 0}deg) scale(${\n                open ? OPEN_SCALE : CLOSED_SCALE\n              })`,\n              transitionDuration: reduceMotion ? \"0ms\" : `${MOTION_MS}ms`,\n            };\n\n            return (\n              <li\n                className=\"absolute top-1/2 left-1/2 w-[min(78vw,21rem)] origin-bottom transition-[transform] ease-[cubic-bezier(.2,.8,.2,1)]\"\n                key={item.name}\n                style={style}\n              >\n                <button\n                  aria-current={selected ? \"true\" : undefined}\n                  className={cn(\n                    \"w-full cursor-pointer rounded-[1.9rem] border border-border bg-card p-4 text-left text-card-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n                    cardClassName,\n                  )}\n                  onClick={() => activate(index)}\n                  onFocus={() => activate(index)}\n                  onKeyDown={(event) => {\n                    if (\n                      event.key === \"ArrowRight\" ||\n                      event.key === \"ArrowDown\"\n                    ) {\n                      event.preventDefault();\n                      const next = (index + 1) % cards.length;\n                      activate(next);\n                      stageRef.current\n                        ?.querySelectorAll<HTMLButtonElement>(\"button\")\n                        [next]?.focus();\n                    }\n                    if (event.key === \"ArrowLeft\" || event.key === \"ArrowUp\") {\n                      event.preventDefault();\n                      const next = (index - 1 + cards.length) % cards.length;\n                      activate(next);\n                      stageRef.current\n                        ?.querySelectorAll<HTMLButtonElement>(\"button\")\n                        [next]?.focus();\n                    }\n                    if (event.key === \"Escape\") {\n                      event.currentTarget.blur();\n                      collapse();\n                    }\n                  }}\n                  onMouseEnter={() => activate(index)}\n                  type=\"button\"\n                >\n                  <div className=\"relative\">\n                    <Portrait item={item} />\n                    <span\n                      aria-hidden=\"true\"\n                      className=\"absolute top-3 right-3 grid size-11 place-items-center rounded-full bg-foreground text-background shadow-lg\"\n                    >\n                      <ArrowUpRightIcon className=\"size-4\" />\n                    </span>\n                  </div>\n                  <div className=\"px-2 pt-6 pb-2\">\n                    <p className=\"text-[0.72rem] font-semibold tracking-[0.18em] text-muted-foreground uppercase\">\n                      {item.role}\n                    </p>\n                    <p className=\"mt-2 text-[2rem] leading-none font-semibold tracking-[-0.04em] text-foreground\">\n                      {item.name}\n                    </p>\n                    <p className=\"mt-4 max-w-[17rem] text-[0.98rem] leading-[1.42] font-medium tracking-[-0.01em] text-muted-foreground\">\n                      {item.description}\n                    </p>\n                    <div className=\"mt-5 border-t border-border pt-4 text-[0.68rem] font-bold tracking-[0.2em] text-muted-foreground uppercase\">\n                      {item.stat ?? \"Profile\"}\n                    </div>\n                  </div>\n                </button>\n              </li>\n            );\n          })}\n        </ul>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "orbit-card-stack/OrbitCardStack.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type OrbitCardStackAccent =\n  | \"primary\"\n  | \"secondary\"\n  | \"accent\"\n  | \"muted\"\n  | \"warning\"\n  | \"success\"\n  | \"destructive\";\n\nexport interface OrbitCardStackItem {\n  name: string;\n  role: string;\n  description: string;\n  initials?: string;\n  stat?: string;\n  image?: string;\n  imageAlt?: string;\n  accent?: OrbitCardStackAccent;\n}\n\nexport interface OrbitCardStackProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"onChange\"> {\n  items?: OrbitCardStackItem[];\n  /** Card that sits at the front when the deck is collapsed. */\n  defaultActiveIndex?: number;\n  /** Horizontal fan distance in pixels while hovered. */\n  spread?: number;\n  /** Extra upward shift for the hovered card, in pixels. */\n  lift?: number;\n  onActiveChange?: (item: OrbitCardStackItem, index: number) => void;\n  cardClassName?: string;\n  /** Names the stack for assistive tech. */\n  label?: string;\n  showCaption?: boolean;\n}\n"
+    },
+    {
+      "path": "orbit-card-stack/index.ts",
+      "type": "index",
+      "content": "export { OrbitCardStack } from \"./OrbitCardStack\";\nexport type {\n  OrbitCardStackAccent,\n  OrbitCardStackItem,\n  OrbitCardStackProps,\n} from \"./OrbitCardStack.types\";\n"
+    },
+    {
+      "path": "orbit-card-stack/OrbitCardStack.mocks.ts",
+      "type": "mocks",
+      "content": "import type {\n  OrbitCardStackItem,\n  OrbitCardStackProps,\n} from \"./OrbitCardStack.types\";\n\nconst studio: OrbitCardStackItem[] = [\n  {\n    name: \"Amara Cole\",\n    role: \"Creative Lead\",\n    description:\n      \"Shapes visual systems with enough restraint to feel expensive and enough edge to be remembered.\",\n    initials: \"AC\",\n    stat: \"Identity\",\n    accent: \"warning\",\n    image: \"/assets/bd48582e630a15fa.webp\",\n    imageAlt: \"Portrait of Amara Cole\",\n  },\n  {\n    name: \"Julian Hart\",\n    role: \"Product Strategy\",\n    description:\n      \"Turns loose ideas into sharp product moves, crisp priorities, and launchable experiences.\",\n    initials: \"JH\",\n    stat: \"Roadmap\",\n    accent: \"success\",\n    image: \"/assets/2a364f729e4f7c09.webp\",\n    imageAlt: \"Portrait of Julian Hart\",\n  },\n  {\n    name: \"Priya Nair\",\n    role: \"Founder\",\n    description:\n      \"Sets the taste bar, protects the details, and keeps the whole team pointed at the same high signal.\",\n    initials: \"PN\",\n    stat: \"Vision\",\n    accent: \"muted\",\n    image: \"/assets/d111cc60a8f2bf68.webp\",\n    imageAlt: \"Portrait of Priya Nair\",\n  },\n  {\n    name: \"Eli Voss\",\n    role: \"Frontend Engineer\",\n    description:\n      \"Builds the motion, polish, and interface texture that make the product feel calm under pressure.\",\n    initials: \"EV\",\n    stat: \"Motion\",\n    accent: \"primary\",\n    image: \"/assets/040bd026249d7af9.webp\",\n    imageAlt: \"Portrait of Eli Voss\",\n  },\n  {\n    name: \"Ines Calder\",\n    role: \"Operations\",\n    description:\n      \"Keeps the machine quiet, the handoffs clean, and the team moving without pointless friction.\",\n    initials: \"IC\",\n    stat: \"Systems\",\n    accent: \"destructive\",\n    image: \"/assets/45dad0903fef5d02.webp\",\n    imageAlt: \"Portrait of Ines Calder\",\n  },\n];\n\nconst trio: OrbitCardStackItem[] = [\n  {\n    name: \"Rowan Hale\",\n    role: \"Art Direction\",\n    description:\n      \"Holds the crop, the type, and the still until the page reads as one decision instead of a pile of parts.\",\n    initials: \"RH\",\n    stat: \"Look\",\n    accent: \"accent\",\n    image: \"/assets/1391b53bc91d2127.webp\",\n    imageAlt: \"Portrait of Rowan Hale\",\n  },\n  {\n    name: \"Noor Elamin\",\n    role: \"Brand Strategy\",\n    description:\n      \"Cuts a brief down to the sentence a buyer can repeat, then guards that sentence through launch.\",\n    initials: \"NE\",\n    stat: \"Signal\",\n    accent: \"secondary\",\n    image: \"/assets/c65cd8af6df1b122.webp\",\n    imageAlt: \"Portrait of Noor Elamin\",\n  },\n  {\n    name: \"Sable Wren\",\n    role: \"Producer\",\n    description:\n      \"Keeps the calendar honest and the handoff quiet so the work can stay sharp under a real deadline.\",\n    initials: \"SW\",\n    stat: \"Pace\",\n    accent: \"warning\",\n    image: \"/assets/7b4e1076c576b862.webp\",\n    imageAlt: \"Portrait of Sable Wren\",\n  },\n];\n\nexport const orbitCardStackItems = studio;\n\nexport const orbitCardStackMocks = {\n  default: {\n    items: studio,\n    defaultActiveIndex: 2,\n    spread: 168,\n    lift: 34,\n    showCaption: true,\n  },\n  alternate: {\n    items: trio,\n    defaultActiveIndex: 1,\n    spread: 150,\n    lift: 40,\n    showCaption: true,\n  },\n} satisfies Record<\"default\" | \"alternate\", OrbitCardStackProps>;\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"grid gap-px overflow-hidden rounded-[--radius] border border-border bg-border lg:grid-cols-2\">\n      <div className=\"bg-background\">\n        <OrbitCardStack {...orbitCardStackMocks.default} />\n      </div>\n      <div className=\"dark bg-background\">\n        <OrbitCardStack {...orbitCardStackMocks.default} />\n      </div>\n    </div>"
+    }
+  ]
+}
