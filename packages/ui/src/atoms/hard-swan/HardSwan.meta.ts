@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/aadium/hard-swan-77",
   tags: ["pattern", "texture", "hatch", "background", "atom"],
   dependencies: [],
   registryDependencies: [],

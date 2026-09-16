@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/marcelodolza/kind-panther-75",
   tags: ["pattern", "honeycomb", "hexagon", "background", "atom"],
   dependencies: [],
   registryDependencies: [],

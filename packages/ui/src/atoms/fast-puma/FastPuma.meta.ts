@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/FColombati/fast-puma-20",
   tags: ["button", "toggle", "plus", "minus", "neumorphic", "atom"],
   dependencies: [],
   registryDependencies: [],

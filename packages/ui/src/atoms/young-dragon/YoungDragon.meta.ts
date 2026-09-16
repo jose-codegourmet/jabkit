@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/AqFox/young-dragon-29",
   tags: ["loader", "spinner", "cube", "3d", "feedback", "atom"],
   dependencies: [],
   registryDependencies: [],

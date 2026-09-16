@@ -31,6 +31,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@shadcnspace/components/scroll-area-01",
   tags: ["scroll", "overflow", "scrollbar", "list", "atom"],
   dependencies: [],
   registryDependencies: [],

@@ -54,6 +54,7 @@ export default {
       role: "Home, guide, and pricing FAQs; the home instance is restyled through home.module.css.",
     },
   ],
+  inspoUrl: "https://www.shadcnblocks.com/block/faq12",
   tags: ["faq", "marketing", "accordion", "sidebar", "docs", "help", "landing"],
   dependencies: ["lucide-react"],
   registryDependencies: ["button"],

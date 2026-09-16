@@ -34,6 +34,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/vinodjangid07/good-donkey-28",
   tags: ["input", "composer", "chat", "file", "send", "atom"],
   dependencies: [],
   registryDependencies: [],

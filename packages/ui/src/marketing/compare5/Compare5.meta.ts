@@ -33,6 +33,7 @@ export default {
   },
   recommendedAfter: ["features", "content"],
   recommendedBefore: ["pricing", "cta"],
+  inspoUrl: "https://www.shadcnblocks.com/block/compare5",
   tags: ["compare", "marketing", "cards", "cta", "landing", "photography"],
   dependencies: [],
   registryDependencies: ["button"],

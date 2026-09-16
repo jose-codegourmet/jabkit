@@ -38,6 +38,7 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["pricing", "cta", "testimonials"],
+  inspoUrl: "https://21st.dev/@designali-in/components/glowing-shadow",
   tags: [
     "glow",
     "shadow",

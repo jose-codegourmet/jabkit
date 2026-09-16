@@ -1,8 +1,8 @@
 export const avatarBorderMocks = {
   default: {
-    src: "/assets/bd48582e630a15fa.webp",
-    alt: "Portrait of Mira Solano",
-    fallback: "MS",
+    src: "/assets/3889dc227b6b684a.webp",
+    alt: "Portrait of a verified member",
+    fallback: "HR",
   },
   fallback: {
     fallback: "JD",

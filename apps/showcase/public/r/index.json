@@ -57,9 +57,10 @@
     "name": "avatar-border",
     "displayName": "AvatarBorder",
     "category": "atoms",
-    "description": "Identity avatar wrapped in a token-colored conic ring that can spin or stay still.",
+    "description": "Circular identity avatar with a static offset outline and a verification check badge.",
+    "inspoUrl": "https://21st.dev/@shadcnspace/components/avatar-border",
     "sectionCategory": "identity",
-    "purpose": "Highlights a person or brand mark with a theme-aware border so profile faces stay distinct in dense lists and headers.",
+    "purpose": "Highlights a verified person or brand with a theme-aware outline and a compact check badge in lists and headers.",
     "bestFor": [
       "profile photos in headers",
       "author bylines that need extra emphasis",
@@ -82,7 +83,8 @@
     "slots": [
       "image",
       "fallback",
-      "ring"
+      "ring",
+      "verification badge"
     ],
     "capabilities": {
       "supportsImage": true,
@@ -103,6 +105,7 @@
     ],
     "addedAt": "2026-09-07",
     "dependencies": [
+      "lucide-react",
       "clsx",
       "tailwind-merge"
     ],
@@ -118,7 +121,8 @@
     "name": "average-swan",
     "displayName": "AverageSwan",
     "category": "atoms",
-    "description": "A four-key sampler pad with square chassis wells, oversized 10px-radius keys, and a hard press-in shadow.",
+    "description": "A four-key sampler pad with square chassis wells, inset 10px-radius keys, and a hard press-in shadow.",
+    "inspoUrl": "https://uiverse.io/Praashoo7/average-swan-99",
     "sectionCategory": "action",
     "purpose": "Recreates a compact hardware pad (minus, plus, record, play) with native buttons and local radii instead of the shared Button shape.",
     "bestFor": [
@@ -240,7 +244,8 @@
     "name": "bright-lizard",
     "displayName": "BrightLizard",
     "category": "atoms",
-    "description": "A circular letter-bounce loader with a token-mapped inset-shadow ring.",
+    "description": "A circular generating indicator with staggered letter pulses and a rotating inset-shadow highlight.",
+    "inspoUrl": "https://uiverse.io/dexter-st/bright-lizard-8",
     "sectionCategory": "feedback",
     "purpose": "Signals an in-progress wait with the Uiverse bright-lizard letter ring, remapped onto semantic tokens.",
     "bestFor": [
@@ -375,6 +380,7 @@
     "displayName": "ButtonColorful",
     "category": "atoms",
     "description": "A compact rounded-md CTA with a chart-token indigo-to-pink wash that brightens on hover.",
+    "inspoUrl": "https://21st.dev/@kokonutd/components/button-colorful",
     "sectionCategory": "action",
     "purpose": "Marks a primary explore action when a solid button needs a colorful hover wash without leaving the token set.",
     "bestFor": [
@@ -434,6 +440,7 @@
     "displayName": "Calendar03",
     "category": "atoms",
     "description": "Single-month appointment calendar paired with a scrollable list of time slots.",
+    "inspoUrl": "https://21st.dev/@shadcnspace/components/calendar-03",
     "sectionCategory": "calendar",
     "purpose": "Lets a user choose a visit date and an open time in one compact picker instead of stepping through separate screens.",
     "bestFor": [
@@ -495,6 +502,7 @@
     "displayName": "CalendarWithLocalisation",
     "category": "atoms",
     "description": "Two-month appointment calendar with a language switcher that localizes copy, weekdays, and month titles.",
+    "inspoUrl": "https://21st.dev/@shadcn/components/calendar-with-localisation",
     "sectionCategory": "calendar",
     "purpose": "Lets users choose an appointment range while demonstrating locale-sensitive dates and interface copy.",
     "bestFor": [
@@ -552,7 +560,7 @@
     "preview": {
       "layout": "center",
       "width": 720,
-      "height": 520
+      "height": 440
     }
   },
   {
@@ -614,9 +622,10 @@
     "name": "clever-panther",
     "displayName": "CleverPanther",
     "category": "atoms",
-    "description": "A 190 by 254 neumorphic slab with a 30px corner, dual 15px shadows, and no control-radius flatten.",
+    "description": "A compact dark balance card with revenue metrics, an aurora chart, and a report action.",
+    "inspoUrl": "https://uiverse.io/Gidarx/clever-panther-6",
     "sectionCategory": "content",
-    "purpose": "Recreates the Gidarx clever-panther-6 extruded tile so a catalogue or empty state can sit on the page field without borrowing Button rounding.",
+    "purpose": "Presents a concise financial snapshot with two metrics and a trend line for dashboard or marketing surfaces.",
     "bestFor": [
       "decorative catalogue tiles",
       "empty-state or wait-list slabs",
@@ -637,7 +646,10 @@
       "alignment": "center"
     },
     "slots": [
-      "caption"
+      "heading",
+      "metrics",
+      "trend",
+      "action"
     ],
     "capabilities": {
       "supportsImage": false,
@@ -648,9 +660,10 @@
     },
     "tags": [
       "card",
-      "neumorphic",
-      "slab",
-      "content",
+      "finance",
+      "metrics",
+      "chart",
+      "dashboard",
       "atom"
     ],
     "addedAt": "2026-09-15",
@@ -663,16 +676,19 @@
       "reducedMotion": true
     },
     "preview": {
-      "layout": "center"
+      "layout": "center",
+      "width": 520,
+      "height": 460
     }
   },
   {
     "name": "curvy-earwig",
     "displayName": "CurvyEarwig",
     "category": "atoms",
-    "description": "A 160px-radius capsule search field that collapses to a 50px disc when the icon is toggled.",
+    "description": "A 301px by 56px search field with layered conic borders, a filter affordance, and focus glow.",
+    "inspoUrl": "https://uiverse.io/Lakshay-art/curvy-earwig-22",
     "sectionCategory": "form",
-    "purpose": "Gives headers a compact search target that opens into a wide pill only after the icon is clicked.",
+    "purpose": "Gives headers a high-contrast search target with a subtle animated edge and native text input.",
     "bestFor": [
       "header or toolbar search that should stay quiet until used",
       "playful catalogue filters that still need a native text field",
@@ -693,9 +709,10 @@
       "alignment": "center"
     },
     "slots": [
-      "toggle",
       "field",
-      "glyph"
+      "search icon",
+      "filter action",
+      "animated border"
     ],
     "capabilities": {
       "supportsImage": false,
@@ -728,6 +745,7 @@
     "displayName": "Dialog",
     "category": "atoms",
     "description": "Accessible modal dialog with trigger, overlay, header, description, and footer composed on Base UI.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/dialog",
     "sectionCategory": "overlay",
     "purpose": "Moves a focused task or decision into a modal layer while preserving the surrounding page context.",
     "bestFor": [
@@ -855,6 +873,7 @@
     "displayName": "EmptyPenguin",
     "category": "atoms",
     "description": "A 70 by 36 neo-brutalist on/off switch: 100px pill track, 2px ink border, 4px offset shadow, and a labeled thumb that slides the well.",
+    "inspoUrl": "https://uiverse.io/andrew-demchenk0/empty-penguin-100",
     "sectionCategory": "form",
     "purpose": "Lets people flip a single persistent setting with the Uiverse empty-penguin motion, without flattening the 100px radii.",
     "bestFor": [
@@ -912,6 +931,7 @@
     "displayName": "FastPuma",
     "category": "atoms",
     "description": "A pair of squishy plus and minus pads in square wells with circular knobs.",
+    "inspoUrl": "https://uiverse.io/FColombati/fast-puma-20",
     "sectionCategory": "action",
     "purpose": "Gives quantity or polarity controls the raised-to-pressed pad feel without flattening the inspo radii.",
     "bestFor": [
@@ -970,6 +990,7 @@
     "displayName": "GoodDonkey",
     "category": "atoms",
     "description": "A 40px, 10px-radius message bar with a plus-circle attach control, a 200px field, and a paper-plane send mark.",
+    "inspoUrl": "https://uiverse.io/vinodjangid07/good-donkey-28",
     "sectionCategory": "form",
     "purpose": "Gives chat and comment rows the compact composer shape from the source inspo, mapped onto semantic tokens.",
     "bestFor": [
@@ -1031,6 +1052,7 @@
     "displayName": "HardSwan",
     "category": "atoms",
     "description": "A square-corner 45-degree dual-tone hatch tiled at 95px by 15px with a 135px offset.",
+    "inspoUrl": "https://uiverse.io/aadium/hard-swan-77",
     "sectionCategory": "content",
     "purpose": "Fills a region with the Uiverse hard-swan weave, mapped to tokens, without rounding the field to the shared control radius.",
     "bestFor": [
@@ -1090,6 +1112,7 @@
     "displayName": "HorribleShrimp",
     "category": "atoms",
     "description": "A compact outlined switch with a 1em pill track and a circular thumb that lifts on hover and slides when on.",
+    "inspoUrl": "https://uiverse.io/Voxybuns/horrible-shrimp-47",
     "sectionCategory": "form",
     "purpose": "Toggles a persistent on or off preference with a tactile, hard-outline control that stays readable in light and dark.",
     "bestFor": [
@@ -1146,6 +1169,7 @@
     "displayName": "ImageCropper",
     "category": "atoms",
     "description": "Upload a photo, zoom and pan to frame a crop, then preview and download the result.",
+    "inspoUrl": "https://21st.dev/@ruixen.ui/components/image-cropper",
     "sectionCategory": "form",
     "purpose": "Lets people frame a profile, cover, or social image with a live preview before they commit the crop.",
     "bestFor": [
@@ -1292,6 +1316,7 @@
     "displayName": "JollyChicken",
     "category": "atoms",
     "description": "A 60×34 pill day-to-night checkbox: sun, halo rays, and drifting clouds slide into a cratered moon and four-point stars.",
+    "inspoUrl": "https://uiverse.io/RiccardoRapelli/jolly-chicken-91",
     "sectionCategory": "form",
     "purpose": "Gives appearance or quiet-hours toggles a readable scene instead of a plain thumb, still using semantic tokens.",
     "bestFor": [
@@ -1350,6 +1375,7 @@
     "displayName": "JollyParrot",
     "category": "atoms",
     "description": "A square diamond field using five angled tile gradients, 40px cells, and a -50px shift.",
+    "inspoUrl": "https://uiverse.io/uiverse-astronaut/jolly-parrot-30",
     "sectionCategory": "background",
     "purpose": "Drops the inspo tessellation behind a caption or empty state without rounding it to the control radius.",
     "bestFor": [
@@ -1405,6 +1431,7 @@
     "displayName": "KindPanther",
     "category": "atoms",
     "description": "A square honeycomb field of 120deg hex cells at 37px, with token-mapped fill and ground.",
+    "inspoUrl": "https://uiverse.io/marcelodolza/kind-panther-75",
     "sectionCategory": "background",
     "purpose": "Drops the inspo hexagon tessellation behind a caption or empty state without rounding it to the control radius.",
     "bestFor": [
@@ -1532,6 +1559,7 @@
     "displayName": "LetterCascade",
     "category": "atoms",
     "description": "A 3D split-flap word where each glyph tilts back while its echo flips up in a staggered spring wave.",
+    "inspoUrl": "https://componentry.dev/docs/components/letter-cascade",
     "sectionCategory": "content",
     "purpose": "Adds a kinetic wordmark or hover label when a line of text should feel mechanical and dimensional without leaving the token set.",
     "bestFor": [
@@ -1588,6 +1616,7 @@
     "displayName": "LightEagle",
     "category": "atoms",
     "description": "A square-corner isometric cube tessellation at 200px, with three face inks mapped to semantic tokens.",
+    "inspoUrl": "https://uiverse.io/Juanes200122/light-eagle-27",
     "sectionCategory": "content",
     "purpose": "Fills a region with the Uiverse light-eagle hexagonal cube weave without rounding the field to the shared control radius.",
     "bestFor": [
@@ -1648,6 +1677,7 @@
     "displayName": "LoudParrot",
     "category": "atoms",
     "description": "A square isometric cube lattice with the Uiverse loud-parrot tile geometry on semantic faces.",
+    "inspoUrl": "https://uiverse.io/mobinkakei/loud-parrot-63",
     "sectionCategory": "content",
     "purpose": "Fills a region with the exact layered-conic cube tessellation, keeping square corners and token-mapped faces.",
     "bestFor": [
@@ -1705,6 +1735,7 @@
     "displayName": "LovelyYak",
     "category": "atoms",
     "description": "A compact analytics card with a token gradient rim, two stats, a seven-bar spark, and a local-radius details action.",
+    "inspoUrl": "https://uiverse.io/themrsami/lovely-yak-39",
     "sectionCategory": "content",
     "purpose": "Presents a live performance snapshot in the same stacked dashboard-card shape as the Uiverse inspo, without flattening radii through Button.",
     "bestFor": [
@@ -1766,6 +1797,7 @@
     "displayName": "NavigationMenu",
     "category": "atoms",
     "description": "Accessible site navigation with desktop mega menus, compact link lists, and a mobile disclosure drawer.",
+    "inspoUrl": "https://21st.dev/@efferd/components/navigation-menu",
     "sectionCategory": "navigation",
     "purpose": "Lets visitors scan products, company pages, and primary actions from a compact header without leaving the current page.",
     "bestFor": [
@@ -1837,6 +1869,7 @@
     "displayName": "OddFish",
     "category": "atoms",
     "description": "A square neo-brutalist profile plate: striped header, hard offset shadow, three counts, and a full-width follow.",
+    "inspoUrl": "https://uiverse.io/WattoRex/odd-fish-37",
     "sectionCategory": "content",
     "purpose": "Keeps the inspo card square and hatched instead of flattening it to the control radius, while mapping ink and fill to semantic tokens.",
     "bestFor": [
@@ -1899,6 +1932,7 @@
     "displayName": "QrCodeGenerator",
     "category": "atoms",
     "description": "Card that encodes a URL or short note into a live QR mark and downloads it as PNG.",
+    "inspoUrl": "https://21st.dev/@user_xn1cklas/components/qr-code-generator",
     "sectionCategory": "form",
     "purpose": "Turns a short payload into a scannable code on the page, with a full-width save action.",
     "bestFor": [
@@ -1962,6 +1996,7 @@
     "displayName": "QuickPanther",
     "category": "atoms",
     "description": "Vertical radio stack with a 10px clip and a glowing rail that slides to the checked option.",
+    "inspoUrl": "https://uiverse.io/Smit-Prajapati/quick-panther-98",
     "sectionCategory": "form",
     "purpose": "Lets someone pick one timing or status option in a compact stacked list with a moving highlight.",
     "bestFor": [
@@ -2022,6 +2057,7 @@
     "displayName": "ScrollArea",
     "category": "atoms",
     "description": "A focusable overflow region with token-styled scrollbars for clipped lists and panels.",
+    "inspoUrl": "https://21st.dev/@shadcnspace/components/scroll-area-01",
     "sectionCategory": "content",
     "purpose": "Keeps long or wide content inside a bounded frame while preserving keyboard access and theme-aware scrollbars.",
     "bestFor": [
@@ -2125,6 +2161,7 @@
     "displayName": "SeriousStingray",
     "category": "atoms",
     "description": "A 6px-rounded outline CTA whose circular fill sweeps in from the far corner on hover.",
+    "inspoUrl": "https://uiverse.io/yaasiinaxmed/serious-stingray-77",
     "sectionCategory": "action",
     "purpose": "Recreates a compact outlined action whose hover fill arrives as a circle from the opposite corner, without flattening the 6px radius through the shared Button atom.",
     "bestFor": [
@@ -2183,6 +2220,7 @@
     "displayName": "ShyRattlesnake",
     "category": "atoms",
     "description": "A perforated conference pass with 1em ticket notches, a pill badge, drifting grid, and a 3D hover tilt.",
+    "inspoUrl": "https://uiverse.io/zeeshan_2112/shy-rattlesnake-3",
     "sectionCategory": "content",
     "purpose": "Turns admission details into a tactile ticket instead of a flat card, while staying on semantic tokens.",
     "bestFor": [
@@ -2293,6 +2331,7 @@
     "displayName": "SoftPanda",
     "category": "atoms",
     "description": "A square dual-tone mosaic field with 45-degree tiles, token-mapped ink and lemon, and an optional slow drift.",
+    "inspoUrl": "https://uiverse.io/aadium/soft-panda-93",
     "sectionCategory": "content",
     "purpose": "Fills a region with a high-contrast diamond mosaic without photographs or palette hex colors.",
     "bestFor": [
@@ -2350,6 +2389,7 @@
     "displayName": "StepperVerticalInline",
     "category": "atoms",
     "description": "Vertical stepper with numbered pill markers and inline titles plus descriptions.",
+    "inspoUrl": "https://21st.dev/@originui/components/stepper/vertical-with-inline-titles-and-descriptions",
     "sectionCategory": "navigation",
     "purpose": "Shows where someone is in a short sequential flow without hiding the remaining steps.",
     "bestFor": [
@@ -2414,6 +2454,7 @@
     "displayName": "StepperWithTitles",
     "category": "atoms",
     "description": "Horizontal stepper with circular markers, titles stacked below, and descriptions.",
+    "inspoUrl": "https://21st.dev/@originui/components/stepper/with-titles-and-descriptions",
     "sectionCategory": "navigation",
     "purpose": "Shows where a person is in a short linear flow and lets them jump to a completed or upcoming step.",
     "bestFor": [
@@ -2476,6 +2517,7 @@
     "displayName": "StrongSquid",
     "category": "atoms",
     "description": "A pill day-to-night switch whose sun slides into a cratered moon while clouds drop and stars rise.",
+    "inspoUrl": "https://uiverse.io/Galahhad/strong-squid-82",
     "sectionCategory": "form",
     "purpose": "Lets people flip a persistent on/off setting when the control itself should telegraph day versus night.",
     "bestFor": [
@@ -2535,6 +2577,7 @@
     "displayName": "StupidInsect",
     "category": "atoms",
     "description": "A square-corner concentric-ring tile at 150px, with sand and navy inks mapped to semantic tokens.",
+    "inspoUrl": "https://uiverse.io/csemszepp/stupid-insect-76",
     "sectionCategory": "content",
     "purpose": "Fills a region with the Uiverse stupid-insect radial weave without rounding the field to the shared control radius.",
     "bestFor": [
@@ -2706,6 +2749,7 @@
     "displayName": "TinyFish",
     "category": "atoms",
     "description": "A compact neo-brutalist switch with a 5px-radius track, hard offset shadow, and a matching square knob.",
+    "inspoUrl": "https://uiverse.io/andrew-demchenk0/tiny-fish-66",
     "sectionCategory": "form",
     "purpose": "Toggles a binary setting with the Uiverse hard-edge switch silhouette instead of a pill thumb.",
     "bestFor": [
@@ -2765,6 +2809,7 @@
     "displayName": "Toast",
     "category": "atoms",
     "description": "Temporary status messages with stacking, swipe dismiss, actions, and success, info, warning, and error types.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/toast",
     "sectionCategory": "feedback",
     "purpose": "Surfaces short-lived success, warning, and error status without taking the user off the current screen.",
     "bestFor": [
@@ -2845,6 +2890,7 @@
     "displayName": "VCheckbox11",
     "category": "atoms",
     "description": "Weekly availability grid with a checkbox for each day and time slot, plus a live selected-count.",
+    "inspoUrl": "https://21st.dev/@cnippet-dev/components/v-checkbox-11",
     "sectionCategory": "form",
     "purpose": "Lets someone mark recurring weekly hours in one scan instead of stacking separate day pickers.",
     "bestFor": [
@@ -2910,6 +2956,7 @@
     "displayName": "WiseLizard",
     "category": "atoms",
     "description": "A square brutalist 3D username field: hard offset shadow, warning plaque, and a native text input that lifts on hover.",
+    "inspoUrl": "https://uiverse.io/0xnihilism/wise-lizard-57",
     "sectionCategory": "form",
     "purpose": "Collects a short identity value with a tilted poster frame while keeping a native text control and square corners.",
     "bestFor": [
@@ -2970,6 +3017,7 @@
     "displayName": "YoungDragon",
     "category": "atoms",
     "description": "A square-faced 3D cube loader that tumbles on two axes using outlined faces and semantic tokens.",
+    "inspoUrl": "https://uiverse.io/AqFox/young-dragon-29",
     "sectionCategory": "feedback",
     "purpose": "Marks an in-progress wait with a geometric 3D cube instead of a flat ring, keeping sharp square faces in light and dark.",
     "bestFor": [
@@ -3027,6 +3075,7 @@
     "displayName": "About11",
     "category": "marketing",
     "description": "Creative-studio about block with staggered team photos, a process grid, logo marquee, honors table, quote overlay, and two motivation plates.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/about11",
     "sectionCategory": "about",
     "purpose": "Tells a layered studio story through people, process, recognition, clients, and values in one immersive editorial sequence.",
     "bestFor": [
@@ -3104,6 +3153,7 @@
     "displayName": "About14",
     "category": "marketing",
     "description": "Six-column about block with a large headline, full-width hero image, labeled intro, inline avatar profile, and a philosophy statement.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/about14",
     "sectionCategory": "about",
     "purpose": "Introduces an organization through a strong visual manifesto, founder identity, and concise philosophy.",
     "bestFor": [
@@ -3185,6 +3235,7 @@
     "displayName": "About6",
     "category": "marketing",
     "description": "Two-column about section with story copy, a staggered workplace photo grid, and an offset second column of images and paragraphs.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/about6",
     "sectionCategory": "about",
     "purpose": "Humanizes a company with a readable narrative and candid workplace imagery.",
     "bestFor": [
@@ -3260,6 +3311,7 @@
     "displayName": "About8",
     "category": "marketing",
     "description": "Fintech about section with a plus-sign field, bordered stats, mission copy, a snap image carousel, a right-aligned product note, and a founding-team plate.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/about8",
     "sectionCategory": "about",
     "purpose": "Builds institutional credibility by combining mission, scale metrics, product imagery, and founding-team context.",
     "bestFor": [
@@ -3335,6 +3387,7 @@
     "displayName": "AdmitOneTicket",
     "category": "marketing",
     "description": "Notched event ticket with a perforated admit-one stub, dithered stock, pointer tilt, and a glare that tracks the pointer.",
+    "inspoUrl": "https://21st.dev/@larsen66/components/admit-one-ticket",
     "sectionCategory": "content",
     "purpose": "Puts a physical door pass on an event landing so visitors can read presenter, guest, venue, and stub copy at ticket proportions.",
     "bestFor": [
@@ -3420,6 +3473,7 @@
     "displayName": "Announcement4",
     "category": "marketing",
     "description": "Slim launch bar with clipped primary blooms, a small-radius glass CTA, and a dismiss control.",
+    "inspoUrl": "https://ui.watermelon.sh/block/announcement-4",
     "sectionCategory": "content",
     "purpose": "Surfaces a temporary product update above the page without stealing the hero, using a tinted strip and a glass action.",
     "bestFor": [
@@ -3492,6 +3546,7 @@
     "displayName": "Awards6",
     "category": "marketing",
     "description": "Milestones ledger with a display heading, labeled columns, and separator rows for title, type, and year.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/awards6",
     "sectionCategory": "awards",
     "purpose": "Signals longevity and external recognition in a restrained, scannable record of achievements.",
     "bestFor": [
@@ -3552,6 +3607,7 @@
     "displayName": "Bento19",
     "category": "marketing",
     "description": "Three-column masonry bento of six bordered cards with integration pills, compact charts, and AI ops illustrations.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/bento19",
     "sectionCategory": "features",
     "purpose": "Explains several technical product benefits through varied visual demonstrations instead of uniform feature cards.",
     "bestFor": [
@@ -3629,6 +3685,7 @@
     "displayName": "CarouselCards",
     "category": "marketing",
     "description": "Horizontally scrollable marketing rail of listing cards with image, rating, price, and a favorite control.",
+    "inspoUrl": "https://21st.dev/@kokonutd/components/carousel-cards",
     "sectionCategory": "features",
     "purpose": "Lets a landing page show bookable experiences or products in a snappy, keyboard-reachable card row without a full gallery.",
     "bestFor": [
@@ -3715,6 +3772,7 @@
     "displayName": "CaseStudies11",
     "category": "marketing",
     "description": "Centered case-study section with a three-column grid of portrait poster cards — full-bleed photography, a bottom gradient, company mark, and title.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/case-studies11",
     "sectionCategory": "case-studies",
     "purpose": "Turns selected work into visually dominant entry points that encourage visitors to explore detailed stories.",
     "bestFor": [
@@ -3791,6 +3849,7 @@
     "displayName": "CaseStudies13",
     "category": "marketing",
     "description": "Four-column case-study grid with cover photographs, large outcome metrics, category badges, and short client stories.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/case-studies13",
     "sectionCategory": "case-studies",
     "purpose": "Proves outcomes with a balanced mix of project imagery, metrics, categories, and narrative context.",
     "bestFor": [
@@ -3937,6 +3996,7 @@
     "displayName": "CodeExample14",
     "category": "marketing",
     "description": "File-ops marketing section with a dotted radial wash, dual CTAs, accordion rows for create/update/delete, and a synced TypeScript snippet with copy.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/code-example14",
     "sectionCategory": "content",
     "purpose": "Makes a developer workflow concrete by pairing selectable operations with synchronized implementation code.",
     "bestFor": [
@@ -4016,6 +4076,7 @@
     "displayName": "ComingSoon3",
     "category": "marketing",
     "description": "Centered coming-soon page with a live day-hour-minute-second countdown and an email notify form.",
+    "inspoUrl": "https://21st.dev/@7ovr/components/coming-soon-3",
     "sectionCategory": "form",
     "purpose": "Holds a pre-launch page with a readable countdown and a single email capture so visitors can wait for a fixed open date.",
     "bestFor": [
@@ -4081,6 +4142,7 @@
     "displayName": "Compare5",
     "category": "marketing",
     "description": "Centered old-versus-new marketing compare with two tall photo cards, bottom scrims, outline actions, and a circular OR chip in the gutter.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/compare5",
     "sectionCategory": "comparison",
     "purpose": "Frames a binary choice or transformation with equal visual weight and explicit paths into each option.",
     "bestFor": [
@@ -4149,6 +4211,7 @@
     "displayName": "Content1",
     "category": "marketing",
     "description": "Long-form marketing article with a sticky in-page outline, scroll-linked active sections, and rich body blocks for images, lists, tables, and callouts.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/content1",
     "sectionCategory": "content",
     "purpose": "Supports deep reading while keeping a long, structured article navigable through a persistent outline.",
     "bestFor": [
@@ -4241,6 +4304,7 @@
     "displayName": "Content2",
     "category": "marketing",
     "description": "Content-hub explainer with a labeled intro, icon type grid, create and manage how-to panels, and an inline tip alert.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/content2",
     "sectionCategory": "content",
     "purpose": "Teaches a multi-part content model through categorized concepts and task-oriented how-to panels.",
     "bestFor": [
@@ -4311,6 +4375,7 @@
     "displayName": "Content3",
     "category": "marketing",
     "description": "Knowledge-style marketing article with breadcrumbs, headline actions, a sticky topic rail, inline figures, a data table, and a callout.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/content3",
     "sectionCategory": "content",
     "purpose": "Presents reference-style guidance with navigation aids, evidence, structured data, and actionable context.",
     "bestFor": [
@@ -4382,6 +4447,7 @@
     "displayName": "Content4",
     "category": "marketing",
     "description": "Publication-style long read with breadcrumbs, author byline, inline figures, a scroll-aware table of contents, and a back-to-top control.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/content4",
     "sectionCategory": "content",
     "purpose": "Creates an editorial reading experience with authorship, figures, section navigation, and a return path.",
     "bestFor": [
@@ -4460,6 +4526,7 @@
     "displayName": "CountUp",
     "category": "marketing",
     "description": "Marketing proof figure that counts from a start value to a target when it enters view, honoring prefers-reduced-motion.",
+    "inspoUrl": "https://reactbits.dev/text-animations/count-up",
     "sectionCategory": "stats",
     "purpose": "Draws attention to a single proof point or KPI with restrained entrance motion.",
     "bestFor": [
@@ -4527,6 +4594,7 @@
     "displayName": "CoverflowCarousel",
     "category": "marketing",
     "description": "Edge-to-edge rack of square covers with inverse 3D perspective: the centre sits square while neighbours swing their outer edges forward. Drag, flick, or arrow through; the caption follows.",
+    "inspoUrl": "https://21st.dev/@ruixen.ui/components/coverflow-carousel",
     "sectionCategory": "gallery",
     "purpose": "Lets a landing show a catalogue of sleeves, portraits, or stills as a tactile inverse coverflow instead of a flat strip.",
     "bestFor": [
@@ -4607,6 +4675,7 @@
     "displayName": "Cta22",
     "category": "marketing",
     "description": "Marketing CTA with a dark app-download panel, store badges, overlapping phone imagery, and a muted newsletter form in a three-column grid.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/cta22",
     "sectionCategory": "cta",
     "purpose": "Combines app acquisition and newsletter capture in a visually rich closing conversion section.",
     "bestFor": [
@@ -4681,6 +4750,7 @@
     "displayName": "Cta28",
     "category": "marketing",
     "description": "Dark enterprise CTA with a serif headline, two-column icon capability grid, wide action, and a layered photo collage on extra-wide layouts.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/cta28",
     "sectionCategory": "cta",
     "purpose": "Closes an enterprise narrative with capability reassurance, a prominent action, and premium editorial imagery.",
     "bestFor": [
@@ -4754,6 +4824,7 @@
     "displayName": "CursorGrid",
     "category": "marketing",
     "description": "Marketing canvas lattice that lights cells around the cursor with configurable falloff and click pulses, honoring prefers-reduced-motion.",
+    "inspoUrl": "https://reactbits.dev/animations/cursor-grid",
     "sectionCategory": "background",
     "purpose": "Adds responsive ambient motion behind sparse hero or campaign content without supplying page structure itself.",
     "bestFor": [
@@ -4815,6 +4886,7 @@
     "displayName": "EcommerceHero8",
     "category": "marketing",
     "description": "Full-viewport fashion hero with synced autoplay campaign slides and a product thumbnail rail.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/ecommerce-hero8",
     "sectionCategory": "hero",
     "purpose": "Opens a fashion storefront with campaign storytelling and direct access to featured products.",
     "bestFor": [
@@ -4893,6 +4965,7 @@
     "displayName": "EcommerceNavbar2",
     "category": "marketing",
     "description": "Dense storefront header with nested dropdowns, a mega shop panel, search, wishlist and cart badges, account menu, and an accordion mobile sheet.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/ecommerce-navbar2",
     "sectionCategory": "navbar",
     "purpose": "Provides comprehensive storefront wayfinding and fast access to product discovery, account, wishlist, and cart tasks.",
     "bestFor": [
@@ -4963,6 +5036,7 @@
     "displayName": "EmberFooterCta",
     "category": "marketing",
     "description": "Closing marketing footer with a waitlist form, serif headline, slim link row, and a token-based ember bed along the baseline.",
+    "inspoUrl": "https://21st.dev/@serafimcloud/components/ember-footer-cta",
     "sectionCategory": "footer",
     "purpose": "Ends a page with atmospheric brand expression, a focused waitlist conversion, and essential links.",
     "bestFor": [
@@ -5029,6 +5103,7 @@
     "displayName": "FallingText",
     "category": "marketing",
     "description": "Marketing headline whose words fall with a physics-like tumble on click, hover, auto, or scroll, with semantic highlights and a static reduced-motion reading.",
+    "inspoUrl": "https://reactbits.dev/text-animations/falling-text",
     "sectionCategory": "content",
     "purpose": "Turns a short landing line into a gravity beat so highlighted claims stay readable while the rest of the sentence drops into place.",
     "bestFor": [
@@ -5107,6 +5182,7 @@
     "displayName": "Faq12",
     "category": "marketing",
     "description": "Documentation-style FAQ with a category sidebar, per-topic accordions, and scroll-synced active highlighting.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/faq12",
     "sectionCategory": "faq",
     "purpose": "Makes a large support or pre-sales question set easy to scan by grouping topics and tracking reading position.",
     "bestFor": [
@@ -5198,6 +5274,7 @@
     "displayName": "Feature261",
     "category": "marketing",
     "description": "Marketing bento mosaic mixing a tall photo, a stat callout, a pricing tile, a short promo, an avatar cluster, and a supporting image.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/feature261",
     "sectionCategory": "features",
     "purpose": "Communicates a broad value proposition through varied proof points, pricing, people, and product imagery in one mosaic.",
     "bestFor": [
@@ -5277,6 +5354,7 @@
     "displayName": "FisheyeInfiniteGrid",
     "category": "marketing",
     "description": "Two-axis editorial image wall that wraps seamlessly and bends as one fisheye surface, with weighted drag, wheel, and arrow navigation.",
+    "inspoUrl": "https://componentry.dev/docs/components/fisheye-infinite-grid",
     "sectionCategory": "gallery",
     "purpose": "Lets a landing present a dense catalogue as a continuous warped field instead of a paged grid or single-axis carousel.",
     "bestFor": [
@@ -5354,6 +5432,7 @@
     "displayName": "Footer10",
     "category": "marketing",
     "description": "Blush-plate marketing footer with a photographic banner CTA, large email, underline newsletter, and four link columns.",
+    "inspoUrl": "https://ui.watermelon.sh/block/footer-10",
     "sectionCategory": "footer",
     "purpose": "Closes a marketing page with a conversion banner, a single email path, a subscribe field, and grouped legal and product links.",
     "bestFor": [
@@ -5429,6 +5508,7 @@
     "displayName": "Footer11",
     "category": "marketing",
     "description": "Dark closing footer with a live badge, light headline, email CTA, text nav, and a stretched wordmark over a primary glow.",
+    "inspoUrl": "https://ui.watermelon.sh/block/footer-11",
     "sectionCategory": "footer",
     "purpose": "Closes a marketing page with one contact path, sparse navigation, and a large brand lockup.",
     "bestFor": [
@@ -5501,6 +5581,7 @@
     "displayName": "Footer12",
     "category": "marketing",
     "description": "Dark editorial footer with newsletter capture, compact link columns, oversized brand lockup, socials, theme pills, and a language control.",
+    "inspoUrl": "https://ui.watermelon.sh/block/footer-12",
     "sectionCategory": "footer",
     "purpose": "Closes a marketing page with a subscribe path, grouped links, a large brand lockup, and site chrome for theme and language.",
     "bestFor": [
@@ -5577,6 +5658,7 @@
     "displayName": "Footer13",
     "category": "marketing",
     "description": "Cinematic landscape footer with a fading wide hero, four link columns, a sharp newsletter capture, socials, and legal links.",
+    "inspoUrl": "https://ui.watermelon.sh/block/footer-13",
     "sectionCategory": "footer",
     "purpose": "Closes a marketing page with a photographic dusk band, grouped navigation, and a square subscribe path.",
     "bestFor": [
@@ -5652,6 +5734,7 @@
     "displayName": "Footer16",
     "category": "marketing",
     "description": "Cinematic landscape footer with a faded giant wordmark, three link columns, socials, and legal links over a photographic close.",
+    "inspoUrl": "https://ui.watermelon.sh/block/footer-16",
     "sectionCategory": "footer",
     "purpose": "Closes a marketing page with a wide landscape band, an oversized brand ghost, grouped navigation, and a legal strip.",
     "bestFor": [
@@ -5727,6 +5810,7 @@
     "displayName": "Footer18",
     "category": "marketing",
     "description": "Full-viewport agency footer with a newsletter card, pill trial CTA, three link columns, uppercase utility links, and an oversized muted wordmark.",
+    "inspoUrl": "https://ui.watermelon.sh/block/footer-18",
     "sectionCategory": "footer",
     "purpose": "Closes a marketing page with a subscribe card, compact navigation, a pill conversion path, and a giant brand lockup.",
     "bestFor": [
@@ -5803,6 +5887,7 @@
     "displayName": "Footer19",
     "category": "marketing",
     "description": "Dark dotted-grid footer with a square newsletter join, status badge, three uppercase link columns, and a location time strip.",
+    "inspoUrl": "https://ui.watermelon.sh/block/footer-19",
     "sectionCategory": "footer",
     "purpose": "Closes a marketing page with a weekly subscribe path, compact company navigation, and studio meta in one full-width band.",
     "bestFor": [
@@ -5877,6 +5962,7 @@
     "displayName": "Footer27",
     "category": "marketing",
     "description": "Cinematic landscape footer with a hero CTA, four-column nav, circular socials, and a slammed giant wordmark.",
+    "inspoUrl": "https://ui.watermelon.sh/block/footer-27",
     "sectionCategory": "footer",
     "purpose": "Closes a marketing page with a photographic hero, pill contact actions, grouped links, and an oversized brand slam.",
     "bestFor": [
@@ -5955,6 +6041,7 @@
     "displayName": "FooterColumn",
     "category": "marketing",
     "description": "Site footer with a brand column, about and service links, a live-help row, contact details, and a legal bar.",
+    "inspoUrl": "https://21st.dev/@mvp_Subha/components/footer-column",
     "sectionCategory": "footer",
     "purpose": "Closes a service-oriented site with organized navigation, direct contact routes, and legal information.",
     "bestFor": [
@@ -6022,6 +6109,7 @@
     "displayName": "FooterSection",
     "category": "marketing",
     "description": "Site footer with a newsletter field, quick links, contact details, social marks, a light/dark toggle, and a legal row.",
+    "inspoUrl": "https://21st.dev/@arihantcodes_1f7b8c4d/components/footer-section",
     "sectionCategory": "footer",
     "purpose": "Combines site closure, newsletter capture, theme control, contact information, and secondary navigation.",
     "bestFor": [
@@ -6089,6 +6177,7 @@
     "displayName": "Form",
     "category": "marketing",
     "description": "Compact stay-booking card with a destination field, date-range chip, room and guest chips, and a check-availability CTA.",
+    "inspoUrl": "https://21st.dev/@lavikatiyar/components/form",
     "sectionCategory": "form",
     "purpose": "Lets a travel or lodging landing page collect a stay request as a single compact card, matching a destination-plus-details booking control.",
     "bestFor": [
@@ -6168,6 +6257,7 @@
     "displayName": "Gallery31",
     "category": "marketing",
     "description": "Product bento gallery with a centered kicker, five image tiles, and direction-aware hover overlays for name and price.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/gallery31",
     "sectionCategory": "gallery",
     "purpose": "Presents a curated product range as an image-first collection with lightweight price discovery.",
     "bestFor": [
@@ -6243,6 +6333,7 @@
     "displayName": "GlowingShadow",
     "category": "marketing",
     "description": "Marketing block with a rotating, color-cycling token glow behind display type. Hover brightens blur, opacity, and scale.",
+    "inspoUrl": "https://21st.dev/@designali-in/components/glowing-shadow",
     "sectionCategory": "features",
     "purpose": "Puts a kinetic light field behind a wordmark or short claim so a landing moment feels lit without leaving semantic tokens.",
     "bestFor": [
@@ -6321,6 +6412,7 @@
     "displayName": "Hero1",
     "category": "marketing",
     "description": "Full-bleed dark energy hero with a bottom-left lattice plate, left-aligned headline, rounded-lg CTA with inset arrow, and a footer of copy, scroll cue, and social links.",
+    "inspoUrl": "https://ui.watermelon.sh/block/hero-1",
     "sectionCategory": "hero",
     "purpose": "Opens an industrial or energy landing page with a dark photographic field, a two-line claim, and a single conversion path.",
     "bestFor": [
@@ -6402,6 +6494,7 @@
     "displayName": "Hero31",
     "category": "marketing",
     "description": "Full-bleed cinematic hero with a glowing curtain plate, italic wordmark, square metal CTAs, word-staggered headline, and a trusted-by logo row.",
+    "inspoUrl": "https://ui.watermelon.sh/block/hero-31",
     "sectionCategory": "hero",
     "purpose": "Opens a landing page with atmosphere first, then a short offer and square actions that keep the original sharp geometry.",
     "bestFor": [
@@ -6477,6 +6570,7 @@
     "displayName": "Hero32",
     "category": "marketing",
     "description": "Full-bleed sunflower-field hero with a floating pill nav, serif headline, glass demo CTA, and a circular play control.",
+    "inspoUrl": "https://ui.watermelon.sh/block/hero-32",
     "sectionCategory": "hero",
     "purpose": "Opens a landing page with a photographic plate, a compact pill header, and a single centered offer.",
     "bestFor": [
@@ -6552,6 +6646,7 @@
     "displayName": "Hero33",
     "category": "marketing",
     "description": "Full-bleed aviation hero with a sunset window plate, staggered title lines, squared CTAs, and two feature highlights.",
+    "inspoUrl": "https://ui.watermelon.sh/block/hero-33",
     "sectionCategory": "hero",
     "purpose": "Opens a travel or lifestyle landing page with cinematic photography, a left-aligned offer, and compact amenity proof.",
     "bestFor": [
@@ -6631,6 +6726,7 @@
     "displayName": "Hero39",
     "category": "marketing",
     "description": "Full-bleed retreat hero with a painterly landscape, pill nav CTA, italic emphasis headline, glass search field, and press wordmarks.",
+    "inspoUrl": "https://ui.watermelon.sh/block/hero-39",
     "sectionCategory": "hero",
     "purpose": "Opens a hospitality or wellness landing page with a photographic plate, a centered offer, and a search-led conversion.",
     "bestFor": [
@@ -6714,6 +6810,7 @@
     "displayName": "HeroSection5",
     "category": "marketing",
     "description": "Cinematic marketing hero with a framed looping video panel, bottom-left offer, a light header, and a logo marquee.",
+    "inspoUrl": "https://21st.dev/@meschacirung/components/hero-section-5",
     "sectionCategory": "hero",
     "purpose": "Creates an immersive brand-first opening while retaining a clear offer, primary action, and customer-logo proof.",
     "bestFor": [
@@ -6789,6 +6886,7 @@
     "displayName": "Hero146",
     "category": "marketing",
     "description": "Centered AI-agents hero on a square grid wash, with a gradient headline, metallic get-started pill, and a framed video teaser that exposes a play bar and optional presentation embed.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/hero146",
     "sectionCategory": "hero",
     "purpose": "Introduces a technical AI product with focused copy and a product demonstration as the primary evidence.",
     "bestFor": [
@@ -6868,6 +6966,7 @@
     "displayName": "Hero228",
     "category": "marketing",
     "description": "Centered marketing hero with a mixed serif headline, muted supporting copy, and an autoplay fan carousel of portraits with animated tick bars and name crossfades.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/hero228",
     "sectionCategory": "hero",
     "purpose": "Builds an editorial, people-centered opening where rotating portraits carry more emotional weight than conversion controls.",
     "bestFor": [
@@ -6941,6 +7040,7 @@
     "displayName": "Hero230",
     "category": "marketing",
     "description": "Centered marketing hero with a pill kicker, dual pill CTAs, an auto-scrolling logo ticker, and an autoplay filmstrip of raised image cards.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/hero230",
     "sectionCategory": "hero",
     "purpose": "Balances a direct conversion message with customer recognition and a lively stream of visual examples.",
     "bestFor": [
@@ -7018,6 +7118,7 @@
     "displayName": "Hero231",
     "category": "marketing",
     "description": "Split marketing hero with left-aligned copy and dual CTAs, a faded logo marquee, and a 3D coverflow of portrait cards.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/hero231",
     "sectionCategory": "hero",
     "purpose": "Gives equal prominence to conversion copy, customer proof, and a dimensional portrait showcase.",
     "bestFor": [
@@ -7093,6 +7194,7 @@
     "displayName": "Hero307",
     "category": "marketing",
     "description": "Fullscreen marketing hero with an oversized headline, paired CTAs, and a CSS-built admin dashboard that tilts in a 3D perspective scene.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/hero307",
     "sectionCategory": "hero",
     "purpose": "Makes a software product feel ambitious by pairing oversized positioning with an immediately recognizable dashboard scene.",
     "bestFor": [
@@ -7171,6 +7273,7 @@
     "displayName": "HoloCard",
     "category": "marketing",
     "description": "Marketing block with holographic trading cards: pointer-driven 3D tilt, token rainbow foil, and a contact shadow that leans with the surface.",
+    "inspoUrl": "https://21st.dev/@rmahammad/components/holo-card",
     "sectionCategory": "features",
     "purpose": "Turns a product or drop announcement into a tactile foil card that reacts to the pointer without leaving semantic tokens.",
     "bestFor": [
@@ -7250,6 +7353,7 @@
     "displayName": "InputModal",
     "category": "marketing",
     "description": "Marketing dialog for turning a file, URL, or saved source into a voiced audio show, with format and voice controls.",
+    "inspoUrl": "https://21st.dev/@arihantcodes_1f7b8c4d/components/input-modal",
     "sectionCategory": "form",
     "purpose": "Captures a source and generation settings in a focused overlay so a landing page can start an audio-show conversion without leaving the page.",
     "bestFor": [
@@ -7334,6 +7438,7 @@
     "displayName": "LiquidMetalButton",
     "category": "marketing",
     "description": "Marketing CTA block with a liquid-metal pill, token chrome field, glowing rim, and hover pour. Still when motion is reduced.",
+    "inspoUrl": "https://21st.dev/@johuniq/components/liquid-metal-button",
     "sectionCategory": "cta",
     "purpose": "Puts a tactile chrome CTA on a landing beat so a primary action feels poured rather than flat.",
     "bestFor": [
@@ -7413,6 +7518,7 @@
     "displayName": "MenuVertical",
     "category": "marketing",
     "description": "Stacked large-type marketing navigation that slides an arrow in and optionally skews labels on hover.",
+    "inspoUrl": "https://21st.dev/@berlix/components/menu-vertical",
     "sectionCategory": "navbar",
     "purpose": "Gives landing pages a bold vertical index of destinations with a kinetic cue that fires on hover and keyboard focus and stays on semantic tokens.",
     "bestFor": [
@@ -7493,6 +7599,7 @@
     "displayName": "MotionImageRevealSlider",
     "category": "marketing",
     "description": "Marketing still with a draggable rail that reveals a color photograph from a grayscale overlay, or compares two images.",
+    "inspoUrl": "https://21st.dev/@motiondotdev/components/motion-image-reveal-slider",
     "sectionCategory": "comparison",
     "purpose": "Lets a landing page show a before-and-after or color-versus-mono photograph as a single interactive frame instead of two static tiles.",
     "bestFor": [
@@ -7573,6 +7680,7 @@
     "displayName": "MotionLoadingProgressBar",
     "category": "marketing",
     "description": "Marketing loading capsule whose fill springs toward discrete progress jumps, still when motion is reduced.",
+    "inspoUrl": "https://21st.dev/@motiondotdev/components/motion-loading-progress-bar",
     "sectionCategory": "content",
     "purpose": "Shows a waiting or sync beat on a landing page as a spring-smoothed bar instead of a spinner or a stepped width snap.",
     "bestFor": [
@@ -7650,6 +7758,7 @@
     "displayName": "NavbarWithAnimatedMegaDropdown",
     "category": "marketing",
     "description": "Marketing header with animated desktop mega menus, a primary CTA, and a slide-in overlay for small screens.",
+    "inspoUrl": "https://21st.dev/@aghasisahakyan1/components/navbar-with-animated-mega-dropdown",
     "sectionCategory": "navbar",
     "purpose": "Lets visitors scan products and resources from a compact header, with a shared animated mega panel on desktop and a disclosure drawer on mobile.",
     "bestFor": [
@@ -7733,6 +7842,7 @@
     "displayName": "Newsletter5",
     "category": "marketing",
     "description": "Newsletter capture on a large-radius muted plate with a radial grid, square email field, and a sharp subscribe action.",
+    "inspoUrl": "https://ui.watermelon.sh/block/newsletter-5",
     "sectionCategory": "cta",
     "purpose": "Closes a marketing page with a focused email capture that keeps the grid and type as the visual, not a pill form.",
     "bestFor": [
@@ -7808,6 +7918,7 @@
     "displayName": "OrbitCardStack",
     "category": "marketing",
     "description": "Collapsed profile deck that fans into an orbit on hover, then lifts the active card without changing its color or angle.",
+    "inspoUrl": "https://componentry.dev/docs/components/orbit-card-stack",
     "sectionCategory": "team",
     "purpose": "Lets a landing introduce a small studio or product team as a tactile stacked deck instead of a flat grid.",
     "bestFor": [
@@ -7888,6 +7999,7 @@
     "displayName": "OrderConfirmationCard",
     "category": "marketing",
     "description": "Centered post-checkout card with a success mark, order id, payment, time, total, and a pill account action.",
+    "inspoUrl": "https://21st.dev/@kavikatiyar/components/order-confirmation-card",
     "sectionCategory": "content",
     "purpose": "Gives an ecommerce landing a trusted order-complete moment shoppers can read and act on without opening a dashboard.",
     "bestFor": [
@@ -7973,6 +8085,7 @@
     "displayName": "PricingCalendar",
     "category": "marketing",
     "description": "Two-month DayPicker-style calendar with a nightly price on each day and a lower-rate highlight.",
+    "inspoUrl": "https://21st.dev/@originui/components/calendar/pricing-calendar",
     "sectionCategory": "pricing",
     "purpose": "Lets a lodging or event landing page show nightly rates on a two-month calendar so visitors pick a date with the price already in view.",
     "bestFor": [
@@ -8051,6 +8164,7 @@
     "displayName": "Pricing28",
     "category": "marketing",
     "description": "Four-plan pricing section with avatar social proof, monthly/yearly billing tabs, tooltips, and grouped feature lists.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/pricing28",
     "sectionCategory": "pricing",
     "purpose": "Supports plan selection by comparing four subscriptions, billing periods, included features, and adoption proof.",
     "bestFor": [
@@ -8144,6 +8258,7 @@
     "displayName": "ProductQuickView4",
     "category": "marketing",
     "description": "Product quick-view dialog with an image carousel, optional price and color groups, size or format options, and a primary action plus details link.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/product-quick-view4",
     "sectionCategory": "product",
     "purpose": "Lets shoppers inspect imagery, price, variants, and purchase actions without leaving a product listing.",
     "bestFor": [
@@ -8220,6 +8335,7 @@
     "displayName": "Projects11",
     "category": "marketing",
     "description": "Masonry project photo wall in CSS columns — twelve unframed images that rise into view on scroll and lift with a brightness overlay on hover.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/projects11",
     "sectionCategory": "gallery",
     "purpose": "Creates an immersive portfolio impression through a dense, minimally captioned wall of project imagery.",
     "bestFor": [
@@ -8287,6 +8403,7 @@
     "displayName": "Projects13",
     "category": "marketing",
     "description": "Editorial project index: numbered rows with title, launch date, large description, and a small thumbnail, separated by hairline borders. Optional per-row hrefs render as title text links.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/projects13",
     "sectionCategory": "projects",
     "purpose": "Lets visitors evaluate a body of work through descriptive, chronological project rows rather than an image-led gallery.",
     "bestFor": [
@@ -8364,6 +8481,7 @@
     "displayName": "Projects16",
     "category": "marketing",
     "description": "Editorial four-image gallery with a medium-weight heading, a two-column staggered 4:3 and 4:5 photo grid, optional captions with text-link destinations, and a link action beneath a short paragraph. Extra images are not rendered.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/projects16",
     "sectionCategory": "projects",
     "purpose": "Balances a concise portfolio introduction with a spacious, art-directed selection of project photography.",
     "bestFor": [
@@ -8441,6 +8559,7 @@
     "displayName": "RandomLetterSwap",
     "category": "marketing",
     "description": "Horizontal marketing navigation whose link labels shuffle glyphs in a random vertical swap on hover.",
+    "inspoUrl": "https://21st.dev/@cnippet.dev/components/m-random-letter-swap-1",
     "sectionCategory": "navbar",
     "purpose": "Gives compact primary navigation a glitchy, kinetic type moment without leaving semantic tokens or reduced-motion support.",
     "bestFor": [
@@ -8515,6 +8634,7 @@
     "displayName": "ReceiptPricing",
     "category": "marketing",
     "description": "Pricing section that prints each plan as a thermal receipt with a monospace ledger, yearly discount, barcode, and serrated edges.",
+    "inspoUrl": "https://21st.dev/@n1m4mz/components/receipt-pricing",
     "sectionCategory": "pricing",
     "purpose": "Lets a landing page compare subscriptions as shop tickets so visitors can read line items, the subtotal, and the yearly discount in one glance.",
     "bestFor": [
@@ -8601,6 +8721,7 @@
     "displayName": "RideBookingForm",
     "category": "marketing",
     "description": "Two-column mobility booking block with a city line, oversized headline, connected pickup and dropoff fields, Today and Now chips, and a price CTA.",
+    "inspoUrl": "https://21st.dev/@ravikatiyar162/components/ride-booking-form",
     "sectionCategory": "form",
     "purpose": "Lets a ride-hailing landing page collect pickup, dropoff, and a departure window beside a city illustration.",
     "bestFor": [
@@ -8685,6 +8806,7 @@
     "displayName": "Scanner",
     "category": "marketing",
     "description": "Marketing canvas of interference bands that sweep like an oscilloscope, tinted with semantic tokens and still when motion is reduced.",
+    "inspoUrl": "https://reactbits.dev/backgrounds/scanner",
     "sectionCategory": "background",
     "purpose": "Creates a technical, signal-processing atmosphere for a backdrop or experimental campaign moment.",
     "bestFor": [
@@ -8746,6 +8868,7 @@
     "displayName": "ScrollBasedVelocity",
     "category": "marketing",
     "description": "Two opposing display-type rows that crawl sideways and surge when the page is scrolled.",
+    "inspoUrl": "https://componentry.dev/docs/components/scroll-based-velocity",
     "sectionCategory": "content",
     "purpose": "Turns a short campaign phrase into a kinetic band whose speed tracks scroll so a landing page feels physically tied to the reader.",
     "bestFor": [
@@ -8822,6 +8945,7 @@
     "displayName": "ShapeGrid",
     "category": "marketing",
     "description": "Marketing canvas of drifting outlined tiles — square, hexagon, circle, or triangle — that fill on hover and rest when motion is reduced.",
+    "inspoUrl": "https://reactbits.dev/backgrounds/shape-grid",
     "sectionCategory": "background",
     "purpose": "Provides a playful geometric backdrop that reacts to the pointer while leaving foreground messaging in control.",
     "bestFor": [
@@ -8884,6 +9008,7 @@
     "displayName": "Skiper39",
     "category": "marketing",
     "description": "Full-bleed crowd canvas with a centered uppercase label and walking Open Peeps figures along the lower stage.",
+    "inspoUrl": "https://skiper-ui.com/v1/skiper39",
     "sectionCategory": "hero",
     "purpose": "Fills a landing viewport with a living sidewalk so the page feels occupied before the next section.",
     "bestFor": [
@@ -8959,6 +9084,7 @@
     "displayName": "Skiper52",
     "category": "marketing",
     "description": "Rounded-3xl hover-expand image rack: idle strips stay 5rem, the active plate opens to 24rem.",
+    "inspoUrl": "https://skiper-ui.com/v1/skiper52",
     "sectionCategory": "gallery",
     "purpose": "Lets a landing page show many photographs in one row without losing a readable hero frame for the active image.",
     "bestFor": [
@@ -9038,6 +9164,7 @@
     "displayName": "Skiper67",
     "category": "marketing",
     "description": "Square looping teaser with a cursor-following Play mark that expands into a full-bleed player overlay.",
+    "inspoUrl": "https://skiper-ui.com/v1/skiper67",
     "sectionCategory": "content",
     "purpose": "Mirrors Skiper video player 001: a sharp 180px loop, exclusion-blend Play that springs with the pointer, then a clip-path expand into overlay controls.",
     "bestFor": [
@@ -9118,6 +9245,7 @@
     "displayName": "SplashCursor",
     "category": "marketing",
     "description": "Marketing canvas that trails ink splashes behind the pointer, mixing semantic token colors and staying still when motion is reduced.",
+    "inspoUrl": "https://reactbits.dev/animations/splash-cursor",
     "sectionCategory": "background",
     "purpose": "Adds expressive pointer-driven fluid motion for a dramatic campaign or creative portfolio surface.",
     "bestFor": [
@@ -9179,6 +9307,7 @@
     "displayName": "SplitText",
     "category": "marketing",
     "description": "Marketing headline that splits into characters or words and staggers each unit into view, honoring prefers-reduced-motion.",
+    "inspoUrl": "https://reactbits.dev/text-animations/split-text",
     "sectionCategory": "content",
     "purpose": "Turns a short headline into a staged entrance moment while preserving reduced-motion behavior.",
     "bestFor": [
@@ -9245,6 +9374,7 @@
     "displayName": "SpotlightCard",
     "category": "marketing",
     "description": "Marketing feature cards with a radial spotlight that tracks the pointer, using semantic tokens in light and dark.",
+    "inspoUrl": "https://reactbits.dev/components/spotlight-card",
     "sectionCategory": "features",
     "purpose": "Draws attention to a small set of feature panels by lighting the surface under the pointer, without leaving semantic tokens.",
     "bestFor": [
@@ -9324,6 +9454,7 @@
     "displayName": "SterlingGateKineticNavigation",
     "category": "marketing",
     "description": "Full-screen kinetic navigation that reveals a typography-heavy overlay from a focused header, with ripple hover on destinations.",
+    "inspoUrl": "https://21st.dev/@hardikkashiyani123456788/components/sterling-gate-kinetic-navigation",
     "sectionCategory": "navbar",
     "purpose": "Turns primary site navigation into an immersive index for luxury and agency pages that need a quiet, heavy-weighted reveal. The overlay does not contain focus or inert the page; consumers must add a Tab trap and background inertness.",
     "bestFor": [
@@ -9409,6 +9540,7 @@
     "displayName": "StickyContentWrapper",
     "category": "marketing",
     "description": "Split-screen marketing tour that pins a viewport while copy steps through headings, lists, and a CTA and the paired image scales and swaps.",
+    "inspoUrl": "https://21st.dev/@hyperiux/components/sticky-content-wrapper",
     "sectionCategory": "features",
     "purpose": "Keeps one product claim on screen while proof, rooms, or steps change beside it, without leaving semantic tokens.",
     "bestFor": [
@@ -9491,6 +9623,7 @@
     "displayName": "StoryScroll",
     "category": "marketing",
     "description": "Full-viewport marketing chapters that pin and stack on scroll, with huge type, hairlines, and semantic tone surfaces.",
+    "inspoUrl": "https://21st.dev/@boudjadjasamira/components/story-scroll",
     "sectionCategory": "content",
     "purpose": "Turns a landing narrative into a sequence of full-bleed sheets so each claim holds the viewport before the next one covers it.",
     "bestFor": [
@@ -9570,6 +9703,7 @@
     "displayName": "Team11",
     "category": "marketing",
     "description": "Bordered team header above a dense member grid that reveals a highlighted bio card on hover and keyboard focus from medium screens up.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/team11",
     "sectionCategory": "team",
     "purpose": "Makes a sizable team browsable while revealing richer biography details only on interaction.",
     "bestFor": [
@@ -9641,6 +9775,7 @@
     "displayName": "Team14",
     "category": "marketing",
     "description": "Split hiring section with a bordered statement panel, ghost CTA, and a row of tall member portraits that becomes a looping carousel on small screens.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/team14",
     "sectionCategory": "team",
     "purpose": "Pairs team visibility with a hiring message so culture and recruitment reinforce each other.",
     "bestFor": [
@@ -9712,6 +9847,7 @@
     "displayName": "Team17",
     "category": "marketing",
     "description": "Documentary team block with a 3:4 portrait grid, flowing alumni and collaborator name lists, and a two-column culture band.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/team17",
     "sectionCategory": "team",
     "purpose": "Documents the wider community around a team, including current members, alumni, collaborators, and culture.",
     "bestFor": [
@@ -9781,6 +9917,7 @@
     "displayName": "Testimonial",
     "category": "marketing",
     "description": "Marketing social-proof block with stacked quote cards, star ratings, avatars, and a grid layout that shows every review at once.",
+    "inspoUrl": "https://21st.dev/@uilayout.contact/components/testimonial",
     "sectionCategory": "testimonials",
     "purpose": "Puts named customer voices on a landing page so visitors can scan quotes, ratings, and attribution without leaving the page.",
     "bestFor": [
@@ -9864,6 +10001,7 @@
     "displayName": "TicketConfirmationCard",
     "category": "marketing",
     "description": "Digital receipt-style confirmation with success status, ticket ID, payment details, and barcode.",
+    "inspoUrl": "https://21st.dev/@ravikatiyar162/components/ticket-confirmation-card",
     "sectionCategory": "content",
     "purpose": "Shows a booking or payment confirmation as a perforated ticket slip visitors can read and scan on the page.",
     "bestFor": [
@@ -9948,6 +10086,7 @@
     "displayName": "TiltedCard",
     "category": "marketing",
     "description": "Marketing media card that tilts and lifts toward the pointer, with an overlay title and a caption that follows the cursor.",
+    "inspoUrl": "https://reactbits.dev/components/tilted-card",
     "sectionCategory": "features",
     "purpose": "Turns a poster, album, or product still into a tactile 3D object that reacts to the pointer without leaving semantic tokens.",
     "bestFor": [
@@ -10027,6 +10166,7 @@
     "displayName": "TrackerCard",
     "category": "marketing",
     "description": "Compact parcel card with a pill tracking control, conveyor package stage, destination flag, status headline, and a rounded scan mark.",
+    "inspoUrl": "https://21st.dev/@ravikatiyar162/components/tracker-card",
     "sectionCategory": "content",
     "purpose": "Puts a single in-transit package on a marketing page so shoppers can read status and open the full track without a dashboard.",
     "bestFor": [
@@ -10111,6 +10251,7 @@
     "displayName": "TubelightNavbar",
     "category": "marketing",
     "description": "Floating pill navigation with a sliding active highlight and a primary-token tubelight glow on the current item.",
+    "inspoUrl": "https://21st.dev/community/components?preview=%2F%40ayushmxxn%2Fcomponents%2Ftubelight-navbar",
     "sectionCategory": "navbar",
     "purpose": "Provides compact primary navigation with a conspicuous animated indicator for the active destination. A bottom-dock composition needs reserved page space and matching document scroll padding so the last content is not covered.",
     "bestFor": [
@@ -10180,6 +10321,7 @@
     "displayName": "VForm8",
     "category": "marketing",
     "description": "Three-step onboarding wizard with account details, plan cards and a newsletter opt-in, a confirm summary, and a success state.",
+    "inspoUrl": "https://21st.dev/@cnippet-dev/components/v-form-8",
     "sectionCategory": "form",
     "purpose": "Lets a product landing page collect a new account, a plan choice, and confirmation without sending visitors into a full checkout.",
     "bestFor": [
@@ -10263,6 +10405,7 @@
     "displayName": "Waitlist3",
     "category": "marketing",
     "description": "Split coming-soon waitlist with a company mark, launch badge, email form, overlapping avatars, copyright, and a full-height photo.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/waitlist3",
     "sectionCategory": "form",
     "purpose": "Captures launch interest while using social proof and full-height photography to make a pre-release product feel established.",
     "bestFor": [
@@ -10328,6 +10471,7 @@
     "displayName": "AgndexDashboard",
     "category": "dashboard",
     "description": "Developer portal for search indexes, API credentials, billing, and project settings.",
+    "inspoUrl": "https://ui.watermelon.sh/dashboard/agndex-dashboard",
     "sectionCategory": "application-shell",
     "purpose": "Frames a search-index product with a sidebar portal, project switcher, and credential or billing views.",
     "bestFor": [
@@ -10402,6 +10546,7 @@
     "displayName": "ApplicationShell1",
     "category": "dashboard",
     "description": "Collapsible application shell with grouped sidebar navigation, nested submenus, user footer, and a breadcrumb header.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/application-shell1",
     "sectionCategory": "application-shell",
     "purpose": "Provides persistent hierarchical navigation and page context for a multi-area desktop application.",
     "bestFor": [
@@ -10472,6 +10617,7 @@
     "displayName": "ApplicationShell13",
     "category": "dashboard",
     "description": "Top navigation dashboard shell with search, org and user menus, dropdown nav groups, a mobile drawer, and a bottom bar.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/application-shell13",
     "sectionCategory": "application-shell",
     "purpose": "Frames a responsive business application with global search, organization controls, and adaptive navigation.",
     "bestFor": [
@@ -10544,6 +10690,7 @@
     "displayName": "ChartGroup14",
     "category": "dashboard",
     "description": "Analytics bento dashboard with date presets, a custom range calendar, KPI cards, a revenue area chart, traffic donut, top pages, and active people.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/chart-group14",
     "sectionCategory": "analytics",
     "purpose": "Gives operators a broad performance snapshot with time controls, KPIs, trends, acquisition, content, and live activity.",
     "bestFor": [
@@ -10613,6 +10760,7 @@
     "displayName": "DemostackDashboard",
     "category": "dashboard",
     "description": "Product-demo workspace with organization switching, resource discovery, and team Demostack libraries.",
+    "inspoUrl": "https://ui.watermelon.sh/dashboard/demostack-dashboard",
     "sectionCategory": "application-shell",
     "purpose": "Frames a demo-enablement product with a collapsible sidebar, search top bar, and library or home views.",
     "bestFor": [
@@ -10687,6 +10835,7 @@
     "displayName": "EventManager",
     "category": "dashboard",
     "description": "Calendar event manager with month, week, day, and list views, search, and tag filters.",
+    "inspoUrl": "https://21st.dev/@vaib215/components/event-manager",
     "sectionCategory": "calendar",
     "purpose": "Supports finding, filtering, creating, and editing events across multiple calendar views.",
     "bestFor": [
@@ -10749,6 +10898,7 @@
     "displayName": "ForgotPassword2",
     "category": "dashboard",
     "description": "Split password-recovery screen with a left-aligned email form and a full-height photograph on large screens.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/forgot-password2",
     "sectionCategory": "authentication",
     "purpose": "Guides a user through password recovery while using branded photography to soften a utility screen.",
     "bestFor": [
@@ -10813,6 +10963,7 @@
     "displayName": "FullscreenCalendar",
     "category": "dashboard",
     "description": "Fullscreen month calendar with day cells, event lists, and today / month navigation.",
+    "inspoUrl": "https://21st.dev/@ahmedmayara/components/fullscreen-calendar",
     "sectionCategory": "calendar",
     "purpose": "Maximizes month-level schedule visibility for products where events are the primary workspace.",
     "bestFor": [
@@ -10872,6 +11023,7 @@
     "displayName": "GridlineDashboard",
     "category": "dashboard",
     "description": "Electrical-grid workspace for network modelling, asset flexibility, and operator workflows.",
+    "inspoUrl": "https://ui.watermelon.sh/dashboard/gridline-dashboard",
     "sectionCategory": "application-shell",
     "purpose": "Frames a DSO operations product with an icon rail, model status strip, workspace cards, and map-led modelling or flexibility views.",
     "bestFor": [
@@ -10947,6 +11099,7 @@
     "displayName": "Kanban",
     "category": "dashboard",
     "description": "Compact status kanban for roadmap features with owners, initiatives, and date ranges.",
+    "inspoUrl": "https://21st.dev/@haydenbleasel/components/kanban",
     "sectionCategory": "task-management",
     "purpose": "Visualizes planned work across status columns so teams can move features without a heavy card chrome.",
     "bestFor": [
@@ -11011,6 +11164,7 @@
     "displayName": "KanbanBoard",
     "category": "dashboard",
     "description": "Drag-and-drop kanban board with priority cards, assignees, and column counts.",
+    "inspoUrl": "https://21st.dev/@arihantcodes_1f7b8c4d/components/kanban-board",
     "sectionCategory": "task-management",
     "purpose": "Lets product teams move work across status columns with tags, due dates, and owners.",
     "bestFor": [
@@ -11071,6 +11225,7 @@
     "displayName": "Login4",
     "category": "dashboard",
     "description": "Centered borderless login with email, password, and full-width Google, Facebook, and GitHub buttons.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/login4",
     "sectionCategory": "authentication",
     "purpose": "Offers a compact sign-in path with credentials and several social authentication alternatives.",
     "bestFor": [
@@ -11134,6 +11289,7 @@
     "displayName": "OtpDialog",
     "category": "dashboard",
     "description": "Compact OTP verification dialog with four digit slots, resend countdown, and success or error feedback.",
+    "inspoUrl": "https://21st.dev/@ruixen.ui/components/otpdialog",
     "sectionCategory": "authentication",
     "purpose": "Confirms a one-time code from email or SMS in a focused overlay so a signed-in product can finish a sensitive step without leaving the page.",
     "bestFor": [
@@ -11202,6 +11358,7 @@
     "displayName": "PortfolioDashboard",
     "category": "dashboard",
     "description": "Insurance book workspace for policies, claims, renewals, and broker insights.",
+    "inspoUrl": "https://ui.watermelon.sh/dashboard/portfolio-dashboard",
     "sectionCategory": "application-shell",
     "purpose": "Frames a broker operations console with a 256px sidebar, policy cards, and risk activity.",
     "bestFor": [
@@ -11277,6 +11434,7 @@
     "displayName": "Table2",
     "category": "dashboard",
     "description": "Filterable invoices table with client search, row selection, bulk actions, status badges, and pagination.",
+    "inspoUrl": "https://21st.dev/@7ovr/components/table-2",
     "sectionCategory": "billing",
     "purpose": "Lets operators filter invoices by client, select rows, and run mark-paid, reminder, and download actions.",
     "bestFor": [
@@ -11349,6 +11507,7 @@
     "displayName": "Todo9",
     "category": "dashboard",
     "description": "Searchable todo list with tag filters, per-task tag editing, and keyboard-friendly reorder.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/todo9",
     "sectionCategory": "task-management",
     "purpose": "Helps users search, classify, complete, edit, and reorder a focused list of tasks.",
     "bestFor": [
@@ -11410,6 +11569,7 @@
     "displayName": "TwoFactor2",
     "category": "dashboard",
     "description": "Split two-factor screen with a compact six-digit code form and a full-height photograph on large screens.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/two-factor2",
     "sectionCategory": "authentication",
     "purpose": "Collects a one-time security code in a branded, split-screen verification step.",
     "bestFor": [
@@ -11475,6 +11635,7 @@
     "displayName": "TwoFactor5",
     "category": "dashboard",
     "description": "Two-column authenticator pairing card with a scannable QR plate and a six-digit verification form.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/two-factor5",
     "sectionCategory": "authentication",
     "purpose": "Guides initial authenticator pairing by keeping QR setup and code verification visible together.",
     "bestFor": [
@@ -11538,6 +11699,7 @@
     "displayName": "VerifyEmail1",
     "category": "dashboard",
     "description": "Centered email verification card with a six-digit code, destination address, and a resend link under the panel.",
+    "inspoUrl": "https://www.shadcnblocks.com/block/verify-email1",
     "sectionCategory": "authentication",
     "purpose": "Confirms email ownership with a focused code-entry step and a clear resend fallback.",
     "bestFor": [

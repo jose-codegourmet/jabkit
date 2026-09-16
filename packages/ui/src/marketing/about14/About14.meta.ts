@@ -39,6 +39,7 @@ export default {
       role: "Host and house-keeper section on the house page.",
     },
   ],
+  inspoUrl: "https://www.shadcnblocks.com/block/about14",
   tags: [
     "about",
     "marketing",

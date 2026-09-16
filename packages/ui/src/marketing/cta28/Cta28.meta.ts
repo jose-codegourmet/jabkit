@@ -34,6 +34,7 @@ export default {
   },
   recommendedAfter: ["features", "pricing", "testimonials"],
   recommendedBefore: ["footer"],
+  inspoUrl: "https://www.shadcnblocks.com/block/cta28",
   tags: ["cta", "marketing", "enterprise", "photography", "landing", "split"],
   dependencies: ["lucide-react"],
   registryDependencies: ["button"],

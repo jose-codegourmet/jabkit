@@ -45,6 +45,7 @@ export default {
   },
   recommendedAfter: ["hero", "features"],
   recommendedBefore: ["testimonials", "cta"],
+  inspoUrl: "https://21st.dev/@lavikatiyar/components/form",
   tags: [
     "form",
     "booking",

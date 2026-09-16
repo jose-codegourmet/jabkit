@@ -34,6 +34,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/yaasiinaxmed/serious-stingray-77",
   tags: ["button", "cta", "action", "outline", "wipe", "atom"],
   dependencies: ["@radix-ui/react-slot"],
   registryDependencies: [],

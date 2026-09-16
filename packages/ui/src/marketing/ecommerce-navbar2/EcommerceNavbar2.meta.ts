@@ -32,6 +32,7 @@ export default {
     supportsDarkMode: true,
   },
   recommendedBefore: ["hero", "content"],
+  inspoUrl: "https://www.shadcnblocks.com/block/ecommerce-navbar2",
   tags: [
     "navbar",
     "marketing",

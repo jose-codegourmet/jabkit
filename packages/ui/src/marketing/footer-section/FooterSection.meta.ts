@@ -37,6 +37,7 @@ export default {
     supportsDarkMode: true,
   },
   recommendedAfter: ["cta", "contact", "faq", "content"],
+  inspoUrl: "https://21st.dev/@arihantcodes_1f7b8c4d/components/footer-section",
   tags: [
     "footer",
     "marketing",

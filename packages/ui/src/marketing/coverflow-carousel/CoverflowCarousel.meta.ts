@@ -39,6 +39,7 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["testimonials", "pricing", "cta"],
+  inspoUrl: "https://21st.dev/@ruixen.ui/components/coverflow-carousel",
   tags: [
     "coverflow",
     "carousel",

@@ -39,6 +39,7 @@ export default {
   },
   recommendedAfter: ["features", "about"],
   recommendedBefore: ["pricing", "testimonials", "cta"],
+  inspoUrl: "https://www.shadcnblocks.com/block/case-studies13",
   tags: [
     "case-studies",
     "marketing",

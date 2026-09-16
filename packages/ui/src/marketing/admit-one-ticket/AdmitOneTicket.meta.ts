@@ -47,6 +47,7 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["pricing", "cta", "faq"],
+  inspoUrl: "https://21st.dev/@larsen66/components/admit-one-ticket",
   tags: [
     "ticket",
     "admit-one",

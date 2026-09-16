@@ -31,6 +31,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@vaib215/components/event-manager",
   tags: [
     "dashboard",
     "calendar",

@@ -30,6 +30,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://www.shadcnblocks.com/block/todo9",
   tags: ["dashboard", "todo", "tasks", "tags", "search", "list"],
   dependencies: ["lucide-react"],
   registryDependencies: [

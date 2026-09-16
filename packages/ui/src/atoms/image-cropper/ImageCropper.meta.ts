@@ -38,6 +38,7 @@ export default {
       role: "Studio and home embed loaded through next/dynamic with ssr: false so cached images initialize crop dimensions.",
     },
   ],
+  inspoUrl: "https://21st.dev/@ruixen.ui/components/image-cropper",
   tags: ["image", "crop", "upload", "zoom", "preview", "atom"],
   dependencies: ["lucide-react"],
   registryDependencies: ["button"],

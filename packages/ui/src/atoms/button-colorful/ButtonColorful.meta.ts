@@ -3,7 +3,7 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "button-colorful",
   displayName: "ButtonColorful",
-  version: "1.1.0",
+  version: "1.1.1",
   addedAt: "2026-09-15",
   description:
     "A compact rounded-md CTA with a chart-token indigo-to-pink wash that brightens on hover.",
@@ -34,6 +34,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@kokonutd/components/button-colorful",
   tags: ["button", "cta", "action", "gradient", "atom"],
   dependencies: ["@radix-ui/react-slot", "lucide-react"],
   registryDependencies: [],

@@ -39,6 +39,7 @@ export default {
   },
   recommendedAfter: ["hero", "about"],
   recommendedBefore: ["testimonials", "cta"],
+  inspoUrl: "https://componentry.dev/docs/components/orbit-card-stack",
   tags: ["team", "cards", "stack", "orbit", "hover", "portraits", "marketing"],
   dependencies: ["lucide-react"],
   registryDependencies: [],

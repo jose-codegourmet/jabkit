@@ -1,19 +1,25 @@
 export const cleverPantherMocks = {
   default: {
-    label: "Neumorphic slab",
+    title: "Monthly Balance",
+    subtitle: "Updated just now",
+    revenue: "$51,274",
+    revenueChange: "+8.5%",
+    costs: "$12,818",
+    costsChange: "+2.1%",
+    actionLabel: "View Full Report",
   },
   raised: {
-    label: "Raised slab",
+    title: "Monthly Balance",
     tone: "raised" as const,
   },
   compact: {
-    label: "Compact slab",
+    title: "Monthly Balance",
     tone: "field" as const,
     size: "sm" as const,
   },
   caption: {
-    label: "Captioned slab",
+    title: "Monthly Balance",
     size: "lg" as const,
-    children: "Night route",
+    children: "Live",
   },
 } as const;

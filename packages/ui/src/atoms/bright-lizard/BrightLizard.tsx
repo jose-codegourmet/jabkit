@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 // biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.
 import * as React from "react";
 import { cn } from "@/lib/cn";
@@ -17,8 +18,9 @@ const fontSizes = {
 
 export function BrightLizard({
   className,
-  label = "LOADING",
+  label = "Generating",
   size = "md",
+  style,
   ...props
 }: BrightLizardProps) {
   const glyphs = Array.from(label);
@@ -35,7 +37,8 @@ export function BrightLizard({
         {
           "--jk-bright-lizard-face": faceSizes[size],
           "--jk-bright-lizard-type": fontSizes[size],
-        } as React.CSSProperties
+          ...style,
+        } as CSSProperties
       }
       {...props}
     >
@@ -69,7 +72,7 @@ export function BrightLizard({
           border-radius: 50%;
           background-color: transparent;
           box-shadow:
-            0 10px 20px 0 var(--jk-card) inset,
+            0 10px 20px 0 var(--jk-foreground) inset,
             0 20px 30px 0 var(--jk-chart-4) inset,
             0 60px 60px 0 var(--jk-primary) inset;
         }
@@ -104,21 +107,21 @@ export function BrightLizard({
           0% {
             transform: rotate(90deg);
             box-shadow:
-              0 10px 20px 0 var(--jk-card) inset,
+              0 10px 20px 0 var(--jk-foreground) inset,
               0 20px 30px 0 var(--jk-chart-4) inset,
               0 60px 60px 0 var(--jk-primary) inset;
           }
           50% {
             transform: rotate(270deg);
             box-shadow:
-              0 10px 20px 0 var(--jk-card) inset,
+              0 10px 20px 0 var(--jk-foreground) inset,
               0 20px 10px 0 var(--jk-destructive) inset,
               0 40px 60px 0 var(--jk-ring) inset;
           }
           100% {
             transform: rotate(450deg);
             box-shadow:
-              0 10px 20px 0 var(--jk-card) inset,
+              0 10px 20px 0 var(--jk-foreground) inset,
               0 20px 30px 0 var(--jk-chart-4) inset,
               0 60px 60px 0 var(--jk-primary) inset;
           }

@@ -37,6 +37,7 @@ export default {
   },
   recommendedAfter: ["navbar"],
   recommendedBefore: ["features", "cta", "footer"],
+  inspoUrl: "https://skiper-ui.com/v1/skiper39",
   tags: [
     "marketing",
     "hero",

@@ -39,6 +39,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://www.shadcnblocks.com/block/login4",
   tags: ["auth", "dashboard", "form", "login", "oauth", "social"],
   dependencies: [],
   registryDependencies: ["button", "input", "label"],

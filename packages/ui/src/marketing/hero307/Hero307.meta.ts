@@ -43,6 +43,7 @@ export default {
   },
   recommendedAfter: ["navbar"],
   recommendedBefore: ["logos", "stats", "features", "about"],
+  inspoUrl: "https://www.shadcnblocks.com/block/hero307",
   tags: [
     "hero",
     "marketing",

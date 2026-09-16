@@ -4,10 +4,16 @@ import { CleverPanther } from "./CleverPanther";
 import { cleverPantherMocks } from "./CleverPanther.mocks";
 
 export default {
-  Default: () => <CleverPanther {...cleverPantherMocks.default} />,
+  Default: () => (
+    <div className="bg-background p-8 text-foreground">
+      <CleverPanther {...cleverPantherMocks.default} />
+    </div>
+  ),
   Tones: () => (
-    <CleverPanther {...cleverPantherMocks.raised} size="lg">
-      Night route
-    </CleverPanther>
+    <div className="flex flex-wrap items-end gap-6 bg-background p-8 text-foreground">
+      <CleverPanther {...cleverPantherMocks.compact} />
+      <CleverPanther {...cleverPantherMocks.raised} />
+      <CleverPanther {...cleverPantherMocks.caption} />
+    </div>
   ),
 };

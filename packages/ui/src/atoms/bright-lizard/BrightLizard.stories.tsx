@@ -16,7 +16,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: { ...brightLizardMocks.default },
   render: () => (
-    <BrightLizard {...brightLizardMocks.default} />
+    <>
+      <BrightLizard {...brightLizardMocks.default} />
+    </>
   ),
 };
 
@@ -26,7 +28,7 @@ export const Sizes: Story = {
     <div className="flex flex-wrap items-end gap-8 bg-background p-10 text-foreground">
       <BrightLizard {...brightLizardMocks.compact} />
       <BrightLizard {...brightLizardMocks.default} />
-      <BrightLizard label="READY" size="lg" />
+      <BrightLizard label="Preparing" size="lg" />
     </div>
   ),
 };

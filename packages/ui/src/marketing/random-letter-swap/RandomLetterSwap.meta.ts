@@ -37,6 +37,7 @@ export default {
     supportsDarkMode: true,
   },
   recommendedBefore: ["hero", "content"],
+  inspoUrl: "https://21st.dev/@cnippet.dev/components/m-random-letter-swap-1",
   tags: [
     "navbar",
     "marketing",

@@ -37,6 +37,7 @@ export default {
   },
   recommendedAfter: ["hero", "features"],
   recommendedBefore: ["pricing", "footer"],
+  inspoUrl: "https://21st.dev/@johuniq/components/liquid-metal-button",
   tags: [
     "cta",
     "button",

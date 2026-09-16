@@ -15,16 +15,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: { ...curvyEarwigMocks.default },
-  render: () => (
-    <CurvyEarwig {...curvyEarwigMocks.default} />
-  ),
+  render: () => <CurvyEarwig {...curvyEarwigMocks.default} />,
 };
 
 export const Expanded: Story = {
   args: { ...curvyEarwigMocks.expanded },
-  render: () => (
-    <CurvyEarwig {...curvyEarwigMocks.expanded} />
-  ),
+  render: () => <CurvyEarwig {...curvyEarwigMocks.expanded} />,
 };
 
 export const ThemeComparison: Story = {

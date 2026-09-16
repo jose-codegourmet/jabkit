@@ -16,12 +16,12 @@ const ThemeComparison = () => (
 
 export default {
   Default: () => (
-    <div className="w-full max-w-[44rem]">
+    <div className="w-full max-w-[36rem]">
       <CalendarWithLocalisation {...calendarWithLocalisationMocks.default} />
     </div>
   ),
   Variants: () => (
-    <div className="w-full max-w-[44rem]">
+    <div className="w-full max-w-[36rem]">
       <CalendarWithLocalisation {...calendarWithLocalisationMocks.english} />
     </div>
   ),

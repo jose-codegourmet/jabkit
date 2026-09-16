@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/0xnihilism/wise-lizard-57",
   tags: ["input", "username", "brutalism", "form", "atom"],
   dependencies: [],
   registryDependencies: [],

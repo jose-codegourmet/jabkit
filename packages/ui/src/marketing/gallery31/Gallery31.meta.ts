@@ -41,6 +41,7 @@ export default {
   },
   recommendedAfter: ["hero", "about"],
   recommendedBefore: ["content", "cta"],
+  inspoUrl: "https://www.shadcnblocks.com/block/gallery31",
   tags: [
     "gallery",
     "marketing",

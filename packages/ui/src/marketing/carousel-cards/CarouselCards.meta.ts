@@ -45,6 +45,7 @@ export default {
       role: "Home rooms strip; onFavoriteChange writes a local Set and a live region, with viewAllHref to the rooms index.",
     },
   ],
+  inspoUrl: "https://21st.dev/@kokonutd/components/carousel-cards",
   tags: [
     "carousel",
     "cards",

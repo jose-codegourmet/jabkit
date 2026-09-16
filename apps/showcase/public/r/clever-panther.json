@@ -1,11 +1,11 @@
 {
   "name": "clever-panther",
   "displayName": "CleverPanther",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "addedAt": "2026-09-15",
-  "description": "A 190 by 254 neumorphic slab with a 30px corner, dual 15px shadows, and no control-radius flatten.",
+  "description": "A compact dark balance card with revenue metrics, an aurora chart, and a report action.",
   "sectionCategory": "content",
-  "purpose": "Recreates the Gidarx clever-panther-6 extruded tile so a catalogue or empty state can sit on the page field without borrowing Button rounding.",
+  "purpose": "Presents a concise financial snapshot with two metrics and a trend line for dashboard or marketing surfaces.",
   "bestFor": [
     "decorative catalogue tiles",
     "empty-state or wait-list slabs",
@@ -26,7 +26,10 @@
     "alignment": "center"
   },
   "slots": [
-    "caption"
+    "heading",
+    "metrics",
+    "trend",
+    "action"
   ],
   "capabilities": {
     "supportsImage": false,
@@ -35,11 +38,13 @@
     "supportsCTA": false,
     "supportsDarkMode": true
   },
+  "inspoUrl": "https://uiverse.io/Gidarx/clever-panther-6",
   "tags": [
     "card",
-    "neumorphic",
-    "slab",
-    "content",
+    "finance",
+    "metrics",
+    "chart",
+    "dashboard",
     "atom"
   ],
   "dependencies": [
@@ -52,19 +57,21 @@
     "reducedMotion": true
   },
   "preview": {
-    "layout": "center"
+    "layout": "center",
+    "width": 520,
+    "height": 460
   },
   "category": "atoms",
   "files": [
     {
       "path": "clever-panther/CleverPanther.tsx",
       "type": "component",
-      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { CleverPantherProps } from \"./CleverPanther.types\";\n\nconst sizes = {\n  sm: \"jk-clever-panther-sm\",\n  md: \"jk-clever-panther-md\",\n  lg: \"jk-clever-panther-lg\",\n} as const;\n\nconst toneVars = {\n  field: \"var(--jk-background)\",\n  raised: \"var(--jk-card)\",\n} as const;\n\nexport function CleverPanther({\n  className,\n  children,\n  label = \"Neumorphic slab\",\n  size = \"md\",\n  tone = \"field\",\n  style,\n  ...props\n}: CleverPantherProps) {\n  return (\n    <div\n      aria-label={children ? undefined : label}\n      className={cn(\"jk-clever-panther\", sizes[size], className)}\n      data-size={size}\n      data-slot=\"clever-panther\"\n      data-tone={tone}\n      role={children ? undefined : \"img\"}\n      style={\n        {\n          \"--jk-clever-face\": toneVars[tone],\n          ...style,\n        } as React.CSSProperties\n      }\n      {...props}\n    >\n      <style href=\"jk-clever-panther\" precedence=\"default\">{`\n        .jk-clever-panther {\n          --jk-clever-w: 190px;\n          --jk-clever-h: 254px;\n          --jk-clever-r: 30px;\n          --jk-clever-s: 15px;\n          --jk-clever-blur: 30px;\n          box-sizing: border-box;\n          position: relative;\n          isolation: isolate;\n          width: var(--jk-clever-w);\n          height: var(--jk-clever-h);\n          overflow: hidden;\n          border: 0;\n          border-radius: var(--jk-clever-r);\n          background: var(--jk-clever-face);\n          box-shadow:\n            var(--jk-clever-s) var(--jk-clever-s) var(--jk-clever-blur)\n              oklch(from var(--jk-clever-face) calc(l - 0.05) c h),\n            calc(var(--jk-clever-s) * -1) calc(var(--jk-clever-s) * -1)\n              var(--jk-clever-blur)\n              oklch(from var(--jk-clever-face) calc(l + 0.14) c h);\n        }\n        .jk-clever-panther-sm {\n          --jk-clever-w: 142.5px;\n          --jk-clever-h: 190.5px;\n          --jk-clever-r: 22.5px;\n          --jk-clever-s: 11.25px;\n          --jk-clever-blur: 22.5px;\n        }\n        .jk-clever-panther-lg {\n          --jk-clever-w: 237.5px;\n          --jk-clever-h: 317.5px;\n          --jk-clever-r: 37.5px;\n          --jk-clever-s: 18.75px;\n          --jk-clever-blur: 37.5px;\n        }\n      `}</style>\n      {children ? (\n        <div className=\"relative z-10 flex h-full items-end p-5 text-sm leading-snug text-foreground\">\n          {children}\n        </div>\n      ) : null}\n    </div>\n  );\n}\n"
+      "content": "\"use client\";\n\nimport { ArrowUpRight, BarChart3 } from \"lucide-react\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { CleverPantherProps } from \"./CleverPanther.types\";\n\nconst sizes = {\n  sm: \"jk-clever-panther-sm\",\n  md: \"jk-clever-panther-md\",\n  lg: \"jk-clever-panther-lg\",\n} as const;\n\nexport function CleverPanther({\n  className,\n  title = \"Monthly Balance\",\n  subtitle = \"Updated just now\",\n  revenue = \"$51,274\",\n  revenueChange = \"+8.5%\",\n  costs = \"$12,818\",\n  costsChange = \"+2.1%\",\n  actionLabel = \"View Full Report\",\n  onAction,\n  tone = \"raised\",\n  size = \"md\",\n  children,\n  ...props\n}: CleverPantherProps) {\n  return (\n    <article\n      aria-label={title}\n      className={cn(\"jk-clever-panther\", sizes[size], className)}\n      data-size={size}\n      data-slot=\"clever-panther\"\n      data-tone={tone}\n      {...props}\n    >\n      <style href=\"jk-clever-panther\" precedence=\"default\">{`\n        .jk-clever-panther {\n          --jk-clever-w: 20rem;\n          box-sizing: border-box;\n          position: relative;\n          isolation: isolate;\n          width: var(--jk-clever-w);\n          overflow: hidden;\n          border: 1px solid var(--jk-border);\n          border-radius: 1rem;\n          background: var(--jk-card);\n          padding: 1.5rem;\n          color: var(--jk-card-foreground);\n          font-family: var(--jk-font-body);\n          box-shadow: 0 1.5rem 2.5rem color-mix(in oklab, var(--jk-foreground) 12%, transparent);\n        }\n        .jk-clever-panther::before {\n          content: \"\";\n          position: absolute;\n          top: -8rem;\n          left: 50%;\n          z-index: -1;\n          width: 16rem;\n          height: 16rem;\n          transform: translateX(-50%);\n          border-radius: 999px;\n          background: color-mix(in oklab, var(--jk-primary) 12%, transparent);\n          filter: blur(3rem);\n          transition: background 700ms ease;\n        }\n        .jk-clever-panther:hover::before {\n          background: color-mix(in oklab, var(--jk-primary) 18%, transparent);\n        }\n        .jk-clever-panther[data-tone=\"field\"] { background: var(--jk-background); }\n        .jk-clever-panther-sm { --jk-clever-w: 17.5rem; font-size: 0.875rem; }\n        .jk-clever-panther-lg { --jk-clever-w: 22.5rem; font-size: 1.0625rem; }\n        .jk-clever-panther-content { position: relative; display: flex; flex-direction: column; gap: 1.25rem; }\n        .jk-clever-panther-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; border-bottom: 1px solid var(--jk-border); padding-bottom: 1.25rem; }\n        .jk-clever-panther-heading { display: flex; align-items: center; gap: 0.75rem; }\n        .jk-clever-panther-icon { display: inline-flex; width: 2.25rem; height: 2.25rem; align-items: center; justify-content: center; border-radius: 0.5rem; background: color-mix(in oklab, var(--jk-primary) 12%, transparent); color: var(--jk-primary); }\n        .jk-clever-panther-title { font-weight: 600; color: var(--jk-card-foreground); }\n        .jk-clever-panther-subtitle, .jk-clever-panther-label { font-size: 0.75rem; color: var(--jk-muted-foreground); }\n        .jk-clever-panther-metrics { display: flex; }\n        .jk-clever-panther-metric { min-width: 0; flex: 1; }\n        .jk-clever-panther-metric + .jk-clever-panther-metric { border-left: 1px solid var(--jk-border); padding-left: 1.5rem; }\n        .jk-clever-panther-metric:not(:last-child) { padding-right: 1.5rem; }\n        .jk-clever-panther-value { margin-top: 0.25rem; font-size: 1.25rem; font-weight: 600; color: var(--jk-card-foreground); }\n        .jk-clever-panther-change { margin-top: 0.25rem; font-size: 0.75rem; font-weight: 500; color: var(--jk-primary); }\n        .jk-clever-panther-change[data-tone=\"negative\"] { color: var(--jk-destructive); }\n        .jk-clever-panther-chart { position: relative; height: 6rem; width: 100%; }\n        .jk-clever-panther-chart svg { display: block; width: 100%; height: 100%; overflow: visible; }\n        .jk-clever-panther-dot { position: absolute; top: 81%; right: -1px; width: 0.75rem; height: 0.75rem; transform: translate(50%, -50%); border-radius: 999px; background: var(--jk-primary); box-shadow: 0 0.25rem 0.75rem color-mix(in oklab, var(--jk-primary) 50%, transparent); }\n        .jk-clever-panther-dot::after { content: \"\"; position: absolute; inset: -0.25rem; border-radius: inherit; background: color-mix(in oklab, var(--jk-primary) 25%, transparent); animation: jk-clever-panther-pulse 1.8s ease-out infinite; }\n        .jk-clever-panther-footer { border-top: 1px solid var(--jk-border); padding-top: 1.25rem; }\n        .jk-clever-panther-action { display: inline-flex; width: 100%; align-items: center; justify-content: center; gap: 0.5rem; border: 1px solid color-mix(in oklab, var(--jk-primary) 55%, transparent); border-radius: 0.5rem; background: transparent; padding: 0.5rem 1rem; color: var(--jk-primary); font-size: 0.875rem; font-weight: 500; transition: background 300ms ease, color 300ms ease; }\n        .jk-clever-panther-action:hover { background: var(--jk-primary); color: var(--jk-primary-foreground); }\n        .jk-clever-panther-action:focus-visible { outline: 2px solid var(--jk-ring); outline-offset: 2px; }\n        @keyframes jk-clever-panther-pulse { 0%, 100% { transform: scale(0.75); opacity: 0.75; } 70% { transform: scale(1.8); opacity: 0; } }\n        @media (prefers-reduced-motion: reduce) { .jk-clever-panther-dot::after { animation: none; } .jk-clever-panther-action { transition: none; } }\n      `}</style>\n      <div className=\"jk-clever-panther-content\">\n        <header className=\"jk-clever-panther-header\">\n          <div className=\"jk-clever-panther-heading\">\n            <span className=\"jk-clever-panther-icon\" aria-hidden=\"true\">\n              <BarChart3 className=\"size-5\" strokeWidth={1.5} />\n            </span>\n            <div>\n              <p className=\"jk-clever-panther-title\">{title}</p>\n              <p className=\"jk-clever-panther-subtitle\">{subtitle}</p>\n            </div>\n          </div>\n          {children}\n        </header>\n        <div className=\"jk-clever-panther-metrics\">\n          <div className=\"jk-clever-panther-metric\">\n            <p className=\"jk-clever-panther-label\">Revenue</p>\n            <p className=\"jk-clever-panther-value\">{revenue}</p>\n            <p className=\"jk-clever-panther-change\">{revenueChange}</p>\n          </div>\n          <div className=\"jk-clever-panther-metric\">\n            <p className=\"jk-clever-panther-label\">Costs</p>\n            <p className=\"jk-clever-panther-value\">{costs}</p>\n            <p className=\"jk-clever-panther-change\" data-tone=\"negative\">\n              {costsChange}\n            </p>\n          </div>\n        </div>\n        <div className=\"jk-clever-panther-chart\" aria-hidden=\"true\">\n          <svg viewBox=\"0 0 300 100\" preserveAspectRatio=\"none\">\n            <title>Revenue trend</title>\n            <defs>\n              <linearGradient\n                id=\"jk-clever-panther-gradient\"\n                x1=\"0\"\n                y1=\"0\"\n                x2=\"0\"\n                y2=\"1\"\n              >\n                <stop\n                  offset=\"0%\"\n                  stopColor=\"var(--jk-primary)\"\n                  stopOpacity=\"0.2\"\n                />\n                <stop\n                  offset=\"100%\"\n                  stopColor=\"var(--jk-primary)\"\n                  stopOpacity=\"0\"\n                />\n              </linearGradient>\n            </defs>\n            <path\n              d=\"M0,65 C50,20 80,80 150,70 S250,50 300,85\"\n              fill=\"none\"\n              stroke=\"var(--jk-primary)\"\n              strokeWidth=\"2\"\n            />\n            <path\n              d=\"M0,100 L0,65 C50,20 80,80 150,70 S250,50 300,85 L300,100 Z\"\n              fill=\"url(#jk-clever-panther-gradient)\"\n            />\n          </svg>\n          <span className=\"jk-clever-panther-dot\" />\n        </div>\n        <footer className=\"jk-clever-panther-footer\">\n          <button\n            type=\"button\"\n            className=\"jk-clever-panther-action\"\n            onClick={onAction}\n          >\n            {actionLabel}\n            <ArrowUpRight aria-hidden=\"true\" className=\"size-4\" />\n          </button>\n        </footer>\n      </div>\n    </article>\n  );\n}\n"
     },
     {
       "path": "clever-panther/CleverPanther.types.ts",
       "type": "types",
-      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type CleverPantherSize = \"sm\" | \"md\" | \"lg\";\nexport type CleverPantherTone = \"field\" | \"raised\";\n\nexport interface CleverPantherProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n  /** Accessible name for the empty neumorphic slab. */\n  label?: string;\n  size?: CleverPantherSize;\n  /** `field` matches the page (inspo). `raised` sits on `--jk-card`. */\n  tone?: CleverPantherTone;\n}\n"
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type CleverPantherSize = \"sm\" | \"md\" | \"lg\";\nexport type CleverPantherTone = \"field\" | \"raised\";\n\nexport interface CleverPantherProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n  title?: string;\n  subtitle?: string;\n  revenue?: string;\n  revenueChange?: string;\n  costs?: string;\n  costsChange?: string;\n  actionLabel?: string;\n  onAction?: () => void;\n  size?: CleverPantherSize;\n  /** Selects the semantic surface token used by the card. */\n  tone?: CleverPantherTone;\n}\n"
     },
     {
       "path": "clever-panther/index.ts",
@@ -80,11 +87,11 @@
   "examples": [
     {
       "name": "Default",
-      "code": "<CleverPanther {...cleverPantherMocks.default} />"
+      "code": "<div className=\"bg-background p-8 text-foreground\">\n      <CleverPanther {...cleverPantherMocks.default} />\n    </div>"
     },
     {
       "name": "Tones",
-      "code": "<div className=\"flex flex-wrap items-end gap-8 bg-background p-10 text-foreground\">\n      <CleverPanther {...cleverPantherMocks.compact} />\n      <CleverPanther {...cleverPantherMocks.default} />\n      <CleverPanther {...cleverPantherMocks.raised} size=\"lg\">\n        Night route\n      </CleverPanther>\n    </div>"
+      "code": "<div className=\"flex flex-wrap items-end gap-8 bg-background p-10 text-foreground\">\n      <CleverPanther {...cleverPantherMocks.compact} />\n      <CleverPanther {...cleverPantherMocks.default} />\n      <CleverPanther {...cleverPantherMocks.raised} size=\"lg\">\n        <span className=\"text-xs text-muted-foreground\">Live</span>\n      </CleverPanther>\n    </div>"
     }
   ]
 }

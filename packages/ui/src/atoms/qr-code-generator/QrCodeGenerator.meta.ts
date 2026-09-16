@@ -35,6 +35,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@user_xn1cklas/components/qr-code-generator",
   tags: ["qr", "code", "download", "link", "atom"],
   dependencies: ["lucide-react"],
   registryDependencies: [],

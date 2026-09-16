@@ -75,7 +75,7 @@ function weekdayLabels(locale: string, start: number) {
   const formatter = new Intl.DateTimeFormat(locale, { weekday: "short" });
   return Array.from({ length: 7 }, (_, index) => {
     const day = new Date(2024, 0, 7 + start + index);
-    return formatter.format(day);
+    return formatter.format(day).slice(0, 2);
   });
 }
 
@@ -140,6 +140,17 @@ export function Calendar03({
   const [uncontrolledTime, setUncontrolledTime] = React.useState(
     defaultTime ?? "",
   );
+  const [focusedDay, setFocusedDay] = React.useState(() =>
+    startOfDay(selectedProp ?? defaultSelected ?? defaultMonth ?? new Date()),
+  );
+  const dayButtons = React.useRef(new Map<string, HTMLButtonElement>());
+  const moveFocus = React.useRef(false);
+
+  React.useEffect(() => {
+    if (!moveFocus.current) return;
+    dayButtons.current.get(dayKey(focusedDay))?.focus();
+    moveFocus.current = false;
+  }, [focusedDay]);
 
   const selected = selectedProp
     ? startOfDay(selectedProp)
@@ -149,6 +160,51 @@ export function Calendar03({
   const weeks = Array.from({ length: cells.length / 7 }, (_, index) =>
     cells.slice(index * 7, index * 7 + 7),
   );
+  const tabDay = isSameMonth(focusedDay, viewMonth)
+    ? focusedDay
+    : selected && isSameMonth(selected, viewMonth)
+      ? selected
+      : viewMonth;
+
+  const navigateDay = (
+    event: React.KeyboardEvent<HTMLButtonElement>,
+    day: Date,
+  ) => {
+    const next = startOfDay(day);
+    const weekOffset = (day.getDay() - weekStartsOn + 7) % 7;
+    const rtl = getComputedStyle(event.currentTarget).direction === "rtl";
+    const offsets: Record<string, number> = {
+      ArrowLeft: rtl ? 1 : -1,
+      ArrowRight: rtl ? -1 : 1,
+      ArrowUp: -7,
+      ArrowDown: 7,
+      Home: -weekOffset,
+      End: 6 - weekOffset,
+    };
+    if (event.key in offsets) {
+      next.setDate(next.getDate() + offsets[event.key]);
+    } else if (event.key === "PageUp" || event.key === "PageDown") {
+      const delta =
+        (event.key === "PageUp" ? -1 : 1) * (event.shiftKey ? 12 : 1);
+      const month = addMonths(day, delta);
+      const last = new Date(
+        month.getFullYear(),
+        month.getMonth() + 1,
+        0,
+      ).getDate();
+      next.setFullYear(
+        month.getFullYear(),
+        month.getMonth(),
+        Math.min(day.getDate(), last),
+      );
+    } else {
+      return;
+    }
+    event.preventDefault();
+    moveFocus.current = true;
+    setViewMonth(startOfMonth(next));
+    setFocusedDay(next);
+  };
 
   const pickDay = (day: Date) => {
     const next = startOfDay(day);
@@ -169,14 +225,14 @@ export function Calendar03({
       data-slot="calendar-03"
       aria-labelledby={headingId}
       className={cn(
-        "flex w-fit divide-x divide-border overflow-hidden rounded-md border border-border bg-background text-foreground",
+        "flex w-fit divide-x divide-border overflow-hidden rounded-[8px] border border-border bg-background text-foreground",
         className,
       )}
       {...props}
     >
       <div
         data-slot="calendar"
-        className="bg-background p-2 [--cell-size:1.75rem]"
+        className="shrink-0 bg-background p-3 [--cell-size:2rem]"
       >
         <div className="relative flex w-fit flex-col gap-4">
           <div className="absolute inset-x-0 top-0 flex w-full items-center justify-between gap-1">
@@ -225,7 +281,9 @@ export function Calendar03({
             {weeks.map((week) => (
               <div key={dayKey(week[0])} className="mt-2 flex w-full">
                 {week.map((day) => {
-                  const isSelected = selected ? isSameDay(day, selected) : false;
+                  const isSelected = selected
+                    ? isSameDay(day, selected)
+                    : false;
                   const isToday = isSameDay(day, startOfDay(new Date()));
                   const inMonth = isSameMonth(day, viewMonth);
                   return (
@@ -235,6 +293,14 @@ export function Calendar03({
                     >
                       <button
                         type="button"
+                        ref={(button) => {
+                          if (button)
+                            dayButtons.current.set(dayKey(day), button);
+                          else dayButtons.current.delete(dayKey(day));
+                        }}
+                        tabIndex={isSameDay(day, tabDay) ? 0 : -1}
+                        onFocus={() => setFocusedDay(day)}
+                        onKeyDown={(event) => navigateDay(event, day)}
                         onClick={() => pickDay(day)}
                         aria-pressed={isSelected}
                         aria-current={isToday ? "date" : undefined}
@@ -244,11 +310,9 @@ export function Calendar03({
                           day: "numeric",
                         })}
                         className={cn(
-                          "relative isolate z-10 flex aspect-square size-auto w-full min-w-[var(--cell-size)] items-center justify-center rounded-md border border-transparent p-0 text-sm leading-none font-normal transition-colors motion-reduce:transition-none",
+                          "relative isolate z-10 flex aspect-square size-auto w-full min-w-[var(--cell-size)] items-center justify-center rounded-[8px] border-0 p-0 text-sm leading-none font-normal transition-colors motion-reduce:transition-none",
                           controlFocus,
-                          inMonth
-                            ? "text-foreground"
-                            : "text-muted-foreground",
+                          inMonth ? "text-foreground" : "text-muted-foreground",
                           isSelected &&
                             "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground",
                           !isSelected && isToday && "bg-muted text-foreground",
@@ -266,13 +330,10 @@ export function Calendar03({
         </div>
       </div>
 
-      <div className="relative w-[249px] self-stretch overflow-hidden">
+      <div className="relative w-[249px] shrink-0 self-stretch overflow-hidden">
         <div className="absolute inset-0 grid min-h-0 grid-rows-[auto_minmax(0,1fr)] gap-4">
           <div className="space-y-2 px-4 pt-4">
-            <p
-              id={timesId}
-              className="text-center text-sm font-medium"
-            >
+            <p id={timesId} className="text-center text-sm font-medium">
               {strings.timesLabel}
             </p>
           </div>
@@ -297,15 +358,14 @@ export function Calendar03({
                       aria-pressed={active}
                       onClick={() => pickTime(slot.value)}
                       className={cn(
-                        "inline-flex h-7 w-full items-center justify-center rounded-md border px-2.5 text-[0.8rem] font-medium whitespace-nowrap transition-all select-none motion-reduce:transition-none disabled:pointer-events-none disabled:opacity-50",
+                        "inline-flex h-8 w-full items-center justify-center rounded-[8px] border px-3 text-xs font-medium whitespace-nowrap shadow-[0_1px_3px_0_color-mix(in_oklab,var(--jk-foreground)_10%,transparent),0_1px_2px_-1px_color-mix(in_oklab,var(--jk-foreground)_10%,transparent)] transition-colors select-none motion-reduce:transition-none disabled:pointer-events-none disabled:opacity-50",
                         controlFocus,
                         active &&
                           "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
                         !active &&
                           !taken &&
                           "border-border bg-background hover:bg-muted hover:text-foreground",
-                        taken &&
-                          "border-border bg-muted text-muted-foreground",
+                        taken && "border-border bg-muted text-muted-foreground",
                       )}
                     >
                       {slot.label}

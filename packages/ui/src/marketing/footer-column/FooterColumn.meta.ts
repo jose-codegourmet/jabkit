@@ -37,6 +37,7 @@ export default {
     supportsDarkMode: true,
   },
   recommendedAfter: ["cta", "contact", "faq", "content"],
+  inspoUrl: "https://21st.dev/@mvp_Subha/components/footer-column",
   tags: [
     "footer",
     "marketing",

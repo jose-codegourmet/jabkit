@@ -42,6 +42,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://ui.watermelon.sh/dashboard/agndex-dashboard",
   tags: [
     "dashboard",
     "developer-portal",

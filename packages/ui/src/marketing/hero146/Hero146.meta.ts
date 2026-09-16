@@ -37,6 +37,7 @@ export default {
   },
   recommendedAfter: ["navbar"],
   recommendedBefore: ["logos", "stats", "features", "about"],
+  inspoUrl: "https://www.shadcnblocks.com/block/hero146",
   tags: ["hero", "marketing", "video", "cta", "agents", "landing", "grid"],
   dependencies: [],
   registryDependencies: ["button"],

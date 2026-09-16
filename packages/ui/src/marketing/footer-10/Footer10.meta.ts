@@ -45,6 +45,7 @@ export default {
     supportsDarkMode: true,
   },
   recommendedAfter: ["cta", "contact", "faq", "content"],
+  inspoUrl: "https://ui.watermelon.sh/block/footer-10",
   tags: ["footer", "marketing", "contact", "newsletter", "landing", "banner"],
   dependencies: ["lucide-react"],
   registryDependencies: [],

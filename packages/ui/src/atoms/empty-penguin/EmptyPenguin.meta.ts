@@ -35,6 +35,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/andrew-demchenk0/empty-penguin-100",
   tags: ["switch", "toggle", "form", "control", "atom"],
   dependencies: [],
   registryDependencies: [],

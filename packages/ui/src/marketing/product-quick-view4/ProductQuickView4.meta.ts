@@ -46,6 +46,7 @@ export default {
       role: "Crop-format launcher on collection detail: presentation is dialog, showCartIcon is false, colors is empty, sizes are crop formats, and onAddToCart routes to the studio.",
     },
   ],
+  inspoUrl: "https://www.shadcnblocks.com/block/product-quick-view4",
   tags: [
     "product",
     "quick-view",

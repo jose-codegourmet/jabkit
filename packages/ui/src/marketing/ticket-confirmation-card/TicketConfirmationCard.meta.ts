@@ -46,6 +46,7 @@ export default {
   },
   recommendedAfter: ["hero", "form", "pricing"],
   recommendedBefore: ["faq", "testimonials", "footer"],
+  inspoUrl: "https://21st.dev/@ravikatiyar162/components/ticket-confirmation-card",
   tags: [
     "ticket",
     "confirmation",

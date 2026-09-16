@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/mobinkakei/loud-parrot-63",
   tags: ["pattern", "isometric", "background", "decorative", "atom"],
   dependencies: [],
   registryDependencies: [],

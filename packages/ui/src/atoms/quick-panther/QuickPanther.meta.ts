@@ -35,6 +35,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/Smit-Prajapati/quick-panther-98",
   tags: ["radio", "glider", "form", "glow", "atom"],
   dependencies: [],
   registryDependencies: [],

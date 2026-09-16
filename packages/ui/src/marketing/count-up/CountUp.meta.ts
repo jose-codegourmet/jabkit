@@ -28,6 +28,7 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["features", "case-studies"],
+  inspoUrl: "https://reactbits.dev/text-animations/count-up",
   tags: [
     "marketing",
     "text",

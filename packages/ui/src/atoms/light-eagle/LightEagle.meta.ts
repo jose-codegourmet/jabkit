@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/Juanes200122/light-eagle-27",
   tags: ["pattern", "hexagon", "cube", "geometric", "background", "atom"],
   dependencies: [],
   registryDependencies: [],

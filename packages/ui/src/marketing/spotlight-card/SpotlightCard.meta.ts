@@ -38,6 +38,7 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["pricing", "cta", "testimonials"],
+  inspoUrl: "https://reactbits.dev/components/spotlight-card",
   tags: [
     "spotlight",
     "card",

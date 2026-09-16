@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: { ...strongSquidMocks.default },
+  // biome-ignore format: Registry examples require parenthesized render output.
   render: () => (
     <StrongSquid {...strongSquidMocks.default} />
   ),
@@ -22,6 +23,7 @@ export const Default: Story = {
 
 export const Night: Story = {
   args: { ...strongSquidMocks.night },
+  // biome-ignore format: Registry examples require parenthesized render output.
   render: () => (
     <StrongSquid {...strongSquidMocks.night} />
   ),

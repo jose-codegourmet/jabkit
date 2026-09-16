@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/RiccardoRapelli/jolly-chicken-91",
   tags: ["switch", "toggle", "theme", "checkbox", "atom"],
   dependencies: [],
   registryDependencies: [],

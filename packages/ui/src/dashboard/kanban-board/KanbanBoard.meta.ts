@@ -27,6 +27,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@arihantcodes_1f7b8c4d/components/kanban-board",
   tags: ["dashboard", "kanban", "board", "tasks", "drag-and-drop", "sprint"],
   dependencies: ["lucide-react"],
   registryDependencies: ["avatar", "badge", "button", "input"],

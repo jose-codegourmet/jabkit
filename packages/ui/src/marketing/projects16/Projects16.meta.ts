@@ -42,6 +42,7 @@ export default {
       role: "Home project gallery with a data-motion-gallery marker and a CTA action link.",
     },
   ],
+  inspoUrl: "https://www.shadcnblocks.com/block/projects16",
   tags: [
     "projects",
     "gallery",

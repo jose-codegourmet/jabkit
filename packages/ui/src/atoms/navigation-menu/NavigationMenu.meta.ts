@@ -32,6 +32,7 @@ export default {
     supportsDarkMode: true,
   },
   recommendedAfter: ["button"],
+  inspoUrl: "https://21st.dev/@efferd/components/navigation-menu",
   tags: [
     "navigation-menu",
     "navbar",

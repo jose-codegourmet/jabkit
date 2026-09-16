@@ -41,6 +41,7 @@ export default {
   },
   recommendedAfter: ["hero", "about", "logos"],
   recommendedBefore: ["case-studies", "pricing", "testimonials", "cta"],
+  inspoUrl: "https://www.shadcnblocks.com/block/feature261",
   tags: [
     "feature",
     "marketing",

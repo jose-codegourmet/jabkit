@@ -38,6 +38,7 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["testimonials", "cta", "gallery"],
+  inspoUrl: "https://reactbits.dev/components/tilted-card",
   tags: [
     "tilt",
     "card",

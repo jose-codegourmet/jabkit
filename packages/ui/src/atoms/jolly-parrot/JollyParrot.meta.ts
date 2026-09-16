@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/uiverse-astronaut/jolly-parrot-30",
   tags: ["pattern", "diamond", "background", "atom"],
   dependencies: [],
   registryDependencies: [],

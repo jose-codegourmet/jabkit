@@ -38,6 +38,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://www.shadcnblocks.com/block/two-factor5",
   tags: [
     "auth",
     "authenticator",

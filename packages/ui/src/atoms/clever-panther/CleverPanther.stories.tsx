@@ -16,7 +16,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: { ...cleverPantherMocks.default },
   render: () => (
-    <CleverPanther {...cleverPantherMocks.default} />
+    <div className="bg-background p-8 text-foreground">
+      <CleverPanther {...cleverPantherMocks.default} />
+    </div>
   ),
 };
 
@@ -27,7 +29,7 @@ export const Tones: Story = {
       <CleverPanther {...cleverPantherMocks.compact} />
       <CleverPanther {...cleverPantherMocks.default} />
       <CleverPanther {...cleverPantherMocks.raised} size="lg">
-        Night route
+        <span className="text-xs text-muted-foreground">Live</span>
       </CleverPanther>
     </div>
   ),

@@ -35,6 +35,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/WattoRex/odd-fish-37",
   tags: ["card", "profile", "brutalist", "hover", "atom"],
   dependencies: [],
   registryDependencies: [],

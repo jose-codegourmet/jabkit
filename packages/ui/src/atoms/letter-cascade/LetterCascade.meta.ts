@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://componentry.dev/docs/components/letter-cascade",
   tags: ["text", "animation", "split-flap", "hover", "atom"],
   dependencies: [],
   registryDependencies: [],

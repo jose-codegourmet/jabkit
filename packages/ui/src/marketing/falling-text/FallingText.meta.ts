@@ -37,6 +37,7 @@ export default {
   },
   recommendedAfter: ["hero", "navbar"],
   recommendedBefore: ["features", "cta", "footer"],
+  inspoUrl: "https://reactbits.dev/text-animations/falling-text",
   tags: [
     "marketing",
     "text",

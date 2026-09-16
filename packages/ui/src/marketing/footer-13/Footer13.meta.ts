@@ -44,6 +44,7 @@ export default {
     supportsDarkMode: true,
   },
   recommendedAfter: ["cta", "contact", "faq", "content"],
+  inspoUrl: "https://ui.watermelon.sh/block/footer-13",
   tags: [
     "footer",
     "marketing",

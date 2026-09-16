@@ -50,6 +50,7 @@ export default {
   },
   recommendedAfter: ["hero", "features"],
   recommendedBefore: ["faq", "testimonials", "cta"],
+  inspoUrl: "https://21st.dev/@n1m4mz/components/receipt-pricing",
   tags: [
     "pricing",
     "receipt",

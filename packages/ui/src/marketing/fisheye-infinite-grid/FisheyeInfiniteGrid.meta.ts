@@ -39,6 +39,7 @@ export default {
   },
   recommendedAfter: ["hero"],
   recommendedBefore: ["testimonials", "cta"],
+  inspoUrl: "https://componentry.dev/docs/components/fisheye-infinite-grid",
   tags: [
     "gallery",
     "fisheye",

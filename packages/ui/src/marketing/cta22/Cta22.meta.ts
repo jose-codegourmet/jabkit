@@ -34,6 +34,7 @@ export default {
   },
   recommendedAfter: ["features", "pricing", "testimonials"],
   recommendedBefore: ["footer"],
+  inspoUrl: "https://www.shadcnblocks.com/block/cta22",
   tags: [
     "cta",
     "marketing",
