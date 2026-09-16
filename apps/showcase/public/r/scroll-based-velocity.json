@@ -1,0 +1,110 @@
+{
+  "name": "scroll-based-velocity",
+  "displayName": "ScrollBasedVelocity",
+  "version": "1.0.0",
+  "addedAt": "2026-09-16",
+  "description": "Two opposing display-type rows that crawl sideways and surge when the page is scrolled.",
+  "sectionCategory": "content",
+  "purpose": "Turns a short campaign phrase into a kinetic band whose speed tracks scroll so a landing page feels physically tied to the reader.",
+  "bestFor": [
+    "launch and manifesto landings",
+    "section breaks between hero and features",
+    "studio sites that want a kinetic type strip"
+  ],
+  "avoidFor": [
+    "dense documentation",
+    "forms or task UI where moving type would compete with controls"
+  ],
+  "tone": [
+    "experimental",
+    "confident",
+    "modern"
+  ],
+  "industries": [
+    "technology",
+    "media",
+    "ecommerce"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "high",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "headline"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero",
+    "navbar"
+  ],
+  "recommendedBefore": [
+    "features",
+    "cta",
+    "footer"
+  ],
+  "tags": [
+    "marketing",
+    "text",
+    "animation",
+    "marquee",
+    "scroll",
+    "velocity",
+    "headline",
+    "kinetic"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 420
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "scroll-based-velocity/ScrollBasedVelocity.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  useEffect,\n  useId,\n  useRef,\n  useState,\n  useSyncExternalStore,\n} from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { ScrollBasedVelocityProps } from \"./ScrollBasedVelocity.types\";\n\nconst defaults = {\n  text: \"Velocity Scroll\",\n  defaultVelocity: 5,\n};\n\nconst TEXT_CLASS =\n  \"text-center text-4xl font-bold tracking-[-0.02em] text-foreground drop-shadow-sm md:text-7xl md:leading-[5rem]\";\n\nfunction subscribeReducedMotion(onChange: () => void) {\n  const media = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n  media.addEventListener(\"change\", onChange);\n  return () => media.removeEventListener(\"change\", onChange);\n}\n\nfunction getReducedMotion() {\n  return window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;\n}\n\nfunction useReducedMotion() {\n  return useSyncExternalStore(\n    subscribeReducedMotion,\n    getReducedMotion,\n    () => false,\n  );\n}\n\nfunction wrapUnit(value: number, unit: number) {\n  if (unit <= 0) return 0;\n  return ((value % unit) + unit) % unit;\n}\n\nfunction VelocityRow({\n  text,\n  baseVelocity,\n  reducedMotion,\n  textClassName,\n}: {\n  text: string;\n  baseVelocity: number;\n  reducedMotion: boolean;\n  textClassName?: string;\n}) {\n  const viewportRef = useRef<HTMLDivElement>(null);\n  const unitRef = useRef<HTMLSpanElement>(null);\n  const trackRef = useRef<HTMLDivElement>(null);\n  const [copies, setCopies] = useState(6);\n\n  useEffect(() => {\n    const viewport = viewportRef.current;\n    const unit = unitRef.current;\n    if (!viewport || !unit) return;\n\n    const measure = () => {\n      const unitWidth = unit.offsetWidth;\n      if (unitWidth <= 0) return;\n      setCopies(Math.max(4, Math.ceil(viewport.offsetWidth / unitWidth) + 2));\n    };\n\n    measure();\n    const observer = new ResizeObserver(measure);\n    observer.observe(viewport);\n    observer.observe(unit);\n    return () => observer.disconnect();\n  }, []);\n\n  useEffect(() => {\n    const track = trackRef.current;\n    if (!track) return;\n\n    if (reducedMotion) {\n      track.style.transform = \"translate3d(0,0,0)\";\n      return;\n    }\n\n    let offset = 0;\n    let lastTime = performance.now();\n    let lastScroll = window.scrollY;\n    let smoothVelocity = 0;\n    let direction = 1;\n    let frame = 0;\n\n    const tick = (now: number) => {\n      const dt = Math.min(0.048, (now - lastTime) / 1000);\n      lastTime = now;\n\n      const scrollY = window.scrollY;\n      const raw = (scrollY - lastScroll) / Math.max(dt, 1 / 120);\n      lastScroll = scrollY;\n      smoothVelocity += (raw - smoothVelocity) * Math.min(1, dt * 9);\n\n      if (smoothVelocity < -8) direction = -1;\n      else if (smoothVelocity > 8) direction = 1;\n\n      const boost = Math.min(6, Math.abs(smoothVelocity) / 220);\n      let travel = direction * baseVelocity * 14 * dt;\n      travel += direction * travel * boost;\n      offset += travel;\n\n      const unitWidth = unitRef.current?.offsetWidth ?? 0;\n      const wrapped = wrapUnit(offset, unitWidth);\n      track.style.transform = `translate3d(${-wrapped}px,0,0)`;\n      frame = requestAnimationFrame(tick);\n    };\n\n    frame = requestAnimationFrame(tick);\n    return () => cancelAnimationFrame(frame);\n  }, [baseVelocity, reducedMotion]);\n\n  const typeClass = cn(\"inline-block pr-[0.35em]\", TEXT_CLASS, textClassName);\n\n  return (\n    <div\n      className=\"w-full overflow-hidden whitespace-nowrap\"\n      data-slot=\"scroll-based-velocity-row\"\n      ref={viewportRef}\n    >\n      <div\n        className=\"inline-flex will-change-transform\"\n        data-slot=\"scroll-based-velocity-track\"\n        ref={trackRef}\n      >\n        {Array.from({ length: copies }, (_, index) => (\n          <span\n            className={typeClass}\n            // biome-ignore lint/suspicious/noArrayIndexKey: copies are identical filler\n            key={`${text}-${index}`}\n            ref={index === 0 ? unitRef : undefined}\n          >\n            {text}\n          </span>\n        ))}\n      </div>\n    </div>\n  );\n}\n\nexport function ScrollBasedVelocity({\n  className,\n  text = defaults.text,\n  defaultVelocity = defaults.defaultVelocity,\n  textClassName,\n  ...props\n}: ScrollBasedVelocityProps) {\n  const headingId = useId();\n  const reducedMotion = useReducedMotion();\n  const speed = Math.abs(defaultVelocity) || defaults.defaultVelocity;\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      className={cn(\n        \"relative w-full overflow-hidden bg-background py-16 text-foreground\",\n        className,\n      )}\n      data-slot=\"scroll-based-velocity\"\n      {...props}\n    >\n      <h2 className=\"sr-only\" id={headingId}>\n        {text}\n      </h2>\n      <div aria-hidden=\"true\" className=\"flex flex-col gap-1\">\n        <VelocityRow\n          baseVelocity={speed}\n          key={`${text}-fwd`}\n          reducedMotion={reducedMotion}\n          text={text}\n          textClassName={textClassName}\n        />\n        <VelocityRow\n          baseVelocity={-speed}\n          key={`${text}-rev`}\n          reducedMotion={reducedMotion}\n          text={text}\n          textClassName={textClassName}\n        />\n      </div>\n      <div\n        aria-hidden=\"true\"\n        className=\"pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background to-background/0\"\n      />\n      <div\n        aria-hidden=\"true\"\n        className=\"pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background to-background/0\"\n      />\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "scroll-based-velocity/ScrollBasedVelocity.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface ScrollBasedVelocityProps extends HTMLAttributes<HTMLElement> {\n  /** Phrase repeated across each velocity row. */\n  text?: string;\n  /** Base travel speed. Sign of each row is applied internally. */\n  defaultVelocity?: number;\n  /** Classes applied to the scrolling type, matching the Componentry text slot. */\n  textClassName?: string;\n}\n"
+    },
+    {
+      "path": "scroll-based-velocity/index.ts",
+      "type": "index",
+      "content": "export { ScrollBasedVelocity } from \"./ScrollBasedVelocity\";\nexport type { ScrollBasedVelocityProps } from \"./ScrollBasedVelocity.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background text-foreground\">\n      <ScrollBasedVelocity {...scrollBasedVelocityMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background text-foreground\">\n      <ScrollBasedVelocity {...scrollBasedVelocityMocks.alternate} />\n    </div>"
+    }
+  ]
+}
