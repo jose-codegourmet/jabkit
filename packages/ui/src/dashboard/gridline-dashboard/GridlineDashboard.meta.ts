@@ -43,6 +43,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://ui.watermelon.sh/dashboard/gridline-dashboard",
   tags: [
     "dashboard",
     "gridline",

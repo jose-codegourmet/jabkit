@@ -5,9 +5,15 @@ export type CleverPantherTone = "field" | "raised";
 
 export interface CleverPantherProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
-  /** Accessible name for the empty neumorphic slab. */
-  label?: string;
+  title?: string;
+  subtitle?: string;
+  revenue?: string;
+  revenueChange?: string;
+  costs?: string;
+  costsChange?: string;
+  actionLabel?: string;
+  onAction?: () => void;
   size?: CleverPantherSize;
-  /** `field` matches the page (inspo). `raised` sits on `--jk-card`. */
+  /** Selects the semantic surface token used by the card. */
   tone?: CleverPantherTone;
 }

@@ -45,6 +45,7 @@ export default {
   },
   recommendedAfter: ["hero", "features"],
   recommendedBefore: ["testimonials", "cta"],
+  inspoUrl: "https://21st.dev/@ravikatiyar162/components/ride-booking-form",
   tags: [
     "ride",
     "booking",

@@ -56,6 +56,7 @@ export default {
       role: "Studio guide sections on how-it-works.",
     },
   ],
+  inspoUrl: "https://www.shadcnblocks.com/block/content1",
   tags: [
     "content",
     "marketing",

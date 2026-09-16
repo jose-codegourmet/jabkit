@@ -34,6 +34,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/themrsami/lovely-yak-39",
   tags: ["card", "analytics", "dashboard", "cta", "atom"],
   dependencies: [],
   registryDependencies: [],

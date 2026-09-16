@@ -39,6 +39,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://www.shadcnblocks.com/block/two-factor2",
   tags: [
     "auth",
     "dashboard",

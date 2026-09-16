@@ -40,6 +40,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@7ovr/components/table-2",
   tags: [
     "dashboard",
     "table",

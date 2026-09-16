@@ -39,6 +39,7 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["testimonials", "cta"],
+  inspoUrl: "https://skiper-ui.com/v1/skiper52",
   tags: [
     "gallery",
     "hover",

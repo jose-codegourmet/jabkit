@@ -34,6 +34,7 @@ export default {
   },
   recommendedAfter: ["hero", "navbar"],
   recommendedBefore: ["related-content", "cta", "footer"],
+  inspoUrl: "https://www.shadcnblocks.com/block/content2",
   tags: [
     "content",
     "marketing",

@@ -43,6 +43,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@ruixen.ui/components/otpdialog",
   tags: [
     "auth",
     "dashboard",

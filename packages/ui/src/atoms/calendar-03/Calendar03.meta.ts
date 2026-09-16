@@ -3,7 +3,7 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "calendar-03",
   displayName: "Calendar03",
-  version: "1.1.0",
+  version: "1.2.0",
   addedAt: "2026-09-15",
   description:
     "Single-month appointment calendar paired with a scrollable list of time slots.",
@@ -32,6 +32,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@shadcnspace/components/calendar-03",
   tags: ["calendar", "appointment", "time", "booking", "atom"],
   dependencies: ["lucide-react"],
   registryDependencies: ["scroll-area"],

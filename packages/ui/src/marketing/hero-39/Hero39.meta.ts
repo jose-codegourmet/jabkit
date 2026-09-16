@@ -45,6 +45,7 @@ export default {
   },
   recommendedAfter: ["navbar"],
   recommendedBefore: ["logos", "features", "about", "cta"],
+  inspoUrl: "https://ui.watermelon.sh/block/hero-39",
   tags: [
     "hero",
     "marketing",

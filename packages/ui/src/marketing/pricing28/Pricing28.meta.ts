@@ -57,6 +57,7 @@ export default {
       role: "Pricing concepts with a controlled billing interval and empty people, trustItems, and badges.",
     },
   ],
+  inspoUrl: "https://www.shadcnblocks.com/block/pricing28",
   tags: [
     "pricing",
     "marketing",

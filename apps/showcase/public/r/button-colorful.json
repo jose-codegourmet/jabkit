@@ -1,7 +1,7 @@
 {
   "name": "button-colorful",
   "displayName": "ButtonColorful",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "addedAt": "2026-09-15",
   "description": "A compact rounded-md CTA with a chart-token indigo-to-pink wash that brightens on hover.",
   "sectionCategory": "action",
@@ -36,6 +36,7 @@
     "supportsCTA": true,
     "supportsDarkMode": true
   },
+  "inspoUrl": "https://21st.dev/@kokonutd/components/button-colorful",
   "tags": [
     "button",
     "cta",
@@ -62,12 +63,12 @@
     {
       "path": "button-colorful/ButtonColorful.tsx",
       "type": "component",
-      "content": "import { Slot } from \"@radix-ui/react-slot\";\nimport { ArrowRight } from \"lucide-react\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { ButtonColorfulProps } from \"./ButtonColorful.types\";\n\nexport function ButtonColorful({\n  className,\n  children,\n  label = \"Explore Components\",\n  showIcon = true,\n  asChild = false,\n  type,\n  ...props\n}: ButtonColorfulProps) {\n  const Component = asChild ? Slot : \"button\";\n  const content = children ?? label;\n\n  return (\n    <Component\n      className={cn(\n        \"jk-button-colorful group relative inline-flex h-10 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-md bg-foreground px-4 py-2 font-medium text-sm whitespace-nowrap text-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50\",\n        className,\n      )}\n      data-slot=\"button-colorful\"\n      type={asChild ? undefined : (type ?? \"button\")}\n      {...props}\n    >\n      <style href=\"jk-button-colorful\" precedence=\"default\">{`\n        .jk-button-colorful-wash {\n          background: linear-gradient(\n            to right,\n            var(--jk-chart-1),\n            var(--jk-chart-4),\n            color-mix(in oklab, var(--jk-chart-4), var(--jk-destructive) 55%)\n          );\n          filter: blur(2px);\n          opacity: 0.4;\n        }\n        .jk-button-colorful:hover .jk-button-colorful-wash,\n        .jk-button-colorful:focus-visible .jk-button-colorful-wash {\n          opacity: 0.8;\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-button-colorful-wash {\n            transition: opacity 500ms ease;\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-button-colorful,\n          .jk-button-colorful-wash {\n            transition: none;\n          }\n        }\n      `}</style>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-button-colorful-wash pointer-events-none absolute inset-0\"\n      />\n      <span className=\"relative flex items-center justify-center gap-2\">\n        <span>{content}</span>\n        {showIcon ? (\n          <ArrowRight\n            aria-hidden=\"true\"\n            className=\"size-3.5 shrink-0 text-background/90\"\n          />\n        ) : null}\n      </span>\n    </Component>\n  );\n}\n"
+      "content": "import { Slot } from \"@radix-ui/react-slot\";\nimport { ArrowUpRight } from \"lucide-react\";\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { ButtonColorfulProps } from \"./ButtonColorful.types\";\n\nexport function ButtonColorful({\n  className,\n  children,\n  label = \"Explore Components\",\n  showIcon = true,\n  asChild = false,\n  type,\n  ...props\n}: ButtonColorfulProps) {\n  const Component = asChild ? Slot : \"button\";\n  const child = asChild ? React.Children.only(children) : null;\n  const content = React.isValidElement<{ children?: React.ReactNode }>(child)\n    ? child.props.children\n    : (children ?? label);\n  const buttonContent = (\n    <>\n      <span\n        aria-hidden=\"true\"\n        className=\"jk-button-colorful-wash pointer-events-none absolute inset-0\"\n      />\n      <span className=\"relative flex items-center justify-center gap-2\">\n        <span>{content}</span>\n        {showIcon ? (\n          <ArrowUpRight\n            aria-hidden=\"true\"\n            className=\"size-3.5 shrink-0 text-background/90\"\n          />\n        ) : null}\n      </span>\n    </>\n  );\n\n  return (\n    <>\n      <style href=\"jk-button-colorful\" precedence=\"default\">{`\n        .jk-button-colorful-wash {\n          background: linear-gradient(\n            to right,\n            var(--jk-chart-1),\n            var(--jk-chart-4),\n            color-mix(in oklab, var(--jk-chart-4), var(--jk-destructive) 55%)\n          );\n          filter: blur(8px);\n          opacity: 0.4;\n        }\n        .jk-button-colorful:hover .jk-button-colorful-wash,\n        .jk-button-colorful:focus-visible .jk-button-colorful-wash {\n          opacity: 0.8;\n        }\n        @media (prefers-reduced-motion: no-preference) {\n          .jk-button-colorful-wash {\n            transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1);\n          }\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .jk-button-colorful,\n          .jk-button-colorful-wash {\n            transition: none;\n          }\n        }\n      `}</style>\n      <Component\n        className={cn(\n          \"jk-button-colorful group relative inline-flex h-10 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-md bg-foreground px-4 py-2 font-medium text-sm whitespace-nowrap text-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50\",\n          className,\n        )}\n        data-slot=\"button-colorful\"\n        type={asChild ? undefined : (type ?? \"button\")}\n        {...props}\n      >\n        {React.isValidElement(child)\n          ? React.cloneElement(child, undefined, buttonContent)\n          : buttonContent}\n      </Component>\n    </>\n  );\n}\n"
     },
     {
       "path": "button-colorful/ButtonColorful.types.ts",
       "type": "types",
-      "content": "import type { ButtonHTMLAttributes, ReactNode } from \"react\";\n\nexport interface ButtonColorfulProps\n  extends ButtonHTMLAttributes<HTMLButtonElement> {\n  children?: ReactNode;\n  label?: string;\n  showIcon?: boolean;\n  asChild?: boolean;\n}\n"
+      "content": "import type { ButtonHTMLAttributes, ReactNode } from \"react\";\n\nexport interface ButtonColorfulProps\n  extends ButtonHTMLAttributes<HTMLButtonElement> {\n  children?: ReactNode;\n  label?: string;\n  showIcon?: boolean;\n  /** Style a single child element (for example an anchor) as the button. */\n  asChild?: boolean;\n}\n"
     },
     {
       "path": "button-colorful/index.ts",
@@ -83,11 +84,15 @@
   "examples": [
     {
       "name": "Default",
-      "code": "<ButtonColorful {...buttonColorfulMocks.default} />"
+      "code": "<>\n      <ButtonColorful {...buttonColorfulMocks.default} />\n    </>"
     },
     {
       "name": "LabelOnly",
-      "code": "<ButtonColorful {...buttonColorfulMocks.labelOnly} />"
+      "code": "<>\n      <ButtonColorful {...buttonColorfulMocks.labelOnly} />\n    </>"
+    },
+    {
+      "name": "AsLink",
+      "code": "<ButtonColorful asChild>\n      <a href=\"/components\">Explore Components</a>\n    </ButtonColorful>"
     }
   ]
 }

@@ -31,6 +31,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@ahmedmayara/components/fullscreen-calendar",
   tags: ["dashboard", "calendar", "schedule", "events", "month"],
   dependencies: ["lucide-react"],
   registryDependencies: ["button"],

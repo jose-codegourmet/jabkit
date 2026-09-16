@@ -47,6 +47,7 @@ export default {
   },
   recommendedAfter: ["hero", "product", "pricing"],
   recommendedBefore: ["faq", "testimonials", "footer"],
+  inspoUrl: "https://21st.dev/@kavikatiyar/components/order-confirmation-card",
   tags: [
     "order",
     "confirmation",

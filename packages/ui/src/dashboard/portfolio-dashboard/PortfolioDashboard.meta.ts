@@ -44,6 +44,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://ui.watermelon.sh/dashboard/portfolio-dashboard",
   tags: [
     "dashboard",
     "portfolio",

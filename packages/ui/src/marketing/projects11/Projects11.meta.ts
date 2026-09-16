@@ -32,6 +32,7 @@ export default {
   },
   recommendedAfter: ["hero", "about"],
   recommendedBefore: ["content", "cta"],
+  inspoUrl: "https://www.shadcnblocks.com/block/projects11",
   tags: [
     "projects",
     "gallery",

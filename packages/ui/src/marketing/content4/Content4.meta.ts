@@ -40,6 +40,7 @@ export default {
       role: "Long-form story body with breadcrumbs, author byline, and mapped blocks; the topic badge lives outside the component.",
     },
   ],
+  inspoUrl: "https://www.shadcnblocks.com/block/content4",
   tags: [
     "content",
     "marketing",

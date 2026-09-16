@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@haydenbleasel/components/kanban",
   tags: [
     "dashboard",
     "kanban",

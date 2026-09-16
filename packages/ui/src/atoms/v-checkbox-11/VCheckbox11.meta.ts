@@ -36,6 +36,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@cnippet-dev/components/v-checkbox-11",
   tags: ["checkbox", "availability", "schedule", "grid", "form", "atom"],
   dependencies: ["lucide-react"],
   registryDependencies: [],

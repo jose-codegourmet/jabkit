@@ -93,7 +93,7 @@ function weekdayLabels(bcp47: string, start: number) {
   const formatter = new Intl.DateTimeFormat(bcp47, { weekday: "short" });
   return Array.from({ length: 7 }, (_, index) => {
     const day = new Date(2024, 0, 7 + start + index);
-    return formatter.format(day);
+    return formatter.format(day).replace(/\.$/, "").slice(0, 2);
   });
 }
 
@@ -213,7 +213,7 @@ export function CalendarWithLocalisation({
       aria-labelledby={headingId}
       aria-describedby={descriptionId}
       className={cn(
-        "w-full max-w-[44rem] overflow-hidden rounded-[--radius] border border-border bg-card text-card-foreground shadow-sm",
+        "w-full max-w-[36rem] overflow-hidden rounded-2xl border border-border bg-card text-card-foreground shadow-sm",
         className,
       )}
       {...props}
@@ -249,7 +249,7 @@ export function CalendarWithLocalisation({
         </label>
       </header>
 
-      <div className="grid gap-6 p-4 sm:grid-cols-2">
+      <div className="grid gap-2 p-4 sm:grid-cols-2">
         {months.map((month, index) => (
           <MonthGrid
             key={dayKey(month)}
@@ -346,7 +346,7 @@ function MonthGrid({
           <span className="size-8" />
         )}
       </div>
-      <div className="grid grid-cols-7 gap-1 text-center">
+      <div className="grid grid-cols-7 gap-0 text-center">
         {weekdays.map((label) => (
           <span
             key={`${bcp47}-${label}`}
@@ -364,6 +364,7 @@ function MonthGrid({
           const isEnd = end ? isSameDay(day, end) : false;
           const selectedDay = isStart || isEnd;
           const mid = isInRange(day, selected);
+          const hasRange = Boolean(start && end && !isSameDay(start, end));
           return (
             <button
               key={cell.key}
@@ -376,11 +377,17 @@ function MonthGrid({
                 day: "numeric",
               })}
               className={cn(
-                "h-8 rounded-md text-xs tabular-nums transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+                "h-8 w-8 rounded-none text-xs tabular-nums transition-colors focus-visible:relative focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
                 isSameMonth(day, month)
                   ? "text-foreground"
                   : "text-muted-foreground",
                 selectedDay && "bg-primary text-primary-foreground",
+                selectedDay &&
+                  (hasRange
+                    ? isStart
+                      ? "rounded-l-md"
+                      : "rounded-r-md"
+                    : "rounded-md"),
                 mid && "bg-accent text-accent-foreground",
                 !selectedDay && !mid && "hover:bg-accent",
               )}

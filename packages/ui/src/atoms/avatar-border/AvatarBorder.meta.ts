@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "avatar-border",
   displayName: "AvatarBorder",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-07",
   description:
-    "Identity avatar wrapped in a token-colored conic ring that can spin or stay still.",
+    "Circular identity avatar with a static offset outline and a verification check badge.",
   sectionCategory: "identity",
   purpose:
-    "Highlights a person or brand mark with a theme-aware border so profile faces stay distinct in dense lists and headers.",
+    "Highlights a verified person or brand with a theme-aware outline and a compact check badge in lists and headers.",
   bestFor: [
     "profile photos in headers",
     "author bylines that need extra emphasis",
@@ -26,7 +26,7 @@ export default {
     type: "stack",
     alignment: "center",
   },
-  slots: ["image", "fallback", "ring"],
+  slots: ["image", "fallback", "ring", "verification badge"],
   capabilities: {
     supportsImage: true,
     supportsVideo: false,
@@ -35,8 +35,9 @@ export default {
     supportsDarkMode: true,
   },
   recommendedAfter: ["avatar"],
+  inspoUrl: "https://21st.dev/@shadcnspace/components/avatar-border",
   tags: ["avatar", "border", "identity", "ring", "atom"],
-  dependencies: [],
+  dependencies: ["lucide-react"],
   registryDependencies: ["avatar"],
   a11y: { keyboardNav: false, reducedMotion: true },
   preview: {

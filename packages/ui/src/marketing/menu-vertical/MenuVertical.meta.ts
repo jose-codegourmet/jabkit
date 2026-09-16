@@ -44,6 +44,7 @@ export default {
       role: "Project index inside a full-screen Dialog; onPointerOver and onFocus sync Motion preview images.",
     },
   ],
+  inspoUrl: "https://21st.dev/@berlix/components/menu-vertical",
   tags: [
     "navbar",
     "marketing",

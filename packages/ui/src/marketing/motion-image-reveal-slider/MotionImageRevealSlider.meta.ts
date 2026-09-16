@@ -37,6 +37,7 @@ export default {
   },
   recommendedAfter: ["hero", "content"],
   recommendedBefore: ["gallery", "cta"],
+  inspoUrl: "https://21st.dev/@motiondotdev/components/motion-image-reveal-slider",
   tags: [
     "slider",
     "reveal",

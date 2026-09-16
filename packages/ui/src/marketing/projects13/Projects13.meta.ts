@@ -42,6 +42,7 @@ export default {
       role: "Filtered case list on the work index, labeled Case list.",
     },
   ],
+  inspoUrl: "https://www.shadcnblocks.com/block/projects13",
   tags: [
     "projects",
     "list",

@@ -37,6 +37,7 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["team", "case-studies", "cta"],
+  inspoUrl: "https://www.shadcnblocks.com/block/about11",
   tags: [
     "about",
     "marketing",

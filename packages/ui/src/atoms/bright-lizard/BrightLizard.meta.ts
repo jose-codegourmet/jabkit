@@ -3,10 +3,10 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "bright-lizard",
   displayName: "BrightLizard",
-  version: "1.1.0",
+  version: "1.1.1",
   addedAt: "2026-09-15",
   description:
-    "A circular letter-bounce loader with a token-mapped inset-shadow ring.",
+    "A circular generating indicator with staggered letter pulses and a rotating inset-shadow highlight.",
   sectionCategory: "feedback",
   purpose:
     "Signals an in-progress wait with the Uiverse bright-lizard letter ring, remapped onto semantic tokens.",
@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/dexter-st/bright-lizard-8",
   tags: ["loader", "spinner", "feedback", "status", "atom"],
   dependencies: [],
   registryDependencies: [],

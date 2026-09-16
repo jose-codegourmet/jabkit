@@ -30,6 +30,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://reactbits.dev/animations/cursor-grid",
   tags: [
     "marketing",
     "animation",

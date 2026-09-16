@@ -20,7 +20,6 @@ export const Default: Story = {
       <AvatarBorder
         alt={avatarBorderMocks.default.alt}
         fallback={avatarBorderMocks.default.fallback}
-        size="lg"
         src={avatarBorderMocks.default.src}
       />
     </div>
@@ -45,9 +44,8 @@ export const Variants: Story = {
       <AvatarBorder fallback={avatarBorderMocks.fallback.fallback} size="lg" />
       <AvatarBorder
         alt={avatarBorderMocks.default.alt}
-        animate={false}
+        verified={false}
         fallback={avatarBorderMocks.default.fallback}
-        size="lg"
         src={avatarBorderMocks.default.src}
       />
     </div>
@@ -62,7 +60,6 @@ export const ThemeComparison: Story = {
         <AvatarBorder
           alt={avatarBorderMocks.default.alt}
           fallback={avatarBorderMocks.default.fallback}
-          size="lg"
           src={avatarBorderMocks.default.src}
         />
       </div>
@@ -70,7 +67,6 @@ export const ThemeComparison: Story = {
         <AvatarBorder
           alt={avatarBorderMocks.default.alt}
           fallback={avatarBorderMocks.default.fallback}
-          size="lg"
           src={avatarBorderMocks.default.src}
         />
       </div>

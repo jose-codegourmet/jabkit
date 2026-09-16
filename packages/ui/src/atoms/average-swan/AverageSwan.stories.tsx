@@ -16,7 +16,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: { ...averageSwanMocks.default },
   render: () => (
-    <AverageSwan {...averageSwanMocks.default} />
+    <>
+      <AverageSwan {...averageSwanMocks.default} />
+    </>
   ),
 };
 

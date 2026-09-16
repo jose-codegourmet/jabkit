@@ -34,6 +34,7 @@ export default {
   },
   recommendedAfter: ["hero", "about", "logos"],
   recommendedBefore: ["case-studies", "pricing", "testimonials", "cta"],
+  inspoUrl: "https://www.shadcnblocks.com/block/bento19",
   tags: [
     "bento",
     "marketing",

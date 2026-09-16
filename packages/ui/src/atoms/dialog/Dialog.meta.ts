@@ -43,6 +43,7 @@ export default {
       role: "Full-screen photographic room menu; showCloseButton is false and local CSS overrides the centered-dialog translate utilities.",
     },
   ],
+  inspoUrl: "https://ui.shadcn.com/docs/components/base/dialog",
   tags: ["dialog", "modal", "overlay", "primitive", "accessible"],
   dependencies: ["@base-ui/react", "lucide-react"],
   registryDependencies: ["button"],

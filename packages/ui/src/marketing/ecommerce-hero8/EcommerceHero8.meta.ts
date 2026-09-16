@@ -42,6 +42,7 @@ export default {
   },
   recommendedAfter: ["navbar"],
   recommendedBefore: ["logos", "stats", "features", "about"],
+  inspoUrl: "https://www.shadcnblocks.com/block/ecommerce-hero8",
   tags: [
     "hero",
     "marketing",

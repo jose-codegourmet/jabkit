@@ -38,6 +38,7 @@ export default {
   },
   recommendedAfter: ["hero", "navbar"],
   recommendedBefore: ["related-content", "cta", "footer"],
+  inspoUrl: "https://www.shadcnblocks.com/block/code-example14",
   tags: [
     "code",
     "example",

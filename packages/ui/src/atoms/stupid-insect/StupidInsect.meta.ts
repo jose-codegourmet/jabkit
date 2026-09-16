@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/csemszepp/stupid-insect-76",
   tags: ["pattern", "texture", "rings", "background", "atom"],
   dependencies: [],
   registryDependencies: [],

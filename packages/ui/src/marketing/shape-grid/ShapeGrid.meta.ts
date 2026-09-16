@@ -30,6 +30,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://reactbits.dev/backgrounds/shape-grid",
   tags: [
     "marketing",
     "animation",

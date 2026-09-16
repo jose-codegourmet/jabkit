@@ -2,7 +2,7 @@ import type { HTMLAttributes } from "react";
 
 export type AverageSwanSize = "sm" | "md" | "lg";
 
-export interface AverageSwanProps extends HTMLAttributes<HTMLDivElement> {
+export interface AverageSwanProps extends HTMLAttributes<HTMLFieldSetElement> {
   size?: AverageSwanSize;
   caption?: string;
   minusLabel?: string;

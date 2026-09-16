@@ -38,6 +38,7 @@ export default {
   },
   recommendedAfter: ["features", "pricing", "case-studies"],
   recommendedBefore: ["cta", "faq", "footer"],
+  inspoUrl: "https://21st.dev/@uilayout.contact/components/testimonial",
   tags: [
     "testimonial",
     "reviews",

@@ -1,39 +1,16 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { ReactNode } from "react";
 
-export type CloudShaderLayout = "saas" | "window";
-
-export interface CloudShaderLink {
-  label: string;
-  href: string;
-}
-
-export interface CloudShaderMetric {
-  label: string;
-  value: string;
-  delta: string;
-}
-
-export interface CloudShaderProof {
-  name: string;
-  src?: string;
-}
-
-export interface CloudShaderProps extends HTMLAttributes<HTMLElement> {
+export interface CloudShaderProps {
+  className?: string;
   children?: ReactNode;
-  layout?: CloudShaderLayout;
+  /** Animation speed multiplier. 1 = default drift. */
   speed?: number;
+  /** Number of clouds (1-6). */
   count?: number;
-  brand?: CloudShaderLink;
-  mark?: string;
-  navItems?: CloudShaderLink[];
-  signIn?: CloudShaderLink;
-  headerAction?: CloudShaderLink;
-  heading?: string;
-  description?: string;
-  primaryAction?: CloudShaderLink;
-  secondaryAction?: CloudShaderLink;
-  helper?: string;
-  metrics?: CloudShaderMetric[];
-  proof?: CloudShaderProof[];
-  proofLabel?: string;
+  /** Cloud tint color (hex or rgb string). */
+  cloudColor?: string;
+  /** Sky color at the top (hex or rgb string). */
+  skyTopColor?: string;
+  /** Sky color at the bottom (hex or rgb string). */
+  skyBottomColor?: string;
 }

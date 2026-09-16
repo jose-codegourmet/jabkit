@@ -79,7 +79,7 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 | `InstallCommand` | `npx jabkit add {name}` (and pnpm dlx / bunx). See [cli.md](cli.md) for what that command actually does today. |
 | `CopyPromptButton` | Prompt that fetches `https://{DEFAULT_SITE_DOMAIN}/r/{name}.json`. Domain is `apps/showcase/common/base.ts` (`jabkit.joseadrianbuctuanon.dev`). Skill command `/jabkit-component {name}`. |
 | `ComponentPreview` | iframe + `files[]` for the code tab |
-| `ComponentData` | `name`, `category`, `version`, `addedAt`, `a11y`, `tags`. Type is `"component"` for atoms, `"block"` otherwise. |
+| `ComponentData` | `name`, `category`, `version`, `addedAt`, `a11y`, `tags`. Type is `"component"` for atoms, `"block"` otherwise. In local development only, an `Inspo` row links to the metadata's `inspoUrl` reference. |
 | Dependencies list | `dependencies` (npm). `registryDependencies` are not shown on this page. |
 | Examples | `examples[]` extracted from stories. |
 | CSS variables card | Only if `cssVars` is present (currently never). |

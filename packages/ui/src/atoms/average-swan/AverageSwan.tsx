@@ -21,16 +21,19 @@ export function AverageSwan({
   ...props
 }: AverageSwanProps) {
   return (
-    <div
+    <fieldset
       aria-label="Sampler pad"
       className={cn("jk-average-swan", className)}
       data-size={size}
       data-slot="average-swan"
-      role="group"
       {...props}
     >
       <style href="jk-average-swan" precedence="default">{`
         .jk-average-swan {
+          min-inline-size: 0;
+          margin: 0;
+          padding: 0;
+          border: 0;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -70,6 +73,9 @@ export function AverageSwan({
           justify-content: center;
           width: 5.7em;
           height: 5.7em;
+          flex-shrink: 0;
+          font-size: calc(1em * 5 / 6);
+          line-height: normal;
           padding: 0;
           border: none;
           border-radius: 10px;
@@ -77,10 +83,8 @@ export function AverageSwan({
           color: var(--jk-muted-foreground);
         }
         .jk-average-swan-key:focus-visible {
-          outline: none;
-          box-shadow:
-            0 0 0 2px var(--jk-background),
-            0 0 0 4px var(--jk-ring);
+          outline: 2px solid var(--jk-ring);
+          outline-offset: 4px;
         }
         .jk-average-swan-key:disabled {
           cursor: not-allowed;
@@ -116,8 +120,8 @@ export function AverageSwan({
         .jk-average-swan-glyph {
           position: relative;
           display: block;
-          width: 1.5625em;
-          height: 1.5625em;
+          width: 1.875em;
+          height: 1.875em;
         }
         .jk-average-swan-glyph::before,
         .jk-average-swan-glyph::after {
@@ -127,23 +131,23 @@ export function AverageSwan({
         }
         .jk-average-swan-glyph-minus::before {
           top: 50%;
-          left: 12.5%;
-          width: 75%;
-          height: 0.14em;
+          left: 20.833333%;
+          width: 58.333333%;
+          height: 0.15625em;
           transform: translateY(-50%);
         }
         .jk-average-swan-glyph-plus::before {
           top: 50%;
-          left: 12.5%;
-          width: 75%;
-          height: 0.14em;
+          left: 20.833333%;
+          width: 58.333333%;
+          height: 0.15625em;
           transform: translateY(-50%);
         }
         .jk-average-swan-glyph-plus::after {
           left: 50%;
-          top: 12.5%;
-          width: 0.14em;
-          height: 75%;
+          top: 20.833333%;
+          width: 0.15625em;
+          height: 58.333333%;
           transform: translateX(-50%);
         }
         .jk-average-swan-label {
@@ -207,7 +211,10 @@ export function AverageSwan({
               onClick={onMinus}
               type="button"
             >
-              <span aria-hidden="true" className="jk-average-swan-glyph jk-average-swan-glyph-minus" />
+              <span
+                aria-hidden="true"
+                className="jk-average-swan-glyph jk-average-swan-glyph-minus"
+              />
             </button>
           </div>
           <div className="jk-average-swan-well">
@@ -218,7 +225,10 @@ export function AverageSwan({
               onClick={onPlus}
               type="button"
             >
-              <span aria-hidden="true" className="jk-average-swan-glyph jk-average-swan-glyph-plus" />
+              <span
+                aria-hidden="true"
+                className="jk-average-swan-glyph jk-average-swan-glyph-plus"
+              />
             </button>
           </div>
         </div>
@@ -246,6 +256,6 @@ export function AverageSwan({
         </div>
       </div>
       {caption ? <p className="jk-average-swan-caption">{caption}</p> : null}
-    </div>
+    </fieldset>
   );
 }

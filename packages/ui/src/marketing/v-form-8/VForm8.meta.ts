@@ -47,6 +47,7 @@ export default {
   },
   recommendedAfter: ["hero", "features"],
   recommendedBefore: ["testimonials", "cta"],
+  inspoUrl: "https://21st.dev/@cnippet-dev/components/v-form-8",
   tags: [
     "form",
     "onboarding",

@@ -43,6 +43,7 @@ export default {
       role: "Primary chrome with subject columns, archive destinations, and a photographic issue card; defaultValue is null, with a sibling Motion reading-progress bar.",
     },
   ],
+  inspoUrl: "https://21st.dev/@aghasisahakyan1/components/navbar-with-animated-mega-dropdown",
   tags: [
     "navbar",
     "marketing",

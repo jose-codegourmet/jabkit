@@ -28,6 +28,7 @@ export default {
   },
   recommendedAfter: ["hero", "navbar"],
   recommendedBefore: ["related-content", "cta", "footer"],
+  inspoUrl: "https://reactbits.dev/text-animations/split-text",
   tags: [
     "marketing",
     "text",

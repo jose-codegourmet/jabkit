@@ -39,6 +39,7 @@ export default {
   },
   recommendedAfter: ["hero", "features"],
   recommendedBefore: ["testimonials", "faq", "cta"],
+  inspoUrl: "https://21st.dev/@originui/components/calendar/pricing-calendar",
   tags: [
     "pricing",
     "calendar",

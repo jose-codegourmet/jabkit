@@ -37,6 +37,7 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["features", "cta"],
+  inspoUrl: "https://21st.dev/@motiondotdev/components/motion-loading-progress-bar",
   tags: [
     "loading",
     "progress",

@@ -44,6 +44,7 @@ export default {
   },
   recommendedAfter: ["navbar"],
   recommendedBefore: ["logos", "stats", "features", "about"],
+  inspoUrl: "https://21st.dev/@meschacirung/components/hero-section-5",
   tags: ["hero", "marketing", "video", "marquee", "cta", "landing"],
   dependencies: [],
   registryDependencies: ["button"],

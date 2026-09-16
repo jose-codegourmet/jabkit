@@ -48,6 +48,7 @@ export default {
   },
   recommendedAfter: ["hero", "features"],
   recommendedBefore: ["testimonials", "cta"],
+  inspoUrl: "https://21st.dev/@arihantcodes_1f7b8c4d/components/input-modal",
   tags: [
     "modal",
     "dialog",

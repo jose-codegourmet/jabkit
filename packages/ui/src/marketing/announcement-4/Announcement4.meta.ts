@@ -34,6 +34,7 @@ export default {
   },
   recommendedAfter: ["navbar"],
   recommendedBefore: ["hero", "features"],
+  inspoUrl: "https://ui.watermelon.sh/block/announcement-4",
   tags: [
     "announcement",
     "banner",

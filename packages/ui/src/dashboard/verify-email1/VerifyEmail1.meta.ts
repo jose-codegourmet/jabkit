@@ -37,6 +37,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://www.shadcnblocks.com/block/verify-email1",
   tags: [
     "auth",
     "dashboard",

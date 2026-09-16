@@ -45,6 +45,7 @@ export default {
   },
   recommendedAfter: ["hero", "product", "pricing"],
   recommendedBefore: ["faq", "testimonials", "footer"],
+  inspoUrl: "https://21st.dev/@ravikatiyar162/components/tracker-card",
   tags: [
     "tracker",
     "shipping",

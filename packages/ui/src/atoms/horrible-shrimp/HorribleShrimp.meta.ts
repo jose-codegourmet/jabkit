@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/Voxybuns/horrible-shrimp-47",
   tags: ["switch", "toggle", "form", "atom"],
   dependencies: [],
   registryDependencies: [],

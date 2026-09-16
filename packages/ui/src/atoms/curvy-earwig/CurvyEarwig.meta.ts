@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "curvy-earwig",
   displayName: "CurvyEarwig",
-  version: "1.1.0",
+  version: "1.2.0",
   addedAt: "2026-09-15",
   description:
-    "A 160px-radius capsule search field that collapses to a 50px disc when the icon is toggled.",
+    "A 301px by 56px search field with layered conic borders, a filter affordance, and focus glow.",
   sectionCategory: "form",
   purpose:
-    "Gives headers a compact search target that opens into a wide pill only after the icon is clicked.",
+    "Gives headers a high-contrast search target with a subtle animated edge and native text input.",
   bestFor: [
     "header or toolbar search that should stay quiet until used",
     "playful catalogue filters that still need a native text field",
@@ -26,7 +26,7 @@ export default {
     type: "stack",
     alignment: "center",
   },
-  slots: ["toggle", "field", "glyph"],
+  slots: ["field", "search icon", "filter action", "animated border"],
   capabilities: {
     supportsImage: false,
     supportsVideo: false,
@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/Lakshay-art/curvy-earwig-22",
   tags: ["search", "input", "expand", "atom"],
   dependencies: [],
   registryDependencies: [],

@@ -3,10 +3,10 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "average-swan",
   displayName: "AverageSwan",
-  version: "1.1.0",
+  version: "1.1.1",
   addedAt: "2026-09-15",
   description:
-    "A four-key sampler pad with square chassis wells, oversized 10px-radius keys, and a hard press-in shadow.",
+    "A four-key sampler pad with square chassis wells, inset 10px-radius keys, and a hard press-in shadow.",
   sectionCategory: "action",
   purpose:
     "Recreates a compact hardware pad (minus, plus, record, play) with native buttons and local radii instead of the shared Button shape.",
@@ -35,6 +35,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/Praashoo7/average-swan-99",
   tags: ["button", "pad", "sampler", "neumorphic", "atom"],
   dependencies: [],
   registryDependencies: [],

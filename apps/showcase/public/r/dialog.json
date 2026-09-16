@@ -54,6 +54,7 @@
       "role": "Full-screen photographic room menu; showCloseButton is false and local CSS overrides the centered-dialog translate utilities."
     }
   ],
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/dialog",
   "tags": [
     "dialog",
     "modal",

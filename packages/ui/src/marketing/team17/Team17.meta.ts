@@ -34,6 +34,7 @@ export default {
   },
   recommendedAfter: ["about", "stats"],
   recommendedBefore: ["cta", "footer"],
+  inspoUrl: "https://www.shadcnblocks.com/block/team17",
   tags: [
     "team",
     "marketing",

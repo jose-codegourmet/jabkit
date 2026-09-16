@@ -44,6 +44,7 @@ export default {
   },
   recommendedAfter: ["navbar"],
   recommendedBefore: ["logos", "stats", "features", "about"],
+  inspoUrl: "https://www.shadcnblocks.com/block/hero231",
   tags: ["hero", "marketing", "carousel", "marquee", "cta", "portraits"],
   dependencies: [],
   registryDependencies: ["button"],

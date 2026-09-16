@@ -35,6 +35,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@originui/components/stepper/with-titles-and-descriptions",
   tags: ["stepper", "progress", "wizard", "navigation", "atom"],
   dependencies: ["lucide-react"],
   registryDependencies: [],

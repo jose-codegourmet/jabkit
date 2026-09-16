@@ -27,6 +27,7 @@ export default {
     supportsCTA: true,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@7ovr/components/coming-soon-3",
   tags: [
     "coming-soon",
     "countdown",

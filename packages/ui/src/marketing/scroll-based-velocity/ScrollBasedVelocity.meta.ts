@@ -37,6 +37,7 @@ export default {
   },
   recommendedAfter: ["hero", "navbar"],
   recommendedBefore: ["features", "cta", "footer"],
+  inspoUrl: "https://componentry.dev/docs/components/scroll-based-velocity",
   tags: [
     "marketing",
     "text",

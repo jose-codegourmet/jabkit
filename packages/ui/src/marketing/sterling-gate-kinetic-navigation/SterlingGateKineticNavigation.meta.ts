@@ -45,6 +45,7 @@ export default {
       role: "Controlled 80px sticky header and full-screen lime menu; local wrapper adds background inertness and a Tab trap.",
     },
   ],
+  inspoUrl: "https://21st.dev/@hardikkashiyani123456788/components/sterling-gate-kinetic-navigation",
   tags: [
     "navbar",
     "marketing",

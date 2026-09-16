@@ -39,6 +39,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://www.shadcnblocks.com/block/application-shell1",
   tags: [
     "dashboard",
     "shell",

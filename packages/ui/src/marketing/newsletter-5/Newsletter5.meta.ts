@@ -43,6 +43,7 @@ export default {
   },
   recommendedAfter: ["features", "blog", "testimonials"],
   recommendedBefore: ["footer"],
+  inspoUrl: "https://ui.watermelon.sh/block/newsletter-5",
   tags: [
     "newsletter",
     "marketing",

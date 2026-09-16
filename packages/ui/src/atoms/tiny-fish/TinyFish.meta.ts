@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/andrew-demchenk0/tiny-fish-66",
   tags: ["switch", "toggle", "checkbox", "neo-brutalist", "form", "atom"],
   dependencies: [],
   registryDependencies: [],

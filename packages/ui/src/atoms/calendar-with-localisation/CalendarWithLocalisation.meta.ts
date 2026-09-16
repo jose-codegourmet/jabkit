@@ -3,7 +3,7 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "calendar-with-localisation",
   displayName: "CalendarWithLocalisation",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-06",
   description:
     "Two-month appointment calendar with a language switcher that localizes copy, weekdays, and month titles.",
@@ -37,6 +37,7 @@ export default {
       role: "Controlled stay-range picker with numberOfMonths from matchMedia and a locale whose week start agrees across server and browser.",
     },
   ],
+  inspoUrl: "https://21st.dev/@shadcn/components/calendar-with-localisation",
   tags: ["calendar", "locale", "date", "range", "atom"],
   dependencies: ["lucide-react"],
   registryDependencies: ["button"],
@@ -44,7 +45,7 @@ export default {
   preview: {
     layout: "center",
     width: 720,
-    height: 520,
-    capture: { viewport: { width: 840, height: 560 } },
+    height: 440,
+    capture: { viewport: { width: 720, height: 520 } },
   },
 } satisfies ComponentMeta;

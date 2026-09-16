@@ -58,6 +58,8 @@ export interface ComponentMeta {
   displayName: string;
   version: string;
   description: string;
+  /** Source reference used to tune visual and interaction fidelity. */
+  inspoUrl?: string;
   /** Semantic role used by composing agents. Structural grouping remains RegistryComponent.category. */
   sectionCategory: string;
   purpose: string;

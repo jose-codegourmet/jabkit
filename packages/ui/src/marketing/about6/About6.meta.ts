@@ -35,6 +35,7 @@ export default {
       role: "Studio story and workplace photo sections on the studio page.",
     },
   ],
+  inspoUrl: "https://www.shadcnblocks.com/block/about6",
   tags: [
     "about",
     "marketing",

@@ -15,6 +15,7 @@ export default {
     "async job status",
     "non-blocking error recovery",
   ],
+  inspoUrl: "https://ui.shadcn.com/docs/components/base/toast",
   tags: ["toast", "notification", "feedback", "alert", "atom"],
   dependencies: ["@base-ui/react", "lucide-react"],
   registryDependencies: [],

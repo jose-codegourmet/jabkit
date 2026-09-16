@@ -38,6 +38,7 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["gallery", "testimonials", "cta"],
+  inspoUrl: "https://21st.dev/@hyperiux/components/sticky-content-wrapper",
   tags: [
     "sticky",
     "scroll",

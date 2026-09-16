@@ -35,6 +35,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://21st.dev/@originui/components/stepper/vertical-with-inline-titles-and-descriptions",
   tags: ["stepper", "progress", "onboarding", "wizard", "atom"],
   dependencies: ["lucide-react"],
   registryDependencies: [],

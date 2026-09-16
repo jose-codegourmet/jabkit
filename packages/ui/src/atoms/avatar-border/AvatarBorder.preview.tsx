@@ -8,7 +8,6 @@ export default {
     <AvatarBorder
       alt={avatarBorderMocks.default.alt}
       fallback={avatarBorderMocks.default.fallback}
-      size="lg"
       src={avatarBorderMocks.default.src}
     />
   ),
@@ -28,9 +27,8 @@ export default {
       <AvatarBorder fallback={avatarBorderMocks.fallback.fallback} size="lg" />
       <AvatarBorder
         alt={avatarBorderMocks.default.alt}
-        animate={false}
+        verified={false}
         fallback={avatarBorderMocks.default.fallback}
-        size="lg"
         src={avatarBorderMocks.default.src}
       />
     </div>

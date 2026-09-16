@@ -38,6 +38,7 @@ export default {
   },
   recommendedAfter: ["hero", "logos"],
   recommendedBefore: ["features", "cta", "footer"],
+  inspoUrl: "https://21st.dev/@boudjadjasamira/components/story-scroll",
   tags: [
     "story",
     "scroll",

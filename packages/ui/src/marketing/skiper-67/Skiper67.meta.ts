@@ -38,6 +38,7 @@ export default {
   },
   recommendedAfter: ["hero", "navbar"],
   recommendedBefore: ["features", "testimonials", "cta"],
+  inspoUrl: "https://skiper-ui.com/v1/skiper67",
   tags: [
     "video",
     "player",

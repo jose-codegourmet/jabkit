@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/aadium/soft-panda-93",
   tags: ["pattern", "mosaic", "background", "decorative", "atom"],
   dependencies: [],
   registryDependencies: [],

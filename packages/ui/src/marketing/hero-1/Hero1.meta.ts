@@ -45,6 +45,7 @@ export default {
   },
   recommendedAfter: ["navbar"],
   recommendedBefore: ["features", "stats", "cta"],
+  inspoUrl: "https://ui.watermelon.sh/block/hero-1",
   tags: ["hero", "marketing", "cta", "landing", "dark", "photo", "energy"],
   dependencies: ["lucide-react"],
   registryDependencies: [],

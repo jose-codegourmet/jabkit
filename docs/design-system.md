@@ -70,6 +70,24 @@ The registry builder inlines each `@/lib/<x>` import as a `"lib"` file in the JS
 
 ## Accessibility
 
+`AvatarBorder` follows the [Avatar - Border reference](https://21st.dev/@shadcnspace/components/avatar-border): a 40px default portrait, 2px static success-token outline separated by a 2px background gap, and a 16px verification badge offset 6px beyond the lower-right corner. Small and large portraits are 24px and 64px. `verified={false}` hides the badge; `verificationLabel` supplies its screen-reader text (default `Verified`). The old `animate` prop is deprecated and ignored because the reference has no motion. Image fallback and custom children remain supported through the composed Avatar API.
+
+`AverageSwan` uses a labeled fieldset containing four native action buttons. At the default size, 76px keys sit inside 80px wells, with 24px gaps and 10px key radii, matching its [sampler reference](https://uiverse.io/Praashoo7/average-swan-99). Its key font size is explicit so Tailwind's button reset cannot enlarge the keys beyond their wells. Keyboard focus uses an offset outline that remains visible during the press-in shadow state.
+
+`BrightLizard` defaults to `Generating`, with a 180px orb, a two-second rotation, and letters staggered by 100ms as in the [loader reference](https://uiverse.io/dexter-st/bright-lizard-8). The foreground token provides its contrasting edge highlight. Reduced motion stops the animation and keeps the label fully visible; caller styles merge with its internal size variables.
+
+`ButtonColorful` keeps the [reference's](https://21st.dev/@kokonutd/components/button-colorful) 40px height, 6px corners, 8px gradient blur, and diagonal arrow. The wash transitions from 40% to 80% opacity on hover or keyboard focus. `asChild` accepts one element, such as an anchor, and applies the same decoration while preserving that element's content and behavior.
+
+`Calendar03` matches its [appointment-picker reference](https://21st.dev/@shadcnspace/components/calendar-03) with 32px day and time controls, 12px calendar padding, two-letter weekday headings, and 8px corners. Dates use one tab stop: arrow keys move by day/week, Home/End move to week boundaries, and Page Up/Down move by month (Shift moves by year). Enter or Space selects the focused date. Month/year jumps clamp to valid dates, including leap years; date and time callbacks retain their controlled/uncontrolled contract.
+
+`CalendarWithLocalisation` follows the [localized two-month calendar reference](https://21st.dev/@shadcn/components/calendar-with-localisation): a compact two-month range picker with a locale select, localized month and weekday labels, contiguous range highlighting, and a 16px outer corner radius. The `locale`, `numberOfMonths`, copy, and selection APIs remain controlled or uncontrolled as before.
+
+`CleverPanther` now follows the [dark balance-card reference](https://uiverse.io/Gidarx/clever-panther-6) with a 320px card, stacked heading and metrics, a semantic-token aurora trend chart, and a full-width report action. Its title, values, trend labels, action, and semantic surface tone are configurable.
+
+`CurvyEarwig` follows the [search-bar reference](https://uiverse.io/Lakshay-art/curvy-earwig-22) with a 56px field, layered conic border glow, left search icon, right filter affordance, and visible focus ring. The legacy `expanded` and `toggleLabel` props remain accepted for source compatibility while the reference field stays open.
+
+`StrongSquid` follows the [day-to-night switch reference](https://uiverse.io/Galahhad/strong-squid-82), including its pill track, sun-to-moon transition, clouds, and stars. It preserves native checkbox behavior and exposes small and medium sizes.
+
 What the repo actually enforces:
 
 - Every meta file declares `a11y: { keyboardNav: boolean, reducedMotion: boolean }`. Those flags are **metadata**, shown on the showcase `ComponentData` card. Nothing asserts they match the implementation.

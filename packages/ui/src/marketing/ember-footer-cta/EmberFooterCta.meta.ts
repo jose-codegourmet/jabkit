@@ -37,6 +37,7 @@ export default {
     supportsDarkMode: true,
   },
   recommendedAfter: ["cta", "contact", "faq", "content"],
+  inspoUrl: "https://21st.dev/@serafimcloud/components/ember-footer-cta",
   tags: [
     "footer",
     "cta",

@@ -16,14 +16,18 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: { ...buttonColorfulMocks.default },
   render: () => (
-    <ButtonColorful {...buttonColorfulMocks.default} />
+    <>
+      <ButtonColorful {...buttonColorfulMocks.default} />
+    </>
   ),
 };
 
 export const LabelOnly: Story = {
   args: { ...buttonColorfulMocks.labelOnly },
   render: () => (
-    <ButtonColorful {...buttonColorfulMocks.labelOnly} />
+    <>
+      <ButtonColorful {...buttonColorfulMocks.labelOnly} />
+    </>
   ),
 };
 
@@ -38,5 +42,13 @@ export const ThemeComparison: Story = {
         <ButtonColorful {...buttonColorfulMocks.default} />
       </div>
     </div>
+  ),
+};
+
+export const AsLink: Story = {
+  render: () => (
+    <ButtonColorful asChild>
+      <a href="/components">Explore Components</a>
+    </ButtonColorful>
   ),
 };

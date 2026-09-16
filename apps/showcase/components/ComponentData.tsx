@@ -21,10 +21,12 @@ export function ComponentData({
 }: {
   entry: Pick<
     RegistryEntry,
-    "name" | "category" | "version" | "addedAt" | "a11y" | "tags"
+    "name" | "category" | "version" | "addedAt" | "a11y" | "tags" | "inspoUrl"
   >;
 }) {
   const type = entry.category === "atoms" ? "component" : "block";
+  const inspoUrl =
+    process.env.NODE_ENV === "development" ? entry.inspoUrl : undefined;
   const rows: Array<{ label: string; value: ReactNode }> = [
     {
       label: "ID",
@@ -54,6 +56,23 @@ export function ComponentData({
       label: "Reduced motion",
       value: <Flag ok={entry.a11y.reducedMotion} />,
     },
+    ...(inspoUrl
+      ? [
+          {
+            label: "Inspo",
+            value: (
+              <a
+                href={inspoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary underline-offset-4 hover:underline"
+              >
+                Open reference ↗
+              </a>
+            ),
+          },
+        ]
+      : []),
   ];
 
   return (

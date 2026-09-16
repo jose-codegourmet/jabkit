@@ -5,5 +5,6 @@ export interface ButtonColorfulProps
   children?: ReactNode;
   label?: string;
   showIcon?: boolean;
+  /** Style a single child element (for example an anchor) as the button. */
   asChild?: boolean;
 }

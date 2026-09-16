@@ -31,6 +31,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://www.shadcnblocks.com/block/awards6",
   tags: [
     "awards",
     "milestones",

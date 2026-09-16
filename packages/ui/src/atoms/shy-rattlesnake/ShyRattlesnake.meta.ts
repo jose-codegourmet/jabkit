@@ -34,6 +34,7 @@ export default {
     supportsCTA: false,
     supportsDarkMode: true,
   },
+  inspoUrl: "https://uiverse.io/zeeshan_2112/shy-rattlesnake-3",
   tags: ["ticket", "pass", "card", "event", "atom"],
   dependencies: [],
   registryDependencies: [],
