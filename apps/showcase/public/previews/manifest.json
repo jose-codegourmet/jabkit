@@ -18,7 +18,8 @@
           "file": "avatar.Default.dark.webp",
           "bytes": 1388,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -26,7 +27,70 @@
           "file": "avatar.Variants.dark.webp",
           "bytes": 1388,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "avatar-border": {
+      "sourceHash": "bf636f7eb44334632b79e24be40a7a4399738de5f21e0cc668a62e7cfc8f0fc3",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "avatar-border.Default.dark.webp",
+          "bytes": 1604,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "avatar-border.Variants.dark.webp",
+          "bytes": 3242,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "average-swan": {
+      "sourceHash": "8913a6075651fc244a0b95d9b49009f9c19eb99ffe2eac39681fec05f1b1a1fa",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Sizes"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "average-swan.Default.dark.webp",
+          "bytes": 3290,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Sizes",
+          "theme": "dark",
+          "file": "average-swan.Sizes.dark.webp",
+          "bytes": 6958,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
         }
       ]
     },
@@ -47,7 +111,8 @@
           "file": "badge.Default.dark.webp",
           "bytes": 1216,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -55,7 +120,39 @@
           "file": "badge.Variants.dark.webp",
           "bytes": 1114,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "bright-lizard": {
+      "sourceHash": "a9de9e61e420ede9ee6dc685607371d2b5cd75950e12ca12eb0fb266d1ed5060",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Sizes"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "bright-lizard.Default.dark.webp",
+          "bytes": 2608,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Sizes",
+          "theme": "dark",
+          "file": "bright-lizard.Sizes.dark.webp",
+          "bytes": 2644,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
         }
       ]
     },
@@ -75,7 +172,7 @@
           "story": "Default",
           "theme": "light",
           "file": "button.Default.light.webp",
-          "bytes": 2158,
+          "bytes": 2076,
           "width": 800,
           "height": 480,
           "format": "webp"
@@ -84,7 +181,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "button.Default.dark.webp",
-          "bytes": 1984,
+          "bytes": 1978,
           "width": 800,
           "height": 480,
           "format": "webp"
@@ -93,7 +190,7 @@
           "story": "Variants",
           "theme": "light",
           "file": "button.Variants.light.webp",
-          "bytes": 1760,
+          "bytes": 1638,
           "width": 800,
           "height": 480,
           "format": "webp"
@@ -102,9 +199,122 @@
           "story": "Variants",
           "theme": "dark",
           "file": "button.Variants.dark.webp",
-          "bytes": 1790,
+          "bytes": 1624,
           "width": 800,
           "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "button-colorful": {
+      "sourceHash": "4a62c008d3bc9ab0cba61746a074b489f47b28f9afdab25edb76fc3ca2e7f6b4",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "LabelOnly"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "button-colorful.Default.dark.webp",
+          "bytes": 2010,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "LabelOnly",
+          "theme": "dark",
+          "file": "button-colorful.LabelOnly.dark.webp",
+          "bytes": 1388,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "calendar-03": {
+      "sourceHash": "877bcb6c957a689d2c25f55e8b9987c4c2ce05da9919667002477f40a062e1a3",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "calendar-03.Default.dark.webp",
+          "bytes": 11926,
+          "width": 640,
+          "height": 420,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "calendar-03.Variants.dark.webp",
+          "bytes": 10218,
+          "width": 640,
+          "height": 420,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "calendar-03.ThemeComparison.dark.webp",
+          "bytes": 18940,
+          "width": 640,
+          "height": 420,
+          "format": "webp"
+        }
+      ]
+    },
+    "calendar-with-localisation": {
+      "sourceHash": "9a4d0c07b1bbb5f1676aa39721d831715404fcbc485c3727e118309bcbe2d253",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "calendar-with-localisation.Default.dark.webp",
+          "bytes": 11794,
+          "width": 840,
+          "height": 560,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "calendar-with-localisation.Variants.dark.webp",
+          "bytes": 12174,
+          "width": 840,
+          "height": 560,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "calendar-with-localisation.ThemeComparison.dark.webp",
+          "bytes": 22784,
+          "width": 840,
+          "height": 560,
           "format": "webp"
         }
       ]
@@ -126,7 +336,8 @@
           "file": "checkbox.Default.dark.webp",
           "bytes": 1674,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -134,7 +345,70 @@
           "file": "checkbox.Variants.dark.webp",
           "bytes": 1794,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "clever-panther": {
+      "sourceHash": "ad361c94ea00afac00128005f8b202a5cf2b268365037284880864875b90f7c4",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Tones"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "clever-panther.Default.dark.webp",
+          "bytes": 1000,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Tones",
+          "theme": "dark",
+          "file": "clever-panther.Tones.dark.webp",
+          "bytes": 1576,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "curvy-earwig": {
+      "sourceHash": "0fb5e2b9c0183c75eaac7d4b6332aabd29fbac29c0e925290de12b63dd4315f9",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Expanded"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "curvy-earwig.Default.dark.webp",
+          "bytes": 1266,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Expanded",
+          "theme": "dark",
+          "file": "curvy-earwig.Expanded.dark.webp",
+          "bytes": 1698,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
         }
       ]
     },
@@ -153,7 +427,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "dialog.Default.dark.webp",
-          "bytes": 1148,
+          "bytes": 1128,
           "width": 800,
           "height": 520,
           "format": "webp"
@@ -162,7 +436,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "dialog.Variants.dark.webp",
-          "bytes": 1080,
+          "bytes": 1074,
           "width": 800,
           "height": 520,
           "format": "webp"
@@ -184,17 +458,235 @@
           "story": "Default",
           "theme": "dark",
           "file": "dropdown-menu.Default.dark.webp",
-          "bytes": 2772,
+          "bytes": 2766,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
           "file": "dropdown-menu.Variants.dark.webp",
-          "bytes": 2772,
+          "bytes": 2766,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "empty-penguin": {
+      "sourceHash": "2d6e1c4c96059c837f47cecb4303bf48669e1af861b7f98da118a1399bfb93d8",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "On"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "empty-penguin.Default.dark.webp",
+          "bytes": 1446,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "On",
+          "theme": "dark",
+          "file": "empty-penguin.On.dark.webp",
+          "bytes": 1606,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "fast-puma": {
+      "sourceHash": "a3571760b3072c7ae7f0957587a517390224d326f07f8c4922a8108ca0fa7d8e",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Sizes"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "fast-puma.Default.dark.webp",
+          "bytes": 1606,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Sizes",
+          "theme": "dark",
+          "file": "fast-puma.Sizes.dark.webp",
+          "bytes": 1424,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "good-donkey": {
+      "sourceHash": "4dfdb8bec9298bb9962a97b0c3f3f9c7e91b6b55f7f471d0a2624d4cfbca8e78",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Filled",
+        "Compact"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "good-donkey.Default.dark.webp",
+          "bytes": 1602,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Filled",
+          "theme": "dark",
+          "file": "good-donkey.Filled.dark.webp",
+          "bytes": 1744,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Compact",
+          "theme": "dark",
+          "file": "good-donkey.Compact.dark.webp",
+          "bytes": 1362,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "hard-swan": {
+      "sourceHash": "b61a330232e1ad04998be04b27ebf0a4a23ab7d9e77e71b80e95e0b372e4ba73",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Palettes",
+        "WithCaption"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "hard-swan.Default.dark.webp",
+          "bytes": 7526,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Palettes",
+          "theme": "dark",
+          "file": "hard-swan.Palettes.dark.webp",
+          "bytes": 11220,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "WithCaption",
+          "theme": "dark",
+          "file": "hard-swan.WithCaption.dark.webp",
+          "bytes": 11684,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "horrible-shrimp": {
+      "sourceHash": "bfd6451b1387462d425cf04348f73498aa0e32d39ae437c6358e65ff665f930d",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Checked"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "horrible-shrimp.Default.dark.webp",
+          "bytes": 1016,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Checked",
+          "theme": "dark",
+          "file": "horrible-shrimp.Checked.dark.webp",
+          "bytes": 982,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "image-cropper": {
+      "sourceHash": "c4e053b16153b41dccf7498613ae5e8d2a1cd30236cb3c561b8292d463f42a55",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "RecoverableErrors"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "image-cropper.Default.dark.webp",
+          "bytes": 9120,
+          "width": 720,
+          "height": 860,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "image-cropper.Variants.dark.webp",
+          "bytes": 9322,
+          "width": 720,
+          "height": 860,
+          "format": "webp"
+        },
+        {
+          "story": "RecoverableErrors",
+          "theme": "dark",
+          "file": "image-cropper.RecoverableErrors.dark.webp",
+          "bytes": 9704,
+          "width": 720,
+          "height": 860,
+          "format": "webp"
         }
       ]
     },
@@ -215,7 +707,8 @@
           "file": "input.Default.dark.webp",
           "bytes": 1650,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -223,7 +716,101 @@
           "file": "input.Variants.dark.webp",
           "bytes": 1764,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "jolly-chicken": {
+      "sourceHash": "262b54c97bd9a1f7d88cebe5845cda6f5977fb074381656746159c64097db1c4",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Night"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "jolly-chicken.Default.dark.webp",
+          "bytes": 1330,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Night",
+          "theme": "dark",
+          "file": "jolly-chicken.Night.dark.webp",
+          "bytes": 1282,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "jolly-parrot": {
+      "sourceHash": "ca91ea9140ab7ae0488e521f07963af6bdfd95e221d5e09b13dfabe8361af72b",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Tones"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "jolly-parrot.Default.dark.webp",
+          "bytes": 1656,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Tones",
+          "theme": "dark",
+          "file": "jolly-parrot.Tones.dark.webp",
+          "bytes": 4510,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "kind-panther": {
+      "sourceHash": "f8d5eb159c94b2ad3f6d3f97dc9cc12a14eaeae049e632a8ada469d8eb722bef",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Tones"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "kind-panther.Default.dark.webp",
+          "bytes": 6378,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Tones",
+          "theme": "dark",
+          "file": "kind-panther.Tones.dark.webp",
+          "bytes": 5726,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
         }
       ]
     },
@@ -244,7 +831,8 @@
           "file": "label.Default.dark.webp",
           "bytes": 1702,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -252,7 +840,317 @@
           "file": "label.Variants.dark.webp",
           "bytes": 1702,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "letter-cascade": {
+      "sourceHash": "7beb9adc7eb2d4165384b3a2780b60a1e4034581dfe07d5c862f27fd68436ae7",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "CenterWave",
+        "ExtraBouncy",
+        "ClickTrigger",
+        "Snappy"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "letter-cascade.Default.dark.webp",
+          "bytes": 1792,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "CenterWave",
+          "theme": "dark",
+          "file": "letter-cascade.CenterWave.dark.webp",
+          "bytes": 2492,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "ExtraBouncy",
+          "theme": "dark",
+          "file": "letter-cascade.ExtraBouncy.dark.webp",
+          "bytes": 2374,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "ClickTrigger",
+          "theme": "dark",
+          "file": "letter-cascade.ClickTrigger.dark.webp",
+          "bytes": 1832,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Snappy",
+          "theme": "dark",
+          "file": "letter-cascade.Snappy.dark.webp",
+          "bytes": 1926,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "light-eagle": {
+      "sourceHash": "61ba415c2d8812bfca1676b050838de39333c3765357501d2529fa4593dd9cbd",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Tones"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "light-eagle.Default.dark.webp",
+          "bytes": 3846,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Tones",
+          "theme": "dark",
+          "file": "light-eagle.Tones.dark.webp",
+          "bytes": 5600,
+          "width": 800,
+          "height": 512,
+          "format": "webp"
+        }
+      ]
+    },
+    "loud-parrot": {
+      "sourceHash": "4bfade736fb58048296b9959e98068f9668b94bda59d6358dbae5b0fe4079228",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Tones"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "loud-parrot.Default.dark.webp",
+          "bytes": 8348,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Tones",
+          "theme": "dark",
+          "file": "loud-parrot.Tones.dark.webp",
+          "bytes": 25654,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "lovely-yak": {
+      "sourceHash": "67e07a2089506e4af01451acf085acf00c57970f39db60525f506762aacd7e64",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "WeeklyPulse"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "lovely-yak.Default.dark.webp",
+          "bytes": 6592,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "WeeklyPulse",
+          "theme": "dark",
+          "file": "lovely-yak.WeeklyPulse.dark.webp",
+          "bytes": 5654,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "navigation-menu": {
+      "sourceHash": "9b86be1d369155c900c5fe5370b3d79066304c4fc210b32534b7531a1a190492",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "navigation-menu.Default.dark.webp",
+          "bytes": 9954,
+          "width": 960,
+          "height": 512,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "navigation-menu.Variants.dark.webp",
+          "bytes": 1308,
+          "width": 960,
+          "height": 512,
+          "format": "webp"
+        }
+      ]
+    },
+    "odd-fish": {
+      "sourceHash": "fece1e81bda6682897446b9f7a8b4b26a7df83cab3526b00235446e2bcd23cc0",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Accent"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "odd-fish.Default.dark.webp",
+          "bytes": 9192,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Accent",
+          "theme": "dark",
+          "file": "odd-fish.Accent.dark.webp",
+          "bytes": 11862,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "qr-code-generator": {
+      "sourceHash": "0a19b3ba445850e08afa4fb5a63ee75882723240fd3767bc1b3d23beab758a5a",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "qr-code-generator.Default.dark.webp",
+          "bytes": 14170,
+          "width": 520,
+          "height": 720,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "qr-code-generator.Variants.dark.webp",
+          "bytes": 18622,
+          "width": 520,
+          "height": 780,
+          "format": "webp"
+        }
+      ]
+    },
+    "quick-panther": {
+      "sourceHash": "44b2af6005d14abad3578f16c0fa518aaed52cf6af56c8d43a31fa65b9d860b2",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "quick-panther.Default.dark.webp",
+          "bytes": 1780,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "quick-panther.Variants.dark.webp",
+          "bytes": 2404,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "scroll-area": {
+      "sourceHash": "24753e779687eeca7d41c6de1b636bc7d1d7fa870ded5467ae9e75091ccd5734",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "scroll-area.Default.dark.webp",
+          "bytes": 7968,
+          "width": 720,
+          "height": 560,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "scroll-area.Variants.dark.webp",
+          "bytes": 2758,
+          "width": 720,
+          "height": 560,
+          "format": "webp"
         }
       ]
     },
@@ -271,9 +1169,10 @@
           "story": "Default",
           "theme": "dark",
           "file": "separator.Default.dark.webp",
-          "bytes": 4470,
+          "bytes": 4456,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -281,7 +1180,70 @@
           "file": "separator.Variants.dark.webp",
           "bytes": 4360,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "serious-stingray": {
+      "sourceHash": "e4d69679a6502cfab1eb072a33f193aab5c533b4e88bf98066321398295a11a3",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Accents"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "serious-stingray.Default.dark.webp",
+          "bytes": 1520,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Accents",
+          "theme": "dark",
+          "file": "serious-stingray.Accents.dark.webp",
+          "bytes": 1702,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "shy-rattlesnake": {
+      "sourceHash": "37a961730570ae2fa610db2b0c0703249fe7e8cd2b189ec07514fb0ffea2d096",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "GuestPass"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "shy-rattlesnake.Default.dark.webp",
+          "bytes": 8450,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "GuestPass",
+          "theme": "dark",
+          "file": "shy-rattlesnake.GuestPass.dark.webp",
+          "bytes": 6918,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
         }
       ]
     },
@@ -302,7 +1264,8 @@
           "file": "skeleton.Default.dark.webp",
           "bytes": 928,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -310,7 +1273,183 @@
           "file": "skeleton.Variants.dark.webp",
           "bytes": 928,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "soft-panda": {
+      "sourceHash": "c20f179cf8c56d4cad1c35729bf63aedb76ba2a6ce2ffd2cf4d3a6e840dac572",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Tones"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "soft-panda.Default.dark.webp",
+          "bytes": 5358,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Tones",
+          "theme": "dark",
+          "file": "soft-panda.Tones.dark.webp",
+          "bytes": 17574,
+          "width": 800,
+          "height": 584,
+          "format": "webp"
+        }
+      ]
+    },
+    "stepper-vertical-inline": {
+      "sourceHash": "4362be690d63e0da86ea46e471c3728da15189ab15510ddb4cdce1ce9a939911",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "stepper-vertical-inline.Default.dark.webp",
+          "bytes": 5434,
+          "width": 640,
+          "height": 520,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "stepper-vertical-inline.Variants.dark.webp",
+          "bytes": 5616,
+          "width": 640,
+          "height": 520,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "stepper-vertical-inline.ThemeComparison.dark.webp",
+          "bytes": 9836,
+          "width": 640,
+          "height": 520,
+          "format": "webp"
+        }
+      ]
+    },
+    "stepper-with-titles": {
+      "sourceHash": "9ab650064c92c98d55569303ec4327f7ed0eb12452696795fb9c70136ed2f34f",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Onboarding"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "stepper-with-titles.Default.dark.webp",
+          "bytes": 5406,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Onboarding",
+          "theme": "dark",
+          "file": "stepper-with-titles.Onboarding.dark.webp",
+          "bytes": 7166,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "strong-squid": {
+      "sourceHash": "84a05a192b86b6135c6354f7059e6f47dfaca428481865246a255616274f7942",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Night",
+        "Sizes"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "strong-squid.Default.dark.webp",
+          "bytes": 3244,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Night",
+          "theme": "dark",
+          "file": "strong-squid.Night.dark.webp",
+          "bytes": 3680,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Sizes",
+          "theme": "dark",
+          "file": "strong-squid.Sizes.dark.webp",
+          "bytes": 2658,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "stupid-insect": {
+      "sourceHash": "59831cfb1482aba42107a9094ef9655e1861ca89e5a28c99e2d786eaedc847ee",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Tones"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "stupid-insect.Default.dark.webp",
+          "bytes": 19718,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Tones",
+          "theme": "dark",
+          "file": "stupid-insect.Tones.dark.webp",
+          "bytes": 30786,
+          "width": 800,
+          "height": 512,
+          "format": "webp"
         }
       ]
     },
@@ -331,7 +1470,8 @@
           "file": "switch.Default.dark.webp",
           "bytes": 1378,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -339,7 +1479,8 @@
           "file": "switch.Variants.dark.webp",
           "bytes": 1522,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         }
       ]
     },
@@ -360,7 +1501,8 @@
           "file": "textarea.Default.dark.webp",
           "bytes": 1580,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -368,7 +1510,70 @@
           "file": "textarea.Variants.dark.webp",
           "bytes": 2600,
           "width": 800,
-          "height": 480
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "tiny-fish": {
+      "sourceHash": "9877deb5a4e2146ae4e5eb543d9aa323ea7ef20adc68722516f365271114f1bc",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Sizes"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "tiny-fish.Default.dark.webp",
+          "bytes": 1500,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Sizes",
+          "theme": "dark",
+          "file": "tiny-fish.Sizes.dark.webp",
+          "bytes": 1738,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "toast": {
+      "sourceHash": "395556381cb9c1699917ff0aff80a78c7dfcc831f692784f75261e788533f585",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "toast.Default.dark.webp",
+          "bytes": 2470,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "toast.Variants.dark.webp",
+          "bytes": 5736,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
         }
       ]
     },
@@ -387,7 +1592,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "tooltip.Default.dark.webp",
-          "bytes": 2076,
+          "bytes": 2010,
           "width": 800,
           "height": 480,
           "format": "webp"
@@ -396,7 +1601,120 @@
           "story": "Variants",
           "theme": "dark",
           "file": "tooltip.Variants.dark.webp",
-          "bytes": 2076,
+          "bytes": 2010,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "v-checkbox-11": {
+      "sourceHash": "957da2deb74f0fe62af98f46ac6b36d1c2370671358fe461a185d3af568235e0",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "v-checkbox-11.Default.dark.webp",
+          "bytes": 4836,
+          "width": 560,
+          "height": 320,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "v-checkbox-11.Variants.dark.webp",
+          "bytes": 3300,
+          "width": 560,
+          "height": 320,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "v-checkbox-11.ThemeComparison.dark.webp",
+          "bytes": 9068,
+          "width": 560,
+          "height": 485,
+          "format": "webp"
+        }
+      ]
+    },
+    "wise-lizard": {
+      "sourceHash": "329db0a4864355248d55a48b7427d088e6b83e0395d063eff6234c8379fa0ae8",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Filled",
+        "Compact"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "wise-lizard.Default.dark.webp",
+          "bytes": 3408,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Filled",
+          "theme": "dark",
+          "file": "wise-lizard.Filled.dark.webp",
+          "bytes": 2814,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Compact",
+          "theme": "dark",
+          "file": "wise-lizard.Compact.dark.webp",
+          "bytes": 2246,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "young-dragon": {
+      "sourceHash": "2eadcb3233bb9d1433e1a9ac2fee1b9f94a9099a2808ed1a84b7377602506e98",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Sizes"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "young-dragon.Default.dark.webp",
+          "bytes": 2104,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Sizes",
+          "theme": "dark",
+          "file": "young-dragon.Sizes.dark.webp",
+          "bytes": 2756,
           "width": 800,
           "height": 480,
           "format": "webp"
@@ -421,7 +1739,8 @@
           "file": "about11.Default.dark.webp",
           "bytes": 76818,
           "width": 960,
-          "height": 2245
+          "height": 2245,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -429,7 +1748,8 @@
           "file": "about11.Variants.dark.webp",
           "bytes": 82278,
           "width": 960,
-          "height": 2179
+          "height": 2179,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -437,7 +1757,8 @@
           "file": "about11.ThemeComparison.dark.webp",
           "bytes": 118584,
           "width": 960,
-          "height": 2057
+          "height": 2057,
+          "format": "webp"
         }
       ]
     },
@@ -459,7 +1780,8 @@
           "file": "about14.Default.dark.webp",
           "bytes": 28184,
           "width": 960,
-          "height": 701
+          "height": 701,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -467,7 +1789,8 @@
           "file": "about14.Variants.dark.webp",
           "bytes": 36292,
           "width": 960,
-          "height": 691
+          "height": 691,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -475,7 +1798,8 @@
           "file": "about14.ThemeComparison.dark.webp",
           "bytes": 46814,
           "width": 960,
-          "height": 739
+          "height": 739,
+          "format": "webp"
         }
       ]
     },
@@ -497,7 +1821,8 @@
           "file": "about6.Default.dark.webp",
           "bytes": 50200,
           "width": 960,
-          "height": 800
+          "height": 800,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -505,7 +1830,8 @@
           "file": "about6.Variants.dark.webp",
           "bytes": 49658,
           "width": 960,
-          "height": 800
+          "height": 800,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -513,7 +1839,8 @@
           "file": "about6.ThemeComparison.dark.webp",
           "bytes": 59730,
           "width": 960,
-          "height": 800
+          "height": 800,
+          "format": "webp"
         }
       ]
     },
@@ -535,7 +1862,8 @@
           "file": "about8.Default.dark.webp",
           "bytes": 82028,
           "width": 960,
-          "height": 1566
+          "height": 1566,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -543,7 +1871,8 @@
           "file": "about8.Variants.dark.webp",
           "bytes": 67938,
           "width": 960,
-          "height": 1545
+          "height": 1545,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -551,7 +1880,80 @@
           "file": "about8.ThemeComparison.dark.webp",
           "bytes": 128330,
           "width": 960,
-          "height": 1498
+          "height": 1498,
+          "format": "webp"
+        }
+      ]
+    },
+    "admit-one-ticket": {
+      "sourceHash": "a5093f11efe6b881e5b9c3f3689e6d4eb14ef0047f96bb3e16cca3e9c3bae442",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "admit-one-ticket.Default.dark.webp",
+          "bytes": 8900,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "admit-one-ticket.Variants.dark.webp",
+          "bytes": 12834,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "admit-one-ticket.ThemeComparison.dark.webp",
+          "bytes": 14426,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "announcement-4": {
+      "sourceHash": "b7f0182f50b719834df30eb9ad72c7aaccdbdccb5d7b9fbf99ade69ff399d7d5",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "announcement-4.Default.dark.webp",
+          "bytes": 2808,
+          "width": 960,
+          "height": 160,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "announcement-4.Variants.dark.webp",
+          "bytes": 3288,
+          "width": 960,
+          "height": 160,
+          "format": "webp"
         }
       ]
     },
@@ -573,7 +1975,8 @@
           "file": "awards6.Default.dark.webp",
           "bytes": 16640,
           "width": 960,
-          "height": 653
+          "height": 653,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -581,7 +1984,8 @@
           "file": "awards6.Variants.dark.webp",
           "bytes": 12924,
           "width": 960,
-          "height": 653
+          "height": 653,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -589,7 +1993,8 @@
           "file": "awards6.ThemeComparison.dark.webp",
           "bytes": 31514,
           "width": 960,
-          "height": 677
+          "height": 677,
+          "format": "webp"
         }
       ]
     },
@@ -611,7 +2016,8 @@
           "file": "bento19.Default.dark.webp",
           "bytes": 31256,
           "width": 960,
-          "height": 911
+          "height": 911,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -619,7 +2025,8 @@
           "file": "bento19.Variants.dark.webp",
           "bytes": 27652,
           "width": 960,
-          "height": 893
+          "height": 893,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -627,7 +2034,59 @@
           "file": "bento19.ThemeComparison.dark.webp",
           "bytes": 53186,
           "width": 960,
-          "height": 808
+          "height": 808,
+          "format": "webp"
+        }
+      ]
+    },
+    "carousel-cards": {
+      "sourceHash": "15bd9a38308bfd123202f88a5e5109a5d097ddd658fca15711856b64aa51c979",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "NightlyRates",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "carousel-cards.Default.dark.webp",
+          "bytes": 32846,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "carousel-cards.Variants.dark.webp",
+          "bytes": 42226,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "NightlyRates",
+          "theme": "dark",
+          "file": "carousel-cards.NightlyRates.dark.webp",
+          "bytes": 22968,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "carousel-cards.ThemeComparison.dark.webp",
+          "bytes": 43950,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
         }
       ]
     },
@@ -648,7 +2107,8 @@
           "file": "case-studies11.Default.dark.webp",
           "bytes": 30492,
           "width": 960,
-          "height": 600
+          "height": 600,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -656,7 +2116,8 @@
           "file": "case-studies11.Variants.dark.webp",
           "bytes": 24454,
           "width": 960,
-          "height": 600
+          "height": 600,
+          "format": "webp"
         }
       ]
     },
@@ -678,7 +2139,8 @@
           "file": "case-studies13.Default.dark.webp",
           "bytes": 36150,
           "width": 960,
-          "height": 653
+          "height": 653,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -686,7 +2148,8 @@
           "file": "case-studies13.Variants.dark.webp",
           "bytes": 39180,
           "width": 960,
-          "height": 653
+          "height": 653,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -694,7 +2157,49 @@
           "file": "case-studies13.ThemeComparison.dark.webp",
           "bytes": 55852,
           "width": 960,
-          "height": 695
+          "height": 695,
+          "format": "webp"
+        }
+      ]
+    },
+    "cloud-shader": {
+      "sourceHash": "b8744d3a149e2044ef3c75c23c7607de2d987fea41de3ecb5380574e6df4a374",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "cloud-shader.Default.dark.webp",
+          "bytes": 11110,
+          "width": 960,
+          "height": 605,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "cloud-shader.Variants.dark.webp",
+          "bytes": 9892,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "cloud-shader.ThemeComparison.dark.webp",
+          "bytes": 17524,
+          "width": 960,
+          "height": 626,
+          "format": "webp"
         }
       ]
     },
@@ -714,30 +2219,74 @@
           "story": "Default",
           "theme": "dark",
           "file": "code-example14.Default.dark.webp",
-          "bytes": 23070,
+          "bytes": 23074,
           "width": 960,
-          "height": 617
+          "height": 617,
+          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
           "file": "code-example14.Variants.dark.webp",
-          "bytes": 22586,
+          "bytes": 22508,
           "width": 960,
-          "height": 617
+          "height": 617,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "code-example14.ThemeComparison.dark.webp",
-          "bytes": 40858,
+          "bytes": 40842,
           "width": 960,
-          "height": 617
+          "height": 617,
+          "format": "webp"
+        }
+      ]
+    },
+    "coming-soon-3": {
+      "sourceHash": "99bbf1db5cae927ea914c5c2ce3a4f9bd947208fbe047be69c8d16365996ecaf",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "coming-soon-3.Default.dark.webp",
+          "bytes": 9566,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "coming-soon-3.Variants.dark.webp",
+          "bytes": 9010,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "coming-soon-3.ThemeComparison.dark.webp",
+          "bytes": 18050,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
         }
       ]
     },
     "compare5": {
-      "sourceHash": "478f15207effc256bcdb6c9f8381f5488d81a1deb07616ed856773ebbbea2290",
+      "sourceHash": "20e48cc5b126614333742c781222f4fc7b338efd7f8218e7868c4a4b08e2be6f",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -754,7 +2303,8 @@
           "file": "compare5.Default.dark.webp",
           "bytes": 25102,
           "width": 960,
-          "height": 667
+          "height": 667,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -762,7 +2312,8 @@
           "file": "compare5.Variants.dark.webp",
           "bytes": 26628,
           "width": 960,
-          "height": 667
+          "height": 667,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -770,7 +2321,8 @@
           "file": "compare5.ThemeComparison.dark.webp",
           "bytes": 41118,
           "width": 960,
-          "height": 667
+          "height": 667,
+          "format": "webp"
         }
       ]
     },
@@ -792,7 +2344,8 @@
           "file": "content1.Default.dark.webp",
           "bytes": 78490,
           "width": 960,
-          "height": 1977
+          "height": 1977,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -800,7 +2353,8 @@
           "file": "content1.Variants.dark.webp",
           "bytes": 77270,
           "width": 960,
-          "height": 1261
+          "height": 1261,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -808,7 +2362,8 @@
           "file": "content1.ThemeComparison.dark.webp",
           "bytes": 114822,
           "width": 960,
-          "height": 2053
+          "height": 2053,
+          "format": "webp"
         }
       ]
     },
@@ -830,7 +2385,8 @@
           "file": "content2.Default.dark.webp",
           "bytes": 24494,
           "width": 960,
-          "height": 733
+          "height": 733,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -838,7 +2394,8 @@
           "file": "content2.Variants.dark.webp",
           "bytes": 25166,
           "width": 960,
-          "height": 733
+          "height": 733,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -846,7 +2403,8 @@
           "file": "content2.ThemeComparison.dark.webp",
           "bytes": 48794,
           "width": 960,
-          "height": 925
+          "height": 925,
+          "format": "webp"
         }
       ]
     },
@@ -866,25 +2424,28 @@
           "story": "Default",
           "theme": "dark",
           "file": "content3.Default.dark.webp",
-          "bytes": 66472,
+          "bytes": 66520,
           "width": 960,
-          "height": 1722
+          "height": 1722,
+          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
           "file": "content3.Variants.dark.webp",
-          "bytes": 61832,
+          "bytes": 61836,
           "width": 960,
-          "height": 1738
+          "height": 1738,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "content3.ThemeComparison.dark.webp",
-          "bytes": 105544,
+          "bytes": 105516,
           "width": 960,
-          "height": 1950
+          "height": 1950,
+          "format": "webp"
         }
       ]
     },
@@ -905,7 +2466,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "content4.Default.dark.webp",
-          "bytes": 80536,
+          "bytes": 80568,
           "width": 960,
           "height": 1756,
           "format": "webp"
@@ -914,7 +2475,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "content4.Variants.dark.webp",
-          "bytes": 46766,
+          "bytes": 46012,
           "width": 960,
           "height": 1067,
           "format": "webp"
@@ -923,7 +2484,7 @@
           "story": "LinkedAuthor",
           "theme": "dark",
           "file": "content4.LinkedAuthor.dark.webp",
-          "bytes": 82754,
+          "bytes": 81924,
           "width": 960,
           "height": 1759,
           "format": "webp"
@@ -932,9 +2493,91 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "content4.ThemeComparison.dark.webp",
-          "bytes": 131336,
+          "bytes": 130660,
           "width": 960,
           "height": 2199,
+          "format": "webp"
+        }
+      ]
+    },
+    "count-up": {
+      "sourceHash": "697682146acd5b872098cd359ceb30a027511f381b51d019fbb723be403bbfc5",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "count-up.Default.dark.webp",
+          "bytes": 4554,
+          "width": 960,
+          "height": 427,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "count-up.Variants.dark.webp",
+          "bytes": 7776,
+          "width": 960,
+          "height": 427,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "count-up.ThemeComparison.dark.webp",
+          "bytes": 8226,
+          "width": 960,
+          "height": 427,
+          "format": "webp"
+        }
+      ]
+    },
+    "coverflow-carousel": {
+      "sourceHash": "9fd73f033ba9c383b2bacdad2b5860e8cd45ee7ef957f9fea04c65f768bd13fb",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "coverflow-carousel.Default.dark.webp",
+          "bytes": 7210,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "coverflow-carousel.Variants.dark.webp",
+          "bytes": 4774,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "coverflow-carousel.ThemeComparison.dark.webp",
+          "bytes": 13182,
+          "width": 960,
+          "height": 600,
           "format": "webp"
         }
       ]
@@ -955,30 +2598,33 @@
           "story": "Default",
           "theme": "dark",
           "file": "cta22.Default.dark.webp",
-          "bytes": 17350,
+          "bytes": 17362,
           "width": 960,
-          "height": 520
+          "height": 520,
+          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
           "file": "cta22.Variants.dark.webp",
-          "bytes": 15064,
+          "bytes": 15068,
           "width": 960,
-          "height": 520
+          "height": 520,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "cta22.ThemeComparison.dark.webp",
-          "bytes": 30470,
+          "bytes": 30428,
           "width": 960,
-          "height": 520
+          "height": 520,
+          "format": "webp"
         }
       ]
     },
     "cta28": {
-      "sourceHash": "8feb8cae5448ba5760c05110bd5be6128f4445cba841223bc003d16b843f5b34",
+      "sourceHash": "6eb1c1e397fb4fc987a5c4fe1e13ad557a0d195bf9e5dbababa728daa4d8c0e1",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -993,25 +2639,69 @@
           "story": "Default",
           "theme": "dark",
           "file": "cta28.Default.dark.webp",
-          "bytes": 23488,
+          "bytes": 23536,
           "width": 960,
-          "height": 528
+          "height": 528,
+          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
           "file": "cta28.Variants.dark.webp",
-          "bytes": 27352,
+          "bytes": 27324,
           "width": 960,
-          "height": 528
+          "height": 528,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "cta28.ThemeComparison.dark.webp",
-          "bytes": 42518,
+          "bytes": 42692,
           "width": 960,
-          "height": 656
+          "height": 656,
+          "format": "webp"
+        }
+      ]
+    },
+    "cursor-grid": {
+      "sourceHash": "a0213a9a092eca2d1143ddf7b021fd7952848ed8090eb0fb485e4b383c5d20ab",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "cursor-grid.Default.dark.webp",
+          "bytes": 16788,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "cursor-grid.Variants.dark.webp",
+          "bytes": 22474,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "cursor-grid.ThemeComparison.dark.webp",
+          "bytes": 25296,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
         }
       ]
     },
@@ -1031,7 +2721,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "ecommerce-hero8.Default.dark.gif",
-          "bytes": 257428,
+          "bytes": 255888,
           "width": 640,
           "height": 400,
           "format": "gif"
@@ -1040,7 +2730,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "ecommerce-hero8.Default.dark.webp",
-          "bytes": 27972,
+          "bytes": 28230,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1049,7 +2739,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "ecommerce-hero8.Variants.dark.webp",
-          "bytes": 17252,
+          "bytes": 17610,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1058,7 +2748,7 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "ecommerce-hero8.ThemeComparison.dark.webp",
-          "bytes": 46652,
+          "bytes": 47444,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1083,7 +2773,8 @@
           "file": "ecommerce-navbar2.Default.dark.webp",
           "bytes": 2878,
           "width": 960,
-          "height": 280
+          "height": 280,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -1091,7 +2782,8 @@
           "file": "ecommerce-navbar2.Variants.dark.webp",
           "bytes": 2510,
           "width": 960,
-          "height": 280
+          "height": 280,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -1099,7 +2791,99 @@
           "file": "ecommerce-navbar2.ThemeComparison.dark.webp",
           "bytes": 4518,
           "width": 960,
-          "height": 280
+          "height": 280,
+          "format": "webp"
+        }
+      ]
+    },
+    "ember-footer-cta": {
+      "sourceHash": "f0f6fd667822eaa85c2f8f8ab63b28fa749da67abfc412e2f201aa4ce6583e06",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "ember-footer-cta.Default.dark.webp",
+          "bytes": 8086,
+          "width": 960,
+          "height": 520,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "ember-footer-cta.Variants.dark.webp",
+          "bytes": 9610,
+          "width": 960,
+          "height": 520,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "ember-footer-cta.ThemeComparison.dark.webp",
+          "bytes": 14084,
+          "width": 960,
+          "height": 520,
+          "format": "webp"
+        }
+      ]
+    },
+    "falling-text": {
+      "sourceHash": "420435ae3a61424faab8dc29e3b93e844f68c68cfe8601b53e6baf10e9a4c89a",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "falling-text.Default.dark.gif",
+          "bytes": 92611,
+          "width": 640,
+          "height": 320,
+          "format": "gif"
+        },
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "falling-text.Default.dark.webp",
+          "bytes": 11402,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "falling-text.Variants.dark.webp",
+          "bytes": 11786,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "falling-text.ThemeComparison.dark.webp",
+          "bytes": 21594,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
         }
       ]
     },
@@ -1121,7 +2905,8 @@
           "file": "faq12.Default.dark.webp",
           "bytes": 29168,
           "width": 960,
-          "height": 1062
+          "height": 1062,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -1129,7 +2914,8 @@
           "file": "faq12.Variants.dark.webp",
           "bytes": 19202,
           "width": 960,
-          "height": 853
+          "height": 853,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -1137,7 +2923,8 @@
           "file": "faq12.ThemeComparison.dark.webp",
           "bytes": 57058,
           "width": 960,
-          "height": 1142
+          "height": 1142,
+          "format": "webp"
         }
       ]
     },
@@ -1159,7 +2946,8 @@
           "file": "feature261.Default.dark.webp",
           "bytes": 44872,
           "width": 960,
-          "height": 925
+          "height": 925,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -1167,7 +2955,8 @@
           "file": "feature261.Variants.dark.webp",
           "bytes": 59684,
           "width": 960,
-          "height": 893
+          "height": 893,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -1175,7 +2964,420 @@
           "file": "feature261.ThemeComparison.dark.webp",
           "bytes": 66588,
           "width": 960,
-          "height": 796
+          "height": 796,
+          "format": "webp"
+        }
+      ]
+    },
+    "fisheye-infinite-grid": {
+      "sourceHash": "72f70fc1d691992fa792b61d60be3d936495718a2c37ef0bac6d789781fdc45c",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "fisheye-infinite-grid.Default.dark.webp",
+          "bytes": 32166,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "fisheye-infinite-grid.Variants.dark.webp",
+          "bytes": 31486,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "fisheye-infinite-grid.ThemeComparison.dark.webp",
+          "bytes": 31256,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "footer-10": {
+      "sourceHash": "7a6593a9e4091510ce97b829169a16356e1eb0d0f316de019655ba894eaa52a6",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "footer-10.Default.dark.webp",
+          "bytes": 18026,
+          "width": 960,
+          "height": 653,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "footer-10.Variants.dark.webp",
+          "bytes": 15154,
+          "width": 960,
+          "height": 653,
+          "format": "webp"
+        }
+      ]
+    },
+    "footer-11": {
+      "sourceHash": "c08e18c1c86361db938f786f16a9dd0dc56da758ad9064f9dc8740d066f4f98b",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "footer-11.Default.dark.webp",
+          "bytes": 12384,
+          "width": 960,
+          "height": 547,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "footer-11.Variants.dark.webp",
+          "bytes": 12152,
+          "width": 960,
+          "height": 547,
+          "format": "webp"
+        }
+      ]
+    },
+    "footer-12": {
+      "sourceHash": "cd6d4f72687bea655258e2421466fd909ee34ac88e57800d50f0bb11f89bb724",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "footer-12.Default.dark.webp",
+          "bytes": 15348,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "footer-12.Variants.dark.webp",
+          "bytes": 12342,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "footer-13": {
+      "sourceHash": "2bb9b9c2e4076a29e8be287afd7d987ade43a34115da3c3ec1cef90aee44b945",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "footer-13.Default.dark.webp",
+          "bytes": 17572,
+          "width": 960,
+          "height": 693,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "footer-13.Variants.dark.webp",
+          "bytes": 16076,
+          "width": 960,
+          "height": 693,
+          "format": "webp"
+        }
+      ]
+    },
+    "footer-16": {
+      "sourceHash": "1d190559490673a808fe1dc74e34698df3aab7f9a54a0f907088e479c5ad3ef9",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "footer-16.Default.dark.webp",
+          "bytes": 11682,
+          "width": 960,
+          "height": 653,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "footer-16.Variants.dark.webp",
+          "bytes": 9544,
+          "width": 960,
+          "height": 653,
+          "format": "webp"
+        }
+      ]
+    },
+    "footer-18": {
+      "sourceHash": "6eca8e80028d9703dd6d8dca910068121a8ab32143e797a6e86a5a53eabf7c2e",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "footer-18.Default.dark.webp",
+          "bytes": 13448,
+          "width": 960,
+          "height": 733,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "footer-18.Variants.dark.webp",
+          "bytes": 10608,
+          "width": 960,
+          "height": 733,
+          "format": "webp"
+        }
+      ]
+    },
+    "footer-19": {
+      "sourceHash": "578b44ce67af47bac3e1c27dc2f95f94a57ab80fa3dc0f3e1f2dddd5ed4dc5b1",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "footer-19.Default.dark.webp",
+          "bytes": 13224,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "footer-19.Variants.dark.webp",
+          "bytes": 12178,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "footer-27": {
+      "sourceHash": "076150ce8919667b6d7b50f7264702ab51f996d79ef9de494e6a41af2a543f6c",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "footer-27.Default.dark.webp",
+          "bytes": 24980,
+          "width": 960,
+          "height": 802,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "footer-27.Variants.dark.webp",
+          "bytes": 18462,
+          "width": 960,
+          "height": 788,
+          "format": "webp"
+        }
+      ]
+    },
+    "footer-column": {
+      "sourceHash": "e2a2a2465a64616556859d56a72192023dfd7e6296525983cb03903714691771",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "footer-column.Default.dark.webp",
+          "bytes": 9324,
+          "width": 960,
+          "height": 547,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "footer-column.Variants.dark.webp",
+          "bytes": 7908,
+          "width": 960,
+          "height": 547,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "footer-column.ThemeComparison.dark.webp",
+          "bytes": 17764,
+          "width": 960,
+          "height": 547,
+          "format": "webp"
+        }
+      ]
+    },
+    "footer-section": {
+      "sourceHash": "8ae8ff6e1a89058ce807679da22487ae4837444a7e4fb8957a98f0a8074af005",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "footer-section.Default.dark.webp",
+          "bytes": 9870,
+          "width": 960,
+          "height": 547,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "footer-section.Variants.dark.webp",
+          "bytes": 8294,
+          "width": 960,
+          "height": 547,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "footer-section.ThemeComparison.dark.webp",
+          "bytes": 18026,
+          "width": 960,
+          "height": 547,
+          "format": "webp"
+        }
+      ]
+    },
+    "form": {
+      "sourceHash": "c0259fcbce98c35eaedb3e8ea996cf4bb52dc6781af2b78b8300bd0f9b69124a",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "form.Default.dark.webp",
+          "bytes": 4108,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "form.Variants.dark.webp",
+          "bytes": 4092,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "form.ThemeComparison.dark.webp",
+          "bytes": 6960,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
         }
       ]
     },
@@ -1197,7 +3399,8 @@
           "file": "gallery31.Default.dark.webp",
           "bytes": 26628,
           "width": 960,
-          "height": 679
+          "height": 679,
+          "format": "webp"
         },
         {
           "story": "Variants",
@@ -1205,7 +3408,8 @@
           "file": "gallery31.Variants.dark.webp",
           "bytes": 26216,
           "width": 960,
-          "height": 679
+          "height": 679,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
@@ -1213,7 +3417,204 @@
           "file": "gallery31.ThemeComparison.dark.webp",
           "bytes": 40990,
           "width": 960,
-          "height": 679
+          "height": 679,
+          "format": "webp"
+        }
+      ]
+    },
+    "glowing-shadow": {
+      "sourceHash": "3030e1fd2c4d346aece1e13430d1ecb36eeb3e7494bf4df66754112c20b909b2",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "glowing-shadow.Default.dark.webp",
+          "bytes": 12614,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "glowing-shadow.Variants.dark.webp",
+          "bytes": 10172,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "glowing-shadow.ThemeComparison.dark.webp",
+          "bytes": 23548,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "hero-1": {
+      "sourceHash": "5fb1a1eccdda4693e489b49f6333340c9d94779ea98e52e99bdc5ed199444e62",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "hero-1.Default.dark.webp",
+          "bytes": 14684,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "hero-1.Variants.dark.webp",
+          "bytes": 15514,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "hero-31": {
+      "sourceHash": "d1682810505e2054b7bb07756c74ef51502854b01cc7bf6df7db1e6b1914511d",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "hero-31.Default.dark.webp",
+          "bytes": 25214,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "hero-31.Variants.dark.webp",
+          "bytes": 25402,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "hero-32": {
+      "sourceHash": "c5c1b72d1655b31afa86d73b3aa568e9b6889747d0d49e753419f4e501126244",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "hero-32.Default.dark.webp",
+          "bytes": 76062,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "hero-32.Variants.dark.webp",
+          "bytes": 76332,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "hero-33": {
+      "sourceHash": "20e5ac0a0fb85949f451354383e031e31e752b5a0c0bc0d763815a3a7fa50286",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "hero-33.Default.dark.webp",
+          "bytes": 25920,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "hero-33.Variants.dark.webp",
+          "bytes": 25048,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "hero-39": {
+      "sourceHash": "e14e44229e2ed4dfd6824fa104d6f1b27fc2973feb7f79f68737b299a630a4b5",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "hero-39.Default.dark.webp",
+          "bytes": 43196,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "hero-39.Variants.dark.webp",
+          "bytes": 42610,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
         }
       ]
     },
@@ -1232,7 +3633,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "hero-section-5.Default.dark.gif",
-          "bytes": 244249,
+          "bytes": 238001,
           "width": 640,
           "height": 400,
           "format": "gif"
@@ -1241,7 +3642,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "hero-section-5.Default.dark.webp",
-          "bytes": 21926,
+          "bytes": 21462,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1250,7 +3651,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "hero-section-5.Variants.dark.webp",
-          "bytes": 20182,
+          "bytes": 19870,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1272,17 +3673,19 @@
           "story": "Default",
           "theme": "dark",
           "file": "hero146.Default.dark.webp",
-          "bytes": 35818,
+          "bytes": 35814,
           "width": 960,
-          "height": 844
+          "height": 844,
+          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
           "file": "hero146.Variants.dark.webp",
-          "bytes": 32962,
+          "bytes": 32996,
           "width": 960,
-          "height": 844
+          "height": 844,
+          "format": "webp"
         }
       ]
     },
@@ -1301,7 +3704,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "hero228.Default.dark.gif",
-          "bytes": 101696,
+          "bytes": 103017,
           "width": 640,
           "height": 400,
           "format": "gif"
@@ -1310,7 +3713,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "hero228.Default.dark.webp",
-          "bytes": 13898,
+          "bytes": 13650,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1319,7 +3722,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "hero228.Variants.dark.webp",
-          "bytes": 12306,
+          "bytes": 12316,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1341,7 +3744,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "hero230.Default.dark.gif",
-          "bytes": 214164,
+          "bytes": 211007,
           "width": 640,
           "height": 508,
           "format": "gif"
@@ -1350,7 +3753,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "hero230.Default.dark.webp",
-          "bytes": 24532,
+          "bytes": 24264,
           "width": 960,
           "height": 762,
           "format": "webp"
@@ -1359,7 +3762,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "hero230.Variants.dark.webp",
-          "bytes": 26440,
+          "bytes": 25928,
           "width": 960,
           "height": 762,
           "format": "webp"
@@ -1381,7 +3784,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "hero231.Default.dark.gif",
-          "bytes": 127810,
+          "bytes": 126464,
           "width": 640,
           "height": 400,
           "format": "gif"
@@ -1390,7 +3793,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "hero231.Default.dark.webp",
-          "bytes": 15650,
+          "bytes": 15254,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1399,7 +3802,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "hero231.Variants.dark.webp",
-          "bytes": 15000,
+          "bytes": 14596,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1422,25 +3825,478 @@
           "story": "Default",
           "theme": "dark",
           "file": "hero307.Default.dark.webp",
-          "bytes": 22568,
+          "bytes": 22548,
           "width": 960,
-          "height": 600
+          "height": 600,
+          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
           "file": "hero307.Variants.dark.webp",
-          "bytes": 21414,
+          "bytes": 21402,
           "width": 960,
-          "height": 600
+          "height": 600,
+          "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "hero307.ThemeComparison.dark.webp",
-          "bytes": 36066,
+          "bytes": 36010,
           "width": 960,
-          "height": 600
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "holo-card": {
+      "sourceHash": "a81992fbbd16baf549f488fea67b18a192a97793aa006d7d4b72b019c381b864",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "holo-card.Default.dark.webp",
+          "bytes": 8672,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "holo-card.Variants.dark.webp",
+          "bytes": 11606,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "holo-card.ThemeComparison.dark.webp",
+          "bytes": 16112,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "input-modal": {
+      "sourceHash": "276cd0db09e166fc7b5e2d064cfa7c6d0469c38edc70b7cf9aeb00c47ff7bae1",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "input-modal.Default.dark.webp",
+          "bytes": 11648,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "input-modal.Variants.dark.webp",
+          "bytes": 12830,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "input-modal.ThemeComparison.dark.webp",
+          "bytes": 22784,
+          "width": 960,
+          "height": 719,
+          "format": "webp"
+        }
+      ]
+    },
+    "liquid-metal-button": {
+      "sourceHash": "195b2027a647f0307d734608df67d7ec41d248d163939bc6fb95a99da21625b4",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "liquid-metal-button.Default.dark.webp",
+          "bytes": 7762,
+          "width": 960,
+          "height": 520,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "liquid-metal-button.Variants.dark.webp",
+          "bytes": 6522,
+          "width": 960,
+          "height": 520,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "liquid-metal-button.ThemeComparison.dark.webp",
+          "bytes": 14378,
+          "width": 960,
+          "height": 520,
+          "format": "webp"
+        }
+      ]
+    },
+    "menu-vertical": {
+      "sourceHash": "097b2b349a3cb29a6b0411fc180cd00e725ae00b37df336563fc2f8a190779e1",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "menu-vertical.Default.dark.webp",
+          "bytes": 5072,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "menu-vertical.Variants.dark.webp",
+          "bytes": 3842,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "menu-vertical.ThemeComparison.dark.webp",
+          "bytes": 9116,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "motion-image-reveal-slider": {
+      "sourceHash": "f694203c5a11c22ec143df3e258e0867c389b750660e971361171b398cc694f7",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "motion-image-reveal-slider.Default.dark.webp",
+          "bytes": 23238,
+          "width": 960,
+          "height": 688,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "motion-image-reveal-slider.Variants.dark.webp",
+          "bytes": 20968,
+          "width": 960,
+          "height": 669,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "motion-image-reveal-slider.ThemeComparison.dark.webp",
+          "bytes": 29252,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "motion-loading-progress-bar": {
+      "sourceHash": "1a44aa7fe6501a7cb9e8eda603f87e43dd999e9d1cea1a782812fff0d6b37d98",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "motion-loading-progress-bar.Default.dark.gif",
+          "bytes": 52598,
+          "width": 640,
+          "height": 320,
+          "format": "gif"
+        },
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "motion-loading-progress-bar.Default.dark.webp",
+          "bytes": 7590,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "motion-loading-progress-bar.Variants.dark.webp",
+          "bytes": 7746,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "motion-loading-progress-bar.ThemeComparison.dark.webp",
+          "bytes": 14146,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "navbar-with-animated-mega-dropdown": {
+      "sourceHash": "fb09c748cb8465cb056ad0869f14db24b1bd984395520451ec638d1084f9c66c",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "navbar-with-animated-mega-dropdown.Default.dark.webp",
+          "bytes": 8000,
+          "width": 960,
+          "height": 427,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "navbar-with-animated-mega-dropdown.Variants.dark.webp",
+          "bytes": 2680,
+          "width": 960,
+          "height": 427,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "navbar-with-animated-mega-dropdown.ThemeComparison.dark.webp",
+          "bytes": 9902,
+          "width": 960,
+          "height": 427,
+          "format": "webp"
+        }
+      ]
+    },
+    "newsletter-5": {
+      "sourceHash": "5cefe487ef2e63bb8f9ad5d951877257ac652cedf6d83ec499e99cfe1562f847",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "newsletter-5.Default.dark.webp",
+          "bytes": 11758,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "newsletter-5.Variants.dark.webp",
+          "bytes": 11462,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "orbit-card-stack": {
+      "sourceHash": "97e455156c2588ac6efa4c015a7c8050b286185d992d3c934f13b14e1bbf4910",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "orbit-card-stack.Default.dark.webp",
+          "bytes": 9814,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "orbit-card-stack.Variants.dark.webp",
+          "bytes": 8742,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "orbit-card-stack.ThemeComparison.dark.webp",
+          "bytes": 18530,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "order-confirmation-card": {
+      "sourceHash": "7aa22e4faa2f688f34ca86065b4cca59a50a0f5b8abdecf180e76547d235ea1e",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "order-confirmation-card.Default.dark.webp",
+          "bytes": 6656,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "order-confirmation-card.Variants.dark.webp",
+          "bytes": 6590,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "order-confirmation-card.ThemeComparison.dark.webp",
+          "bytes": 12012,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "pricing-calendar": {
+      "sourceHash": "da4417c330e4102a18fc6d710316675fc6ddc9773f74796d746a2a4ad2d3cc16",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "pricing-calendar.Default.dark.webp",
+          "bytes": 8892,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "pricing-calendar.Variants.dark.webp",
+          "bytes": 7648,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "pricing-calendar.ThemeComparison.dark.webp",
+          "bytes": 16622,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
         }
       ]
     },
@@ -1461,7 +4317,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "pricing28.Default.dark.webp",
-          "bytes": 27214,
+          "bytes": 26676,
           "width": 960,
           "height": 753,
           "format": "webp"
@@ -1470,7 +4326,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "pricing28.Variants.dark.webp",
-          "bytes": 26168,
+          "bytes": 25642,
           "width": 960,
           "height": 753,
           "format": "webp"
@@ -1479,7 +4335,7 @@
           "story": "TwoPlans",
           "theme": "dark",
           "file": "pricing28.TwoPlans.dark.webp",
-          "bytes": 17498,
+          "bytes": 15928,
           "width": 960,
           "height": 733,
           "format": "webp"
@@ -1488,465 +4344,9 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "pricing28.ThemeComparison.dark.webp",
-          "bytes": 53016,
+          "bytes": 51916,
           "width": 960,
           "height": 881,
-          "format": "webp"
-        }
-      ]
-    },
-    "waitlist3": {
-      "sourceHash": "935978ae16fb3db3d958ae439a53d179adf9c2c39c6fb58bd4bb07e8d9c5b2dd",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "waitlist3.Default.dark.webp",
-          "bytes": 33198,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "waitlist3.Variants.dark.webp",
-          "bytes": 31024,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "waitlist3.ThemeComparison.dark.webp",
-          "bytes": 45512,
-          "width": 960,
-          "height": 600
-        }
-      ]
-    },
-    "application-shell1": {
-      "sourceHash": "08054e571a241bc92022d1eb4e2c0c821a88676a2631b590ec0475fbd83e8198",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "application-shell1.Default.dark.webp",
-          "bytes": 6824,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "application-shell1.Variants.dark.webp",
-          "bytes": 3452,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "application-shell1.ThemeComparison.dark.webp",
-          "bytes": 11794,
-          "width": 960,
-          "height": 600
-        }
-      ]
-    },
-    "application-shell13": {
-      "sourceHash": "cd7cbb3db1c5b482cf3759ecbb0bce809dc4d49dda583384c6efddae3d09de0a",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "application-shell13.Default.dark.webp",
-          "bytes": 6540,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "application-shell13.Variants.dark.webp",
-          "bytes": 4636,
-          "width": 960,
-          "height": 600
-        }
-      ]
-    },
-    "chart-group14": {
-      "sourceHash": "6520e6625c73dd20237b240dcd89a5a77fab16c7bfeff879195c1aa13b74ac75",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "chart-group14.Default.dark.webp",
-          "bytes": 24138,
-          "width": 960,
-          "height": 787
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "chart-group14.Variants.dark.webp",
-          "bytes": 22860,
-          "width": 960,
-          "height": 787
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "chart-group14.ThemeComparison.dark.webp",
-          "bytes": 43280,
-          "width": 960,
-          "height": 787
-        }
-      ]
-    },
-    "forgot-password2": {
-      "sourceHash": "4c6f00af47e35b68d4280f3cda9ea86ed0226a3e6a1c90e0e8ac386cd27a91a7",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "forgot-password2.Default.dark.webp",
-          "bytes": 29858,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "forgot-password2.Variants.dark.webp",
-          "bytes": 47934,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "forgot-password2.ThemeComparison.dark.webp",
-          "bytes": 38876,
-          "width": 960,
-          "height": 600
-        }
-      ]
-    },
-    "login4": {
-      "sourceHash": "2bb4be15be971815340e72d9285fcd0b9e89c3fa2849bc309b9ef30343353f3c",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "login4.Default.dark.webp",
-          "bytes": 6428,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "login4.Variants.dark.webp",
-          "bytes": 6700,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "login4.ThemeComparison.dark.webp",
-          "bytes": 11580,
-          "width": 960,
-          "height": 600
-        }
-      ]
-    },
-    "two-factor2": {
-      "sourceHash": "b29bd606a6be52ee80d2e69930e9b392974710286144a4f43c8b8df90f0f1abd",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "two-factor2.Default.dark.webp",
-          "bytes": 23812,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "two-factor2.Variants.dark.webp",
-          "bytes": 31832,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "two-factor2.ThemeComparison.dark.webp",
-          "bytes": 34766,
-          "width": 960,
-          "height": 600
-        }
-      ]
-    },
-    "two-factor5": {
-      "sourceHash": "fca2d66bbb4e8ead96a090b03dcf5d8a091803c285751ae750ab91cfa429fcde",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "two-factor5.Default.dark.webp",
-          "bytes": 5770,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "two-factor5.Variants.dark.webp",
-          "bytes": 6624,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "two-factor5.ThemeComparison.dark.webp",
-          "bytes": 10360,
-          "width": 960,
-          "height": 600
-        }
-      ]
-    },
-    "team14": {
-      "sourceHash": "d5ca463b2a07978db1e8a40c0c1d53d178471fd74bcfa5753d760f2cca1555fa",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "team14.Default.dark.webp",
-          "bytes": 15700,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "team14.Variants.dark.webp",
-          "bytes": 17908,
-          "width": 960,
-          "height": 600
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "team14.ThemeComparison.dark.webp",
-          "bytes": 19446,
-          "width": 960,
-          "height": 600
-        }
-      ]
-    },
-    "team17": {
-      "sourceHash": "ad91fa380aadf386266b7e961009cd299a4407ef23816ee40b81835f2836059a",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "team17.Default.dark.webp",
-          "bytes": 64270,
-          "width": 960,
-          "height": 1295,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "team17.Variants.dark.webp",
-          "bytes": 33690,
-          "width": 960,
-          "height": 1255,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "team17.ThemeComparison.dark.webp",
-          "bytes": 80502,
-          "width": 960,
-          "height": 1200,
-          "format": "webp"
-        }
-      ]
-    },
-    "verify-email1": {
-      "sourceHash": "208ba54e00cca2b074f35954914d7a6d0d1a09da12d00d6e9776360588ad20fd",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "verify-email1.Default.dark.webp",
-          "bytes": 5310,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "verify-email1.Variants.dark.webp",
-          "bytes": 5804,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "verify-email1.ThemeComparison.dark.webp",
-          "bytes": 9260,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        }
-      ]
-    },
-    "team11": {
-      "sourceHash": "ea34ce997577a3ecef54563b6986c604613d4d0f37a624151897ca26862c7dd0",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "team11.Default.dark.webp",
-          "bytes": 18714,
-          "width": 960,
-          "height": 733,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "team11.Variants.dark.webp",
-          "bytes": 16234,
-          "width": 960,
-          "height": 733,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "team11.ThemeComparison.dark.webp",
-          "bytes": 32726,
-          "width": 960,
-          "height": 733,
           "format": "webp"
         }
       ]
@@ -1968,7 +4368,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "product-quick-view4.Default.dark.webp",
-          "bytes": 30268,
+          "bytes": 30130,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1977,7 +4377,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "product-quick-view4.Variants.dark.webp",
-          "bytes": 20082,
+          "bytes": 20014,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1986,7 +4386,7 @@
           "story": "StudioPreview",
           "theme": "dark",
           "file": "product-quick-view4.StudioPreview.dark.webp",
-          "bytes": 16356,
+          "bytes": 15784,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -1995,60 +4395,9 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "product-quick-view4.ThemeComparison.dark.webp",
-          "bytes": 42636,
+          "bytes": 40758,
           "width": 960,
           "height": 600,
-          "format": "webp"
-        }
-      ]
-    },
-    "projects16": {
-      "sourceHash": "cb8688667b3c4797b2bb8b4c45bcd58f3641579e572764ba773a0f2bc78e798c",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "Linked",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "projects16.Default.dark.webp",
-          "bytes": 49262,
-          "width": 960,
-          "height": 1051,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "projects16.Variants.dark.webp",
-          "bytes": 40748,
-          "width": 960,
-          "height": 987,
-          "format": "webp"
-        },
-        {
-          "story": "Linked",
-          "theme": "dark",
-          "file": "projects16.Linked.dark.webp",
-          "bytes": 49964,
-          "width": 960,
-          "height": 1072,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "projects16.ThemeComparison.dark.webp",
-          "bytes": 68758,
-          "width": 960,
-          "height": 933,
           "format": "webp"
         }
       ]
@@ -2094,47 +4443,6 @@
         }
       ]
     },
-    "todo9": {
-      "sourceHash": "144d1cfb6bfc64dbe356df379a38deea794ba3beb6379c1c7359c0176d686402",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "todo9.Default.dark.webp",
-          "bytes": 9888,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "todo9.Variants.dark.webp",
-          "bytes": 5788,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "todo9.ThemeComparison.dark.webp",
-          "bytes": 18604,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        }
-      ]
-    },
     "projects13": {
       "sourceHash": "d44ace4f1ff29ae0d53cfe7a74b349cdd96a0ce1c32d489e64a770173ada9b37",
       "pipelineVersion": 1,
@@ -2152,7 +4460,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "projects13.Default.dark.webp",
-          "bytes": 32700,
+          "bytes": 29942,
           "width": 960,
           "height": 733,
           "format": "webp"
@@ -2161,7 +4469,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "projects13.Variants.dark.webp",
-          "bytes": 26860,
+          "bytes": 24302,
           "width": 960,
           "height": 733,
           "format": "webp"
@@ -2170,7 +4478,7 @@
           "story": "Linked",
           "theme": "dark",
           "file": "projects13.Linked.dark.webp",
-          "bytes": 32700,
+          "bytes": 29942,
           "width": 960,
           "height": 733,
           "format": "webp"
@@ -2179,15 +4487,66 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "projects13.ThemeComparison.dark.webp",
-          "bytes": 66862,
+          "bytes": 59804,
           "width": 960,
           "height": 1011,
           "format": "webp"
         }
       ]
     },
-    "tubelight-navbar": {
-      "sourceHash": "319189257dd990ed0411c0b6b405e731017d9356d0ca36fab3af77dddd7f0cb5",
+    "projects16": {
+      "sourceHash": "cb8688667b3c4797b2bb8b4c45bcd58f3641579e572764ba773a0f2bc78e798c",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "Linked",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "projects16.Default.dark.webp",
+          "bytes": 47782,
+          "width": 960,
+          "height": 1051,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "projects16.Variants.dark.webp",
+          "bytes": 38302,
+          "width": 960,
+          "height": 987,
+          "format": "webp"
+        },
+        {
+          "story": "Linked",
+          "theme": "dark",
+          "file": "projects16.Linked.dark.webp",
+          "bytes": 48312,
+          "width": 960,
+          "height": 1072,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "projects16.ThemeComparison.dark.webp",
+          "bytes": 65678,
+          "width": 960,
+          "height": 933,
+          "format": "webp"
+        }
+      ]
+    },
+    "random-letter-swap": {
+      "sourceHash": "0ba495740bfe7ccb45c77cee7443e68f23698bfab79723e6b78cf467415bc399",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2201,8 +4560,8 @@
         {
           "story": "Default",
           "theme": "dark",
-          "file": "tubelight-navbar.Default.dark.webp",
-          "bytes": 1412,
+          "file": "random-letter-swap.Default.dark.webp",
+          "bytes": 1734,
           "width": 960,
           "height": 280,
           "format": "webp"
@@ -2210,8 +4569,8 @@
         {
           "story": "Variants",
           "theme": "dark",
-          "file": "tubelight-navbar.Variants.dark.webp",
-          "bytes": 1480,
+          "file": "random-letter-swap.Variants.dark.webp",
+          "bytes": 1898,
           "width": 960,
           "height": 280,
           "format": "webp"
@@ -2219,16 +4578,16 @@
         {
           "story": "ThemeComparison",
           "theme": "dark",
-          "file": "tubelight-navbar.ThemeComparison.dark.webp",
-          "bytes": 2244,
+          "file": "random-letter-swap.ThemeComparison.dark.webp",
+          "bytes": 2786,
           "width": 960,
           "height": 280,
           "format": "webp"
         }
       ]
     },
-    "fullscreen-calendar": {
-      "sourceHash": "799b3b53752c76388fe524d374b9821b1b8f549532db60fdbca67159ea8050cd",
+    "receipt-pricing": {
+      "sourceHash": "38c853e4556c30886f15ecb04ea48d44b2e9b0612f30f06af56c741d0674eef6",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2242,34 +4601,34 @@
         {
           "story": "Default",
           "theme": "dark",
-          "file": "fullscreen-calendar.Default.dark.webp",
-          "bytes": 11572,
+          "file": "receipt-pricing.Default.dark.webp",
+          "bytes": 5398,
           "width": 960,
-          "height": 700,
+          "height": 733,
           "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
-          "file": "fullscreen-calendar.Variants.dark.webp",
-          "bytes": 8872,
+          "file": "receipt-pricing.Variants.dark.webp",
+          "bytes": 6444,
           "width": 960,
-          "height": 618,
+          "height": 733,
           "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
-          "file": "fullscreen-calendar.ThemeComparison.dark.webp",
-          "bytes": 19942,
+          "file": "receipt-pricing.ThemeComparison.dark.webp",
+          "bytes": 9176,
           "width": 960,
-          "height": 700,
+          "height": 733,
           "format": "webp"
         }
       ]
     },
-    "event-manager": {
-      "sourceHash": "f39d53c431ac75c80ef603e252ded62f25a6007a5fbac8677d379b40cc64972c",
+    "ride-booking-form": {
+      "sourceHash": "c69bf166e06fdea0bc097edb1907b1745a3655c89083657adb9cbf0d21fc3b30",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2283,17 +4642,17 @@
         {
           "story": "Default",
           "theme": "dark",
-          "file": "event-manager.Default.dark.webp",
-          "bytes": 17360,
+          "file": "ride-booking-form.Default.dark.webp",
+          "bytes": 26678,
           "width": 960,
-          "height": 864,
+          "height": 600,
           "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
-          "file": "event-manager.Variants.dark.webp",
-          "bytes": 10582,
+          "file": "ride-booking-form.Variants.dark.webp",
+          "bytes": 20444,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -2301,338 +4660,10 @@
         {
           "story": "ThemeComparison",
           "theme": "dark",
-          "file": "event-manager.ThemeComparison.dark.webp",
-          "bytes": 32640,
+          "file": "ride-booking-form.ThemeComparison.dark.webp",
+          "bytes": 30938,
           "width": 960,
-          "height": 864,
-          "format": "webp"
-        }
-      ]
-    },
-    "calendar-with-localisation": {
-      "sourceHash": "9a4d0c07b1bbb5f1676aa39721d831715404fcbc485c3727e118309bcbe2d253",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "calendar-with-localisation.Default.dark.webp",
-          "bytes": 13570,
-          "width": 840,
-          "height": 560,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "calendar-with-localisation.Variants.dark.webp",
-          "bytes": 13568,
-          "width": 840,
-          "height": 560,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "calendar-with-localisation.ThemeComparison.dark.webp",
-          "bytes": 26524,
-          "width": 840,
-          "height": 560,
-          "format": "webp"
-        }
-      ]
-    },
-    "footer-section": {
-      "sourceHash": "8ae8ff6e1a89058ce807679da22487ae4837444a7e4fb8957a98f0a8074af005",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "footer-section.Default.dark.webp",
-          "bytes": 10696,
-          "width": 960,
-          "height": 547,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "footer-section.Variants.dark.webp",
-          "bytes": 8948,
-          "width": 960,
-          "height": 547,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "footer-section.ThemeComparison.dark.webp",
-          "bytes": 19698,
-          "width": 960,
-          "height": 547,
-          "format": "webp"
-        }
-      ]
-    },
-    "ember-footer-cta": {
-      "sourceHash": "f0f6fd667822eaa85c2f8f8ab63b28fa749da67abfc412e2f201aa4ce6583e06",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "ember-footer-cta.Default.dark.webp",
-          "bytes": 7812,
-          "width": 960,
-          "height": 520,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "ember-footer-cta.Variants.dark.webp",
-          "bytes": 8984,
-          "width": 960,
-          "height": 520,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "ember-footer-cta.ThemeComparison.dark.webp",
-          "bytes": 13620,
-          "width": 960,
-          "height": 520,
-          "format": "webp"
-        }
-      ]
-    },
-    "footer-column": {
-      "sourceHash": "e2a2a2465a64616556859d56a72192023dfd7e6296525983cb03903714691771",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "footer-column.Default.dark.webp",
-          "bytes": 9814,
-          "width": 960,
-          "height": 547,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "footer-column.Variants.dark.webp",
-          "bytes": 8316,
-          "width": 960,
-          "height": 547,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "footer-column.ThemeComparison.dark.webp",
-          "bytes": 18454,
-          "width": 960,
-          "height": 547,
-          "format": "webp"
-        }
-      ]
-    },
-    "split-text": {
-      "sourceHash": "b8f9814cc5347e8f46cf08bf83214bcdc086978ffeb8fd60afabbe54af1f3d81",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "split-text.Default.dark.webp",
-          "bytes": 9764,
-          "width": 960,
-          "height": 427,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "split-text.Variants.dark.webp",
-          "bytes": 10378,
-          "width": 960,
-          "height": 427,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "split-text.ThemeComparison.dark.webp",
-          "bytes": 18512,
-          "width": 960,
-          "height": 427,
-          "format": "webp"
-        }
-      ]
-    },
-    "count-up": {
-      "sourceHash": "697682146acd5b872098cd359ceb30a027511f381b51d019fbb723be403bbfc5",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "count-up.Default.dark.webp",
-          "bytes": 4852,
-          "width": 960,
-          "height": 427,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "count-up.Variants.dark.webp",
-          "bytes": 8054,
-          "width": 960,
-          "height": 427,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "count-up.ThemeComparison.dark.webp",
-          "bytes": 8786,
-          "width": 960,
-          "height": 427,
-          "format": "webp"
-        }
-      ]
-    },
-    "cursor-grid": {
-      "sourceHash": "a0213a9a092eca2d1143ddf7b021fd7952848ed8090eb0fb485e4b383c5d20ab",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "cursor-grid.Default.dark.webp",
-          "bytes": 17304,
-          "width": 960,
-          "height": 480,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "cursor-grid.Variants.dark.webp",
-          "bytes": 22684,
-          "width": 960,
-          "height": 480,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "cursor-grid.ThemeComparison.dark.webp",
-          "bytes": 25384,
-          "width": 960,
-          "height": 480,
-          "format": "webp"
-        }
-      ]
-    },
-    "splash-cursor": {
-      "sourceHash": "12adb01874506a6e3a52ee32abab0073f4bef9d6f1a614885802d4c7d1c9dfbd",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "splash-cursor.Default.dark.webp",
-          "bytes": 8354,
-          "width": 960,
-          "height": 480,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "splash-cursor.Variants.dark.webp",
-          "bytes": 8772,
-          "width": 960,
-          "height": 480,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "splash-cursor.ThemeComparison.dark.webp",
-          "bytes": 15786,
-          "width": 960,
-          "height": 480,
+          "height": 600,
           "format": "webp"
         }
       ]
@@ -2653,7 +4684,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "scanner.Default.dark.webp",
-          "bytes": 22122,
+          "bytes": 22058,
           "width": 960,
           "height": 480,
           "format": "webp"
@@ -2662,7 +4693,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "scanner.Variants.dark.webp",
-          "bytes": 30604,
+          "bytes": 30426,
           "width": 960,
           "height": 480,
           "format": "webp"
@@ -2671,9 +4702,40 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "scanner.ThemeComparison.dark.webp",
-          "bytes": 32622,
+          "bytes": 32158,
           "width": 960,
           "height": 480,
+          "format": "webp"
+        }
+      ]
+    },
+    "scroll-based-velocity": {
+      "sourceHash": "c1d78016d4e8286e4bae1c1d007c85d2d721cfb905f4fd0c67051d69721dde8c",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "scroll-based-velocity.Default.dark.webp",
+          "bytes": 12718,
+          "width": 960,
+          "height": 280,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "scroll-based-velocity.Variants.dark.webp",
+          "bytes": 12366,
+          "width": 960,
+          "height": 280,
           "format": "webp"
         }
       ]
@@ -2694,7 +4756,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "shape-grid.Default.dark.webp",
-          "bytes": 13612,
+          "bytes": 13924,
           "width": 960,
           "height": 480,
           "format": "webp"
@@ -2703,7 +4765,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "shape-grid.Variants.dark.webp",
-          "bytes": 14918,
+          "bytes": 14992,
           "width": 960,
           "height": 480,
           "format": "webp"
@@ -2712,15 +4774,107 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "shape-grid.ThemeComparison.dark.webp",
-          "bytes": 19708,
+          "bytes": 20496,
           "width": 960,
           "height": 480,
           "format": "webp"
         }
       ]
     },
-    "toast": {
-      "sourceHash": "395556381cb9c1699917ff0aff80a78c7dfcc831f692784f75261e788533f585",
+    "skiper-39": {
+      "sourceHash": "c0788aa2b4515c9e79e44e90811135f340548eb13b12f7c6fe2b96bb7e376db1",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "CanvasOnly",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "skiper-39.Default.dark.webp",
+          "bytes": 46666,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "skiper-39.Variants.dark.webp",
+          "bytes": 41596,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "CanvasOnly",
+          "theme": "dark",
+          "file": "skiper-39.CanvasOnly.dark.webp",
+          "bytes": 46384,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "skiper-39.ThemeComparison.dark.webp",
+          "bytes": 49952,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "skiper-52": {
+      "sourceHash": "918c80049480433b48e230724822cd14e01d382c50c637138a0f6e2009fe73dd",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "skiper-52.Default.dark.webp",
+          "bytes": 16646,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "skiper-52.Variants.dark.webp",
+          "bytes": 15134,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "skiper-52.ThemeComparison.dark.webp",
+          "bytes": 27152,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "skiper-67": {
+      "sourceHash": "375262a0f1ac002d591ad3243ff1d3857caa2e73acf0cb9d7bcd679e57712311",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2733,25 +4887,66 @@
         {
           "story": "Default",
           "theme": "dark",
-          "file": "toast.Default.dark.webp",
-          "bytes": 2710,
-          "width": 800,
+          "file": "skiper-67.Default.dark.webp",
+          "bytes": 3932,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "skiper-67.Variants.dark.webp",
+          "bytes": 3552,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "splash-cursor": {
+      "sourceHash": "12adb01874506a6e3a52ee32abab0073f4bef9d6f1a614885802d4c7d1c9dfbd",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "splash-cursor.Default.dark.webp",
+          "bytes": 8430,
+          "width": 960,
           "height": 480,
           "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
-          "file": "toast.Variants.dark.webp",
-          "bytes": 6526,
-          "width": 800,
+          "file": "splash-cursor.Variants.dark.webp",
+          "bytes": 8782,
+          "width": 960,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "splash-cursor.ThemeComparison.dark.webp",
+          "bytes": 15764,
+          "width": 960,
           "height": 480,
           "format": "webp"
         }
       ]
     },
-    "holo-card": {
-      "sourceHash": "a81992fbbd16baf549f488fea67b18a192a97793aa006d7d4b72b019c381b864",
+    "split-text": {
+      "sourceHash": "b8f9814cc5347e8f46cf08bf83214bcdc086978ffeb8fd60afabbe54af1f3d81",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2765,233 +4960,28 @@
         {
           "story": "Default",
           "theme": "dark",
-          "file": "holo-card.Default.dark.webp",
-          "bytes": 9366,
+          "file": "split-text.Default.dark.webp",
+          "bytes": 9564,
           "width": 960,
-          "height": 600,
+          "height": 427,
           "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
-          "file": "holo-card.Variants.dark.webp",
-          "bytes": 12378,
+          "file": "split-text.Variants.dark.webp",
+          "bytes": 10300,
           "width": 960,
-          "height": 600,
+          "height": 427,
           "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
-          "file": "holo-card.ThemeComparison.dark.webp",
-          "bytes": 17498,
+          "file": "split-text.ThemeComparison.dark.webp",
+          "bytes": 18246,
           "width": 960,
-          "height": 600,
-          "format": "webp"
-        }
-      ]
-    },
-    "glowing-shadow": {
-      "sourceHash": "3030e1fd2c4d346aece1e13430d1ecb36eeb3e7494bf4df66754112c20b909b2",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "glowing-shadow.Default.dark.webp",
-          "bytes": 13310,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "glowing-shadow.Variants.dark.webp",
-          "bytes": 10886,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "glowing-shadow.ThemeComparison.dark.webp",
-          "bytes": 24824,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        }
-      ]
-    },
-    "liquid-metal-button": {
-      "sourceHash": "195b2027a647f0307d734608df67d7ec41d248d163939bc6fb95a99da21625b4",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "liquid-metal-button.Default.dark.webp",
-          "bytes": 8592,
-          "width": 960,
-          "height": 520,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "liquid-metal-button.Variants.dark.webp",
-          "bytes": 7258,
-          "width": 960,
-          "height": 520,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "liquid-metal-button.ThemeComparison.dark.webp",
-          "bytes": 16022,
-          "width": 960,
-          "height": 520,
-          "format": "webp"
-        }
-      ]
-    },
-    "testimonial": {
-      "sourceHash": "4c5090b331a53964a3e3939c67a8dfef09b5de2387175ff96eeb3544c88f0747",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "testimonial.Default.dark.webp",
-          "bytes": 17466,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "testimonial.Variants.dark.webp",
-          "bytes": 29762,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "testimonial.ThemeComparison.dark.webp",
-          "bytes": 33932,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        }
-      ]
-    },
-    "tilted-card": {
-      "sourceHash": "33e8191f62e92c3bc73b341a0ea86e2cd8f612744e5c7dced9312dab7119a47e",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "tilted-card.Default.dark.webp",
-          "bytes": 10376,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "tilted-card.Variants.dark.webp",
-          "bytes": 16512,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "tilted-card.ThemeComparison.dark.webp",
-          "bytes": 19580,
-          "width": 960,
-          "height": 622,
-          "format": "webp"
-        }
-      ]
-    },
-    "input-modal": {
-      "sourceHash": "276cd0db09e166fc7b5e2d064cfa7c6d0469c38edc70b7cf9aeb00c47ff7bae1",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "input-modal.Default.dark.webp",
-          "bytes": 12442,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "input-modal.Variants.dark.webp",
-          "bytes": 13564,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "input-modal.ThemeComparison.dark.webp",
-          "bytes": 23548,
-          "width": 960,
-          "height": 719,
+          "height": 427,
           "format": "webp"
         }
       ]
@@ -3012,7 +5002,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "spotlight-card.Default.dark.webp",
-          "bytes": 15222,
+          "bytes": 14442,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -3021,7 +5011,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "spotlight-card.Variants.dark.webp",
-          "bytes": 12112,
+          "bytes": 11486,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -3030,89 +5020,7 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "spotlight-card.ThemeComparison.dark.webp",
-          "bytes": 28814,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        }
-      ]
-    },
-    "sticky-content-wrapper": {
-      "sourceHash": "df61d3455c6de09e0f4dd53c8240b17e2dbc7aec69ea5dd8f6242bb591de7b4d",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "sticky-content-wrapper.Default.dark.webp",
-          "bytes": 27272,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "sticky-content-wrapper.Variants.dark.webp",
-          "bytes": 25908,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "sticky-content-wrapper.ThemeComparison.dark.webp",
-          "bytes": 38352,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        }
-      ]
-    },
-    "otp-dialog": {
-      "sourceHash": "ea0c27db83cf5e80b6d3385c31e519f331215c85aacbb99c17e2c3e06f8bc1df",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "otp-dialog.Default.dark.webp",
-          "bytes": 5074,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "otp-dialog.Variants.dark.webp",
-          "bytes": 6496,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "otp-dialog.ThemeComparison.dark.webp",
-          "bytes": 7944,
+          "bytes": 27036,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -3135,7 +5043,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "sterling-gate-kinetic-navigation.Default.dark.webp",
-          "bytes": 6398,
+          "bytes": 5752,
           "width": 960,
           "height": 601,
           "format": "webp"
@@ -3144,7 +5052,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "sterling-gate-kinetic-navigation.Variants.dark.webp",
-          "bytes": 10176,
+          "bytes": 10022,
           "width": 960,
           "height": 601,
           "format": "webp"
@@ -3153,15 +5061,15 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "sterling-gate-kinetic-navigation.ThemeComparison.dark.webp",
-          "bytes": 18966,
+          "bytes": 18630,
           "width": 960,
           "height": 601,
           "format": "webp"
         }
       ]
     },
-    "random-letter-swap": {
-      "sourceHash": "0ba495740bfe7ccb45c77cee7443e68f23698bfab79723e6b78cf467415bc399",
+    "sticky-content-wrapper": {
+      "sourceHash": "df61d3455c6de09e0f4dd53c8240b17e2dbc7aec69ea5dd8f6242bb591de7b4d",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -3175,273 +5083,28 @@
         {
           "story": "Default",
           "theme": "dark",
-          "file": "random-letter-swap.Default.dark.webp",
-          "bytes": 1858,
-          "width": 960,
-          "height": 280,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "random-letter-swap.Variants.dark.webp",
-          "bytes": 2076,
-          "width": 960,
-          "height": 280,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "random-letter-swap.ThemeComparison.dark.webp",
-          "bytes": 3114,
-          "width": 960,
-          "height": 280,
-          "format": "webp"
-        }
-      ]
-    },
-    "navigation-menu": {
-      "sourceHash": "9b86be1d369155c900c5fe5370b3d79066304c4fc210b32534b7531a1a190492",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "navigation-menu.Default.dark.webp",
-          "bytes": 10938,
-          "width": 960,
-          "height": 512,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "navigation-menu.Variants.dark.webp",
-          "bytes": 1310,
-          "width": 960,
-          "height": 512,
-          "format": "webp"
-        }
-      ]
-    },
-    "navbar-with-animated-mega-dropdown": {
-      "sourceHash": "fb09c748cb8465cb056ad0869f14db24b1bd984395520451ec638d1084f9c66c",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "navbar-with-animated-mega-dropdown.Default.dark.webp",
-          "bytes": 8328,
-          "width": 960,
-          "height": 427,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "navbar-with-animated-mega-dropdown.Variants.dark.webp",
-          "bytes": 2780,
-          "width": 960,
-          "height": 427,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "navbar-with-animated-mega-dropdown.ThemeComparison.dark.webp",
-          "bytes": 10362,
-          "width": 960,
-          "height": 427,
-          "format": "webp"
-        }
-      ]
-    },
-    "menu-vertical": {
-      "sourceHash": "097b2b349a3cb29a6b0411fc180cd00e725ae00b37df336563fc2f8a190779e1",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "menu-vertical.Default.dark.webp",
-          "bytes": 5508,
-          "width": 960,
-          "height": 480,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "menu-vertical.Variants.dark.webp",
-          "bytes": 4192,
-          "width": 960,
-          "height": 480,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "menu-vertical.ThemeComparison.dark.webp",
-          "bytes": 10124,
-          "width": 960,
-          "height": 480,
-          "format": "webp"
-        }
-      ]
-    },
-    "motion-image-reveal-slider": {
-      "sourceHash": "f694203c5a11c22ec143df3e258e0867c389b750660e971361171b398cc694f7",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "motion-image-reveal-slider.Default.dark.webp",
-          "bytes": 24126,
-          "width": 960,
-          "height": 688,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "motion-image-reveal-slider.Variants.dark.webp",
-          "bytes": 21640,
-          "width": 960,
-          "height": 669,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "motion-image-reveal-slider.ThemeComparison.dark.webp",
-          "bytes": 30684,
+          "file": "sticky-content-wrapper.Default.dark.webp",
+          "bytes": 25952,
           "width": 960,
           "height": 600,
           "format": "webp"
-        }
-      ]
-    },
-    "motion-loading-progress-bar": {
-      "sourceHash": "1a44aa7fe6501a7cb9e8eda603f87e43dd999e9d1cea1a782812fff0d6b37d98",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "motion-loading-progress-bar.Default.dark.gif",
-          "bytes": 51752,
-          "width": 640,
-          "height": 320,
-          "format": "gif"
-        },
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "motion-loading-progress-bar.Default.dark.webp",
-          "bytes": 8328,
-          "width": 960,
-          "height": 480,
-          "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
-          "file": "motion-loading-progress-bar.Variants.dark.webp",
-          "bytes": 8548,
+          "file": "sticky-content-wrapper.Variants.dark.webp",
+          "bytes": 23700,
           "width": 960,
-          "height": 480,
+          "height": 600,
           "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
-          "file": "motion-loading-progress-bar.ThemeComparison.dark.webp",
-          "bytes": 15644,
+          "file": "sticky-content-wrapper.ThemeComparison.dark.webp",
+          "bytes": 35688,
           "width": 960,
-          "height": 480,
-          "format": "webp"
-        }
-      ]
-    },
-    "image-cropper": {
-      "sourceHash": "c4e053b16153b41dccf7498613ae5e8d2a1cd30236cb3c561b8292d463f42a55",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "RecoverableErrors"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "image-cropper.Default.dark.webp",
-          "bytes": 9900,
-          "width": 720,
-          "height": 860,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "image-cropper.Variants.dark.webp",
-          "bytes": 10454,
-          "width": 720,
-          "height": 860,
-          "format": "webp"
-        },
-        {
-          "story": "RecoverableErrors",
-          "theme": "dark",
-          "file": "image-cropper.RecoverableErrors.dark.webp",
-          "bytes": 10904,
-          "width": 720,
-          "height": 860,
+          "height": 600,
           "format": "webp"
         }
       ]
@@ -3462,7 +5125,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "story-scroll.Default.dark.webp",
-          "bytes": 103292,
+          "bytes": 97230,
           "width": 960,
           "height": 3241,
           "format": "webp"
@@ -3471,7 +5134,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "story-scroll.Variants.dark.webp",
-          "bytes": 26156,
+          "bytes": 24720,
           "width": 960,
           "height": 1200,
           "format": "webp"
@@ -3480,15 +5143,425 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "story-scroll.ThemeComparison.dark.webp",
-          "bytes": 206918,
+          "bytes": 192210,
           "width": 960,
-          "height": 3451,
+          "height": 3465,
           "format": "webp"
         }
       ]
     },
-    "scroll-area": {
-      "sourceHash": "24753e779687eeca7d41c6de1b636bc7d1d7fa870ded5467ae9e75091ccd5734",
+    "team11": {
+      "sourceHash": "ea34ce997577a3ecef54563b6986c604613d4d0f37a624151897ca26862c7dd0",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "team11.Default.dark.webp",
+          "bytes": 17416,
+          "width": 960,
+          "height": 733,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "team11.Variants.dark.webp",
+          "bytes": 15192,
+          "width": 960,
+          "height": 733,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "team11.ThemeComparison.dark.webp",
+          "bytes": 30716,
+          "width": 960,
+          "height": 733,
+          "format": "webp"
+        }
+      ]
+    },
+    "team14": {
+      "sourceHash": "d5ca463b2a07978db1e8a40c0c1d53d178471fd74bcfa5753d760f2cca1555fa",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "team14.Default.dark.webp",
+          "bytes": 14974,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "team14.Variants.dark.webp",
+          "bytes": 17226,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "team14.ThemeComparison.dark.webp",
+          "bytes": 18368,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "team17": {
+      "sourceHash": "ad91fa380aadf386266b7e961009cd299a4407ef23816ee40b81835f2836059a",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "team17.Default.dark.webp",
+          "bytes": 61988,
+          "width": 960,
+          "height": 1295,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "team17.Variants.dark.webp",
+          "bytes": 32152,
+          "width": 960,
+          "height": 1255,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "team17.ThemeComparison.dark.webp",
+          "bytes": 78134,
+          "width": 960,
+          "height": 1200,
+          "format": "webp"
+        }
+      ]
+    },
+    "testimonial": {
+      "sourceHash": "4c5090b331a53964a3e3939c67a8dfef09b5de2387175ff96eeb3544c88f0747",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "testimonial.Default.dark.webp",
+          "bytes": 16360,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "testimonial.Variants.dark.webp",
+          "bytes": 29778,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "testimonial.ThemeComparison.dark.webp",
+          "bytes": 31468,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "ticket-confirmation-card": {
+      "sourceHash": "56a835da284a1dad882d3f5fe2dd82bd06d93b048e38d35d7da99f1de7e6e09f",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "ticket-confirmation-card.Default.dark.webp",
+          "bytes": 6850,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "ticket-confirmation-card.Variants.dark.webp",
+          "bytes": 6846,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "ticket-confirmation-card.ThemeComparison.dark.webp",
+          "bytes": 12352,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "tilted-card": {
+      "sourceHash": "33e8191f62e92c3bc73b341a0ea86e2cd8f612744e5c7dced9312dab7119a47e",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "tilted-card.Default.dark.webp",
+          "bytes": 9622,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "tilted-card.Variants.dark.webp",
+          "bytes": 16080,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "tilted-card.ThemeComparison.dark.webp",
+          "bytes": 18068,
+          "width": 960,
+          "height": 622,
+          "format": "webp"
+        }
+      ]
+    },
+    "tracker-card": {
+      "sourceHash": "f24b4697c09e8470249308792b81f618bb7f2eaddbc38f19ae4af155196b1117",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "tracker-card.Default.dark.webp",
+          "bytes": 6300,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "tracker-card.Variants.dark.webp",
+          "bytes": 5904,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "tracker-card.ThemeComparison.dark.webp",
+          "bytes": 11494,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "tubelight-navbar": {
+      "sourceHash": "319189257dd990ed0411c0b6b405e731017d9356d0ca36fab3af77dddd7f0cb5",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "tubelight-navbar.Default.dark.webp",
+          "bytes": 1406,
+          "width": 960,
+          "height": 280,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "tubelight-navbar.Variants.dark.webp",
+          "bytes": 1422,
+          "width": 960,
+          "height": 280,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "tubelight-navbar.ThemeComparison.dark.webp",
+          "bytes": 2228,
+          "width": 960,
+          "height": 280,
+          "format": "webp"
+        }
+      ]
+    },
+    "v-form-8": {
+      "sourceHash": "89889a11b4b3cbe98db627d46903dbc0adf7861d89c3c4efeb7c894e08a8a0a3",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "v-form-8.Default.dark.webp",
+          "bytes": 3350,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "v-form-8.Variants.dark.webp",
+          "bytes": 4128,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "v-form-8.ThemeComparison.dark.webp",
+          "bytes": 5518,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "waitlist3": {
+      "sourceHash": "935978ae16fb3db3d958ae439a53d179adf9c2c39c6fb58bd4bb07e8d9c5b2dd",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "waitlist3.Default.dark.webp",
+          "bytes": 33206,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "waitlist3.Variants.dark.webp",
+          "bytes": 31092,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "waitlist3.ThemeComparison.dark.webp",
+          "bytes": 45428,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "agndex-dashboard": {
+      "sourceHash": "13677abe82b4fc449918595a3a6cc701dad32b6b54103fe7d08487a5db7a5e87",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -3501,25 +5574,66 @@
         {
           "story": "Default",
           "theme": "dark",
-          "file": "scroll-area.Default.dark.webp",
-          "bytes": 8838,
-          "width": 720,
-          "height": 560,
+          "file": "agndex-dashboard.Default.dark.webp",
+          "bytes": 14084,
+          "width": 960,
+          "height": 600,
           "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
-          "file": "scroll-area.Variants.dark.webp",
-          "bytes": 2974,
-          "width": 720,
-          "height": 560,
+          "file": "agndex-dashboard.Variants.dark.webp",
+          "bytes": 15422,
+          "width": 960,
+          "height": 600,
           "format": "webp"
         }
       ]
     },
-    "avatar-border": {
-      "sourceHash": "bf636f7eb44334632b79e24be40a7a4399738de5f21e0cc668a62e7cfc8f0fc3",
+    "application-shell1": {
+      "sourceHash": "08054e571a241bc92022d1eb4e2c0c821a88676a2631b590ec0475fbd83e8198",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "application-shell1.Default.dark.webp",
+          "bytes": 6824,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "application-shell1.Variants.dark.webp",
+          "bytes": 3452,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "application-shell1.ThemeComparison.dark.webp",
+          "bytes": 11794,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "application-shell13": {
+      "sourceHash": "cd7cbb3db1c5b482cf3759ecbb0bce809dc4d49dda583384c6efddae3d09de0a",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -3532,41 +5646,8 @@
         {
           "story": "Default",
           "theme": "dark",
-          "file": "avatar-border.Default.dark.webp",
-          "bytes": 1606,
-          "width": 800,
-          "height": 480,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "avatar-border.Variants.dark.webp",
-          "bytes": 3208,
-          "width": 800,
-          "height": 480,
-          "format": "webp"
-        }
-      ]
-    },
-    "carousel-cards": {
-      "sourceHash": "15bd9a38308bfd123202f88a5e5109a5d097ddd658fca15711856b64aa51c979",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "NightlyRates",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "carousel-cards.Default.dark.webp",
-          "bytes": 33482,
+          "file": "application-shell13.Default.dark.webp",
+          "bytes": 6540,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -3574,34 +5655,16 @@
         {
           "story": "Variants",
           "theme": "dark",
-          "file": "carousel-cards.Variants.dark.webp",
-          "bytes": 43524,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "NightlyRates",
-          "theme": "dark",
-          "file": "carousel-cards.NightlyRates.dark.webp",
-          "bytes": 23822,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "carousel-cards.ThemeComparison.dark.webp",
-          "bytes": 47344,
+          "file": "application-shell13.Variants.dark.webp",
+          "bytes": 4636,
           "width": 960,
           "height": 600,
           "format": "webp"
         }
       ]
     },
-    "falling-text": {
-      "sourceHash": "420435ae3a61424faab8dc29e3b93e844f68c68cfe8601b53e6baf10e9a4c89a",
+    "chart-group14": {
+      "sourceHash": "6520e6625c73dd20237b240dcd89a5a77fab16c7bfeff879195c1aa13b74ac75",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -3615,43 +5678,65 @@
         {
           "story": "Default",
           "theme": "dark",
-          "file": "falling-text.Default.dark.gif",
-          "bytes": 89879,
-          "width": 640,
-          "height": 320,
-          "format": "gif"
-        },
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "falling-text.Default.dark.webp",
-          "bytes": 11804,
+          "file": "chart-group14.Default.dark.webp",
+          "bytes": 24140,
           "width": 960,
-          "height": 480,
+          "height": 787,
           "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
-          "file": "falling-text.Variants.dark.webp",
-          "bytes": 12284,
+          "file": "chart-group14.Variants.dark.webp",
+          "bytes": 22832,
           "width": 960,
-          "height": 480,
+          "height": 787,
           "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
-          "file": "falling-text.ThemeComparison.dark.webp",
-          "bytes": 22586,
+          "file": "chart-group14.ThemeComparison.dark.webp",
+          "bytes": 43298,
           "width": 960,
-          "height": 480,
+          "height": 787,
           "format": "webp"
         }
       ]
     },
-    "kanban-board": {
-      "sourceHash": "497cf59b58b438b554e167f5cb7106abcc94d2efc818b520a4c12ced47fb8486",
+    "demostack-dashboard": {
+      "sourceHash": "b4822fa100059965e7747e3831e538ebca6c1e55a08505a653f0c56fa3ddf7ab",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "demostack-dashboard.Default.dark.webp",
+          "bytes": 38310,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "demostack-dashboard.Variants.dark.webp",
+          "bytes": 22576,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "event-manager": {
+      "sourceHash": "f39d53c431ac75c80ef603e252ded62f25a6007a5fbac8677d379b40cc64972c",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -3665,17 +5750,17 @@
         {
           "story": "Default",
           "theme": "dark",
-          "file": "kanban-board.Default.dark.webp",
-          "bytes": 17616,
+          "file": "event-manager.Default.dark.webp",
+          "bytes": 16510,
           "width": 960,
-          "height": 600,
+          "height": 864,
           "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
-          "file": "kanban-board.Variants.dark.webp",
-          "bytes": 12060,
+          "file": "event-manager.Variants.dark.webp",
+          "bytes": 9834,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -3683,10 +5768,123 @@
         {
           "story": "ThemeComparison",
           "theme": "dark",
-          "file": "kanban-board.ThemeComparison.dark.webp",
-          "bytes": 32494,
+          "file": "event-manager.ThemeComparison.dark.webp",
+          "bytes": 30656,
           "width": 960,
-          "height": 804,
+          "height": 864,
+          "format": "webp"
+        }
+      ]
+    },
+    "forgot-password2": {
+      "sourceHash": "4c6f00af47e35b68d4280f3cda9ea86ed0226a3e6a1c90e0e8ac386cd27a91a7",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "forgot-password2.Default.dark.webp",
+          "bytes": 29854,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "forgot-password2.Variants.dark.webp",
+          "bytes": 47902,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "forgot-password2.ThemeComparison.dark.webp",
+          "bytes": 38844,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "fullscreen-calendar": {
+      "sourceHash": "799b3b53752c76388fe524d374b9821b1b8f549532db60fdbca67159ea8050cd",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "fullscreen-calendar.Default.dark.webp",
+          "bytes": 10802,
+          "width": 960,
+          "height": 700,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "fullscreen-calendar.Variants.dark.webp",
+          "bytes": 7162,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "fullscreen-calendar.ThemeComparison.dark.webp",
+          "bytes": 18706,
+          "width": 960,
+          "height": 700,
+          "format": "webp"
+        }
+      ]
+    },
+    "gridline-dashboard": {
+      "sourceHash": "502725d3e389ad313b039a882607ad0397a4e9d4d185cd685a80f96ef2182296",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "gridline-dashboard.Default.dark.webp",
+          "bytes": 19518,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "gridline-dashboard.Variants.dark.webp",
+          "bytes": 17112,
+          "width": 960,
+          "height": 600,
           "format": "webp"
         }
       ]
@@ -3707,7 +5905,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "kanban.Default.dark.webp",
-          "bytes": 12798,
+          "bytes": 12462,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -3716,7 +5914,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "kanban.Variants.dark.webp",
-          "bytes": 8156,
+          "bytes": 7892,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -3725,15 +5923,15 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "kanban.ThemeComparison.dark.webp",
-          "bytes": 20940,
+          "bytes": 20582,
           "width": 960,
           "height": 600,
           "format": "webp"
         }
       ]
     },
-    "form": {
-      "sourceHash": "1dd9452431b9399f5adcf44d5544cb5ca19e3cd4932d0f1a7b4c1af7658a5518",
+    "kanban-board": {
+      "sourceHash": "497cf59b58b438b554e167f5cb7106abcc94d2efc818b520a4c12ced47fb8486",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -3747,157 +5945,34 @@
         {
           "story": "Default",
           "theme": "dark",
-          "file": "form.Default.dark.webp",
-          "bytes": 8302,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "form.Variants.dark.webp",
-          "bytes": 8140,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "form.ThemeComparison.dark.webp",
-          "bytes": 15212,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        }
-      ]
-    },
-    "ride-booking-form": {
-      "sourceHash": "e382d6b3ea62f26915e1022272c9d370d8d27e46f283d887337aae9a5648709e",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "ride-booking-form.Default.dark.webp",
-          "bytes": 16110,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "ride-booking-form.Variants.dark.webp",
-          "bytes": 12254,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "ride-booking-form.ThemeComparison.dark.webp",
-          "bytes": 30910,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        }
-      ]
-    },
-    "pricing-calendar": {
-      "sourceHash": "6c55ae61630a645467c0fa657e0d12e1455ab3665bfcef200532f0a2196a1017",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "pricing-calendar.Default.dark.webp",
-          "bytes": 19488,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "pricing-calendar.Variants.dark.webp",
-          "bytes": 20048,
-          "width": 960,
-          "height": 634,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "pricing-calendar.ThemeComparison.dark.webp",
-          "bytes": 37804,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        }
-      ]
-    },
-    "calendar-03": {
-      "sourceHash": "2e9b00a69c0bb88a4deb569f6d2f590a22739ce81864ffc6efbec4b5420310e9",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "calendar-03.Default.dark.webp",
+          "file": "kanban-board.Default.dark.webp",
           "bytes": 17382,
-          "width": 840,
-          "height": 796,
+          "width": 960,
+          "height": 600,
           "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
-          "file": "calendar-03.Variants.dark.webp",
-          "bytes": 14156,
-          "width": 840,
-          "height": 560,
+          "file": "kanban-board.Variants.dark.webp",
+          "bytes": 11946,
+          "width": 960,
+          "height": 600,
           "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
-          "file": "calendar-03.ThemeComparison.dark.webp",
-          "bytes": 32498,
-          "width": 840,
-          "height": 844,
+          "file": "kanban-board.ThemeComparison.dark.webp",
+          "bytes": 31856,
+          "width": 960,
+          "height": 804,
           "format": "webp"
         }
       ]
     },
-    "receipt-pricing": {
-      "sourceHash": "a2fe3c2398e22f01402da8cfc7f8c36b8797bf1008f606265510210a2177f01c",
+    "login4": {
+      "sourceHash": "2bb4be15be971815340e72d9285fcd0b9e89c3fa2849bc309b9ef30343353f3c",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -3911,49 +5986,8 @@
         {
           "story": "Default",
           "theme": "dark",
-          "file": "receipt-pricing.Default.dark.webp",
-          "bytes": 23918,
-          "width": 960,
-          "height": 733,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "receipt-pricing.Variants.dark.webp",
-          "bytes": 20368,
-          "width": 960,
-          "height": 733,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "receipt-pricing.ThemeComparison.dark.webp",
-          "bytes": 44206,
-          "width": 960,
-          "height": 733,
-          "format": "webp"
-        }
-      ]
-    },
-    "v-form-8": {
-      "sourceHash": "b7933139a3ebd7ef0316b4d9962aac0646d3cf248e87bdb5cbf82fad889e0547",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "v-form-8.Default.dark.webp",
-          "bytes": 7038,
+          "file": "login4.Default.dark.webp",
+          "bytes": 6420,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -3961,66 +5995,97 @@
         {
           "story": "Variants",
           "theme": "dark",
-          "file": "v-form-8.Variants.dark.webp",
-          "bytes": 6978,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        },
-        {
-          "story": "ThemeComparison",
-          "theme": "dark",
-          "file": "v-form-8.ThemeComparison.dark.webp",
-          "bytes": 12940,
-          "width": 960,
-          "height": 600,
-          "format": "webp"
-        }
-      ]
-    },
-    "v-checkbox-11": {
-      "sourceHash": "9bf75c72784af58072851a966a31062590e85099ef9056def767716a63d3ddf1",
-      "pipelineVersion": 1,
-      "stories": [
-        "Default",
-        "Variants",
-        "ThemeComparison"
-      ],
-      "themes": [
-        "dark"
-      ],
-      "assets": [
-        {
-          "story": "Default",
-          "theme": "dark",
-          "file": "v-checkbox-11.Default.dark.webp",
-          "bytes": 8316,
-          "width": 960,
-          "height": 471,
-          "format": "webp"
-        },
-        {
-          "story": "Variants",
-          "theme": "dark",
-          "file": "v-checkbox-11.Variants.dark.webp",
+          "file": "login4.Variants.dark.webp",
           "bytes": 6720,
           "width": 960,
-          "height": 471,
+          "height": 600,
           "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
-          "file": "v-checkbox-11.ThemeComparison.dark.webp",
-          "bytes": 15950,
+          "file": "login4.ThemeComparison.dark.webp",
+          "bytes": 11486,
           "width": 960,
-          "height": 471,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "otp-dialog": {
+      "sourceHash": "ea0c27db83cf5e80b6d3385c31e519f331215c85aacbb99c17e2c3e06f8bc1df",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "otp-dialog.Default.dark.webp",
+          "bytes": 5004,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "otp-dialog.Variants.dark.webp",
+          "bytes": 6380,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "otp-dialog.ThemeComparison.dark.webp",
+          "bytes": 7518,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "portfolio-dashboard": {
+      "sourceHash": "52d0c608cd19a2740bf2b6eb84c7a0bc26e3e965edda9b94f277607a22a0cea2",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "portfolio-dashboard.Default.dark.webp",
+          "bytes": 50992,
+          "width": 960,
+          "height": 833,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "portfolio-dashboard.Variants.dark.webp",
+          "bytes": 13822,
+          "width": 960,
+          "height": 672,
           "format": "webp"
         }
       ]
     },
     "table-2": {
-      "sourceHash": "26762506f9bfd9d49d64f870ab0f97523249312a5a188605f52039d90f15faef",
+      "sourceHash": "119cda6a45add73170936cde185c26f935e9c0547f206576b23dc0bd5c5b7d0d",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -4035,7 +6100,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "table-2.Default.dark.webp",
-          "bytes": 17044,
+          "bytes": 18578,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -4044,7 +6109,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "table-2.Variants.dark.webp",
-          "bytes": 7898,
+          "bytes": 7334,
           "width": 960,
           "height": 600,
           "format": "webp"
@@ -4053,15 +6118,15 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "table-2.ThemeComparison.dark.webp",
-          "bytes": 33162,
+          "bytes": 34784,
           "width": 960,
-          "height": 600,
+          "height": 604,
           "format": "webp"
         }
       ]
     },
-    "ticket-confirmation-card": {
-      "sourceHash": "fc65b994e3ab8ce222aa5eeef2a53d80648a14026854d5a2cf2419c5cf6f49c9",
+    "todo9": {
+      "sourceHash": "144d1cfb6bfc64dbe356df379a38deea794ba3beb6379c1c7359c0176d686402",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -4075,28 +6140,151 @@
         {
           "story": "Default",
           "theme": "dark",
-          "file": "ticket-confirmation-card.Default.dark.webp",
-          "bytes": 13058,
+          "file": "todo9.Default.dark.webp",
+          "bytes": 9212,
           "width": 960,
-          "height": 749,
+          "height": 600,
           "format": "webp"
         },
         {
           "story": "Variants",
           "theme": "dark",
-          "file": "ticket-confirmation-card.Variants.dark.webp",
-          "bytes": 13998,
+          "file": "todo9.Variants.dark.webp",
+          "bytes": 5588,
           "width": 960,
-          "height": 733,
+          "height": 600,
           "format": "webp"
         },
         {
           "story": "ThemeComparison",
           "theme": "dark",
-          "file": "ticket-confirmation-card.ThemeComparison.dark.webp",
-          "bytes": 24604,
+          "file": "todo9.ThemeComparison.dark.webp",
+          "bytes": 17462,
           "width": 960,
-          "height": 749,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "two-factor2": {
+      "sourceHash": "b29bd606a6be52ee80d2e69930e9b392974710286144a4f43c8b8df90f0f1abd",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "two-factor2.Default.dark.webp",
+          "bytes": 23810,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "two-factor2.Variants.dark.webp",
+          "bytes": 31854,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "two-factor2.ThemeComparison.dark.webp",
+          "bytes": 34752,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "two-factor5": {
+      "sourceHash": "fca2d66bbb4e8ead96a090b03dcf5d8a091803c285751ae750ab91cfa429fcde",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "two-factor5.Default.dark.webp",
+          "bytes": 5732,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "two-factor5.Variants.dark.webp",
+          "bytes": 6640,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "two-factor5.ThemeComparison.dark.webp",
+          "bytes": 10330,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
+    },
+    "verify-email1": {
+      "sourceHash": "208ba54e00cca2b074f35954914d7a6d0d1a09da12d00d6e9776360588ad20fd",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants",
+        "ThemeComparison"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "verify-email1.Default.dark.webp",
+          "bytes": 4924,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "verify-email1.Variants.dark.webp",
+          "bytes": 5426,
+          "width": 960,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "verify-email1.ThemeComparison.dark.webp",
+          "bytes": 8624,
+          "width": 960,
+          "height": 600,
           "format": "webp"
         }
       ]

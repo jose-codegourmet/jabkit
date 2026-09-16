@@ -1,3 +1,5 @@
+"use client";
+
 // biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.
 import * as React from "react";
 import { cn } from "@/lib/cn";
