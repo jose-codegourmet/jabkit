@@ -1,0 +1,106 @@
+{
+  "name": "message",
+  "displayName": "Message",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Lays out a conversation row with optional avatar, header, footer, and start or end alignment.",
+  "sectionCategory": "content",
+  "purpose": "Owns chat-row chrome around a bubble so sender, alignment, status, and actions stay consistent in a thread.",
+  "bestFor": [
+    "chat and assistant threads",
+    "grouped consecutive messages from one sender",
+    "rows with names, delivery status, or actions"
+  ],
+  "avoidFor": [
+    "standalone alerts that do not sit in a conversation",
+    "full scroll containers; pair with a scroller at the page level"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "avatar",
+    "header",
+    "content",
+    "footer",
+    "group"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "bubble",
+    "avatar",
+    "marker"
+  ],
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/message",
+  "tags": [
+    "message",
+    "chat",
+    "conversation",
+    "avatar",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "avatar",
+    "bubble",
+    "marker"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center",
+    "width": 420,
+    "height": 640
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "message/Message.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  MessageAvatarProps,\n  MessageContentProps,\n  MessageFooterProps,\n  MessageGroupProps,\n  MessageHeaderProps,\n  MessageProps,\n} from \"./Message.types\";\n\nfunction MessageGroup({ className, ...props }: MessageGroupProps) {\n  return (\n    <div\n      data-slot=\"message-group\"\n      className={cn(\"flex min-w-0 flex-col gap-2\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction Message({ className, align = \"start\", ...props }: MessageProps) {\n  return (\n    <div\n      data-slot=\"message\"\n      data-align={align}\n      className={cn(\n        \"group/message relative flex w-full min-w-0 gap-2 text-sm data-[align=end]:flex-row-reverse\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction MessageAvatar({ className, ...props }: MessageAvatarProps) {\n  return (\n    <div\n      data-slot=\"message-avatar\"\n      className={cn(\n        \"flex w-fit min-w-8 shrink-0 items-center justify-center self-end overflow-hidden rounded-full bg-muted group-has-data-[slot=message-footer]/message:-translate-y-8\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction MessageContent({ className, ...props }: MessageContentProps) {\n  return (\n    <div\n      data-slot=\"message-content\"\n      className={cn(\n        \"flex w-full min-w-0 flex-col gap-2.5 wrap-break-word group-data-[align=end]/message:*:data-slot:self-end\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction MessageHeader({ className, ...props }: MessageHeaderProps) {\n  return (\n    <div\n      data-slot=\"message-header\"\n      className={cn(\n        \"flex max-w-full min-w-0 items-center px-3 text-xs font-medium text-muted-foreground group-has-data-[variant=ghost]/message:px-0\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction MessageFooter({ className, ...props }: MessageFooterProps) {\n  return (\n    <div\n      data-slot=\"message-footer\"\n      className={cn(\n        \"flex max-w-full min-w-0 items-center px-3 text-xs font-medium text-muted-foreground group-has-data-[variant=ghost]/message:px-0 group-data-[align=end]/message:justify-end\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport {\n  Message,\n  MessageAvatar,\n  MessageContent,\n  MessageFooter,\n  MessageGroup,\n  MessageHeader,\n};\n"
+    },
+    {
+      "path": "message/Message.types.ts",
+      "type": "types",
+      "content": "import type { ComponentProps } from \"react\";\n\nexport type MessageAlign = \"start\" | \"end\";\n\nexport type MessageProps = ComponentProps<\"div\"> & {\n  align?: MessageAlign;\n};\n\nexport type MessageGroupProps = ComponentProps<\"div\">;\n\nexport type MessageAvatarProps = ComponentProps<\"div\">;\n\nexport type MessageContentProps = ComponentProps<\"div\">;\n\nexport type MessageHeaderProps = ComponentProps<\"div\">;\n\nexport type MessageFooterProps = ComponentProps<\"div\">;\n"
+    },
+    {
+      "path": "message/index.ts",
+      "type": "index",
+      "content": "export * from \"./Message\";\nexport type * from \"./Message.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"flex w-full max-w-sm flex-col gap-6 py-12\">\n      <Message align=\"end\">\n        <MessageAvatar>\n          <Avatar>\n            <AvatarFallback>{messageMocks.default.meInitials}</AvatarFallback>\n          </Avatar>\n        </MessageAvatar>\n        <MessageContent>\n          <Bubble>\n            <BubbleContent>{messageMocks.default.deploy}</BubbleContent>\n          </Bubble>\n        </MessageContent>\n      </Message>\n      <Message>\n        <MessageAvatar>\n          <Avatar>\n            <AvatarFallback>\n              {messageMocks.default.otherInitials}\n            </AvatarFallback>\n          </Avatar>\n        </MessageAvatar>\n        <MessageContent>\n          <Bubble variant=\"muted\">\n            <BubbleContent>{messageMocks.default.friday}</BubbleContent>\n          </Bubble>\n        </MessageContent>\n      </Message>\n      <Message align=\"end\">\n        <MessageAvatar>\n          <Avatar>\n            <AvatarFallback>{messageMocks.default.meInitials}</AvatarFallback>\n          </Avatar>\n        </MessageAvatar>\n        <MessageContent>\n          <Bubble>\n            <BubbleContent>{messageMocks.default.oneLine}</BubbleContent>\n          </Bubble>\n          <MessageFooter>{messageMocks.default.delivered}</MessageFooter>\n        </MessageContent>\n      </Message>\n      <Message>\n        <MessageAvatar>\n          <Avatar>\n            <AvatarFallback>\n              {messageMocks.default.otherInitials}\n            </AvatarFallback>\n          </Avatar>\n        </MessageAvatar>\n        <MessageContent>\n          <BubbleGroup>\n            <Bubble variant=\"muted\">\n              <BubbleContent>\n                {messageMocks.default.alwaysOneLine}\n              </BubbleContent>\n            </Bubble>\n            <Bubble variant=\"muted\">\n              <BubbleContent>{messageMocks.default.takeALook}</BubbleContent>\n              <BubbleReactions aria-label=\"Reactions: thumbs up\">\n                <span>👍</span>\n              </BubbleReactions>\n            </Bubble>\n          </BubbleGroup>\n        </MessageContent>\n      </Message>\n      <Marker role=\"status\">\n        <MarkerContent className=\"shimmer\">\n          {messageMocks.default.typing}\n        </MarkerContent>\n      </Marker>\n    </div>"
+    },
+    {
+      "name": "Group",
+      "code": "<div className=\"flex w-full max-w-sm flex-col gap-6 py-12\">\n      <MessageGroup>\n        <Message>\n          <MessageAvatar />\n          <MessageContent>\n            <Bubble variant=\"muted\">\n              <BubbleContent>{messageMocks.group.first}</BubbleContent>\n            </Bubble>\n          </MessageContent>\n        </Message>\n        <Message>\n          <MessageAvatar>\n            <Avatar>\n              <AvatarFallback>{messageMocks.group.initials}</AvatarFallback>\n            </Avatar>\n          </MessageAvatar>\n          <MessageContent>\n            <Bubble variant=\"muted\">\n              <BubbleContent>{messageMocks.group.second}</BubbleContent>\n            </Bubble>\n          </MessageContent>\n        </Message>\n      </MessageGroup>\n    </div>"
+    }
+  ]
+}
