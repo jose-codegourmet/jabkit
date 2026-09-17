@@ -551,6 +551,70 @@
     }
   },
   {
+    "name": "breadcrumb",
+    "displayName": "Breadcrumb",
+    "category": "atoms",
+    "description": "Displays the path to the current resource using a hierarchy of links.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/breadcrumb",
+    "sectionCategory": "navigation",
+    "purpose": "Shows where a page sits in the site hierarchy so people can step back to a parent section without the main nav.",
+    "bestFor": [
+      "docs and settings nested pages",
+      "product or category paths",
+      "admin screens with a parent list"
+    ],
+    "avoidFor": [
+      "primary site navigation",
+      "single-level pages with no parent trail"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "inline",
+      "alignment": "left"
+    },
+    "slots": [
+      "list",
+      "item",
+      "link",
+      "page",
+      "separator",
+      "ellipsis"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "breadcrumb",
+      "navigation",
+      "path",
+      "hierarchy",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "@base-ui/react",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "bright-lizard",
     "displayName": "BrightLizard",
     "category": "atoms",

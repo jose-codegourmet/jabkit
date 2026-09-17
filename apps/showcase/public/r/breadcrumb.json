@@ -1,0 +1,98 @@
+{
+  "name": "breadcrumb",
+  "displayName": "Breadcrumb",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Displays the path to the current resource using a hierarchy of links.",
+  "sectionCategory": "navigation",
+  "purpose": "Shows where a page sits in the site hierarchy so people can step back to a parent section without the main nav.",
+  "bestFor": [
+    "docs and settings nested pages",
+    "product or category paths",
+    "admin screens with a parent list"
+  ],
+  "avoidFor": [
+    "primary site navigation",
+    "single-level pages with no parent trail"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "inline",
+    "alignment": "left"
+  },
+  "slots": [
+    "list",
+    "item",
+    "link",
+    "page",
+    "separator",
+    "ellipsis"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/breadcrumb",
+  "tags": [
+    "breadcrumb",
+    "navigation",
+    "path",
+    "hierarchy",
+    "atom"
+  ],
+  "dependencies": [
+    "@base-ui/react",
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "breadcrumb/Breadcrumb.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { mergeProps } from \"@base-ui/react/merge-props\";\nimport { useRender } from \"@base-ui/react/use-render\";\nimport { ChevronRightIcon, MoreHorizontalIcon } from \"lucide-react\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  BreadcrumbEllipsisProps,\n  BreadcrumbItemProps,\n  BreadcrumbLinkProps,\n  BreadcrumbListProps,\n  BreadcrumbPageProps,\n  BreadcrumbProps,\n  BreadcrumbSeparatorProps,\n} from \"./Breadcrumb.types\";\n\nfunction Breadcrumb({ className, ...props }: BreadcrumbProps) {\n  return (\n    <nav\n      aria-label=\"breadcrumb\"\n      data-slot=\"breadcrumb\"\n      className={cn(className)}\n      {...props}\n    />\n  );\n}\n\nfunction BreadcrumbList({ className, ...props }: BreadcrumbListProps) {\n  return (\n    <ol\n      data-slot=\"breadcrumb-list\"\n      className={cn(\n        \"flex flex-wrap items-center gap-1.5 text-sm wrap-break-word text-muted-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction BreadcrumbItem({ className, ...props }: BreadcrumbItemProps) {\n  return (\n    <li\n      data-slot=\"breadcrumb-item\"\n      className={cn(\"inline-flex items-center gap-1\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction BreadcrumbLink({ className, render, ...props }: BreadcrumbLinkProps) {\n  return useRender({\n    defaultTagName: \"a\",\n    props: mergeProps<\"a\">(\n      {\n        className: cn(\"transition-colors hover:text-foreground\", className),\n      },\n      props,\n    ),\n    render,\n    state: {\n      slot: \"breadcrumb-link\",\n    },\n  });\n}\n\nfunction BreadcrumbPage({ className, ...props }: BreadcrumbPageProps) {\n  return (\n    // biome-ignore lint/a11y/useFocusableInteractive: Current page is a non-focusable link per the shadcn breadcrumb.\n    // biome-ignore lint/a11y/useSemanticElements: Current page uses role=link like the shadcn breadcrumb.\n    <span\n      data-slot=\"breadcrumb-page\"\n      role=\"link\"\n      aria-disabled=\"true\"\n      aria-current=\"page\"\n      className={cn(\"font-normal text-foreground\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction BreadcrumbSeparator({\n  children,\n  className,\n  ...props\n}: BreadcrumbSeparatorProps) {\n  return (\n    <li\n      data-slot=\"breadcrumb-separator\"\n      role=\"presentation\"\n      aria-hidden=\"true\"\n      className={cn(\"[&>svg]:size-3.5\", className)}\n      {...props}\n    >\n      {children ?? <ChevronRightIcon className=\"rtl:-scale-x-100\" />}\n    </li>\n  );\n}\n\nfunction BreadcrumbEllipsis({ className, ...props }: BreadcrumbEllipsisProps) {\n  return (\n    <span\n      data-slot=\"breadcrumb-ellipsis\"\n      role=\"presentation\"\n      aria-hidden=\"true\"\n      className={cn(\n        \"flex size-5 items-center justify-center [&>svg]:size-4\",\n        className,\n      )}\n      {...props}\n    >\n      <MoreHorizontalIcon />\n      <span className=\"sr-only\">More</span>\n    </span>\n  );\n}\n\nexport {\n  Breadcrumb,\n  BreadcrumbEllipsis,\n  BreadcrumbItem,\n  BreadcrumbLink,\n  BreadcrumbList,\n  BreadcrumbPage,\n  BreadcrumbSeparator,\n};\n"
+    },
+    {
+      "path": "breadcrumb/Breadcrumb.types.ts",
+      "type": "types",
+      "content": "import type { useRender } from \"@base-ui/react/use-render\";\nimport type { ComponentProps } from \"react\";\n\nexport type BreadcrumbProps = ComponentProps<\"nav\">;\n\nexport type BreadcrumbListProps = ComponentProps<\"ol\">;\n\nexport type BreadcrumbItemProps = ComponentProps<\"li\">;\n\nexport type BreadcrumbLinkProps = useRender.ComponentProps<\"a\">;\n\nexport type BreadcrumbPageProps = ComponentProps<\"span\">;\n\nexport type BreadcrumbSeparatorProps = ComponentProps<\"li\">;\n\nexport type BreadcrumbEllipsisProps = ComponentProps<\"span\">;\n"
+    },
+    {
+      "path": "breadcrumb/index.ts",
+      "type": "index",
+      "content": "export * from \"./Breadcrumb\";\nexport type * from \"./Breadcrumb.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Breadcrumb>\n      <BreadcrumbList>\n        <BreadcrumbItem>\n          <BreadcrumbLink href={breadcrumbMocks.default.homeHref}>\n            {breadcrumbMocks.default.home}\n          </BreadcrumbLink>\n        </BreadcrumbItem>\n        <BreadcrumbSeparator />\n        <BreadcrumbItem>\n          <BreadcrumbLink href={breadcrumbMocks.default.sectionHref}>\n            {breadcrumbMocks.default.section}\n          </BreadcrumbLink>\n        </BreadcrumbItem>\n        <BreadcrumbSeparator />\n        <BreadcrumbItem>\n          <BreadcrumbPage>{breadcrumbMocks.default.page}</BreadcrumbPage>\n        </BreadcrumbItem>\n      </BreadcrumbList>\n    </Breadcrumb>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"flex flex-col gap-8\">\n      <Breadcrumb>\n        <BreadcrumbList>\n          <BreadcrumbItem>\n            <BreadcrumbLink href={breadcrumbMocks.default.homeHref}>\n              {breadcrumbMocks.default.home}\n            </BreadcrumbLink>\n          </BreadcrumbItem>\n          <BreadcrumbSeparator>\n            <DotIcon />\n          </BreadcrumbSeparator>\n          <BreadcrumbItem>\n            <BreadcrumbLink href={breadcrumbMocks.default.sectionHref}>\n              {breadcrumbMocks.default.section}\n            </BreadcrumbLink>\n          </BreadcrumbItem>\n          <BreadcrumbSeparator>\n            <DotIcon />\n          </BreadcrumbSeparator>\n          <BreadcrumbItem>\n            <BreadcrumbPage>{breadcrumbMocks.default.page}</BreadcrumbPage>\n          </BreadcrumbItem>\n        </BreadcrumbList>\n      </Breadcrumb>\n      <Breadcrumb>\n        <BreadcrumbList>\n          <BreadcrumbItem>\n            <BreadcrumbLink href={breadcrumbMocks.collapsed.homeHref}>\n              {breadcrumbMocks.collapsed.home}\n            </BreadcrumbLink>\n          </BreadcrumbItem>\n          <BreadcrumbSeparator />\n          <BreadcrumbItem>\n            <BreadcrumbEllipsis />\n          </BreadcrumbItem>\n          <BreadcrumbSeparator />\n          <BreadcrumbItem>\n            <BreadcrumbLink href={breadcrumbMocks.collapsed.buildingHref}>\n              {breadcrumbMocks.collapsed.building}\n            </BreadcrumbLink>\n          </BreadcrumbItem>\n          <BreadcrumbSeparator />\n          <BreadcrumbItem>\n            <BreadcrumbPage>{breadcrumbMocks.collapsed.page}</BreadcrumbPage>\n          </BreadcrumbItem>\n        </BreadcrumbList>\n      </Breadcrumb>\n      <Breadcrumb>\n        <BreadcrumbList>\n          <BreadcrumbItem>\n            <BreadcrumbLink href={breadcrumbMocks.dropdown.homeHref}>\n              {breadcrumbMocks.dropdown.home}\n            </BreadcrumbLink>\n          </BreadcrumbItem>\n          <BreadcrumbSeparator />\n          <BreadcrumbItem>\n            <DropdownMenu>\n              <DropdownMenuTrigger className=\"flex items-center gap-1\">\n                <BreadcrumbEllipsis className=\"size-4\" />\n                <span className=\"sr-only\">Toggle menu</span>\n              </DropdownMenuTrigger>\n              <DropdownMenuContent align=\"start\">\n                <DropdownMenuItem>\n                  {breadcrumbMocks.dropdown.documentation}\n                </DropdownMenuItem>\n                <DropdownMenuItem>\n                  {breadcrumbMocks.dropdown.themes}\n                </DropdownMenuItem>\n                <DropdownMenuItem>\n                  {breadcrumbMocks.dropdown.github}\n                </DropdownMenuItem>\n              </DropdownMenuContent>\n            </DropdownMenu>\n          </BreadcrumbItem>\n          <BreadcrumbSeparator />\n          <BreadcrumbItem>\n            <BreadcrumbLink href={breadcrumbMocks.dropdown.sectionHref}>\n              {breadcrumbMocks.dropdown.section}\n            </BreadcrumbLink>\n          </BreadcrumbItem>\n          <BreadcrumbSeparator />\n          <BreadcrumbItem>\n            <BreadcrumbPage>{breadcrumbMocks.dropdown.page}</BreadcrumbPage>\n          </BreadcrumbItem>\n        </BreadcrumbList>\n      </Breadcrumb>\n    </div>"
+    }
+  ]
+}
