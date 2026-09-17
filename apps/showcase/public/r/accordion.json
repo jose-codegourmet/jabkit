@@ -73,7 +73,7 @@
     {
       "path": "accordion/index.ts",
       "type": "index",
-      "content": "export { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from \"./Accordion\";\nexport type * from \"./Accordion.types\";\n"
+      "content": "export * from \"./Accordion\";\nexport type * from \"./Accordion.types\";\n"
     },
     {
       "path": "lib/cn.ts",
