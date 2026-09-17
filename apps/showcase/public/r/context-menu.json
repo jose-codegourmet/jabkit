@@ -1,0 +1,96 @@
+{
+  "name": "context-menu",
+  "displayName": "ContextMenu",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Right-click menu of contextual actions, with groups, shortcuts, nested menus, and selection items.",
+  "sectionCategory": "overlay",
+  "purpose": "Keeps pointer-local actions next to the clicked surface instead of a distant toolbar.",
+  "bestFor": [
+    "canvas and list item actions",
+    "file and document operations",
+    "view toggles next to selected content"
+  ],
+  "avoidFor": [
+    "primary navigation",
+    "actions that must stay visible without a pointer"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "low",
+  "layout": {
+    "type": "overlay",
+    "alignment": "left"
+  },
+  "slots": [
+    "trigger",
+    "menuItems",
+    "groups",
+    "submenu"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/context-menu",
+  "tags": [
+    "context-menu",
+    "overlay",
+    "primitive",
+    "accessible",
+    "atom"
+  ],
+  "dependencies": [
+    "@base-ui/react",
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "context-menu/ContextMenu.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ContextMenu as ContextMenuPrimitive } from \"@base-ui/react/context-menu\";\nimport { CheckIcon, ChevronRightIcon } from \"lucide-react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  ContextMenuCheckboxItemProps,\n  ContextMenuContentProps,\n  ContextMenuGroupProps,\n  ContextMenuItemProps,\n  ContextMenuLabelProps,\n  ContextMenuPortalProps,\n  ContextMenuProps,\n  ContextMenuRadioGroupProps,\n  ContextMenuRadioItemProps,\n  ContextMenuSeparatorProps,\n  ContextMenuShortcutProps,\n  ContextMenuSubContentProps,\n  ContextMenuSubProps,\n  ContextMenuSubTriggerProps,\n  ContextMenuTriggerProps,\n} from \"./ContextMenu.types\";\n\nfunction ContextMenu({ ...props }: ContextMenuProps) {\n  return <ContextMenuPrimitive.Root data-slot=\"context-menu\" {...props} />;\n}\n\nfunction ContextMenuPortal({ ...props }: ContextMenuPortalProps) {\n  return (\n    <ContextMenuPrimitive.Portal data-slot=\"context-menu-portal\" {...props} />\n  );\n}\n\nfunction ContextMenuTrigger({ className, ...props }: ContextMenuTriggerProps) {\n  return (\n    <ContextMenuPrimitive.Trigger\n      data-slot=\"context-menu-trigger\"\n      className={cn(\"select-none\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction ContextMenuContent({\n  className,\n  align = \"start\",\n  alignOffset = 4,\n  side = \"right\",\n  sideOffset = 0,\n  ...props\n}: ContextMenuContentProps) {\n  return (\n    <ContextMenuPrimitive.Portal>\n      <ContextMenuPrimitive.Positioner\n        className=\"isolate z-50 outline-none\"\n        align={align}\n        alignOffset={alignOffset}\n        side={side}\n        sideOffset={sideOffset}\n      >\n        <ContextMenuPrimitive.Popup\n          data-slot=\"context-menu-content\"\n          className={cn(\n            \"z-50 max-h-(--available-height) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 outline-none motion-reduce:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95\",\n            className,\n          )}\n          {...props}\n        />\n      </ContextMenuPrimitive.Positioner>\n    </ContextMenuPrimitive.Portal>\n  );\n}\n\nfunction ContextMenuGroup({ ...props }: ContextMenuGroupProps) {\n  return (\n    <ContextMenuPrimitive.Group data-slot=\"context-menu-group\" {...props} />\n  );\n}\n\nfunction ContextMenuLabel({\n  className,\n  inset,\n  ...props\n}: ContextMenuLabelProps) {\n  return (\n    <ContextMenuPrimitive.GroupLabel\n      data-slot=\"context-menu-label\"\n      data-inset={inset}\n      className={cn(\n        \"px-1.5 py-1 text-xs font-medium text-muted-foreground data-inset:pl-7\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction ContextMenuItem({\n  className,\n  inset,\n  variant = \"default\",\n  ...props\n}: ContextMenuItemProps) {\n  return (\n    <ContextMenuPrimitive.Item\n      data-slot=\"context-menu-item\"\n      data-inset={inset}\n      data-variant={variant}\n      className={cn(\n        \"group/context-menu-item relative flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground data-inset:pl-7 data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 focus:*:[svg]:text-accent-foreground data-[variant=destructive]:*:[svg]:text-destructive\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction ContextMenuSub({ ...props }: ContextMenuSubProps) {\n  return (\n    <ContextMenuPrimitive.SubmenuRoot data-slot=\"context-menu-sub\" {...props} />\n  );\n}\n\nfunction ContextMenuSubTrigger({\n  className,\n  inset,\n  children,\n  ...props\n}: ContextMenuSubTriggerProps) {\n  return (\n    <ContextMenuPrimitive.SubmenuTrigger\n      data-slot=\"context-menu-sub-trigger\"\n      data-inset={inset}\n      className={cn(\n        \"flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground data-inset:pl-7 data-open:bg-accent data-open:text-accent-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      <ChevronRightIcon className=\"ml-auto\" />\n    </ContextMenuPrimitive.SubmenuTrigger>\n  );\n}\n\nfunction ContextMenuSubContent({\n  className,\n  side = \"right\",\n  ...props\n}: ContextMenuSubContentProps) {\n  return (\n    <ContextMenuContent\n      data-slot=\"context-menu-sub-content\"\n      className={cn(\"shadow-lg\", className)}\n      side={side}\n      {...props}\n    />\n  );\n}\n\nfunction ContextMenuCheckboxItem({\n  className,\n  children,\n  checked,\n  inset,\n  ...props\n}: ContextMenuCheckboxItemProps) {\n  return (\n    <ContextMenuPrimitive.CheckboxItem\n      data-slot=\"context-menu-checkbox-item\"\n      data-inset={inset}\n      className={cn(\n        \"relative flex cursor-default items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground data-inset:pl-7 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n        className,\n      )}\n      checked={checked}\n      {...props}\n    >\n      <span\n        className=\"pointer-events-none absolute right-2 flex items-center justify-center\"\n        data-slot=\"context-menu-checkbox-item-indicator\"\n      >\n        <ContextMenuPrimitive.CheckboxItemIndicator>\n          <CheckIcon />\n        </ContextMenuPrimitive.CheckboxItemIndicator>\n      </span>\n      {children}\n    </ContextMenuPrimitive.CheckboxItem>\n  );\n}\n\nfunction ContextMenuRadioGroup({ ...props }: ContextMenuRadioGroupProps) {\n  return (\n    <ContextMenuPrimitive.RadioGroup\n      data-slot=\"context-menu-radio-group\"\n      {...props}\n    />\n  );\n}\n\nfunction ContextMenuRadioItem({\n  className,\n  children,\n  inset,\n  ...props\n}: ContextMenuRadioItemProps) {\n  return (\n    <ContextMenuPrimitive.RadioItem\n      data-slot=\"context-menu-radio-item\"\n      data-inset={inset}\n      className={cn(\n        \"relative flex cursor-default items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground data-inset:pl-7 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n        className,\n      )}\n      {...props}\n    >\n      <span\n        className=\"pointer-events-none absolute right-2 flex items-center justify-center\"\n        data-slot=\"context-menu-radio-item-indicator\"\n      >\n        <ContextMenuPrimitive.RadioItemIndicator>\n          <CheckIcon />\n        </ContextMenuPrimitive.RadioItemIndicator>\n      </span>\n      {children}\n    </ContextMenuPrimitive.RadioItem>\n  );\n}\n\nfunction ContextMenuSeparator({\n  className,\n  ...props\n}: ContextMenuSeparatorProps) {\n  return (\n    <ContextMenuPrimitive.Separator\n      data-slot=\"context-menu-separator\"\n      className={cn(\"-mx-1 my-1 h-px bg-border\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction ContextMenuShortcut({\n  className,\n  ...props\n}: ContextMenuShortcutProps) {\n  return (\n    <span\n      data-slot=\"context-menu-shortcut\"\n      className={cn(\n        \"ml-auto text-xs tracking-widest text-muted-foreground group-focus/context-menu-item:text-accent-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport {\n  ContextMenu,\n  ContextMenuCheckboxItem,\n  ContextMenuContent,\n  ContextMenuGroup,\n  ContextMenuItem,\n  ContextMenuLabel,\n  ContextMenuPortal,\n  ContextMenuRadioGroup,\n  ContextMenuRadioItem,\n  ContextMenuSeparator,\n  ContextMenuShortcut,\n  ContextMenuSub,\n  ContextMenuSubContent,\n  ContextMenuSubTrigger,\n  ContextMenuTrigger,\n};\n"
+    },
+    {
+      "path": "context-menu/ContextMenu.types.ts",
+      "type": "types",
+      "content": "import type { ContextMenu as ContextMenuPrimitive } from \"@base-ui/react/context-menu\";\nimport type { ComponentProps } from \"react\";\n\nexport type ContextMenuProps = ContextMenuPrimitive.Root.Props;\nexport type ContextMenuPortalProps = ContextMenuPrimitive.Portal.Props;\nexport type ContextMenuTriggerProps = ContextMenuPrimitive.Trigger.Props;\nexport type ContextMenuGroupProps = ContextMenuPrimitive.Group.Props;\nexport type ContextMenuLabelProps = ContextMenuPrimitive.GroupLabel.Props & {\n  inset?: boolean;\n};\nexport type ContextMenuItemVariant = \"default\" | \"destructive\";\nexport type ContextMenuItemProps = ContextMenuPrimitive.Item.Props & {\n  inset?: boolean;\n  variant?: ContextMenuItemVariant;\n};\nexport type ContextMenuSubProps = ContextMenuPrimitive.SubmenuRoot.Props;\nexport type ContextMenuSubTriggerProps =\n  ContextMenuPrimitive.SubmenuTrigger.Props & {\n    inset?: boolean;\n  };\nexport type ContextMenuContentProps = ContextMenuPrimitive.Popup.Props &\n  Pick<\n    ContextMenuPrimitive.Positioner.Props,\n    \"align\" | \"alignOffset\" | \"side\" | \"sideOffset\"\n  >;\nexport type ContextMenuSubContentProps = ContextMenuContentProps;\nexport type ContextMenuCheckboxItemProps =\n  ContextMenuPrimitive.CheckboxItem.Props & {\n    inset?: boolean;\n  };\nexport type ContextMenuRadioGroupProps = ContextMenuPrimitive.RadioGroup.Props;\nexport type ContextMenuRadioItemProps = ContextMenuPrimitive.RadioItem.Props & {\n  inset?: boolean;\n};\nexport type ContextMenuSeparatorProps = ContextMenuPrimitive.Separator.Props;\nexport type ContextMenuShortcutProps = ComponentProps<\"span\">;\n"
+    },
+    {
+      "path": "context-menu/index.ts",
+      "type": "index",
+      "content": "export * from \"./ContextMenu\";\nexport type * from \"./ContextMenu.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<ContextMenu>\n      <ContextMenuTrigger className={triggerClassName}>\n        {contextMenuMocks.trigger}\n      </ContextMenuTrigger>\n      <ContextMenuContent>\n        {contextMenuMocks.default.items.map((item) => (\n          <ContextMenuItem key={item}>{item}</ContextMenuItem>\n        ))}\n      </ContextMenuContent>\n    </ContextMenu>"
+    },
+    {
+      "name": "Variants",
+      "code": "<ContextMenu>\n      <ContextMenuTrigger className={triggerClassName}>\n        {contextMenuMocks.trigger}\n      </ContextMenuTrigger>\n      <ContextMenuContent className=\"w-52\">\n        <ContextMenuGroup>\n          <ContextMenuLabel>\n            {contextMenuMocks.variants.fileLabel}\n          </ContextMenuLabel>\n          {contextMenuMocks.variants.fileItems.map((item) => (\n            <ContextMenuItem key={item.label}>\n              {item.label}\n              <ContextMenuShortcut>{item.shortcut}</ContextMenuShortcut>\n            </ContextMenuItem>\n          ))}\n        </ContextMenuGroup>\n        <ContextMenuSeparator />\n        <ContextMenuGroup>\n          <ContextMenuLabel>\n            {contextMenuMocks.variants.editLabel}\n          </ContextMenuLabel>\n          {contextMenuMocks.variants.editItems.map((item) => (\n            <ContextMenuItem key={item.label}>\n              {item.label}\n              <ContextMenuShortcut>{item.shortcut}</ContextMenuShortcut>\n            </ContextMenuItem>\n          ))}\n        </ContextMenuGroup>\n        <ContextMenuSeparator />\n        <ContextMenuCheckboxItem checked>\n          {contextMenuMocks.variants.checkboxes[0].label}\n        </ContextMenuCheckboxItem>\n        <ContextMenuCheckboxItem>\n          {contextMenuMocks.variants.checkboxes[1].label}\n        </ContextMenuCheckboxItem>\n        <ContextMenuSeparator />\n        <ContextMenuGroup>\n          <ContextMenuLabel>\n            {contextMenuMocks.variants.peopleLabel}\n          </ContextMenuLabel>\n          <ContextMenuRadioGroup value=\"pedro\">\n            {contextMenuMocks.variants.people.map((item) => (\n              <ContextMenuRadioItem key={item.value} value={item.value}>\n                {item.label}\n              </ContextMenuRadioItem>\n            ))}\n          </ContextMenuRadioGroup>\n        </ContextMenuGroup>\n        <ContextMenuSeparator />\n        <ContextMenuSub>\n          <ContextMenuSubTrigger>\n            {contextMenuMocks.variants.moreTools}\n          </ContextMenuSubTrigger>\n          <ContextMenuSubContent>\n            {contextMenuMocks.variants.submenu.map((item) => (\n              <ContextMenuItem key={item}>{item}</ContextMenuItem>\n            ))}\n          </ContextMenuSubContent>\n        </ContextMenuSub>\n        <ContextMenuSeparator />\n        <ContextMenuItem variant=\"destructive\">\n          {contextMenuMocks.variants.destructive}\n        </ContextMenuItem>\n      </ContextMenuContent>\n    </ContextMenu>"
+    }
+  ]
+}
