@@ -3324,6 +3324,67 @@
     }
   },
   {
+    "name": "progress",
+    "displayName": "Progress",
+    "category": "atoms",
+    "description": "A completion bar that shows how far a task has progressed, with optional label and value.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/progress",
+    "sectionCategory": "feedback",
+    "purpose": "Gives people a clear reading of remaining work on uploads, installs, and other long-running tasks.",
+    "bestFor": [
+      "file upload and download status",
+      "multi-step task completion",
+      "install or export progress"
+    ],
+    "avoidFor": [
+      "determinate steps that should use a stepper",
+      "binary loading that should use a spinner"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "label",
+      "value",
+      "track",
+      "indicator"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "progress",
+      "progress-bar",
+      "feedback",
+      "loading",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "@base-ui/react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "qr-code-generator",
     "displayName": "QrCodeGenerator",
     "category": "atoms",

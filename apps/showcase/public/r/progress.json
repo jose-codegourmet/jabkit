@@ -1,0 +1,95 @@
+{
+  "name": "progress",
+  "displayName": "Progress",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "A completion bar that shows how far a task has progressed, with optional label and value.",
+  "sectionCategory": "feedback",
+  "purpose": "Gives people a clear reading of remaining work on uploads, installs, and other long-running tasks.",
+  "bestFor": [
+    "file upload and download status",
+    "multi-step task completion",
+    "install or export progress"
+  ],
+  "avoidFor": [
+    "determinate steps that should use a stepper",
+    "binary loading that should use a spinner"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "label",
+    "value",
+    "track",
+    "indicator"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/progress",
+  "tags": [
+    "progress",
+    "progress-bar",
+    "feedback",
+    "loading",
+    "atom"
+  ],
+  "dependencies": [
+    "@base-ui/react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "progress/Progress.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  ProgressIndicatorProps,\n  ProgressLabelProps,\n  ProgressProps,\n  ProgressTrackProps,\n  ProgressValueProps,\n} from \"./Progress.types\";\n\nfunction Progress({ className, children, value, ...props }: ProgressProps) {\n  return (\n    <ProgressPrimitive.Root\n      value={value}\n      data-slot=\"progress\"\n      className={cn(\"flex flex-wrap gap-3\", className)}\n      {...props}\n    >\n      {children}\n      <ProgressTrack>\n        <ProgressIndicator />\n      </ProgressTrack>\n    </ProgressPrimitive.Root>\n  );\n}\n\nfunction ProgressTrack({ className, ...props }: ProgressTrackProps) {\n  return (\n    <ProgressPrimitive.Track\n      className={cn(\n        \"relative flex h-1 w-full items-center overflow-x-hidden rounded-full bg-muted\",\n        className,\n      )}\n      data-slot=\"progress-track\"\n      {...props}\n    />\n  );\n}\n\nfunction ProgressIndicator({ className, ...props }: ProgressIndicatorProps) {\n  return (\n    <ProgressPrimitive.Indicator\n      data-slot=\"progress-indicator\"\n      className={cn(\n        \"h-full bg-primary transition-all motion-reduce:transition-none\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction ProgressLabel({ className, ...props }: ProgressLabelProps) {\n  return (\n    <ProgressPrimitive.Label\n      className={cn(\"text-sm font-medium text-foreground\", className)}\n      data-slot=\"progress-label\"\n      {...props}\n    />\n  );\n}\n\nfunction ProgressValue({ className, ...props }: ProgressValueProps) {\n  return (\n    <ProgressPrimitive.Value\n      className={cn(\n        \"ml-auto text-sm text-muted-foreground tabular-nums\",\n        className,\n      )}\n      data-slot=\"progress-value\"\n      {...props}\n    />\n  );\n}\n\nexport {\n  Progress,\n  ProgressIndicator,\n  ProgressLabel,\n  ProgressTrack,\n  ProgressValue,\n};\n"
+    },
+    {
+      "path": "progress/Progress.types.ts",
+      "type": "types",
+      "content": "import type { Progress as ProgressPrimitive } from \"@base-ui/react/progress\";\n\nexport type ProgressProps = ProgressPrimitive.Root.Props;\nexport type ProgressTrackProps = ProgressPrimitive.Track.Props;\nexport type ProgressIndicatorProps = ProgressPrimitive.Indicator.Props;\nexport type ProgressLabelProps = ProgressPrimitive.Label.Props;\nexport type ProgressValueProps = ProgressPrimitive.Value.Props;\n"
+    },
+    {
+      "path": "progress/index.ts",
+      "type": "index",
+      "content": "export {\n  Progress,\n  ProgressIndicator,\n  ProgressLabel,\n  ProgressTrack,\n  ProgressValue,\n} from \"./Progress\";\nexport type {\n  ProgressIndicatorProps,\n  ProgressLabelProps,\n  ProgressProps,\n  ProgressTrackProps,\n  ProgressValueProps,\n} from \"./Progress.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Progress className=\"w-full max-w-sm\" value={progressMocks.default.value} />"
+    },
+    {
+      "name": "WithLabel",
+      "code": "<Progress className=\"w-full max-w-sm\" value={progressMocks.labeled.value}>\n      <ProgressLabel>{progressMocks.labeled.label}</ProgressLabel>\n      <ProgressValue />\n    </Progress>"
+    }
+  ]
+}
