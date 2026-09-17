@@ -2,9 +2,7 @@ import {
   ChevronDownIcon,
   ChevronsUpDownIcon,
   MaximizeIcon,
-  MinimizeIcon,
 } from "lucide-react";
-import * as React from "react";
 import { Button } from "@/atoms/button";
 import {
   Card,
@@ -22,26 +20,25 @@ import {
 import { collapsibleMocks } from "./Collapsible.mocks";
 
 function OrderDetails({ defaultOpen = false }: { defaultOpen?: boolean }) {
-  const [isOpen, setIsOpen] = React.useState(defaultOpen);
-
   return (
     <Collapsible
       className="flex w-[350px] flex-col gap-2"
-      onOpenChange={setIsOpen}
-      open={isOpen}
+      defaultOpen={defaultOpen}
     >
       <div className="flex items-center justify-between gap-4 px-4">
         <h4 className="text-sm font-semibold">
           {collapsibleMocks.default.title}
         </h4>
         <CollapsibleTrigger
-          render={<Button className="size-8 p-0" size="sm" variant="ghost" />}
-        >
-          <ChevronsUpDownIcon />
-          <span className="sr-only">
-            {collapsibleMocks.default.toggleLabel}
-          </span>
-        </CollapsibleTrigger>
+          render={
+            <Button className="size-8 p-0" size="sm" variant="ghost">
+              <ChevronsUpDownIcon />
+              <span className="sr-only">
+                {collapsibleMocks.default.toggleLabel}
+              </span>
+            </Button>
+          }
+        />
       </div>
       <div className="flex items-center justify-between rounded-md border border-border px-4 py-2 text-sm">
         <span className="text-muted-foreground">
@@ -70,8 +67,6 @@ function OrderDetails({ defaultOpen = false }: { defaultOpen?: boolean }) {
 }
 
 function SettingsPanel() {
-  const [isOpen, setIsOpen] = React.useState(false);
-
   return (
     <Card className="mx-auto w-full max-w-xs" size="sm">
       <CardHeader>
@@ -81,11 +76,7 @@ function SettingsPanel() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Collapsible
-          className="flex items-start gap-2"
-          onOpenChange={setIsOpen}
-          open={isOpen}
-        >
+        <Collapsible className="flex items-start gap-2">
           <div className="grid w-full grid-cols-2 gap-2">
             <div>
               <label className="sr-only" htmlFor="preview-radius-x">
@@ -124,14 +115,14 @@ function SettingsPanel() {
           </div>
           <CollapsibleTrigger
             render={
-              <Button className="size-8 p-0" size="sm" variant="secondary" />
+              <Button className="size-8 p-0" size="sm" variant="secondary">
+                <MaximizeIcon />
+                <span className="sr-only">
+                  {collapsibleMocks.settings.toggleLabel}
+                </span>
+              </Button>
             }
-          >
-            {isOpen ? <MinimizeIcon /> : <MaximizeIcon />}
-            <span className="sr-only">
-              {collapsibleMocks.settings.toggleLabel}
-            </span>
-          </CollapsibleTrigger>
+          />
         </Collapsible>
       </CardContent>
     </Card>
@@ -147,12 +138,12 @@ export default {
           <Collapsible className="rounded-md data-open:bg-muted">
             <CollapsibleTrigger
               render={
-                <Button className="group/button w-full" variant="ghost" />
+                <Button className="group/button w-full" variant="ghost">
+                  {collapsibleMocks.basic.trigger}
+                  <ChevronDownIcon className="ml-auto group-data-panel-open/button:rotate-180" />
+                </Button>
               }
-            >
-              {collapsibleMocks.basic.trigger}
-              <ChevronDownIcon className="ml-auto group-data-panel-open/button:rotate-180" />
-            </CollapsibleTrigger>
+            />
             <CollapsibleContent className="flex flex-col items-start gap-2 p-2.5 pt-0 text-sm">
               <div>{collapsibleMocks.basic.content}</div>
               <Button size="sm">{collapsibleMocks.basic.action}</Button>

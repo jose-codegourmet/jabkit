@@ -45,13 +45,15 @@ function OrderDetails({ defaultOpen = false }: { defaultOpen?: boolean }) {
           {collapsibleMocks.default.title}
         </h4>
         <CollapsibleTrigger
-          render={<Button className="size-8 p-0" size="sm" variant="ghost" />}
-        >
-          <ChevronsUpDownIcon />
-          <span className="sr-only">
-            {collapsibleMocks.default.toggleLabel}
-          </span>
-        </CollapsibleTrigger>
+          render={
+            <Button className="size-8 p-0" size="sm" variant="ghost">
+              <ChevronsUpDownIcon />
+              <span className="sr-only">
+                {collapsibleMocks.default.toggleLabel}
+              </span>
+            </Button>
+          }
+        />
       </div>
       <div className="flex items-center justify-between rounded-md border border-border px-4 py-2 text-sm">
         <span className="text-muted-foreground">
@@ -126,14 +128,14 @@ function SettingsPanel() {
           </div>
           <CollapsibleTrigger
             render={
-              <Button className="size-8 p-0" size="sm" variant="secondary" />
+              <Button className="size-8 p-0" size="sm" variant="secondary">
+                {isOpen ? <MinimizeIcon /> : <MaximizeIcon />}
+                <span className="sr-only">
+                  {collapsibleMocks.settings.toggleLabel}
+                </span>
+              </Button>
             }
-          >
-            {isOpen ? <MinimizeIcon /> : <MaximizeIcon />}
-            <span className="sr-only">
-              {collapsibleMocks.settings.toggleLabel}
-            </span>
-          </CollapsibleTrigger>
+          />
         </Collapsible>
       </CardContent>
     </Card>
@@ -148,13 +150,15 @@ export const Default: Story = {
           {collapsibleMocks.default.title}
         </h4>
         <CollapsibleTrigger
-          render={<Button className="size-8 p-0" size="sm" variant="ghost" />}
-        >
-          <ChevronsUpDownIcon />
-          <span className="sr-only">
-            {collapsibleMocks.default.toggleLabel}
-          </span>
-        </CollapsibleTrigger>
+          render={
+            <Button className="size-8 p-0" size="sm" variant="ghost">
+              <ChevronsUpDownIcon />
+              <span className="sr-only">
+                {collapsibleMocks.default.toggleLabel}
+              </span>
+            </Button>
+          }
+        />
       </div>
       <div className="flex items-center justify-between rounded-md border border-border px-4 py-2 text-sm">
         <span className="text-muted-foreground">
@@ -190,12 +194,12 @@ export const Variants: Story = {
           <Collapsible className="rounded-md data-open:bg-muted">
             <CollapsibleTrigger
               render={
-                <Button className="group/button w-full" variant="ghost" />
+                <Button className="group/button w-full" variant="ghost">
+                  {collapsibleMocks.basic.trigger}
+                  <ChevronDownIcon className="ml-auto group-data-panel-open/button:rotate-180" />
+                </Button>
               }
-            >
-              {collapsibleMocks.basic.trigger}
-              <ChevronDownIcon className="ml-auto group-data-panel-open/button:rotate-180" />
-            </CollapsibleTrigger>
+            />
             <CollapsibleContent className="flex flex-col items-start gap-2 p-2.5 pt-0 text-sm">
               <div>{collapsibleMocks.basic.content}</div>
               <Button size="sm">{collapsibleMocks.basic.action}</Button>
