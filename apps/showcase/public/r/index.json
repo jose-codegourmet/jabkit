@@ -4036,6 +4036,57 @@
     }
   },
   {
+    "name": "slider",
+    "displayName": "Slider",
+    "category": "atoms",
+    "description": "Accessible range Slider primitive adapted from shadcn/ui Base UI.",
+    "sectionCategory": "form",
+    "purpose": "Lets users pick a value or range along a continuous scale with keyboard and pointer control.",
+    "bestFor": [
+      "forms",
+      "settings",
+      "filters",
+      "data entry"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "label",
+      "control",
+      "supportingText"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "slider",
+      "primitive",
+      "accessible",
+      "range"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
     "name": "soft-panda",
     "displayName": "SoftPanda",
     "category": "atoms",
