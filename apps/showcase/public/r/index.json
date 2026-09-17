@@ -1488,6 +1488,68 @@
     }
   },
   {
+    "name": "context-menu",
+    "displayName": "ContextMenu",
+    "category": "atoms",
+    "description": "Right-click menu of contextual actions, with groups, shortcuts, nested menus, and selection items.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/context-menu",
+    "sectionCategory": "overlay",
+    "purpose": "Keeps pointer-local actions next to the clicked surface instead of a distant toolbar.",
+    "bestFor": [
+      "canvas and list item actions",
+      "file and document operations",
+      "view toggles next to selected content"
+    ],
+    "avoidFor": [
+      "primary navigation",
+      "actions that must stay visible without a pointer"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "low",
+    "layout": {
+      "type": "overlay",
+      "alignment": "left"
+    },
+    "slots": [
+      "trigger",
+      "menuItems",
+      "groups",
+      "submenu"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "context-menu",
+      "overlay",
+      "primitive",
+      "accessible",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "@base-ui/react",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "curvy-earwig",
     "displayName": "CurvyEarwig",
     "category": "atoms",
