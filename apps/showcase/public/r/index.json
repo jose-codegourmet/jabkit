@@ -2991,6 +2991,76 @@
     }
   },
   {
+    "name": "message-scroller",
+    "displayName": "MessageScroller",
+    "category": "atoms",
+    "description": "A chat transcript scroller that anchors turns, follows streamed replies, and preserves the reader's place.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/message-scroller",
+    "sectionCategory": "content",
+    "purpose": "Owns chat scroll behavior — opening position, turn anchors, live-edge follow, history prepend, and jump controls — without owning messages or transport.",
+    "bestFor": [
+      "assistant and support chat transcripts",
+      "streamed replies that must not steal the reader's place",
+      "long threads that need jump-to-latest and last-anchor restore"
+    ],
+    "avoidFor": [
+      "full-page document scrolling",
+      "carousels or snap galleries",
+      "virtualized lists that already own the scroll element"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "viewport",
+      "content",
+      "item",
+      "jumpControl"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "message",
+      "marker",
+      "button"
+    ],
+    "tags": [
+      "message-scroller",
+      "chat",
+      "scroll",
+      "transcript",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "@shadcn/react",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center",
+      "width": 420,
+      "height": 640
+    }
+  },
+  {
     "name": "navigation-menu",
     "displayName": "NavigationMenu",
     "category": "atoms",
