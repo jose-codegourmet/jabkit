@@ -1,0 +1,104 @@
+{
+  "name": "popover",
+  "displayName": "Popover",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Accessible popover that shows rich content in a portal, triggered by a button.",
+  "sectionCategory": "overlay",
+  "purpose": "Surfaces contextual content next to a trigger without taking over the page like a modal.",
+  "bestFor": [
+    "quick views",
+    "inline settings",
+    "contextual forms"
+  ],
+  "avoidFor": [
+    "full-page workflows",
+    "toasts",
+    "persistent page content"
+  ],
+  "tone": [
+    "professional",
+    "focused"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "overlay",
+    "alignment": "center"
+  },
+  "slots": [
+    "trigger",
+    "title",
+    "description",
+    "content"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "button"
+  ],
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/popover",
+  "tags": [
+    "popover",
+    "overlay",
+    "primitive",
+    "accessible"
+  ],
+  "dependencies": [
+    "@base-ui/react",
+    "clsx",
+    "tailwind-merge",
+    "react"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "popover/Popover.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { Popover as PopoverPrimitive } from \"@base-ui/react/popover\";\nimport { cn } from \"@/lib/cn\";\nimport { useJkPortalContainer } from \"@/lib/portal-container\";\nimport type {\n  PopoverContentProps,\n  PopoverDescriptionProps,\n  PopoverHeaderProps,\n  PopoverProps,\n  PopoverTitleProps,\n  PopoverTriggerProps,\n} from \"./Popover.types\";\n\nfunction Popover({ ...props }: PopoverProps) {\n  return <PopoverPrimitive.Root data-slot=\"popover\" {...props} />;\n}\n\nfunction PopoverTrigger({ ...props }: PopoverTriggerProps) {\n  return <PopoverPrimitive.Trigger data-slot=\"popover-trigger\" {...props} />;\n}\n\nfunction PopoverContent({\n  className,\n  align = \"center\",\n  alignOffset = 0,\n  side = \"bottom\",\n  sideOffset = 4,\n  container,\n  ...props\n}: PopoverContentProps) {\n  const portalContainer = useJkPortalContainer(container);\n  return (\n    <PopoverPrimitive.Portal container={portalContainer ?? undefined}>\n      <PopoverPrimitive.Positioner\n        align={align}\n        alignOffset={alignOffset}\n        side={side}\n        sideOffset={sideOffset}\n        className=\"isolate z-50\"\n      >\n        <PopoverPrimitive.Popup\n          data-slot=\"popover-content\"\n          className={cn(\n            \"z-50 flex w-72 origin-(--transform-origin) flex-col gap-2.5 rounded-lg bg-popover p-2.5 text-sm text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-hidden duration-100 motion-reduce:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95\",\n            className,\n          )}\n          {...props}\n        />\n      </PopoverPrimitive.Positioner>\n    </PopoverPrimitive.Portal>\n  );\n}\n\nfunction PopoverHeader({ className, ...props }: PopoverHeaderProps) {\n  return (\n    <div\n      data-slot=\"popover-header\"\n      className={cn(\"flex flex-col gap-0.5 text-sm\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction PopoverTitle({ className, ...props }: PopoverTitleProps) {\n  return (\n    <PopoverPrimitive.Title\n      data-slot=\"popover-title\"\n      className={cn(\"font-medium\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction PopoverDescription({ className, ...props }: PopoverDescriptionProps) {\n  return (\n    <PopoverPrimitive.Description\n      data-slot=\"popover-description\"\n      className={cn(\"text-muted-foreground\", className)}\n      {...props}\n    />\n  );\n}\n\nexport {\n  Popover,\n  PopoverContent,\n  PopoverDescription,\n  PopoverHeader,\n  PopoverTitle,\n  PopoverTrigger,\n};\n"
+    },
+    {
+      "path": "popover/Popover.types.ts",
+      "type": "types",
+      "content": "import type { Popover as PopoverPrimitive } from \"@base-ui/react/popover\";\nimport type { ComponentProps } from \"react\";\n\nexport type PopoverProps = PopoverPrimitive.Root.Props;\nexport type PopoverTriggerProps = PopoverPrimitive.Trigger.Props;\nexport type PopoverTitleProps = PopoverPrimitive.Title.Props;\nexport type PopoverDescriptionProps = PopoverPrimitive.Description.Props;\nexport type PopoverHeaderProps = ComponentProps<\"div\">;\n\nexport type PopoverContentProps = PopoverPrimitive.Popup.Props &\n  Pick<\n    PopoverPrimitive.Positioner.Props,\n    \"align\" | \"alignOffset\" | \"side\" | \"sideOffset\"\n  > &\n  Pick<PopoverPrimitive.Portal.Props, \"container\">;\n"
+    },
+    {
+      "path": "popover/index.ts",
+      "type": "index",
+      "content": "export {\n  Popover,\n  PopoverContent,\n  PopoverDescription,\n  PopoverHeader,\n  PopoverTitle,\n  PopoverTrigger,\n} from \"./Popover\";\nexport type {\n  PopoverContentProps,\n  PopoverDescriptionProps,\n  PopoverHeaderProps,\n  PopoverProps,\n  PopoverTitleProps,\n  PopoverTriggerProps,\n} from \"./Popover.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    },
+    {
+      "path": "lib/portal-container.ts",
+      "type": "lib",
+      "content": "\"use client\";\n\nimport {\n  createContext,\n  createElement,\n  type ReactNode,\n  type RefObject,\n  useContext,\n} from \"react\";\n\nexport type JkPortalContainer =\n  | HTMLElement\n  | ShadowRoot\n  | RefObject<HTMLElement | ShadowRoot | null>\n  | null\n  | undefined;\n\nconst JkPortalContainerContext = createContext<JkPortalContainer>(undefined);\n\nexport function JkPortalContainerProvider({\n  container,\n  children,\n}: {\n  container: JkPortalContainer;\n  children: ReactNode;\n}) {\n  return createElement(\n    JkPortalContainerContext.Provider,\n    { value: container },\n    children,\n  );\n}\n\nexport function useJkPortalContainer(\n  override?: JkPortalContainer,\n): JkPortalContainer {\n  const ctx = useContext(JkPortalContainerContext);\n  if (override !== undefined) return override ?? undefined;\n  return ctx ?? undefined;\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Popover>\n      <PopoverTrigger\n        render={<Button variant=\"secondary\">{popoverMocks.default.trigger}</Button>}\n      />\n      <PopoverContent>\n        <PopoverHeader>\n          <PopoverTitle>{popoverMocks.default.title}</PopoverTitle>\n          <PopoverDescription>\n            {popoverMocks.default.description}\n          </PopoverDescription>\n        </PopoverHeader>\n      </PopoverContent>\n    </Popover>"
+    },
+    {
+      "name": "Align",
+      "code": "<div className=\"flex flex-wrap items-center justify-center gap-2\">\n      <Popover>\n        <PopoverTrigger\n          render={<Button variant=\"secondary\">{popoverMocks.align.start}</Button>}\n        />\n        <PopoverContent align=\"start\">\n          <PopoverHeader>\n            <PopoverTitle>{popoverMocks.align.startLabel}</PopoverTitle>\n          </PopoverHeader>\n        </PopoverContent>\n      </Popover>\n      <Popover>\n        <PopoverTrigger\n          render={\n            <Button variant=\"secondary\">{popoverMocks.align.center}</Button>\n          }\n        />\n        <PopoverContent align=\"center\">\n          <PopoverHeader>\n            <PopoverTitle>{popoverMocks.align.centerLabel}</PopoverTitle>\n          </PopoverHeader>\n        </PopoverContent>\n      </Popover>\n      <Popover>\n        <PopoverTrigger\n          render={<Button variant=\"secondary\">{popoverMocks.align.end}</Button>}\n        />\n        <PopoverContent align=\"end\">\n          <PopoverHeader>\n            <PopoverTitle>{popoverMocks.align.endLabel}</PopoverTitle>\n          </PopoverHeader>\n        </PopoverContent>\n      </Popover>\n    </div>"
+    }
+  ]
+}
