@@ -1754,6 +1754,74 @@
     }
   },
   {
+    "name": "drawer",
+    "displayName": "Drawer",
+    "category": "atoms",
+    "description": "Accessible swipeable drawer with trigger, overlay, header, description, and footer composed on Base UI.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/drawer",
+    "sectionCategory": "overlay",
+    "purpose": "Slides a focused task or detail sheet from an edge of the viewport while the page stays in place.",
+    "bestFor": [
+      "mobile sheets",
+      "side filters",
+      "confirmations that should feel lighter than a dialog",
+      "nested or snap-point sheets"
+    ],
+    "avoidFor": [
+      "toasts",
+      "inline help",
+      "centered desktop dialogs"
+    ],
+    "tone": [
+      "professional",
+      "focused"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "overlay",
+      "alignment": "center"
+    },
+    "slots": [
+      "trigger",
+      "title",
+      "description",
+      "content",
+      "actions"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "button"
+    ],
+    "tags": [
+      "drawer",
+      "sheet",
+      "overlay",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "@base-ui/react",
+      "clsx",
+      "tailwind-merge",
+      "react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "dropdown-menu",
     "displayName": "DropdownMenu",
     "category": "atoms",
