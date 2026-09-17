@@ -3575,6 +3575,63 @@
     }
   },
   {
+    "name": "radio-group",
+    "displayName": "RadioGroup",
+    "category": "atoms",
+    "description": "A set of radio buttons where only one option can be selected at a time.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/radio-group",
+    "sectionCategory": "form",
+    "purpose": "Collects a single exclusive choice from a short, visible list of options.",
+    "bestFor": [
+      "settings that allow one value",
+      "plan or preference pickers",
+      "short exclusive form choices"
+    ],
+    "avoidFor": [
+      "independent on/off choices; use a checkbox",
+      "long searchable lists; use a select or combobox"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "group",
+      "item",
+      "label"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "radio",
+      "radio-group",
+      "form",
+      "choice",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "@base-ui/react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
     "name": "scroll-area",
     "displayName": "ScrollArea",
     "category": "atoms",

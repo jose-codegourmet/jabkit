@@ -1,0 +1,93 @@
+{
+  "name": "radio-group",
+  "displayName": "RadioGroup",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "A set of radio buttons where only one option can be selected at a time.",
+  "sectionCategory": "form",
+  "purpose": "Collects a single exclusive choice from a short, visible list of options.",
+  "bestFor": [
+    "settings that allow one value",
+    "plan or preference pickers",
+    "short exclusive form choices"
+  ],
+  "avoidFor": [
+    "independent on/off choices; use a checkbox",
+    "long searchable lists; use a select or combobox"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "group",
+    "item",
+    "label"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/radio-group",
+  "tags": [
+    "radio",
+    "radio-group",
+    "form",
+    "choice",
+    "atom"
+  ],
+  "dependencies": [
+    "@base-ui/react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "label"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "radio-group/RadioGroup.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\";\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\";\nimport { cn } from \"@/lib/cn\";\nimport type { RadioGroupItemProps, RadioGroupProps } from \"./RadioGroup.types\";\n\nfunction RadioGroup({ className, ...props }: RadioGroupProps) {\n  return (\n    <RadioGroupPrimitive\n      data-slot=\"radio-group\"\n      className={cn(\"grid w-full gap-2\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction RadioGroupItem({ className, ...props }: RadioGroupItemProps) {\n  return (\n    <RadioPrimitive.Root\n      data-slot=\"radio-group-item\"\n      className={cn(\n        \"group/radio-group-item peer relative flex aspect-square size-4 shrink-0 rounded-full border border-input outline-none group-has-[:focus-visible]/field-label:ring-0 group-has-[:focus-visible]/field-label:not-data-checked:border-input after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground group-has-[:focus-visible]/field-label:data-checked:border-primary dark:data-checked:bg-primary\",\n        className,\n      )}\n      {...props}\n    >\n      <RadioPrimitive.Indicator\n        data-slot=\"radio-group-indicator\"\n        className=\"flex size-4 items-center justify-center\"\n      >\n        <span className=\"absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-foreground\" />\n      </RadioPrimitive.Indicator>\n    </RadioPrimitive.Root>\n  );\n}\n\nexport { RadioGroup, RadioGroupItem };\n"
+    },
+    {
+      "path": "radio-group/RadioGroup.types.ts",
+      "type": "types",
+      "content": "import type { Radio as RadioPrimitive } from \"@base-ui/react/radio\";\nimport type { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\";\n\nexport type RadioGroupProps = RadioGroupPrimitive.Props;\nexport type RadioGroupItemProps = RadioPrimitive.Root.Props;\n"
+    },
+    {
+      "path": "radio-group/index.ts",
+      "type": "index",
+      "content": "export { RadioGroup, RadioGroupItem } from \"./RadioGroup\";\nexport type { RadioGroupItemProps, RadioGroupProps } from \"./RadioGroup.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<RadioGroup defaultValue={radioGroupMocks.defaultValue}>\n      {radioGroupMocks.options.map((option) => (\n        <div className=\"flex items-center gap-3\" key={option.value}>\n          <RadioGroupItem id={option.value} value={option.value} />\n          <Label htmlFor={option.value}>{option.label}</Label>\n        </div>\n      ))}\n    </RadioGroup>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"flex w-64 flex-col gap-8\">\n      <RadioGroup defaultValue={radioGroupMocks.plans[0].value}>\n        {radioGroupMocks.plans.map((option) => (\n          <div className=\"flex items-center gap-3\" key={option.value}>\n            <RadioGroupItem id={`plan-${option.value}`} value={option.value} />\n            <Label htmlFor={`plan-${option.value}`}>{option.label}</Label>\n          </div>\n        ))}\n      </RadioGroup>\n      <RadioGroup defaultValue={radioGroupMocks.defaultValue} disabled>\n        {radioGroupMocks.options.map((option) => (\n          <div className=\"flex items-center gap-3\" key={option.value}>\n            <RadioGroupItem\n              id={`disabled-${option.value}`}\n              value={option.value}\n            />\n            <Label htmlFor={`disabled-${option.value}`}>{option.label}</Label>\n          </div>\n        ))}\n      </RadioGroup>\n      <RadioGroup defaultValue={radioGroupMocks.defaultValue}>\n        {radioGroupMocks.options.map((option) => (\n          <div className=\"flex items-center gap-3\" key={option.value}>\n            <RadioGroupItem\n              aria-invalid\n              id={`invalid-${option.value}`}\n              value={option.value}\n            />\n            <Label htmlFor={`invalid-${option.value}`}>{option.label}</Label>\n          </div>\n        ))}\n      </RadioGroup>\n    </div>"
+    }
+  ]
+}
