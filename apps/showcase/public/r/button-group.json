@@ -1,0 +1,98 @@
+{
+  "name": "button-group",
+  "displayName": "ButtonGroup",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "A container that groups related buttons together with consistent styling.",
+  "sectionCategory": "action",
+  "purpose": "Joins related actions into one control so people can scan a compact set of buttons, inputs, or split actions.",
+  "bestFor": [
+    "paired actions such as archive and report",
+    "split buttons with a primary action and overflow",
+    "compact toolbars with an input or prefix label"
+  ],
+  "avoidFor": [
+    "toggled selection sets; use a toggle group instead",
+    "unrelated actions that should stay separate"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "inline",
+    "alignment": "left"
+  },
+  "slots": [
+    "button",
+    "separator",
+    "text",
+    "input"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/button-group",
+  "tags": [
+    "button-group",
+    "button",
+    "toolbar",
+    "split-button",
+    "atom"
+  ],
+  "dependencies": [
+    "@base-ui/react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "separator",
+    "button"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "button-group/ButtonGroup.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { mergeProps } from \"@base-ui/react/merge-props\";\nimport { useRender } from \"@base-ui/react/use-render\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { Separator } from \"@/components/jabkit/separator\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  ButtonGroupOrientation,\n  ButtonGroupProps,\n  ButtonGroupSeparatorProps,\n  ButtonGroupTextProps,\n} from \"./ButtonGroup.types\";\n\nconst buttonGroupVariants = ({\n  orientation = \"horizontal\",\n}: {\n  orientation?: ButtonGroupOrientation;\n} = {}) =>\n  cn(\n    \"flex w-fit items-stretch *:focus-visible:relative *:focus-visible:z-10 has-[>[data-slot=button-group]]:gap-2 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-lg [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1\",\n    {\n      horizontal:\n        \"*:data-slot:rounded-r-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-lg! [&>[data-slot]~[data-slot]]:rounded-l-none [&>[data-slot]~[data-slot]]:border-l-0\",\n      vertical:\n        \"flex-col *:data-slot:rounded-b-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-lg! [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0\",\n    }[orientation],\n  );\n\nfunction ButtonGroup({ className, orientation, ...props }: ButtonGroupProps) {\n  return (\n    // biome-ignore lint/a11y/useSemanticElements: shadcn ButtonGroup uses role=group, not fieldset.\n    <div\n      role=\"group\"\n      data-slot=\"button-group\"\n      data-orientation={orientation}\n      className={cn(buttonGroupVariants({ orientation }), className)}\n      {...props}\n    />\n  );\n}\n\nfunction ButtonGroupText({\n  className,\n  render,\n  ...props\n}: ButtonGroupTextProps) {\n  return useRender({\n    defaultTagName: \"div\",\n    props: mergeProps<\"div\">(\n      {\n        className: cn(\n          \"flex items-center gap-2 rounded-lg border bg-muted px-2.5 text-sm font-medium [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4\",\n          className,\n        ),\n      },\n      props,\n    ),\n    render,\n    state: {\n      slot: \"button-group-text\",\n    },\n  });\n}\n\nfunction ButtonGroupSeparator({\n  className,\n  orientation = \"vertical\",\n  ...props\n}: ButtonGroupSeparatorProps) {\n  return (\n    <Separator\n      data-slot=\"button-group-separator\"\n      orientation={orientation}\n      className={cn(\n        \"relative self-stretch bg-input data-horizontal:mx-px data-horizontal:w-auto data-vertical:my-px data-vertical:h-auto\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport {\n  ButtonGroup,\n  ButtonGroupSeparator,\n  ButtonGroupText,\n  buttonGroupVariants,\n};\n"
+    },
+    {
+      "path": "button-group/ButtonGroup.types.ts",
+      "type": "types",
+      "content": "import type { Separator } from \"@base-ui/react/separator\";\nimport type { useRender } from \"@base-ui/react/use-render\";\nimport type { ComponentProps } from \"react\";\n\nexport type ButtonGroupOrientation = \"horizontal\" | \"vertical\";\n\nexport type ButtonGroupProps = ComponentProps<\"div\"> & {\n  orientation?: ButtonGroupOrientation;\n};\n\nexport type ButtonGroupTextProps = useRender.ComponentProps<\"div\">;\n\nexport type ButtonGroupSeparatorProps = Separator.Props;\n"
+    },
+    {
+      "path": "button-group/index.ts",
+      "type": "index",
+      "content": "export * from \"./ButtonGroup\";\nexport type * from \"./ButtonGroup.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<ButtonGroup>\n      <Button variant=\"secondary\">{buttonGroupMocks.default.first}</Button>\n      <Button variant=\"secondary\">{buttonGroupMocks.default.second}</Button>\n    </ButtonGroup>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"flex flex-col items-start gap-8\">\n      <ButtonGroup orientation=\"vertical\">\n        <Button variant=\"secondary\" size=\"sm\" aria-label=\"Increase\">\n          <PlusIcon />\n        </Button>\n        <Button variant=\"secondary\" size=\"sm\" aria-label=\"Decrease\">\n          <MinusIcon />\n        </Button>\n      </ButtonGroup>\n      <ButtonGroup>\n        <ButtonGroup>\n          <Button variant=\"secondary\" size=\"sm\">\n            {buttonGroupMocks.archive.first}\n          </Button>\n          <Button variant=\"secondary\" size=\"sm\">\n            {buttonGroupMocks.archive.second}\n          </Button>\n        </ButtonGroup>\n        <ButtonGroup>\n          <Button variant=\"secondary\" size=\"sm\" aria-label=\"Voice Mode\">\n            <AudioLinesIcon />\n          </Button>\n        </ButtonGroup>\n      </ButtonGroup>\n      <ButtonGroup>\n        <Button variant=\"ghost\">{buttonGroupMocks.archive.first}</Button>\n        <ButtonGroupSeparator />\n        <Button variant=\"ghost\">{buttonGroupMocks.archive.second}</Button>\n      </ButtonGroup>\n      <ButtonGroup>\n        <ButtonGroupText>{buttonGroupMocks.text.label}</ButtonGroupText>\n        <Input placeholder={buttonGroupMocks.input.placeholder} />\n        <Button variant=\"secondary\">{buttonGroupMocks.input.action}</Button>\n      </ButtonGroup>\n    </div>"
+    }
+  ]
+}

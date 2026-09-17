@@ -872,6 +872,67 @@
     }
   },
   {
+    "name": "button-group",
+    "displayName": "ButtonGroup",
+    "category": "atoms",
+    "description": "A container that groups related buttons together with consistent styling.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/button-group",
+    "sectionCategory": "action",
+    "purpose": "Joins related actions into one control so people can scan a compact set of buttons, inputs, or split actions.",
+    "bestFor": [
+      "paired actions such as archive and report",
+      "split buttons with a primary action and overflow",
+      "compact toolbars with an input or prefix label"
+    ],
+    "avoidFor": [
+      "toggled selection sets; use a toggle group instead",
+      "unrelated actions that should stay separate"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "inline",
+      "alignment": "left"
+    },
+    "slots": [
+      "button",
+      "separator",
+      "text",
+      "input"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "button-group",
+      "button",
+      "toolbar",
+      "split-button",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "@base-ui/react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "calendar-03",
     "displayName": "Calendar03",
     "category": "atoms",
