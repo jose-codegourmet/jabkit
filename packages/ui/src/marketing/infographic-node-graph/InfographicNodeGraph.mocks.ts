@@ -1,0 +1,136 @@
+import type {
+  InfographicGraphEdge,
+  InfographicGraphNode,
+  InfographicNodeGraphProps,
+} from "./InfographicNodeGraph.types";
+
+export const traffoConstellationNodes: InfographicGraphNode[] = [
+  { id: "lock", x: 50, y: 12, tone: "ink", shape: "circle", icon: "lock" },
+  {
+    id: "expand",
+    x: 32,
+    y: 22,
+    tone: "success",
+    shape: "pill",
+    icon: "expand",
+  },
+  {
+    id: "analytics",
+    x: 68,
+    y: 22,
+    tone: "warning",
+    shape: "pill",
+    icon: "analytics",
+  },
+  { id: "cloud", x: 22, y: 42, tone: "accent", shape: "pill", icon: "cloud" },
+  {
+    id: "database",
+    x: 50,
+    y: 42,
+    tone: "ink",
+    shape: "hub",
+    icon: "database",
+    label: "Store",
+    value: "Hub",
+  },
+  {
+    id: "thumbs",
+    x: 78,
+    y: 42,
+    tone: "success",
+    shape: "pill",
+    icon: "thumbs",
+  },
+  { id: "cursor", x: 16, y: 60, tone: "ink", shape: "circle", icon: "cursor" },
+  { id: "users", x: 34, y: 64, tone: "warning", shape: "pill", icon: "users" },
+  { id: "globe", x: 50, y: 66, tone: "accent", shape: "pill", icon: "globe" },
+  { id: "share", x: 84, y: 60, tone: "ink", shape: "circle", icon: "share" },
+  {
+    id: "network",
+    x: 44,
+    y: 84,
+    tone: "success",
+    shape: "pill",
+    icon: "network",
+  },
+  { id: "plus", x: 90, y: 78, tone: "ink", shape: "circle", icon: "plus" },
+  { id: "close", x: 92, y: 38, tone: "ink", shape: "circle", icon: "close" },
+];
+
+export const traffoConstellationEdges: InfographicGraphEdge[] = [
+  { from: "lock", to: "database" },
+  { from: "lock", to: "expand" },
+  { from: "lock", to: "analytics" },
+  { from: "expand", to: "database" },
+  { from: "analytics", to: "database" },
+  { from: "cloud", to: "database" },
+  { from: "thumbs", to: "database" },
+  { from: "cursor", to: "database" },
+  { from: "users", to: "database" },
+  { from: "globe", to: "database" },
+  { from: "globe", to: "cloud" },
+  { from: "globe", to: "users" },
+  { from: "share", to: "database" },
+  { from: "network", to: "users" },
+  { from: "network", to: "globe" },
+];
+
+export const traffoRevealOrder = [
+  "lock",
+  "expand",
+  "analytics",
+  "database",
+  "cloud",
+  "thumbs",
+  "cursor",
+  "users",
+  "globe",
+  "share",
+  "network",
+  "plus",
+  "close",
+];
+
+export const infographicNodeGraphMocks = {
+  default: {
+    nodes: traffoConstellationNodes,
+    edges: traffoConstellationEdges,
+    revealOrder: traffoRevealOrder,
+  },
+  alternate: {
+    nodes: [
+      {
+        id: "sessions",
+        x: 22,
+        y: 28,
+        label: "Sessions",
+        value: "12.4k",
+        tone: "warning",
+        shape: "pill",
+      },
+      {
+        id: "forms",
+        x: 50,
+        y: 50,
+        label: "Forms",
+        value: "318",
+        tone: "ink",
+        shape: "hub",
+      },
+      {
+        id: "paid",
+        x: 78,
+        y: 72,
+        label: "Paid",
+        value: "6.1%",
+        tone: "success",
+        shape: "pill",
+      },
+    ],
+    edges: [
+      { from: "sessions", to: "forms" },
+      { from: "forms", to: "paid" },
+    ],
+    revealOrder: ["sessions", "forms", "paid"],
+  },
+} satisfies Record<string, InfographicNodeGraphProps>;

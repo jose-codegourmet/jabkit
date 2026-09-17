@@ -1,0 +1,104 @@
+{
+  "name": "infographic-node-graph",
+  "displayName": "InfographicNodeGraph",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Content-driven node constellation with SVG connectors and a scroll-scrubbed GSAP reveal.",
+  "sectionCategory": "hero",
+  "purpose": "Lights analytics nodes and draws their links as the visitor scrolls through the Traffo hero.",
+  "bestFor": [
+    "data landing heroes",
+    "scroll-linked infographics",
+    "product architecture diagrams"
+  ],
+  "tone": [
+    "professional",
+    "bold"
+  ],
+  "industries": [
+    "saas",
+    "analytics"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "high",
+  "layout": {
+    "type": "full-width",
+    "alignment": "center"
+  },
+  "slots": [
+    "nodes",
+    "edges",
+    "revealOrder"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://codepen.io/dermalhealth/pen/myORdJX",
+  "tags": [
+    "infographic",
+    "gsap",
+    "scroll",
+    "graph",
+    "marketing"
+  ],
+  "dependencies": [
+    "gsap",
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "infographic-node"
+  ],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 900,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "infographic-node-graph/InfographicNodeGraph.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  BarChart3,\n  Cloud,\n  Database,\n  Globe,\n  Hexagon,\n  Lock,\n  Maximize2,\n  MousePointer2,\n  Plus,\n  Share2,\n  ThumbsUp,\n  Users,\n  X,\n} from \"lucide-react\";\nimport type { ReactNode } from \"react\";\nimport { useEffect, useMemo, useRef, useState } from \"react\";\nimport { InfographicNode } from \"@/components/jabkit/infographic-node\";\nimport { cn } from \"@/lib/cn\";\nimport { infographicNodeGraphMocks } from \"./InfographicNodeGraph.mocks\";\nimport type {\n  InfographicGraphEdge,\n  InfographicNodeGraphProps,\n  InfographicNodeIconName,\n} from \"./InfographicNodeGraph.types\";\n\nconst icons: Record<InfographicNodeIconName, ReactNode> = {\n  lock: <Lock />,\n  expand: <Maximize2 />,\n  analytics: <BarChart3 />,\n  cloud: <Cloud />,\n  database: <Database />,\n  thumbs: <ThumbsUp />,\n  cursor: <MousePointer2 />,\n  users: <Users />,\n  globe: <Globe />,\n  share: <Share2 />,\n  network: <Hexagon />,\n  plus: <Plus />,\n  close: <X />,\n};\n\ninterface MeasuredEdge {\n  key: string;\n  from: string;\n  to: string;\n  d: string;\n  length: number;\n}\n\nfunction measureEdges(\n  root: HTMLElement,\n  svg: SVGSVGElement,\n  edges: InfographicGraphEdge[],\n): MeasuredEdge[] {\n  const svgBox = svg.getBoundingClientRect();\n  if (svgBox.width === 0 || svgBox.height === 0) return [];\n  const viewW = svg.viewBox.baseVal.width || 600;\n  const viewH = svg.viewBox.baseVal.height || 600;\n  const scaleX = viewW / svgBox.width;\n  const scaleY = viewH / svgBox.height;\n\n  return edges.flatMap((edge) => {\n    const fromEl = root.querySelector<HTMLElement>(\n      `[data-node-id=\"${edge.from}\"]`,\n    );\n    const toEl = root.querySelector<HTMLElement>(`[data-node-id=\"${edge.to}\"]`);\n    if (!fromEl || !toEl) return [];\n    const fromBox = fromEl.getBoundingClientRect();\n    const toBox = toEl.getBoundingClientRect();\n    const x1 = (fromBox.left + fromBox.width / 2 - svgBox.left) * scaleX;\n    const y1 = (fromBox.top + fromBox.height / 2 - svgBox.top) * scaleY;\n    const x2 = (toBox.left + toBox.width / 2 - svgBox.left) * scaleX;\n    const y2 = (toBox.top + toBox.height / 2 - svgBox.top) * scaleY;\n    return [\n      {\n        key: `${edge.from}-${edge.to}`,\n        from: edge.from,\n        to: edge.to,\n        d: `M ${x1} ${y1} L ${x2} ${y2}`,\n        length: Math.hypot(x2 - x1, y2 - y1),\n      },\n    ];\n  });\n}\n\nexport function InfographicNodeGraph({\n  className,\n  nodes = infographicNodeGraphMocks.default.nodes,\n  edges = infographicNodeGraphMocks.default.edges,\n  revealOrder = infographicNodeGraphMocks.default.revealOrder,\n  ...props\n}: InfographicNodeGraphProps) {\n  const rootRef = useRef<HTMLDivElement>(null);\n  const svgRef = useRef<SVGSVGElement>(null);\n  const [activeIds, setActiveIds] = useState<Set<string>>(() => new Set());\n  const [paths, setPaths] = useState<MeasuredEdge[]>([]);\n  const graphNodes = nodes ?? [];\n  const graphEdges = edges ?? [];\n  const order = useMemo(\n    () => revealOrder ?? graphNodes.map((node) => node.id),\n    [graphNodes, revealOrder],\n  );\n\n  useEffect(() => {\n    const root = rootRef.current;\n    const svg = svgRef.current;\n    if (!root || !svg) return;\n\n    const measure = () => {\n      setPaths(measureEdges(root, svg, graphEdges));\n    };\n\n    const frame = window.requestAnimationFrame(measure);\n    window.addEventListener(\"resize\", measure);\n    return () => {\n      window.cancelAnimationFrame(frame);\n      window.removeEventListener(\"resize\", measure);\n    };\n  }, [graphEdges]);\n\n  useEffect(() => {\n    const root = rootRef.current;\n    const svg = svgRef.current;\n    if (!root || !svg || paths.length === 0) return;\n\n    let cancelled = false;\n    let revert: (() => void) | undefined;\n\n    const setup = async () => {\n      if (window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) {\n        setActiveIds(new Set(graphNodes.map((node) => node.id)));\n        return;\n      }\n\n      const [{ gsap }, { ScrollTrigger }] = await Promise.all([\n        import(\"gsap\"),\n        import(\"gsap/ScrollTrigger\"),\n      ]);\n      if (cancelled) return;\n      gsap.registerPlugin(ScrollTrigger);\n\n      const pathEls = Array.from(\n        svg.querySelectorAll<SVGPathElement>(\"[data-graph-edge]\"),\n      );\n      pathEls.forEach((path, index) => {\n        const length = paths[index]?.length ?? path.getTotalLength();\n        gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });\n      });\n\n      const ctx = gsap.context(() => {\n        const timeline = gsap.timeline({\n          scrollTrigger: {\n            trigger: root,\n            start: \"top 72%\",\n            end: \"bottom 18%\",\n            scrub: 0.65,\n          },\n        });\n\n        order.forEach((id, index) => {\n          const incoming = pathEls.filter((path) => path.dataset.to === id);\n          timeline.call(\n            () => {\n              setActiveIds((current) => {\n                const next = new Set(current);\n                next.add(id);\n                return next;\n              });\n            },\n            undefined,\n            index * 0.35,\n          );\n          incoming.forEach((path) => {\n            timeline.to(\n              path,\n              { strokeDashoffset: 0, duration: 0.35, ease: \"none\" },\n              index * 0.35,\n            );\n          });\n        });\n      }, root);\n\n      revert = () => ctx.revert();\n    };\n\n    void setup();\n    return () => {\n      cancelled = true;\n      revert?.();\n    };\n  }, [graphNodes, order, paths]);\n\n  return (\n    <div\n      ref={rootRef}\n      data-slot=\"infographic-node-graph\"\n      className={cn(\"relative aspect-square w-full max-w-[38rem]\", className)}\n      {...props}\n    >\n      <svg\n        ref={svgRef}\n        className=\"pointer-events-none absolute inset-0 size-full text-foreground\"\n        viewBox=\"0 0 600 600\"\n        aria-hidden=\"true\"\n      >\n        {paths.map((path) => (\n          <path\n            key={path.key}\n            data-graph-edge=\"\"\n            data-from={path.from}\n            data-to={path.to}\n            d={path.d}\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeOpacity={0.28}\n            strokeWidth={2}\n          />\n        ))}\n      </svg>\n      {graphNodes.map((node) => (\n        <div\n          key={node.id}\n          data-node-id={node.id}\n          className=\"absolute -translate-x-1/2 -translate-y-1/2\"\n          style={{ left: `${node.x}%`, top: `${node.y}%` }}\n        >\n          <InfographicNode\n            label={node.label}\n            value={node.value}\n            tone={node.tone}\n            shape={node.shape}\n            icon={node.icon ? icons[node.icon] : undefined}\n            state={activeIds.has(node.id) ? \"active\" : \"idle\"}\n          />\n        </div>\n      ))}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "infographic-node-graph/InfographicNodeGraph.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport type {\n  InfographicNodeShape,\n  InfographicNodeTone,\n} from \"@/components/jabkit/infographic-node\";\n\nexport type InfographicNodeIconName =\n  | \"lock\"\n  | \"expand\"\n  | \"analytics\"\n  | \"cloud\"\n  | \"database\"\n  | \"thumbs\"\n  | \"cursor\"\n  | \"users\"\n  | \"globe\"\n  | \"share\"\n  | \"network\"\n  | \"plus\"\n  | \"close\";\n\nexport interface InfographicGraphNode {\n  id: string;\n  x: number;\n  y: number;\n  label?: string;\n  value?: string;\n  tone?: InfographicNodeTone;\n  shape?: InfographicNodeShape;\n  icon?: InfographicNodeIconName;\n}\n\nexport interface InfographicGraphEdge {\n  from: string;\n  to: string;\n}\n\nexport interface InfographicNodeGraphProps extends HTMLAttributes<HTMLElement> {\n  nodes?: InfographicGraphNode[];\n  edges?: InfographicGraphEdge[];\n  revealOrder?: string[];\n}\n"
+    },
+    {
+      "path": "infographic-node-graph/index.ts",
+      "type": "index",
+      "content": "export { InfographicNodeGraph } from \"./InfographicNodeGraph\";\nexport type {\n  InfographicGraphEdge,\n  InfographicGraphNode,\n  InfographicNodeGraphProps,\n  InfographicNodeIconName,\n} from \"./InfographicNodeGraph.types\";\n"
+    },
+    {
+      "path": "infographic-node-graph/InfographicNodeGraph.mocks.ts",
+      "type": "mocks",
+      "content": "import type {\n  InfographicGraphEdge,\n  InfographicGraphNode,\n  InfographicNodeGraphProps,\n} from \"./InfographicNodeGraph.types\";\n\nexport const traffoConstellationNodes: InfographicGraphNode[] = [\n  { id: \"lock\", x: 50, y: 12, tone: \"ink\", shape: \"circle\", icon: \"lock\" },\n  {\n    id: \"expand\",\n    x: 32,\n    y: 22,\n    tone: \"success\",\n    shape: \"pill\",\n    icon: \"expand\",\n  },\n  {\n    id: \"analytics\",\n    x: 68,\n    y: 22,\n    tone: \"warning\",\n    shape: \"pill\",\n    icon: \"analytics\",\n  },\n  { id: \"cloud\", x: 22, y: 42, tone: \"accent\", shape: \"pill\", icon: \"cloud\" },\n  {\n    id: \"database\",\n    x: 50,\n    y: 42,\n    tone: \"ink\",\n    shape: \"hub\",\n    icon: \"database\",\n    label: \"Store\",\n    value: \"Hub\",\n  },\n  {\n    id: \"thumbs\",\n    x: 78,\n    y: 42,\n    tone: \"success\",\n    shape: \"pill\",\n    icon: \"thumbs\",\n  },\n  { id: \"cursor\", x: 16, y: 60, tone: \"ink\", shape: \"circle\", icon: \"cursor\" },\n  { id: \"users\", x: 34, y: 64, tone: \"warning\", shape: \"pill\", icon: \"users\" },\n  { id: \"globe\", x: 50, y: 66, tone: \"accent\", shape: \"pill\", icon: \"globe\" },\n  { id: \"share\", x: 84, y: 60, tone: \"ink\", shape: \"circle\", icon: \"share\" },\n  {\n    id: \"network\",\n    x: 44,\n    y: 84,\n    tone: \"success\",\n    shape: \"pill\",\n    icon: \"network\",\n  },\n  { id: \"plus\", x: 90, y: 78, tone: \"ink\", shape: \"circle\", icon: \"plus\" },\n  { id: \"close\", x: 92, y: 38, tone: \"ink\", shape: \"circle\", icon: \"close\" },\n];\n\nexport const traffoConstellationEdges: InfographicGraphEdge[] = [\n  { from: \"lock\", to: \"database\" },\n  { from: \"lock\", to: \"expand\" },\n  { from: \"lock\", to: \"analytics\" },\n  { from: \"expand\", to: \"database\" },\n  { from: \"analytics\", to: \"database\" },\n  { from: \"cloud\", to: \"database\" },\n  { from: \"thumbs\", to: \"database\" },\n  { from: \"cursor\", to: \"database\" },\n  { from: \"users\", to: \"database\" },\n  { from: \"globe\", to: \"database\" },\n  { from: \"globe\", to: \"cloud\" },\n  { from: \"globe\", to: \"users\" },\n  { from: \"share\", to: \"database\" },\n  { from: \"network\", to: \"users\" },\n  { from: \"network\", to: \"globe\" },\n];\n\nexport const traffoRevealOrder = [\n  \"lock\",\n  \"expand\",\n  \"analytics\",\n  \"database\",\n  \"cloud\",\n  \"thumbs\",\n  \"cursor\",\n  \"users\",\n  \"globe\",\n  \"share\",\n  \"network\",\n  \"plus\",\n  \"close\",\n];\n\nexport const infographicNodeGraphMocks = {\n  default: {\n    nodes: traffoConstellationNodes,\n    edges: traffoConstellationEdges,\n    revealOrder: traffoRevealOrder,\n  },\n  alternate: {\n    nodes: [\n      {\n        id: \"sessions\",\n        x: 22,\n        y: 28,\n        label: \"Sessions\",\n        value: \"12.4k\",\n        tone: \"warning\",\n        shape: \"pill\",\n      },\n      {\n        id: \"forms\",\n        x: 50,\n        y: 50,\n        label: \"Forms\",\n        value: \"318\",\n        tone: \"ink\",\n        shape: \"hub\",\n      },\n      {\n        id: \"paid\",\n        x: 78,\n        y: 72,\n        label: \"Paid\",\n        value: \"6.1%\",\n        tone: \"success\",\n        shape: \"pill\",\n      },\n    ],\n    edges: [\n      { from: \"sessions\", to: \"forms\" },\n      { from: \"forms\", to: \"paid\" },\n    ],\n    revealOrder: [\"sessions\", \"forms\", \"paid\"],\n  },\n} satisfies Record<string, InfographicNodeGraphProps>;\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background p-8\">\n      <InfographicNodeGraph {...infographicNodeGraphMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background p-8\">\n      <InfographicNodeGraph {...infographicNodeGraphMocks.alternate} />\n    </div>"
+    }
+  ]
+}

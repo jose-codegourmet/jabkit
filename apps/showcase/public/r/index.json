@@ -2365,6 +2365,61 @@
     }
   },
   {
+    "name": "infographic-node",
+    "displayName": "InfographicNode",
+    "category": "atoms",
+    "description": "Single data node for a Traffo-style constellation: label, value, and idle or active state.",
+    "inspoUrl": "https://codepen.io/dermalhealth/pen/myORdJX",
+    "sectionCategory": "content",
+    "purpose": "Renders one measurable graph node that a scroll sequence can light from idle to active.",
+    "bestFor": [
+      "analytics infographics",
+      "scroll-linked node graphs",
+      "metric constellation tiles"
+    ],
+    "tone": [
+      "professional",
+      "bold"
+    ],
+    "industries": [
+      "saas",
+      "analytics"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "stack",
+      "alignment": "center"
+    },
+    "slots": [
+      "icon",
+      "value",
+      "label"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "infographic",
+      "node",
+      "metric",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    }
+  },
+  {
     "name": "input",
     "displayName": "Input",
     "category": "atoms",
@@ -9628,6 +9683,69 @@
     }
   },
   {
+    "name": "infographic-node-graph",
+    "displayName": "InfographicNodeGraph",
+    "category": "marketing",
+    "description": "Content-driven node constellation with SVG connectors and a scroll-scrubbed GSAP reveal.",
+    "inspoUrl": "https://codepen.io/dermalhealth/pen/myORdJX",
+    "sectionCategory": "hero",
+    "purpose": "Lights analytics nodes and draws their links as the visitor scrolls through the Traffo hero.",
+    "bestFor": [
+      "data landing heroes",
+      "scroll-linked infographics",
+      "product architecture diagrams"
+    ],
+    "tone": [
+      "professional",
+      "bold"
+    ],
+    "industries": [
+      "saas",
+      "analytics"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "center"
+    },
+    "slots": [
+      "nodes",
+      "edges",
+      "revealOrder"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "infographic",
+      "gsap",
+      "scroll",
+      "graph",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "gsap",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 900,
+      "height": 900
+    }
+  },
+  {
     "name": "input-modal",
     "displayName": "InputModal",
     "category": "marketing",
@@ -12848,6 +12966,327 @@
       "layout": "fit",
       "width": 1440,
       "height": 900
+    }
+  },
+  {
+    "name": "traffo-feature-card",
+    "displayName": "TraffoFeatureCard",
+    "category": "marketing",
+    "description": "Pastel Traffo pillar card with kicker, title, body, and a bottom glyph well.",
+    "inspoUrl": "https://codepen.io/dermalhealth/pen/myORdJX",
+    "sectionCategory": "feature",
+    "purpose": "States one analytics pillar in the Traffo three-card row without flattening the pen radii.",
+    "bestFor": [
+      "feature pillars",
+      "product capability cards"
+    ],
+    "tone": [
+      "professional",
+      "bold"
+    ],
+    "industries": [
+      "saas",
+      "analytics"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "kicker",
+      "title",
+      "body",
+      "icon"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "feature",
+      "card",
+      "traffo",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 480,
+      "height": 520
+    }
+  },
+  {
+    "name": "traffo-features-section",
+    "displayName": "TraffoFeaturesSection",
+    "category": "marketing",
+    "description": "Traffo pillars head, shipping meta, and a three-card feature grid.",
+    "inspoUrl": "https://codepen.io/dermalhealth/pen/myORdJX",
+    "sectionCategory": "feature",
+    "purpose": "Frames Capture, Understand, and Convert as the Traffo product story.",
+    "bestFor": [
+      "SaaS feature sections",
+      "analytics landings"
+    ],
+    "tone": [
+      "professional",
+      "bold"
+    ],
+    "industries": [
+      "saas",
+      "analytics"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "grid",
+      "alignment": "left",
+      "columns": 3
+    },
+    "slots": [
+      "eyebrow",
+      "title",
+      "meta",
+      "featureCards"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero"
+    ],
+    "tags": [
+      "features",
+      "traffo",
+      "pillars",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1100
+    }
+  },
+  {
+    "name": "traffo-footer",
+    "displayName": "TraffoFooter",
+    "category": "marketing",
+    "description": "Traffo footer with brand blurb, Product/Company/Legal columns, and a quiet bottom bar.",
+    "inspoUrl": "https://codepen.io/dermalhealth/pen/myORdJX",
+    "sectionCategory": "footer",
+    "purpose": "Closes the Traffo landing with directory links and legal/product paths.",
+    "bestFor": [
+      "SaaS landings",
+      "analytics marketing pages"
+    ],
+    "tone": [
+      "professional",
+      "clean"
+    ],
+    "industries": [
+      "saas",
+      "analytics"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "low",
+    "layout": {
+      "type": "grid",
+      "alignment": "left",
+      "columns": 4
+    },
+    "slots": [
+      "brand",
+      "blurb",
+      "columns",
+      "copyright",
+      "credit"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "cta"
+    ],
+    "tags": [
+      "footer",
+      "traffo",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 520
+    }
+  },
+  {
+    "name": "traffo-header",
+    "displayName": "TraffoHeader",
+    "category": "marketing",
+    "description": "Traffo site header with brand mark, primary nav, and a compact start CTA.",
+    "inspoUrl": "https://codepen.io/dermalhealth/pen/myORdJX",
+    "sectionCategory": "navbar",
+    "purpose": "Pins the analytics landing chrome: product links plus the header conversion action.",
+    "bestFor": [
+      "analytics landings",
+      "SaaS marketing pages"
+    ],
+    "tone": [
+      "professional",
+      "clean"
+    ],
+    "industries": [
+      "saas",
+      "analytics"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "full-width",
+      "alignment": "mixed"
+    },
+    "slots": [
+      "brand",
+      "navigationItems",
+      "headerCta",
+      "mobileNavigation"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedBefore": [
+      "hero"
+    ],
+    "tags": [
+      "navbar",
+      "header",
+      "traffo",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 180
+    }
+  },
+  {
+    "name": "traffo-landing-page",
+    "displayName": "TraffoLandingPage",
+    "category": "marketing",
+    "description": "Full Traffo analytics landing: header, scroll-linked node graph, pillars, and footer.",
+    "inspoUrl": "https://codepen.io/dermalhealth/pen/myORdJX",
+    "sectionCategory": "page",
+    "purpose": "Assembles the Traffo children into one data landing that matches the CodePen choreography.",
+    "bestFor": [
+      "analytics product landings",
+      "scroll-linked SaaS stories",
+      "source-distributed marketing samples"
+    ],
+    "tone": [
+      "professional",
+      "bold"
+    ],
+    "industries": [
+      "saas",
+      "analytics"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "mixed"
+    },
+    "slots": [
+      "header",
+      "hero",
+      "graph",
+      "stats",
+      "features",
+      "testimonial",
+      "cta",
+      "footer"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "page",
+      "traffo",
+      "landing",
+      "gsap",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "gsap",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 3200
     }
   },
   {
