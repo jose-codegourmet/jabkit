@@ -1,0 +1,98 @@
+{
+  "name": "resizable",
+  "displayName": "Resizable",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Accessible resizable panel groups and layouts with keyboard support.",
+  "sectionCategory": "layout",
+  "purpose": "Lets people drag a divider to grow or shrink neighboring panes without leaving the page.",
+  "bestFor": [
+    "sidebars next to a main pane",
+    "split editors and inspectors",
+    "nested horizontal and vertical workspaces"
+  ],
+  "avoidFor": [
+    "fixed marketing columns",
+    "layouts that must stay a single width on every screen"
+  ],
+  "tone": [
+    "professional",
+    "clean"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "low",
+  "layout": {
+    "type": "split",
+    "alignment": "left",
+    "columns": 2
+  },
+  "slots": [
+    "panel",
+    "handle"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/resizable",
+  "tags": [
+    "resizable",
+    "split",
+    "panels",
+    "layout",
+    "atom"
+  ],
+  "dependencies": [
+    "react-resizable-panels",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "resizable/Resizable.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport * as ResizablePrimitive from \"react-resizable-panels\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  ResizableHandleProps,\n  ResizablePanelGroupProps,\n  ResizablePanelProps,\n} from \"./Resizable.types\";\n\nfunction ResizablePanelGroup({\n  className,\n  ...props\n}: ResizablePanelGroupProps) {\n  return (\n    <ResizablePrimitive.Group\n      data-slot=\"resizable-panel-group\"\n      className={cn(\n        \"flex h-full w-full aria-[orientation=vertical]:flex-col\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction ResizablePanel({ ...props }: ResizablePanelProps) {\n  return <ResizablePrimitive.Panel data-slot=\"resizable-panel\" {...props} />;\n}\n\nfunction ResizableHandle({\n  withHandle,\n  className,\n  ...props\n}: ResizableHandleProps) {\n  return (\n    <ResizablePrimitive.Separator\n      data-slot=\"resizable-handle\"\n      className={cn(\n        \"relative flex w-px items-center justify-center bg-border ring-offset-background after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-hidden aria-[orientation=horizontal]:h-px aria-[orientation=horizontal]:w-full aria-[orientation=horizontal]:after:left-0 aria-[orientation=horizontal]:after:h-1 aria-[orientation=horizontal]:after:w-full aria-[orientation=horizontal]:after:translate-x-0 aria-[orientation=horizontal]:after:-translate-y-1/2 motion-reduce:after:transition-none [&[aria-orientation=horizontal]>div]:rotate-90\",\n        className,\n      )}\n      {...props}\n    >\n      {withHandle ? (\n        <div className=\"z-10 flex h-6 w-1 shrink-0 rounded-lg bg-border\" />\n      ) : null}\n    </ResizablePrimitive.Separator>\n  );\n}\n\nexport { ResizableHandle, ResizablePanel, ResizablePanelGroup };\n"
+    },
+    {
+      "path": "resizable/Resizable.types.ts",
+      "type": "types",
+      "content": "import type * as ResizablePrimitive from \"react-resizable-panels\";\n\nexport type ResizablePanelGroupProps = ResizablePrimitive.GroupProps;\n\nexport type ResizablePanelProps = ResizablePrimitive.PanelProps;\n\nexport type ResizableHandleProps = ResizablePrimitive.SeparatorProps & {\n  withHandle?: boolean;\n};\n"
+    },
+    {
+      "path": "resizable/index.ts",
+      "type": "index",
+      "content": "export * from \"./Resizable\";\nexport type * from \"./Resizable.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<ResizablePanelGroup\n      className=\"max-w-sm rounded-lg border border-border\"\n      orientation=\"horizontal\"\n    >\n      <ResizablePanel defaultSize=\"50%\">\n        <div className=\"flex h-[200px] items-center justify-center p-6\">\n          <span className=\"font-semibold\">{resizableMocks.default.one}</span>\n        </div>\n      </ResizablePanel>\n      <ResizableHandle withHandle />\n      <ResizablePanel defaultSize=\"50%\">\n        <ResizablePanelGroup orientation=\"vertical\">\n          <ResizablePanel defaultSize=\"25%\">\n            <div className=\"flex h-full items-center justify-center p-6\">\n              <span className=\"font-semibold\">\n                {resizableMocks.default.two}\n              </span>\n            </div>\n          </ResizablePanel>\n          <ResizableHandle withHandle />\n          <ResizablePanel defaultSize=\"75%\">\n            <div className=\"flex h-full items-center justify-center p-6\">\n              <span className=\"font-semibold\">\n                {resizableMocks.default.three}\n              </span>\n            </div>\n          </ResizablePanel>\n        </ResizablePanelGroup>\n      </ResizablePanel>\n    </ResizablePanelGroup>"
+    },
+    {
+      "name": "Vertical",
+      "code": "<ResizablePanelGroup\n      className=\"min-h-[200px] max-w-sm rounded-lg border border-border\"\n      orientation=\"vertical\"\n    >\n      <ResizablePanel defaultSize=\"25%\">\n        <div className=\"flex h-full items-center justify-center p-6\">\n          <span className=\"font-semibold\">\n            {resizableMocks.vertical.header}\n          </span>\n        </div>\n      </ResizablePanel>\n      <ResizableHandle />\n      <ResizablePanel defaultSize=\"75%\">\n        <div className=\"flex h-full items-center justify-center p-6\">\n          <span className=\"font-semibold\">\n            {resizableMocks.vertical.content}\n          </span>\n        </div>\n      </ResizablePanel>\n    </ResizablePanelGroup>"
+    },
+    {
+      "name": "Handle",
+      "code": "<ResizablePanelGroup\n      className=\"min-h-[200px] max-w-sm rounded-lg border border-border\"\n      orientation=\"horizontal\"\n    >\n      <ResizablePanel defaultSize=\"25%\">\n        <div className=\"flex h-full items-center justify-center p-6\">\n          <span className=\"font-semibold\">{resizableMocks.handle.sidebar}</span>\n        </div>\n      </ResizablePanel>\n      <ResizableHandle withHandle />\n      <ResizablePanel defaultSize=\"75%\">\n        <div className=\"flex h-full items-center justify-center p-6\">\n          <span className=\"font-semibold\">{resizableMocks.handle.content}</span>\n        </div>\n      </ResizablePanel>\n    </ResizablePanelGroup>"
+    }
+  ]
+}

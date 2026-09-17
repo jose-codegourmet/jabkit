@@ -3632,6 +3632,66 @@
     }
   },
   {
+    "name": "resizable",
+    "displayName": "Resizable",
+    "category": "atoms",
+    "description": "Accessible resizable panel groups and layouts with keyboard support.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/resizable",
+    "sectionCategory": "layout",
+    "purpose": "Lets people drag a divider to grow or shrink neighboring panes without leaving the page.",
+    "bestFor": [
+      "sidebars next to a main pane",
+      "split editors and inspectors",
+      "nested horizontal and vertical workspaces"
+    ],
+    "avoidFor": [
+      "fixed marketing columns",
+      "layouts that must stay a single width on every screen"
+    ],
+    "tone": [
+      "professional",
+      "clean"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "low",
+    "layout": {
+      "type": "split",
+      "alignment": "left",
+      "columns": 2
+    },
+    "slots": [
+      "panel",
+      "handle"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "resizable",
+      "split",
+      "panels",
+      "layout",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "react-resizable-panels",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "scroll-area",
     "displayName": "ScrollArea",
     "category": "atoms",
