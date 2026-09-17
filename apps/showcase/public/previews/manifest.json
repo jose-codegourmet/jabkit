@@ -6535,6 +6535,37 @@
           "format": "webp"
         }
       ]
+    },
+    "chart": {
+      "sourceHash": "8d1c290a6c77dc7ed44f1e1cd5fc9e8c6f1e7314a14b1abfacb7947b29301a9b",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "chart.Default.dark.webp",
+          "bytes": 7202,
+          "width": 800,
+          "height": 600,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "chart.Variants.dark.webp",
+          "bytes": 8582,
+          "width": 800,
+          "height": 600,
+          "format": "webp"
+        }
+      ]
     }
   }
 }

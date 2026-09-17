@@ -1123,6 +1123,68 @@
     }
   },
   {
+    "name": "chart",
+    "displayName": "Chart",
+    "category": "atoms",
+    "description": "Beautiful charts. Built using Recharts.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/chart",
+    "sectionCategory": "data",
+    "purpose": "Styles Recharts with semantic chart tokens, tooltips, and legends so series stay readable in light and dark.",
+    "bestFor": [
+      "dashboard visitor and revenue series",
+      "comparing a few named metrics over time",
+      "composed bar, line, or area charts with a shared config"
+    ],
+    "avoidFor": [
+      "tables that need exact cell-level comparison",
+      "maps or non-cartesian visualizations Recharts does not cover"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "config",
+      "series",
+      "tooltip",
+      "legend"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "chart",
+      "recharts",
+      "data",
+      "tooltip",
+      "legend",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "recharts",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "checkbox",
     "displayName": "Checkbox",
     "category": "atoms",
