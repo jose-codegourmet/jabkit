@@ -6628,6 +6628,37 @@
           "format": "webp"
         }
       ]
+    },
+    "command": {
+      "sourceHash": "5719a86309cbb20138971272739113a6be21fb4dafb805ebe5378499569a543f",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "command.Default.dark.webp",
+          "bytes": 6190,
+          "width": 720,
+          "height": 560,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "command.Variants.dark.webp",
+          "bytes": 6320,
+          "width": 720,
+          "height": 560,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
