@@ -1,0 +1,51 @@
+export const sidebarMocks = {
+  brand: "Northwind",
+  workspace: "Design ops",
+  headerSearch: "Search",
+  insetTitle: "Inbox",
+  insetBody: "Choose a thread from the sidebar to keep working.",
+  nav: [
+    {
+      title: "Home",
+      href: "#home",
+      icon: "home" as const,
+      isActive: true,
+      badge: undefined as string | undefined,
+    },
+    {
+      title: "Inbox",
+      href: "#inbox",
+      icon: "inbox" as const,
+      isActive: false,
+      badge: "12",
+    },
+    {
+      title: "Calendar",
+      href: "#calendar",
+      icon: "calendar" as const,
+      isActive: false,
+      badge: undefined as string | undefined,
+    },
+    {
+      title: "Search",
+      href: "#search",
+      icon: "search" as const,
+      isActive: false,
+      badge: undefined as string | undefined,
+    },
+    {
+      title: "Settings",
+      href: "#settings",
+      icon: "settings" as const,
+      isActive: false,
+      badge: undefined as string | undefined,
+    },
+  ],
+  projectsLabel: "Projects",
+  projects: [
+    { title: "Atlas launch", href: "#atlas" },
+    { title: "Billing v2", href: "#billing" },
+    { title: "Help center", href: "#help" },
+  ],
+  footer: "Ada Moreno",
+} as const;

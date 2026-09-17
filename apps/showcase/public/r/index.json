@@ -3918,6 +3918,76 @@
     }
   },
   {
+    "name": "sidebar",
+    "displayName": "Sidebar",
+    "category": "atoms",
+    "description": "Composable application sidebar with header, groups, menus, rail, and an inset content pane.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/sidebar",
+    "sectionCategory": "navigation",
+    "purpose": "Gives product shells a persistent navigation column that can collapse to icons or slide in on small screens.",
+    "bestFor": [
+      "application shells with nested destinations",
+      "workspace switchers and project lists",
+      "icon-collapsed desktop navigation with a mobile sheet"
+    ],
+    "avoidFor": [
+      "marketing site headers; use a navigation menu",
+      "simple in-page tabs or steppers"
+    ],
+    "tone": [
+      "professional",
+      "focused"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "split",
+      "alignment": "left",
+      "columns": 2
+    },
+    "slots": [
+      "header",
+      "content",
+      "group",
+      "menu",
+      "footer",
+      "rail",
+      "inset",
+      "trigger"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "sidebar",
+      "navigation",
+      "shell",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "@base-ui/react",
+      "@radix-ui/react-slot",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge",
+      "react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 960,
+      "height": 560
+    }
+  },
+  {
     "name": "skeleton",
     "displayName": "Skeleton",
     "category": "atoms",
