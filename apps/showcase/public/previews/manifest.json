@@ -6442,6 +6442,37 @@
           "format": "webp"
         }
       ]
+    },
+    "attachment": {
+      "sourceHash": "b43cd1e32ae4e23b7d7f4bbd7950ad834e7b2418679bb42b852d342eb40da8c3",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "attachment.Default.dark.webp",
+          "bytes": 13506,
+          "width": 720,
+          "height": 640,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "attachment.Variants.dark.webp",
+          "bytes": 11356,
+          "width": 720,
+          "height": 640,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
