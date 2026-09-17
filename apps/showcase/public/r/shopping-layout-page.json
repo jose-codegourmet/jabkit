@@ -1,0 +1,102 @@
+{
+  "name": "shopping-layout-page",
+  "displayName": "ShoppingLayoutPage",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Full Mugsys Mugs shopping layout wiring store nav, collection hero, product grid, and footer chrome.",
+  "sectionCategory": "page",
+  "purpose": "Assembles the shopping-layout children into one collection page that matches the CodePen storefront.",
+  "bestFor": [
+    "ecommerce collection pages",
+    "limited-edition shop landings",
+    "source-distributed storefront samples"
+  ],
+  "tone": [
+    "bold",
+    "playful"
+  ],
+  "industries": [
+    "retail",
+    "ecommerce"
+  ],
+  "contentDensity": "high",
+  "visualWeight": "high",
+  "layout": {
+    "type": "full-width",
+    "alignment": "mixed"
+  },
+  "slots": [
+    "navigation",
+    "hero",
+    "productGrid",
+    "footer"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://codepen.io/jakebogan01/pen/pvNWZWr",
+  "tags": [
+    "page",
+    "shop",
+    "ecommerce",
+    "collection",
+    "marketing"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "shop-animated-button",
+    "shop-product-card",
+    "shop-product-grid",
+    "shop-collection-hero",
+    "shop-top-nav"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 2200
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "shopping-layout-page/ShoppingLayoutPage.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport { ShopCollectionHero } from \"@/components/jabkit/shop-collection-hero\";\nimport { ShopProductGrid } from \"@/components/jabkit/shop-product-grid\";\nimport { shopProductGridItems } from \"@/components/jabkit/shop-product-grid/ShopProductGrid.mocks\";\nimport { ShopTopNav } from \"@/components/jabkit/shop-top-nav\";\nimport type {\n  ShoppingLayoutPageProps,\n  ShoppingLayoutPageSocialLink,\n} from \"./ShoppingLayoutPage.types\";\n\nconst defaultFooterLinks = [\n  { label: \"Home\", href: \"#home\" },\n  { label: \"About\", href: \"#about\" },\n  { label: \"Company\", href: \"#company\" },\n  { label: \"Stores\", href: \"#stores\" },\n];\n\nconst defaultSocialLinks: ShoppingLayoutPageSocialLink[] = [\n  { label: \"Facebook\", href: \"#facebook\", network: \"facebook\" },\n  { label: \"Instagram\", href: \"#instagram\", network: \"instagram\" },\n  { label: \"X\", href: \"#x\", network: \"x\" },\n  { label: \"GitHub\", href: \"#github\", network: \"github\" },\n  { label: \"YouTube\", href: \"#youtube\", network: \"youtube\" },\n];\n\nconst socialMarks = {\n  facebook: \"FB\",\n  instagram: \"IG\",\n  x: \"X\",\n  github: \"GH\",\n  youtube: \"YT\",\n} as const;\n\nexport function ShoppingLayoutPage({\n  className,\n  nav,\n  hero,\n  products = shopProductGridItems,\n  footerLinks = defaultFooterLinks,\n  footerCopyright = \"© 2026 Mugsy's Mugs, Inc. All rights reserved.\",\n  socialLinks = defaultSocialLinks,\n  ...props\n}: ShoppingLayoutPageProps) {\n  return (\n    <div\n      data-slot=\"shopping-layout-page\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <ShopTopNav {...nav} />\n      <ShopCollectionHero {...hero} />\n      <div className=\"bg-background px-5 pb-20 sm:px-8\">\n        <ShopProductGrid products={products} />\n      </div>\n      <footer className=\"bg-primary px-5 py-16 text-center text-primary-foreground sm:px-8\">\n        <nav aria-label=\"Footer\">\n          <ul className=\"flex flex-col items-center justify-center gap-4 md:flex-row md:gap-8\">\n            {footerLinks.map((link) => (\n              <li key={link.href}>\n                <a\n                  href={link.href}\n                  className=\"text-base font-medium text-primary-foreground no-underline transition-opacity duration-300 hover:opacity-80\"\n                >\n                  {link.label}\n                </a>\n              </li>\n            ))}\n          </ul>\n        </nav>\n        <p className=\"mt-6 text-sm text-primary-foreground/80\">\n          {footerCopyright}\n        </p>\n        <ul className=\"mt-6 flex justify-center gap-4\">\n          {socialLinks.map((link) => (\n            <li key={link.network}>\n              <a\n                href={link.href}\n                aria-label={link.label}\n                className=\"grid size-10 place-items-center rounded-full bg-[color-mix(in_oklab,var(--jk-primary-foreground)_10%,transparent)] text-xs font-semibold text-primary-foreground transition-[transform,background-color] duration-300 ease-out hover:-translate-y-0.5 hover:bg-[color-mix(in_oklab,var(--jk-primary-foreground)_20%,transparent)] motion-reduce:transition-none motion-reduce:hover:translate-y-0\"\n              >\n                {socialMarks[link.network]}\n              </a>\n            </li>\n          ))}\n        </ul>\n      </footer>\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "shopping-layout-page/ShoppingLayoutPage.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport type { ShopCollectionHeroProps } from \"@/components/jabkit/shop-collection-hero\";\nimport type { ShopProductGridItem } from \"@/components/jabkit/shop-product-grid\";\nimport type { ShopTopNavProps } from \"@/components/jabkit/shop-top-nav\";\n\nexport interface ShoppingLayoutPageFooterLink {\n  label: string;\n  href: string;\n}\n\nexport interface ShoppingLayoutPageSocialLink {\n  label: string;\n  href: string;\n  network: \"facebook\" | \"instagram\" | \"x\" | \"github\" | \"youtube\";\n}\n\nexport interface ShoppingLayoutPageProps extends HTMLAttributes<HTMLElement> {\n  nav?: ShopTopNavProps;\n  hero?: ShopCollectionHeroProps;\n  products?: ShopProductGridItem[];\n  footerLinks?: ShoppingLayoutPageFooterLink[];\n  footerCopyright?: string;\n  socialLinks?: ShoppingLayoutPageSocialLink[];\n}\n"
+    },
+    {
+      "path": "shopping-layout-page/index.ts",
+      "type": "index",
+      "content": "export { ShoppingLayoutPage } from \"./ShoppingLayoutPage\";\nexport type * from \"./ShoppingLayoutPage.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<>\n      <ShoppingLayoutPage {...shoppingLayoutPageMocks.default} />\n    </>"
+    },
+    {
+      "name": "Variants",
+      "code": "<>\n      <ShoppingLayoutPage {...shoppingLayoutPageMocks.alternate} />\n    </>"
+    }
+  ]
+}

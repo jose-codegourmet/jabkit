@@ -1,0 +1,98 @@
+{
+  "name": "shop-product-card",
+  "displayName": "ShopProductCard",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Mugsys-style product tile with a 16px card, square photo, compare-at price, and circular cart and favorite actions.",
+  "sectionCategory": "product",
+  "purpose": "Presents one collection SKU with price, image, and quick cart or favorite actions.",
+  "bestFor": [
+    "ecommerce collection grids",
+    "limited-edition product tiles",
+    "catalogue merchandising"
+  ],
+  "tone": [
+    "playful",
+    "clean"
+  ],
+  "industries": [
+    "retail",
+    "ecommerce"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "image",
+    "price",
+    "title",
+    "cartAction",
+    "favoriteAction"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://codepen.io/jakebogan01/pen/pvNWZWr",
+  "tags": [
+    "product",
+    "card",
+    "shop",
+    "ecommerce",
+    "marketing"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center",
+    "width": 420,
+    "height": 560
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "shop-product-card/ShopProductCard.tsx",
+      "type": "component",
+      "content": "import { HeartIcon, ShoppingCartIcon } from \"lucide-react\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { ShopProductCardProps } from \"./ShopProductCard.types\";\n\nconst defaults = {\n  cartLabel: \"Add to cart\",\n  favoriteLabel: \"Save to favorites\",\n} as const;\n\nexport function ShopProductCard({\n  className,\n  name,\n  price,\n  compareAtPrice,\n  image,\n  href,\n  cartLabel = defaults.cartLabel,\n  favoriteLabel = defaults.favoriteLabel,\n  onAddToCart,\n  onFavorite,\n  ...props\n}: ShopProductCardProps) {\n  const title = href ? (\n    <a\n      href={href}\n      className=\"text-lg font-semibold text-card-foreground no-underline transition-colors duration-300 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n    >\n      {name}\n    </a>\n  ) : (\n    <span className=\"text-lg font-semibold text-card-foreground\">{name}</span>\n  );\n\n  return (\n    <article\n      data-slot=\"shop-product-card\"\n      className={cn(\n        \"relative rounded-[16px] bg-card p-5 text-card-foreground shadow-[0_2px_8px_color-mix(in_oklab,var(--jk-foreground),transparent_92%)] transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_24px_color-mix(in_oklab,var(--jk-foreground),transparent_85%)] motion-reduce:transition-none motion-reduce:hover:translate-y-0\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"relative mb-4 overflow-hidden rounded-[12px] bg-muted p-5\">\n        <img\n          src={image.src}\n          alt={image.alt}\n          className=\"aspect-square w-full object-cover\"\n        />\n        <div className=\"absolute top-3 right-3 flex gap-2\">\n          <button\n            type=\"button\"\n            aria-label={cartLabel}\n            onClick={onAddToCart}\n            className=\"grid size-10 place-items-center rounded-full bg-warning text-warning-foreground transition-transform duration-300 ease-out hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none motion-reduce:hover:scale-100\"\n          >\n            <ShoppingCartIcon\n              aria-hidden=\"true\"\n              className=\"size-4 stroke-[2]\"\n            />\n          </button>\n          <button\n            type=\"button\"\n            aria-label={favoriteLabel}\n            onClick={onFavorite}\n            className=\"grid size-10 place-items-center rounded-full bg-warning text-warning-foreground transition-transform duration-300 ease-out hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none motion-reduce:hover:scale-100\"\n          >\n            <HeartIcon aria-hidden=\"true\" className=\"size-4 stroke-[2]\" />\n          </button>\n        </div>\n      </div>\n      <div className=\"flex flex-col gap-2\">\n        <div className=\"flex items-center gap-3\">\n          {compareAtPrice ? (\n            <span className=\"text-sm text-muted-foreground line-through\">\n              {compareAtPrice}\n            </span>\n          ) : null}\n          <span className=\"text-2xl font-bold text-card-foreground\">\n            {price}\n          </span>\n        </div>\n        {title}\n      </div>\n    </article>\n  );\n}\n"
+    },
+    {
+      "path": "shop-product-card/ShopProductCard.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, MouseEventHandler } from \"react\";\n\nexport interface ShopProductCardImage {\n  src: string;\n  alt: string;\n}\n\nexport interface ShopProductCardProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  name: string;\n  price: string;\n  compareAtPrice?: string;\n  image: ShopProductCardImage;\n  href?: string;\n  cartLabel?: string;\n  favoriteLabel?: string;\n  onAddToCart?: MouseEventHandler<HTMLButtonElement>;\n  onFavorite?: MouseEventHandler<HTMLButtonElement>;\n}\n"
+    },
+    {
+      "path": "shop-product-card/index.ts",
+      "type": "index",
+      "content": "export { ShopProductCard } from \"./ShopProductCard\";\nexport type * from \"./ShopProductCard.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"w-[22rem] bg-background p-6 text-foreground\">\n      <ShopProductCard {...shopProductCardMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"grid w-[44rem] max-w-full gap-6 bg-background p-6 text-foreground sm:grid-cols-2\">\n      <ShopProductCard {...shopProductCardMocks.default} />\n      <ShopProductCard {...shopProductCardMocks.alternate} />\n    </div>"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "name": "shop-product-grid",
+  "displayName": "ShopProductGrid",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Responsive 3-2-1 collection grid of ShopProductCard tiles with 24px gutters.",
+  "sectionCategory": "gallery",
+  "purpose": "Lays out a mug collection so shoppers can scan price and image in a tight merchandising rhythm.",
+  "bestFor": [
+    "ecommerce collection pages",
+    "limited-run drops",
+    "product catalogues"
+  ],
+  "tone": [
+    "clean",
+    "playful"
+  ],
+  "industries": [
+    "retail",
+    "ecommerce"
+  ],
+  "contentDensity": "high",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "grid",
+    "alignment": "center",
+    "columns": 3
+  },
+  "slots": [
+    "productTiles"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://codepen.io/jakebogan01/pen/pvNWZWr",
+  "tags": [
+    "grid",
+    "product",
+    "shop",
+    "ecommerce",
+    "marketing"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "shop-product-card"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 1100
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "shop-product-grid/ShopProductGrid.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport { ShopProductCard } from \"@/components/jabkit/shop-product-card\";\nimport { shopProductGridItems } from \"./ShopProductGrid.mocks\";\nimport type { ShopProductGridProps } from \"./ShopProductGrid.types\";\n\nexport function ShopProductGrid({\n  className,\n  products = shopProductGridItems,\n  ...props\n}: ShopProductGridProps) {\n  return (\n    <section\n      data-slot=\"shop-product-grid\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto grid max-w-[1400px] grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3\">\n        {products.map((product) => (\n          <ShopProductCard key={product.name} {...product} />\n        ))}\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "shop-product-grid/ShopProductGrid.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport type { ShopProductCardProps } from \"@/components/jabkit/shop-product-card\";\n\nexport type ShopProductGridItem = ShopProductCardProps;\n\nexport interface ShopProductGridProps extends HTMLAttributes<HTMLElement> {\n  products?: ShopProductGridItem[];\n}\n"
+    },
+    {
+      "path": "shop-product-grid/index.ts",
+      "type": "index",
+      "content": "export { ShopProductGrid } from \"./ShopProductGrid\";\nexport type * from \"./ShopProductGrid.types\";\n"
+    },
+    {
+      "path": "shop-product-grid/ShopProductGrid.mocks.ts",
+      "type": "mocks",
+      "content": "import type {\n  ShopProductGridItem,\n  ShopProductGridProps,\n} from \"./ShopProductGrid.types\";\n\nexport const shopProductGridItems: ShopProductGridItem[] = [\n  {\n    name: \"The Classic\",\n    price: \"$120\",\n    compareAtPrice: \"$200\",\n    href: \"#the-classic\",\n    image: {\n      src: \"/assets/d7aec5a4066ae4f7.webp\",\n      alt: \"White ceramic mug on a studio surface\",\n    },\n  },\n  {\n    name: \"The Camper\",\n    price: \"$80\",\n    compareAtPrice: \"$200\",\n    href: \"#the-camper\",\n    image: {\n      src: \"/assets/42c22367c0be8e21.webp\",\n      alt: \"Espresso cup and saucer on a dark table\",\n    },\n  },\n  {\n    name: \"The Couple\",\n    price: \"$150\",\n    compareAtPrice: \"$200\",\n    href: \"#the-couple\",\n    image: {\n      src: \"/assets/47795ebdce09455e.webp\",\n      alt: \"Two coffee cups on a wooden table\",\n    },\n  },\n  {\n    name: \"The Ridge\",\n    price: \"$70\",\n    compareAtPrice: \"$200\",\n    href: \"#the-ridge\",\n    image: {\n      src: \"/assets/63aeec58a6ab5c74.webp\",\n      alt: \"Dark coffee cup beside roasted beans\",\n    },\n  },\n  {\n    name: \"Dreams\",\n    price: \"$60\",\n    compareAtPrice: \"$200\",\n    href: \"#dreams\",\n    image: {\n      src: \"/assets/02a7269595e4f4e6.webp\",\n      alt: \"Latte in a handled mug with foam\",\n    },\n  },\n  {\n    name: \"Van Life\",\n    price: \"$110\",\n    compareAtPrice: \"$200\",\n    href: \"#van-life\",\n    image: {\n      src: \"/assets/5267138413360745.webp\",\n      alt: \"Travel mug on an outdoor table\",\n    },\n  },\n  {\n    name: \"The Bold\",\n    price: \"$140\",\n    compareAtPrice: \"$200\",\n    href: \"#the-bold\",\n    image: {\n      src: \"/assets/ec2b22380882848a.webp\",\n      alt: \"Iced coffee in a tall glass\",\n    },\n  },\n  {\n    name: \"The Traveler\",\n    price: \"$180\",\n    compareAtPrice: \"$200\",\n    href: \"#the-traveler\",\n    image: {\n      src: \"/assets/ece1ed59bb6c27ee.webp\",\n      alt: \"Takeaway coffee cup on a cafe counter\",\n    },\n  },\n  {\n    name: \"The Savor\",\n    price: \"$50\",\n    compareAtPrice: \"$200\",\n    href: \"#the-savor\",\n    image: {\n      src: \"/assets/61d7ee48453facc3.webp\",\n      alt: \"Small coffee cup on a saucer\",\n    },\n  },\n];\n\nexport const shopProductGridMocks = {\n  default: {\n    products: shopProductGridItems,\n  },\n  alternate: {\n    products: shopProductGridItems.slice(0, 4),\n  },\n} satisfies Record<string, ShopProductGridProps>;\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"bg-background px-5 py-10 text-foreground\">\n      <ShopProductGrid {...shopProductGridMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"bg-background px-5 py-10 text-foreground\">\n      <ShopProductGrid {...shopProductGridMocks.alternate} />\n    </div>"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "name": "shop-top-nav",
+  "displayName": "ShopTopNav",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Mugsys store chrome with brand mark, four destination links, a sliding Explore CTA, and a compact mobile menu.",
+  "sectionCategory": "navbar",
+  "purpose": "Gives a collection storefront a single-line header that routes into Home, About, Company, Stores, and the collection.",
+  "bestFor": [
+    "ecommerce headers",
+    "collection landing chrome",
+    "compact store navigation"
+  ],
+  "tone": [
+    "clean",
+    "playful"
+  ],
+  "industries": [
+    "retail",
+    "ecommerce"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "full-width",
+    "alignment": "mixed"
+  },
+  "slots": [
+    "brand",
+    "navigationItems",
+    "primaryCTA",
+    "mobileNavigation"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedBefore": [
+    "hero"
+  ],
+  "inspoUrl": "https://codepen.io/jakebogan01/pen/pvNWZWr",
+  "tags": [
+    "navbar",
+    "shop",
+    "ecommerce",
+    "marketing"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "shop-animated-button"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 220
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "shop-top-nav/ShopTopNav.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { CoffeeIcon, MenuIcon, XIcon } from \"lucide-react\";\nimport { useId, useState } from \"react\";\nimport { ShopAnimatedButton } from \"@/components/jabkit/shop-animated-button\";\nimport { cn } from \"@/lib/cn\";\nimport type { ShopTopNavProps } from \"./ShopTopNav.types\";\n\nconst defaults = {\n  brand: \"MUGSY'S MUGS\",\n  links: [\n    { label: \"Home\", href: \"#home\" },\n    { label: \"About\", href: \"#about\" },\n    { label: \"Company\", href: \"#company\" },\n    { label: \"Stores\", href: \"#stores\" },\n  ],\n  cta: { label: \"Explore Collection\", href: \"#collection\" },\n  menuLabel: \"Toggle menu\",\n} as const;\n\nexport function ShopTopNav({\n  className,\n  brand = defaults.brand,\n  links = [...defaults.links],\n  cta = defaults.cta,\n  menuLabel = defaults.menuLabel,\n  ...props\n}: ShopTopNavProps) {\n  const menuId = useId();\n  const [open, setOpen] = useState(false);\n\n  return (\n    <header\n      data-slot=\"shop-top-nav\"\n      className={cn(\n        \"bg-card text-card-foreground shadow-[0_2px_8px_color-mix(in_oklab,var(--jk-foreground),transparent_90%)]\",\n        className,\n      )}\n      {...props}\n    >\n      <nav\n        aria-label=\"Store\"\n        className=\"relative z-[5] mx-auto flex max-w-[1400px] items-center justify-between overflow-hidden px-5 py-5\"\n      >\n        <div className=\"flex min-w-0 items-center gap-1.5 rounded-br-[32px] bg-card\">\n          <button\n            type=\"button\"\n            className=\"grid size-9 place-items-center rounded-[8px] text-card-foreground md:hidden\"\n            aria-label={menuLabel}\n            aria-expanded={open}\n            aria-controls={menuId}\n            onClick={() => setOpen((value) => !value)}\n          >\n            {open ? (\n              <XIcon aria-hidden=\"true\" className=\"size-7\" />\n            ) : (\n              <MenuIcon aria-hidden=\"true\" className=\"size-7\" />\n            )}\n          </button>\n          <a\n            href=\"#home\"\n            className=\"flex items-center gap-2 font-semibold tracking-wide text-card-foreground no-underline\"\n          >\n            <CoffeeIcon aria-hidden=\"true\" className=\"size-6 text-warning\" />\n            <span>{brand}</span>\n          </a>\n        </div>\n        <ul className=\"hidden items-center gap-8 md:flex\">\n          {links.map((link) => (\n            <li key={link.href}>\n              <a\n                href={link.href}\n                className=\"text-base font-medium text-card-foreground no-underline transition-colors duration-300 hover:text-primary\"\n              >\n                {link.label}\n              </a>\n            </li>\n          ))}\n        </ul>\n        <ShopAnimatedButton asChild className=\"hidden md:inline-flex\">\n          <a href={cta.href}>{cta.label}</a>\n        </ShopAnimatedButton>\n      </nav>\n      {open ? (\n        <div\n          id={menuId}\n          className=\"border-t border-border bg-card px-5 py-4 md:hidden\"\n        >\n          <ul className=\"flex flex-col gap-4\">\n            {links.map((link) => (\n              <li key={link.href}>\n                <a\n                  href={link.href}\n                  className=\"text-base font-medium text-card-foreground no-underline\"\n                  onClick={() => setOpen(false)}\n                >\n                  {link.label}\n                </a>\n              </li>\n            ))}\n          </ul>\n          <div className=\"mt-4\">\n            <ShopAnimatedButton asChild>\n              <a href={cta.href}>{cta.label}</a>\n            </ShopAnimatedButton>\n          </div>\n        </div>\n      ) : null}\n    </header>\n  );\n}\n"
+    },
+    {
+      "path": "shop-top-nav/ShopTopNav.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface ShopTopNavLink {\n  label: string;\n  href: string;\n}\n\nexport interface ShopTopNavCta {\n  label: string;\n  href: string;\n}\n\nexport interface ShopTopNavProps extends HTMLAttributes<HTMLElement> {\n  brand?: string;\n  links?: ShopTopNavLink[];\n  cta?: ShopTopNavCta;\n  menuLabel?: string;\n}\n"
+    },
+    {
+      "path": "shop-top-nav/index.ts",
+      "type": "index",
+      "content": "export { ShopTopNav } from \"./ShopTopNav\";\nexport type * from \"./ShopTopNav.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<>\n      <ShopTopNav {...shopTopNavMocks.default} />\n    </>"
+    },
+    {
+      "name": "Variants",
+      "code": "<>\n      <ShopTopNav {...shopTopNavMocks.alternate} />\n    </>"
+    }
+  ]
+}
