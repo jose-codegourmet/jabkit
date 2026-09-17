@@ -1,0 +1,94 @@
+{
+  "name": "alert",
+  "displayName": "Alert",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Inline callout for user attention with default and destructive variants, title, description, and an optional action.",
+  "sectionCategory": "feedback",
+  "purpose": "Keeps important success, warning, and error messages on the current page without blocking the rest of the UI.",
+  "bestFor": [
+    "form save confirmation",
+    "payment or billing status",
+    "inline error recovery with an action"
+  ],
+  "avoidFor": [
+    "temporary toasts that dismiss themselves",
+    "modal dialogs that require a decision"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "icon",
+    "title",
+    "description",
+    "action"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/alert",
+  "tags": [
+    "alert",
+    "callout",
+    "feedback",
+    "status",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "alert/Alert.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  AlertActionProps,\n  AlertDescriptionProps,\n  AlertProps,\n  AlertTitleProps,\n} from \"./Alert.types\";\n\nfunction Alert({ className, variant = \"default\", ...props }: AlertProps) {\n  return (\n    <div\n      data-slot=\"alert\"\n      role=\"alert\"\n      className={cn(\n        \"group/alert relative grid w-full gap-0.5 rounded-lg border border-border px-2.5 py-2 text-left text-sm has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-current *:[svg:not([class*='size-'])]:size-4\",\n        variant === \"destructive\"\n          ? \"bg-card text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current\"\n          : \"bg-card text-card-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AlertTitle({ className, ...props }: AlertTitleProps) {\n  return (\n    <div\n      data-slot=\"alert-title\"\n      className={cn(\n        \"font-medium group-has-[>svg]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AlertDescription({ className, ...props }: AlertDescriptionProps) {\n  return (\n    <div\n      data-slot=\"alert-description\"\n      className={cn(\n        \"text-sm text-balance text-muted-foreground md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AlertAction({ className, ...props }: AlertActionProps) {\n  return (\n    <div\n      data-slot=\"alert-action\"\n      className={cn(\"absolute top-2 right-2\", className)}\n      {...props}\n    />\n  );\n}\n\nexport { Alert, AlertAction, AlertDescription, AlertTitle };\n"
+    },
+    {
+      "path": "alert/Alert.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport type AlertVariant = \"default\" | \"destructive\";\n\nexport interface AlertProps extends HTMLAttributes<HTMLDivElement> {\n  variant?: AlertVariant;\n}\n\nexport type AlertTitleProps = HTMLAttributes<HTMLDivElement>;\nexport type AlertDescriptionProps = HTMLAttributes<HTMLDivElement>;\nexport type AlertActionProps = HTMLAttributes<HTMLDivElement>;\n"
+    },
+    {
+      "path": "alert/index.ts",
+      "type": "index",
+      "content": "export { Alert, AlertAction, AlertDescription, AlertTitle } from \"./Alert\";\nexport type * from \"./Alert.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"flex w-full max-w-lg flex-col gap-4\">\n      <Alert>\n        <CheckCircle2Icon />\n        <AlertTitle>{alertMocks.default.title}</AlertTitle>\n        <AlertDescription>{alertMocks.default.description}</AlertDescription>\n      </Alert>\n      <Alert>\n        <InfoIcon />\n        <AlertTitle>{alertMocks.feature.title}</AlertTitle>\n        <AlertDescription>{alertMocks.feature.description}</AlertDescription>\n      </Alert>\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"flex w-full max-w-lg flex-col gap-4\">\n      <Alert>\n        <CheckCircle2Icon />\n        <AlertTitle>{alertMocks.basic.title}</AlertTitle>\n        <AlertDescription>{alertMocks.basic.description}</AlertDescription>\n      </Alert>\n      <Alert variant=\"destructive\">\n        <CircleAlertIcon />\n        <AlertTitle>{alertMocks.destructive.title}</AlertTitle>\n        <AlertDescription>\n          {alertMocks.destructive.description}\n        </AlertDescription>\n      </Alert>\n      <Alert>\n        <InfoIcon />\n        <AlertTitle>{alertMocks.action.title}</AlertTitle>\n        <AlertDescription>{alertMocks.action.description}</AlertDescription>\n        <AlertAction>\n          <Button size=\"sm\" variant=\"secondary\">\n            {alertMocks.action.actionLabel}\n          </Button>\n        </AlertAction>\n      </Alert>\n    </div>"
+    }
+  ]
+}

@@ -1,5 +1,65 @@
 [
   {
+    "name": "alert",
+    "displayName": "Alert",
+    "category": "atoms",
+    "description": "Inline callout for user attention with default and destructive variants, title, description, and an optional action.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/alert",
+    "sectionCategory": "feedback",
+    "purpose": "Keeps important success, warning, and error messages on the current page without blocking the rest of the UI.",
+    "bestFor": [
+      "form save confirmation",
+      "payment or billing status",
+      "inline error recovery with an action"
+    ],
+    "avoidFor": [
+      "temporary toasts that dismiss themselves",
+      "modal dialogs that require a decision"
+    ],
+    "tone": [
+      "clean",
+      "professional"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "icon",
+      "title",
+      "description",
+      "action"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "alert",
+      "callout",
+      "feedback",
+      "status",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": false,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "avatar",
     "displayName": "Avatar",
     "category": "atoms",
