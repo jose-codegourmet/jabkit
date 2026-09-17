@@ -1,0 +1,95 @@
+{
+  "name": "aspect-ratio",
+  "displayName": "AspectRatio",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Displays content within a desired ratio.",
+  "sectionCategory": "content",
+  "purpose": "Locks media or framed content to a fixed width-to-height ratio so layouts stay stable as the container resizes.",
+  "bestFor": [
+    "video embeds",
+    "hero and card images",
+    "thumbnails that must stay 16:9, 1:1, or 9:16"
+  ],
+  "avoidFor": [
+    "fluid text blocks",
+    "content that should grow with its height"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "media"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": true,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/aspect-ratio",
+  "tags": [
+    "aspect-ratio",
+    "media",
+    "image",
+    "video",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "aspect-ratio/AspectRatio.tsx",
+      "type": "component",
+      "content": "import type { CSSProperties } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { AspectRatioProps } from \"./AspectRatio.types\";\n\nfunction AspectRatio({ ratio, className, ...props }: AspectRatioProps) {\n  return (\n    <div\n      data-slot=\"aspect-ratio\"\n      style={\n        {\n          \"--ratio\": ratio,\n        } as CSSProperties\n      }\n      className={cn(\"relative aspect-(--ratio)\", className)}\n      {...props}\n    />\n  );\n}\n\nexport { AspectRatio };\n"
+    },
+    {
+      "path": "aspect-ratio/AspectRatio.types.ts",
+      "type": "types",
+      "content": "import type { ComponentProps } from \"react\";\n\nexport type AspectRatioProps = ComponentProps<\"div\"> & { ratio: number };\n"
+    },
+    {
+      "path": "aspect-ratio/index.ts",
+      "type": "index",
+      "content": "export { AspectRatio } from \"./AspectRatio\";\nexport type { AspectRatioProps } from \"./AspectRatio.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"w-full max-w-md\">\n      <AspectRatio\n        ratio={aspectRatioMocks.default.ratio}\n        className=\"rounded-lg bg-muted\"\n      >\n        <img\n          src={aspectRatioMocks.default.src}\n          alt={aspectRatioMocks.default.alt}\n          className=\"h-full w-full rounded-lg object-cover grayscale dark:brightness-20\"\n        />\n      </AspectRatio>\n    </div>"
+    },
+    {
+      "name": "Square",
+      "code": "<div className=\"w-full max-w-xs\">\n      <AspectRatio\n        ratio={aspectRatioMocks.square.ratio}\n        className=\"rounded-lg bg-muted\"\n      >\n        <img\n          src={aspectRatioMocks.square.src}\n          alt={aspectRatioMocks.square.alt}\n          className=\"h-full w-full rounded-lg object-cover grayscale dark:brightness-20\"\n        />\n      </AspectRatio>\n    </div>"
+    },
+    {
+      "name": "Portrait",
+      "code": "<div className=\"w-48\">\n      <AspectRatio\n        ratio={aspectRatioMocks.portrait.ratio}\n        className=\"rounded-lg bg-muted\"\n      >\n        <img\n          src={aspectRatioMocks.portrait.src}\n          alt={aspectRatioMocks.portrait.alt}\n          className=\"h-full w-full rounded-lg object-cover grayscale dark:brightness-20\"\n        />\n      </AspectRatio>\n    </div>"
+    }
+  ]
+}
