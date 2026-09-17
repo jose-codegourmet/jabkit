@@ -3259,6 +3259,71 @@
     }
   },
   {
+    "name": "popover",
+    "displayName": "Popover",
+    "category": "atoms",
+    "description": "Accessible popover that shows rich content in a portal, triggered by a button.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/popover",
+    "sectionCategory": "overlay",
+    "purpose": "Surfaces contextual content next to a trigger without taking over the page like a modal.",
+    "bestFor": [
+      "quick views",
+      "inline settings",
+      "contextual forms"
+    ],
+    "avoidFor": [
+      "full-page workflows",
+      "toasts",
+      "persistent page content"
+    ],
+    "tone": [
+      "professional",
+      "focused"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "overlay",
+      "alignment": "center"
+    },
+    "slots": [
+      "trigger",
+      "title",
+      "description",
+      "content"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "button"
+    ],
+    "tags": [
+      "popover",
+      "overlay",
+      "primitive",
+      "accessible"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "@base-ui/react",
+      "clsx",
+      "tailwind-merge",
+      "react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "qr-code-generator",
     "displayName": "QrCodeGenerator",
     "category": "atoms",
