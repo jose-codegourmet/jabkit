@@ -55,6 +55,8 @@ Inside a scope, `[data-slot="input"]` uses `--jk-control-height`, `--jk-radius`,
 | `--jk-chart-1` … `--jk-chart-5` | `--color-chart-1` … `--color-chart-5` |
 | `--jk-radius` | `--radius` → `rounded-[--radius]` |
 
+Accordion open/close motion uses `--animate-accordion-down` and `--animate-accordion-up` in the same `@theme inline` block (`accordion-down` / `accordion-up` against `--accordion-panel-height`). Those keyframes collapse under `prefers-reduced-motion: reduce`.
+
 Foundation variables (`--jk-space-*`, `--jk-content-max`, `--jk-border-width`, `--jk-control-height`, `--jk-shadow-control`, `--jk-font-*`) are CSS custom properties only. Button primary reads `--jk-shadow-control`. They are not `--color-*` utilities.
 
 Values are `oklch(...)`. Light and dark pairs are both defined in `tokens.css`; do not add a third theme by inventing a media query.
