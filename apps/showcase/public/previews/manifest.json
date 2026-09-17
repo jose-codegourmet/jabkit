@@ -6566,6 +6566,37 @@
           "format": "webp"
         }
       ]
+    },
+    "collapsible": {
+      "sourceHash": "acd21b70080ca7f7cdbe59038eb5278012f4884a48a4a3c0011936632f4ec3a9",
+      "pipelineVersion": 1,
+      "stories": [
+        "Default",
+        "Variants"
+      ],
+      "themes": [
+        "dark"
+      ],
+      "assets": [
+        {
+          "story": "Default",
+          "theme": "dark",
+          "file": "collapsible.Default.dark.webp",
+          "bytes": 2594,
+          "width": 720,
+          "height": 640,
+          "format": "webp"
+        },
+        {
+          "story": "Variants",
+          "theme": "dark",
+          "file": "collapsible.Variants.dark.webp",
+          "bytes": 4206,
+          "width": 720,
+          "height": 640,
+          "format": "webp"
+        }
+      ]
     }
   }
 }
