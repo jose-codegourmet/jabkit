@@ -1,0 +1,111 @@
+{
+  "name": "agency-index-section",
+  "displayName": "AgencyIndexSection",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Agency index intro with numbered heading, manifesto copy, category strip, and selected-work grid.",
+  "sectionCategory": "hero",
+  "purpose": "Opens the agency page with the Form follows friction intro and a browsable work index.",
+  "bestFor": [
+    "studio landings",
+    "portfolio indexes",
+    "editorial agency intros"
+  ],
+  "tone": [
+    "editorial",
+    "bold"
+  ],
+  "industries": [
+    "design",
+    "agency"
+  ],
+  "contentDensity": "high",
+  "visualWeight": "high",
+  "layout": {
+    "type": "full-width",
+    "alignment": "left"
+  },
+  "slots": [
+    "kicker",
+    "headline",
+    "description",
+    "primaryCTA",
+    "categories",
+    "gallery"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "navbar"
+  ],
+  "recommendedBefore": [
+    "features"
+  ],
+  "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+  "tags": [
+    "index",
+    "agency",
+    "hero",
+    "gallery",
+    "marketing"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "agency-section-heading"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 1600
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "agency-index-section/AgencyIndexSection.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { AgencySectionHeading } from \"@/components/jabkit/agency-section-heading\";\nimport { cn } from \"@/lib/cn\";\nimport { agencyIndexWorks } from \"./AgencyIndexSection.mocks\";\nimport type { AgencyIndexSectionProps } from \"./AgencyIndexSection.types\";\n\nconst defaults = {\n  id: \"index\",\n  number: \"01\",\n  label: \"Index\",\n  meta: \"128 items\",\n  kicker: \"[01] Independent design practice est. 2019\",\n  availability: \"[05] BDX -- Berlin available Q3-Q4 2026\",\n  title: \"Form follows friction\",\n  emphasis: \"friction\",\n  body: \"A graphic design practice working at the intersection of brand systems, editorial design, and screen-based typography. Built one grid at a time, with attention to the seams.\",\n  ctaLabel: \"Browse index 128\",\n  ctaHref: \"#works\",\n  categories: [\n    \"Brand systems\",\n    \"Editorial design\",\n    \"Web and interaction\",\n    \"Print and packaging\",\n  ],\n  worksHeading: \"Selected works 2019-26\",\n} as const;\n\nexport function AgencyIndexSection({\n  className,\n  id = defaults.id,\n  number = defaults.number,\n  label = defaults.label,\n  meta = defaults.meta,\n  kicker = defaults.kicker,\n  availability = defaults.availability,\n  title = defaults.title,\n  emphasis = defaults.emphasis,\n  body = defaults.body,\n  ctaLabel = defaults.ctaLabel,\n  ctaHref = defaults.ctaHref,\n  categories = [...defaults.categories],\n  worksHeading = defaults.worksHeading,\n  works = agencyIndexWorks,\n  ...props\n}: AgencyIndexSectionProps) {\n  return (\n    <section\n      id={id}\n      data-slot=\"agency-index-section\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto max-w-[90rem] px-[var(--jk-space-gutter)] pt-10 pb-16 sm:pt-14\">\n        <div className=\"flex flex-col gap-3 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground sm:flex-row sm:justify-between\">\n          <p>{kicker}</p>\n          <p>{availability}</p>\n        </div>\n        <AgencySectionHeading\n          className=\"mt-10\"\n          number={number}\n          label={label}\n          meta={meta}\n          title={title}\n          emphasis={emphasis}\n          titleAs=\"h1\"\n        />\n        <p className=\"mt-8 max-w-[62ch] text-base leading-relaxed text-muted-foreground\">\n          {body}\n        </p>\n        <a\n          href={ctaHref}\n          className=\"mt-8 inline-flex items-center gap-3 rounded-none bg-foreground px-5 py-3 font-mono text-[11px] tracking-[0.16em] text-background no-underline uppercase transition-[transform,background-color] duration-300 hover:bg-warning hover:text-warning-foreground motion-reduce:transition-none motion-reduce:hover:bg-foreground motion-reduce:hover:text-background\"\n        >\n          {ctaLabel}\n          <span aria-hidden=\"true\">{\">\"}</span>\n        </a>\n      </div>\n      <div className=\"bg-foreground px-[var(--jk-space-gutter)] py-4 text-background\">\n        <ul className=\"mx-auto flex max-w-[90rem] flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em]\">\n          {categories.map((category, index) => (\n            <li key={category} className=\"inline-flex items-center gap-5\">\n              {index > 0 ? (\n                <span\n                  aria-hidden=\"true\"\n                  className=\"size-1.5 rounded-full bg-warning\"\n                />\n              ) : null}\n              <span>{category}</span>\n            </li>\n          ))}\n        </ul>\n      </div>\n      <div\n        id=\"works\"\n        className=\"mx-auto max-w-[90rem] px-[var(--jk-space-gutter)] py-16\"\n      >\n        <h2 className=\"font-[family-name:var(--jk-font-display)] text-2xl font-semibold tracking-tight text-foreground uppercase sm:text-4xl\">\n          {worksHeading}\n        </h2>\n        <ul className=\"mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4\">\n          {works.map((work) => (\n            <li key={work.href}>\n              <a\n                href={work.href}\n                className=\"group block rounded-none no-underline\"\n              >\n                <figure className=\"overflow-hidden bg-muted\">\n                  <img\n                    src={work.image.src}\n                    alt={work.image.alt}\n                    className=\"aspect-[4/5] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100\"\n                  />\n                </figure>\n                <p className=\"mt-2 font-mono text-[11px] tracking-[0.12em] text-foreground uppercase\">\n                  {work.title}\n                </p>\n              </a>\n            </li>\n          ))}\n        </ul>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "agency-index-section/AgencyIndexSection.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface AgencyIndexWork {\n  title: string;\n  href: string;\n  image: {\n    src: string;\n    alt: string;\n  };\n}\n\nexport interface AgencyIndexSectionProps extends HTMLAttributes<HTMLElement> {\n  id?: string;\n  number?: string;\n  label?: string;\n  meta?: string;\n  kicker?: string;\n  availability?: string;\n  title?: string;\n  emphasis?: string;\n  body?: string;\n  ctaLabel?: string;\n  ctaHref?: string;\n  categories?: string[];\n  worksHeading?: string;\n  works?: AgencyIndexWork[];\n}\n"
+    },
+    {
+      "path": "agency-index-section/index.ts",
+      "type": "index",
+      "content": "export { AgencyIndexSection } from \"./AgencyIndexSection\";\nexport type * from \"./AgencyIndexSection.types\";\n"
+    },
+    {
+      "path": "agency-index-section/AgencyIndexSection.mocks.ts",
+      "type": "mocks",
+      "content": "import type {\n  AgencyIndexSectionProps,\n  AgencyIndexWork,\n} from \"./AgencyIndexSection.types\";\n\nexport const agencyIndexWorks: AgencyIndexWork[] = [\n  {\n    title: \"Atlas Type System\",\n    href: \"#work-atlas\",\n    image: {\n      src: \"/assets/d7aec5a4066ae4f7.webp\",\n      alt: \"Studio still for the Atlas type system\",\n    },\n  },\n  {\n    title: \"Harbor Review\",\n    href: \"#work-harbor\",\n    image: {\n      src: \"/assets/42c22367c0be8e21.webp\",\n      alt: \"Printed pages from Harbor Review\",\n    },\n  },\n  {\n    title: \"North Grid\",\n    href: \"#work-north\",\n    image: {\n      src: \"/assets/47795ebdce09455e.webp\",\n      alt: \"North Grid identity lockup on a table\",\n    },\n  },\n  {\n    title: \"Field Notes 26\",\n    href: \"#work-field\",\n    image: {\n      src: \"/assets/63aeec58a6ab5c74.webp\",\n      alt: \"Bound field notes on a desk\",\n    },\n  },\n  {\n    title: \"Signal Pack\",\n    href: \"#work-signal\",\n    image: {\n      src: \"/assets/02a7269595e4f4e6.webp\",\n      alt: \"Packaging sample from Signal Pack\",\n    },\n  },\n  {\n    title: \"River Marks\",\n    href: \"#work-river\",\n    image: {\n      src: \"/assets/5267138413360745.webp\",\n      alt: \"River Marks print specimens\",\n    },\n  },\n  {\n    title: \"Index Cards\",\n    href: \"#work-cards\",\n    image: {\n      src: \"/assets/ec2b22380882848a.webp\",\n      alt: \"Stacked index cards from a brand system\",\n    },\n  },\n  {\n    title: \"Screen Ledger\",\n    href: \"#work-ledger\",\n    image: {\n      src: \"/assets/ece1ed59bb6c27ee.webp\",\n      alt: \"Screen-based typography study\",\n    },\n  },\n];\n\nexport const agencyIndexSectionMocks = {\n  default: {\n    id: \"index\",\n    number: \"01\",\n    label: \"Index\",\n    meta: \"128 items\",\n    kicker: \"[01] Independent design practice est. 2019\",\n    availability: \"[05] BDX -- Berlin available Q3-Q4 2026\",\n    title: \"Form follows friction\",\n    emphasis: \"friction\",\n    body: \"A graphic design practice working at the intersection of brand systems, editorial design, and screen-based typography. Built one grid at a time, with attention to the seams.\",\n    ctaLabel: \"Browse index 128\",\n    ctaHref: \"#works\",\n    categories: [\n      \"Brand systems\",\n      \"Editorial design\",\n      \"Web and interaction\",\n      \"Print and packaging\",\n    ],\n    worksHeading: \"Selected works 2019-26\",\n    works: agencyIndexWorks,\n  },\n  alternate: {\n    id: \"index\",\n    number: \"01\",\n    label: \"Work\",\n    meta: \"48 items\",\n    kicker: \"[01] Studio practice est. 2021\",\n    availability: \"[05] BER booking autumn 2026\",\n    title: \"Type before decoration\",\n    emphasis: \"decoration\",\n    body: \"A smaller index of identity, print, and screen commissions for publishers and product teams.\",\n    ctaLabel: \"Browse work 48\",\n    ctaHref: \"#works\",\n    categories: [\"Identity\", \"Print\", \"Screens\"],\n    worksHeading: \"Selected works 2021-26\",\n    works: agencyIndexWorks.slice(0, 4),\n  },\n} satisfies Record<string, AgencyIndexSectionProps>;\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<>\n      <AgencyIndexSection {...agencyIndexSectionMocks.default} />\n    </>"
+    },
+    {
+      "name": "Variants",
+      "code": "<>\n      <AgencyIndexSection {...agencyIndexSectionMocks.alternate} />\n    </>"
+    }
+  ]
+}

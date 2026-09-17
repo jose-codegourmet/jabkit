@@ -1,0 +1,91 @@
+{
+  "name": "agency-section-heading",
+  "displayName": "AgencySectionHeading",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Numbered agency section label in the [05] / Contact pattern, with optional title and emphasis highlight.",
+  "sectionCategory": "content",
+  "purpose": "Marks editorial agency sections with a mono index, a display title, and a single emphasized word.",
+  "bestFor": [
+    "editorial agency landings",
+    "numbered portfolio sections",
+    "contact and services heads"
+  ],
+  "tone": [
+    "editorial",
+    "professional"
+  ],
+  "industries": [
+    "design",
+    "agency"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "index",
+    "label",
+    "meta",
+    "headline",
+    "emphasis"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+  "tags": [
+    "heading",
+    "agency",
+    "index",
+    "atom"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "agency-section-heading/AgencySectionHeading.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { AgencySectionHeadingProps } from \"./AgencySectionHeading.types\";\n\nfunction TitleWithEmphasis({\n  title,\n  emphasis,\n}: {\n  title: string;\n  emphasis?: string;\n}) {\n  if (!emphasis || !title.includes(emphasis)) {\n    return title;\n  }\n\n  const [before, ...rest] = title.split(emphasis);\n  return (\n    <>\n      {before}\n      <em className=\"bg-warning px-[0.08em] pb-1 font-semibold text-warning-foreground italic leading-[1.1]\">\n        {emphasis}\n      </em>\n      {rest.join(emphasis)}\n    </>\n  );\n}\n\nexport function AgencySectionHeading({\n  className,\n  number = \"05\",\n  label = \"Contact\",\n  meta,\n  title,\n  emphasis,\n  titleAs: TitleTag = \"h2\",\n  ...props\n}: AgencySectionHeadingProps) {\n  const titleNode =\n    typeof title === \"string\" ? (\n      <TitleWithEmphasis title={title} emphasis={emphasis} />\n    ) : (\n      title\n    );\n\n  return (\n    <div\n      data-slot=\"agency-section-heading\"\n      className={cn(\"text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"flex flex-wrap items-baseline justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground\">\n        <p>\n          <span className=\"text-foreground\">[{number}]</span>\n          <span className=\"mx-2 text-muted-foreground\">/</span>\n          <span className=\"text-foreground\">{label}</span>\n        </p>\n        {meta ? <p className=\"text-muted-foreground\">{meta}</p> : null}\n      </div>\n      {titleNode ? (\n        <TitleTag className=\"mt-5 max-w-[18ch] font-[family-name:var(--jk-font-display)] text-4xl font-semibold tracking-tight text-balance text-foreground uppercase leading-[1.1] sm:text-6xl\">\n          {titleNode}\n        </TitleTag>\n      ) : null}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "agency-section-heading/AgencySectionHeading.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport interface AgencySectionHeadingProps\n  extends Omit<HTMLAttributes<HTMLDivElement>, \"title\"> {\n  number?: string;\n  label?: string;\n  meta?: string;\n  title?: ReactNode;\n  emphasis?: string;\n  titleAs?: \"h1\" | \"h2\" | \"h3\" | \"p\";\n}\n"
+    },
+    {
+      "path": "agency-section-heading/index.ts",
+      "type": "index",
+      "content": "export { AgencySectionHeading } from \"./AgencySectionHeading\";\nexport type { AgencySectionHeadingProps } from \"./AgencySectionHeading.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"w-[min(720px,92vw)] bg-background p-8\">\n      <AgencySectionHeading {...agencySectionHeadingMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"w-[min(720px,92vw)] bg-background p-8\">\n      <AgencySectionHeading {...agencySectionHeadingMocks.alternate} />\n    </div>"
+    }
+  ]
+}

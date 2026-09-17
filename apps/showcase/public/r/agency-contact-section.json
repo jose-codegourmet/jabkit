@@ -1,0 +1,105 @@
+{
+  "name": "agency-contact-section",
+  "displayName": "AgencyContactSection",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Contact head, studio meta, schematic map, and the agency inquiry form in one section.",
+  "sectionCategory": "contact",
+  "purpose": "Closes the agency page with booking copy and a validated brief form.",
+  "bestFor": [
+    "studio contact pages",
+    "agency landings",
+    "project intake"
+  ],
+  "tone": [
+    "editorial",
+    "professional"
+  ],
+  "industries": [
+    "design",
+    "agency"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "high",
+  "layout": {
+    "type": "split",
+    "alignment": "mixed",
+    "columns": 2
+  },
+  "slots": [
+    "headline",
+    "description",
+    "studio",
+    "form"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "features"
+  ],
+  "recommendedBefore": [
+    "footer"
+  ],
+  "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+  "tags": [
+    "contact",
+    "agency",
+    "form",
+    "marketing"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "agency-section-heading",
+    "agency-contact-form"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 1100
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "agency-contact-section/AgencyContactSection.tsx",
+      "type": "component",
+      "content": "// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { AgencySectionHeading } from \"@/components/jabkit/agency-section-heading\";\nimport { cn } from \"@/lib/cn\";\nimport { AgencyContactForm } from \"@/components/jabkit/agency-contact-form\";\nimport type { AgencyContactSectionProps } from \"./AgencyContactSection.types\";\n\nconst defaults = {\n  id: \"contact\",\n  number: \"05\",\n  label: \"Contact\",\n  title: \"Let's make something specific.\",\n  emphasis: \"specific.\",\n  body: \"Currently booking projects starting Q3 2026. Reach out with a brief, a budget range, and a timeline. Replies within 48 hours.\",\n  studioName: \"Studio Layout\",\n  address: \"123 Cr. Victor Hugo, 33000 Bordeaux\",\n  hours: \"Mon-Fri, 09/00-18/00\",\n  appointment: \"By appointment\",\n} as const;\n\nexport function AgencyContactSection({\n  className,\n  id = defaults.id,\n  number = defaults.number,\n  label = defaults.label,\n  title = defaults.title,\n  emphasis = defaults.emphasis,\n  body = defaults.body,\n  studioName = defaults.studioName,\n  address = defaults.address,\n  hours = defaults.hours,\n  appointment = defaults.appointment,\n  form,\n  ...props\n}: AgencyContactSectionProps) {\n  return (\n    <section\n      id={id}\n      data-slot=\"agency-contact-section\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto grid max-w-[90rem] gap-12 px-[var(--jk-space-gutter)] py-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]\">\n        <div>\n          <AgencySectionHeading\n            number={number}\n            label={label}\n            title={title}\n            emphasis={emphasis}\n          />\n          <p className=\"mt-6 max-w-[46ch] text-sm leading-relaxed text-muted-foreground uppercase\">\n            {body}\n          </p>\n          <div\n            aria-hidden=\"true\"\n            className=\"relative mt-10 aspect-[5/4] overflow-hidden rounded-none border border-foreground bg-muted\"\n          >\n            <div className=\"absolute inset-[12%] border border-dashed border-foreground/40\" />\n            <div className=\"absolute top-1/2 right-[8%] left-[8%] h-px bg-foreground/30\" />\n            <div className=\"absolute top-[18%] bottom-[18%] left-1/2 w-px bg-foreground/30\" />\n            <p className=\"absolute top-4 left-4 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground\">\n              {studioName}\n            </p>\n            <p className=\"absolute right-4 bottom-4 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground\">\n              La Garonne\n            </p>\n            <span className=\"absolute top-1/2 left-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-warning\" />\n          </div>\n          <dl className=\"mt-6 space-y-2 font-mono text-[11px] uppercase tracking-[0.14em] text-foreground\">\n            <div>\n              <dt className=\"sr-only\">Studio</dt>\n              <dd>{studioName}</dd>\n            </div>\n            <div>\n              <dt className=\"sr-only\">Address</dt>\n              <dd>{address}</dd>\n            </div>\n            <div>\n              <dt className=\"sr-only\">Visit</dt>\n              <dd>\n                {appointment} / {hours}\n              </dd>\n            </div>\n          </dl>\n        </div>\n        <AgencyContactForm {...form} />\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "agency-contact-section/AgencyContactSection.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport type { AgencyContactFormProps } from \"@/components/jabkit/agency-contact-form\";\n\nexport interface AgencyContactSectionProps extends HTMLAttributes<HTMLElement> {\n  id?: string;\n  number?: string;\n  label?: string;\n  title?: string;\n  emphasis?: string;\n  body?: string;\n  studioName?: string;\n  address?: string;\n  hours?: string;\n  appointment?: string;\n  form?: AgencyContactFormProps;\n}\n"
+    },
+    {
+      "path": "agency-contact-section/index.ts",
+      "type": "index",
+      "content": "export { AgencyContactSection } from \"./AgencyContactSection\";\nexport type { AgencyContactSectionProps } from \"./AgencyContactSection.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<>\n      <AgencyContactSection {...agencyContactSectionMocks.default} />\n    </>"
+    },
+    {
+      "name": "Variants",
+      "code": "<>\n      <AgencyContactSection {...agencyContactSectionMocks.alternate} />\n    </>"
+    }
+  ]
+}
