@@ -1,0 +1,102 @@
+{
+  "name": "attachment",
+  "displayName": "Attachment",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Displays a file or image attachment with media, metadata, upload state, and actions.",
+  "sectionCategory": "content",
+  "purpose": "Shows a file or image in composers, threads, and upload lists with status, metadata, and optional actions.",
+  "bestFor": [
+    "chat composer file chips",
+    "message thread attachments",
+    "upload queues with progress and retry"
+  ],
+  "avoidFor": [
+    "full document previews",
+    "file managers with folders and bulk selection"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "media",
+    "title",
+    "description",
+    "actions",
+    "trigger"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "button"
+  ],
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/attachment",
+  "tags": [
+    "attachment",
+    "file",
+    "upload",
+    "media",
+    "atom"
+  ],
+  "dependencies": [
+    "@base-ui/react",
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "attachment/Attachment.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { mergeProps } from \"@base-ui/react/merge-props\";\nimport { useRender } from \"@base-ui/react/use-render\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { Button } from \"@/components/jabkit/button\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  AttachmentActionProps,\n  AttachmentActionsProps,\n  AttachmentContentProps,\n  AttachmentDescriptionProps,\n  AttachmentGroupProps,\n  AttachmentMediaProps,\n  AttachmentProps,\n  AttachmentTitleProps,\n  AttachmentTriggerProps,\n} from \"./Attachment.types\";\n\nconst attachmentSizeClass = {\n  default:\n    \"gap-2 text-sm has-data-[slot=attachment-content]:px-2.5 has-data-[slot=attachment-content]:py-2 has-data-[slot=attachment-media]:p-2\",\n  sm: \"gap-2.5 text-xs has-data-[slot=attachment-content]:px-2 has-data-[slot=attachment-content]:py-1.5 has-data-[slot=attachment-media]:p-1.5\",\n  xs: \"gap-1.5 rounded-xl text-xs has-data-[slot=attachment-content]:px-1.5 has-data-[slot=attachment-content]:py-1 has-data-[slot=attachment-media]:p-1\",\n} as const;\n\nconst attachmentOrientationClass = {\n  horizontal: \"min-w-40 items-center\",\n  vertical: \"w-24 flex-col has-data-[slot=attachment-content]:w-30\",\n} as const;\n\nfunction Attachment({\n  className,\n  state = \"done\",\n  size = \"default\",\n  orientation = \"horizontal\",\n  children,\n  ...props\n}: AttachmentProps) {\n  return (\n    <div\n      data-slot=\"attachment\"\n      data-state={state}\n      data-size={size}\n      data-orientation={orientation}\n      className={cn(\n        \"group/attachment relative flex w-fit max-w-full min-w-0 shrink-0 flex-wrap rounded-2xl border border-border bg-card text-card-foreground transition-colors focus-within:ring-1 focus-within:ring-ring/30 has-[>a,>button]:hover:bg-muted/50 data-[state=error]:border-destructive/30 data-[state=idle]:border-dashed\",\n        attachmentSizeClass[size],\n        attachmentOrientationClass[orientation],\n        className,\n      )}\n      {...props}\n    >\n      <style>\n        {`@keyframes jk-attachment-shimmer{0%{background-position:200% center}100%{background-position:-200% center}}[data-slot=attachment][data-state=uploading] [data-slot=attachment-title],[data-slot=attachment][data-state=processing] [data-slot=attachment-title]{background-image:linear-gradient(90deg,currentColor 0%,color-mix(in oklab,currentColor 35%,transparent) 45%,currentColor 90%);background-size:200% 100%;background-clip:text;-webkit-background-clip:text;color:transparent;animation:jk-attachment-shimmer 2s linear infinite}@media (prefers-reduced-motion:reduce){[data-slot=attachment][data-state=uploading] [data-slot=attachment-title],[data-slot=attachment][data-state=processing] [data-slot=attachment-title]{animation:none;background-image:none;color:inherit}}`}\n      </style>\n      {children}\n    </div>\n  );\n}\n\nfunction AttachmentMedia({\n  className,\n  variant = \"icon\",\n  ...props\n}: AttachmentMediaProps) {\n  return (\n    <div\n      data-slot=\"attachment-media\"\n      data-variant={variant}\n      className={cn(\n        \"relative flex aspect-square w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-muted text-foreground group-data-[orientation=vertical]/attachment:w-full group-data-[size=sm]/attachment:w-8 group-data-[size=xs]/attachment:w-7 group-data-[size=xs]/attachment:rounded-md group-data-[state=error]/attachment:bg-destructive/10 group-data-[state=error]/attachment:text-destructive group-data-[orientation=vertical]/attachment:*:data-[slot=spinner]:size-6! [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 group-data-[orientation=vertical]/attachment:[&_svg:not([class*='size-'])]:size-6 group-data-[size=xs]/attachment:[&_svg:not([class*='size-'])]:size-3.5\",\n        variant === \"image\" &&\n          \"opacity-60 group-data-[state=done]/attachment:opacity-100 group-data-[state=idle]/attachment:opacity-100 *:[img]:aspect-square *:[img]:w-full *:[img]:object-cover\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AttachmentContent({ className, ...props }: AttachmentContentProps) {\n  return (\n    <div\n      data-slot=\"attachment-content\"\n      className={cn(\n        \"max-w-full min-w-0 flex-1 leading-tight group-data-[orientation=vertical]/attachment:px-1\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AttachmentTitle({ className, ...props }: AttachmentTitleProps) {\n  return (\n    <span\n      data-slot=\"attachment-title\"\n      className={cn(\"block max-w-full min-w-0 truncate font-medium\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction AttachmentDescription({\n  className,\n  ...props\n}: AttachmentDescriptionProps) {\n  return (\n    <span\n      data-slot=\"attachment-description\"\n      className={cn(\n        \"mt-0.5 block min-w-0 max-w-full truncate text-xs text-muted-foreground group-data-[state=error]/attachment:text-destructive/80\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AttachmentActions({ className, ...props }: AttachmentActionsProps) {\n  return (\n    <div\n      data-slot=\"attachment-actions\"\n      className={cn(\n        \"relative z-20 flex shrink-0 items-center group-data-[orientation=vertical]/attachment:absolute group-data-[orientation=vertical]/attachment:top-3 group-data-[orientation=vertical]/attachment:right-3 group-data-[orientation=vertical]/attachment:gap-1\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AttachmentAction({\n  className,\n  variant,\n  size = \"icon-xs\",\n  ...props\n}: AttachmentActionProps) {\n  const iconXs = size === \"icon-xs\";\n  return (\n    <Button\n      data-slot=\"attachment-action\"\n      variant={variant ?? \"ghost\"}\n      size={iconXs ? \"sm\" : size}\n      className={cn(\n        iconXs && \"size-6 rounded-md p-0 [&_svg:not([class*='size-'])]:size-3\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AttachmentTrigger({\n  className,\n  render,\n  type,\n  ...props\n}: AttachmentTriggerProps) {\n  return useRender({\n    defaultTagName: \"button\",\n    props: mergeProps<\"button\">(\n      {\n        type: render ? type : (type ?? \"button\"),\n        className: cn(\"absolute inset-0 z-10 outline-none\", className),\n      },\n      props,\n    ),\n    render,\n    state: {\n      slot: \"attachment-trigger\",\n    },\n  });\n}\n\nfunction AttachmentGroup({ className, ...props }: AttachmentGroupProps) {\n  return (\n    <div\n      data-slot=\"attachment-group\"\n      className={cn(\n        \"flex min-w-0 snap-x snap-mandatory scroll-px-1 gap-3 overflow-x-auto overscroll-x-contain py-1 [mask-image:linear-gradient(to_right,transparent,black_1.5rem,black_calc(100%-1.5rem),transparent)] [scrollbar-width:none] *:data-[slot=attachment]:flex-none *:data-[slot=attachment]:snap-start [&::-webkit-scrollbar]:hidden\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport {\n  Attachment,\n  AttachmentAction,\n  AttachmentActions,\n  AttachmentContent,\n  AttachmentDescription,\n  AttachmentGroup,\n  AttachmentMedia,\n  AttachmentTitle,\n  AttachmentTrigger,\n};\n"
+    },
+    {
+      "path": "attachment/Attachment.types.ts",
+      "type": "types",
+      "content": "import type { useRender } from \"@base-ui/react/use-render\";\nimport type { ComponentProps, ReactNode } from \"react\";\n\nexport type AttachmentState =\n  | \"idle\"\n  | \"uploading\"\n  | \"processing\"\n  | \"error\"\n  | \"done\";\n\nexport type AttachmentSize = \"default\" | \"sm\" | \"xs\";\n\nexport type AttachmentOrientation = \"horizontal\" | \"vertical\";\n\nexport type AttachmentMediaVariant = \"icon\" | \"image\";\n\nexport type AttachmentProps = ComponentProps<\"div\"> & {\n  state?: AttachmentState;\n  size?: AttachmentSize;\n  orientation?: AttachmentOrientation;\n};\n\nexport type AttachmentMediaProps = ComponentProps<\"div\"> & {\n  variant?: AttachmentMediaVariant;\n};\n\nexport type AttachmentContentProps = ComponentProps<\"div\">;\n\nexport type AttachmentTitleProps = ComponentProps<\"span\">;\n\nexport type AttachmentDescriptionProps = ComponentProps<\"span\">;\n\nexport type AttachmentActionsProps = ComponentProps<\"div\">;\n\nexport type AttachmentActionProps = ComponentProps<\"button\"> & {\n  variant?: \"primary\" | \"secondary\" | \"ghost\" | \"destructive\";\n  size?: \"sm\" | \"md\" | \"lg\" | \"icon-xs\";\n  asChild?: boolean;\n  children: ReactNode;\n};\n\nexport type AttachmentTriggerProps = useRender.ComponentProps<\"button\">;\n\nexport type AttachmentGroupProps = ComponentProps<\"div\">;\n"
+    },
+    {
+      "path": "attachment/index.ts",
+      "type": "index",
+      "content": "export * from \"./Attachment\";\nexport type * from \"./Attachment.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"mx-auto flex w-full max-w-sm flex-col gap-3 py-4\">\n      <AttachmentGroup>\n        {attachmentMocks.images.map((image) => (\n          <Attachment key={image.name} orientation=\"vertical\">\n            <AttachmentMedia variant=\"image\">\n              <img src={image.src} alt={image.alt} />\n            </AttachmentMedia>\n            <AttachmentContent>\n              <AttachmentTitle>{image.name}</AttachmentTitle>\n              <AttachmentDescription>{image.meta}</AttachmentDescription>\n            </AttachmentContent>\n          </Attachment>\n        ))}\n      </AttachmentGroup>\n      <Attachment state=\"uploading\" className=\"w-full\">\n        <AttachmentMedia>\n          <LoaderCircleIcon\n            data-slot=\"spinner\"\n            className=\"animate-spin motion-reduce:animate-none\"\n          />\n        </AttachmentMedia>\n        <AttachmentContent>\n          <AttachmentTitle>{attachmentMocks.uploading.title}</AttachmentTitle>\n          <AttachmentDescription>\n            {attachmentMocks.uploading.description}\n          </AttachmentDescription>\n        </AttachmentContent>\n        <AttachmentActions>\n          <AttachmentAction aria-label=\"Cancel upload\">\n            <XIcon />\n          </AttachmentAction>\n        </AttachmentActions>\n      </Attachment>\n      <Attachment className=\"w-full\">\n        <AttachmentMedia>\n          <FileCodeIcon />\n        </AttachmentMedia>\n        <AttachmentContent>\n          <AttachmentTitle>{attachmentMocks.file.title}</AttachmentTitle>\n          <AttachmentDescription>\n            {attachmentMocks.file.description}\n          </AttachmentDescription>\n        </AttachmentContent>\n        <AttachmentActions>\n          <AttachmentAction aria-label={`Remove ${attachmentMocks.file.title}`}>\n            <XIcon />\n          </AttachmentAction>\n        </AttachmentActions>\n      </Attachment>\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"mx-auto flex w-full max-w-sm flex-col gap-2 py-4\">\n      <Attachment state=\"idle\" className=\"w-full\">\n        <AttachmentMedia>\n          <ClockIcon />\n        </AttachmentMedia>\n        <AttachmentContent>\n          <AttachmentTitle>{attachmentMocks.idle.title}</AttachmentTitle>\n          <AttachmentDescription>\n            {attachmentMocks.idle.description}\n          </AttachmentDescription>\n        </AttachmentContent>\n        <AttachmentActions>\n          <AttachmentAction aria-label={`Remove ${attachmentMocks.idle.title}`}>\n            <XIcon />\n          </AttachmentAction>\n        </AttachmentActions>\n      </Attachment>\n      <Attachment state=\"uploading\" className=\"w-full\">\n        <AttachmentMedia>\n          <LoaderCircleIcon\n            data-slot=\"spinner\"\n            className=\"animate-spin motion-reduce:animate-none\"\n          />\n        </AttachmentMedia>\n        <AttachmentContent>\n          <AttachmentTitle>design-system.zip</AttachmentTitle>\n          <AttachmentDescription>Uploading · 64%</AttachmentDescription>\n        </AttachmentContent>\n        <AttachmentActions>\n          <AttachmentAction aria-label=\"Cancel upload\">\n            <XIcon />\n          </AttachmentAction>\n        </AttachmentActions>\n      </Attachment>\n      <Attachment state=\"processing\" className=\"w-full\">\n        <AttachmentMedia>\n          <FileTextIcon />\n        </AttachmentMedia>\n        <AttachmentContent>\n          <AttachmentTitle>{attachmentMocks.processing.title}</AttachmentTitle>\n          <AttachmentDescription>\n            {attachmentMocks.processing.description}\n          </AttachmentDescription>\n        </AttachmentContent>\n        <AttachmentActions>\n          <AttachmentAction\n            aria-label={`Remove ${attachmentMocks.processing.title}`}\n          >\n            <XIcon />\n          </AttachmentAction>\n        </AttachmentActions>\n      </Attachment>\n      <Attachment state=\"error\" className=\"w-full\">\n        <AttachmentMedia>\n          <FileWarningIcon />\n        </AttachmentMedia>\n        <AttachmentContent>\n          <AttachmentTitle>{attachmentMocks.error.title}</AttachmentTitle>\n          <AttachmentDescription>\n            {attachmentMocks.error.description}\n          </AttachmentDescription>\n        </AttachmentContent>\n        <AttachmentActions>\n          <AttachmentAction aria-label=\"Retry upload\">\n            <RefreshCwIcon />\n          </AttachmentAction>\n          <AttachmentAction\n            aria-label={`Remove ${attachmentMocks.error.title}`}\n          >\n            <XIcon />\n          </AttachmentAction>\n        </AttachmentActions>\n      </Attachment>\n      <Attachment state=\"done\" className=\"w-full\">\n        <AttachmentMedia>\n          <CheckIcon />\n        </AttachmentMedia>\n        <AttachmentContent>\n          <AttachmentTitle>{attachmentMocks.done.title}</AttachmentTitle>\n          <AttachmentDescription>\n            {attachmentMocks.done.description}\n          </AttachmentDescription>\n        </AttachmentContent>\n        <AttachmentActions>\n          <AttachmentAction aria-label={`Remove ${attachmentMocks.done.title}`}>\n            <XIcon />\n          </AttachmentAction>\n        </AttachmentActions>\n      </Attachment>\n    </div>"
+    }
+  ]
+}
