@@ -1,0 +1,115 @@
+{
+  "name": "data-table",
+  "displayName": "DataTable",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Sortable, filterable, and paginated data table built with TanStack Table.",
+  "sectionCategory": "content",
+  "purpose": "Presents tabular records with selection, column visibility, email filtering, and row actions.",
+  "bestFor": [
+    "payment and invoice lists",
+    "admin record tables",
+    "sortable filtered datasets"
+  ],
+  "avoidFor": [
+    "simple static key-value tables",
+    "spreadsheet-scale editing grids"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "high",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "toolbar",
+    "columns",
+    "rows",
+    "pagination",
+    "rowActions"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/data-table",
+  "tags": [
+    "data-table",
+    "table",
+    "tanstack",
+    "pagination",
+    "sorting",
+    "atom"
+  ],
+  "dependencies": [
+    "@tanstack/react-table",
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button",
+    "checkbox",
+    "dropdown-menu",
+    "input"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center",
+    "width": 840,
+    "height": 520
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "data-table/DataTable.features.ts",
+      "type": "component",
+      "content": "import {\n  columnFilteringFeature,\n  columnVisibilityFeature,\n  createFilteredRowModel,\n  createPaginatedRowModel,\n  createSortedRowModel,\n  filterFn_includesString,\n  rowPaginationFeature,\n  rowSelectionFeature,\n  rowSortingFeature,\n  sortFn_alphanumeric,\n  sortFn_text,\n  tableFeatures,\n} from \"@tanstack/react-table\";\n\nexport const dataTableFeatures = tableFeatures({\n  columnFilteringFeature,\n  columnVisibilityFeature,\n  rowPaginationFeature,\n  rowSelectionFeature,\n  rowSortingFeature,\n  filteredRowModel: createFilteredRowModel(),\n  paginatedRowModel: createPaginatedRowModel(),\n  sortedRowModel: createSortedRowModel(),\n  filterFns: { includesString: filterFn_includesString },\n  sortFns: { alphanumeric: sortFn_alphanumeric, text: sortFn_text },\n});\n\nexport type DataTableFeatures = typeof dataTableFeatures;\n"
+    },
+    {
+      "path": "data-table/DataTable.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport {\n  type ColumnDef,\n  type ColumnFiltersState,\n  type ColumnVisibilityState,\n  createColumnHelper,\n  type RowData,\n  type SortingState,\n  useTable,\n} from \"@tanstack/react-table\";\nimport { ArrowUpDown, MoreHorizontal } from \"lucide-react\";\nimport * as React from \"react\";\nimport { Button } from \"@/components/jabkit/button\";\nimport { Checkbox } from \"@/components/jabkit/checkbox\";\nimport {\n  DropdownMenu,\n  DropdownMenuCheckboxItem,\n  DropdownMenuContent,\n  DropdownMenuItem,\n  DropdownMenuLabel,\n  DropdownMenuSeparator,\n  DropdownMenuTrigger,\n} from \"@/components/jabkit/dropdown-menu/DropdownMenu\";\nimport { Input } from \"@/components/jabkit/input\";\nimport { cn } from \"@/lib/cn\";\nimport {\n  type DataTableFeatures,\n  dataTableFeatures,\n} from \"./DataTable.features\";\nimport { dataTableMocks } from \"./DataTable.mocks\";\nimport type { DataTablePayment, DataTableProps } from \"./DataTable.types\";\n\nfunction Table({ className, ...props }: React.ComponentProps<\"table\">) {\n  return (\n    <div\n      data-slot=\"table-container\"\n      className=\"relative w-full overflow-x-auto\"\n    >\n      <table\n        data-slot=\"table\"\n        className={cn(\"w-full caption-bottom text-sm\", className)}\n        {...props}\n      />\n    </div>\n  );\n}\n\nfunction TableHeader({ className, ...props }: React.ComponentProps<\"thead\">) {\n  return (\n    <thead\n      data-slot=\"table-header\"\n      className={cn(\"[&_tr]:border-b\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction TableBody({ className, ...props }: React.ComponentProps<\"tbody\">) {\n  return (\n    <tbody\n      data-slot=\"table-body\"\n      className={cn(\"[&_tr:last-child]:border-0\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction TableFooter({ className, ...props }: React.ComponentProps<\"tfoot\">) {\n  return (\n    <tfoot\n      data-slot=\"table-footer\"\n      className={cn(\n        \"border-t bg-muted/50 font-medium [&>tr]:last:border-b-0\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction TableRow({ className, ...props }: React.ComponentProps<\"tr\">) {\n  return (\n    <tr\n      data-slot=\"table-row\"\n      className={cn(\n        \"border-b transition-colors hover:bg-muted/50 has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted motion-reduce:transition-none\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction TableHead({ className, ...props }: React.ComponentProps<\"th\">) {\n  return (\n    <th\n      data-slot=\"table-head\"\n      className={cn(\n        \"h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction TableCell({ className, ...props }: React.ComponentProps<\"td\">) {\n  return (\n    <td\n      data-slot=\"table-cell\"\n      className={cn(\n        \"p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction TableCaption({\n  className,\n  ...props\n}: React.ComponentProps<\"caption\">) {\n  return (\n    <caption\n      data-slot=\"table-caption\"\n      className={cn(\"mt-4 text-sm text-muted-foreground\", className)}\n      {...props}\n    />\n  );\n}\n\nconst columnHelper = createColumnHelper<DataTableFeatures, DataTablePayment>();\n\nexport const dataTableColumns = columnHelper.columns([\n  columnHelper.display({\n    id: \"select\",\n    header: ({ table }) => (\n      <Checkbox\n        checked={table.getIsAllPageRowsSelected()}\n        indeterminate={\n          table.getIsSomePageRowsSelected() && !table.getIsAllPageRowsSelected()\n        }\n        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}\n        aria-label=\"Select all\"\n      />\n    ),\n    cell: ({ row }) => (\n      <Checkbox\n        checked={row.getIsSelected()}\n        onCheckedChange={(value) => row.toggleSelected(!!value)}\n        aria-label=\"Select row\"\n      />\n    ),\n    enableSorting: false,\n    enableHiding: false,\n  }),\n  columnHelper.accessor(\"status\", {\n    header: \"Status\",\n    cell: ({ row }) => (\n      <div className=\"capitalize\">{row.getValue(\"status\")}</div>\n    ),\n  }),\n  columnHelper.accessor(\"email\", {\n    header: ({ column }) => {\n      return (\n        <Button\n          variant=\"ghost\"\n          onClick={() => column.toggleSorting(column.getIsSorted() === \"asc\")}\n        >\n          Email\n          <ArrowUpDown className=\"ml-2 h-4 w-4\" />\n        </Button>\n      );\n    },\n  }),\n  columnHelper.accessor(\"amount\", {\n    header: () => <div className=\"text-right\">Amount</div>,\n    cell: ({ row }) => {\n      const amount = parseFloat(row.getValue(\"amount\"));\n      const formatted = new Intl.NumberFormat(\"en-US\", {\n        style: \"currency\",\n        currency: \"USD\",\n      }).format(amount);\n\n      return <div className=\"text-right font-medium\">{formatted}</div>;\n    },\n  }),\n  columnHelper.display({\n    id: \"actions\",\n    cell: ({ row }) => {\n      const payment = row.original;\n\n      return (\n        <DropdownMenu>\n          <DropdownMenuTrigger\n            render={\n              <Button variant=\"ghost\" className=\"h-8 w-8 p-0\">\n                {null}\n              </Button>\n            }\n          >\n            <span className=\"sr-only\">Open menu</span>\n            <MoreHorizontal className=\"h-4 w-4\" />\n          </DropdownMenuTrigger>\n          <DropdownMenuContent align=\"end\">\n            <DropdownMenuLabel>Actions</DropdownMenuLabel>\n            <DropdownMenuItem\n              onClick={() => navigator.clipboard.writeText(payment.id)}\n            >\n              Copy payment ID\n            </DropdownMenuItem>\n            <DropdownMenuSeparator />\n            <DropdownMenuItem>View customer</DropdownMenuItem>\n            <DropdownMenuItem>View payment details</DropdownMenuItem>\n          </DropdownMenuContent>\n        </DropdownMenu>\n      );\n    },\n    enableHiding: false,\n  }),\n]);\n\nexport function DataTable<TData extends RowData = DataTablePayment>({\n  columns = dataTableColumns as ColumnDef<DataTableFeatures, TData>[],\n  data = dataTableMocks.payments as unknown as TData[],\n  className,\n  ...props\n}: DataTableProps<TData>) {\n  const [sorting, setSorting] = React.useState<SortingState>([]);\n  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(\n    [],\n  );\n  const [columnVisibility, setColumnVisibility] =\n    React.useState<ColumnVisibilityState>({});\n  const [rowSelection, setRowSelection] = React.useState({});\n\n  const table = useTable({\n    features: dataTableFeatures,\n    data,\n    columns: columns as ColumnDef<DataTableFeatures, TData>[],\n    onSortingChange: setSorting,\n    onColumnFiltersChange: setColumnFilters,\n    onColumnVisibilityChange: setColumnVisibility,\n    onRowSelectionChange: setRowSelection,\n    state: {\n      sorting,\n      columnFilters,\n      columnVisibility,\n      rowSelection,\n    },\n  });\n\n  return (\n    <div data-slot=\"data-table\" className={cn(className)} {...props}>\n      <div className=\"flex items-center py-4\">\n        <Input\n          placeholder=\"Filter emails...\"\n          value={(table.getColumn(\"email\")?.getFilterValue() as string) ?? \"\"}\n          onChange={(event) =>\n            table.getColumn(\"email\")?.setFilterValue(event.target.value)\n          }\n          className=\"max-w-sm\"\n        />\n        <DropdownMenu>\n          <DropdownMenuTrigger\n            render={\n              <Button variant=\"secondary\" className=\"ml-auto\">\n                {null}\n              </Button>\n            }\n          >\n            Columns\n          </DropdownMenuTrigger>\n          <DropdownMenuContent align=\"end\">\n            {table\n              .getAllColumns()\n              .filter((column) => column.getCanHide())\n              .map((column) => {\n                return (\n                  <DropdownMenuCheckboxItem\n                    key={column.id}\n                    className=\"capitalize\"\n                    checked={column.getIsVisible()}\n                    onCheckedChange={(value) =>\n                      column.toggleVisibility(!!value)\n                    }\n                  >\n                    {column.id}\n                  </DropdownMenuCheckboxItem>\n                );\n              })}\n          </DropdownMenuContent>\n        </DropdownMenu>\n      </div>\n      <div className=\"overflow-hidden rounded-md border\">\n        <Table>\n          <TableHeader>\n            {table.getHeaderGroups().map((headerGroup) => (\n              <TableRow key={headerGroup.id}>\n                {headerGroup.headers.map((header) => {\n                  return (\n                    <TableHead key={header.id}>\n                      {header.isPlaceholder ? null : (\n                        <table.FlexRender header={header} />\n                      )}\n                    </TableHead>\n                  );\n                })}\n              </TableRow>\n            ))}\n          </TableHeader>\n          <TableBody>\n            {table.getRowModel().rows?.length ? (\n              table.getRowModel().rows.map((row) => (\n                <TableRow\n                  key={row.id}\n                  data-state={row.getIsSelected() && \"selected\"}\n                >\n                  {row.getVisibleCells().map((cell) => (\n                    <TableCell key={cell.id}>\n                      <table.FlexRender cell={cell} />\n                    </TableCell>\n                  ))}\n                </TableRow>\n              ))\n            ) : (\n              <TableRow>\n                <TableCell\n                  colSpan={columns.length}\n                  className=\"h-24 text-center\"\n                >\n                  No results.\n                </TableCell>\n              </TableRow>\n            )}\n          </TableBody>\n        </Table>\n      </div>\n      <div className=\"flex items-center justify-end space-x-2 py-4\">\n        <div className=\"flex-1 text-sm text-muted-foreground\">\n          {table.getFilteredSelectedRowModel().rows.length} of{\" \"}\n          {table.getFilteredRowModel().rows.length} row(s) selected.\n        </div>\n        <Button\n          variant=\"secondary\"\n          size=\"sm\"\n          onClick={() => table.previousPage()}\n          disabled={!table.getCanPreviousPage()}\n        >\n          Previous\n        </Button>\n        <Button\n          variant=\"secondary\"\n          size=\"sm\"\n          onClick={() => table.nextPage()}\n          disabled={!table.getCanNextPage()}\n        >\n          Next\n        </Button>\n      </div>\n    </div>\n  );\n}\n\nexport {\n  Table,\n  TableBody,\n  TableCaption,\n  TableCell,\n  TableFooter,\n  TableHead,\n  TableHeader,\n  TableRow,\n};\n"
+    },
+    {
+      "path": "data-table/DataTable.types.ts",
+      "type": "types",
+      "content": "import type { ColumnDef, RowData } from \"@tanstack/react-table\";\nimport type { HTMLAttributes } from \"react\";\nimport type { DataTableFeatures } from \"./DataTable.features\";\n\nexport type DataTablePaymentStatus =\n  | \"pending\"\n  | \"processing\"\n  | \"success\"\n  | \"failed\";\n\nexport interface DataTablePayment {\n  id: string;\n  amount: number;\n  status: DataTablePaymentStatus;\n  email: string;\n}\n\nexport interface DataTableProps<TData extends RowData = DataTablePayment>\n  extends Omit<HTMLAttributes<HTMLDivElement>, \"children\"> {\n  columns?: ColumnDef<DataTableFeatures, TData>[];\n  data?: TData[];\n}\n"
+    },
+    {
+      "path": "data-table/index.ts",
+      "type": "index",
+      "content": "export {\n  DataTable,\n  dataTableColumns,\n  Table,\n  TableBody,\n  TableCaption,\n  TableCell,\n  TableFooter,\n  TableHead,\n  TableHeader,\n  TableRow,\n} from \"./DataTable\";\nexport type { DataTableFeatures } from \"./DataTable.features\";\nexport { dataTableFeatures } from \"./DataTable.features\";\nexport type {\n  DataTablePayment,\n  DataTablePaymentStatus,\n  DataTableProps,\n} from \"./DataTable.types\";\n"
+    },
+    {
+      "path": "data-table/DataTable.mocks.ts",
+      "type": "mocks",
+      "content": "import type { DataTablePayment } from \"./DataTable.types\";\n\nexport const dataTableMocks = {\n  payments: [\n    {\n      id: \"m5gr84i9\",\n      amount: 316,\n      status: \"success\",\n      email: \"ken99@example.com\",\n    },\n    {\n      id: \"3u1reuv4\",\n      amount: 242,\n      status: \"success\",\n      email: \"Abe45@example.com\",\n    },\n    {\n      id: \"derv1ws0\",\n      amount: 837,\n      status: \"processing\",\n      email: \"Monserrat44@example.com\",\n    },\n    {\n      id: \"5kma53ae\",\n      amount: 874,\n      status: \"success\",\n      email: \"Silas22@example.com\",\n    },\n    {\n      id: \"bhqecj4p\",\n      amount: 721,\n      status: \"failed\",\n      email: \"carmella@example.com\",\n    },\n  ] satisfies DataTablePayment[],\n  empty: [] satisfies DataTablePayment[],\n} as const;\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"w-[800px] bg-background p-4 text-foreground\">\n      <DataTable />\n    </div>"
+    },
+    {
+      "name": "Empty",
+      "code": "<div className=\"w-[800px] bg-background p-4 text-foreground\">\n      <DataTable data={[...dataTableMocks.empty]} />\n    </div>"
+    }
+  ]
+}
