@@ -1,0 +1,98 @@
+{
+  "name": "shop-animated-button",
+  "displayName": "ShopAnimatedButton",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Pill Explore/CTA control whose label and arrow slide on hover, matching the Mugsys Mugs shopping layout.",
+  "sectionCategory": "action",
+  "purpose": "Gives storefront heroes and collection headers a motion-forward primary action without leaving semantic tokens.",
+  "bestFor": [
+    "collection explore CTAs",
+    "shop hero actions",
+    "commerce landing buttons"
+  ],
+  "avoidFor": [
+    "destructive actions",
+    "dense application toolbars"
+  ],
+  "tone": [
+    "playful",
+    "bold"
+  ],
+  "industries": [
+    "retail",
+    "ecommerce"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "center"
+  },
+  "slots": [
+    "actionLabel",
+    "trailingIcon"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://codepen.io/jakebogan01/pen/pvNWZWr",
+  "tags": [
+    "button",
+    "cta",
+    "shop",
+    "motion",
+    "atom"
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "shop-animated-button/ShopAnimatedButton.tsx",
+      "type": "component",
+      "content": "import { Slot } from \"@radix-ui/react-slot\";\nimport { ArrowRightIcon } from \"lucide-react\";\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { ShopAnimatedButtonProps } from \"./ShopAnimatedButton.types\";\n\nexport function ShopAnimatedButton({\n  className,\n  children,\n  label = \"Explore Collection\",\n  showIcon = true,\n  asChild = false,\n  type,\n  ...props\n}: ShopAnimatedButtonProps) {\n  const Component = asChild ? Slot : \"button\";\n  const child = asChild ? React.Children.only(children) : null;\n  const content = React.isValidElement<{ children?: React.ReactNode }>(child)\n    ? child.props.children\n    : (children ?? label);\n  const buttonContent = (\n    <>\n      <span>{content}</span>\n      {showIcon ? (\n        <ArrowRightIcon\n          aria-hidden=\"true\"\n          data-slot=\"shop-animated-button-icon\"\n          className=\"size-5 shrink-0 stroke-[2] transition-transform duration-300 ease-out group-hover:translate-x-1 group-focus-visible:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-focus-visible:translate-x-0\"\n        />\n      ) : null}\n    </>\n  );\n\n  return (\n    <Component\n      className={cn(\n        \"group inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-[32px] bg-warning px-6 py-3 text-base font-semibold whitespace-nowrap text-warning-foreground shadow-none transition-[transform,box-shadow,filter] duration-300 ease-out hover:translate-x-1 hover:shadow-[0_4px_12px_color-mix(in_oklab,var(--jk-warning),transparent_60%)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-px disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none motion-reduce:hover:translate-x-0\",\n        className,\n      )}\n      data-slot=\"shop-animated-button\"\n      type={asChild ? undefined : (type ?? \"button\")}\n      {...props}\n    >\n      {React.isValidElement(child)\n        ? React.cloneElement(child, undefined, buttonContent)\n        : buttonContent}\n    </Component>\n  );\n}\n"
+    },
+    {
+      "path": "shop-animated-button/ShopAnimatedButton.types.ts",
+      "type": "types",
+      "content": "import type { ButtonHTMLAttributes, ReactNode } from \"react\";\n\nexport interface ShopAnimatedButtonProps\n  extends ButtonHTMLAttributes<HTMLButtonElement> {\n  children?: ReactNode;\n  label?: string;\n  showIcon?: boolean;\n  /** Style a single child element (for example an anchor) as the button. */\n  asChild?: boolean;\n}\n"
+    },
+    {
+      "path": "shop-animated-button/index.ts",
+      "type": "index",
+      "content": "export { ShopAnimatedButton } from \"./ShopAnimatedButton\";\nexport type { ShopAnimatedButtonProps } from \"./ShopAnimatedButton.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<>\n      <ShopAnimatedButton {...shopAnimatedButtonMocks.default} />\n    </>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"flex flex-wrap items-center gap-3 bg-background p-8 text-foreground\">\n      <ShopAnimatedButton {...shopAnimatedButtonMocks.default} />\n      <ShopAnimatedButton {...shopAnimatedButtonMocks.alternate} />\n    </div>"
+    }
+  ]
+}

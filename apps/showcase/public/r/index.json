@@ -3855,6 +3855,70 @@
     }
   },
   {
+    "name": "shop-animated-button",
+    "displayName": "ShopAnimatedButton",
+    "category": "atoms",
+    "description": "Pill Explore/CTA control whose label and arrow slide on hover, matching the Mugsys Mugs shopping layout.",
+    "inspoUrl": "https://codepen.io/jakebogan01/pen/pvNWZWr",
+    "sectionCategory": "action",
+    "purpose": "Gives storefront heroes and collection headers a motion-forward primary action without leaving semantic tokens.",
+    "bestFor": [
+      "collection explore CTAs",
+      "shop hero actions",
+      "commerce landing buttons"
+    ],
+    "avoidFor": [
+      "destructive actions",
+      "dense application toolbars"
+    ],
+    "tone": [
+      "playful",
+      "bold"
+    ],
+    "industries": [
+      "retail",
+      "ecommerce"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "stack",
+      "alignment": "center"
+    },
+    "slots": [
+      "actionLabel",
+      "trailingIcon"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "button",
+      "cta",
+      "shop",
+      "motion",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "@radix-ui/react-slot",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "shy-rattlesnake",
     "displayName": "ShyRattlesnake",
     "category": "atoms",
@@ -10761,6 +10825,331 @@
       "layout": "fit",
       "width": 1440,
       "height": 720
+    }
+  },
+  {
+    "name": "shop-collection-hero",
+    "displayName": "ShopCollectionHero",
+    "category": "marketing",
+    "description": "Mugsys collection hero with oversized brand type, premium copy, satisfaction badge, and an Explore the Collection CTA.",
+    "inspoUrl": "https://codepen.io/jakebogan01/pen/pvNWZWr",
+    "sectionCategory": "hero",
+    "purpose": "Opens a storefront collection with limited-edition positioning and a motion CTA into the product grid.",
+    "bestFor": [
+      "ecommerce collection landings",
+      "limited-edition drops",
+      "branded shop heroes"
+    ],
+    "tone": [
+      "bold",
+      "playful"
+    ],
+    "industries": [
+      "retail",
+      "ecommerce"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "mixed"
+    },
+    "slots": [
+      "brand",
+      "kicker",
+      "body",
+      "shopCTA",
+      "productImage",
+      "socialProof",
+      "headline",
+      "description",
+      "primaryCTA"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "gallery"
+    ],
+    "tags": [
+      "hero",
+      "shop",
+      "collection",
+      "cta",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1100
+    }
+  },
+  {
+    "name": "shop-product-card",
+    "displayName": "ShopProductCard",
+    "category": "marketing",
+    "description": "Mugsys-style product tile with a 16px card, square photo, compare-at price, and circular cart and favorite actions.",
+    "inspoUrl": "https://codepen.io/jakebogan01/pen/pvNWZWr",
+    "sectionCategory": "product",
+    "purpose": "Presents one collection SKU with price, image, and quick cart or favorite actions.",
+    "bestFor": [
+      "ecommerce collection grids",
+      "limited-edition product tiles",
+      "catalogue merchandising"
+    ],
+    "tone": [
+      "playful",
+      "clean"
+    ],
+    "industries": [
+      "retail",
+      "ecommerce"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "image",
+      "price",
+      "title",
+      "cartAction",
+      "favoriteAction"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "product",
+      "card",
+      "shop",
+      "ecommerce",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center",
+      "width": 420,
+      "height": 560
+    }
+  },
+  {
+    "name": "shop-product-grid",
+    "displayName": "ShopProductGrid",
+    "category": "marketing",
+    "description": "Responsive 3-2-1 collection grid of ShopProductCard tiles with 24px gutters.",
+    "inspoUrl": "https://codepen.io/jakebogan01/pen/pvNWZWr",
+    "sectionCategory": "gallery",
+    "purpose": "Lays out a mug collection so shoppers can scan price and image in a tight merchandising rhythm.",
+    "bestFor": [
+      "ecommerce collection pages",
+      "limited-run drops",
+      "product catalogues"
+    ],
+    "tone": [
+      "clean",
+      "playful"
+    ],
+    "industries": [
+      "retail",
+      "ecommerce"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "grid",
+      "alignment": "center",
+      "columns": 3
+    },
+    "slots": [
+      "productTiles"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "grid",
+      "product",
+      "shop",
+      "ecommerce",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1100
+    }
+  },
+  {
+    "name": "shop-top-nav",
+    "displayName": "ShopTopNav",
+    "category": "marketing",
+    "description": "Mugsys store chrome with brand mark, four destination links, a sliding Explore CTA, and a compact mobile menu.",
+    "inspoUrl": "https://codepen.io/jakebogan01/pen/pvNWZWr",
+    "sectionCategory": "navbar",
+    "purpose": "Gives a collection storefront a single-line header that routes into Home, About, Company, Stores, and the collection.",
+    "bestFor": [
+      "ecommerce headers",
+      "collection landing chrome",
+      "compact store navigation"
+    ],
+    "tone": [
+      "clean",
+      "playful"
+    ],
+    "industries": [
+      "retail",
+      "ecommerce"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "full-width",
+      "alignment": "mixed"
+    },
+    "slots": [
+      "brand",
+      "navigationItems",
+      "primaryCTA",
+      "mobileNavigation"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedBefore": [
+      "hero"
+    ],
+    "tags": [
+      "navbar",
+      "shop",
+      "ecommerce",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "lucide-react",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 220
+    }
+  },
+  {
+    "name": "shopping-layout-page",
+    "displayName": "ShoppingLayoutPage",
+    "category": "marketing",
+    "description": "Full Mugsys Mugs shopping layout wiring store nav, collection hero, product grid, and footer chrome.",
+    "inspoUrl": "https://codepen.io/jakebogan01/pen/pvNWZWr",
+    "sectionCategory": "page",
+    "purpose": "Assembles the shopping-layout children into one collection page that matches the CodePen storefront.",
+    "bestFor": [
+      "ecommerce collection pages",
+      "limited-edition shop landings",
+      "source-distributed storefront samples"
+    ],
+    "tone": [
+      "bold",
+      "playful"
+    ],
+    "industries": [
+      "retail",
+      "ecommerce"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "mixed"
+    },
+    "slots": [
+      "navigation",
+      "hero",
+      "productGrid",
+      "footer"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "page",
+      "shop",
+      "ecommerce",
+      "collection",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 2200
     }
   },
   {

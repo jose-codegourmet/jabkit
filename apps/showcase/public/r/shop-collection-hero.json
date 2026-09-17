@@ -1,0 +1,115 @@
+{
+  "name": "shop-collection-hero",
+  "displayName": "ShopCollectionHero",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Mugsys collection hero with oversized brand type, premium copy, satisfaction badge, and an Explore the Collection CTA.",
+  "sectionCategory": "hero",
+  "purpose": "Opens a storefront collection with limited-edition positioning and a motion CTA into the product grid.",
+  "bestFor": [
+    "ecommerce collection landings",
+    "limited-edition drops",
+    "branded shop heroes"
+  ],
+  "tone": [
+    "bold",
+    "playful"
+  ],
+  "industries": [
+    "retail",
+    "ecommerce"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "high",
+  "layout": {
+    "type": "full-width",
+    "alignment": "mixed"
+  },
+  "slots": [
+    "brand",
+    "kicker",
+    "body",
+    "shopCTA",
+    "productImage",
+    "socialProof",
+    "headline",
+    "description",
+    "primaryCTA"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "navbar"
+  ],
+  "recommendedBefore": [
+    "gallery"
+  ],
+  "inspoUrl": "https://codepen.io/jakebogan01/pen/pvNWZWr",
+  "tags": [
+    "hero",
+    "shop",
+    "collection",
+    "cta",
+    "marketing"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "shop-animated-button"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 1100
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "shop-collection-hero/ShopCollectionHero.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { ChevronLeftIcon, ChevronRightIcon } from \"lucide-react\";\nimport { useId } from \"react\";\nimport { ShopAnimatedButton } from \"@/components/jabkit/shop-animated-button\";\nimport { cn } from \"@/lib/cn\";\nimport { shopCollectionHeroMocks } from \"./ShopCollectionHero.mocks\";\nimport type {\n  ShopCollectionHeroCta,\n  ShopCollectionHeroProps,\n} from \"./ShopCollectionHero.types\";\n\nconst defaults = {\n  brand: \"MUGSY'S\",\n  kicker: \"PREMIUM\",\n  title: \"Explore the Collection\",\n  description:\n    \"Limited edition mugs designed for everyday carry and modern travel. Only 2,000 units worldwide.\",\n  body: \"Engineered for everyday adventures. Durable, lightweight, and built to move with you wherever the journey leads.\",\n  cta: { label: \"Explore Collection\", href: \"#collection\" },\n  shopCta: { label: \"Shop Now\", href: \"#shop\" },\n  rating: \"98%\",\n  ratingLabel: \"Customer satisfaction rating across all orders\",\n  previousLabel: \"Previous featured mug\",\n  nextLabel: \"Next featured mug\",\n} as const;\n\nfunction HeroCta({\n  action,\n  className,\n}: {\n  action: ShopCollectionHeroCta;\n  className?: string;\n}) {\n  if (action.href) {\n    return (\n      <ShopAnimatedButton asChild className={className}>\n        <a href={action.href}>{action.label}</a>\n      </ShopAnimatedButton>\n    );\n  }\n\n  return (\n    <ShopAnimatedButton className={className} onClick={action.onClick}>\n      {action.label}\n    </ShopAnimatedButton>\n  );\n}\n\nexport function ShopCollectionHero({\n  className,\n  brand = defaults.brand,\n  kicker = defaults.kicker,\n  title = defaults.title,\n  description = defaults.description,\n  body = defaults.body,\n  cta = defaults.cta,\n  shopCta = defaults.shopCta,\n  rating = defaults.rating,\n  ratingLabel = defaults.ratingLabel,\n  avatars = shopCollectionHeroMocks.default.avatars,\n  productImage = shopCollectionHeroMocks.default.productImage,\n  previousLabel = defaults.previousLabel,\n  nextLabel = defaults.nextLabel,\n  onPrevious,\n  onNext,\n  ...props\n}: ShopCollectionHeroProps) {\n  const headingId = useId();\n  const collectionId = useId();\n\n  return (\n    <div\n      data-slot=\"shop-collection-hero\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <section\n        aria-labelledby={headingId}\n        className=\"bg-primary px-5 py-16 text-primary-foreground sm:px-8 sm:py-20\"\n      >\n        <div className=\"mx-auto max-w-[1400px]\">\n          <h1\n            id={headingId}\n            className=\"text-center font-[family-name:var(--jk-font-display)] text-[clamp(5rem,12vw,11.25rem)] leading-[0.9] font-black tracking-[-0.04em] uppercase\"\n          >\n            {brand}\n          </h1>\n          <div className=\"mt-10 grid items-start gap-10 lg:mt-16 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-8\">\n            <div className=\"max-w-md rounded-[20px] bg-[color-mix(in_oklab,var(--jk-foreground)_20%,transparent)] p-10 backdrop-blur-md\">\n              <p className=\"font-[family-name:var(--jk-font-display)] text-5xl font-black tracking-tight text-warning uppercase\">\n                {kicker}\n              </p>\n              <p className=\"mt-5 text-base leading-relaxed text-primary-foreground\">\n                {body}\n              </p>\n              <div className=\"mt-6\">\n                <HeroCta action={shopCta} />\n              </div>\n            </div>\n            {productImage ? (\n              <figure className=\"mx-auto w-full max-w-sm\">\n                <img\n                  src={productImage.src}\n                  alt={productImage.alt}\n                  className=\"aspect-[2/3] w-full object-contain\"\n                />\n              </figure>\n            ) : (\n              <div />\n            )}\n            <aside className=\"ml-auto w-full max-w-xs rounded-[16px] bg-card p-8 text-center text-card-foreground\">\n              <p className=\"text-6xl font-black tracking-tight\">{rating}</p>\n              {avatars.length > 0 ? (\n                <ul className=\"mt-4 flex justify-center\">\n                  {avatars.map((avatar, index) => (\n                    <li\n                      key={`${avatar.src}-${avatar.alt}`}\n                      className={cn(index > 0 && \"-ml-2\")}\n                    >\n                      <img\n                        src={avatar.src}\n                        alt={avatar.alt}\n                        className=\"size-10 rounded-full border-2 border-card object-cover\"\n                      />\n                    </li>\n                  ))}\n                </ul>\n              ) : null}\n              <p className=\"mt-4 text-sm leading-5 text-card-foreground\">\n                {ratingLabel}\n              </p>\n            </aside>\n          </div>\n          <div className=\"mt-10 flex justify-center gap-4\">\n            <button\n              type=\"button\"\n              aria-label={previousLabel}\n              onClick={onPrevious}\n              className=\"grid size-12 place-items-center rounded-full bg-card text-card-foreground transition-transform duration-300 ease-out hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none motion-reduce:hover:scale-100\"\n            >\n              <ChevronLeftIcon aria-hidden=\"true\" className=\"size-6\" />\n            </button>\n            <button\n              type=\"button\"\n              aria-label={nextLabel}\n              onClick={onNext}\n              className=\"grid size-12 place-items-center rounded-full bg-card text-card-foreground transition-transform duration-300 ease-out hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none motion-reduce:hover:scale-100\"\n            >\n              <ChevronRightIcon aria-hidden=\"true\" className=\"size-6\" />\n            </button>\n          </div>\n        </div>\n      </section>\n      <section\n        aria-labelledby={collectionId}\n        className=\"bg-background px-5 py-20 text-foreground sm:px-8\"\n      >\n        <div className=\"mx-auto max-w-[1400px]\">\n          <h2\n            id={collectionId}\n            className=\"font-[family-name:var(--jk-font-display)] text-[clamp(2.25rem,5vw,4rem)] leading-[1.05] font-black tracking-tight uppercase\"\n          >\n            {title}\n          </h2>\n          <div className=\"mt-6 flex flex-col items-start justify-between gap-8 md:flex-row md:items-center\">\n            <p className=\"max-w-xl text-base leading-relaxed text-foreground\">\n              {description}\n            </p>\n            <HeroCta action={cta} />\n          </div>\n        </div>\n      </section>\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "shop-collection-hero/ShopCollectionHero.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, MouseEventHandler } from \"react\";\n\nexport interface ShopCollectionHeroImage {\n  src: string;\n  alt: string;\n}\n\nexport interface ShopCollectionHeroAvatar {\n  src: string;\n  alt: string;\n}\n\nexport interface ShopCollectionHeroCta {\n  label: string;\n  href?: string;\n  onClick?: MouseEventHandler<HTMLButtonElement>;\n}\n\nexport interface ShopCollectionHeroProps\n  extends Omit<HTMLAttributes<HTMLElement>, \"title\"> {\n  brand?: string;\n  kicker?: string;\n  title?: string;\n  description?: string;\n  body?: string;\n  cta?: ShopCollectionHeroCta;\n  shopCta?: ShopCollectionHeroCta;\n  rating?: string;\n  ratingLabel?: string;\n  avatars?: ShopCollectionHeroAvatar[];\n  productImage?: ShopCollectionHeroImage;\n  previousLabel?: string;\n  nextLabel?: string;\n  onPrevious?: MouseEventHandler<HTMLButtonElement>;\n  onNext?: MouseEventHandler<HTMLButtonElement>;\n}\n"
+    },
+    {
+      "path": "shop-collection-hero/index.ts",
+      "type": "index",
+      "content": "export { ShopCollectionHero } from \"./ShopCollectionHero\";\nexport type * from \"./ShopCollectionHero.types\";\n"
+    },
+    {
+      "path": "shop-collection-hero/ShopCollectionHero.mocks.ts",
+      "type": "mocks",
+      "content": "import type { ShopCollectionHeroProps } from \"./ShopCollectionHero.types\";\n\nexport const shopCollectionHeroMocks = {\n  default: {\n    brand: \"MUGSY'S\",\n    kicker: \"PREMIUM\",\n    title: \"Explore the Collection\",\n    description:\n      \"Limited edition mugs designed for everyday carry and modern travel. Only 2,000 units worldwide.\",\n    body: \"Engineered for everyday adventures. Durable, lightweight, and built to move with you wherever the journey leads.\",\n    cta: { label: \"Explore Collection\", href: \"#collection\" },\n    shopCta: { label: \"Shop Now\", href: \"#shop\" },\n    rating: \"98%\",\n    ratingLabel: \"Customer satisfaction rating across all orders\",\n    avatars: [\n      {\n        src: \"/assets/ea07d2da071b9238.webp\",\n        alt: \"Customer portrait\",\n      },\n      {\n        src: \"/assets/167acbe9e3afc083.webp\",\n        alt: \"Customer portrait\",\n      },\n      {\n        src: \"/assets/60599cf2ed9c77bc.webp\",\n        alt: \"Customer portrait\",\n      },\n    ],\n    productImage: {\n      src: \"/assets/55338b0d02a343f3.webp\",\n      alt: \"Featured ceramic mug from the collection\",\n    },\n  },\n  alternate: {\n    brand: \"MUGSY'S\",\n    kicker: \"LIMITED\",\n    title: \"Camp Series\",\n    description:\n      \"Trail-ready vessels for early starts and long drives. Four hundred numbered units this season.\",\n    body: \"Double-wall steel, a lock-tight lid, and a silhouette that clips to a pack.\",\n    cta: { label: \"See camp series\", href: \"#camp\" },\n    shopCta: { label: \"Shop camp\", href: \"#shop-camp\" },\n    rating: \"96%\",\n    ratingLabel: \"Verified ratings from the last drop\",\n    avatars: [\n      {\n        src: \"/assets/ea07d2da071b9238.webp\",\n        alt: \"Customer portrait\",\n      },\n      {\n        src: \"/assets/60599cf2ed9c77bc.webp\",\n        alt: \"Customer portrait\",\n      },\n    ],\n    productImage: {\n      src: \"/assets/722519d9149dd264.webp\",\n      alt: \"Travel mug on an outdoor table\",\n    },\n  },\n} satisfies Record<string, ShopCollectionHeroProps>;\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<>\n      <ShopCollectionHero {...shopCollectionHeroMocks.default} />\n    </>"
+    },
+    {
+      "name": "Variants",
+      "code": "<>\n      <ShopCollectionHero {...shopCollectionHeroMocks.alternate} />\n    </>"
+    }
+  ]
+}
