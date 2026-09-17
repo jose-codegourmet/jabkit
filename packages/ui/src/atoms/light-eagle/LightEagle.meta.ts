@@ -7,7 +7,7 @@ export default {
   addedAt: "2026-09-15",
   description:
     "A square-corner isometric cube tessellation at 200px, with three face inks mapped to semantic tokens.",
-  sectionCategory: "content",
+  sectionCategory: "background",
   purpose:
     "Fills a region with the Uiverse light-eagle hexagonal cube weave without rounding the field to the shared control radius.",
   bestFor: [

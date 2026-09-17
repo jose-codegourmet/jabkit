@@ -7,7 +7,7 @@ export default {
   addedAt: "2026-09-15",
   description:
     "A square-corner concentric-ring tile at 150px, with sand and navy inks mapped to semantic tokens.",
-  sectionCategory: "content",
+  sectionCategory: "background",
   purpose:
     "Fills a region with the Uiverse stupid-insect radial weave without rounding the field to the shared control radius.",
   bestFor: [

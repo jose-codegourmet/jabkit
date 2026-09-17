@@ -4,7 +4,7 @@
   "version": "1.1.0",
   "addedAt": "2026-09-15",
   "description": "A square dual-tone mosaic field with 45-degree tiles, token-mapped ink and lemon, and an optional slow drift.",
-  "sectionCategory": "content",
+  "sectionCategory": "background",
   "purpose": "Fills a region with a high-contrast diamond mosaic without photographs or palette hex colors.",
   "bestFor": [
     "decorative section fills",

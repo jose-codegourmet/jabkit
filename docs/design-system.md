@@ -88,6 +88,8 @@ The registry builder inlines each `@/lib/<x>` import as a `"lib"` file in the JS
 
 `StrongSquid` follows the [day-to-night switch reference](https://uiverse.io/Galahhad/strong-squid-82), including its pill track, sun-to-moon transition, clouds, and stars. It preserves native checkbox behavior and exposes small and medium sizes.
 
+`EmberFooterCta` follows the [21st.dev reference](https://21st.dev/@serafimcloud/components/ember-footer-cta) with a dark radial footer, 420px waitlist control, focused invalid-email shake, success transition, compact link row, and pixelated pointer-reactive ember canvas.
+
 What the repo actually enforces:
 
 - Every meta file declares `a11y: { keyboardNav: boolean, reducedMotion: boolean }`. Those flags are **metadata**, shown on the showcase `ComponentData` card. Nothing asserts they match the implementation.

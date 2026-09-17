@@ -1,6 +1,9 @@
 import Link from "next/link";
+import type { Route } from "next";
+import { CatalogueFilters } from "../../components/CatalogueFilters";
 import { PreviewImage } from "../../components/PreviewImage";
 import { SiteHeader } from "../../components/SiteHeader";
+import { catalogueGroups, itemKind } from "../../lib/catalogue-groups";
 import { registryIndex } from "../../lib/registry";
 
 export default async function ComponentsPage({
@@ -12,6 +15,9 @@ export default async function ComponentsPage({
     tag?: string | string[];
     sort?: string;
     dependency?: string;
+    kind?: string;
+    group?: string;
+    page?: string;
   }>;
 }) {
   const query = await searchParams;
@@ -20,11 +26,14 @@ export default async function ComponentsPage({
       ? query.tag
       : [query.tag]
     : [];
+  const activeGroup = catalogueGroups.find((group) => group.id === query.group);
   const allItems = await registryIndex();
-  const items = allItems
+  const filteredItems = allItems
     .filter(
       (item) =>
         (!query.category || item.category === query.category) &&
+        (!query.kind || itemKind(item) === query.kind) &&
+        (!activeGroup || activeGroup.matches(item)) &&
         (!tags.length || tags.every((tag) => item.tags.includes(tag))) &&
         (query.dependency !== "zero" || item.dependencies.length === 0) &&
         (!query.q ||
@@ -39,87 +48,77 @@ export default async function ComponentsPage({
           ? b.addedAt.localeCompare(a.addedAt)
           : 0,
     );
-  const tagCounts = new Map<string, number>();
-  for (const item of allItems)
-    for (const tag of item.tags)
-      tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+  const pageSize = 24;
+  const totalPages = Math.max(1, Math.ceil(filteredItems.length / pageSize));
+  const requestedPage = Number.parseInt(query.page ?? "1", 10);
+  const currentPage = Math.min(
+    totalPages,
+    Math.max(1, Number.isNaN(requestedPage) ? 1 : requestedPage),
+  );
+  const items = filteredItems.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize,
+  );
+  const groups = catalogueGroups.map(({ id, label, kind, matches }) => ({
+    id,
+    label,
+    kind,
+    count: allItems.filter(matches).length,
+  }));
+  const title =
+    activeGroup?.label ??
+    (query.kind === "component"
+      ? "Components"
+      : query.kind === "block"
+        ? "Blocks"
+        : "Everything");
+  const paginationHref = (page: number): Route => {
+    const params = new URLSearchParams();
+    if (query.q) params.set("q", query.q);
+    if (query.category) params.set("category", query.category);
+    for (const tag of tags) params.append("tag", tag);
+    if (query.sort) params.set("sort", query.sort);
+    if (query.dependency) params.set("dependency", query.dependency);
+    if (query.kind) params.set("kind", query.kind);
+    if (query.group) params.set("group", query.group);
+    if (page > 1) params.set("page", String(page));
+    const search = params.toString();
+    return (search ? `/components?${search}` : "/components") as Route;
+  };
   return (
     <>
       <SiteHeader />
       <main className="min-h-[calc(100dvh-68px)] lg:flex">
-        <aside className="border-b border-border p-6 lg:sticky lg:top-[68px] lg:h-[calc(100dvh-68px)] lg:w-[278px] lg:shrink-0 lg:border-b-0 lg:border-r">
-          <Link
-            href="/"
-            className="text-sm text-muted-foreground hover:text-foreground"
-          >
-            Back home
-          </Link>
-          <h1 className="mt-8 text-xl font-semibold tracking-tight">
-            Components
-          </h1>
-          <form className="mt-6">
-            <label
-              className="font-mono text-xs text-muted-foreground"
-              htmlFor="q"
-            >
-              Search
-            </label>
-            <input
-              id="q"
-              name="q"
-              defaultValue={query.q}
-              placeholder="Try ‘button’ or ‘form’"
-              className="mt-2 h-10 w-full rounded-[--radius] border border-border bg-card px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
-            />
-          </form>
-          <nav className="mt-8 space-y-1 text-sm">
-            <p className="mb-2 font-mono text-xs text-muted-foreground">
-              Category
-            </p>
-            {["all", "atoms", "marketing", "dashboard"].map((category) => (
-              <Link
-                key={category}
-                href={
-                  category === "all"
-                    ? "/components"
-                    : `/components?category=${category}`
-                }
-                className={`block rounded-md px-3 py-2 capitalize hover:bg-accent ${query.category === category ? "bg-accent font-medium" : "text-muted-foreground"}`}
-              >
-                {category}
-              </Link>
-            ))}
-          </nav>
-          <div className="mt-8 space-y-3 text-sm">
-            <p className="font-mono text-xs text-muted-foreground">Sort</p>
-            {[
-              ["", "Recommended"],
-              ["newest", "Newest"],
-              ["name", "Name A–Z"],
-            ].map(([value, label]) => (
-              <Link
-                key={value}
-                href={`/components?${new URLSearchParams({ ...(query.q ? { q: query.q } : {}), ...(value ? { sort: value } : {}) }).toString()}`}
-                className="block text-muted-foreground hover:text-foreground"
-              >
-                {label}
-              </Link>
-            ))}
-            <p className="pt-3 font-mono text-xs text-muted-foreground">Tags</p>
-            {[...tagCounts.entries()].slice(0, 8).map(([tag, count]) => (
-              <Link
-                key={tag}
-                href={`/components?tag=${encodeURIComponent(tag)}`}
-                className="flex justify-between text-muted-foreground hover:text-foreground"
-              >
-                <span>#{tag}</span>
-                <span>{count}</span>
-              </Link>
-            ))}
-          </div>
-        </aside>
+        <CatalogueFilters
+          current={{
+            q: query.q,
+            kind: query.kind,
+            group: query.group,
+            sort: query.sort,
+          }}
+          groups={groups}
+        />
         <section className="min-w-0 flex-1">
-          <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="flex items-end justify-between gap-4 border-b border-border px-5 py-5 sm:px-6">
+            <div>
+              <p className="font-mono text-xs text-muted-foreground">
+                {query.kind === "block"
+                  ? "Reusable sections"
+                  : query.kind === "component"
+                    ? "Interface primitives"
+                    : "Component catalogue"}
+              </p>
+              <h2 className="mt-1 text-xl font-semibold tracking-tight">
+                {title}
+              </h2>
+            </div>
+            <p className="shrink-0 font-mono text-xs text-muted-foreground">
+              {filteredItems.length === 0
+                ? "0 results"
+                : `${(currentPage - 1) * pageSize + 1}-${Math.min(currentPage * pageSize, filteredItems.length)} of ${filteredItems.length}`}
+            </p>
+          </div>
+          <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-8">
             {items.map((item) => (
               <Link
                 key={item.name}
@@ -134,7 +133,7 @@ export default async function ComponentsPage({
                 </div>
                 <div className="pt-4">
                   <p className="font-mono text-[11px] text-primary uppercase">
-                    {item.category}
+                    {itemKind(item)}
                   </p>
                   <h2 className="mt-1 font-medium group-hover:text-primary">
                     {item.displayName}
@@ -150,7 +149,7 @@ export default async function ComponentsPage({
                 <div>
                   <h2 className="font-medium">No components found</h2>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    Try clearing the search or choosing another category.
+                    Try another search or return to the full library.
                   </p>
                   <Link
                     href="/components"
@@ -162,6 +161,40 @@ export default async function ComponentsPage({
               </div>
             )}
           </div>
+          {totalPages > 1 ? (
+            <nav
+              aria-label="Catalogue pagination"
+              className="flex items-center justify-between gap-4 border-t border-border bg-background px-5 py-4 sm:px-6"
+            >
+              {currentPage > 1 ? (
+                <Link
+                  href={paginationHref(currentPage - 1)}
+                  className="inline-flex min-h-10 items-center rounded-[--radius] border border-border px-3 text-sm font-medium hover:bg-accent"
+                >
+                  Previous
+                </Link>
+              ) : (
+                <span className="inline-flex min-h-10 items-center rounded-[--radius] border border-border px-3 text-sm text-muted-foreground opacity-50">
+                  Previous
+                </span>
+              )}
+              <p className="font-mono text-xs text-muted-foreground">
+                Page {currentPage} of {totalPages}
+              </p>
+              {currentPage < totalPages ? (
+                <Link
+                  href={paginationHref(currentPage + 1)}
+                  className="inline-flex min-h-10 items-center rounded-[--radius] border border-border px-3 text-sm font-medium hover:bg-accent"
+                >
+                  Next
+                </Link>
+              ) : (
+                <span className="inline-flex min-h-10 items-center rounded-[--radius] border border-border px-3 text-sm text-muted-foreground opacity-50">
+                  Next
+                </span>
+              )}
+            </nav>
+          ) : null}
         </section>
       </main>
     </>

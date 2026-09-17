@@ -13,10 +13,12 @@ export interface EmberFooterCtaProps
   emailLabel?: string;
   emailPlaceholder?: string;
   submitLabel?: string;
+  successMessage?: string;
   onSubscribe?: (email: string) => void;
   onSubmit?: FormEventHandler<HTMLFormElement>;
   brand?: string;
   links?: EmberFooterCtaLink[];
   footnote?: string;
   showEmber?: boolean;
+  flameHeight?: number;
 }

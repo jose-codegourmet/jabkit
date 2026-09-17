@@ -28,7 +28,7 @@ The five complete design-system sites now live in `apps/minimal`, `apps/neo-brut
 | Route | File | Role |
 | --- | --- | --- |
 | `/` | `app/page.tsx` | Marketing home. Driven by `registryIndex()`, with hardcoded feature picks: hero `hero307`, bento `hero228`, `hero230`, `case-studies13`, `compare5`, `code-example14`, theme proof `button`. |
-| `/components` | `app/components/page.tsx` | Filterable catalogue. Query params: `q`, `category`, `tag` (repeatable), `sort` (`newest` \| `name`), `dependency=zero`. |
+| `/components` | `app/components/page.tsx` | Filterable, paginated catalogue (24 items per page). Components (atoms) and blocks (marketing/dashboard) are grouped by their registry tags and `sectionCategory`; **Backgrounds** collects pattern atoms and background blocks (`sectionCategory: "background"`, or `background`/`pattern` tags). The desktop sidebar is collapsible and becomes an accessible filter drawer on mobile. The grid reaches eight compact cards per row on 2xl displays. Query params: `q`, `category`, `tag` (repeatable), `kind` (`component` \| `block`), `group` (`backgrounds` \| `background-blocks` \| …), `sort` (`newest` \| `name`), `page`, `dependency=zero`. |
 | `/[category]` | `app/[category]/page.tsx` | Category list. `validCategories` is `atoms` \| `marketing` \| `dashboard`; anything else is `notFound()`. Copy on that page is the canonical category description. |
 | `/[category]/[name]` | `app/[category]/[name]/page.tsx` | Component detail. 404 if the entry is missing or `entry.category !== category`. |
 | `/preview/[name]/[story]` | `app/preview/[name]/[story]/page.tsx` | Isolated iframe document. |
