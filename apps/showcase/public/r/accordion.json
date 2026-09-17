@@ -1,0 +1,94 @@
+{
+  "name": "accordion",
+  "displayName": "Accordion",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Vertically stacked headings that reveal and hide related content, with single or multiple open items.",
+  "sectionCategory": "content",
+  "purpose": "Lets people scan a list of questions or sections and open only the answers they need without leaving the page.",
+  "bestFor": [
+    "FAQ lists",
+    "settings groups",
+    "progressive disclosure of long copy"
+  ],
+  "avoidFor": [
+    "primary navigation",
+    "content that must stay visible at all times"
+  ],
+  "tone": [
+    "clean",
+    "professional"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "low",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "trigger",
+    "content"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/accordion",
+  "tags": [
+    "accordion",
+    "disclosure",
+    "faq",
+    "collapse",
+    "atom"
+  ],
+  "dependencies": [
+    "@base-ui/react",
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "accordion/Accordion.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { Accordion as AccordionPrimitive } from \"@base-ui/react/accordion\";\nimport { ChevronDownIcon, ChevronUpIcon } from \"lucide-react\";\nimport { cn } from \"@/lib/cn\";\nimport type {\n  AccordionContentProps,\n  AccordionItemProps,\n  AccordionProps,\n  AccordionTriggerProps,\n} from \"./Accordion.types\";\n\nfunction Accordion({ className, ...props }: AccordionProps) {\n  return (\n    <AccordionPrimitive.Root\n      data-slot=\"accordion\"\n      className={cn(\"flex w-full flex-col\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction AccordionItem({ className, ...props }: AccordionItemProps) {\n  return (\n    <AccordionPrimitive.Item\n      data-slot=\"accordion-item\"\n      className={cn(\"not-last:border-b not-last:border-border\", className)}\n      {...props}\n    />\n  );\n}\n\nfunction AccordionTrigger({\n  className,\n  children,\n  ...props\n}: AccordionTriggerProps) {\n  return (\n    <AccordionPrimitive.Header className=\"flex\">\n      <AccordionPrimitive.Trigger\n        data-slot=\"accordion-trigger\"\n        className={cn(\n          \"group/accordion-trigger relative flex flex-1 items-start justify-between rounded-lg border border-transparent py-2.5 text-left text-sm font-medium text-foreground transition-all outline-none hover:underline focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:after:border-ring aria-disabled:pointer-events-none aria-disabled:opacity-50 motion-reduce:transition-none **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted-foreground\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n        <ChevronDownIcon\n          data-slot=\"accordion-trigger-icon\"\n          className=\"pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden\"\n        />\n        <ChevronUpIcon\n          data-slot=\"accordion-trigger-icon\"\n          className=\"pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline\"\n        />\n      </AccordionPrimitive.Trigger>\n    </AccordionPrimitive.Header>\n  );\n}\n\nfunction AccordionContent({\n  className,\n  children,\n  ...props\n}: AccordionContentProps) {\n  return (\n    <AccordionPrimitive.Panel\n      data-slot=\"accordion-content\"\n      className=\"overflow-hidden text-sm text-muted-foreground data-open:animate-accordion-down data-closed:animate-accordion-up motion-reduce:animate-none\"\n      {...props}\n    >\n      <div\n        className={cn(\n          \"h-(--accordion-panel-height) pt-0 pb-2.5 data-ending-style:h-0 data-starting-style:h-0 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4\",\n          className,\n        )}\n      >\n        {children}\n      </div>\n    </AccordionPrimitive.Panel>\n  );\n}\n\nexport { Accordion, AccordionContent, AccordionItem, AccordionTrigger };\n"
+    },
+    {
+      "path": "accordion/Accordion.types.ts",
+      "type": "types",
+      "content": "import type { Accordion as AccordionPrimitive } from \"@base-ui/react/accordion\";\n\nexport type AccordionProps = AccordionPrimitive.Root.Props;\nexport type AccordionItemProps = AccordionPrimitive.Item.Props;\nexport type AccordionTriggerProps = AccordionPrimitive.Trigger.Props;\nexport type AccordionContentProps = AccordionPrimitive.Panel.Props;\n"
+    },
+    {
+      "path": "accordion/index.ts",
+      "type": "index",
+      "content": "export * from \"./Accordion\";\nexport type * from \"./Accordion.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Accordion className=\"w-full max-w-md\" defaultValue={[\"item-1\"]}>\n      {accordionMocks.default.map((item) => (\n        <AccordionItem key={item.value} value={item.value}>\n          <AccordionTrigger>{item.trigger}</AccordionTrigger>\n          <AccordionContent>{item.content}</AccordionContent>\n        </AccordionItem>\n      ))}\n    </Accordion>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"flex w-full max-w-md flex-col gap-8\">\n      <Accordion\n        className=\"rounded-lg border border-border px-4\"\n        defaultValue={[\"notifications\", \"billing\"]}\n        multiple\n      >\n        {accordionMocks.multiple.map((item) => (\n          <AccordionItem\n            key={item.value}\n            className=\"border-b border-border last:border-b-0\"\n            value={item.value}\n          >\n            <AccordionTrigger>{item.trigger}</AccordionTrigger>\n            <AccordionContent>{item.content}</AccordionContent>\n          </AccordionItem>\n        ))}\n      </Accordion>\n      <Accordion className=\"w-full\" defaultValue={[\"history\"]}>\n        {accordionMocks.disabled.map((item) => (\n          <AccordionItem\n            key={item.value}\n            disabled={item.disabled}\n            value={item.value}\n          >\n            <AccordionTrigger>{item.trigger}</AccordionTrigger>\n            <AccordionContent>{item.content}</AccordionContent>\n          </AccordionItem>\n        ))}\n      </Accordion>\n    </div>"
+    }
+  ]
+}

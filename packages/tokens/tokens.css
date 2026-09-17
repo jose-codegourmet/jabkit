@@ -112,4 +112,44 @@
   --color-chart-4: var(--jk-chart-4);
   --color-chart-5: var(--jk-chart-5);
   --radius: var(--jk-radius);
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--accordion-panel-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--accordion-panel-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes accordion-down {
+    from {
+      height: var(--accordion-panel-height);
+    }
+    to {
+      height: var(--accordion-panel-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: 0;
+    }
+    to {
+      height: 0;
+    }
+  }
 }
