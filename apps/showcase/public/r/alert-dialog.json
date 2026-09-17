@@ -1,0 +1,108 @@
+{
+  "name": "alert-dialog",
+  "displayName": "AlertDialog",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "A modal that interrupts the page to confirm a destructive or high-impact action before it proceeds.",
+  "sectionCategory": "overlay",
+  "purpose": "Stops the current flow and asks for an explicit cancel or confirm decision when the next step cannot be undone.",
+  "bestFor": [
+    "delete confirmations",
+    "irreversible account actions",
+    "permission prompts"
+  ],
+  "avoidFor": [
+    "toasts",
+    "non-blocking status",
+    "forms that should stay on the page"
+  ],
+  "tone": [
+    "professional",
+    "focused"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "overlay",
+    "alignment": "center"
+  },
+  "slots": [
+    "trigger",
+    "media",
+    "title",
+    "description",
+    "actions"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "button"
+  ],
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/alert-dialog",
+  "tags": [
+    "alert-dialog",
+    "modal",
+    "confirm",
+    "overlay",
+    "atom"
+  ],
+  "dependencies": [
+    "@base-ui/react",
+    "clsx",
+    "tailwind-merge",
+    "react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "alert-dialog/AlertDialog.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { AlertDialog as AlertDialogPrimitive } from \"@base-ui/react/alert-dialog\";\nimport { Button } from \"@/components/jabkit/button\";\nimport { cn } from \"@/lib/cn\";\nimport { useJkPortalContainer } from \"@/lib/portal-container\";\nimport type {\n  AlertDialogActionProps,\n  AlertDialogCancelProps,\n  AlertDialogContentProps,\n  AlertDialogDescriptionProps,\n  AlertDialogFooterProps,\n  AlertDialogHeaderProps,\n  AlertDialogMediaProps,\n  AlertDialogOverlayProps,\n  AlertDialogPortalProps,\n  AlertDialogProps,\n  AlertDialogTitleProps,\n  AlertDialogTriggerProps,\n} from \"./AlertDialog.types\";\n\nfunction AlertDialog({ ...props }: AlertDialogProps) {\n  return <AlertDialogPrimitive.Root data-slot=\"alert-dialog\" {...props} />;\n}\n\nfunction AlertDialogTrigger({ ...props }: AlertDialogTriggerProps) {\n  return (\n    <AlertDialogPrimitive.Trigger data-slot=\"alert-dialog-trigger\" {...props} />\n  );\n}\n\nfunction AlertDialogPortal({ container, ...props }: AlertDialogPortalProps) {\n  const portalContainer = useJkPortalContainer(container);\n  return (\n    <AlertDialogPrimitive.Portal\n      data-slot=\"alert-dialog-portal\"\n      container={portalContainer ?? undefined}\n      {...props}\n    />\n  );\n}\n\nfunction AlertDialogOverlay({ className, ...props }: AlertDialogOverlayProps) {\n  return (\n    <AlertDialogPrimitive.Backdrop\n      data-slot=\"alert-dialog-overlay\"\n      className={cn(\n        \"fixed inset-0 isolate z-50 bg-foreground/10 duration-100 supports-backdrop-filter:backdrop-blur-xs motion-reduce:animate-none data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AlertDialogContent({\n  className,\n  size = \"default\",\n  ...props\n}: AlertDialogContentProps) {\n  return (\n    <AlertDialogPortal>\n      <AlertDialogOverlay />\n      <AlertDialogPrimitive.Popup\n        data-slot=\"alert-dialog-content\"\n        data-size={size}\n        className={cn(\n          \"group/alert-dialog-content fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-[--radius] bg-popover p-4 text-popover-foreground ring-1 ring-foreground/10 duration-100 outline-none motion-reduce:animate-none data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-[size=default]:sm:max-w-sm\",\n          className,\n        )}\n        {...props}\n      />\n    </AlertDialogPortal>\n  );\n}\n\nfunction AlertDialogHeader({ className, ...props }: AlertDialogHeaderProps) {\n  return (\n    <div\n      data-slot=\"alert-dialog-header\"\n      className={cn(\n        \"grid grid-rows-[auto_1fr] place-items-center gap-1.5 text-center has-data-[slot=alert-dialog-media]:grid-rows-[auto_auto_1fr] has-data-[slot=alert-dialog-media]:gap-x-4 sm:group-data-[size=default]/alert-dialog-content:place-items-start sm:group-data-[size=default]/alert-dialog-content:text-left sm:group-data-[size=default]/alert-dialog-content:has-data-[slot=alert-dialog-media]:grid-rows-[auto_1fr]\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AlertDialogFooter({ className, ...props }: AlertDialogFooterProps) {\n  return (\n    <div\n      data-slot=\"alert-dialog-footer\"\n      className={cn(\n        \"-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-[--radius] border-t border-border bg-muted/50 p-4 group-data-[size=sm]/alert-dialog-content:grid group-data-[size=sm]/alert-dialog-content:grid-cols-2 sm:flex-row sm:justify-end\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AlertDialogMedia({ className, ...props }: AlertDialogMediaProps) {\n  return (\n    <div\n      data-slot=\"alert-dialog-media\"\n      className={cn(\n        \"mb-2 inline-flex size-10 items-center justify-center rounded-md bg-muted sm:group-data-[size=default]/alert-dialog-content:row-span-2 *:[svg:not([class*='size-'])]:size-6\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AlertDialogTitle({ className, ...props }: AlertDialogTitleProps) {\n  return (\n    <AlertDialogPrimitive.Title\n      data-slot=\"alert-dialog-title\"\n      className={cn(\n        \"text-base font-medium sm:group-data-[size=default]/alert-dialog-content:group-has-data-[slot=alert-dialog-media]/alert-dialog-content:col-start-2\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AlertDialogDescription({\n  className,\n  ...props\n}: AlertDialogDescriptionProps) {\n  return (\n    <AlertDialogPrimitive.Description\n      data-slot=\"alert-dialog-description\"\n      className={cn(\n        \"text-sm text-balance text-muted-foreground md:text-pretty *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction AlertDialogAction({\n  className,\n  variant = \"primary\",\n  size = \"md\",\n  ...props\n}: AlertDialogActionProps) {\n  return (\n    <AlertDialogPrimitive.Close\n      data-slot=\"alert-dialog-action\"\n      className={className}\n      render={\n        <Button variant={variant} size={size}>\n          {null}\n        </Button>\n      }\n      {...props}\n    />\n  );\n}\n\nfunction AlertDialogCancel({\n  className,\n  variant = \"secondary\",\n  size = \"md\",\n  ...props\n}: AlertDialogCancelProps) {\n  return (\n    <AlertDialogPrimitive.Close\n      data-slot=\"alert-dialog-cancel\"\n      className={className}\n      render={\n        <Button variant={variant} size={size}>\n          {null}\n        </Button>\n      }\n      {...props}\n    />\n  );\n}\n\nexport {\n  AlertDialog,\n  AlertDialogAction,\n  AlertDialogCancel,\n  AlertDialogContent,\n  AlertDialogDescription,\n  AlertDialogFooter,\n  AlertDialogHeader,\n  AlertDialogMedia,\n  AlertDialogOverlay,\n  AlertDialogPortal,\n  AlertDialogTitle,\n  AlertDialogTrigger,\n};\n"
+    },
+    {
+      "path": "alert-dialog/AlertDialog.types.ts",
+      "type": "types",
+      "content": "import type { AlertDialog as AlertDialogPrimitive } from \"@base-ui/react/alert-dialog\";\nimport type { ComponentProps } from \"react\";\nimport type { ButtonProps } from \"@/components/jabkit/button\";\n\nexport type AlertDialogProps = AlertDialogPrimitive.Root.Props;\nexport type AlertDialogTriggerProps = AlertDialogPrimitive.Trigger.Props;\nexport type AlertDialogPortalProps = AlertDialogPrimitive.Portal.Props;\nexport type AlertDialogOverlayProps = AlertDialogPrimitive.Backdrop.Props;\nexport type AlertDialogTitleProps = AlertDialogPrimitive.Title.Props;\nexport type AlertDialogDescriptionProps =\n  AlertDialogPrimitive.Description.Props;\nexport type AlertDialogHeaderProps = ComponentProps<\"div\">;\nexport type AlertDialogFooterProps = ComponentProps<\"div\">;\nexport type AlertDialogMediaProps = ComponentProps<\"div\">;\n\nexport type AlertDialogContentSize = \"default\" | \"sm\";\n\nexport type AlertDialogContentProps = AlertDialogPrimitive.Popup.Props & {\n  size?: AlertDialogContentSize;\n};\n\nexport type AlertDialogActionProps = AlertDialogPrimitive.Close.Props &\n  Pick<ButtonProps, \"variant\" | \"size\">;\n\nexport type AlertDialogCancelProps = AlertDialogPrimitive.Close.Props &\n  Pick<ButtonProps, \"variant\" | \"size\">;\n"
+    },
+    {
+      "path": "alert-dialog/index.ts",
+      "type": "index",
+      "content": "export * from \"./AlertDialog\";\nexport type * from \"./AlertDialog.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    },
+    {
+      "path": "lib/portal-container.ts",
+      "type": "lib",
+      "content": "\"use client\";\n\nimport {\n  createContext,\n  createElement,\n  type ReactNode,\n  type RefObject,\n  useContext,\n} from \"react\";\n\nexport type JkPortalContainer =\n  | HTMLElement\n  | ShadowRoot\n  | RefObject<HTMLElement | ShadowRoot | null>\n  | null\n  | undefined;\n\nconst JkPortalContainerContext = createContext<JkPortalContainer>(undefined);\n\nexport function JkPortalContainerProvider({\n  container,\n  children,\n}: {\n  container: JkPortalContainer;\n  children: ReactNode;\n}) {\n  return createElement(\n    JkPortalContainerContext.Provider,\n    { value: container },\n    children,\n  );\n}\n\nexport function useJkPortalContainer(\n  override?: JkPortalContainer,\n): JkPortalContainer {\n  const ctx = useContext(JkPortalContainerContext);\n  if (override !== undefined) return override ?? undefined;\n  return ctx ?? undefined;\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<AlertDialog>\n      <AlertDialogTrigger\n        render={\n          <Button variant=\"secondary\">\n            {alertDialogMocks.default.trigger}\n          </Button>\n        }\n      />\n      <AlertDialogContent>\n        <AlertDialogHeader>\n          <AlertDialogTitle>{alertDialogMocks.default.title}</AlertDialogTitle>\n          <AlertDialogDescription>\n            {alertDialogMocks.default.description}\n          </AlertDialogDescription>\n        </AlertDialogHeader>\n        <AlertDialogFooter>\n          <AlertDialogCancel>\n            {alertDialogMocks.default.cancel}\n          </AlertDialogCancel>\n          <AlertDialogAction>\n            {alertDialogMocks.default.confirm}\n          </AlertDialogAction>\n        </AlertDialogFooter>\n      </AlertDialogContent>\n    </AlertDialog>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"flex flex-wrap items-center gap-3\">\n      <AlertDialog>\n        <AlertDialogTrigger\n          render={\n            <Button variant=\"secondary\">\n              {alertDialogMocks.small.trigger}\n            </Button>\n          }\n        />\n        <AlertDialogContent size=\"sm\">\n          <AlertDialogHeader>\n            <AlertDialogMedia>\n              <BluetoothIcon />\n            </AlertDialogMedia>\n            <AlertDialogTitle>{alertDialogMocks.small.title}</AlertDialogTitle>\n            <AlertDialogDescription>\n              {alertDialogMocks.small.description}\n            </AlertDialogDescription>\n          </AlertDialogHeader>\n          <AlertDialogFooter>\n            <AlertDialogCancel>\n              {alertDialogMocks.small.cancel}\n            </AlertDialogCancel>\n            <AlertDialogAction>\n              {alertDialogMocks.small.confirm}\n            </AlertDialogAction>\n          </AlertDialogFooter>\n        </AlertDialogContent>\n      </AlertDialog>\n      <AlertDialog>\n        <AlertDialogTrigger\n          render={\n            <Button variant=\"destructive\">\n              {alertDialogMocks.destructive.trigger}\n            </Button>\n          }\n        />\n        <AlertDialogContent size=\"sm\">\n          <AlertDialogHeader>\n            <AlertDialogMedia className=\"bg-destructive/10 text-destructive\">\n              <Trash2Icon />\n            </AlertDialogMedia>\n            <AlertDialogTitle>\n              {alertDialogMocks.destructive.title}\n            </AlertDialogTitle>\n            <AlertDialogDescription>\n              This will permanently delete this chat conversation. View{\" \"}\n              <a href=\"#settings\">Settings</a> to delete any memories saved\n              during this chat.\n            </AlertDialogDescription>\n          </AlertDialogHeader>\n          <AlertDialogFooter>\n            <AlertDialogCancel variant=\"ghost\">\n              {alertDialogMocks.destructive.cancel}\n            </AlertDialogCancel>\n            <AlertDialogAction variant=\"destructive\">\n              {alertDialogMocks.destructive.confirm}\n            </AlertDialogAction>\n          </AlertDialogFooter>\n        </AlertDialogContent>\n      </AlertDialog>\n    </div>"
+    }
+  ]
+}
