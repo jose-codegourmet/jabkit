@@ -1,0 +1,106 @@
+{
+  "name": "traffo-features-section",
+  "displayName": "TraffoFeaturesSection",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Traffo pillars head, shipping meta, and a three-card feature grid.",
+  "sectionCategory": "feature",
+  "purpose": "Frames Capture, Understand, and Convert as the Traffo product story.",
+  "bestFor": [
+    "SaaS feature sections",
+    "analytics landings"
+  ],
+  "tone": [
+    "professional",
+    "bold"
+  ],
+  "industries": [
+    "saas",
+    "analytics"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "high",
+  "layout": {
+    "type": "grid",
+    "alignment": "left",
+    "columns": 3
+  },
+  "slots": [
+    "eyebrow",
+    "title",
+    "meta",
+    "featureCards"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero"
+  ],
+  "inspoUrl": "https://codepen.io/dermalhealth/pen/myORdJX",
+  "tags": [
+    "features",
+    "traffo",
+    "pillars",
+    "marketing"
+  ],
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "traffo-feature-card"
+  ],
+  "a11y": {
+    "keyboardNav": false,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 1100
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "traffo-features-section/TraffoFeaturesSection.tsx",
+      "type": "component",
+      "content": "import { Activity, Crosshair, TrendingUp } from \"lucide-react\";\n// biome-ignore lint/correctness/noUnusedImports: Storybook supports the classic JSX runtime.\nimport * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport { TraffoFeatureCard } from \"@/components/jabkit/traffo-feature-card\";\nimport { traffoFeatureItems } from \"./TraffoFeaturesSection.mocks\";\nimport type { TraffoFeaturesSectionProps } from \"./TraffoFeaturesSection.types\";\n\nconst fallbackIcons = [\n  <Crosshair key=\"a\" />,\n  <TrendingUp key=\"b\" />,\n  <Activity key=\"c\" />,\n];\n\nconst defaults = {\n  eyebrow: \"02 / Built for teams\",\n  title: \"Three pillars. One platform. Zero busywork.\",\n  meta: [\"Version 4.2\", \"Shipped May 2026\", \"24 integrations\"],\n} as const;\n\nexport function TraffoFeaturesSection({\n  className,\n  eyebrow = defaults.eyebrow,\n  title = defaults.title,\n  meta = [...defaults.meta],\n  items = traffoFeatureItems,\n  ...props\n}: TraffoFeaturesSectionProps) {\n  return (\n    <section\n      id=\"features\"\n      data-slot=\"traffo-features-section\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto max-w-[80rem] px-[var(--jk-space-gutter)] py-[var(--jk-space-section)]\">\n        <div className=\"flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between\">\n          <div className=\"max-w-[18ch]\">\n            {eyebrow ? (\n              <p className=\"font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase\">\n                {eyebrow}\n              </p>\n            ) : null}\n            <h2 className=\"mt-4 text-4xl font-semibold tracking-tight text-balance leading-[1.1] sm:text-6xl\">\n              {title}\n            </h2>\n          </div>\n          {meta.length > 0 ? (\n            <ul className=\"font-mono text-[11px] tracking-[0.12em] text-muted-foreground uppercase\">\n              {meta.map((line) => (\n                <li key={line} className=\"leading-[1.8]\">\n                  {line}\n                </li>\n              ))}\n            </ul>\n          ) : null}\n        </div>\n        <div className=\"mt-12 grid gap-6 md:grid-cols-3\">\n          {items.map((item, index) => (\n            <TraffoFeatureCard\n              key={item.kicker}\n              kicker={item.kicker}\n              title={item.title}\n              body={item.body}\n              tone={item.tone}\n              icon={item.icon ?? fallbackIcons[index]}\n            />\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "traffo-features-section/TraffoFeaturesSection.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\nimport type { TraffoFeatureCardTone } from \"@/components/jabkit/traffo-feature-card\";\n\nexport interface TraffoFeatureItem {\n  kicker: string;\n  title: string;\n  body: string;\n  tone: TraffoFeatureCardTone;\n  icon?: ReactNode;\n}\n\nexport interface TraffoFeaturesSectionProps\n  extends HTMLAttributes<HTMLElement> {\n  eyebrow?: string;\n  title?: string;\n  meta?: string[];\n  items?: TraffoFeatureItem[];\n}\n"
+    },
+    {
+      "path": "traffo-features-section/index.ts",
+      "type": "index",
+      "content": "export { TraffoFeaturesSection } from \"./TraffoFeaturesSection\";\nexport type {\n  TraffoFeatureItem,\n  TraffoFeaturesSectionProps,\n} from \"./TraffoFeaturesSection.types\";\n"
+    },
+    {
+      "path": "traffo-features-section/TraffoFeaturesSection.mocks.ts",
+      "type": "mocks",
+      "content": "import type {\n  TraffoFeatureItem,\n  TraffoFeaturesSectionProps,\n} from \"./TraffoFeaturesSection.types\";\n\nexport const traffoFeatureItems: TraffoFeatureItem[] = [\n  {\n    kicker: \"01 - Capture\",\n    title: \"Every click. Every scroll. Every form.\",\n    body: \"Drop the snippet, walk away. We capture every meaningful event automatically. No manual tagging, no missed data.\",\n    tone: \"success\",\n  },\n  {\n    kicker: \"02 - Understand\",\n    title: \"Funnels, cohorts, attribution: visual.\",\n    body: \"Drag-and-drop reports that do not require a PhD in SQL. See where users drop off, why, and what to fix first.\",\n    tone: \"warning\",\n  },\n  {\n    kicker: \"03 - Convert\",\n    title: \"Ship experiments. Watch numbers move.\",\n    body: \"Native A/B testing with statistical confidence baked in. Stop guessing, start shipping changes that actually compound.\",\n    tone: \"accent\",\n  },\n];\n\nexport const traffoFeaturesSectionMocks = {\n  default: {\n    eyebrow: \"02 / Built for teams\",\n    title: \"Three pillars. One platform. Zero busywork.\",\n    meta: [\"Version 4.2\", \"Shipped May 2026\", \"24 integrations\"],\n    items: traffoFeatureItems,\n  },\n  alternate: {\n    eyebrow: \"Capabilities\",\n    title: \"Measure less. Decide faster.\",\n    meta: [\"Self-serve\"],\n    items: traffoFeatureItems.slice(0, 2),\n  },\n} satisfies Record<string, TraffoFeaturesSectionProps>;\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<>\n      <TraffoFeaturesSection {...traffoFeaturesSectionMocks.default} />\n    </>"
+    },
+    {
+      "name": "Variants",
+      "code": "<>\n      <TraffoFeaturesSection {...traffoFeaturesSectionMocks.alternate} />\n    </>"
+    }
+  ]
+}
