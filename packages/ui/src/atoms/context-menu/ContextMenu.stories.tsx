@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import * as React from "react";
 import {
   ContextMenu,
   ContextMenuCheckboxItem,
@@ -45,12 +44,8 @@ export const Default: Story = {
   ),
 };
 
-function VariantsDemo() {
-  const [showBookmarks, setShowBookmarks] = React.useState(true);
-  const [showUrls, setShowUrls] = React.useState(false);
-  const [person, setPerson] = React.useState("pedro");
-
-  return (
+export const Variants: Story = {
+  render: () => (
     <ContextMenu>
       <ContextMenuTrigger className={triggerClassName}>
         {contextMenuMocks.trigger}
@@ -80,16 +75,10 @@ function VariantsDemo() {
           ))}
         </ContextMenuGroup>
         <ContextMenuSeparator />
-        <ContextMenuCheckboxItem
-          checked={showBookmarks}
-          onCheckedChange={setShowBookmarks}
-        >
+        <ContextMenuCheckboxItem checked>
           {contextMenuMocks.variants.checkboxes[0].label}
         </ContextMenuCheckboxItem>
-        <ContextMenuCheckboxItem
-          checked={showUrls}
-          onCheckedChange={setShowUrls}
-        >
+        <ContextMenuCheckboxItem>
           {contextMenuMocks.variants.checkboxes[1].label}
         </ContextMenuCheckboxItem>
         <ContextMenuSeparator />
@@ -97,7 +86,7 @@ function VariantsDemo() {
           <ContextMenuLabel>
             {contextMenuMocks.variants.peopleLabel}
           </ContextMenuLabel>
-          <ContextMenuRadioGroup value={person} onValueChange={setPerson}>
+          <ContextMenuRadioGroup value="pedro">
             {contextMenuMocks.variants.people.map((item) => (
               <ContextMenuRadioItem key={item.value} value={item.value}>
                 {item.label}
@@ -122,14 +111,6 @@ function VariantsDemo() {
         </ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
-  );
-}
-
-export const Variants: Story = {
-  render: () => (
-    <div>
-      <VariantsDemo />
-    </div>
   ),
 };
 
