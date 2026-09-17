@@ -2,10 +2,6 @@
 import * as React from "react";
 import {
   Combobox,
-  ComboboxChip,
-  ComboboxChips,
-  ComboboxChipsInput,
-  ComboboxCollection,
   ComboboxContent,
   ComboboxEmpty,
   ComboboxGroup,
@@ -14,46 +10,8 @@ import {
   ComboboxLabel,
   ComboboxList,
   ComboboxSeparator,
-  ComboboxValue,
-  useComboboxAnchor,
 } from "./Combobox";
 import { comboboxMocks } from "./Combobox.mocks";
-
-function MultipleFrameworks() {
-  const anchor = useComboboxAnchor();
-
-  return (
-    <Combobox
-      autoHighlight
-      defaultValue={[comboboxMocks.frameworks[0]]}
-      items={comboboxMocks.frameworks}
-      multiple
-    >
-      <ComboboxChips ref={anchor}>
-        <ComboboxValue>
-          {(values) => (
-            <>
-              {values.map((value: string) => (
-                <ComboboxChip key={value}>{value}</ComboboxChip>
-              ))}
-              <ComboboxChipsInput />
-            </>
-          )}
-        </ComboboxValue>
-      </ComboboxChips>
-      <ComboboxContent anchor={anchor}>
-        <ComboboxEmpty>{comboboxMocks.empty}</ComboboxEmpty>
-        <ComboboxList>
-          {(item) => (
-            <ComboboxItem key={item} value={item}>
-              {item}
-            </ComboboxItem>
-          )}
-        </ComboboxList>
-      </ComboboxContent>
-    </Combobox>
-  );
-}
 
 export default {
   Default: () => (
@@ -62,36 +20,33 @@ export default {
       <ComboboxContent>
         <ComboboxEmpty>{comboboxMocks.empty}</ComboboxEmpty>
         <ComboboxList>
-          {(item) => (
+          {comboboxMocks.frameworks.map((item) => (
             <ComboboxItem key={item} value={item}>
               {item}
             </ComboboxItem>
-          )}
+          ))}
         </ComboboxList>
       </ComboboxContent>
     </Combobox>
   ),
   Variants: () => (
     <div className="flex w-full max-w-sm flex-col gap-8">
-      <MultipleFrameworks />
       <Combobox items={comboboxMocks.timezones}>
         <ComboboxInput placeholder={comboboxMocks.timezonePlaceholder} />
         <ComboboxContent>
           <ComboboxEmpty>{comboboxMocks.timezoneEmpty}</ComboboxEmpty>
           <ComboboxList>
-            {(group) => (
+            {comboboxMocks.timezones.map((group) => (
               <ComboboxGroup key={group.value} items={group.items}>
                 <ComboboxLabel>{group.value}</ComboboxLabel>
-                <ComboboxCollection>
-                  {(item) => (
-                    <ComboboxItem key={item} value={item}>
-                      {item}
-                    </ComboboxItem>
-                  )}
-                </ComboboxCollection>
+                {group.items.map((item) => (
+                  <ComboboxItem key={item} value={item}>
+                    {item}
+                  </ComboboxItem>
+                ))}
                 <ComboboxSeparator />
               </ComboboxGroup>
-            )}
+            ))}
           </ComboboxList>
         </ComboboxContent>
       </Combobox>
@@ -106,11 +61,11 @@ export default {
         <ComboboxContent>
           <ComboboxEmpty>{comboboxMocks.empty}</ComboboxEmpty>
           <ComboboxList>
-            {(item) => (
+            {comboboxMocks.frameworks.map((item) => (
               <ComboboxItem key={item} value={item}>
                 {item}
               </ComboboxItem>
-            )}
+            ))}
           </ComboboxList>
         </ComboboxContent>
       </Combobox>
