@@ -2167,6 +2167,71 @@
     }
   },
   {
+    "name": "hover-card",
+    "displayName": "HoverCard",
+    "category": "atoms",
+    "description": "Sighted preview of content behind a trigger, composed on Base UI Preview Card.",
+    "inspoUrl": "https://ui.shadcn.com/docs/components/base/hover-card",
+    "sectionCategory": "overlay",
+    "purpose": "Lets a reader inspect a compact preview of a link or identity without leaving the page.",
+    "bestFor": [
+      "profile previews",
+      "link previews",
+      "progressive disclosure for sighted users"
+    ],
+    "avoidFor": [
+      "required actions that must work without hover",
+      "toasts",
+      "primary navigation"
+    ],
+    "tone": [
+      "subtle",
+      "clean"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "overlay",
+      "alignment": "center"
+    },
+    "slots": [
+      "trigger",
+      "previewContent"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "button",
+      "avatar"
+    ],
+    "tags": [
+      "hover-card",
+      "overlay",
+      "primitive",
+      "accessible",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "@base-ui/react",
+      "clsx",
+      "tailwind-merge",
+      "react"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "center"
+    }
+  },
+  {
     "name": "image-cropper",
     "displayName": "ImageCropper",
     "category": "atoms",

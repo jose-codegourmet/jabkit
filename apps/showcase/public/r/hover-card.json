@@ -1,0 +1,107 @@
+{
+  "name": "hover-card",
+  "displayName": "HoverCard",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Sighted preview of content behind a trigger, composed on Base UI Preview Card.",
+  "sectionCategory": "overlay",
+  "purpose": "Lets a reader inspect a compact preview of a link or identity without leaving the page.",
+  "bestFor": [
+    "profile previews",
+    "link previews",
+    "progressive disclosure for sighted users"
+  ],
+  "avoidFor": [
+    "required actions that must work without hover",
+    "toasts",
+    "primary navigation"
+  ],
+  "tone": [
+    "subtle",
+    "clean"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "overlay",
+    "alignment": "center"
+  },
+  "slots": [
+    "trigger",
+    "previewContent"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "button",
+    "avatar"
+  ],
+  "inspoUrl": "https://ui.shadcn.com/docs/components/base/hover-card",
+  "tags": [
+    "hover-card",
+    "overlay",
+    "primitive",
+    "accessible",
+    "atom"
+  ],
+  "dependencies": [
+    "@base-ui/react",
+    "clsx",
+    "tailwind-merge",
+    "react"
+  ],
+  "registryDependencies": [
+    "avatar",
+    "button"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "center"
+  },
+  "category": "atoms",
+  "files": [
+    {
+      "path": "hover-card/HoverCard.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { PreviewCard as PreviewCardPrimitive } from \"@base-ui/react/preview-card\";\nimport { cn } from \"@/lib/cn\";\nimport { useJkPortalContainer } from \"@/lib/portal-container\";\nimport type {\n  HoverCardContentProps,\n  HoverCardProps,\n  HoverCardTriggerProps,\n} from \"./HoverCard.types\";\n\nfunction HoverCard({ ...props }: HoverCardProps) {\n  return <PreviewCardPrimitive.Root data-slot=\"hover-card\" {...props} />;\n}\n\nfunction HoverCardTrigger({ ...props }: HoverCardTriggerProps) {\n  return (\n    <PreviewCardPrimitive.Trigger data-slot=\"hover-card-trigger\" {...props} />\n  );\n}\n\nfunction HoverCardContent({\n  className,\n  side = \"bottom\",\n  sideOffset = 4,\n  align = \"center\",\n  alignOffset = 4,\n  container,\n  ...props\n}: HoverCardContentProps) {\n  const portalContainer = useJkPortalContainer(container);\n\n  return (\n    <PreviewCardPrimitive.Portal\n      data-slot=\"hover-card-portal\"\n      container={portalContainer ?? undefined}\n    >\n      <PreviewCardPrimitive.Positioner\n        align={align}\n        alignOffset={alignOffset}\n        side={side}\n        sideOffset={sideOffset}\n        className=\"isolate z-50\"\n      >\n        <PreviewCardPrimitive.Popup\n          data-slot=\"hover-card-content\"\n          className={cn(\n            \"z-50 w-64 origin-(--transform-origin) rounded-lg bg-popover p-2.5 text-sm text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-hidden duration-100 motion-reduce:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95\",\n            className,\n          )}\n          {...props}\n        />\n      </PreviewCardPrimitive.Positioner>\n    </PreviewCardPrimitive.Portal>\n  );\n}\n\nexport { HoverCard, HoverCardContent, HoverCardTrigger };\n"
+    },
+    {
+      "path": "hover-card/HoverCard.types.ts",
+      "type": "types",
+      "content": "import type { PreviewCard as PreviewCardPrimitive } from \"@base-ui/react/preview-card\";\n\nexport type HoverCardProps = PreviewCardPrimitive.Root.Props;\nexport type HoverCardTriggerProps = PreviewCardPrimitive.Trigger.Props;\nexport type HoverCardPortalProps = PreviewCardPrimitive.Portal.Props;\nexport type HoverCardContentProps = PreviewCardPrimitive.Popup.Props &\n  Pick<\n    PreviewCardPrimitive.Positioner.Props,\n    \"align\" | \"alignOffset\" | \"side\" | \"sideOffset\"\n  > &\n  Pick<PreviewCardPrimitive.Portal.Props, \"container\">;\n"
+    },
+    {
+      "path": "hover-card/index.ts",
+      "type": "index",
+      "content": "export * from \"./HoverCard\";\nexport type * from \"./HoverCard.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    },
+    {
+      "path": "lib/portal-container.ts",
+      "type": "lib",
+      "content": "\"use client\";\n\nimport {\n  createContext,\n  createElement,\n  type ReactNode,\n  type RefObject,\n  useContext,\n} from \"react\";\n\nexport type JkPortalContainer =\n  | HTMLElement\n  | ShadowRoot\n  | RefObject<HTMLElement | ShadowRoot | null>\n  | null\n  | undefined;\n\nconst JkPortalContainerContext = createContext<JkPortalContainer>(undefined);\n\nexport function JkPortalContainerProvider({\n  container,\n  children,\n}: {\n  container: JkPortalContainer;\n  children: ReactNode;\n}) {\n  return createElement(\n    JkPortalContainerContext.Provider,\n    { value: container },\n    children,\n  );\n}\n\nexport function useJkPortalContainer(\n  override?: JkPortalContainer,\n): JkPortalContainer {\n  const ctx = useContext(JkPortalContainerContext);\n  if (override !== undefined) return override ?? undefined;\n  return ctx ?? undefined;\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<HoverCard>\n      <HoverCardTrigger\n        delay={100}\n        closeDelay={100}\n        render={\n          <Button variant=\"ghost\" className=\"px-2\">\n            {hoverCardMocks.default.trigger}\n          </Button>\n        }\n      />\n      <HoverCardContent>\n        <div className=\"flex justify-between gap-4\">\n          <Avatar>\n            <AvatarFallback>{hoverCardMocks.default.initials}</AvatarFallback>\n          </Avatar>\n          <div className=\"space-y-1\">\n            <h4 className=\"text-sm font-semibold\">\n              {hoverCardMocks.default.name}\n            </h4>\n            <p className=\"text-sm\">{hoverCardMocks.default.description}</p>\n            <div className=\"text-xs text-muted-foreground\">\n              {hoverCardMocks.default.meta}\n            </div>\n          </div>\n        </div>\n      </HoverCardContent>\n    </HoverCard>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"flex flex-wrap items-center justify-center gap-2\">\n      {hoverCardSides.map((side) => (\n        <HoverCard key={side}>\n          <HoverCardTrigger\n            delay={100}\n            closeDelay={100}\n            render={\n              <Button variant=\"secondary\" className=\"capitalize\">\n                {side.replace(\"-\", \" \")}\n              </Button>\n            }\n          />\n          <HoverCardContent side={side}>\n            <div className=\"flex flex-col gap-1.5\">\n              <h4 className=\"font-medium\">{hoverCardMocks.sides.title}</h4>\n              <p>{hoverCardMocks.sides.description}</p>\n            </div>\n          </HoverCardContent>\n        </HoverCard>\n      ))}\n    </div>"
+    }
+  ]
+}
