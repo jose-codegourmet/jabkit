@@ -3,13 +3,13 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "kind-panther",
   displayName: "KindPanther",
-  version: "1.1.0",
+  version: "2.0.0",
   addedAt: "2026-09-15",
   description:
-    "A square honeycomb field of 120deg hex cells at 37px, with token-mapped fill and ground.",
+    "A repeating interlocking wave field of concentric radial bands, token-mapped warm and cool, with an optional slow drift.",
   sectionCategory: "background",
   purpose:
-    "Drops the inspo hexagon tessellation behind a caption or empty state without rounding it to the control radius.",
+    "Drops the inspo salmon-and-navy ripple tessellation behind a caption or empty state without rounding it to the control radius.",
   bestFor: [
     "decorative catalogue tiles",
     "empty-state or wait-list backdrops",
@@ -19,7 +19,7 @@ export default {
     "data-dense charts that need a quiet canvas",
     "text-heavy reading surfaces",
   ],
-  tone: ["playful", "bold"],
+  tone: ["retro", "bold"],
   contentDensity: "low",
   visualWeight: "medium",
   layout: {
@@ -35,7 +35,7 @@ export default {
     supportsDarkMode: true,
   },
   inspoUrl: "https://uiverse.io/marcelodolza/kind-panther-75",
-  tags: ["pattern", "honeycomb", "hexagon", "background", "atom"],
+  tags: ["pattern", "wave", "ripple", "retro", "background", "atom"],
   dependencies: [],
   registryDependencies: [],
   a11y: { keyboardNav: false, reducedMotion: true },

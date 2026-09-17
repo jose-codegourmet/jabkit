@@ -3,10 +3,10 @@ import type { ComponentMeta } from "@jabkit/build-registry";
 export default {
   name: "ember-footer-cta",
   displayName: "EmberFooterCta",
-  version: "1.0.0",
+  version: "1.1.0",
   addedAt: "2026-09-06",
   description:
-    "Closing marketing footer with a waitlist form, serif headline, slim link row, and a token-based ember bed along the baseline.",
+    "Animated ember footer with a waitlist form, dark radial canvas bed, slim link row, and success transition.",
   sectionCategory: "footer",
   purpose:
     "Ends a page with atmospheric brand expression, a focused waitlist conversion, and essential links.",
@@ -50,5 +50,10 @@ export default {
   dependencies: [],
   registryDependencies: ["button", "input", "label"],
   a11y: { keyboardNav: true, reducedMotion: true },
-  preview: { layout: "fit", width: 1440, height: 780 },
+  preview: {
+    layout: "fit",
+    width: 1440,
+    height: 780,
+    capture: { waitMs: 500 },
+  },
 } satisfies ComponentMeta;

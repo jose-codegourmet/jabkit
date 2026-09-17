@@ -1053,7 +1053,7 @@
     "category": "atoms",
     "description": "A square-corner 45-degree dual-tone hatch tiled at 95px by 15px with a 135px offset.",
     "inspoUrl": "https://uiverse.io/aadium/hard-swan-77",
-    "sectionCategory": "content",
+    "sectionCategory": "background",
     "purpose": "Fills a region with the Uiverse hard-swan weave, mapped to tokens, without rounding the field to the shared control radius.",
     "bestFor": [
       "section covers and empty-state backdrops",
@@ -1430,10 +1430,10 @@
     "name": "kind-panther",
     "displayName": "KindPanther",
     "category": "atoms",
-    "description": "A square honeycomb field of 120deg hex cells at 37px, with token-mapped fill and ground.",
+    "description": "A repeating interlocking wave field of concentric radial bands, token-mapped warm and cool, with an optional slow drift.",
     "inspoUrl": "https://uiverse.io/marcelodolza/kind-panther-75",
     "sectionCategory": "background",
-    "purpose": "Drops the inspo hexagon tessellation behind a caption or empty state without rounding it to the control radius.",
+    "purpose": "Drops the inspo salmon-and-navy ripple tessellation behind a caption or empty state without rounding it to the control radius.",
     "bestFor": [
       "decorative catalogue tiles",
       "empty-state or wait-list backdrops",
@@ -1444,7 +1444,7 @@
       "text-heavy reading surfaces"
     ],
     "tone": [
-      "playful",
+      "retro",
       "bold"
     ],
     "contentDensity": "low",
@@ -1465,8 +1465,9 @@
     },
     "tags": [
       "pattern",
-      "honeycomb",
-      "hexagon",
+      "wave",
+      "ripple",
+      "retro",
       "background",
       "atom"
     ],
@@ -1617,7 +1618,7 @@
     "category": "atoms",
     "description": "A square-corner isometric cube tessellation at 200px, with three face inks mapped to semantic tokens.",
     "inspoUrl": "https://uiverse.io/Juanes200122/light-eagle-27",
-    "sectionCategory": "content",
+    "sectionCategory": "background",
     "purpose": "Fills a region with the Uiverse light-eagle hexagonal cube weave without rounding the field to the shared control radius.",
     "bestFor": [
       "section covers and empty-state backdrops",
@@ -1678,7 +1679,7 @@
     "category": "atoms",
     "description": "A square isometric cube lattice with the Uiverse loud-parrot tile geometry on semantic faces.",
     "inspoUrl": "https://uiverse.io/mobinkakei/loud-parrot-63",
-    "sectionCategory": "content",
+    "sectionCategory": "background",
     "purpose": "Fills a region with the exact layered-conic cube tessellation, keeping square corners and token-mapped faces.",
     "bestFor": [
       "decorative section fills",
@@ -2332,7 +2333,7 @@
     "category": "atoms",
     "description": "A square dual-tone mosaic field with 45-degree tiles, token-mapped ink and lemon, and an optional slow drift.",
     "inspoUrl": "https://uiverse.io/aadium/soft-panda-93",
-    "sectionCategory": "content",
+    "sectionCategory": "background",
     "purpose": "Fills a region with a high-contrast diamond mosaic without photographs or palette hex colors.",
     "bestFor": [
       "decorative section fills",
@@ -2578,7 +2579,7 @@
     "category": "atoms",
     "description": "A square-corner concentric-ring tile at 150px, with sand and navy inks mapped to semantic tokens.",
     "inspoUrl": "https://uiverse.io/csemszepp/stupid-insect-76",
-    "sectionCategory": "content",
+    "sectionCategory": "background",
     "purpose": "Fills a region with the Uiverse stupid-insect radial weave without rounding the field to the shared control radius.",
     "bestFor": [
       "section covers and empty-state backdrops",
@@ -5035,7 +5036,7 @@
     "name": "ember-footer-cta",
     "displayName": "EmberFooterCta",
     "category": "marketing",
-    "description": "Closing marketing footer with a waitlist form, serif headline, slim link row, and a token-based ember bed along the baseline.",
+    "description": "Animated ember footer with a waitlist form, dark radial canvas bed, slim link row, and success transition.",
     "inspoUrl": "https://21st.dev/@serafimcloud/components/ember-footer-cta",
     "sectionCategory": "footer",
     "purpose": "Ends a page with atmospheric brand expression, a focused waitlist conversion, and essential links.",

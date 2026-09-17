@@ -794,11 +794,12 @@
       ]
     },
     "kind-panther": {
-      "sourceHash": "d41ce6444edd4c4fcd8d0b9e7ca5d378aa5da007a77dbd62b0d4cb4172770bf5",
+      "sourceHash": "0faf05beea256c2a97de76a4e25d184e324b1dc5d764d8bb44b06a28382f6865",
       "pipelineVersion": 1,
       "stories": [
         "Default",
-        "Tones"
+        "Tones",
+        "ThemeComparison"
       ],
       "themes": [
         "dark"
@@ -808,7 +809,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "kind-panther.Default.dark.webp",
-          "bytes": 6378,
+          "bytes": 10368,
           "width": 800,
           "height": 480,
           "format": "webp"
@@ -817,7 +818,16 @@
           "story": "Tones",
           "theme": "dark",
           "file": "kind-panther.Tones.dark.webp",
-          "bytes": 5726,
+          "bytes": 18698,
+          "width": 800,
+          "height": 480,
+          "format": "webp"
+        },
+        {
+          "story": "ThemeComparison",
+          "theme": "dark",
+          "file": "kind-panther.ThemeComparison.dark.webp",
+          "bytes": 19950,
           "width": 800,
           "height": 480,
           "format": "webp"
@@ -2807,7 +2817,7 @@
       ]
     },
     "ember-footer-cta": {
-      "sourceHash": "9c2e331a127e88261dab94760180fba21da5d7721ce01bca53a31d8d546860b3",
+      "sourceHash": "97c76710a2e33005728ce557a29a0b96b52f837654af69e7af0f1ac97a6e5c8e",
       "pipelineVersion": 1,
       "stories": [
         "Default",
@@ -2822,7 +2832,7 @@
           "story": "Default",
           "theme": "dark",
           "file": "ember-footer-cta.Default.dark.webp",
-          "bytes": 8086,
+          "bytes": 7054,
           "width": 960,
           "height": 520,
           "format": "webp"
@@ -2831,7 +2841,7 @@
           "story": "Variants",
           "theme": "dark",
           "file": "ember-footer-cta.Variants.dark.webp",
-          "bytes": 9610,
+          "bytes": 8566,
           "width": 960,
           "height": 520,
           "format": "webp"
@@ -2840,7 +2850,7 @@
           "story": "ThemeComparison",
           "theme": "dark",
           "file": "ember-footer-cta.ThemeComparison.dark.webp",
-          "bytes": 14084,
+          "bytes": 11808,
           "width": 960,
           "height": 520,
           "format": "webp"

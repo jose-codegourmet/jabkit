@@ -12,6 +12,7 @@ export type RegistryIndexItem = {
   category: "atoms" | "marketing" | "dashboard";
   description: string;
   inspoUrl?: string;
+  sectionCategory?: string;
   tags: string[];
   addedAt: string;
   dependencies: string[];

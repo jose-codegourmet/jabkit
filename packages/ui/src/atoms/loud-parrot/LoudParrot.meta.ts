@@ -7,7 +7,7 @@ export default {
   addedAt: "2026-09-15",
   description:
     "A square isometric cube lattice with the Uiverse loud-parrot tile geometry on semantic faces.",
-  sectionCategory: "content",
+  sectionCategory: "background",
   purpose:
     "Fills a region with the exact layered-conic cube tessellation, keeping square corners and token-mapped faces.",
   bestFor: [
