@@ -1,0 +1,98 @@
+{
+  "name": "agency-topbar",
+  "displayName": "AgencyTopbar",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Sticky agency chrome with a LAYOUT brand, primary anchors, and a live local-time clock.",
+  "sectionCategory": "navbar",
+  "purpose": "Pins editorial agency navigation and a client-safe local clock above numbered page sections.",
+  "bestFor": [
+    "agency landings",
+    "editorial studio sites",
+    "single-page section navigation"
+  ],
+  "tone": [
+    "editorial",
+    "professional"
+  ],
+  "industries": [
+    "design",
+    "agency"
+  ],
+  "contentDensity": "low",
+  "visualWeight": "low",
+  "layout": {
+    "type": "full-width",
+    "alignment": "mixed"
+  },
+  "slots": [
+    "brand",
+    "navigationItems",
+    "localTime",
+    "mobileNavigation"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedBefore": [
+    "hero"
+  ],
+  "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+  "tags": [
+    "navbar",
+    "agency",
+    "clock",
+    "marketing"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 180
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "agency-topbar/AgencyTopbar.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { useEffect, useId, useState } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport type { AgencyTopbarProps } from \"./AgencyTopbar.types\";\n\nconst defaults = {\n  brand: \"LAYOUT\",\n  brandHref: \"#top\",\n  links: [\n    { label: \"Index\", href: \"#index\" },\n    { label: \"Services\", href: \"#services\" },\n    { label: \"Contact\", href: \"#contact\" },\n  ],\n  locationCode: \"BDX\",\n  menuLabel: \"Toggle menu\",\n} as const;\n\nfunction formatLocalTime(date: Date, locationCode: string) {\n  const hours = String(date.getHours()).padStart(2, \"0\");\n  const minutes = String(date.getMinutes()).padStart(2, \"0\");\n  const seconds = String(date.getSeconds()).padStart(2, \"0\");\n  return `${locationCode} ${hours}:${minutes}:${seconds}`;\n}\n\nexport function AgencyTopbar({\n  className,\n  brand = defaults.brand,\n  brandHref = defaults.brandHref,\n  links = [...defaults.links],\n  locationCode = defaults.locationCode,\n  menuLabel = defaults.menuLabel,\n  ...props\n}: AgencyTopbarProps) {\n  const menuId = useId();\n  const [open, setOpen] = useState(false);\n  const [now, setNow] = useState<Date | null>(null);\n\n  useEffect(() => {\n    const tick = () => {\n      setNow(new Date());\n    };\n    tick();\n    const timer = window.setInterval(tick, 1000);\n    return () => window.clearInterval(timer);\n  }, []);\n\n  const clock = now\n    ? formatLocalTime(now, locationCode)\n    : `${locationCode} --:--:--`;\n\n  return (\n    <header\n      data-slot=\"agency-topbar\"\n      className={cn(\n        \"sticky top-0 z-20 border-b border-[color-mix(in_oklab,var(--jk-background)_18%,transparent)] bg-foreground text-background\",\n        className,\n      )}\n      {...props}\n    >\n      <nav\n        aria-label=\"Primary\"\n        className=\"mx-auto flex h-16 max-w-[90rem] items-center justify-between gap-4 px-[var(--jk-space-gutter)]\"\n      >\n        <a\n          href={brandHref}\n          className=\"inline-flex items-center gap-2 font-[family-name:var(--jk-font-display)] text-sm font-semibold tracking-[0.22em] text-background no-underline uppercase\"\n        >\n          {brand}\n          <span\n            aria-hidden=\"true\"\n            className=\"size-1.5 rounded-full bg-warning\"\n          />\n        </a>\n        <ul className=\"hidden items-center gap-8 md:flex\">\n          {links.map((link) => (\n            <li key={link.href}>\n              <a\n                href={link.href}\n                className=\"font-mono text-[11px] tracking-[0.18em] text-background/80 no-underline uppercase transition-colors duration-300 hover:text-background motion-reduce:transition-none\"\n              >\n                {link.label}\n              </a>\n            </li>\n          ))}\n        </ul>\n        <div className=\"flex items-center gap-3\">\n          <p\n            className=\"font-mono text-[11px] tracking-[0.14em] text-background tabular-nums\"\n            aria-live=\"polite\"\n            aria-atomic=\"true\"\n          >\n            {clock}\n          </p>\n          <button\n            type=\"button\"\n            className=\"grid size-9 place-items-center rounded-none border border-[color-mix(in_oklab,var(--jk-background)_28%,transparent)] text-background md:hidden\"\n            aria-label={menuLabel}\n            aria-expanded={open}\n            aria-controls={menuId}\n            onClick={() => setOpen((value) => !value)}\n          >\n            <span aria-hidden=\"true\">{open ? \"×\" : \"+\"}</span>\n          </button>\n        </div>\n      </nav>\n      {open ? (\n        <div\n          id={menuId}\n          className=\"border-t border-[color-mix(in_oklab,var(--jk-background)_18%,transparent)] px-[var(--jk-space-gutter)] py-4 md:hidden\"\n        >\n          <ul className=\"flex flex-col gap-3\">\n            {links.map((link) => (\n              <li key={link.href}>\n                <a\n                  href={link.href}\n                  className=\"font-mono text-[11px] tracking-[0.18em] text-background no-underline uppercase\"\n                  onClick={() => setOpen(false)}\n                >\n                  {link.label}\n                </a>\n              </li>\n            ))}\n          </ul>\n        </div>\n      ) : null}\n    </header>\n  );\n}\n"
+    },
+    {
+      "path": "agency-topbar/AgencyTopbar.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface AgencyTopbarLink {\n  label: string;\n  href: string;\n}\n\nexport interface AgencyTopbarProps extends HTMLAttributes<HTMLElement> {\n  brand?: string;\n  brandHref?: string;\n  links?: AgencyTopbarLink[];\n  locationCode?: string;\n  menuLabel?: string;\n}\n"
+    },
+    {
+      "path": "agency-topbar/index.ts",
+      "type": "index",
+      "content": "export { AgencyTopbar } from \"./AgencyTopbar\";\nexport type { AgencyTopbarLink, AgencyTopbarProps } from \"./AgencyTopbar.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<>\n      <AgencyTopbar {...agencyTopbarMocks.default} />\n    </>"
+    },
+    {
+      "name": "Variants",
+      "code": "<>\n      <AgencyTopbar {...agencyTopbarMocks.alternate} />\n    </>"
+    }
+  ]
+}

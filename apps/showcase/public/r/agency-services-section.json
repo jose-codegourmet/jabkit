@@ -1,0 +1,106 @@
+{
+  "name": "agency-services-section",
+  "displayName": "AgencyServicesSection",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Numbered agency services block with a What I do heading and expandable practice categories.",
+  "sectionCategory": "features",
+  "purpose": "Lists identity, editorial, web, and direction as one accordion that matches the LAYOUT pen.",
+  "bestFor": [
+    "studio service menus",
+    "practice offerings",
+    "editorial capability lists"
+  ],
+  "tone": [
+    "editorial",
+    "professional"
+  ],
+  "industries": [
+    "design",
+    "agency"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "stack",
+    "alignment": "left"
+  },
+  "slots": [
+    "headline",
+    "serviceList"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": false,
+    "supportsCTA": false,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "hero"
+  ],
+  "recommendedBefore": [
+    "contact"
+  ],
+  "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+  "tags": [
+    "services",
+    "agency",
+    "accordion",
+    "marketing"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "agency-section-heading"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "agency-services-section/AgencyServicesSection.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\nimport { AgencySectionHeading } from \"@/components/jabkit/agency-section-heading\";\nimport { cn } from \"@/lib/cn\";\nimport { agencyServiceItems } from \"./AgencyServicesSection.mocks\";\nimport type { AgencyServicesSectionProps } from \"./AgencyServicesSection.types\";\n\nconst defaults = {\n  id: \"services\",\n  number: \"04\",\n  label: \"Services\",\n  meta: \"04 categories\",\n  title: \"What I do\",\n} as const;\n\nexport function AgencyServicesSection({\n  className,\n  id = defaults.id,\n  number = defaults.number,\n  label = defaults.label,\n  meta = defaults.meta,\n  title = defaults.title,\n  items = [...agencyServiceItems],\n  ...props\n}: AgencyServicesSectionProps) {\n  const [openIndex, setOpenIndex] = useState(0);\n\n  return (\n    <section\n      id={id}\n      data-slot=\"agency-services-section\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto max-w-[90rem] px-[var(--jk-space-gutter)] py-16\">\n        <AgencySectionHeading\n          number={number}\n          label={label}\n          meta={meta}\n          title={title}\n        />\n        <ul className=\"mt-10 border-t border-foreground\">\n          {items.map((item, index) => {\n            const open = openIndex === index;\n            return (\n              <li key={item.number} className=\"border-b border-foreground\">\n                <button\n                  type=\"button\"\n                  className={cn(\n                    \"flex w-full items-center justify-between gap-4 rounded-none px-0 py-5 text-left transition-colors duration-300 motion-reduce:transition-none\",\n                    open\n                      ? \"bg-foreground px-4 text-background sm:px-5\"\n                      : \"bg-background text-foreground hover:bg-muted\",\n                  )}\n                  aria-expanded={open}\n                  onClick={() => setOpenIndex(open ? -1 : index)}\n                >\n                  <span className=\"font-[family-name:var(--jk-font-display)] text-xl font-semibold uppercase tracking-tight sm:text-3xl\">\n                    {item.number} {item.title}\n                  </span>\n                  <span aria-hidden=\"true\" className=\"font-mono text-lg\">\n                    {open ? \"−\" : \"+\"}\n                  </span>\n                </button>\n                <div\n                  className={cn(\n                    \"grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none\",\n                    open ? \"grid-rows-[1fr]\" : \"grid-rows-[0fr]\",\n                  )}\n                >\n                  <div className=\"overflow-hidden\">\n                    <p\n                      className={cn(\n                        \"max-w-[62ch] px-4 py-5 text-sm leading-relaxed sm:px-5\",\n                        open\n                          ? \"bg-foreground text-background\"\n                          : \"bg-background text-muted-foreground\",\n                      )}\n                    >\n                      {item.body}\n                    </p>\n                  </div>\n                </div>\n              </li>\n            );\n          })}\n        </ul>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "path": "agency-services-section/AgencyServicesSection.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface AgencyServiceItem {\n  number: string;\n  title: string;\n  body: string;\n}\n\nexport interface AgencyServicesSectionProps\n  extends HTMLAttributes<HTMLElement> {\n  id?: string;\n  number?: string;\n  label?: string;\n  meta?: string;\n  title?: string;\n  items?: AgencyServiceItem[];\n}\n"
+    },
+    {
+      "path": "agency-services-section/index.ts",
+      "type": "index",
+      "content": "export { AgencyServicesSection } from \"./AgencyServicesSection\";\nexport type * from \"./AgencyServicesSection.types\";\n"
+    },
+    {
+      "path": "agency-services-section/AgencyServicesSection.mocks.ts",
+      "type": "mocks",
+      "content": "import type { AgencyServicesSectionProps } from \"./AgencyServicesSection.types\";\n\nexport const agencyServiceItems = [\n  {\n    number: \"01\",\n    title: \"Identity\",\n    body: \"Naming, marks, type systems, and the rules that keep a brand readable across print and screen.\",\n  },\n  {\n    number: \"02\",\n    title: \"Editorial\",\n    body: \"Publications, campaigns, and long-form layouts where hierarchy and paper still matter.\",\n  },\n  {\n    number: \"03\",\n    title: \"Web\",\n    body: \"Sites and interfaces built as typographic systems, not template skins.\",\n  },\n  {\n    number: \"04\",\n    title: \"Direction\",\n    body: \"Art direction and commissioning across photography, motion, and production partners.\",\n  },\n] as const;\n\nexport const agencyServicesSectionMocks = {\n  default: {\n    id: \"services\",\n    number: \"04\",\n    label: \"Services\",\n    meta: \"04 categories\",\n    title: \"What I do\",\n    items: [...agencyServiceItems],\n  },\n  alternate: {\n    id: \"services\",\n    number: \"03\",\n    label: \"Practice\",\n    meta: \"03 categories\",\n    title: \"How we work\",\n    items: [\n      {\n        number: \"01\",\n        title: \"Audit\",\n        body: \"A short read of the current system before any new marks are drawn.\",\n      },\n      {\n        number: \"02\",\n        title: \"Build\",\n        body: \"A focused set of assets and rules, not a 200-page unused brand book.\",\n      },\n      {\n        number: \"03\",\n        title: \"Steer\",\n        body: \"Ongoing direction when the first applications hit print and product.\",\n      },\n    ],\n  },\n} satisfies Record<string, AgencyServicesSectionProps>;\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<>\n      <AgencyServicesSection {...agencyServicesSectionMocks.default} />\n    </>"
+    },
+    {
+      "name": "Variants",
+      "code": "<>\n      <AgencyServicesSection {...agencyServicesSectionMocks.alternate} />\n    </>"
+    }
+  ]
+}

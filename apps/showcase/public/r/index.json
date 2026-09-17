@@ -60,6 +60,63 @@
     }
   },
   {
+    "name": "agency-section-heading",
+    "displayName": "AgencySectionHeading",
+    "category": "atoms",
+    "description": "Numbered agency section label in the [05] / Contact pattern, with optional title and emphasis highlight.",
+    "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+    "sectionCategory": "content",
+    "purpose": "Marks editorial agency sections with a mono index, a display title, and a single emphasized word.",
+    "bestFor": [
+      "editorial agency landings",
+      "numbered portfolio sections",
+      "contact and services heads"
+    ],
+    "tone": [
+      "editorial",
+      "professional"
+    ],
+    "industries": [
+      "design",
+      "agency"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "index",
+      "label",
+      "meta",
+      "headline",
+      "emphasis"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "heading",
+      "agency",
+      "index",
+      "atom"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    }
+  },
+  {
     "name": "alert",
     "displayName": "Alert",
     "category": "atoms",
@@ -5290,6 +5347,404 @@
       "layout": "fit",
       "width": 1440,
       "height": 900
+    }
+  },
+  {
+    "name": "agency-contact-form",
+    "displayName": "AgencyContactForm",
+    "category": "marketing",
+    "description": "Agency contact form with numbered fields, project and budget selects, and inline validation UX.",
+    "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+    "sectionCategory": "form",
+    "purpose": "Collects a brief with required name, email, project type, and budget before submit.",
+    "bestFor": [
+      "studio inquiry forms",
+      "project briefing",
+      "agency contact blocks"
+    ],
+    "tone": [
+      "editorial",
+      "professional"
+    ],
+    "industries": [
+      "design",
+      "agency"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "grid",
+      "alignment": "left",
+      "columns": 2
+    },
+    "slots": [
+      "name",
+      "email",
+      "projectType",
+      "budget",
+      "brief",
+      "submit"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "contact"
+    ],
+    "tags": [
+      "form",
+      "contact",
+      "agency",
+      "validation",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 960,
+      "height": 900
+    }
+  },
+  {
+    "name": "agency-contact-section",
+    "displayName": "AgencyContactSection",
+    "category": "marketing",
+    "description": "Contact head, studio meta, schematic map, and the agency inquiry form in one section.",
+    "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+    "sectionCategory": "contact",
+    "purpose": "Closes the agency page with booking copy and a validated brief form.",
+    "bestFor": [
+      "studio contact pages",
+      "agency landings",
+      "project intake"
+    ],
+    "tone": [
+      "editorial",
+      "professional"
+    ],
+    "industries": [
+      "design",
+      "agency"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "high",
+    "layout": {
+      "type": "split",
+      "alignment": "mixed",
+      "columns": 2
+    },
+    "slots": [
+      "headline",
+      "description",
+      "studio",
+      "form"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "features"
+    ],
+    "recommendedBefore": [
+      "footer"
+    ],
+    "tags": [
+      "contact",
+      "agency",
+      "form",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1100
+    }
+  },
+  {
+    "name": "agency-index-section",
+    "displayName": "AgencyIndexSection",
+    "category": "marketing",
+    "description": "Agency index intro with numbered heading, manifesto copy, category strip, and selected-work grid.",
+    "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+    "sectionCategory": "hero",
+    "purpose": "Opens the agency page with the Form follows friction intro and a browsable work index.",
+    "bestFor": [
+      "studio landings",
+      "portfolio indexes",
+      "editorial agency intros"
+    ],
+    "tone": [
+      "editorial",
+      "bold"
+    ],
+    "industries": [
+      "design",
+      "agency"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "left"
+    },
+    "slots": [
+      "kicker",
+      "headline",
+      "description",
+      "primaryCTA",
+      "categories",
+      "gallery"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "navbar"
+    ],
+    "recommendedBefore": [
+      "features"
+    ],
+    "tags": [
+      "index",
+      "agency",
+      "hero",
+      "gallery",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 1600
+    }
+  },
+  {
+    "name": "agency-layout-page",
+    "displayName": "AgencyLayoutPage",
+    "category": "marketing",
+    "description": "Full LAYOUT agency page wiring topbar, index, services, contact form, and footer chrome.",
+    "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+    "sectionCategory": "page",
+    "purpose": "Assembles the agency-layout children into one editorial landing that matches the CodePen.",
+    "bestFor": [
+      "studio landings",
+      "independent design practices",
+      "source-distributed agency samples"
+    ],
+    "tone": [
+      "editorial",
+      "bold"
+    ],
+    "industries": [
+      "design",
+      "agency"
+    ],
+    "contentDensity": "high",
+    "visualWeight": "high",
+    "layout": {
+      "type": "full-width",
+      "alignment": "mixed"
+    },
+    "slots": [
+      "navigation",
+      "index",
+      "services",
+      "contact",
+      "footer"
+    ],
+    "capabilities": {
+      "supportsImage": true,
+      "supportsVideo": false,
+      "supportsForm": true,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "tags": [
+      "page",
+      "agency",
+      "layout",
+      "contact",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 2800
+    }
+  },
+  {
+    "name": "agency-services-section",
+    "displayName": "AgencyServicesSection",
+    "category": "marketing",
+    "description": "Numbered agency services block with a What I do heading and expandable practice categories.",
+    "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+    "sectionCategory": "features",
+    "purpose": "Lists identity, editorial, web, and direction as one accordion that matches the LAYOUT pen.",
+    "bestFor": [
+      "studio service menus",
+      "practice offerings",
+      "editorial capability lists"
+    ],
+    "tone": [
+      "editorial",
+      "professional"
+    ],
+    "industries": [
+      "design",
+      "agency"
+    ],
+    "contentDensity": "medium",
+    "visualWeight": "medium",
+    "layout": {
+      "type": "stack",
+      "alignment": "left"
+    },
+    "slots": [
+      "headline",
+      "serviceList"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": false,
+      "supportsDarkMode": true
+    },
+    "recommendedAfter": [
+      "hero"
+    ],
+    "recommendedBefore": [
+      "contact"
+    ],
+    "tags": [
+      "services",
+      "agency",
+      "accordion",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "name": "agency-topbar",
+    "displayName": "AgencyTopbar",
+    "category": "marketing",
+    "description": "Sticky agency chrome with a LAYOUT brand, primary anchors, and a live local-time clock.",
+    "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+    "sectionCategory": "navbar",
+    "purpose": "Pins editorial agency navigation and a client-safe local clock above numbered page sections.",
+    "bestFor": [
+      "agency landings",
+      "editorial studio sites",
+      "single-page section navigation"
+    ],
+    "tone": [
+      "editorial",
+      "professional"
+    ],
+    "industries": [
+      "design",
+      "agency"
+    ],
+    "contentDensity": "low",
+    "visualWeight": "low",
+    "layout": {
+      "type": "full-width",
+      "alignment": "mixed"
+    },
+    "slots": [
+      "brand",
+      "navigationItems",
+      "localTime",
+      "mobileNavigation"
+    ],
+    "capabilities": {
+      "supportsImage": false,
+      "supportsVideo": false,
+      "supportsForm": false,
+      "supportsCTA": true,
+      "supportsDarkMode": true
+    },
+    "recommendedBefore": [
+      "hero"
+    ],
+    "tags": [
+      "navbar",
+      "agency",
+      "clock",
+      "marketing"
+    ],
+    "addedAt": "2026-09-17",
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "a11y": {
+      "keyboardNav": true,
+      "reducedMotion": true
+    },
+    "preview": {
+      "layout": "fit",
+      "width": 1440,
+      "height": 180
     }
   },
   {

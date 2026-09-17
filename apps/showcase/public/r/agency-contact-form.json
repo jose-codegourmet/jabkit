@@ -1,0 +1,107 @@
+{
+  "name": "agency-contact-form",
+  "displayName": "AgencyContactForm",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Agency contact form with numbered fields, project and budget selects, and inline validation UX.",
+  "sectionCategory": "form",
+  "purpose": "Collects a brief with required name, email, project type, and budget before submit.",
+  "bestFor": [
+    "studio inquiry forms",
+    "project briefing",
+    "agency contact blocks"
+  ],
+  "tone": [
+    "editorial",
+    "professional"
+  ],
+  "industries": [
+    "design",
+    "agency"
+  ],
+  "contentDensity": "medium",
+  "visualWeight": "medium",
+  "layout": {
+    "type": "grid",
+    "alignment": "left",
+    "columns": 2
+  },
+  "slots": [
+    "name",
+    "email",
+    "projectType",
+    "budget",
+    "brief",
+    "submit"
+  ],
+  "capabilities": {
+    "supportsImage": false,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "recommendedAfter": [
+    "contact"
+  ],
+  "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+  "tags": [
+    "form",
+    "contact",
+    "agency",
+    "validation",
+    "marketing"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 960,
+    "height": 900
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "agency-contact-form/AgencyContactForm.tsx",
+      "type": "component",
+      "content": "\"use client\";\n\nimport { type FormEvent, useId, useRef, useState } from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport { agencyBudgets, agencyProjectTypes } from \"./AgencyContactForm.mocks\";\nimport type {\n  AgencyContactFormProps,\n  AgencyContactFormValues,\n} from \"./AgencyContactForm.types\";\n\nconst defaults = {\n  nameLabel: \"Name\",\n  emailLabel: \"Email\",\n  projectTypeLabel: \"Project type\",\n  budgetLabel: \"Budget\",\n  briefLabel: \"Brief\",\n  briefPlaceholder: \"What are you working on?\",\n  requiredLabel: \"Required\",\n  selectLabel: \"Select\",\n  submitLabel: \"Send message\",\n  sendingLabel: \"Sending\",\n  successLabel: \"Sent\",\n} as const;\n\ntype FieldKey = keyof AgencyContactFormValues;\n\nconst emptyValues: AgencyContactFormValues = {\n  name: \"\",\n  email: \"\",\n  projectType: \"\",\n  budget: \"\",\n  brief: \"\",\n};\n\nfunction isValidEmail(value: string) {\n  return value.includes(\"@\") && value.split(\"@\")[1]?.length > 0;\n}\n\nexport function AgencyContactForm({\n  className,\n  nameLabel = defaults.nameLabel,\n  emailLabel = defaults.emailLabel,\n  projectTypeLabel = defaults.projectTypeLabel,\n  budgetLabel = defaults.budgetLabel,\n  briefLabel = defaults.briefLabel,\n  briefPlaceholder = defaults.briefPlaceholder,\n  requiredLabel = defaults.requiredLabel,\n  selectLabel = defaults.selectLabel,\n  submitLabel = defaults.submitLabel,\n  sendingLabel = defaults.sendingLabel,\n  successLabel = defaults.successLabel,\n  projectTypes = [...agencyProjectTypes],\n  budgets = [...agencyBudgets],\n  defaultValues,\n  onSubmit,\n  onInvalidField,\n  onFormSubmit,\n  ...props\n}: AgencyContactFormProps) {\n  const formId = useId();\n  const nameRef = useRef<HTMLInputElement>(null);\n  const emailRef = useRef<HTMLInputElement>(null);\n  const projectRef = useRef<HTMLSelectElement>(null);\n  const budgetRef = useRef<HTMLSelectElement>(null);\n  const [values, setValues] = useState<AgencyContactFormValues>({\n    ...emptyValues,\n    ...defaultValues,\n  });\n  const [errors, setErrors] = useState<Partial<Record<FieldKey, string>>>({});\n  const [status, setStatus] = useState<\"idle\" | \"sending\" | \"sent\" | \"failed\">(\n    \"idle\",\n  );\n  const [banner, setBanner] = useState<string | null>(null);\n\n  const fieldClass = (key: FieldKey) =>\n    cn(\n      \"w-full rounded-none border-0 border-b bg-transparent px-0 py-3 text-base text-foreground outline-none transition-colors duration-200 placeholder:text-muted-foreground motion-reduce:transition-none\",\n      errors[key]\n        ? \"border-warning focus:border-warning\"\n        : \"border-foreground focus:border-warning\",\n    );\n\n  const validate = (next: AgencyContactFormValues) => {\n    const nextErrors: Partial<Record<FieldKey, string>> = {};\n    if (!next.name.trim()) {\n      nextErrors.name = \"Please fill out this field.\";\n    }\n    if (!next.email.trim()) {\n      nextErrors.email = \"Please fill out this field.\";\n    } else if (!isValidEmail(next.email.trim())) {\n      nextErrors.email = `Please include an '@' in the email address. '${next.email}' is missing an '@'.`;\n    }\n    if (!next.projectType) {\n      nextErrors.projectType = \"Please fill out this field.\";\n    }\n    if (!next.budget) {\n      nextErrors.budget = \"Please fill out this field.\";\n    }\n    return nextErrors;\n  };\n\n  const focusFirst = (nextErrors: Partial<Record<FieldKey, string>>) => {\n    const order = [\"name\", \"email\", \"projectType\", \"budget\"] as const;\n    const first = order.find((key) => nextErrors[key]);\n    if (!first) return;\n    onInvalidField?.(first);\n    const map = {\n      name: nameRef,\n      email: emailRef,\n      projectType: projectRef,\n      budget: budgetRef,\n    } as const;\n    map[first].current?.focus();\n  };\n\n  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {\n    event.preventDefault();\n    onFormSubmit?.(event);\n    const nextErrors = validate(values);\n    setErrors(nextErrors);\n    setBanner(null);\n    if (Object.keys(nextErrors).length) {\n      setStatus(\"idle\");\n      focusFirst(nextErrors);\n      return;\n    }\n    setStatus(\"sending\");\n    try {\n      await onSubmit?.(values);\n      setStatus(\"sent\");\n    } catch {\n      setStatus(\"failed\");\n      setBanner(\"Failed to send. Try again or write us directly.\");\n    }\n  };\n\n  const fieldLabel = (\n    index: string,\n    text: string,\n    hint: string,\n    htmlFor: string,\n  ) => (\n    <label\n      htmlFor={htmlFor}\n      className=\"mb-2 flex items-baseline justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground\"\n    >\n      <span>\n        <span className=\"text-foreground\">[{index}]</span> {text}\n      </span>\n      <span>{hint}</span>\n    </label>\n  );\n\n  return (\n    <form\n      data-slot=\"agency-contact-form\"\n      className={cn(\"bg-background text-foreground\", className)}\n      noValidate\n      onSubmit={handleSubmit}\n      {...props}\n    >\n      {banner ? (\n        <p\n          role=\"alert\"\n          className=\"mb-6 border border-destructive px-4 py-3 font-mono text-[11px] uppercase tracking-[0.12em] text-destructive\"\n        >\n          {banner}\n        </p>\n      ) : null}\n      {status === \"sent\" ? (\n        <p\n          role=\"status\"\n          className=\"mb-6 border border-success px-4 py-3 font-mono text-[11px] uppercase tracking-[0.12em] text-success\"\n        >\n          {successLabel}\n        </p>\n      ) : null}\n      <div className=\"grid gap-8 md:grid-cols-2\">\n        <div>\n          {fieldLabel(\"01\", nameLabel, requiredLabel, `${formId}-name`)}\n          <input\n            ref={nameRef}\n            id={`${formId}-name`}\n            name=\"name\"\n            autoComplete=\"name\"\n            value={values.name}\n            aria-invalid={Boolean(errors.name)}\n            aria-describedby={errors.name ? `${formId}-name-error` : undefined}\n            className={fieldClass(\"name\")}\n            onChange={(event) =>\n              setValues((current) => ({ ...current, name: event.target.value }))\n            }\n          />\n          {errors.name ? (\n            <p\n              id={`${formId}-name-error`}\n              className=\"mt-2 font-mono text-[11px] text-warning\"\n            >\n              {errors.name}\n            </p>\n          ) : null}\n        </div>\n        <div>\n          {fieldLabel(\"02\", emailLabel, requiredLabel, `${formId}-email`)}\n          <input\n            ref={emailRef}\n            id={`${formId}-email`}\n            name=\"email\"\n            type=\"email\"\n            autoComplete=\"email\"\n            value={values.email}\n            aria-invalid={Boolean(errors.email)}\n            aria-describedby={\n              errors.email ? `${formId}-email-error` : undefined\n            }\n            className={fieldClass(\"email\")}\n            onChange={(event) =>\n              setValues((current) => ({\n                ...current,\n                email: event.target.value,\n              }))\n            }\n          />\n          {errors.email ? (\n            <p\n              id={`${formId}-email-error`}\n              className=\"mt-2 font-mono text-[11px] text-warning\"\n            >\n              {errors.email}\n            </p>\n          ) : null}\n        </div>\n        <div>\n          {fieldLabel(\n            \"03\",\n            projectTypeLabel,\n            `${requiredLabel} / ${selectLabel}`,\n            `${formId}-project`,\n          )}\n          <select\n            ref={projectRef}\n            id={`${formId}-project`}\n            name=\"projectType\"\n            value={values.projectType}\n            aria-invalid={Boolean(errors.projectType)}\n            aria-describedby={\n              errors.projectType ? `${formId}-project-error` : undefined\n            }\n            className={cn(fieldClass(\"projectType\"), \"appearance-none\")}\n            onChange={(event) =>\n              setValues((current) => ({\n                ...current,\n                projectType: event.target.value,\n              }))\n            }\n          >\n            {projectTypes.map((option) => (\n              <option\n                key={`${option.value}-${option.label}`}\n                value={option.value}\n              >\n                {option.label}\n              </option>\n            ))}\n          </select>\n          {errors.projectType ? (\n            <p\n              id={`${formId}-project-error`}\n              className=\"mt-2 font-mono text-[11px] text-warning\"\n            >\n              {errors.projectType}\n            </p>\n          ) : null}\n        </div>\n        <div>\n          {fieldLabel(\n            \"04\",\n            budgetLabel,\n            `${requiredLabel} / ${selectLabel}`,\n            `${formId}-budget`,\n          )}\n          <select\n            ref={budgetRef}\n            id={`${formId}-budget`}\n            name=\"budget\"\n            value={values.budget}\n            aria-invalid={Boolean(errors.budget)}\n            aria-describedby={\n              errors.budget ? `${formId}-budget-error` : undefined\n            }\n            className={cn(fieldClass(\"budget\"), \"appearance-none\")}\n            onChange={(event) =>\n              setValues((current) => ({\n                ...current,\n                budget: event.target.value,\n              }))\n            }\n          >\n            {budgets.map((option) => (\n              <option\n                key={`${option.value}-${option.label}`}\n                value={option.value}\n              >\n                {option.label}\n              </option>\n            ))}\n          </select>\n          {errors.budget ? (\n            <p\n              id={`${formId}-budget-error`}\n              className=\"mt-2 font-mono text-[11px] text-warning\"\n            >\n              {errors.budget}\n            </p>\n          ) : null}\n        </div>\n      </div>\n      <div className=\"mt-8\">\n        {fieldLabel(\"05\", briefLabel, \"Optional\", `${formId}-brief`)}\n        <textarea\n          id={`${formId}-brief`}\n          name=\"brief\"\n          rows={6}\n          placeholder={briefPlaceholder}\n          value={values.brief}\n          className={cn(fieldClass(\"brief\"), \"min-h-40 resize-y\")}\n          onChange={(event) =>\n            setValues((current) => ({ ...current, brief: event.target.value }))\n          }\n        />\n      </div>\n      <button\n        type=\"submit\"\n        disabled={status === \"sending\"}\n        className=\"mt-8 inline-flex items-center gap-3 rounded-none bg-foreground px-6 py-3 font-mono text-[11px] tracking-[0.16em] text-background uppercase transition-[transform,background-color] duration-300 hover:bg-warning hover:text-warning-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-70 motion-reduce:transition-none\"\n      >\n        {status === \"sending\" ? sendingLabel : submitLabel}\n        <span aria-hidden=\"true\">→</span>\n      </button>\n    </form>\n  );\n}\n"
+    },
+    {
+      "path": "agency-contact-form/AgencyContactForm.types.ts",
+      "type": "types",
+      "content": "import type { FormEvent, HTMLAttributes } from \"react\";\n\nexport interface AgencyContactFormValues {\n  name: string;\n  email: string;\n  projectType: string;\n  budget: string;\n  brief: string;\n}\n\nexport interface AgencyContactFormSelectOption {\n  value: string;\n  label: string;\n}\n\nexport interface AgencyContactFormProps\n  extends Omit<HTMLAttributes<HTMLFormElement>, \"onSubmit\"> {\n  nameLabel?: string;\n  emailLabel?: string;\n  projectTypeLabel?: string;\n  budgetLabel?: string;\n  briefLabel?: string;\n  briefPlaceholder?: string;\n  requiredLabel?: string;\n  selectLabel?: string;\n  submitLabel?: string;\n  sendingLabel?: string;\n  successLabel?: string;\n  projectTypes?: AgencyContactFormSelectOption[];\n  budgets?: AgencyContactFormSelectOption[];\n  defaultValues?: Partial<AgencyContactFormValues>;\n  onSubmit?: (values: AgencyContactFormValues) => void | Promise<void>;\n  onInvalidField?: (field: keyof AgencyContactFormValues) => void;\n  onFormSubmit?: (event: FormEvent<HTMLFormElement>) => void;\n}\n"
+    },
+    {
+      "path": "agency-contact-form/index.ts",
+      "type": "index",
+      "content": "export { AgencyContactForm } from \"./AgencyContactForm\";\nexport type * from \"./AgencyContactForm.types\";\n"
+    },
+    {
+      "path": "agency-contact-form/AgencyContactForm.mocks.ts",
+      "type": "mocks",
+      "content": "import type { AgencyContactFormProps } from \"./AgencyContactForm.types\";\n\nexport const agencyProjectTypes = [\n  { value: \"\", label: \"-- Choose --\" },\n  { value: \"identity\", label: \"Identity\" },\n  { value: \"editorial\", label: \"Editorial\" },\n  { value: \"web\", label: \"Web\" },\n  { value: \"direction\", label: \"Direction\" },\n  { value: \"other\", label: \"Other\" },\n] as const;\n\nexport const agencyBudgets = [\n  { value: \"\", label: \"-- Choose --\" },\n  { value: \"under-5k\", label: \"Under €5k\" },\n  { value: \"5-15k\", label: \"€5-15k\" },\n  { value: \"15-50k\", label: \"€15-50k\" },\n  { value: \"50k-plus\", label: \"€50k+\" },\n] as const;\n\nexport const agencyContactFormMocks = {\n  default: {\n    nameLabel: \"Name\",\n    emailLabel: \"Email\",\n    projectTypeLabel: \"Project type\",\n    budgetLabel: \"Budget\",\n    briefLabel: \"Brief\",\n    briefPlaceholder: \"What are you working on?\",\n    requiredLabel: \"Required\",\n    selectLabel: \"Select\",\n    submitLabel: \"Send message\",\n    sendingLabel: \"Sending\",\n    successLabel: \"Sent\",\n    projectTypes: [...agencyProjectTypes],\n    budgets: [...agencyBudgets],\n  },\n  alternate: {\n    nameLabel: \"Your name\",\n    emailLabel: \"Work email\",\n    projectTypeLabel: \"Need\",\n    budgetLabel: \"Range\",\n    briefLabel: \"Notes\",\n    briefPlaceholder: \"Timeline, references, constraints.\",\n    requiredLabel: \"Required\",\n    selectLabel: \"Select\",\n    submitLabel: \"Send brief\",\n    sendingLabel: \"Sending\",\n    successLabel: \"Received\",\n    projectTypes: [\n      { value: \"\", label: \"-- Choose --\" },\n      { value: \"audit\", label: \"Audit\" },\n      { value: \"build\", label: \"Build\" },\n      { value: \"steer\", label: \"Steer\" },\n    ],\n    budgets: [\n      { value: \"\", label: \"-- Choose --\" },\n      { value: \"under-10k\", label: \"Under €10k\" },\n      { value: \"10-25k\", label: \"€10-25k\" },\n    ],\n  },\n} satisfies Record<string, AgencyContactFormProps>;\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<div className=\"w-[min(880px,92vw)] bg-background p-8\">\n      <AgencyContactForm {...agencyContactFormMocks.default} />\n    </div>"
+    },
+    {
+      "name": "Variants",
+      "code": "<div className=\"w-[min(880px,92vw)] bg-background p-8\">\n      <AgencyContactForm {...agencyContactFormMocks.alternate} />\n    </div>"
+    }
+  ]
+}

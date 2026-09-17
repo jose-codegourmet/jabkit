@@ -1,0 +1,104 @@
+{
+  "name": "agency-layout-page",
+  "displayName": "AgencyLayoutPage",
+  "version": "1.0.0",
+  "addedAt": "2026-09-17",
+  "description": "Full LAYOUT agency page wiring topbar, index, services, contact form, and footer chrome.",
+  "sectionCategory": "page",
+  "purpose": "Assembles the agency-layout children into one editorial landing that matches the CodePen.",
+  "bestFor": [
+    "studio landings",
+    "independent design practices",
+    "source-distributed agency samples"
+  ],
+  "tone": [
+    "editorial",
+    "bold"
+  ],
+  "industries": [
+    "design",
+    "agency"
+  ],
+  "contentDensity": "high",
+  "visualWeight": "high",
+  "layout": {
+    "type": "full-width",
+    "alignment": "mixed"
+  },
+  "slots": [
+    "navigation",
+    "index",
+    "services",
+    "contact",
+    "footer"
+  ],
+  "capabilities": {
+    "supportsImage": true,
+    "supportsVideo": false,
+    "supportsForm": true,
+    "supportsCTA": true,
+    "supportsDarkMode": true
+  },
+  "inspoUrl": "https://codepen.io/fchaussin/pen/PwbPEVV",
+  "tags": [
+    "page",
+    "agency",
+    "layout",
+    "contact",
+    "marketing"
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "agency-section-heading",
+    "agency-topbar",
+    "agency-index-section",
+    "agency-services-section",
+    "agency-contact-form",
+    "agency-contact-section"
+  ],
+  "a11y": {
+    "keyboardNav": true,
+    "reducedMotion": true
+  },
+  "preview": {
+    "layout": "fit",
+    "width": 1440,
+    "height": 2800
+  },
+  "category": "marketing",
+  "files": [
+    {
+      "path": "agency-layout-page/AgencyLayoutPage.tsx",
+      "type": "component",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/cn\";\nimport { AgencyContactSection } from \"@/components/jabkit/agency-contact-section\";\nimport { AgencyIndexSection } from \"@/components/jabkit/agency-index-section\";\nimport { AgencyServicesSection } from \"@/components/jabkit/agency-services-section\";\nimport { AgencyTopbar } from \"@/components/jabkit/agency-topbar\";\nimport type { AgencyLayoutPageProps } from \"./AgencyLayoutPage.types\";\n\nconst defaultFooterColumns = [\n  {\n    title: \"Index\",\n    links: [\n      { label: \"Top\", href: \"#top\" },\n      { label: \"Works\", href: \"#works\" },\n      { label: \"Services\", href: \"#services\" },\n    ],\n  },\n  {\n    title: \"Social\",\n    links: [\n      { label: \"Are.na\", href: \"#arena\" },\n      { label: \"Instagram\", href: \"#instagram\" },\n      { label: \"Read.cv\", href: \"#readcv\" },\n    ],\n  },\n  {\n    title: \"Legal\",\n    links: [\n      { label: \"Imprint\", href: \"#imprint\" },\n      { label: \"Privacy\", href: \"#privacy\" },\n      { label: \"Cookies\", href: \"#cookies\" },\n    ],\n  },\n  {\n    title: \"Colophon\",\n    links: [\n      { label: \"Set in Archivo and JBR\", href: \"#colophon\" },\n      { label: \"OKLCH color space\", href: \"#color\" },\n      { label: \"Hand-coded HTML/CSS\", href: \"#build\" },\n    ],\n  },\n];\n\nexport function AgencyLayoutPage({\n  className,\n  nav,\n  index,\n  services,\n  contact,\n  footerBrand = \"LA YO UT\",\n  footerColumns = defaultFooterColumns,\n  ...props\n}: AgencyLayoutPageProps) {\n  return (\n    <div\n      id=\"top\"\n      data-slot=\"agency-layout-page\"\n      className={cn(\n        \"bg-background text-foreground motion-safe:scroll-smooth\",\n        className,\n      )}\n      {...props}\n    >\n      <AgencyTopbar {...nav} />\n      <AgencyIndexSection {...index} />\n      <AgencyServicesSection {...services} />\n      <AgencyContactSection {...contact} />\n      <footer className=\"bg-foreground px-[var(--jk-space-gutter)] py-16 text-background\">\n        <p className=\"font-[family-name:var(--jk-font-display)] text-5xl font-semibold tracking-tight uppercase sm:text-7xl\">\n          {footerBrand.split(\" \").map((part) => (\n            <React.Fragment key={part}>\n              <span\n                aria-hidden=\"true\"\n                className=\"mx-1 text-warning first:hidden\"\n              >\n                ●\n              </span>\n              {part}\n            </React.Fragment>\n          ))}\n        </p>\n        <nav\n          aria-label=\"Footer\"\n          className=\"mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4\"\n        >\n          {footerColumns.map((column) => (\n            <div key={column.title}>\n              <p className=\"font-mono text-[11px] uppercase tracking-[0.16em] text-background/70\">\n                {column.title}\n              </p>\n              <ul className=\"mt-4 space-y-2\">\n                {column.links.map((link) => (\n                  <li key={link.href}>\n                    <a\n                      href={link.href}\n                      className=\"font-mono text-[11px] uppercase tracking-[0.14em] text-background no-underline transition-opacity duration-300 hover:opacity-70 motion-reduce:transition-none\"\n                    >\n                      {link.label}\n                    </a>\n                  </li>\n                ))}\n              </ul>\n            </div>\n          ))}\n        </nav>\n      </footer>\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "agency-layout-page/AgencyLayoutPage.types.ts",
+      "type": "types",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport type { AgencyContactSectionProps } from \"@/components/jabkit/agency-contact-section\";\nimport type { AgencyIndexSectionProps } from \"@/components/jabkit/agency-index-section\";\nimport type { AgencyServicesSectionProps } from \"@/components/jabkit/agency-services-section\";\nimport type { AgencyTopbarProps } from \"@/components/jabkit/agency-topbar\";\n\nexport interface AgencyLayoutFooterLink {\n  label: string;\n  href: string;\n}\n\nexport interface AgencyLayoutFooterColumn {\n  title: string;\n  links: AgencyLayoutFooterLink[];\n}\n\nexport interface AgencyLayoutPageProps extends HTMLAttributes<HTMLElement> {\n  nav?: AgencyTopbarProps;\n  index?: AgencyIndexSectionProps;\n  services?: AgencyServicesSectionProps;\n  contact?: AgencyContactSectionProps;\n  footerBrand?: string;\n  footerColumns?: AgencyLayoutFooterColumn[];\n}\n"
+    },
+    {
+      "path": "agency-layout-page/index.ts",
+      "type": "index",
+      "content": "export { AgencyLayoutPage } from \"./AgencyLayoutPage\";\nexport type * from \"./AgencyLayoutPage.types\";\n"
+    },
+    {
+      "path": "lib/cn.ts",
+      "type": "lib",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...classes: ClassValue[]) {\n  return twMerge(clsx(classes));\n}\n"
+    }
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<>\n      <AgencyLayoutPage {...agencyLayoutPageMocks.default} />\n    </>"
+    },
+    {
+      "name": "Variants",
+      "code": "<>\n      <AgencyLayoutPage {...agencyLayoutPageMocks.alternate} />\n    </>"
+    }
+  ]
+}
