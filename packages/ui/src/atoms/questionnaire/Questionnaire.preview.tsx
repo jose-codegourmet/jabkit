@@ -24,7 +24,6 @@ export default {
       className="mx-auto w-[min(100%,28rem)]"
       defaultItem="direction"
       items={questionnaireMocks.defaultItems}
-      onSubmit={(event) => event.preventDefault()}
       shortcuts="letters"
     >
       <QuestionnaireProgress />
@@ -76,7 +75,6 @@ export default {
       className="mx-auto w-[min(100%,28rem)]"
       defaultItem="kind"
       items={questionnaireMocks.skipItems}
-      onSubmit={(event) => event.preventDefault()}
     >
       <QuestionnaireProgress />
       {questionnaireMocks.skipItems.map((question) => (
