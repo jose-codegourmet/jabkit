@@ -6,7 +6,9 @@
     "dev": "pnpm -w registry:build && next dev",
     "build": "pnpm -w registry:build && next build",
     "start": "next start",
-    "typecheck": "pnpm -w registry:build && tsc --noEmit"
+    "typecheck": "pnpm -w registry:build && tsc --noEmit",
+    "storybook": "storybook dev --port 6007",
+    "storybook:build": "storybook build"
   },
   "dependencies": {
     "@jabkit/tokens": "workspace:*",
@@ -19,9 +21,13 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^10.6.0",
+    "@storybook/nextjs-vite": "^10.6.0",
     "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.8",
-    "typescript": "^5.9.3"
+    "storybook": "^10.6.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.6"
   }
 }

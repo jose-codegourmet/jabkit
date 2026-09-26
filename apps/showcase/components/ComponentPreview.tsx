@@ -75,8 +75,8 @@ export function ComponentPreview({
     : ATOM_HEIGHT;
 
   return (
-    <section className="overflow-hidden rounded-[--radius] border border-border bg-card">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-2 sm:px-3">
+    <section className="vd-card overflow-hidden">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-ink px-2 sm:px-3">
         <div className="flex">
           {(
             [

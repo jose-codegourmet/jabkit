@@ -14,6 +14,7 @@
     "dev": "pnpm --parallel --filter @jabkit/showcase --filter @jabkit/minimal --filter @jabkit/neo-brutalism --filter @jabkit/editorial --filter @jabkit/luxury --filter @jabkit/retro dev",
     "storybook": "pnpm --filter @jabkit/ui storybook",
     "storybook:build": "pnpm --filter @jabkit/ui storybook:build",
+    "storybook:showcase": "pnpm --filter @jabkit/showcase storybook",
     "lint": "biome check .",
     "format": "biome format --write .",
     "typecheck": "turbo run typecheck --filter=!@jabkit/minimal --filter=!@jabkit/neo-brutalism --filter=!@jabkit/editorial --filter=!@jabkit/luxury --filter=!@jabkit/retro",

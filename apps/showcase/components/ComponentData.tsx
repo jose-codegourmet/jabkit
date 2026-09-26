@@ -5,7 +5,7 @@ import type { RegistryEntry } from "../lib/registry";
 function Flag({ ok }: { ok: boolean }) {
   return ok ? (
     <span className="inline-flex items-center gap-1.5 text-foreground">
-      <CheckIcon className="size-3.5 text-primary" />
+      <CheckIcon className="size-3.5 text-success" />
       Yes
     </span>
   ) : (
@@ -76,8 +76,8 @@ export function ComponentData({
   ];
 
   return (
-    <section className="rounded-[--radius] border border-border bg-card p-5">
-      <h2 className="font-medium">Component Data</h2>
+    <section className="vd-card p-5">
+      <h2 className="font-display text-lg">Component data</h2>
       <dl className="mt-4 space-y-3 text-sm">
         {rows.map((row) => (
           <div
@@ -90,11 +90,11 @@ export function ComponentData({
         ))}
       </dl>
       {entry.tags.length > 0 && (
-        <div className="mt-5 flex flex-wrap gap-2 border-t border-border pt-4">
+        <div className="mt-5 flex flex-wrap gap-2 border-t-2 border-dashed border-ink pt-4">
           {entry.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-accent px-2.5 py-1 font-mono text-[11px] text-accent-foreground"
+              className="rounded-full border border-ink bg-accent px-2.5 py-0.5 font-mono text-[11px] text-accent-foreground"
             >
               {tag}
             </span>

@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "showcase",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "export PATH=$HOME/.nvm/versions/node/v24.15.0/bin:$PATH && cd /Users/joseadrianbuctuanon/Documents/web_work/jabkit/apps/showcase && pnpm dev"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "showcase-storybook",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "export PATH=$HOME/.nvm/versions/node/v24.15.0/bin:$PATH && cd /Users/joseadrianbuctuanon/Documents/web_work/jabkit/apps/showcase && pnpm storybook --no-open"
+      ],
+      "port": 6007
+    }
+  ]
+}

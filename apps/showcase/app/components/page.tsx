@@ -1,24 +1,33 @@
-import Link from "next/link";
+import { Cross2Icon } from "@radix-ui/react-icons";
 import type { Route } from "next";
+import Link from "next/link";
+import { CatalogueCard } from "../../components/CatalogueCard";
 import { CatalogueFilters } from "../../components/CatalogueFilters";
 import { PreviewImage } from "../../components/PreviewImage";
-import { SiteHeader } from "../../components/SiteHeader";
+import { SiteShell } from "../../components/SiteShell";
 import { catalogueGroups, itemKind } from "../../lib/catalogue-groups";
 import { registryIndex } from "../../lib/registry";
+
+type CatalogueQuery = {
+  q?: string;
+  category?: string;
+  tag?: string | string[];
+  sort?: string;
+  dependency?: string;
+  kind?: string;
+  group?: string;
+  page?: string;
+};
+
+const sortLabels: Record<string, string> = {
+  newest: "Newest",
+  name: "Name A–Z",
+};
 
 export default async function ComponentsPage({
   searchParams,
 }: {
-  searchParams: Promise<{
-    q?: string;
-    category?: string;
-    tag?: string | string[];
-    sort?: string;
-    dependency?: string;
-    kind?: string;
-    group?: string;
-    page?: string;
-  }>;
+  searchParams: Promise<CatalogueQuery>;
 }) {
   const query = await searchParams;
   const tags = query.tag
@@ -71,24 +80,58 @@ export default async function ComponentsPage({
       ? "Components"
       : query.kind === "block"
         ? "Blocks"
-        : "Everything");
-  const paginationHref = (page: number): Route => {
+        : query.category
+          ? query.category[0].toUpperCase() + query.category.slice(1)
+          : "Everything");
+
+  const hrefWith = (
+    changes: Partial<Omit<CatalogueQuery, "tag">> & { tag?: string[] },
+  ): Route => {
+    const next = { ...query, tag: tags, page: undefined, ...changes };
     const params = new URLSearchParams();
-    if (query.q) params.set("q", query.q);
-    if (query.category) params.set("category", query.category);
-    for (const tag of tags) params.append("tag", tag);
-    if (query.sort) params.set("sort", query.sort);
-    if (query.dependency) params.set("dependency", query.dependency);
-    if (query.kind) params.set("kind", query.kind);
-    if (query.group) params.set("group", query.group);
-    if (page > 1) params.set("page", String(page));
+    if (next.q) params.set("q", next.q);
+    if (next.category) params.set("category", next.category);
+    for (const tag of next.tag ?? []) params.append("tag", tag);
+    if (next.sort) params.set("sort", next.sort);
+    if (next.dependency) params.set("dependency", next.dependency);
+    if (next.kind) params.set("kind", next.kind);
+    if (next.group) params.set("group", next.group);
+    if (next.page && next.page !== "1") params.set("page", next.page);
     const search = params.toString();
     return (search ? `/components?${search}` : "/components") as Route;
   };
+  const paginationHref = (page: number) => hrefWith({ page: String(page) });
+
+  const activeFilters: Array<{ label: string; href: Route }> = [
+    ...(query.q ? [{ label: `q: ${query.q}`, href: hrefWith({ q: "" }) }] : []),
+    ...(query.category
+      ? [{ label: query.category, href: hrefWith({ category: "" }) }]
+      : []),
+    ...(activeGroup
+      ? [{ label: activeGroup.label, href: hrefWith({ group: "" }) }]
+      : query.kind
+        ? [
+            {
+              label: query.kind === "block" ? "Blocks" : "Components",
+              href: hrefWith({ kind: "" }),
+            },
+          ]
+        : []),
+    ...tags.map((tag) => ({
+      label: `#${tag}`,
+      href: hrefWith({ tag: tags.filter((item) => item !== tag) }),
+    })),
+    ...(query.dependency === "zero"
+      ? [{ label: "Zero deps", href: hrefWith({ dependency: "" }) }]
+      : []),
+    ...(query.sort && sortLabels[query.sort]
+      ? [{ label: sortLabels[query.sort], href: hrefWith({ sort: "" }) }]
+      : []),
+  ];
+
   return (
-    <>
-      <SiteHeader />
-      <main className="min-h-[calc(100dvh-68px)] lg:flex">
+    <SiteShell>
+      <main className="min-h-[calc(100dvh-90px)] desk:flex">
         <CatalogueFilters
           current={{
             q: query.q,
@@ -97,9 +140,11 @@ export default async function ComponentsPage({
             sort: query.sort,
           }}
           groups={groups}
+          resultCount={filteredItems.length}
+          activeCount={activeFilters.length}
         />
         <section className="min-w-0 flex-1">
-          <div className="flex items-end justify-between gap-4 border-b border-border px-5 py-5 sm:px-6">
+          <div className="flex items-end justify-between gap-4 border-b-2 border-ink px-5 py-5 tab:px-6">
             <div>
               <p className="font-mono text-xs text-muted-foreground">
                 {query.kind === "block"
@@ -108,53 +153,62 @@ export default async function ComponentsPage({
                     ? "Interface primitives"
                     : "Component catalogue"}
               </p>
-              <h2 className="mt-1 text-xl font-semibold tracking-tight">
-                {title}
-              </h2>
+              <h2 className="mt-1 font-display text-2xl">{title}</h2>
             </div>
             <p className="shrink-0 font-mono text-xs text-muted-foreground">
               {filteredItems.length === 0
                 ? "0 results"
-                : `${(currentPage - 1) * pageSize + 1}-${Math.min(currentPage * pageSize, filteredItems.length)} of ${filteredItems.length}`}
+                : `${(currentPage - 1) * pageSize + 1}–${Math.min(currentPage * pageSize, filteredItems.length)} of ${filteredItems.length}`}
             </p>
           </div>
-          <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-8">
-            {items.map((item) => (
+          {activeFilters.length > 0 ? (
+            <div className="flex flex-wrap items-center gap-2 border-b-2 border-ink px-5 py-3 tab:px-6">
+              {activeFilters.map((filter) => (
+                <Link
+                  key={filter.label}
+                  href={filter.href}
+                  aria-label={`Remove filter ${filter.label}`}
+                  data-active="true"
+                  className="vd-chip min-h-[30px] text-xs"
+                >
+                  {filter.label}
+                  <Cross2Icon aria-hidden className="opacity-70" />
+                </Link>
+              ))}
               <Link
-                key={item.name}
-                href={`/${item.category}/${item.name}`}
-                className="group bg-background p-4 focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                href="/components"
+                className="ml-1 text-[13px] text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
               >
-                <div className="aspect-[16/10] overflow-hidden rounded-[--radius] border border-border bg-card">
-                  <PreviewImage
-                    name={item.name}
-                    displayName={item.displayName}
-                  />
-                </div>
-                <div className="pt-4">
-                  <p className="font-mono text-[11px] text-primary uppercase">
-                    {itemKind(item)}
-                  </p>
-                  <h2 className="mt-1 font-medium group-hover:text-primary">
-                    {item.displayName}
-                  </h2>
-                  <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
-                    {item.description}
-                  </p>
-                </div>
+                Clear all
               </Link>
+            </div>
+          ) : null}
+          <div className="grid gap-px bg-ink tab:grid-cols-2 desk:grid-cols-3 2xl:grid-cols-4">
+            {items.map((item) => (
+              <div key={item.name} className="bg-background p-4">
+                <CatalogueCard
+                  name={item.name}
+                  href={`/${item.category}/${item.name}` as Route}
+                  displayName={item.displayName}
+                  kind={itemKind(item)}
+                  description={item.description}
+                  preview={
+                    <PreviewImage
+                      name={item.name}
+                      displayName={item.displayName}
+                    />
+                  }
+                />
+              </div>
             ))}
             {items.length === 0 && (
-              <div className="col-span-full grid min-h-80 place-items-center p-8 text-center">
+              <div className="col-span-full grid min-h-80 place-items-center bg-background p-8 text-center">
                 <div>
-                  <h2 className="font-medium">No components found</h2>
+                  <h2 className="font-display text-2xl">No components found</h2>
                   <p className="mt-2 text-sm text-muted-foreground">
                     Try another search or return to the full library.
                   </p>
-                  <Link
-                    href="/components"
-                    className="mt-4 inline-block text-sm text-primary hover:underline"
-                  >
+                  <Link href="/components" className="vd-btn vd-btn-sm mt-5">
                     Clear filters
                   </Link>
                 </div>
@@ -164,17 +218,17 @@ export default async function ComponentsPage({
           {totalPages > 1 ? (
             <nav
               aria-label="Catalogue pagination"
-              className="flex items-center justify-between gap-4 border-t border-border bg-background px-5 py-4 sm:px-6"
+              className="flex items-center justify-between gap-4 border-t-2 border-ink px-5 py-4 tab:px-6"
             >
               {currentPage > 1 ? (
                 <Link
                   href={paginationHref(currentPage - 1)}
-                  className="inline-flex min-h-10 items-center rounded-[--radius] border border-border px-3 text-sm font-medium hover:bg-accent"
+                  className="vd-btn vd-btn-sm"
                 >
                   Previous
                 </Link>
               ) : (
-                <span className="inline-flex min-h-10 items-center rounded-[--radius] border border-border px-3 text-sm text-muted-foreground opacity-50">
+                <span aria-disabled="true" className="vd-btn vd-btn-sm">
                   Previous
                 </span>
               )}
@@ -184,12 +238,12 @@ export default async function ComponentsPage({
               {currentPage < totalPages ? (
                 <Link
                   href={paginationHref(currentPage + 1)}
-                  className="inline-flex min-h-10 items-center rounded-[--radius] border border-border px-3 text-sm font-medium hover:bg-accent"
+                  className="vd-btn vd-btn-sm"
                 >
                   Next
                 </Link>
               ) : (
-                <span className="inline-flex min-h-10 items-center rounded-[--radius] border border-border px-3 text-sm text-muted-foreground opacity-50">
+                <span aria-disabled="true" className="vd-btn vd-btn-sm">
                   Next
                 </span>
               )}
@@ -197,6 +251,6 @@ export default async function ComponentsPage({
           ) : null}
         </section>
       </main>
-    </>
+    </SiteShell>
   );
 }

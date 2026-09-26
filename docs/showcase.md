@@ -27,16 +27,20 @@ The five complete design-system sites now live in `apps/minimal`, `apps/neo-brut
 
 | Route | File | Role |
 | --- | --- | --- |
-| `/` | `app/page.tsx` | Marketing home. Driven by `registryIndex()`, with hardcoded feature picks: hero `hero307`, bento `hero228`, `hero230`, `case-studies13`, `compare5`, `code-example14`, theme proof `button`. |
+| `/` | `app/page.tsx` | Marketing home (Vaudeville): hero with flip-book and install box, registry stats marquee, comic-strip "short path", café menu board of tag shelves, "findable by intent" search plus tag stickers, agent handoff, light/dark split, curtain-call CTA. Every number, tag count, and shelf count is computed from `registryIndex()`; sections live in `components/home/` and take plain data props. Illustrations only, no component screenshots. |
 | `/components` | `app/components/page.tsx` | Filterable, paginated catalogue (24 items per page). Components (atoms) and blocks (marketing/dashboard) are grouped by their registry tags and `sectionCategory`; **Backgrounds** collects pattern atoms and background blocks (`sectionCategory: "background"`, or `background`/`pattern` tags). The desktop sidebar is collapsible and becomes an accessible filter drawer on mobile. The grid reaches eight compact cards per row on 2xl displays. Query params: `q`, `category`, `tag` (repeatable), `kind` (`component` \| `block`), `group` (`backgrounds` \| `background-blocks` \| …), `sort` (`newest` \| `name`), `page`, `dependency=zero`. |
-| `/[category]` | `app/[category]/page.tsx` | Category list. `validCategories` is `atoms` \| `marketing` \| `dashboard`; anything else is `notFound()`. Copy on that page is the canonical category description. |
-| `/[category]/[name]` | `app/[category]/[name]/page.tsx` | Component detail. 404 if the entry is missing or `entry.category !== category`. |
+| `/[category]` | `app/[category]/page.tsx` | Category list with Atoms / Marketing / Dashboard tabs (each its own URL), counts, and a preview grid. `validCategories` is `atoms` \| `marketing` \| `dashboard`; anything else is `notFound()`. Copy on that page is the canonical category description. |
+| `/[category]/[name]` | `app/[category]/[name]/page.tsx` | Component detail: live preview plus a sticky install panel (CLI / Prompt / MCP tabs) and agent handoff card; data, dependencies, examples, related, and previous/next within the category. 404 if the entry is missing or `entry.category !== category`. |
 | `/preview/[name]/[story]` | `app/preview/[name]/[story]/page.tsx` | Isolated iframe document. |
-| `/samples` | `app/samples/page.tsx` | Product-sample index from `app/samples/catalog.ts`. Ready entries link; pending entries are not wrapped in `Link`. |
+| `/samples` | `app/samples/page.tsx` | Product-sample index from `app/samples/catalog.ts`. Ready entries are a featured card that shows the registry still of the sample's lead block (labelled as such, not a page capture) and the `components` it composes; pending entries are dimmed and not wrapped in `Link`. |
 | `/samples/saas` | `app/samples/saas/page.tsx` | SaaS landing assembled from registry blocks. Demo chrome is `saas/layout.tsx`. |
 | `/samples/draft` | `app/samples/draft/page.tsx` | Unpublished DemoBar check. Omitted from the catalogue. |
 | `/samples/scope-reference` | `app/samples/scope-reference/page.tsx` | Scoped token/typography/portal reference. Not a catalogue sample. |
-| `/design-systems` | `app/design-systems/page.tsx` | Design-system directions index. Static so it is not captured by `/[category]`. |
+| `/design-systems` | `app/design-systems/page.tsx` | Five-tab switcher (`components/DesignSystemSwitcher.tsx`): a text "playbill" panel, the site's route list from `catalog.ts` `routes`, and a link out. No catalogue cover is rendered. Static so it is not captured by `/[category]`. |
+| `/how-it-works` | `app/how-it-works/page.tsx` | Describe → Add → Own stepper. "Try it with" components are resolved server-side with `lib/install-plan.ts` (same walk as the CLI), so the terminal lists real files and npm deps. |
+| `/agents` | `app/agents/page.tsx`, `app/agents/layout.tsx` | MCP reference overview: protocol, data source, agent flow, limitations. Three-column shell with a filterable tool rail. |
+| `/agents/[tool]` | `app/agents/[tool]/page.tsx` | One page per tool from `lib/mcp-tools.ts` (arguments, curl / fetch / prompt request, response, errors). Keep `lib/mcp-tools.ts` in step with `app/mcp/route.ts`. Unknown tool → 404. |
+| any unmatched URL / `notFound()` | `app/not-found.tsx` | 404 with the puzzled mascot, catalogue search prefilled from the path, and the three closest registry names. |
 | `/mcp` | `app/mcp/route.ts` | Read-only JSON endpoint. See [mcp.md](mcp.md). |
 
 SH-01 dated gate, SH-07 full-site review template, and catalogue-cover rules: [qa/design-system-showcases.md](qa/design-system-showcases.md). Every `-12` release PR copies that template. Whole-site shots are not `pnpm previews:build` output.
@@ -63,7 +67,7 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 - New-tab link uses the same URL.
 - Iframe is `aria-hidden`.
 
-`ScaledFrame.tsx` no longer exists. The home page and `/components` use the server-rendered `PreviewImage` component, which reads the committed preview manifest and renders a local `/previews/{file}` still WebP (or GIF when `preview.capture.format` is `"gif"`) instead of an iframe. Reduced-motion visitors receive the still. Button's home theme-proof strip selects its corresponding light or dark capture.
+`ScaledFrame.tsx` no longer exists. `/components`, category pages, detail-page related cards, and the samples index use the server-rendered `PreviewImage` component, which reads the committed preview manifest and renders a local `/previews/{file}` still WebP (or GIF when `preview.capture.format` is `"gif"`) instead of an iframe. Reduced-motion visitors receive the still. Client components that need a still URL (the how-it-works stepper, the 404) get it from `lib/preview-assets.ts` (`previewStillSrc`, `previewStillMap`). The home page uses brand illustrations, not previews.
 
 `apps/showcase/public/previews/` contains the generated WebPs and `manifest.json`; `apps/showcase/public/assets/` contains re-hosted component images and `sources.json`. Design-system photography now lives under each independent app’s `public/assets/design-systems/` with a separate provenance contract. See [previews.md](previews.md).
 
@@ -88,7 +92,7 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 
 `/samples` and `/design-systems` are separate catalogues. `app/samples/catalog.ts` owns product-sample metadata. The only ready sample is `/samples/saas` (Quarry). A ready entry’s `href` must pass `linkedSampleHref`, which only accepts `implementedSampleHrefs`. Paths outside those roots fail typecheck without an `as Route` assertion. Showcase `tsc --noEmit` does not load Next’s generated route union, so the implemented-href allowlist is the static contract; `Link` still uses typedRoutes at the call site. Pending entries have no `href` and must not be wrapped in `Link`.
 
-`app/design-systems/catalog.ts` owns the five website-language sites. Ready entries use configured external app origins; `isReadyDesignSystem` narrows entries with a usable URL. Index cards on both pages are text only (label, brand, description, status). There is no catalogue-cover field until a change actually renders one. `/samples/draft` exists only to exercise shared demo chrome and is omitted from both catalogues. Former `/samples/{system}` URLs redirect to `/design-systems/{system}`.
+`app/design-systems/catalog.ts` owns the five website-language sites. Ready entries use configured external app origins; `isReadyDesignSystem` narrows entries with a usable URL. The samples index shows the lead block's registry still (labelled "Opens with …") and the sample's `components` list; the design-systems switcher is text only (playbill, description, `routes`). There is no catalogue-cover field until a change actually renders a real browser capture. `/samples/draft` exists only to exercise shared demo chrome and is omitted from both catalogues. Former `/samples/{system}` URLs redirect to `/design-systems/{system}`.
 
 ### Five-site route inventory (SH-08)
 
@@ -132,8 +136,15 @@ There is no public conventions route. SH-06 helpers are used by the shipped site
 
 ## Site chrome
 
-`SiteHeader` (sticky, mobile burger, `ThemeToggle`) and `SiteFooter` wrap marketing routes. The header's GitHub anchor is currently `https://github.com` with no repo path.
+Catalogue pages render inside `SiteShell` (`components/SiteShell.tsx`), which adds the `.vd` Vaudeville scope, `SiteHeader`, `SiteFooter` (with the registry count), and `RayMotion`. Samples and `/preview` do not use it. Tokens and scoping: [theming.md](theming.md#showcase-chrome-vaudeville).
 
-Chrome stories (`components/*.stories.tsx`) and `.storybook/` are excluded from `apps/showcase/tsconfig.json`. They are not Next.js app modules; `next build` must not type-check `@storybook/nextjs-vite`.
+- `SiteHeader`: scalloped awning (scrolls away) above a sticky bar; nav from `lib/site.ts` with the current section highlighted; collapses to a burger at ≤1100px; `ThemeToggle`. GitHub links to `jose-codegourmet/jabkit`.
+- `SiteFooter`: brand block, Catalogue / Learn / Project columns, oversized "Take it home." sign-off. No license is claimed because the repo has no LICENSE file.
+- Motion: `RayMotion` advances `--ray` on visible `[data-vd-rays]` layers (`components/Rays.tsx`) with a scroll-velocity boost; `HeroArt` handles hero parallax; the flip-book and stats marquee are CSS. All of it is off under `prefers-reduced-motion: reduce`.
+- Art lives in `public/art/` (WebP converted from the design handoff). It is brand illustration, not component previews.
+
+Chrome stories (`components/**/*.stories.tsx`) and `.storybook/` are excluded from `apps/showcase/tsconfig.json`. They are not Next.js app modules; `next build` must not type-check `@storybook/nextjs-vite`.
+
+Run them with `pnpm storybook:showcase` (port 6007, `@storybook/nextjs-vite`). The preview decorator loads the same fonts as the root layout and wraps every story in `.vd`; set `parameters.vaudeville: false` to render on library tokens. Stories use fixtures from `.storybook/fixtures.ts` and static files from `public/`, so every new chrome component takes plain data props rather than reading the registry itself.
 
 Preview routes do not render the header; they are a blank document for the iframe.

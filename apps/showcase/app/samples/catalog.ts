@@ -39,6 +39,8 @@ interface SampleFields {
   designSystem: string;
   brand: string;
   description: string;
+  /** Registry names the sample composes, lead block first. */
+  components: readonly string[];
 }
 
 export type ReadySample = SampleFields & {
@@ -66,6 +68,18 @@ export const samples = [
     brand: "Quarry",
     description:
       "A full marketing site for Quarry, a fictional product-analytics company, assembled from JabKit marketing and dashboard blocks.",
+    components: [
+      "hero-section-5",
+      "chart-group14",
+      "compare5",
+      "case-studies13",
+      "code-example14",
+      "about8",
+      "content2",
+      "faq12",
+      "cta28",
+      "separator",
+    ],
     href: linkedSampleHref("/samples/saas"),
     status: "ready",
   },

@@ -1,8 +1,7 @@
-import { ArrowRightIcon } from "@radix-ui/react-icons";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteFooter } from "../../components/SiteFooter";
-import { SiteHeader } from "../../components/SiteHeader";
+import { DesignSystemSwitcher } from "../../components/DesignSystemSwitcher";
+import { SiteShell } from "../../components/SiteShell";
 import { designSystems, isReadyDesignSystem } from "./catalog";
 
 export const metadata: Metadata = {
@@ -12,74 +11,36 @@ export const metadata: Metadata = {
 };
 
 export default function DesignSystemsPage() {
+  const systems = designSystems.map((entry) => ({
+    slug: entry.slug,
+    designSystem: entry.designSystem,
+    brand: entry.brand,
+    description: entry.description,
+    routes: entry.routes,
+    href: isReadyDesignSystem(entry) ? entry.href : undefined,
+  }));
+
   return (
-    <>
-      <SiteHeader />
-      <main className="mx-auto max-w-5xl px-5 py-16 sm:px-8">
-        <p className="font-mono text-xs font-medium tracking-[0.16em] text-primary uppercase">
-          Website languages
-        </p>
-        <h1 className="mt-4 text-5xl font-semibold tracking-[-0.06em]">
-          Design systems
+    <SiteShell>
+      <main className="mx-auto max-w-[1280px] px-5 py-14 tab:px-8 tab:py-16">
+        <p className="vd-kicker mb-4">Design systems</p>
+        <h1 className="vd-h1 max-w-[22ch] desk:text-5xl">
+          Five websites. One component library.
         </h1>
-        <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
+        <p className="mt-4 max-w-[42rem] text-[17px] leading-7 text-muted-foreground">
           Each direction is a full fictional website with its own tokens, type,
           and routes, deployed as an independent app. Product compositions
           assembled from registry blocks live on{" "}
-          <Link href="/samples" className="font-medium text-foreground">
+          <Link
+            href="/samples"
+            className="font-semibold text-foreground underline-offset-4 hover:underline"
+          >
             Samples
           </Link>
           .
         </p>
-        <div className="mt-14 grid gap-3">
-          {designSystems.map((entry) => {
-            const body = (
-              <div className="flex items-start justify-between gap-6">
-                <div>
-                  <p className="font-mono text-[11px] text-primary uppercase">
-                    {entry.designSystem}
-                    {" · "}
-                    {entry.status === "ready"
-                      ? "Open website"
-                      : "Deployment not configured"}
-                  </p>
-                  <h2 className="mt-2 text-xl font-semibold tracking-tight">
-                    {entry.brand}
-                  </h2>
-                  <p className="mt-2 max-w-2xl leading-7 text-muted-foreground">
-                    {entry.description}
-                  </p>
-                </div>
-                {isReadyDesignSystem(entry) ? (
-                  <ArrowRightIcon className="mt-1 shrink-0 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary" />
-                ) : null}
-              </div>
-            );
-
-            if (isReadyDesignSystem(entry)) {
-              return (
-                <a
-                  key={entry.slug}
-                  href={entry.href}
-                  className="group rounded-[--radius] border border-border bg-card p-6 transition hover:border-primary"
-                >
-                  {body}
-                </a>
-              );
-            }
-
-            return (
-              <article
-                key={entry.slug}
-                className="rounded-[--radius] border border-border bg-card p-6"
-              >
-                {body}
-              </article>
-            );
-          })}
-        </div>
+        <DesignSystemSwitcher systems={systems} />
       </main>
-      <SiteFooter />
-    </>
+    </SiteShell>
   );
 }

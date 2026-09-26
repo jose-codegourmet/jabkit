@@ -13,11 +13,7 @@ export function SourceViewer({
   if (!files.length) return null;
   return (
     <section
-      className={
-        embedded
-          ? "overflow-hidden"
-          : "overflow-hidden rounded-[--radius] border border-border bg-card"
-      }
+      className={embedded ? "overflow-hidden" : "vd-card overflow-hidden"}
     >
       <div className="flex overflow-x-auto border-b border-border">
         {files.map((file, index) => (
@@ -31,7 +27,7 @@ export function SourceViewer({
           </button>
         ))}
       </div>
-      <pre className="code-sheen max-h-[34rem] overflow-auto p-5 text-xs leading-5 text-muted-foreground">
+      <pre className="vd-code max-h-[34rem] overflow-auto rounded-none p-5 text-xs leading-5">
         <code>{files[active].content}</code>
       </pre>
     </section>

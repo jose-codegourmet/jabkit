@@ -1,6 +1,6 @@
 # Preview assets
 
-Catalogue previews are committed captures of the real showcase preview route. The home page and `/components` render these files as images; the component detail page keeps its live iframe for device and theme inspection.
+Catalogue previews are committed captures of the real showcase preview route. `/components`, category pages, related cards, samples, how-it-works, and the 404 render these files as images; the component detail page keeps its live iframe for device and theme inspection.
 
 ## Commands
 
@@ -50,7 +50,7 @@ Defaults when `format` is `"gif"`: GIF only the `Default` story, four frames, 70
 
 Each still is named `{name}.{Story}.{theme}.webp`. Each GIF is `{name}.{Story}.{theme}.gif`. Both live in `apps/showcase/public/previews/`. The generated `manifest.json` records the source hash, pipeline version, stories, themes, file name, byte count, rendered dimensions, and format.
 
-Dark is the default theme for every preview story. Button is the exception: it captures both light and dark so the home theme-proof strip can show each state. The capture pipeline reads `data-preview-stories` and `data-preview-ready` from the preview route's outer `<main>`; it never assumes that an HTTP 200 confirms a story because unknown stories fall back to `Default`.
+Dark is the default theme for every preview story. Button is the exception: it captures both light and dark (the how-it-works stepper shows the light still). The capture pipeline reads `data-preview-stories` and `data-preview-ready` from the preview route's outer `<main>`; it never assumes that an HTTP 200 confirms a story because unknown stories fall back to `Default`.
 
 Marketing components must have committed assets for `Default` and `Variants`. ThemeComparison is captured when the preview module exports it; it is not required for GIF.
 

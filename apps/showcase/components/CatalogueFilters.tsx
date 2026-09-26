@@ -4,7 +4,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   Cross2Icon,
-  HamburgerMenuIcon,
+  MixerHorizontalIcon,
 } from "@radix-ui/react-icons";
 import type { Route } from "next";
 import Link from "next/link";
@@ -15,6 +15,12 @@ type FilterState = { q?: string; kind?: string; group?: string; sort?: string };
 type FilterGroup = Pick<CatalogueGroup, "id" | "label" | "kind"> & {
   count: number;
 };
+type Option = {
+  label: string;
+  changes: Partial<FilterState>;
+  active: boolean;
+  count?: number;
+};
 
 function hrefFor(current: FilterState, changes: Partial<FilterState>): Route {
   const params = new URLSearchParams();
@@ -24,46 +30,65 @@ function hrefFor(current: FilterState, changes: Partial<FilterState>): Route {
   return (search ? `/components?${search}` : "/components") as Route;
 }
 
-function FilterContents({
-  current,
-  groups,
-  onNavigate,
-}: {
-  current: FilterState;
-  groups: FilterGroup[];
-  onNavigate?: () => void;
-}) {
-  const renderLink = (
-    label: string,
-    changes: Partial<FilterState>,
-    active: boolean,
-    count?: number,
-  ) => (
-    <Link
-      href={hrefFor(current, changes)}
-      onClick={onNavigate}
-      aria-current={active ? "page" : undefined}
-      className={`flex min-h-10 items-center justify-between rounded-md px-3 text-sm transition-colors hover:bg-accent hover:text-foreground ${active ? "bg-accent font-medium text-foreground" : "text-muted-foreground"}`}
-    >
-      <span>{label}</span>
-      {typeof count === "number" ? (
-        <span className="font-mono text-xs text-muted-foreground">{count}</span>
-      ) : null}
-    </Link>
-  );
-  const grouped = (kind: FilterGroup["kind"]) =>
+function filterSections(current: FilterState, groups: FilterGroup[]) {
+  const grouped = (kind: FilterGroup["kind"]): Option[] =>
     groups
       .filter((group) => group.kind === kind)
-      .map((group) =>
-        renderLink(
-          group.label,
-          { kind, group: group.id },
-          current.group === group.id,
-          group.count,
-        ),
-      );
+      .map((group) => ({
+        label: group.label,
+        changes: { kind, group: group.id },
+        active: current.group === group.id,
+        count: group.count,
+      }));
+  return [
+    {
+      title: "Browse",
+      options: [
+        {
+          label: "Everything",
+          changes: { kind: undefined, group: undefined },
+          active: !current.kind && !current.group,
+        },
+        {
+          label: "Components",
+          changes: { kind: "component", group: undefined },
+          active: current.kind === "component" && !current.group,
+        },
+        {
+          label: "Blocks",
+          changes: { kind: "block", group: undefined },
+          active: current.kind === "block" && !current.group,
+        },
+      ],
+    },
+    { title: "Components", options: grouped("component") },
+    { title: "Blocks", options: grouped("block") },
+    {
+      title: "Sort",
+      options: [
+        {
+          label: "Recommended",
+          changes: { sort: undefined },
+          active: !current.sort,
+        },
+        {
+          label: "Newest",
+          changes: { sort: "newest" },
+          active: current.sort === "newest",
+        },
+        {
+          label: "Name A–Z",
+          changes: { sort: "name" },
+          active: current.sort === "name",
+        },
+      ],
+    },
+  ] satisfies Array<{ title: string; options: Option[] }>;
+}
+
+function SearchForm({ current, id }: { current: FilterState; id: string }) {
   return (
-    <div className="space-y-7">
+    <search>
       <form action="/components" className="space-y-2">
         {current.kind ? (
           <input name="kind" type="hidden" value={current.kind} />
@@ -74,63 +99,58 @@ function FilterContents({
         {current.sort ? (
           <input name="sort" type="hidden" value={current.sort} />
         ) : null}
-        <label
-          className="font-mono text-xs text-muted-foreground"
-          htmlFor="catalogue-search"
-        >
+        <label className="font-mono text-xs text-muted-foreground" htmlFor={id}>
           Search library
         </label>
         <input
-          id="catalogue-search"
+          id={id}
           name="q"
           defaultValue={current.q}
-          placeholder="Search buttons, inputs…"
-          className="h-10 w-full rounded-[--radius] border border-border bg-card px-3 text-sm outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
+          placeholder="Search buttons, heroes…"
+          className="h-10 w-full rounded-[--radius] border-2 border-ink bg-card px-3 text-sm outline-none placeholder:text-muted-foreground focus:ring-3 focus:ring-mustard"
         />
       </form>
+    </search>
+  );
+}
+
+function SidebarFilters({
+  current,
+  groups,
+}: {
+  current: FilterState;
+  groups: FilterGroup[];
+}) {
+  return (
+    <div className="space-y-7">
+      <SearchForm current={current} id="catalogue-search" />
       <nav aria-label="Component catalogue" className="space-y-5">
-        <section>
-          <p className="mb-2 font-mono text-xs text-muted-foreground">Browse</p>
-          <div className="space-y-1">
-            {renderLink(
-              "Everything",
-              { kind: undefined, group: undefined },
-              !current.kind && !current.group,
-            )}
-            {renderLink(
-              "Components",
-              { kind: "component", group: undefined },
-              current.kind === "component" && !current.group,
-            )}
-            {renderLink(
-              "Blocks",
-              { kind: "block", group: undefined },
-              current.kind === "block" && !current.group,
-            )}
-          </div>
-        </section>
-        <section>
-          <p className="mb-2 font-mono text-xs text-muted-foreground">
-            Components
-          </p>
-          <div className="space-y-1">{grouped("component")}</div>
-        </section>
-        <section>
-          <p className="mb-2 font-mono text-xs text-muted-foreground">Blocks</p>
-          <div className="space-y-1">{grouped("block")}</div>
-        </section>
-        <section>
-          <p className="mb-2 font-mono text-xs text-muted-foreground">Sort</p>
-          <div className="space-y-1">
-            {renderLink("Recommended", { sort: undefined }, !current.sort)}
-            {renderLink(
-              "Newest",
-              { sort: "newest" },
-              current.sort === "newest",
-            )}
-            {renderLink("Name A–Z", { sort: "name" }, current.sort === "name")}
-          </div>
-        </section>
+        {filterSections(current, groups).map((section) => (
+          <section key={section.title}>
+            <p className="mb-2 font-mono text-xs text-muted-foreground">
+              {section.title}
+            </p>
+            <div className="space-y-1">
+              {section.options.map((option) => (
+                <Link
+                  key={option.label}
+                  href={hrefFor(current, option.changes)}
+                  aria-current={option.active ? "page" : undefined}
+                  className={`flex min-h-10 items-center justify-between rounded-md border-2 px-3 text-sm transition-colors ${
+                    option.active
+                      ? "border-ink bg-mustard font-semibold text-ink"
+                      : "border-transparent text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
+                >
+                  <span>{option.label}</span>
+                  {typeof option.count === "number" ? (
+                    <span className="font-mono text-xs">{option.count}</span>
+                  ) : null}
+                </Link>
+              ))}
+            </div>
+          </section>
+        ))}
       </nav>
     </div>
   );
@@ -139,15 +159,21 @@ function FilterContents({
 export function CatalogueFilters({
   current,
   groups,
+  resultCount,
+  activeCount = 0,
 }: {
   current: FilterState;
   groups: FilterGroup[];
+  resultCount: number;
+  activeCount?: number;
 }) {
   const [open, setOpen] = useState(false);
   const [desktopCollapsed, setDesktopCollapsed] = useState(false);
-  const drawerId = useId();
-  const drawerTitleId = useId();
+  const sheetId = useId();
+  const sheetTitleId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {
@@ -156,16 +182,18 @@ export function CatalogueFilters({
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     document.addEventListener("keydown", onKeyDown);
+    sheetRef.current?.querySelector<HTMLElement>("button, a, input")?.focus();
     return () => {
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", onKeyDown);
       triggerRef.current?.focus();
     };
   }, [open]);
+
   return (
     <>
       <aside
-        className={`hidden lg:sticky lg:top-[68px] lg:flex lg:h-[calc(100dvh-68px)] lg:shrink-0 lg:flex-col lg:overflow-y-auto lg:border-r lg:border-border lg:transition-[width] ${desktopCollapsed ? "lg:w-14" : "lg:w-[310px]"}`}
+        className={`hidden desk:sticky desk:top-[78px] desk:flex desk:h-[calc(100dvh-78px)] desk:shrink-0 desk:flex-col desk:overflow-y-auto desk:border-r-2 desk:border-ink desk:transition-[width] ${desktopCollapsed ? "desk:w-14" : "desk:w-[300px]"}`}
       >
         <div className="flex justify-end p-2">
           <button
@@ -179,7 +207,7 @@ export function CatalogueFilters({
             aria-expanded={!desktopCollapsed}
             title={desktopCollapsed ? "Expand filters" : "Collapse filters"}
             onClick={() => setDesktopCollapsed((collapsed) => !collapsed)}
-            className="grid size-10 place-items-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
+            className="grid size-10 place-items-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
           >
             {desktopCollapsed ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </button>
@@ -190,87 +218,132 @@ export function CatalogueFilters({
               href="/"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
-              Back home
+              ← Back home
             </Link>
-            <h1 className="mt-8 text-xl font-semibold tracking-tight">
-              Component library
-            </h1>
+            <h1 className="mt-6 font-display text-2xl">Component library</h1>
             <p className="mt-2 text-sm text-muted-foreground">
               Primitives and ready-to-use blocks.
             </p>
             <div className="mt-7">
-              <FilterContents current={current} groups={groups} />
+              <SidebarFilters current={current} groups={groups} />
             </div>
           </div>
         ) : null}
       </aside>
-      <div className="border-b border-border p-4 lg:hidden">
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <h1 className="font-semibold tracking-tight">Component library</h1>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Browse components and blocks
-            </p>
-          </div>
-          <button
-            ref={triggerRef}
-            type="button"
-            aria-expanded={open}
-            aria-controls={drawerId}
-            onClick={() => setOpen(true)}
-            className="inline-flex min-h-10 items-center gap-2 rounded-[--radius] border border-border bg-card px-3 text-sm font-medium hover:bg-accent"
-          >
-            <HamburgerMenuIcon aria-hidden /> Filters
-          </button>
+
+      <div className="flex items-center justify-between gap-4 border-b-2 border-ink px-4 py-4 desk:hidden">
+        <div>
+          <h1 className="font-display text-xl">Component library</h1>
+          <p className="mt-0.5 text-sm text-muted-foreground">
+            {resultCount} {resultCount === 1 ? "result" : "results"}
+          </p>
         </div>
+        <button
+          ref={triggerRef}
+          type="button"
+          aria-expanded={open}
+          aria-controls={sheetId}
+          onClick={() => setOpen(true)}
+          className="vd-btn vd-btn-sm"
+        >
+          <MixerHorizontalIcon aria-hidden />
+          Filters
+          {activeCount > 0 ? (
+            <span className="grid h-5 min-w-5 place-items-center rounded-full bg-tomato px-1 text-[11px] text-primary-foreground">
+              {activeCount}
+            </span>
+          ) : null}
+        </button>
       </div>
+
       {open ? (
         <div
-          className="fixed inset-0 z-50 lg:hidden"
+          className="fixed inset-0 z-50 desk:hidden"
           role="dialog"
           aria-modal="true"
-          aria-labelledby={drawerTitleId}
+          aria-labelledby={sheetTitleId}
         >
           <button
             type="button"
             tabIndex={-1}
             aria-label="Close filters"
             onClick={() => setOpen(false)}
-            className="absolute inset-0 bg-foreground/20"
+            className="absolute inset-0 bg-ink/40"
           />
-          <aside
-            id={drawerId}
-            className="relative flex h-full w-[min(22rem,calc(100%-2.5rem))] flex-col overflow-y-auto border-r border-border bg-background p-6 shadow-xl"
+          <div
+            ref={sheetRef}
+            id={sheetId}
+            className="absolute inset-x-0 bottom-0 flex max-h-[88dvh] flex-col rounded-t-3xl border-t-3 border-ink bg-background shadow-[0_-20px_50px_-20px_oklch(0_0_0/30%)]"
           >
-            <div className="flex items-start justify-between gap-4">
+            <div
+              aria-hidden="true"
+              className="mx-auto mt-2.5 h-[5px] w-10 rounded-full bg-ink/30"
+            />
+            <div className="flex items-start justify-between gap-4 border-b-2 border-ink px-5 pt-3 pb-4">
               <div>
                 <p className="font-mono text-xs text-muted-foreground">
                   Component library
                 </p>
-                <h2
-                  id={drawerTitleId}
-                  className="mt-1 text-lg font-semibold tracking-tight"
-                >
+                <h2 id={sheetTitleId} className="mt-0.5 font-display text-xl">
                   Browse the library
                 </h2>
               </div>
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/components"
+                  scroll={false}
+                  className="text-sm text-muted-foreground underline-offset-4 hover:underline"
+                >
+                  Reset
+                </Link>
+                <button
+                  type="button"
+                  aria-label="Close filters"
+                  onClick={() => setOpen(false)}
+                  className="grid size-10 place-items-center rounded-full bg-muted"
+                >
+                  <Cross2Icon />
+                </button>
+              </div>
+            </div>
+            <div className="flex-1 space-y-5 overflow-y-auto px-5 py-4">
+              <SearchForm current={current} id="catalogue-search-sheet" />
+              {filterSections(current, groups).map((section) => (
+                <section key={section.title}>
+                  <p className="mb-2 font-mono text-xs text-muted-foreground">
+                    {section.title}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {section.options.map((option) => (
+                      <Link
+                        key={option.label}
+                        href={hrefFor(current, option.changes)}
+                        scroll={false}
+                        aria-current={option.active ? "page" : undefined}
+                        className="vd-chip"
+                      >
+                        {option.label}
+                        {typeof option.count === "number" ? (
+                          <span className="font-mono text-xs opacity-70">
+                            {option.count}
+                          </span>
+                        ) : null}
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+            <div className="border-t-2 border-ink px-5 pt-4 pb-7">
               <button
                 type="button"
-                aria-label="Close filters"
                 onClick={() => setOpen(false)}
-                className="grid size-10 place-items-center rounded-md hover:bg-accent"
+                className="vd-btn vd-btn-primary w-full"
               >
-                <Cross2Icon />
+                Show {resultCount} {resultCount === 1 ? "result" : "results"}
               </button>
             </div>
-            <div className="mt-7">
-              <FilterContents
-                current={current}
-                groups={groups}
-                onNavigate={() => setOpen(false)}
-              />
-            </div>
-          </aside>
+          </div>
         </div>
       ) : null}
     </>

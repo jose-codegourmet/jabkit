@@ -4,12 +4,40 @@
 @source "../../../packages/ui/src";
 
 @theme inline {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-sans:
+    var(--vd-font-body, var(--font-geist-sans)), ui-sans-serif, system-ui,
+    sans-serif;
+  --font-mono:
+    var(--vd-font-mono, var(--font-geist-mono)), ui-monospace, monospace;
+  --font-display: var(--font-young-serif), ui-serif, Georgia, serif;
+  --font-script: var(--font-yellowtail), cursive;
+
+  --color-ink: var(--vd-ink);
+  --color-cream: var(--vd-cream);
+  --color-paper: var(--vd-paper);
+  --color-mustard: var(--vd-mustard);
+  --color-tomato: var(--vd-tomato);
+  --color-tomato-text: var(--vd-tomato-text);
+  --color-slate: var(--vd-slate);
+  --color-board: var(--vd-board);
+  --color-telegraph: var(--vd-telegraph);
+  --color-curtain: var(--vd-curtain);
+  --color-code: var(--vd-code-bg);
+  --color-code-foreground: var(--vd-code-fg);
 }
 
-* {
-  border-color: var(--jk-border);
+/* Showcase breakpoints from the Vaudeville handoff: ≤600 mobile, ≤1100 tablet. */
+@theme {
+  --breakpoint-tab: 37.5625rem;
+  --breakpoint-desk: 68.8125rem;
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--jk-border);
+  }
 }
 html {
   background: var(--jk-background);
@@ -62,5 +90,470 @@ body {
       animation-timeline: view();
       animation-range: entry 10% cover 26%;
     }
+  }
+}
+
+/*
+ * Vaudeville: the showcase chrome direction. Scoped to `.vd` (SiteShell) so
+ * product samples, design-system previews, and `/preview` iframes keep the
+ * library's default `--jk-*` values.
+ */
+@property --ray {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+.vd {
+  --vd-ink: oklch(0.2 0.03 30);
+  --vd-cream: oklch(0.95 0.03 90);
+  --vd-paper: oklch(0.965 0.025 85);
+  --vd-mustard: oklch(0.84 0.14 85);
+  --vd-tomato: oklch(0.58 0.19 28);
+  --vd-tomato-text: oklch(0.5 0.18 28);
+  --vd-slate: oklch(0.43 0.07 245);
+  --vd-board: oklch(0.26 0.03 160);
+  --vd-telegraph: oklch(0.22 0.03 250);
+  --vd-curtain: oklch(0.3 0.08 25);
+  --vd-code-bg: oklch(0.2 0.03 30);
+  --vd-code-fg: oklch(0.95 0.03 90);
+  --vd-shadow: var(--vd-ink);
+  --vd-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .16 0 0 0 0 .08 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  --vd-font-body: var(--font-josefin-sans);
+  --vd-font-mono: var(--font-courier-prime);
+
+  --jk-background: oklch(0.93 0.035 85);
+  --jk-foreground: var(--vd-ink);
+  --jk-card: oklch(0.965 0.025 85);
+  --jk-card-foreground: var(--vd-ink);
+  --jk-popover: oklch(0.965 0.025 85);
+  --jk-popover-foreground: var(--vd-ink);
+  --jk-primary: var(--vd-tomato);
+  --jk-primary-foreground: oklch(0.97 0.02 85);
+  --jk-secondary: oklch(0.89 0.04 80);
+  --jk-secondary-foreground: var(--vd-ink);
+  --jk-accent: var(--vd-mustard);
+  --jk-accent-foreground: var(--vd-ink);
+  --jk-muted: oklch(0.89 0.04 80);
+  --jk-muted-foreground: oklch(0.4 0.03 40);
+  --jk-success: oklch(0.52 0.12 160);
+  --jk-border: oklch(0.22 0.03 30);
+  --jk-input: oklch(0.22 0.03 30);
+  --jk-ring: var(--vd-tomato);
+  --jk-radius: 10px;
+  --jk-font-display: var(--font-young-serif), ui-serif, Georgia, serif;
+  --jk-font-body: var(--font-josefin-sans), ui-sans-serif, sans-serif;
+  --jk-font-label: var(--font-josefin-sans), ui-sans-serif, sans-serif;
+
+  min-height: 100dvh;
+  background-color: var(--jk-background);
+  background-image: radial-gradient(
+    ellipse at 50% 0,
+    transparent 55%,
+    oklch(0.6 0.06 60 / 18%) 100%
+  );
+  color: var(--jk-foreground);
+  font-family: var(--vd-font-body), ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Night shift: the same source, re-inked for `.dark`. */
+.dark .vd {
+  --vd-ink: oklch(0.12 0.02 30);
+  --vd-tomato: oklch(0.64 0.18 30);
+  --vd-tomato-text: oklch(0.76 0.14 40);
+  --vd-slate: oklch(0.32 0.06 250);
+  --vd-board: oklch(0.22 0.03 160);
+  --vd-telegraph: oklch(0.18 0.03 250);
+  --vd-curtain: oklch(0.26 0.07 25);
+  --vd-code-bg: oklch(0.14 0.02 30);
+  --vd-shadow: oklch(0.08 0.015 30);
+
+  --jk-background: oklch(0.21 0.025 40);
+  --jk-foreground: oklch(0.93 0.035 85);
+  --jk-card: oklch(0.26 0.03 40);
+  --jk-card-foreground: oklch(0.93 0.035 85);
+  --jk-popover: oklch(0.26 0.03 40);
+  --jk-popover-foreground: oklch(0.93 0.035 85);
+  --jk-primary-foreground: oklch(0.97 0.02 85);
+  --jk-secondary: oklch(0.31 0.03 40);
+  --jk-secondary-foreground: oklch(0.93 0.035 85);
+  --jk-muted: oklch(0.31 0.03 40);
+  --jk-muted-foreground: oklch(0.8 0.03 80);
+  --jk-success: oklch(0.72 0.13 160);
+  --jk-border: oklch(0.1 0.02 30);
+  --jk-input: oklch(0.1 0.02 30);
+
+  background-image: radial-gradient(
+    ellipse at 50% 0,
+    transparent 55%,
+    oklch(0.1 0.03 40 / 40%) 100%
+  );
+}
+
+@layer components {
+  .vd-h1,
+  .vd-h2 {
+    margin: 0;
+    font-family: var(--font-young-serif), ui-serif, Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+  .vd-h1 {
+    font-size: 42px;
+  }
+  .vd-h2 {
+    font-size: 30px;
+  }
+  @media (width >= 37.5625rem) {
+    .vd-h1 {
+      font-size: clamp(44px, 8vw, 72px);
+    }
+    .vd-h2 {
+      font-size: 34px;
+    }
+  }
+  @media (width >= 68.8125rem) {
+    .vd-h1 {
+      font-size: 60px;
+    }
+  }
+  .vd-h3 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .vd-script {
+    font-family: var(--font-yellowtail), cursive;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--vd-tomato-text);
+  }
+
+  .vd-kicker {
+    display: inline-block;
+    margin: 0;
+    padding: 6px 26px 4px;
+    border-top: 2px solid var(--vd-ink);
+    background: var(--vd-mustard);
+    color: oklch(0.2 0.03 30);
+    font-family: var(--font-young-serif), ui-serif, serif;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    clip-path: polygon(0 0, 100% 0, 94% 50%, 100% 100%, 0 100%, 6% 50%);
+  }
+
+  .vd-card {
+    border: 2px solid var(--vd-ink);
+    border-radius: var(--jk-radius);
+    background-color: var(--jk-card);
+    box-shadow: 4px 4px 0 var(--vd-shadow);
+    color: var(--jk-card-foreground);
+  }
+
+  .vd-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 22px;
+    border: 2px solid var(--vd-ink);
+    border-radius: 99px;
+    background: var(--jk-card);
+    color: var(--jk-foreground);
+    box-shadow: 3px 3px 0 var(--vd-shadow);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+    text-align: center;
+    text-transform: uppercase;
+    transition:
+      transform 120ms ease,
+      box-shadow 120ms ease;
+  }
+  .vd-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--vd-shadow);
+  }
+  .vd-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--vd-shadow);
+  }
+  .vd-btn:focus-visible {
+    outline: 3px solid var(--vd-mustard);
+    outline-offset: 2px;
+  }
+  .vd-btn[aria-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .vd-btn-primary {
+    background: var(--vd-tomato);
+    color: var(--jk-primary-foreground);
+  }
+  .vd-btn-sm {
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 12px;
+  }
+
+  .vd-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 36px;
+    padding: 0 14px;
+    border: 2px solid var(--vd-ink);
+    border-radius: 99px;
+    background: var(--jk-card);
+    color: var(--jk-foreground);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .vd-chip[data-active="true"],
+  .vd-chip[aria-pressed="true"],
+  .vd-chip[aria-current="page"] {
+    background: var(--vd-mustard);
+    color: oklch(0.2 0.03 30);
+  }
+
+  .vd-code {
+    border-radius: 8px;
+    background: var(--vd-code-bg);
+    color: var(--vd-code-fg);
+    font-family: var(--vd-font-mono), ui-monospace, monospace;
+  }
+
+  .vd-awning {
+    position: relative;
+    height: 18px;
+    border-top: 3px solid var(--vd-ink);
+    background: repeating-linear-gradient(
+      90deg,
+      var(--vd-tomato) 0 36px,
+      var(--jk-card) 36px 72px
+    );
+    mask:
+      radial-gradient(18px 12px at 18px 0, #000 98%, transparent) 0 0 / 36px
+      100% repeat-x,
+      linear-gradient(#000 0 0) 0 0 / 100% 10px no-repeat;
+  }
+
+  .vd-header {
+    background-color: var(--jk-card);
+    background-image: linear-gradient(
+      to bottom,
+      transparent calc(100% - 6px),
+      oklch(0.2 0.03 30 / 12%)
+    );
+    border-bottom: 4px double var(--vd-ink);
+    box-shadow:
+      0 6px 0 -2px var(--vd-mustard),
+      0 8px 0 -2px var(--vd-ink);
+  }
+
+  .vd-logo-medallion {
+    display: block;
+    flex: none;
+    border: 2px solid var(--vd-ink);
+    border-radius: 999px;
+    background: var(--jk-background);
+    box-shadow: 2px 2px 0 var(--vd-shadow);
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+
+  /* Slate hero stage: dot halftone + radial light. Rays are a separate layer. */
+  .vd-stage {
+    background-color: var(--vd-slate);
+    background-image:
+      var(--vd-grain),
+      radial-gradient(oklch(1 0 0 / 9%) 1.5px, transparent 1.6px),
+      radial-gradient(
+        circle at 75% 45%,
+        oklch(0.55 0.09 245),
+        oklch(0.36 0.07 250) 70%
+      );
+    background-size:
+      220px 220px,
+      14px 14px,
+      auto;
+    box-shadow: inset 0 0 120px oklch(0.15 0.05 250 / 55%);
+    border-bottom: 4px double var(--vd-ink);
+  }
+  .dark .vd-stage {
+    background-image:
+      var(--vd-grain),
+      radial-gradient(oklch(1 0 0 / 7%) 1.5px, transparent 1.6px),
+      radial-gradient(
+        circle at 75% 45%,
+        oklch(0.42 0.08 245),
+        oklch(0.24 0.05 250) 70%
+      );
+  }
+
+  /*
+   * Rotating light rays. `--ray` is advanced by <RayMotion />; the layer is
+   * empty so per-frame style work stays inside it.
+   */
+  .vd-rays {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-conic-gradient(
+      from var(--ray) at var(--ray-x, 50%) var(--ray-y, 50%),
+      var(--ray-color, oklch(1 0 0 / 6%)) 0 var(--ray-width, 6deg),
+      transparent var(--ray-width, 6deg) calc(var(--ray-width, 6deg) * 2)
+    );
+  }
+
+  .vd-halftone {
+    background-image:
+      var(--vd-grain),
+      radial-gradient(oklch(0.2 0.03 30 / 14%) 1.6px, transparent 1.8px);
+    background-size:
+      220px 220px,
+      12px 12px;
+  }
+
+  .vd-bulbs {
+    background-color: var(--vd-mustard);
+    background-image:
+      radial-gradient(
+        circle,
+        oklch(0.9 0.15 90) 0 5px,
+        var(--vd-ink) 5.5px 7px,
+        transparent 7.5px
+      ),
+      radial-gradient(
+        circle,
+        oklch(0.9 0.15 90) 0 5px,
+        var(--vd-ink) 5.5px 7px,
+        transparent 7.5px
+      ),
+      radial-gradient(
+        circle,
+        oklch(0.9 0.15 90) 0 5px,
+        var(--vd-ink) 5.5px 7px,
+        transparent 7.5px
+      ),
+      radial-gradient(
+        circle,
+        oklch(0.9 0.15 90) 0 5px,
+        var(--vd-ink) 5.5px 7px,
+        transparent 7.5px
+      );
+    background-size:
+      28px 22px,
+      28px 22px,
+      22px 28px,
+      22px 28px;
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-position:
+      0 0,
+      0 100%,
+      0 0,
+      100% 0;
+  }
+
+  .vd-footer {
+    border-top: 4px double var(--vd-ink);
+  }
+  .vd-footer-bar {
+    background-color: var(--vd-code-bg);
+    background-image:
+      var(--vd-grain),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 3px,
+        oklch(1 0 0 / 3%) 3px 4px
+      );
+    color: var(--vd-code-fg);
+  }
+
+  .vd-flip {
+    background: url("/art/frames/f1.webp") center / cover no-repeat;
+  }
+  .vd-marquee {
+    display: flex;
+    width: max-content;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .vd-flip {
+    animation: vd-flip 1.7s steps(1, end) infinite;
+  }
+  .vd-flicker {
+    animation: vd-flicker 0.17s steps(2) infinite;
+  }
+  .vd-marquee {
+    animation: vd-marquee 40s linear infinite;
+  }
+  .vd-marquee:hover,
+  .vd-marquee:focus-within {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes vd-flip {
+  0% {
+    background-image: url("/art/frames/f1.webp");
+  }
+  10% {
+    background-image: url("/art/frames/f2.webp");
+  }
+  20% {
+    background-image: url("/art/frames/f3.webp");
+  }
+  30% {
+    background-image: url("/art/frames/f4.webp");
+  }
+  40% {
+    background-image: url("/art/frames/f5.webp");
+  }
+  50% {
+    background-image: url("/art/frames/f6.webp");
+  }
+  60% {
+    background-image: url("/art/frames/f7.webp");
+  }
+  70% {
+    background-image: url("/art/frames/f8.webp");
+  }
+  80% {
+    background-image: url("/art/frames/f9.webp");
+  }
+  90% {
+    background-image: url("/art/frames/f10.webp");
+  }
+  100% {
+    background-image: url("/art/frames/f1.webp");
+  }
+}
+@keyframes vd-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+@keyframes vd-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }

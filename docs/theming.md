@@ -8,6 +8,12 @@ There is a separate open issue about preview-iframe theme behavior. This documen
 
 The five `apps/<system>` websites own `app/globals.css` and `app/theme.css`. They do not import showcase styles or the shared five-style scope sheet. Their Tailwind v4 configuration scans their own app/components and shared UI source, and uses app-local semantic values. The original `packages/tokens/scopes.css` remains available for the catalogue reference surface and library stories. See [standalone apps](standalone-design-systems.md).
 
+## Showcase chrome (Vaudeville)
+
+The catalogue chrome in `apps/showcase` uses the Vaudeville direction (cream paper, ink outlines, tomato and mustard, Young Serif / Josefin Sans / Yellowtail / Courier Prime). It is scoped to `.vd`, which `components/SiteShell.tsx` puts around every catalogue page. `.vd` (and `.dark .vd` for the "night shift" variant) redefines the `--jk-*` values locally, so existing `bg-card`, `border-border`, `text-primary` classes inside the chrome pick up the palette. It also adds showcase-only `--vd-*` tokens (ink, mustard, tomato, slate, board, telegraph, curtain, code) exposed to Tailwind as `bg-ink`, `text-mustard`, `bg-code`, etc., plus component classes (`vd-card`, `vd-btn`, `vd-chip`, `vd-kicker`, `vd-h1`, `vd-stage`, `vd-rays`, …) in `apps/showcase/app/globals.css`.
+
+Nothing outside `.vd` changes: product samples, `/samples/*` demo chrome, and `/preview` iframes keep the library's `:root` / `.dark` tokens. Never add `.vd` to `packages/ui`. Showcase breakpoints `tab` (≥601px) and `desk` (≥1101px) come from the handoff; the default Tailwind breakpoints still exist for library code.
+
 ## Token ownership
 
 `packages/tokens/tokens.css` owns canonical shared-library `--jk-*` values. `@jabkit/tokens` exports that file as `./tokens.css`, a TypeScript object as `./tokens`, and sample-site presets as `./scopes.css`. Do not paste design-system JSON into CSS or register these presets as component `cssVars`.

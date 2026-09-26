@@ -27,3 +27,18 @@ export const MobileOpen: Story = {
     ).toBeVisible();
   },
 };
+
+export const ActiveSection: Story = {
+  globals: { viewport: { value: "desktop" } },
+  parameters: {
+    nextjs: { navigation: { pathname: "/marketing/hero307" } },
+  },
+  play: async ({ canvasElement }) => {
+    const primary = canvasElement.querySelector(
+      'nav[aria-label="Primary"]',
+    ) as HTMLElement;
+    await expect(
+      within(primary).getByText("Components").closest("a"),
+    ).toHaveAttribute("aria-current", "page");
+  },
+};

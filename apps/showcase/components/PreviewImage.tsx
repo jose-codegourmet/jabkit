@@ -1,40 +1,8 @@
-import { readFile } from "node:fs/promises";
-import path from "node:path";
-
-type Theme = "light" | "dark";
-type PreviewAsset = {
-  story: string;
-  theme: Theme;
-  file: string;
-  width: number;
-  height: number;
-  format?: "webp" | "gif";
-};
-type PreviewManifest = {
-  components: Record<string, { assets: PreviewAsset[] }>;
-};
-
-function assetFormat(asset: PreviewAsset) {
-  return asset.format ?? (asset.file.endsWith(".gif") ? "gif" : "webp");
-}
-
-async function previewAssets(name: string, story: string, theme: Theme) {
-  try {
-    const manifest = JSON.parse(
-      await readFile(
-        path.join(process.cwd(), "public/previews/manifest.json"),
-        "utf8",
-      ),
-    ) as PreviewManifest;
-    return (
-      manifest.components[name]?.assets.filter(
-        (asset) => asset.story === story && asset.theme === theme,
-      ) ?? []
-    );
-  } catch {
-    return [];
-  }
-}
+import {
+  assetFormat,
+  type PreviewTheme,
+  previewAssets,
+} from "../lib/preview-assets";
 
 export async function PreviewImage({
   name,
@@ -46,7 +14,7 @@ export async function PreviewImage({
   name: string;
   displayName: string;
   story?: string;
-  theme?: Theme;
+  theme?: PreviewTheme;
   loading?: "eager" | "lazy";
 }) {
   const assets = await previewAssets(name, story, theme);
