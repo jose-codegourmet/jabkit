@@ -1,1 +1,214 @@
-/* Owned by the Foundation ticket. */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  padding: 0.75rem var(--jk-space-gutter) 0;
+}
+
+.rail {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: min(100%, var(--jk-content-max));
+  margin-inline: auto;
+  padding: 0.45rem 0.45rem 0.45rem 1rem;
+  border-radius: 999px;
+  background: var(--jk-clay-cream);
+  color: var(--jk-clay-plum);
+  box-shadow: var(--jk-shadow-raised);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  margin-right: auto;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 999px;
+}
+
+.symbol {
+  width: 2.25rem;
+  height: 2.25rem;
+  object-fit: contain;
+}
+
+.wordmarkImage {
+  width: auto;
+  height: 2rem;
+  object-fit: contain;
+}
+
+.wordmarkType {
+  font-family: var(--jk-font-display);
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  color: inherit;
+  font-family: var(--jk-font-label);
+  font-size: 0.98rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.link[aria-current="page"] {
+  background: var(--jk-card);
+  box-shadow: var(--jk-shadow-chip);
+}
+
+.start {
+  min-height: 2.75rem;
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3rem;
+  height: 3rem;
+  padding-inline: 0.9rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--jk-clay-lavender);
+  color: var(--jk-clay-ink);
+  font-family: var(--jk-font-label);
+  font-weight: 800;
+  box-shadow: var(--jk-shadow-chip);
+  cursor: pointer;
+}
+
+.sheet {
+  position: fixed;
+  z-index: 39;
+  top: 5rem;
+  right: 0;
+  left: 0;
+  padding: 0 var(--jk-space-gutter) 1.25rem;
+  animation: sheet-in 200ms ease;
+}
+
+.sheetInner {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.75rem;
+  border-radius: 0 0 1.75rem 1.75rem;
+  background: var(--jk-clay-cream);
+  color: var(--jk-clay-plum);
+  box-shadow: var(--jk-shadow-raised);
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  min-height: 3.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 1.25rem;
+  background: var(--jk-card);
+  color: inherit;
+  font-family: var(--jk-font-label);
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: var(--jk-shadow-chip);
+}
+
+.tile[aria-current="page"] {
+  background: var(--jk-clay-butter);
+  color: var(--jk-clay-ink);
+}
+
+.extra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  padding: 0.35rem 0.5rem 0.5rem;
+}
+
+.extra a {
+  color: inherit;
+  font-family: var(--jk-font-label);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.close {
+  justify-self: start;
+  min-height: 2.75rem;
+  margin-top: 0.25rem;
+  padding: 0.4rem 1rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-family: var(--jk-font-label);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+  cursor: pointer;
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+  }
+
+  .menuButton,
+  .sheet {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .rail {
+    gap: 0.4rem;
+    padding-left: 0.75rem;
+  }
+
+  .wordmarkType {
+    font-size: 1.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet {
+    animation-name: sheet-fade;
+  }
+}
+
+@keyframes sheet-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

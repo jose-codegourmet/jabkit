@@ -9,83 +9,82 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :where(:root) {
-  --jk-background: oklch(0.985 0.002 250);
-  --jk-foreground: oklch(0.19 0.018 258);
-  --jk-card: oklch(1 0 0);
-  --jk-card-foreground: oklch(0.19 0.018 258);
-  --jk-popover: oklch(1 0 0);
-  --jk-popover-foreground: oklch(0.19 0.018 258);
-  --jk-primary: oklch(0.49 0.19 255);
-  --jk-primary-foreground: oklch(0.985 0.002 250);
-  --jk-secondary: oklch(0.94 0.015 250);
-  --jk-secondary-foreground: oklch(0.19 0.018 258);
-  --jk-accent: oklch(0.92 0.035 245);
-  --jk-accent-foreground: oklch(0.19 0.018 258);
-  --jk-muted: oklch(0.955 0.008 250);
-  --jk-muted-foreground: oklch(0.49 0.02 258);
-  --jk-destructive: oklch(0.58 0.22 28);
-  --jk-destructive-foreground: oklch(0.985 0.002 250);
-  --jk-success: oklch(0.62 0.16 158);
-  --jk-success-foreground: oklch(0.985 0.002 250);
-  --jk-warning: oklch(0.77 0.15 80);
-  --jk-warning-foreground: oklch(0.19 0.018 258);
-  --jk-border: oklch(0.89 0.012 250);
-  --jk-input: oklch(0.89 0.012 250);
-  --jk-ring: oklch(0.49 0.19 255);
-  --jk-chart-1: oklch(0.62 0.2 255);
-  --jk-chart-2: oklch(0.62 0.16 158);
-  --jk-chart-3: oklch(0.67 0.16 55);
-  --jk-chart-4: oklch(0.65 0.18 315);
-  --jk-chart-5: oklch(0.7 0.15 195);
-  --jk-radius: 0.875rem;
+  --jk-background: #fff8f0;
+  --jk-foreground: #332b3e;
+  --jk-card: #fffdf9;
+  --jk-card-foreground: #332b3e;
+  --jk-popover: #fffdf9;
+  --jk-popover-foreground: #332b3e;
+  --jk-primary: #ff826e;
+  --jk-primary-foreground: #332b3e;
+  --jk-secondary: #b7a3ed;
+  --jk-secondary-foreground: #332b3e;
+  --jk-accent: #a8dcc4;
+  --jk-accent-foreground: #332b3e;
+  --jk-muted: #f3e6d8;
+  --jk-muted-foreground: #5c5168;
+  --jk-destructive: #9d2c2c;
+  --jk-destructive-foreground: #fff8f0;
+  --jk-success: #1e6a48;
+  --jk-success-foreground: #fff8f0;
+  --jk-warning: #f6d978;
+  --jk-warning-foreground: #332b3e;
+  --jk-border: color-mix(in oklab, #332b3e 16%, #fff8f0);
+  --jk-input: color-mix(in oklab, #332b3e 22%, #fff8f0);
+  --jk-ring: #332b3e;
+  --jk-chart-1: #ff826e;
+  --jk-chart-2: #a8dcc4;
+  --jk-chart-3: #f6d978;
+  --jk-chart-4: #b7a3ed;
+  --jk-chart-5: #332b3e;
+  --jk-radius: 999px;
   --jk-space-xs: 0.25rem;
   --jk-space-sm: 0.5rem;
   --jk-space-md: 1rem;
   --jk-space-lg: 2rem;
   --jk-space-gutter: clamp(1.25rem, 4vw, 4rem);
-  --jk-space-section: clamp(4rem, 8vw, 8rem);
+  --jk-space-section: clamp(3.5rem, 7vw, 6.5rem);
   --jk-space-card: 1.5rem;
-  --jk-space-grid: 1.5rem;
-  --jk-content-max: 90rem;
-  --jk-border-width: 1px;
-  --jk-control-height: 2.75rem;
-  --jk-shadow-control: 0 10px 24px -14px
-    color-mix(in oklab, var(--jk-primary), transparent 25%);
-  --jk-font-display:
-    var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --jk-font-body: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --jk-font-label: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --jk-space-grid: 1.25rem;
+  --jk-content-max: 76rem;
+  --jk-border-width: 0px;
+  --jk-control-height: 3rem;
+  --jk-shadow-control: 7px 9px 18px
+    color-mix(in oklab, #332b3e 16%, transparent);
+  --jk-font-display: "Nunito", ui-rounded, sans-serif;
+  --jk-font-body: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --jk-font-label: "Nunito", ui-rounded, sans-serif;
 }
 
 :where(.dark) {
-  --jk-background: oklch(0.15 0.018 258);
-  --jk-foreground: oklch(0.96 0.006 250);
-  --jk-card: oklch(0.2 0.02 258);
-  --jk-card-foreground: oklch(0.96 0.006 250);
-  --jk-popover: oklch(0.2 0.02 258);
-  --jk-popover-foreground: oklch(0.96 0.006 250);
-  --jk-primary: oklch(0.72 0.16 245);
-  --jk-primary-foreground: oklch(0.15 0.018 258);
-  --jk-secondary: oklch(0.27 0.02 258);
-  --jk-secondary-foreground: oklch(0.96 0.006 250);
-  --jk-accent: oklch(0.3 0.05 250);
-  --jk-accent-foreground: oklch(0.96 0.006 250);
-  --jk-muted: oklch(0.25 0.02 258);
-  --jk-muted-foreground: oklch(0.72 0.015 250);
-  --jk-destructive: oklch(0.7 0.2 28);
-  --jk-destructive-foreground: oklch(0.15 0.018 258);
-  --jk-success: oklch(0.72 0.16 158);
-  --jk-success-foreground: oklch(0.15 0.018 258);
-  --jk-warning: oklch(0.83 0.14 80);
-  --jk-warning-foreground: oklch(0.15 0.018 258);
-  --jk-border: oklch(1 0 0 / 13%);
-  --jk-input: oklch(1 0 0 / 18%);
-  --jk-ring: oklch(0.72 0.16 245);
-  --jk-chart-1: oklch(0.72 0.16 245);
-  --jk-chart-2: oklch(0.72 0.16 158);
-  --jk-chart-3: oklch(0.78 0.15 80);
-  --jk-chart-4: oklch(0.74 0.17 315);
-  --jk-chart-5: oklch(0.72 0.14 195);
+  --jk-background: #241c2c;
+  --jk-foreground: #fff8f0;
+  --jk-card: #32283a;
+  --jk-card-foreground: #fff8f0;
+  --jk-popover: #32283a;
+  --jk-popover-foreground: #fff8f0;
+  --jk-primary: #ff826e;
+  --jk-primary-foreground: #2a1c22;
+  --jk-secondary: #cdbef2;
+  --jk-secondary-foreground: #241c2c;
+  --jk-accent: #a8dcc4;
+  --jk-accent-foreground: #1a2e26;
+  --jk-muted: #3a3144;
+  --jk-muted-foreground: #e4d7c8;
+  --jk-destructive: #ffb4a8;
+  --jk-destructive-foreground: #2a1210;
+  --jk-success: #a8dcc4;
+  --jk-success-foreground: #1a2e26;
+  --jk-warning: #f6d978;
+  --jk-warning-foreground: #332b3e;
+  --jk-border: color-mix(in oklab, #fff8f0 16%, #241c2c);
+  --jk-input: color-mix(in oklab, #fff8f0 24%, #241c2c);
+  --jk-ring: #e7d7ff;
+  --jk-chart-1: #ff826e;
+  --jk-chart-2: #a8dcc4;
+  --jk-chart-3: #f6d978;
+  --jk-chart-4: #cdbef2;
+  --jk-chart-5: #fff8f0;
 }
 
 @theme inline {
@@ -140,4 +139,21 @@ body {
 ::selection {
   background: var(--jk-primary);
   color: var(--jk-primary-foreground);
+}
+
+/* Locally hosted, OFL-licensed brand typography. */
+@font-face {
+  font-family: "Nunito";
+  src: url("/fonts/nunito.ttf") format("truetype");
+  font-weight: 200 1000;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("/fonts/nunitosans.ttf") format("truetype");
+  font-weight: 200 1000;
+  font-stretch: 75% 125%;
+  font-style: normal;
+  font-display: swap;
 }
