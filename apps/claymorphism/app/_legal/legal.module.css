@@ -1,0 +1,51 @@
+.page {
+  display: grid;
+  justify-items: center;
+  min-width: 0;
+}
+
+.column {
+  display: grid;
+  gap: 1.35rem;
+  width: min(100%, 40rem);
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+.header,
+.prose,
+.notice {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.column h1,
+.column p {
+  margin: 0;
+}
+
+.updated {
+  color: var(--jk-muted-foreground);
+}
+
+.callout {
+  width: 100%;
+  min-width: 0;
+  border-radius: var(--jk-radius-surface);
+  background: var(--jk-card);
+  color: var(--jk-card-foreground);
+  box-shadow: var(--jk-shadow-raised);
+  --card-spacing: 1.15rem;
+}
+
+.prose {
+  background: transparent;
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .callout {
+    transition: none;
+  }
+}
