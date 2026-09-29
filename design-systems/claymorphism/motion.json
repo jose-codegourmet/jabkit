@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "claymorphism",
+  "durationMs": {
+    "feedback": 200,
+    "transition": 200,
+    "reveal": "Completion squash lasts 200ms and the check fills. The mobile sheet may travel 8px.",
+    "stagger": 0
+  },
+  "easing": {
+    "standard": "ease"
+  },
+  "behaviors": {
+    "hover": {
+      "trigger": "pointer enters an enabled control",
+      "effect": "Lift the control with translateY(-2px). Do not delay the feedback.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "No translation. Show the enabled state with colour, icon, and text only."
+    },
+    "press": {
+      "trigger": "pointer or keyboard activation",
+      "effect": "Move translateY(2px) and shrink the clay shadow. No bounce.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "No translation or shadow animation. Keep the pressed state in colour and text."
+    },
+    "reveal": {
+      "trigger": "a step is marked done",
+      "effect": "The tile settles with a 200ms squash and the check fills.",
+      "duration": "reveal",
+      "easing": "standard",
+      "reducedMotion": "Skip the squash. Show the completed word, icon, and colour immediately."
+    },
+    "image": {
+      "trigger": "page paint",
+      "effect": "Clay images stay still. Do not zoom, parallax, or crossfade them in.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Images are already static. No zoom, translation, or stagger."
+    },
+    "menu": {
+      "trigger": "menu open or close action",
+      "effect": "The clay sheet slides down 8px. Links are operable immediately.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Fade only. Do not slide. Focus still moves and returns."
+    }
+  },
+  "global": {
+    "autoplay": false,
+    "audioAutoplay": false,
+    "maxStaggerItems": 0,
+    "replayOnScroll": false,
+    "reducedMotionMedia": "(prefers-reduced-motion: reduce)",
+    "contentBeforeEnhancement": "Visible, usable, and in reading order.",
+    "colorTransition": "Colour, icon, and text carry state when motion is reduced. A loading spinner does not spin."
+  }
+}

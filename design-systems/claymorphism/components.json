@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "claymorphism",
+  "components": {
+    "button": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/button/Button.tsx"],
+      "adaptation": "A pill-shaped clay control: coral primary for “Create a free board” and “Start free”, generous height, press that moves 2px down and shrinks the shadow, lift of 2px on hover. Child actions such as “I did it” use at least 64px targets.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API. Keep the accessible name. Disabled keeps the label and adds aria-disabled plus helper text. Loading sets aria-busy and changes the label, for example “Creating your board…”. Focus is a 3px plum outline offset from the pill."
+    },
+    "card": {
+      "category": "marketing",
+      "existingCandidates": [],
+      "adaptation": "A raised clay tile for steps, benefits, plans, and routine ideas. Generous radius, one soft offset shadow, restrained top highlight, and copy on a solid cream surface. Routine cards are full-card links.",
+      "notes": "No standalone card atom is assumed; compose semantic HTML with existing atoms. Related candidates to inspect: packages/ui/src/marketing/spotlight-card/SpotlightCard.tsx, packages/ui/src/marketing/bento19/Bento19.tsx, packages/ui/src/atoms/badge/Badge.tsx, packages/ui/src/atoms/avatar/Avatar.tsx, packages/ui/src/atoms/progress/Progress.tsx, packages/ui/src/atoms/checkbox/Checkbox.tsx. Tone down pointer glow. Every example board carries a visible “Example board” badge. Avatars are initial letters only."
+    },
+    "input": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/input/Input.tsx"],
+      "adaptation": "A rounded, labelled field on a cream card with patient help text and an inline error. Used for step names, first name, email, board name, and contact message.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API. Also inspect packages/ui/src/atoms/textarea/Textarea.tsx and packages/ui/src/atoms/checkbox/Checkbox.tsx. There is no select atom; a native select needs the same label, boundary, and focus ring. Errors appear on blur and submit, with a summary that links to the fields. Demo forms never send or store what was typed."
+    },
+    "navbar": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/atoms/navigation-menu/NavigationMenu.tsx"
+      ],
+      "adaptation": "A soft floating rail: pillo wordmark to home, How it works, For families, Pricing, FAQ, and a Start free button. Active route is a raised clay pill with aria-current=\"page\". No mega menu.",
+      "notes": "NavigationMenu is a list primitive, not a finished header. Below 768px collapse to wordmark, Start free, and a round Menu button with aria-expanded and aria-controls. The sheet lists the four links as 56px tiles, then Routine ideas and Contact. Close with Close menu, Escape, or a link; return focus to Menu and lock body scroll while open."
+    },
+    "hero": {
+      "category": "marketing",
+      "existingCandidates": ["packages/ui/src/marketing/hero307/Hero307.tsx"],
+      "adaptation": "“Make room for easier mornings.” with Create a free board and See how it works. Replace the tilted admin dashboard with a coded morning board on cla-hero. The board shows real tasks, owners, and progress.",
+      "notes": "Hero307’s dashboard composition does not fit this direction. Keep behavior and semantics; change the scene. On small screens use cla-hero-mobile behind the board. Text sits on a solid cream surface, not on the illustration. Do not publish invented adoption numbers."
+    },
+    "pricing": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/pricing28/Pricing28.tsx"
+      ],
+      "adaptation": "Two plans only: Free and Plus. State limits and price as client-confirmation placeholders. No discounts, testimonials, or “most popular” badge.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API. Free leads to Create a free board. Plus leads to Start with Free, upgrade anytime. Unknown commercial terms stay marked for the client."
+    }
+  }
+}
