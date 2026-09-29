@@ -7,8 +7,6 @@ type RouteParams = {
   slug: string;
 };
 
-export const dynamicParams = false;
-
 export function generateStaticParams(): RouteParams[] {
   return routineSlugs.map((slug) => ({ slug }));
 }
