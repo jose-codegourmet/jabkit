@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ClaySurface } from "../../_components/ClaySurface";
 import { FaqAccordion } from "../../_components/FaqAccordion";
 import { faqGroups } from "../../_data/faq";
@@ -8,15 +8,6 @@ import styles from "./faq.module.css";
 
 export function FaqTopics() {
   const [activeId, setActiveId] = useState(faqGroups[0]?.id ?? "");
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReducedMotion(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
 
   useEffect(() => {
     const nodes = faqGroups
@@ -39,19 +30,6 @@ export function FaqTopics() {
     return () => observer.disconnect();
   }, []);
 
-  const scrollToGroup = useCallback(
-    (id: string) => {
-      const node = document.getElementById(id);
-      if (!node) return;
-      setActiveId(id);
-      node.scrollIntoView({
-        behavior: reducedMotion ? "auto" : "smooth",
-        block: "start",
-      });
-    },
-    [reducedMotion],
-  );
-
   return (
     <div className={styles.layout}>
       <nav aria-label="FAQ categories" className={styles.rail}>
@@ -62,10 +40,6 @@ export function FaqTopics() {
                 aria-current={activeId === group.id ? "true" : undefined}
                 className={styles.railLink}
                 href={`#${group.id}`}
-                onClick={(event) => {
-                  event.preventDefault();
-                  scrollToGroup(group.id);
-                }}
               >
                 {group.title}
               </a>
