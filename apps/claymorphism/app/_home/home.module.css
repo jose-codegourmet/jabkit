@@ -15,7 +15,7 @@
 
 .eyebrow {
   margin: 0;
-  color: var(--jk-primary);
+  color: var(--jk-status-next);
   font-family: var(--jk-font-label);
   font-size: 0.95rem;
   font-weight: 800;
@@ -198,6 +198,10 @@
   gap: 0.85rem;
   align-content: start;
   padding: 1.15rem;
+}
+
+.progressTile [data-slot="progress-label"] {
+  color: inherit;
 }
 
 .peopleList li {
