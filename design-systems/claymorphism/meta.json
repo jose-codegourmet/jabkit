@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "claymorphism",
+  "name": "Claymorphism",
+  "status": "draft-specification",
+  "intent": "Make family routines feel soft, touchable, and reassuring, so a parent can see the next small step and a child can celebrate it.",
+  "keywords": ["warm", "tactile", "rounded", "patient", "playful"],
+  "bestFor": [
+    "Family planning and shared routines for children aged 6–12",
+    "Products whose interface is made of tiles, badges, avatars, and progress",
+    "Welcoming consumer marketing that must stay legible and calm"
+  ],
+  "avoidFor": [
+    "Dense operational dashboards that need tight type and hard edges",
+    "Urgent, guilt-driven, or streak-based motivation",
+    "Offers that cannot show a truthful product state without decoration"
+  ],
+  "referenceReviewDate": "2026-09-29",
+  "files": {
+    "system.md": "system.md",
+    "rules.md": "rules.md",
+    "tokens.json": "tokens.json",
+    "typography.json": "typography.json",
+    "components.json": "components.json",
+    "patterns.json": "patterns.json",
+    "motion.json": "motion.json",
+    "motion.md": "motion.md",
+    "migration.md": "migration.md",
+    "imagery.md": "imagery.md",
+    "references.md": "references.md"
+  },
+  "compatibility": {
+    "runtime": "Documentation only; manual application required.",
+    "tokenSource": "../../packages/tokens/tokens.css",
+    "modes": ["light", "dark"],
+    "categories": ["atoms", "marketing", "dashboard"],
+    "automaticInstall": false,
+    "foundationVariables": "Proposed additions, not existing runtime variables."
+  }
+}

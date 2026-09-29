@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "claymorphism",
+  "patterns": [
+    {
+      "id": "family-home",
+      "purpose": "Explain Pillo in a few seconds and get a parent to create a free family board.",
+      "sections": [
+        "Floating navigation and Start free",
+        "Hero promise with a coded morning board",
+        "Three steps: build, next step, celebrate",
+        "Interactive example board and benefits",
+        "Routine teasers, plan summary, short FAQ, and closing board CTA"
+      ],
+      "desktop": "Cream canvas, content within 76rem, hero board offset on cla-hero, three raised tiles in a row, then a two-plan summary.",
+      "mobile": "Board first, hero objects drop behind it, steps stack with numbered clay chips, and the rail becomes a sheet.",
+      "conversion": "Create a free board stays available without motion. Secondary path is See how it works.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "routine-library",
+      "purpose": "Help a parent copy a starter routine and see it as a working example board.",
+      "sections": [
+        "Routine ideas index",
+        "Morning, after school, and bedtime cards",
+        "Detail board with owners and progress",
+        "One tip and the other routines",
+        "Use this routine"
+      ],
+      "desktop": "Three cards, then a detail with image and text side by side and a resettable example board.",
+      "mobile": "One card per row. The whole card is the link. Detail stacks image, then copy, then the board.",
+      "conversion": "Use this routine goes to /start?routine={slug}. Unknown slugs recover to the routine list.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "board-setup",
+      "purpose": "Show a believable sign-up and first board without storing anything.",
+      "sections": [
+        "Demo notice",
+        "Name, email, board name, starting routine, and agreement",
+        "Loading, error, and success",
+        "Empty or prefilled first board",
+        "Child-view toggle"
+      ],
+      "desktop": "Form on the left, cla-empty-board on the right.",
+      "mobile": "Single column. Hide the side image below 640px. Keep the demo notice visible.",
+      "conversion": "Create my board is a demo submit. Nothing is sent or saved. Errors keep typed values.",
+      "imageryGuide": "imagery.md"
+    }
+  ]
+}
