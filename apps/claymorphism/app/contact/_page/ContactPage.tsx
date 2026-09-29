@@ -40,7 +40,7 @@ export function ContactPage() {
         </ClaySurface>
       </section>
 
-      <section aria-label="Message" className={styles.formSection}>
+      <section aria-label="Contact form" className={styles.formSection}>
         <DemoFormNotice>{contactFormCopy.notice}</DemoFormNotice>
         <ContactForm />
       </section>
