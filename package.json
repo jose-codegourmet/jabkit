@@ -8,17 +8,17 @@
     "node": ">=24"
   },
   "scripts": {
-    "build": "turbo run build --filter=!@jabkit/minimal --filter=!@jabkit/neo-brutalism --filter=!@jabkit/editorial --filter=!@jabkit/luxury --filter=!@jabkit/retro",
-    "build:design-systems": "turbo run build --filter=@jabkit/minimal --filter=@jabkit/neo-brutalism --filter=@jabkit/editorial --filter=@jabkit/luxury --filter=@jabkit/retro",
+    "build": "turbo run build --filter=!@jabkit/minimal --filter=!@jabkit/neo-brutalism --filter=!@jabkit/editorial --filter=!@jabkit/luxury --filter=!@jabkit/retro --filter=!@jabkit/claymorphism --filter=!@jabkit/cybercore --filter=!@jabkit/synthwave --filter=!@jabkit/glassmorphism --filter=!@jabkit/bento --filter=!@jabkit/swiss --filter=!@jabkit/maximalism",
+    "build:design-systems": "turbo run build --filter=@jabkit/minimal --filter=@jabkit/neo-brutalism --filter=@jabkit/editorial --filter=@jabkit/luxury --filter=@jabkit/retro --filter=@jabkit/claymorphism --filter=@jabkit/cybercore --filter=@jabkit/synthwave --filter=@jabkit/glassmorphism --filter=@jabkit/bento --filter=@jabkit/swiss --filter=@jabkit/maximalism",
     "build:design-systems:affected": "tsx scripts/build-affected-design-systems.ts",
-    "dev": "pnpm --parallel --filter @jabkit/showcase --filter @jabkit/minimal --filter @jabkit/neo-brutalism --filter @jabkit/editorial --filter @jabkit/luxury --filter @jabkit/retro dev",
+    "dev": "pnpm --parallel --filter @jabkit/showcase --filter @jabkit/minimal --filter @jabkit/neo-brutalism --filter @jabkit/editorial --filter @jabkit/luxury --filter @jabkit/retro --filter @jabkit/claymorphism --filter @jabkit/cybercore --filter @jabkit/synthwave --filter @jabkit/glassmorphism --filter @jabkit/bento --filter @jabkit/swiss --filter @jabkit/maximalism dev",
     "storybook": "pnpm --filter @jabkit/ui storybook",
     "storybook:build": "pnpm --filter @jabkit/ui storybook:build",
     "storybook:showcase": "pnpm --filter @jabkit/showcase storybook",
     "lint": "biome check .",
     "format": "biome format --write .",
-    "typecheck": "turbo run typecheck --filter=!@jabkit/minimal --filter=!@jabkit/neo-brutalism --filter=!@jabkit/editorial --filter=!@jabkit/luxury --filter=!@jabkit/retro",
-    "typecheck:design-systems": "turbo run typecheck --filter=@jabkit/minimal --filter=@jabkit/neo-brutalism --filter=@jabkit/editorial --filter=@jabkit/luxury --filter=@jabkit/retro",
+    "typecheck": "turbo run typecheck --filter=!@jabkit/minimal --filter=!@jabkit/neo-brutalism --filter=!@jabkit/editorial --filter=!@jabkit/luxury --filter=!@jabkit/retro --filter=!@jabkit/claymorphism --filter=!@jabkit/cybercore --filter=!@jabkit/synthwave --filter=!@jabkit/glassmorphism --filter=!@jabkit/bento --filter=!@jabkit/swiss --filter=!@jabkit/maximalism",
+    "typecheck:design-systems": "turbo run typecheck --filter=@jabkit/minimal --filter=@jabkit/neo-brutalism --filter=@jabkit/editorial --filter=@jabkit/luxury --filter=@jabkit/retro --filter=@jabkit/claymorphism --filter=@jabkit/cybercore --filter=@jabkit/synthwave --filter=@jabkit/glassmorphism --filter=@jabkit/bento --filter=@jabkit/swiss --filter=@jabkit/maximalism",
     "check:conventions": "tsx scripts/check-conventions.ts",
     "check:design-system-assets": "tsx scripts/check-design-system-assets.ts",
     "registry:build": "pnpm --filter @jabkit/build-registry build",
@@ -28,7 +28,7 @@
     "previews:verify": "tsx scripts/verify-preview-assets.ts",
     "check": "pnpm lint && pnpm typecheck && pnpm check:conventions && pnpm check:design-system-assets && pnpm registry:verify && pnpm previews:verify",
     "release:cli": "pnpm --filter @jabkit/cli exec npm version --no-git-tag-version",
-    "dev:design-systems": "pnpm --parallel --filter @jabkit/minimal --filter @jabkit/neo-brutalism --filter @jabkit/editorial --filter @jabkit/luxury --filter @jabkit/retro dev"
+    "dev:design-systems": "pnpm --parallel --filter @jabkit/minimal --filter @jabkit/neo-brutalism --filter @jabkit/editorial --filter @jabkit/luxury --filter @jabkit/retro --filter @jabkit/claymorphism --filter @jabkit/cybercore --filter @jabkit/synthwave --filter @jabkit/glassmorphism --filter @jabkit/bento --filter @jabkit/swiss --filter @jabkit/maximalism dev"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.15",
