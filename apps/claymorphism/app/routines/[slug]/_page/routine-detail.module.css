@@ -1,0 +1,138 @@
+.page {
+  display: grid;
+  min-width: 0;
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  color: var(--jk-muted-foreground);
+  font-family: var(--jk-font-label);
+  font-size: 0.95rem;
+  font-weight: 800;
+  list-style: none;
+}
+
+.crumbs a {
+  color: var(--jk-foreground);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.current {
+  color: var(--jk-foreground);
+}
+
+.header {
+  display: grid;
+  gap: var(--jk-space-grid);
+  align-items: center;
+  min-width: 0;
+}
+
+.copy,
+.tip,
+.missing {
+  display: grid;
+  gap: 0.9rem;
+  justify-items: start;
+  min-width: 0;
+}
+
+.copy h1,
+.copy p,
+.tip h2,
+.tip p,
+.others h2,
+.missing h1,
+.missing p {
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  max-width: 100%;
+}
+
+.actions a,
+.missing a {
+  width: auto;
+  max-width: 100%;
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--jk-radius-surface);
+  background: var(--jk-clay-cream);
+  box-shadow: var(--jk-shadow-raised);
+}
+
+.section,
+.others {
+  display: grid;
+  margin-top: var(--jk-space-section);
+  min-width: 0;
+}
+
+.tip {
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.grid {
+  display: grid;
+  gap: var(--jk-space-grid);
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grid > li {
+  display: grid;
+  min-width: 0;
+  height: 100%;
+}
+
+.card {
+  height: 100%;
+}
+
+.cta {
+  width: 100%;
+  margin-top: var(--jk-space-section);
+  padding-inline: 0;
+  padding-bottom: 0;
+}
+
+.missing {
+  max-width: 40rem;
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+@media (min-width: 768px) {
+  .header {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crumbs a,
+  .actions a,
+  .card a,
+  .missing a {
+    transition: none;
+  }
+}
