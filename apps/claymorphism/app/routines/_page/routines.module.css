@@ -1,0 +1,83 @@
+.page {
+  display: grid;
+  min-width: 0;
+}
+
+.intro h1,
+.intro p,
+.bandCopy h2,
+.bandCopy p {
+  margin: 0;
+}
+
+.section {
+  display: grid;
+  margin-top: var(--jk-space-section);
+  min-width: 0;
+}
+
+.grid {
+  display: grid;
+  gap: var(--jk-space-grid);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grid > li {
+  display: grid;
+  min-width: 0;
+  height: 100%;
+}
+
+.card {
+  height: 100%;
+}
+
+.band {
+  display: grid;
+  gap: var(--jk-space-grid);
+  align-items: center;
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.bandCopy {
+  display: grid;
+  gap: 0.9rem;
+  justify-items: start;
+  min-width: 0;
+}
+
+.bandCopy a {
+  justify-self: start;
+  width: auto;
+  max-width: 100%;
+}
+
+.board {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 1.15rem;
+  background: var(--jk-clay-cream);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .band {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bandCopy a,
+  .card a {
+    transition: none;
+  }
+}
