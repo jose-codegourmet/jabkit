@@ -1,8 +1,12 @@
+import type { Metadata } from "next";
+import { HomePage } from "./_home/HomePage";
+
+export const metadata: Metadata = {
+  title: { absolute: "Pillo — Little steps. Lighter days." },
+  description:
+    "Pillo turns chores, school prep, and small daily goals into shared visual routines your family can see, tick off, and celebrate together.",
+};
+
 export default function Page() {
-  return (
-    <main id="top">
-      <h1>Pillo</h1>
-      <p>Site in progress.</p>
-    </main>
-  );
+  return <HomePage />;
 }

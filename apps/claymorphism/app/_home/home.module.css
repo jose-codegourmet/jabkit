@@ -1,0 +1,288 @@
+.hero {
+  display: grid;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.9rem;
+  justify-items: start;
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--jk-primary);
+  font-family: var(--jk-font-label);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.heroCopy h1,
+.section h2,
+.sectionIntro h2 {
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.fine {
+  margin: 0;
+  max-width: 42ch;
+  color: var(--jk-muted-foreground);
+  font-family: var(--jk-font-body);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.heroStage {
+  position: relative;
+  min-width: 0;
+  padding-top: 5.5rem;
+  overflow: clip;
+}
+
+.heroMedia {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+  width: 100%;
+  transform: scale(0.4);
+  transform-origin: top right;
+  pointer-events: none;
+}
+
+.heroMedia picture {
+  display: block;
+}
+
+.heroImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--jk-radius-surface);
+  object-fit: cover;
+}
+
+.heroBoard {
+  position: relative;
+  z-index: 1;
+}
+
+.section {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: var(--jk-space-section);
+  scroll-margin-top: 6.5rem;
+}
+
+.sectionIntro {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.sectionIntro p,
+.fine {
+  margin: 0;
+}
+
+.howGrid,
+.benefitGrid,
+.routineGrid,
+.planGrid,
+.peopleList {
+  display: grid;
+  gap: var(--jk-space-grid);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tile {
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--jk-radius-surface);
+  background: var(--jk-clay-cream);
+  color: var(--jk-clay-plum);
+  box-shadow: var(--jk-shadow-raised);
+  --card-spacing: 1rem;
+}
+
+.tile picture {
+  display: block;
+  margin-top: calc(var(--card-spacing) * -1);
+  margin-inline: calc(var(--card-spacing) * -1);
+}
+
+.stepImage,
+.benefitImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  background: var(--jk-clay-cream);
+}
+
+.stepImage {
+  aspect-ratio: 1;
+}
+
+.benefitImage {
+  aspect-ratio: 4 / 3;
+}
+
+.tileHeader {
+  gap: 0.45rem;
+}
+
+.chip {
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-top: -2.15rem;
+  padding: 0;
+  border-radius: 999px;
+  background: var(--jk-clay-coral);
+  color: var(--jk-clay-ink);
+  font-family: var(--jk-font-label);
+  font-size: 1.15rem;
+  font-weight: 800;
+  box-shadow: var(--jk-shadow-chip);
+}
+
+.tileTitle {
+  margin: 0;
+  color: var(--jk-clay-plum);
+  font-family: var(--jk-font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.tileBody {
+  color: var(--jk-clay-plum);
+  font-family: var(--jk-font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  min-height: 2.75rem;
+  color: var(--jk-foreground);
+  font-family: var(--jk-font-label);
+  font-weight: 800;
+  text-underline-offset: 0.2rem;
+}
+
+.mosaic {
+  display: grid;
+  gap: var(--jk-space-grid);
+  align-items: stretch;
+}
+
+.progressTile,
+.peopleTile {
+  display: grid;
+  gap: 0.85rem;
+  align-content: start;
+  padding: 1.15rem;
+}
+
+.peopleList li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  font-family: var(--jk-font-label);
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.check {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.ctaBand {
+  width: 100%;
+  margin-top: var(--jk-space-section);
+  padding-inline: 0;
+  padding-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .howGrid,
+  .benefitGrid,
+  .routineGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .planGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: 1.5rem;
+  }
+
+  .heroStage {
+    min-height: 36rem;
+    padding-top: 0;
+    overflow: visible;
+  }
+
+  .heroMedia {
+    inset: 0;
+    width: auto;
+    height: auto;
+    transform: none;
+  }
+
+  .heroMedia picture,
+  .heroImage {
+    width: 100%;
+    height: 100%;
+  }
+
+  .heroImage {
+    object-fit: cover;
+    object-position: 20% center;
+  }
+
+  .heroBoard {
+    width: min(100%, 32rem);
+    margin-top: 2.5rem;
+    margin-left: auto;
+  }
+
+  .mosaic {
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.85fr);
+  }
+
+  .mosaic > :first-child {
+    grid-row: span 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroBoard,
+  .chip,
+  .tile {
+    transition: none;
+  }
+}
