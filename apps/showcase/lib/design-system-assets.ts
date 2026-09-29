@@ -4,6 +4,13 @@ export const designSystemIds = [
   "editorial",
   "luxury",
   "retro",
+  "claymorphism",
+  "cybercore",
+  "synthwave",
+  "glassmorphism",
+  "bento",
+  "swiss",
+  "maximalism",
 ] as const;
 
 export type DesignSystemId = (typeof designSystemIds)[number];

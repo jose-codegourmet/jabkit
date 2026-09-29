@@ -9,6 +9,13 @@ const systems = [
   "editorial",
   "luxury",
   "retro",
+  "claymorphism",
+  "cybercore",
+  "synthwave",
+  "glassmorphism",
+  "bento",
+  "swiss",
+  "maximalism",
 ] as const;
 const sourceExtensions = [".ts", ".tsx", ".js", ".jsx"];
 const ignoredDirectories = new Set([".next", "node_modules"]);
