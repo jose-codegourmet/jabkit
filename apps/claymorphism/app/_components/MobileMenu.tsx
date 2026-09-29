@@ -47,7 +47,29 @@ export function MobileMenu() {
     closeRef.current?.focus();
 
     function onKey(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const sheet = document.getElementById(menuId);
+      if (!sheet) return;
+      const items = [
+        ...sheet.querySelectorAll<HTMLElement>("a[href], button"),
+      ].filter((item) => !item.hasAttribute("disabled"));
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (!first || !last) return;
+      const active = document.activeElement;
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+        return;
+      }
+      if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
     window.addEventListener("keydown", onKey);
     return () => {
@@ -57,7 +79,7 @@ export function MobileMenu() {
       setInert(demo, false);
       window.removeEventListener("keydown", onKey);
     };
-  }, [open]);
+  }, [open, menuId]);
 
   useEffect(() => {
     if (open) {
@@ -80,7 +102,13 @@ export function MobileMenu() {
         Menu
       </button>
       {open ? (
-        <div className={styles.sheet} id={menuId}>
+        <div
+          aria-label="Menu"
+          aria-modal="true"
+          className={styles.sheet}
+          id={menuId}
+          role="dialog"
+        >
           <div className={styles.sheetInner}>
             {navLinks.map((link) => (
               <a
