@@ -3,6 +3,11 @@
   min-width: 0;
 }
 
+.intro a {
+  justify-self: start;
+  width: auto;
+}
+
 .section {
   display: grid;
   gap: 1.25rem;

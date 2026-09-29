@@ -39,6 +39,7 @@ export function HowItWorksPage() {
         }}
         backgroundId={howItWorksIntro.backgroundId}
         body={howItWorksIntro.body}
+        className={styles.intro}
         title={howItWorksIntro.title}
       />
 
