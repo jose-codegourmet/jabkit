@@ -1,1 +1,322 @@
-/* Owned by the Foundation ticket. */
+/* Pillo: app-owned tokens and typography. Edit independently. */
+
+[data-jk-design-system] {
+  background-color: var(--jk-background);
+  color: var(--jk-foreground);
+  font-family: var(--jk-font-body);
+  --font-sans: var(--jk-font-body);
+}
+
+[data-jk-design-system] [data-slot="input"],
+[data-jk-design-system] [data-slot="textarea"],
+[data-jk-design-system] select {
+  height: var(--jk-control-height);
+  min-height: var(--jk-control-height);
+  border-radius: var(--jk-radius-surface);
+  border-width: var(--jk-border-width);
+  background: var(--jk-card);
+  color: var(--jk-foreground);
+}
+
+[data-jk-design-system] [data-slot="button"] {
+  border-radius: var(--jk-radius);
+  font-family: var(--jk-font-label);
+}
+
+[data-jk-design-system] .jk-display {
+  font-family: var(--jk-role-font-display);
+  font-size: var(--jk-text-display);
+  font-weight: var(--jk-weight-display);
+  letter-spacing: var(--jk-tracking-display);
+  line-height: var(--jk-leading-display);
+  max-width: var(--jk-measure-display);
+}
+
+[data-jk-design-system] .jk-heading {
+  font-family: var(--jk-role-font-heading);
+  font-size: var(--jk-text-heading);
+  font-weight: var(--jk-weight-heading);
+  letter-spacing: var(--jk-tracking-heading);
+  line-height: var(--jk-leading-heading);
+  max-width: var(--jk-measure-heading);
+}
+
+[data-jk-design-system] .jk-body {
+  font-family: var(--jk-role-font-body);
+  font-size: var(--jk-text-body);
+  font-weight: var(--jk-weight-body);
+  letter-spacing: var(--jk-tracking-body);
+  line-height: var(--jk-leading-body);
+  max-width: var(--jk-measure-body);
+}
+
+[data-jk-design-system] .jk-lead {
+  font-family: var(--jk-role-font-lead);
+  font-size: var(--jk-text-lead);
+  font-weight: var(--jk-weight-lead);
+  letter-spacing: var(--jk-tracking-lead);
+  line-height: var(--jk-leading-lead);
+  max-width: var(--jk-measure-lead);
+}
+
+[data-jk-design-system] .jk-label {
+  font-family: var(--jk-role-font-label);
+  font-size: var(--jk-text-label);
+  font-weight: var(--jk-weight-label);
+  letter-spacing: var(--jk-tracking-label);
+  line-height: var(--jk-leading-label);
+}
+
+[data-jk-design-system] .jk-caption {
+  font-family: var(--jk-role-font-caption);
+  font-size: var(--jk-text-caption);
+  font-weight: var(--jk-weight-caption);
+  letter-spacing: var(--jk-tracking-caption);
+  line-height: var(--jk-leading-caption);
+  max-width: var(--jk-measure-caption);
+}
+
+[data-jk-design-system="claymorphism"] {
+  --jk-background: #fff8f0;
+  --jk-foreground: #332b3e;
+  --jk-card: #fffdf9;
+  --jk-card-foreground: #332b3e;
+  --jk-popover: #fffdf9;
+  --jk-popover-foreground: #332b3e;
+  --jk-primary: #ff826e;
+  --jk-primary-foreground: #332b3e;
+  --jk-secondary: #b7a3ed;
+  --jk-secondary-foreground: #332b3e;
+  --jk-accent: #a8dcc4;
+  --jk-accent-foreground: #332b3e;
+  --jk-muted: #f3e6d8;
+  --jk-muted-foreground: #5c5168;
+  --jk-destructive: #9d2c2c;
+  --jk-destructive-foreground: #fff8f0;
+  --jk-success: #1e6a48;
+  --jk-success-foreground: #fff8f0;
+  --jk-warning: #f6d978;
+  --jk-warning-foreground: #332b3e;
+  --jk-border: color-mix(in oklab, #332b3e 16%, #fff8f0);
+  --jk-input: color-mix(in oklab, #332b3e 22%, #fff8f0);
+  --jk-ring: #332b3e;
+  --jk-chart-1: #ff826e;
+  --jk-chart-2: #a8dcc4;
+  --jk-chart-3: #f6d978;
+  --jk-chart-4: #b7a3ed;
+  --jk-chart-5: #332b3e;
+  --jk-radius: 999px;
+  --jk-radius-surface: 1.75rem;
+  --jk-space-xs: 0.25rem;
+  --jk-space-sm: 0.5rem;
+  --jk-space-md: 1rem;
+  --jk-space-lg: 2rem;
+  --jk-space-gutter: clamp(1.25rem, 4vw, 4rem);
+  --jk-space-section: clamp(3.5rem, 7vw, 6.5rem);
+  --jk-space-card: 1.5rem;
+  --jk-space-grid: 1.25rem;
+  --jk-content-max: 76rem;
+  --jk-border-width: 0px;
+  --jk-control-height: 3rem;
+  --jk-clay-cream: #fff8f0;
+  --jk-clay-coral: #ff826e;
+  --jk-clay-lavender: #b7a3ed;
+  --jk-clay-mint: #a8dcc4;
+  --jk-clay-butter: #f6d978;
+  --jk-clay-plum: #332b3e;
+  --jk-clay-ink: #332b3e;
+  --jk-status-done: #1e6a48;
+  --jk-status-next: #b84332;
+  --jk-status-todo: #5c5168;
+  --jk-shadow-raised:
+    7px 9px 18px
+    color-mix(in oklab, #332b3e 16%, transparent),
+    inset 2px 2px 0 color-mix(in oklab, white 78%, transparent),
+    inset -3px -4px 8px color-mix(in oklab, #332b3e 7%, transparent);
+  --jk-shadow-pressed:
+    2px 3px 6px color-mix(in oklab, #332b3e 18%, transparent),
+    inset 1px 1px 0 color-mix(in oklab, white 40%, transparent);
+  --jk-shadow-chip:
+    3px 4px 8px color-mix(in oklab, #332b3e 16%, transparent),
+    inset 1px 1px 0 color-mix(in oklab, white 70%, transparent);
+  --jk-shadow-control: var(--jk-shadow-raised);
+  --jk-font-display: "Nunito", ui-rounded, sans-serif;
+  --jk-font-body: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --jk-font-label: "Nunito", ui-rounded, sans-serif;
+  --jk-text-display: clamp(2.6rem, 1.2rem + 4.2vw, 4.75rem);
+  --jk-leading-display: 1.05;
+  --jk-weight-display: 800;
+  --jk-tracking-display: -0.03em;
+  --jk-measure-display: 16ch;
+  --jk-role-font-display: var(--jk-font-display);
+  --jk-text-heading: clamp(1.85rem, 1.05rem + 2.2vw, 3rem);
+  --jk-leading-heading: 1.15;
+  --jk-weight-heading: 750;
+  --jk-tracking-heading: -0.025em;
+  --jk-measure-heading: 22ch;
+  --jk-role-font-heading: var(--jk-font-display);
+  --jk-text-body: 1.0625rem;
+  --jk-leading-body: 1.6;
+  --jk-weight-body: 450;
+  --jk-tracking-body: 0em;
+  --jk-measure-body: 62ch;
+  --jk-role-font-body: var(--jk-font-body);
+  --jk-text-lead: clamp(1.125rem, 1rem + 0.4vw, 1.35rem);
+  --jk-leading-lead: 1.5;
+  --jk-weight-lead: 500;
+  --jk-tracking-lead: -0.01em;
+  --jk-measure-lead: 42ch;
+  --jk-role-font-lead: var(--jk-font-body);
+  --jk-text-label: 1rem;
+  --jk-leading-label: 1.3;
+  --jk-weight-label: 700;
+  --jk-tracking-label: -0.01em;
+  --jk-measure-label: none;
+  --jk-role-font-label: var(--jk-font-label);
+  --jk-text-caption: 0.9375rem;
+  --jk-leading-caption: 1.45;
+  --jk-weight-caption: 500;
+  --jk-tracking-caption: 0em;
+  --jk-measure-caption: 62ch;
+  --jk-role-font-caption: var(--jk-font-body);
+}
+
+.dark [data-jk-design-system="claymorphism"]:not([data-jk-color-mode="light"]),
+[data-jk-design-system="claymorphism"].dark,
+[data-jk-design-system="claymorphism"][data-jk-color-mode="dark"] {
+  --jk-background: #241c2c;
+  --jk-foreground: #fff8f0;
+  --jk-card: #32283a;
+  --jk-card-foreground: #fff8f0;
+  --jk-popover: #32283a;
+  --jk-popover-foreground: #fff8f0;
+  --jk-primary: #ff826e;
+  --jk-primary-foreground: #2a1c22;
+  --jk-secondary: #cdbef2;
+  --jk-secondary-foreground: #241c2c;
+  --jk-accent: #a8dcc4;
+  --jk-accent-foreground: #1a2e26;
+  --jk-muted: #3a3144;
+  --jk-muted-foreground: #e4d7c8;
+  --jk-destructive: #ffb4a8;
+  --jk-destructive-foreground: #2a1210;
+  --jk-success: #a8dcc4;
+  --jk-success-foreground: #1a2e26;
+  --jk-warning: #f6d978;
+  --jk-warning-foreground: #332b3e;
+  --jk-border: color-mix(in oklab, #fff8f0 16%, #241c2c);
+  --jk-input: color-mix(in oklab, #fff8f0 24%, #241c2c);
+  /* Pale plum: #332B3E disappears on the dark canvas, so the ring stays in the plum family and stays visible. */
+  --jk-ring: #e7d7ff;
+  --jk-chart-1: #ff826e;
+  --jk-chart-2: #a8dcc4;
+  --jk-chart-3: #f6d978;
+  --jk-chart-4: #cdbef2;
+  --jk-chart-5: #fff8f0;
+  --jk-clay-cream: #32283a;
+  --jk-clay-plum: #fff8f0;
+  --jk-status-done: #a8dcc4;
+  --jk-status-next: #ff826e;
+  --jk-status-todo: #e4d7c8;
+  --jk-shadow-raised:
+    8px 12px 22px color-mix(in oklab, black 48%, transparent),
+    inset 2px 2px 0 color-mix(in oklab, white 14%, transparent);
+  --jk-shadow-pressed:
+    2px 3px 8px color-mix(in oklab, black 50%, transparent),
+    inset 1px 1px 0 color-mix(in oklab, white 8%, transparent);
+  --jk-shadow-chip:
+    3px 4px 10px color-mix(in oklab, black 40%, transparent),
+    inset 1px 1px 0 color-mix(in oklab, white 16%, transparent);
+  --jk-shadow-control: var(--jk-shadow-raised);
+}
+
+/* PillStateStyles: clay press, lift, focus, disabled, and loading. */
+[data-jk-design-system="claymorphism"] [data-slot="button"],
+[data-jk-design-system="claymorphism"] .jk-clay-control {
+  box-shadow: var(--jk-shadow-raised);
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    background-color 200ms ease;
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="button"]:hover,
+[data-jk-design-system="claymorphism"] .jk-clay-control:hover,
+[data-jk-design-system="claymorphism"] .jk-clay-hover {
+  transform: translateY(-2px);
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="button"]:active,
+[data-jk-design-system="claymorphism"] .jk-clay-control:active,
+[data-jk-design-system="claymorphism"] .jk-clay-pressed {
+  transform: translateY(2px);
+  box-shadow: var(--jk-shadow-pressed);
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="button"]:focus-visible,
+[data-jk-design-system="claymorphism"] .jk-clay-control:focus-visible,
+[data-jk-design-system="claymorphism"] a:focus-visible,
+[data-jk-design-system="claymorphism"] button:focus-visible,
+[data-jk-design-system="claymorphism"] input:focus-visible,
+[data-jk-design-system="claymorphism"] select:focus-visible,
+[data-jk-design-system="claymorphism"] textarea:focus-visible,
+[data-jk-design-system="claymorphism"] .jk-clay-focus {
+  outline: 3px solid var(--jk-ring);
+  outline-offset: 3px;
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="button"]:disabled,
+[data-jk-design-system="claymorphism"] .jk-clay-control:disabled,
+[data-jk-design-system="claymorphism"] .jk-clay-disabled {
+  opacity: 0.45;
+  transform: none;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="button"][aria-busy="true"],
+[data-jk-design-system="claymorphism"] .jk-clay-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+[data-jk-design-system="claymorphism"]
+  [data-slot="button"][aria-busy="true"]::before,
+[data-jk-design-system="claymorphism"] .jk-clay-loading::before {
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: jk-clay-spin 700ms linear infinite;
+}
+
+@keyframes jk-clay-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-jk-design-system="claymorphism"] [data-slot="button"],
+  [data-jk-design-system="claymorphism"] .jk-clay-control,
+  [data-jk-design-system="claymorphism"] [data-slot="button"]:hover,
+  [data-jk-design-system="claymorphism"] .jk-clay-control:hover,
+  [data-jk-design-system="claymorphism"] .jk-clay-hover,
+  [data-jk-design-system="claymorphism"] [data-slot="button"]:active,
+  [data-jk-design-system="claymorphism"] .jk-clay-control:active,
+  [data-jk-design-system="claymorphism"] .jk-clay-pressed {
+    transform: none;
+    transition: none;
+    box-shadow: var(--jk-shadow-raised);
+  }
+
+  [data-jk-design-system="claymorphism"]
+    [data-slot="button"][aria-busy="true"]::before,
+  [data-jk-design-system="claymorphism"] .jk-clay-loading::before {
+    animation: none;
+    border-right-color: currentColor;
+  }
+}
