@@ -18,6 +18,15 @@
         "export PATH=$HOME/.nvm/versions/node/v24.15.0/bin:$PATH && cd /Users/joseadrianbuctuanon/Documents/web_work/jabkit/apps/showcase && pnpm storybook --no-open"
       ],
       "port": 6007
+    },
+    {
+      "name": "claymorphism",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "export PATH=$HOME/.nvm/versions/node/v24.15.0/bin:$PATH && cd /Users/joseadrianbuctuanon/Documents/web_work/jabkit/apps/claymorphism && pnpm dev"
+      ],
+      "port": 3106
     }
   ]
 }
