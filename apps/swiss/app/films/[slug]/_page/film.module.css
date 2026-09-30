@@ -1,0 +1,121 @@
+.header,
+.media,
+.screenings,
+.detail,
+.more,
+.notFound {
+  padding-block: var(--jk-space-section);
+}
+.header {
+  border-bottom: 1px solid var(--jk-border);
+}
+.index {
+  margin: 3rem 0 1rem;
+  color: var(--swi-signal);
+  font-size: var(--jk-text-label);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.header h1,
+.notFound h1 {
+  max-width: 10ch;
+  margin: 0;
+  font-size: var(--jk-text-display);
+  letter-spacing: var(--jk-tracking-display);
+  line-height: var(--jk-leading-display);
+}
+.meta {
+  margin: 1.5rem 0 0;
+  font-size: var(--jk-text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+}
+.synopsis {
+  max-width: 50ch;
+  margin: 2rem 0 0;
+  font-size: var(--jk-text-lead);
+}
+.media,
+.detail,
+.more {
+  border-bottom: 1px solid var(--jk-border);
+}
+.facts {
+  margin: 2rem 0 0;
+}
+.facts div {
+  padding-block: 0.75rem;
+  border-top: 1px solid var(--jk-border);
+}
+.facts dt {
+  color: var(--jk-muted-foreground);
+  font-size: var(--jk-text-caption);
+}
+.facts dd {
+  margin: 0.35rem 0 0;
+  font-size: var(--jk-text-caption);
+}
+.screenings h2,
+.more h2 {
+  margin: 0 0 2rem;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+.picker {
+  border-top: 1px solid var(--jk-foreground);
+}
+.screeningRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--jk-border);
+}
+.screeningRow > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+.screeningRow[data-selected] {
+  border-left: 2px solid var(--jk-foreground);
+}
+.selected {
+  font-weight: 700;
+}
+.helper {
+  color: var(--jk-muted-foreground);
+  font-size: var(--jk-text-caption);
+}
+.detailCopy {
+  padding-block: 2rem;
+  font-size: var(--jk-text-lead);
+  line-height: 1.5;
+}
+.detailCopy p + p {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--jk-border);
+}
+.card {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+.notFound {
+  min-height: 65vh;
+}
+.notFound p {
+  margin-block: 1.5rem;
+}
+@media (min-width: 1024px) {
+  .facts {
+    margin-top: 0;
+  }
+  .detailCopy {
+    padding-block: 4rem;
+  }
+}
