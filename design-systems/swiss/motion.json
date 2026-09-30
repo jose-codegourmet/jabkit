@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "swiss",
+  "durationMs": {
+    "feedback": 120,
+    "transition": 200,
+    "reveal": 360,
+    "stagger": 45
+  },
+  "easing": {
+    "standard": "cubic-bezier(0.2, 0.7, 0.2, 1)"
+  },
+  "behaviors": {
+    "hover": {
+      "trigger": "pointer enters an enabled control",
+      "effect": "Move or thicken the existing underline and update the action surface without shifting layout.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "Show the final underline and surface immediately."
+    },
+    "press": {
+      "trigger": "pointer or keyboard activation",
+      "effect": "Change weight and surface immediately; do not bounce or scale.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "Show the final weight and surface immediately."
+    },
+    "filter": {
+      "trigger": "program or schedule filters change",
+      "effect": "Crossfade the factual result region while keeping its top edge stable.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Replace results immediately and retain focus."
+    },
+    "reveal": {
+      "trigger": "a secondary section first enters the viewport",
+      "effect": "Reveal once with opacity and no more than 16px vertical travel.",
+      "duration": "reveal",
+      "easing": "standard",
+      "reducedMotion": "Render the final state immediately with no translation or stagger."
+    },
+    "menu": {
+      "trigger": "mobile menu opens or closes",
+      "effect": "Reveal the full-height sheet as one group; focus moves when the sheet is ready.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Open and close immediately while preserving focus management."
+    }
+  },
+  "global": {
+    "autoplay": false,
+    "audioAutoplay": false,
+    "maxStaggerItems": 3,
+    "replayOnScroll": false,
+    "reducedMotionMedia": "(prefers-reduced-motion: reduce)",
+    "contentBeforeEnhancement": "Visible, usable, and in reading order.",
+    "colorTransition": "Signal-red marker transitions are brief; reduced motion removes spatial animation and stagger."
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "swiss",
+  "name": "Swiss Design",
+  "status": "draft-specification",
+  "intent": "Make cultural programs fast to scan through disciplined grids, direct typography, and precise information hierarchy.",
+  "keywords": [
+    "grid",
+    "typographic",
+    "systematic",
+    "asymmetric",
+    "informative"
+  ],
+  "bestFor": [
+    "Film festivals and cultural programs",
+    "Schedules, catalogues, and event information",
+    "Organizations that need a strong identity without obscuring facts"
+  ],
+  "avoidFor": [
+    "Brands that depend on ornamental or nostalgic storytelling",
+    "Interfaces where decoration would compete with urgent task status"
+  ],
+  "referenceReviewDate": "2026-09-30",
+  "files": {
+    "system.md": "system.md",
+    "rules.md": "rules.md",
+    "tokens.json": "tokens.json",
+    "typography.json": "typography.json",
+    "components.json": "components.json",
+    "patterns.json": "patterns.json",
+    "motion.json": "motion.json",
+    "motion.md": "motion.md",
+    "migration.md": "migration.md",
+    "imagery.md": "imagery.md",
+    "references.md": "references.md"
+  },
+  "compatibility": {
+    "runtime": "Documentation only; manual application required.",
+    "tokenSource": "../../packages/tokens/tokens.css",
+    "modes": ["light", "dark"],
+    "categories": ["atoms", "marketing", "dashboard"],
+    "automaticInstall": false,
+    "foundationVariables": "Proposed additions, not existing runtime variables."
+  }
+}
