@@ -82,7 +82,8 @@ export function SchedulePage() {
       <section className={styles.filterBar}>
         <Grid>
           <GridItem span={{ mobile: 4, tablet: 8, desktop: 12 }}>
-            <div className={styles.viewSwitch} role="group" aria-label="View">
+            <fieldset className={styles.viewSwitch}>
+              <legend className="sr-only">View</legend>
               <button
                 type="button"
                 aria-pressed={view === "table"}
@@ -97,7 +98,7 @@ export function SchedulePage() {
               >
                 Calendar
               </button>
-            </div>
+            </fieldset>
           </GridItem>
           <GridItem span={{ mobile: 4, tablet: 4, desktop: 4 }}>
             <FilterToggleGroup
@@ -234,7 +235,8 @@ export function SchedulePage() {
                             </button>
                           );
                         })}
-                      {!visible.some((s) => s.day === d.id) && d.emptyNote ? (
+                      {!visible.some((s) => s.day === d.id) &&
+                      "emptyNote" in d ? (
                         <p>{d.emptyNote}</p>
                       ) : null}
                     </section>

@@ -6,6 +6,8 @@
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
+  padding: 0;
+  border: 0;
 }
 .viewSwitch button,
 .results button {
