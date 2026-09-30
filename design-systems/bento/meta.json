@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "bento",
+  "name": "Bento Grid",
+  "status": "draft-specification",
+  "intent": "Put a small team's whole day on one screen as a grid of named tiles, where visual size reflects priority and every tile either states a fact or opens the full view behind it.",
+  "keywords": ["modular", "organized", "operational", "calm", "traceable"],
+  "bestFor": [
+    "Operational portals and daily overviews for small service businesses",
+    "Marketing pages that prove a product with a working dashboard built in code",
+    "Summaries that must stay traceable to full tables, boards, and calendars"
+  ],
+  "avoidFor": [
+    "Long-form narrative or editorial reading where tiles fragment the story",
+    "Decorative feature grids whose tiles answer no question",
+    "Offers that need a single dramatic image or campaign moment rather than information"
+  ],
+  "referenceReviewDate": "2026-09-30",
+  "files": {
+    "system.md": "system.md",
+    "rules.md": "rules.md",
+    "tokens.json": "tokens.json",
+    "typography.json": "typography.json",
+    "components.json": "components.json",
+    "patterns.json": "patterns.json",
+    "motion.json": "motion.json",
+    "motion.md": "motion.md",
+    "migration.md": "migration.md",
+    "imagery.md": "imagery.md",
+    "references.md": "references.md"
+  },
+  "compatibility": {
+    "runtime": "Documentation only; manual application required.",
+    "tokenSource": "../../packages/tokens/tokens.css",
+    "modes": ["light", "dark"],
+    "categories": ["atoms", "marketing", "dashboard"],
+    "automaticInstall": false,
+    "foundationVariables": "Proposed additions, not existing runtime variables."
+  }
+}

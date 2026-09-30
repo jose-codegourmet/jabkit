@@ -1,1 +1,303 @@
-/* Owned by the Foundation ticket. */
+/* DAYMARK: app-owned tokens and typography. Edit independently. */
+
+/*
+ * Bento layout rules (also shown on /demo/states).
+ *
+ * - 12-column grid. Gap --ben-gap: 16px, 24px at 1280px and wider.
+ * - Tile radius --ben-radius: 16px. Internal padding --ben-pad: 20px, 24px at 1024px and wider.
+ * - Spans: primary tile 6–8 columns, secondary 4, compact 3. A tile spans two rows only
+ *   when its content needs the height.
+ * - Nesting: one level at most. A tile may hold a list or a mini-chart, never another grid.
+ * - Order: DOM order = reading order = mobile stack order. Desktop placement uses only
+ *   grid-column / grid-row spans, never `order`.
+ * - Interactive tiles are either one link (the whole card is the <a>, evergreen border on
+ *   hover, focus ring) or a static surface holding explicit buttons.
+ * - Static tiles have no hover, no pointer cursor and no chevron.
+ * - State is never shown by colour alone: warning adds an icon and the words
+ *   "Needs attention"; selected adds aria-current and an evergreen border.
+ */
+
+[data-jk-design-system] {
+  background-color: var(--jk-background);
+  color: var(--jk-foreground);
+  font-family: var(--jk-font-body);
+  --font-sans: var(--jk-font-body);
+}
+
+[data-jk-design-system] [data-slot="input"],
+[data-jk-design-system] [data-slot="textarea"] {
+  border-radius: var(--jk-radius);
+  border-width: var(--jk-border-width);
+  background: var(--jk-card);
+  color: var(--jk-foreground);
+}
+
+[data-jk-design-system] [data-slot="input"] {
+  height: var(--jk-control-height);
+  min-height: var(--jk-control-height);
+}
+
+[data-jk-design-system] [data-slot="button"] {
+  border-radius: var(--jk-radius);
+  font-family: var(--jk-font-label);
+  font-weight: 650;
+  letter-spacing: -0.005em;
+  box-shadow: none;
+}
+
+[data-jk-design-system] [data-slot="button"]:focus-visible,
+[data-jk-design-system] a:focus-visible,
+[data-jk-design-system] button:focus-visible,
+[data-jk-design-system] select:focus-visible,
+[data-jk-design-system] input:focus-visible,
+[data-jk-design-system] textarea:focus-visible,
+[data-jk-design-system] summary:focus-visible {
+  /* --ben-focus lets dark surfaces (evergreen tiles) swap the ring colour. */
+  outline: 2px solid var(--ben-focus, var(--jk-ring));
+  outline-offset: 2px;
+}
+
+[data-jk-design-system] .jk-display {
+  font-family: var(--jk-role-font-display);
+  font-size: var(--jk-text-display);
+  font-weight: var(--jk-weight-display);
+  letter-spacing: var(--jk-tracking-display);
+  line-height: var(--jk-leading-display);
+  max-width: var(--jk-measure-display);
+  text-wrap: balance;
+}
+
+[data-jk-design-system] .jk-heading {
+  font-family: var(--jk-role-font-heading);
+  font-size: var(--jk-text-heading);
+  font-weight: var(--jk-weight-heading);
+  letter-spacing: var(--jk-tracking-heading);
+  line-height: var(--jk-leading-heading);
+  max-width: var(--jk-measure-heading);
+  text-wrap: balance;
+}
+
+[data-jk-design-system] .jk-title {
+  font-family: var(--jk-role-font-heading);
+  font-size: var(--jk-text-title);
+  font-weight: var(--jk-weight-title);
+  letter-spacing: var(--jk-tracking-title);
+  line-height: var(--jk-leading-title);
+}
+
+[data-jk-design-system] .jk-body {
+  font-family: var(--jk-role-font-body);
+  font-size: var(--jk-text-body);
+  font-weight: var(--jk-weight-body);
+  letter-spacing: var(--jk-tracking-body);
+  line-height: var(--jk-leading-body);
+  max-width: var(--jk-measure-body);
+}
+
+[data-jk-design-system] .jk-lead {
+  font-family: var(--jk-role-font-lead);
+  font-size: var(--jk-text-lead);
+  font-weight: var(--jk-weight-lead);
+  letter-spacing: var(--jk-tracking-lead);
+  line-height: var(--jk-leading-lead);
+  max-width: var(--jk-measure-lead);
+}
+
+[data-jk-design-system] .jk-label {
+  font-family: var(--jk-role-font-label);
+  font-size: var(--jk-text-label);
+  font-weight: var(--jk-weight-label);
+  letter-spacing: var(--jk-tracking-label);
+  line-height: var(--jk-leading-label);
+}
+
+[data-jk-design-system] .jk-caption {
+  font-family: var(--jk-role-font-caption);
+  font-size: var(--jk-text-caption);
+  font-weight: var(--jk-weight-caption);
+  letter-spacing: var(--jk-tracking-caption);
+  line-height: var(--jk-leading-caption);
+  max-width: var(--jk-measure-caption);
+}
+
+/* Tile primary lines, times, counts and tables line up as tabular numerals. */
+[data-jk-design-system] .jk-figure {
+  font-family: var(--jk-font-display);
+  font-size: var(--jk-text-figure);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-jk-design-system] .jk-num {
+  font-variant-numeric: tabular-nums;
+}
+
+[data-jk-design-system="bento"] {
+  --jk-background: #f5f6f2;
+  --jk-foreground: #26332f;
+  --jk-card: #fcfdfb;
+  --jk-card-foreground: #26332f;
+  --jk-popover: #ffffff;
+  --jk-popover-foreground: #26332f;
+  --jk-primary: #386a57;
+  --jk-primary-foreground: #f5f6f2;
+  --jk-secondary: #e3e8e4;
+  --jk-secondary-foreground: #26332f;
+  --jk-accent: #cde6d7;
+  --jk-accent-foreground: #26332f;
+  --jk-muted: #e3e8e4;
+  --jk-muted-foreground: #53625c;
+  --jk-destructive: #a23b2c;
+  --jk-destructive-foreground: #fcfdfb;
+  --jk-success: #386a57;
+  --jk-success-foreground: #f5f6f2;
+  --jk-warning: #f6c794;
+  --jk-warning-foreground: #26332f;
+  --jk-border: #d9e0db;
+  --jk-input: #78857f;
+  --jk-ring: #386a57;
+  --jk-chart-1: #386a57;
+  --jk-chart-2: #7fb79a;
+  --jk-chart-3: #f6c794;
+  --jk-chart-4: #9aa8a1;
+  --jk-chart-5: #26332f;
+  --jk-radius: 0.75rem;
+  --jk-space-xs: 0.25rem;
+  --jk-space-sm: 0.5rem;
+  --jk-space-md: 1rem;
+  --jk-space-lg: 2rem;
+  --jk-space-gutter: clamp(1rem, 3.5vw, 2.5rem);
+  --jk-space-section: clamp(3.5rem, 7vw, 6rem);
+  --jk-space-card: 1.25rem;
+  --jk-space-grid: 1rem;
+  --jk-content-max: 80rem;
+  --jk-border-width: 1px;
+  --jk-control-height: 2.75rem;
+  --jk-shadow-control: none;
+
+  /* Bento geometry. */
+  --ben-gap: 1rem;
+  --ben-radius: 1rem;
+  --ben-pad: 1.25rem;
+  --ben-shadow: 0 1px 2px color-mix(in oklab, #26332f 6%, transparent);
+  --ben-shadow-hover: 0 6px 18px -10px
+    color-mix(in oklab, #26332f 28%, transparent);
+  --ben-tile: var(--jk-card);
+  --ben-tile-border: var(--jk-border);
+  --ben-tile-mint: #e6f2eb;
+  --ben-tile-apricot: #fcebd8;
+  --ben-tile-evergreen: #386a57;
+  --ben-tile-evergreen-foreground: #f5f6f2;
+  --ben-warning-edge: #d9954f;
+  --ben-warning-text: #7a4a17;
+  --ben-strip: #fbe9d3;
+  --ben-strip-foreground: #4a3413;
+  --ben-grid-line: color-mix(in oklab, #26332f 9%, transparent);
+
+  --jk-font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --jk-font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --jk-font-label: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --jk-text-display: clamp(2.5rem, 1.6rem + 3.4vw, 4.25rem);
+  --jk-leading-display: 1.02;
+  --jk-weight-display: 750;
+  --jk-tracking-display: -0.035em;
+  --jk-measure-display: 15ch;
+  --jk-role-font-display: var(--jk-font-display);
+  --jk-text-heading: clamp(1.75rem, 1.25rem + 1.6vw, 2.625rem);
+  --jk-leading-heading: 1.1;
+  --jk-weight-heading: 720;
+  --jk-tracking-heading: -0.03em;
+  --jk-measure-heading: 24ch;
+  --jk-role-font-heading: var(--jk-font-display);
+  --jk-text-title: 1.1875rem;
+  --jk-leading-title: 1.3;
+  --jk-weight-title: 680;
+  --jk-tracking-title: -0.015em;
+  --jk-text-figure: clamp(1.5rem, 1.2rem + 0.9vw, 2rem);
+  --jk-text-body: 1rem;
+  --jk-leading-body: 1.6;
+  --jk-weight-body: 430;
+  --jk-tracking-body: 0em;
+  --jk-measure-body: 60ch;
+  --jk-role-font-body: var(--jk-font-body);
+  --jk-text-lead: clamp(1.0625rem, 0.98rem + 0.35vw, 1.25rem);
+  --jk-leading-lead: 1.55;
+  --jk-weight-lead: 450;
+  --jk-tracking-lead: -0.005em;
+  --jk-measure-lead: 50ch;
+  --jk-role-font-lead: var(--jk-font-body);
+  --jk-text-label: 0.8125rem;
+  --jk-leading-label: 1.3;
+  --jk-weight-label: 650;
+  --jk-tracking-label: 0.01em;
+  --jk-measure-label: none;
+  --jk-role-font-label: var(--jk-font-label);
+  --jk-text-caption: 0.875rem;
+  --jk-leading-caption: 1.5;
+  --jk-weight-caption: 450;
+  --jk-tracking-caption: 0em;
+  --jk-measure-caption: 60ch;
+  --jk-role-font-caption: var(--jk-font-body);
+}
+
+@media (min-width: 1024px) {
+  [data-jk-design-system="bento"] {
+    --ben-pad: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  [data-jk-design-system="bento"] {
+    --ben-gap: 1.5rem;
+  }
+}
+
+/* Dark: ink-green canvas, chalk text, lighter evergreen primary; apricot stays the warning colour. */
+.dark [data-jk-design-system="bento"]:not([data-jk-color-mode="light"]),
+[data-jk-design-system="bento"].dark,
+[data-jk-design-system="bento"][data-jk-color-mode="dark"] {
+  --jk-background: #121a17;
+  --jk-foreground: #eef1ec;
+  --jk-card: #1a2420;
+  --jk-card-foreground: #eef1ec;
+  --jk-popover: #1f2a26;
+  --jk-popover-foreground: #eef1ec;
+  --jk-primary: #82c4a4;
+  --jk-primary-foreground: #0f1f18;
+  --jk-secondary: #25302c;
+  --jk-secondary-foreground: #eef1ec;
+  --jk-accent: #21433a;
+  --jk-accent-foreground: #dcefe3;
+  --jk-muted: #222d29;
+  --jk-muted-foreground: #aab7b1;
+  --jk-destructive: #f0a293;
+  --jk-destructive-foreground: #2a100b;
+  --jk-success: #82c4a4;
+  --jk-success-foreground: #0f1f18;
+  --jk-warning: #f6c794;
+  --jk-warning-foreground: #26332f;
+  --jk-border: #2c3834;
+  --jk-input: #6b7a74;
+  --jk-ring: #82c4a4;
+  --jk-chart-1: #82c4a4;
+  --jk-chart-2: #4f8f72;
+  --jk-chart-3: #f6c794;
+  --jk-chart-4: #7d8b85;
+  --jk-chart-5: #eef1ec;
+  --ben-shadow: 0 1px 2px color-mix(in oklab, black 40%, transparent);
+  --ben-shadow-hover: 0 8px 22px -12px
+    color-mix(in oklab, black 70%, transparent);
+  --ben-tile-mint: #1c332b;
+  --ben-tile-apricot: #3a2c1c;
+  --ben-tile-evergreen: #2a5645;
+  --ben-tile-evergreen-foreground: #eef1ec;
+  --ben-warning-edge: #f6c794;
+  --ben-warning-text: #f6c794;
+  --ben-strip: #3a2c1c;
+  --ben-strip-foreground: #fbe3c6;
+  --ben-grid-line: color-mix(in oklab, #eef1ec 9%, transparent);
+  --ben-illustration-filter: brightness(0.86) saturate(0.9);
+}

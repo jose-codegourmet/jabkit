@@ -1,0 +1,363 @@
+/* /product: header, the five anchored tile sections, card states and the material band. */
+
+/* ---------- Header ---------- */
+
+.hero {
+  padding-block: clamp(1.25rem, 3vw, 2.5rem) 0;
+}
+
+.heroCopy {
+  justify-content: center;
+  gap: 1.25rem;
+  padding: clamp(1.5rem, 3.5vw, 2.75rem);
+}
+
+.heroCopy h1.heroTitle {
+  margin: 0;
+  font-size: clamp(2.25rem, 1.5rem + 2.4vw, 3.5rem);
+  max-width: 14ch;
+}
+
+.heroBoard {
+  padding: clamp(0.85rem, 2vw, 1.25rem);
+}
+
+/* ---------- Tour: five tiles, each an anchored section ---------- */
+
+/* Home links land on these ids; keep the heading clear of the sticky header. */
+.anchor {
+  scroll-margin-top: 5.5rem;
+}
+
+.anchor:target {
+  border-color: var(--jk-primary);
+  box-shadow:
+    0 0 0 1px var(--jk-primary),
+    var(--ben-shadow);
+}
+
+.tourTitle {
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.75rem);
+  font-weight: 720;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.demoLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.45rem;
+  font-family: var(--jk-font-display);
+  font-size: clamp(1.125rem, 1rem + 0.45vw, 1.375rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+
+.demoTag {
+  color: var(--jk-muted-foreground);
+  font-family: var(--jk-font-label);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.tourBody {
+  max-width: 52ch;
+  color: var(--jk-muted-foreground);
+}
+
+.tourLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  border: 1px solid var(--jk-border);
+  border-radius: var(--jk-radius);
+  background: var(--jk-card);
+  color: var(--jk-foreground);
+  font-size: 0.9375rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition:
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.tourLink:hover {
+  border-color: var(--jk-primary);
+  color: var(--jk-primary);
+}
+
+.tourLink svg {
+  color: var(--jk-primary);
+}
+
+.subLabel {
+  margin: 0;
+  color: var(--jk-muted-foreground);
+  font-family: var(--jk-font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.specimenPart {
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+/* Today: visit list beside the calendar thumbnail. */
+.todayTile {
+  gap: 0.85rem;
+}
+
+.todaySpecimen {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.visits,
+.rows,
+.roster {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.visits li {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.6rem;
+  background: var(--jk-background);
+  font-size: 0.9375rem;
+}
+
+.time {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.visitName {
+  overflow: hidden;
+  color: var(--jk-foreground);
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.visitStaff {
+  color: var(--jk-muted-foreground);
+  font-size: 0.875rem;
+}
+
+.calendarThumb {
+  padding: 0.75rem;
+  border: 1px solid var(--jk-border);
+  border-radius: 0.9rem;
+  background: var(--jk-muted);
+}
+
+.calendarThumb > :not(p) {
+  min-width: 0;
+}
+
+/* Bookings and follow-ups rows. */
+.rows li,
+.roster li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.15rem 0.75rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.6rem;
+  background: var(--jk-background);
+  font-size: 0.9375rem;
+}
+
+.rows li {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.rowMeta {
+  color: var(--jk-muted-foreground);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.offLine {
+  margin: 0.15rem 0 0;
+  color: var(--jk-muted-foreground);
+  font-size: 0.875rem;
+}
+
+/* Team: desk coverage. */
+.progress {
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.progress [data-slot="progress-track"] {
+  height: 0.5rem;
+  background: var(--jk-muted);
+}
+
+.progress [data-slot="progress-indicator"] {
+  background: var(--jk-primary);
+}
+
+.progressLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Trend: chart beside its always-visible numbers once the tile is wide enough. */
+.trendTile {
+  container-type: inline-size;
+}
+
+.trendTile .trendChart {
+  align-items: start;
+}
+
+.trendTile .trendChart table {
+  margin-top: 0;
+}
+
+@container (min-width: 34rem) {
+  .trendTile .trendChart {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    column-gap: 1.5rem;
+  }
+}
+
+/* ---------- Card states ---------- */
+
+.statesHead {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+}
+
+.statesIntro {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.statesIntro > * {
+  margin: 0;
+}
+
+.stateTile {
+  gap: 0.75rem;
+  min-height: 13rem;
+}
+
+.stateName {
+  margin: 0;
+  color: var(--jk-muted-foreground);
+  font-family: var(--jk-font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.stateFigure {
+  font-family: var(--jk-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+
+.stateNote {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--jk-border);
+  color: var(--jk-muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* In the link tile the arrow row takes the bottom; the note sits under the name. */
+.linkState .stateNote {
+  margin-top: 0;
+}
+
+/* ---------- Material interlude ---------- */
+
+.interlude {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(3.5rem, 9vw, 7rem);
+  background: var(--jk-muted);
+}
+
+/* The chalk-paper grid multiplies into the band colour, so it stays quiet in dark mode. */
+.interludeImage {
+  z-index: -1;
+  mix-blend-mode: multiply;
+}
+
+.interludeInner {
+  display: grid;
+  justify-items: center;
+}
+
+.panel {
+  width: min(100%, 52rem);
+  padding: clamp(1.75rem, 5vw, 3.5rem) clamp(1.25rem, 5vw, 4rem);
+  border: 1px solid var(--ben-tile-border);
+  border-radius: var(--ben-radius);
+  background: var(--jk-background);
+  box-shadow: var(--ben-shadow);
+  text-align: center;
+}
+
+.pullLine {
+  margin: 0 auto;
+  max-width: 22ch;
+  font-family: var(--jk-font-display);
+  font-size: clamp(1.625rem, 1.1rem + 2.2vw, 2.75rem);
+  font-weight: 720;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+@media (min-width: 640px) {
+  .todaySpecimen {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .statesHead {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tourLink {
+    transition: none;
+  }
+}

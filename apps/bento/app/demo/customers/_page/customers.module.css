@@ -1,0 +1,167 @@
+.tabs {
+  margin-bottom: 1rem;
+}
+
+/* ---------- Table ---------- */
+
+.scroll {
+  overflow-x: auto;
+  border-radius: inherit;
+}
+
+.scroll:focus-visible {
+  outline: 2px solid var(--jk-ring);
+  outline-offset: -2px;
+}
+
+.table {
+  width: 100%;
+  min-width: 46rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.caption {
+  padding: var(--ben-pad) var(--ben-pad) 0.75rem;
+  color: var(--jk-muted-foreground);
+  font-family: var(--jk-font-label);
+  font-size: var(--jk-text-label);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--jk-border);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: var(--ben-pad);
+}
+
+.table th:last-child,
+.table td:last-child {
+  padding-right: var(--ben-pad);
+}
+
+.table thead th {
+  padding-block: 0.6rem;
+  border-top: 1px solid var(--jk-border);
+  background: var(--jk-background);
+  color: var(--jk-muted-foreground);
+  font-family: var(--jk-font-label);
+  font-size: 0.8125rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.table tbody tr {
+  scroll-margin-top: 5rem;
+}
+
+/* Follow-up rows carry a warning edge in addition to the flag text. */
+.table tbody tr[data-follow-up] > th {
+  box-shadow: inset 4px 0 0 var(--ben-warning-edge);
+}
+
+/* /demo/customers#c-… from a booking: highlight the linked customer. */
+.table tbody tr:target {
+  background: var(--ben-tile-mint);
+}
+
+.table tbody tr:target > th {
+  box-shadow: inset 4px 0 0 var(--jk-primary);
+}
+
+.name {
+  color: var(--jk-foreground);
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.date {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.none {
+  color: var(--jk-muted-foreground);
+}
+
+.followUp {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.flag,
+.contacted {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: fit-content;
+  font-family: var(--jk-font-label);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.flag {
+  color: var(--ben-warning-text);
+}
+
+.contacted {
+  color: var(--jk-muted-foreground);
+}
+
+.contacted svg {
+  color: var(--jk-primary);
+}
+
+.reason {
+  color: var(--jk-foreground);
+}
+
+.markButton {
+  min-width: 10rem;
+}
+
+.rowLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  color: var(--jk-primary);
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  white-space: nowrap;
+}
+
+.rowLink:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* ---------- Empty ---------- */
+
+.emptyFocus {
+  display: grid;
+  justify-items: center;
+  padding-block: 1.5rem;
+  border-radius: 0.6rem;
+  outline: none;
+}
+
+.emptyFocus:focus-visible {
+  outline: 2px solid var(--jk-ring);
+  outline-offset: 2px;
+}

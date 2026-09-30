@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "bento",
+  "durationMs": {
+    "feedback": 150,
+    "transition": 200,
+    "reveal": "No entrance reveal. Tiles are visible and in place at first paint; only a state change (for example loading to ready) may fade content in over the transition duration.",
+    "stagger": 0
+  },
+  "easing": {
+    "standard": "cubic-bezier(0.2, 0, 0, 1)"
+  },
+  "behaviors": {
+    "hover": {
+      "trigger": "pointer enters a link tile or an enabled control",
+      "effect": "A link tile's border turns evergreen and its trailing arrow shifts 2px. Buttons change surface tone. Static tiles do not react.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "No arrow travel. Keep the evergreen border and surface change as an instant state; focus ring unchanged."
+    },
+    "press": {
+      "trigger": "pointer or keyboard activation",
+      "effect": "Darken the surface tone immediately. No scale, bounce, or tile lift.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "Same color change, applied instantly. No translation or scale."
+    },
+    "reveal": {
+      "trigger": "a tile leaves the loading state",
+      "effect": "Skeleton rows are replaced by content with a short opacity fade; the tile keeps its size so the grid does not shift.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Swap content without fading. The polite live message still announces the result."
+    },
+    "image": {
+      "trigger": "page paint",
+      "effect": "Photos stay still inside their tiles. No zoom, parallax, or crossfade.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Images are already static. No zoom, translation, or stagger."
+    },
+    "menu": {
+      "trigger": "menu, portal sidebar, or dropdown open or close action",
+      "effect": "Fade the sheet or menu surface as one group; links are operable immediately. Focus moves in on open and returns to the trigger on close.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Show and hide instantly. Focus still moves and returns; scroll lock unchanged."
+    }
+  },
+  "global": {
+    "autoplay": false,
+    "audioAutoplay": false,
+    "maxStaggerItems": 0,
+    "replayOnScroll": false,
+    "reducedMotionMedia": "(prefers-reduced-motion: reduce)",
+    "contentBeforeEnhancement": "Visible, usable, and in reading order.",
+    "colorTransition": "Border and surface color may transition over the feedback duration; reduced motion applies them instantly. Loading skeletons do not shimmer when motion is reduced."
+  }
+}

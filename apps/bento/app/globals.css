@@ -9,83 +9,81 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :where(:root) {
-  --jk-background: oklch(0.985 0.002 250);
-  --jk-foreground: oklch(0.19 0.018 258);
-  --jk-card: oklch(1 0 0);
-  --jk-card-foreground: oklch(0.19 0.018 258);
-  --jk-popover: oklch(1 0 0);
-  --jk-popover-foreground: oklch(0.19 0.018 258);
-  --jk-primary: oklch(0.49 0.19 255);
-  --jk-primary-foreground: oklch(0.985 0.002 250);
-  --jk-secondary: oklch(0.94 0.015 250);
-  --jk-secondary-foreground: oklch(0.19 0.018 258);
-  --jk-accent: oklch(0.92 0.035 245);
-  --jk-accent-foreground: oklch(0.19 0.018 258);
-  --jk-muted: oklch(0.955 0.008 250);
-  --jk-muted-foreground: oklch(0.49 0.02 258);
-  --jk-destructive: oklch(0.58 0.22 28);
-  --jk-destructive-foreground: oklch(0.985 0.002 250);
-  --jk-success: oklch(0.62 0.16 158);
-  --jk-success-foreground: oklch(0.985 0.002 250);
-  --jk-warning: oklch(0.77 0.15 80);
-  --jk-warning-foreground: oklch(0.19 0.018 258);
-  --jk-border: oklch(0.89 0.012 250);
-  --jk-input: oklch(0.89 0.012 250);
-  --jk-ring: oklch(0.49 0.19 255);
-  --jk-chart-1: oklch(0.62 0.2 255);
-  --jk-chart-2: oklch(0.62 0.16 158);
-  --jk-chart-3: oklch(0.67 0.16 55);
-  --jk-chart-4: oklch(0.65 0.18 315);
-  --jk-chart-5: oklch(0.7 0.15 195);
-  --jk-radius: 0.875rem;
+  --jk-background: #f5f6f2;
+  --jk-foreground: #26332f;
+  --jk-card: #fcfdfb;
+  --jk-card-foreground: #26332f;
+  --jk-popover: #ffffff;
+  --jk-popover-foreground: #26332f;
+  --jk-primary: #386a57;
+  --jk-primary-foreground: #f5f6f2;
+  --jk-secondary: #e3e8e4;
+  --jk-secondary-foreground: #26332f;
+  --jk-accent: #cde6d7;
+  --jk-accent-foreground: #26332f;
+  --jk-muted: #e3e8e4;
+  --jk-muted-foreground: #53625c;
+  --jk-destructive: #a23b2c;
+  --jk-destructive-foreground: #fcfdfb;
+  --jk-success: #386a57;
+  --jk-success-foreground: #f5f6f2;
+  --jk-warning: #f6c794;
+  --jk-warning-foreground: #26332f;
+  --jk-border: #d9e0db;
+  --jk-input: #78857f;
+  --jk-ring: #386a57;
+  --jk-chart-1: #386a57;
+  --jk-chart-2: #7fb79a;
+  --jk-chart-3: #f6c794;
+  --jk-chart-4: #9aa8a1;
+  --jk-chart-5: #26332f;
+  --jk-radius: 0.75rem;
   --jk-space-xs: 0.25rem;
   --jk-space-sm: 0.5rem;
   --jk-space-md: 1rem;
   --jk-space-lg: 2rem;
-  --jk-space-gutter: clamp(1.25rem, 4vw, 4rem);
-  --jk-space-section: clamp(4rem, 8vw, 8rem);
-  --jk-space-card: 1.5rem;
-  --jk-space-grid: 1.5rem;
-  --jk-content-max: 90rem;
+  --jk-space-gutter: clamp(1rem, 3.5vw, 2.5rem);
+  --jk-space-section: clamp(3.5rem, 7vw, 6rem);
+  --jk-space-card: 1.25rem;
+  --jk-space-grid: 1rem;
+  --jk-content-max: 80rem;
   --jk-border-width: 1px;
   --jk-control-height: 2.75rem;
-  --jk-shadow-control: 0 10px 24px -14px
-    color-mix(in oklab, var(--jk-primary), transparent 25%);
-  --jk-font-display:
-    var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --jk-font-body: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --jk-font-label: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --jk-shadow-control: none;
+  --jk-font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --jk-font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --jk-font-label: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 :where(.dark) {
-  --jk-background: oklch(0.15 0.018 258);
-  --jk-foreground: oklch(0.96 0.006 250);
-  --jk-card: oklch(0.2 0.02 258);
-  --jk-card-foreground: oklch(0.96 0.006 250);
-  --jk-popover: oklch(0.2 0.02 258);
-  --jk-popover-foreground: oklch(0.96 0.006 250);
-  --jk-primary: oklch(0.72 0.16 245);
-  --jk-primary-foreground: oklch(0.15 0.018 258);
-  --jk-secondary: oklch(0.27 0.02 258);
-  --jk-secondary-foreground: oklch(0.96 0.006 250);
-  --jk-accent: oklch(0.3 0.05 250);
-  --jk-accent-foreground: oklch(0.96 0.006 250);
-  --jk-muted: oklch(0.25 0.02 258);
-  --jk-muted-foreground: oklch(0.72 0.015 250);
-  --jk-destructive: oklch(0.7 0.2 28);
-  --jk-destructive-foreground: oklch(0.15 0.018 258);
-  --jk-success: oklch(0.72 0.16 158);
-  --jk-success-foreground: oklch(0.15 0.018 258);
-  --jk-warning: oklch(0.83 0.14 80);
-  --jk-warning-foreground: oklch(0.15 0.018 258);
-  --jk-border: oklch(1 0 0 / 13%);
-  --jk-input: oklch(1 0 0 / 18%);
-  --jk-ring: oklch(0.72 0.16 245);
-  --jk-chart-1: oklch(0.72 0.16 245);
-  --jk-chart-2: oklch(0.72 0.16 158);
-  --jk-chart-3: oklch(0.78 0.15 80);
-  --jk-chart-4: oklch(0.74 0.17 315);
-  --jk-chart-5: oklch(0.72 0.14 195);
+  --jk-background: #121a17;
+  --jk-foreground: #eef1ec;
+  --jk-card: #1a2420;
+  --jk-card-foreground: #eef1ec;
+  --jk-popover: #1f2a26;
+  --jk-popover-foreground: #eef1ec;
+  --jk-primary: #82c4a4;
+  --jk-primary-foreground: #0f1f18;
+  --jk-secondary: #25302c;
+  --jk-secondary-foreground: #eef1ec;
+  --jk-accent: #21433a;
+  --jk-accent-foreground: #dcefe3;
+  --jk-muted: #222d29;
+  --jk-muted-foreground: #aab7b1;
+  --jk-destructive: #f0a293;
+  --jk-destructive-foreground: #2a100b;
+  --jk-success: #82c4a4;
+  --jk-success-foreground: #0f1f18;
+  --jk-warning: #f6c794;
+  --jk-warning-foreground: #26332f;
+  --jk-border: #2c3834;
+  --jk-input: #6b7a74;
+  --jk-ring: #82c4a4;
+  --jk-chart-1: #82c4a4;
+  --jk-chart-2: #4f8f72;
+  --jk-chart-3: #f6c794;
+  --jk-chart-4: #7d8b85;
+  --jk-chart-5: #eef1ec;
 }
 
 @theme inline {
@@ -140,4 +138,25 @@ body {
 ::selection {
   background: var(--jk-primary);
   color: var(--jk-primary-foreground);
+}
+
+/* Locally hosted, OFL-licensed brand typography (variable weight 200–800). */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/fonts/plusjakartasans.ttf") format("truetype");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+.sr-only-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }

@@ -1,0 +1,781 @@
+/* Demo · Calendar. Day time grid (8:00 am – 6:00 pm) and week overview. */
+
+.root,
+.sheet {
+  --cal-sam: var(--jk-chart-1);
+  --cal-ana: var(--jk-chart-2);
+  --cal-kai: var(--jk-chart-4);
+}
+
+.root {
+  /* One grid row = 5 minutes; one hour = 12 rows. */
+  --slot: 0.5rem;
+  --hour: calc(var(--slot) * 12);
+  --axis: 4.25rem;
+  --lane-gap: 0.5rem;
+  min-width: 0;
+}
+
+.root [data-staff="sam"] {
+  --staff: var(--cal-sam);
+}
+
+.root [data-staff="ana"] {
+  --staff: var(--cal-ana);
+}
+
+.root [data-staff="kai"] {
+  --staff: var(--cal-kai);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Header controls ---------- */
+
+.headerActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.headerActions [data-slot="button"] {
+  gap: 0.35rem;
+}
+
+.segmented {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: 1px solid var(--jk-border);
+  border-radius: calc(var(--jk-radius) + 0.25rem);
+  background: var(--jk-card);
+}
+
+.segment {
+  min-width: 4.25rem;
+  min-height: 2.25rem;
+  padding: 0 0.9rem;
+  border: 0;
+  border-radius: var(--jk-radius);
+  background: transparent;
+  color: var(--jk-muted-foreground);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.segment:hover {
+  background: var(--jk-muted);
+  color: var(--jk-foreground);
+}
+
+.segment[aria-pressed="true"] {
+  background: var(--jk-primary);
+  color: var(--jk-primary-foreground);
+}
+
+/* ---------- Calendar tile ---------- */
+
+.root .tile {
+  gap: 1.25rem;
+}
+
+.tileTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+}
+
+.headingGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.75rem;
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: var(--jk-text-title);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+.todayTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  background: var(--jk-accent);
+  color: var(--jk-accent-foreground);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.count {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--jk-muted-foreground);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Staff filter chips ---------- */
+
+.staffFilter {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+/* Floated so the legend lays out as a flex item. */
+.staffLegend {
+  float: left;
+  padding: 0;
+  color: var(--jk-muted-foreground);
+  font-family: var(--jk-font-label);
+  font-size: var(--jk-text-label);
+  font-weight: 650;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0 1rem 0 0.8rem;
+  border: 1px solid var(--jk-border);
+  border-radius: 999px;
+  background: var(--jk-card);
+  color: var(--jk-muted-foreground);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.chip:hover {
+  border-color: var(--staff);
+  color: var(--jk-foreground);
+}
+
+.chip[aria-pressed="true"] {
+  border-color: var(--staff);
+  background: color-mix(in oklab, var(--staff) 18%, var(--jk-card));
+  color: var(--jk-foreground);
+}
+
+.chip[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.chipIcon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--jk-foreground);
+}
+
+.chipDot {
+  flex: none;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 2px var(--staff);
+}
+
+.laneHead .chipDot {
+  background: var(--staff);
+}
+
+/* ---------- Visit block (agenda card on mobile, grid block from 768px) ---------- */
+
+.visit {
+  display: grid;
+  align-content: start;
+  gap: 0.15rem;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.7rem 0.85rem 0.7rem 0.9rem;
+  border: 1px solid var(--jk-border);
+  border-left: 4px solid var(--staff);
+  border-radius: 0.7rem;
+  background: color-mix(in oklab, var(--staff) 12%, var(--jk-card));
+  color: var(--jk-foreground);
+  font: inherit;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.visit:hover {
+  border-color: var(--staff);
+  box-shadow: var(--ben-shadow-hover);
+}
+
+.visitTime {
+  color: var(--jk-muted-foreground);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.visitName {
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.visitMeta {
+  color: var(--jk-muted-foreground);
+  font-size: 0.8125rem;
+}
+
+.visitStatus {
+  justify-self: start;
+  margin-top: 0.3rem;
+}
+
+/* ---------- Overlap ---------- */
+
+.flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: fit-content;
+  margin: 0;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid var(--ben-warning-edge);
+  border-radius: 999px;
+  background: var(--jk-warning);
+  color: var(--jk-warning-foreground);
+  font-family: var(--jk-font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.flag svg {
+  flex: none;
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.visit .flag {
+  margin-top: 0.3rem;
+}
+
+.overlapGroup {
+  position: relative;
+  display: grid;
+  gap: 0.6rem;
+  padding: 0.75rem;
+  border: 2px dashed var(--ben-warning-edge);
+  border-radius: 0.9rem;
+  background: var(--ben-tile-apricot);
+  scroll-margin-top: 6rem;
+  outline: none;
+}
+
+.overlapGroup:target,
+.overlapGroup:focus-visible {
+  outline: 2px solid var(--jk-ring);
+  outline-offset: 3px;
+}
+
+.overlapList {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Day view: stacked agenda below 768px ---------- */
+
+.laneHeads,
+.axis,
+.backdrop {
+  display: none;
+}
+
+.entries {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entry {
+  min-width: 0;
+}
+
+/* ---------- Day view: time grid from 768px ---------- */
+
+@media (min-width: 768px) {
+  .laneHeads {
+    display: grid;
+    grid-template-columns: var(--axis) repeat(var(--lanes), minmax(0, 1fr));
+    column-gap: var(--lane-gap);
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--jk-border);
+  }
+
+  .laneHead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.2rem 0.45rem;
+    min-width: 0;
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+
+  .laneHead small {
+    color: var(--jk-muted-foreground);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .board {
+    display: grid;
+    grid-template-columns: var(--axis) minmax(0, 1fr);
+    column-gap: var(--lane-gap);
+    padding-block: 0.9rem 0.5rem;
+  }
+
+  .axis {
+    position: relative;
+    display: block;
+    height: calc(var(--hour) * 10);
+  }
+
+  .axisLabel {
+    position: absolute;
+    top: calc(var(--h) * var(--hour));
+    right: 0.25rem;
+    translate: 0 -50%;
+    color: var(--jk-muted-foreground);
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .track {
+    position: relative;
+    min-width: 0;
+  }
+
+  .backdrop {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--lanes), minmax(0, 1fr));
+    column-gap: var(--lane-gap);
+    border-bottom: 1px solid var(--ben-grid-line);
+    background-image: linear-gradient(
+      to bottom,
+      var(--ben-grid-line) 1px,
+      transparent 1px
+    );
+    background-size: 100% var(--hour);
+  }
+
+  .laneTrack {
+    border-radius: 0.6rem;
+    background: color-mix(in oklab, var(--jk-muted) 30%, transparent);
+  }
+
+  .entries {
+    position: relative;
+    grid-template-columns: repeat(var(--lanes), minmax(0, 1fr));
+    grid-template-rows: repeat(120, var(--slot));
+    gap: 0 var(--lane-gap);
+  }
+
+  .entry,
+  .overlapGroup {
+    grid-column: var(--lane);
+    grid-row: var(--row-start) / var(--row-end);
+    min-height: 0;
+  }
+
+  .entry {
+    padding: 2px 0;
+  }
+
+  .board .visit {
+    height: 100%;
+    min-height: 0;
+    gap: 0;
+    padding: 0.3rem 0.5rem 0.3rem 0.55rem;
+    overflow: hidden;
+    border-left-width: 3px;
+    border-radius: 0.55rem;
+  }
+
+  .board .visitTime,
+  .board .visitMeta {
+    font-size: 0.75rem;
+  }
+
+  .board .visitName {
+    font-size: 0.8125rem;
+  }
+
+  .board .visitTime,
+  .board .visitName,
+  .board .visitMeta {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Status stays in the accessible name; the panel shows the badge. */
+  .board .visitStatus {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .overlapGroup {
+    display: block;
+    margin-block: 1px;
+    padding: 2px;
+    border-radius: 0.7rem;
+  }
+
+  /* The flag sits just above the group so it never covers a visit. */
+  .overlapGroup > .flag {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0.25rem;
+    translate: 0 calc(-100% - 3px);
+  }
+
+  .overlapList {
+    position: relative;
+    display: flex;
+    gap: 3px;
+    height: 100%;
+  }
+
+  .overlapList > li {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    top: calc(var(--offset) / var(--span) * 100%);
+    height: calc(var(--len) / var(--span) * 100%);
+  }
+}
+
+/* ---------- Week view ---------- */
+
+.weekScroll {
+  min-width: 0;
+  border-radius: 0.9rem;
+}
+
+.weekScroll:focus-visible {
+  outline: 2px solid var(--jk-ring);
+  outline-offset: 3px;
+}
+
+.week {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.weekDay {
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0.6rem;
+  border: 1px solid var(--jk-border);
+  border-radius: 0.9rem;
+  background: var(--jk-background);
+}
+
+.weekDay[data-selected] {
+  border-color: var(--jk-primary);
+  box-shadow: inset 0 0 0 1px var(--jk-primary);
+}
+
+.weekDayHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.5rem;
+  border: 0;
+  border-radius: 0.6rem;
+  background: transparent;
+  color: var(--jk-foreground);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.weekDayHead:hover {
+  background: var(--jk-muted);
+}
+
+.weekDayName {
+  color: var(--jk-muted-foreground);
+  font-family: var(--jk-font-label);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.weekDayNum {
+  font-family: var(--jk-font-display);
+  font-size: 1.25rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.weekVisits {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.visitCompact {
+  padding: 0.5rem 0.6rem 0.5rem 0.65rem;
+  border-left-width: 3px;
+  border-radius: 0.55rem;
+}
+
+.visitCompact .visitName {
+  font-size: 0.875rem;
+}
+
+.visitCompact .visitMeta,
+.visitCompact .visitTime {
+  font-size: 0.75rem;
+}
+
+.weekEmpty {
+  margin: 0;
+  padding: 0 0.5rem 0.25rem;
+  color: var(--jk-muted-foreground);
+  font-size: 0.8125rem;
+}
+
+@media (min-width: 768px) {
+  .weekScroll {
+    overflow-x: auto;
+  }
+
+  .week {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.5rem;
+    min-width: 52rem;
+  }
+
+  .weekDay {
+    padding: 0.4rem;
+  }
+}
+
+/* ---------- Empty day ---------- */
+
+.empty {
+  padding-block: clamp(1rem, 4vw, 2.5rem);
+}
+
+/* ---------- Side panel + Add visit dialog (portalled @/atoms/dialog) ---------- */
+
+.sheet {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  translate: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: min(100%, 26rem);
+  max-width: none;
+  height: 100dvh;
+  padding: 1.5rem 1.25rem;
+  overflow-y: auto;
+  border-left: 1px solid var(--jk-border);
+  border-radius: var(--ben-radius) 0 0 var(--ben-radius);
+  background: var(--jk-popover);
+  color: var(--jk-popover-foreground);
+  font-size: 1rem;
+  animation: sheet-in 200ms ease-out;
+}
+
+.sheet[data-ending-style] {
+  animation: sheet-out 160ms ease-in forwards;
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateX(1.5rem);
+    opacity: 0;
+  }
+}
+
+@keyframes sheet-out {
+  to {
+    transform: translateX(1.5rem);
+    opacity: 0;
+  }
+}
+
+.sheetHeader {
+  padding-right: 2.5rem;
+}
+
+.sheetTitle {
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: var(--jk-text-title);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+.sheetDescription {
+  color: var(--jk-muted-foreground);
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.summary {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--jk-border);
+}
+
+.summary > div {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--jk-border);
+}
+
+.summary dt {
+  color: var(--jk-muted-foreground);
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.summary dd {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+.sheetAction {
+  gap: 0.4rem;
+  align-self: flex-start;
+}
+
+.addDialog {
+  width: 100%;
+  max-width: min(calc(100% - 2rem), 30rem);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  background: var(--jk-popover);
+  color: var(--jk-popover-foreground);
+  font-size: 1rem;
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+.formRow {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 480px) {
+  .formRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.form [data-slot="input"] {
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.formFooter {
+  margin-top: 0.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .segment,
+  .chip,
+  .visit {
+    transition: none;
+  }
+
+  .sheet,
+  .sheet[data-ending-style] {
+    animation: none;
+  }
+}

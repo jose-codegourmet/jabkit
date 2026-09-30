@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "bento",
+  "components": {
+    "button": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/button/Button.tsx"],
+      "adaptation": "A plain evergreen action with chalk text for “Request a walkthrough”, “Confirm booking”, and “Send request”; secondary actions use the cool-gray surface or an outline. Rounded to --jk-radius (0.75rem), 44px (--jk-control-height) minimum height, label weight 650, no shadow, glow, or gradient.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API. Loading keeps the button in place, sets aria-busy, and changes the label, for example “Sending…”. Tile actions such as “View day” or “Review bookings” are links, not buttons, unless they change state in place. Focus is a 2px evergreen (--jk-ring) outline offset 2px from the control."
+    },
+    "card": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/card/Card.tsx"],
+      "adaptation": "The bento tile: a whiter chalk surface on the chalk page, 16px radius (--ben-radius), 1px --jk-border, at most the --ben-shadow hairline, and 20px padding (24px at 1024px and up). Each tile has a short visible label, one plain primary line, and one of three kinds: static (no hover, no pointer, no chevron), link (the whole card is one anchor with an evergreen hover border, focus ring, and trailing arrow), or action (static surface holding explicit buttons). States: default, loading, empty, warning, selected, error.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API. Card currently hardcodes rounded-xl, a ring border, and text-sm; override geometry in the app composition. Render tiles as section, article, or li with aria-labelledby pointing at the visible label. Warning adds an apricot left edge, an icon, and the words “Needs attention”; selected uses aria-current and an evergreen border; loading uses aria-busy with a polite live message such as “Loading bookings…”. Related candidates to inspect: packages/ui/src/marketing/bento19/Bento19.tsx, packages/ui/src/marketing/feature261/Feature261.tsx, packages/ui/src/atoms/badge/Badge.tsx, packages/ui/src/atoms/progress/Progress.tsx, packages/ui/src/atoms/alert/Alert.tsx, packages/ui/src/atoms/skeleton/Skeleton.tsx. The weekly visits chart is built in markup (labelled bars, a written-out text equivalent, and an optional table), not with packages/ui/src/atoms/chart/Chart.tsx, because recharts is not a dependency of apps/bento. Remove the blocks' avatars, AI illustrations, prices, and statistic claims. Never nest a bento grid inside a tile."
+    },
+    "input": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/input/Input.tsx"],
+      "adaptation": "A calm labelled field on the --jk-card surface, 2.75rem high, rounded to --jk-radius, with a 1px --jk-input edge, help text under the label, and an inline error linked by aria-describedby. Used on the walkthrough request, the add-visit dialog, and the bookings search.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API. Also inspect packages/ui/src/atoms/label/Label.tsx, packages/ui/src/atoms/textarea/Textarea.tsx, and packages/ui/src/atoms/checkbox/Checkbox.tsx. There is no field or select atom; wrap label, control, help, and error in a local field component and use a native select with the input's height, boundary, and focus ring. A failed submit focuses an error summary at the top and keeps typed values. Demo forms make no network call."
+    },
+    "navbar": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/traffo-header/TraffoHeader.tsx",
+        "packages/ui/src/atoms/navigation-menu/NavigationMenu.tsx"
+      ],
+      "adaptation": "A header visually lighter than the product grid: chalk background, 1px cool-gray bottom border, no shadow. An inline SVG of the four-cell symbol plus “DAYMARK” set in HTML links home (accessible name “DAYMARK home”); Product, Who it's for, How it works, FAQ; a “See a sample dashboard” text link (hidden below 1024px) and a primary “Request a walkthrough” button. The current page gets aria-current=\"page\" and an evergreen underline.",
+      "notes": "Inspect the candidate anatomy and props before adapting; this guidance does not describe its current API. Below 768px show a “Menu” button with icon and visible text and aria-expanded; the full-width sheet lists Product, Who it's for, How it works, FAQ, See a sample dashboard, then a full-width “Request a walkthrough”. Esc and “Close” dismiss it, focus returns to Menu, body scroll locks while open. The portal (/demo/*) replaces this header with a shell modelled on packages/ui/src/dashboard/application-shell1/ApplicationShell1.tsx: that block hardcodes a generic logo, renders an sr-only h1 that would duplicate page headings, and collapses instead of opening a mobile sheet, so compose it locally from sidebar, breadcrumb, avatar, and dropdown-menu atoms."
+    },
+    "hero": {
+      "category": "marketing",
+      "existingCandidates": ["packages/ui/src/marketing/hero307/Hero307.tsx"],
+      "adaptation": "“Open the day with a clearer picture.” with “See a sample dashboard” and “Request a walkthrough”. The right side is a live, scaled five-tile version of the /demo bento built from real components inside a figure labelled “Sample DAYMARK dashboard with demo data”, captioned “Demo data from a fictional studio.” ben-hero sits as a small span-4 photo tile, never as a full-bleed background.",
+      "notes": "Hero307's angled analytics dashboard does not fit; keep only its semantics or compose from card and button. The mini dashboard tiles are static in this preview: no hover, no pointer, no arrow. Never replace the coded dashboard with a screenshot or generated image of UI."
+    },
+    "pricing": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/accordion/Accordion.tsx"],
+      "adaptation": "DAYMARK has no price table. Pricing is a question in the FAQ accordion answered with “[Price — client to confirm]. Ask for pricing when you request a walkthrough.” and a checkbox on the walkthrough form: “I'd also like pricing information”.",
+      "notes": "Do not adapt a pricing block, plan cards, discounts, or “most popular” badges. Inspect packages/ui/src/marketing/faq12/Faq12.tsx if a grouped FAQ layout is wanted. Commercial terms stay as client-confirmation placeholders until the client supplies them."
+    }
+  }
+}

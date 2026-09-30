@@ -1,0 +1,165 @@
+.hero {
+  padding-block: clamp(1.25rem, 3vw, 2.5rem) calc(var(--jk-space-section) / 2);
+}
+
+.heroCopy {
+  justify-content: center;
+  gap: 1.25rem;
+  padding: clamp(1.5rem, 3.5vw, 2.75rem);
+}
+
+.heroCopy h1.heroTitle {
+  margin: 0;
+  font-size: clamp(2.35rem, 1.6rem + 2.4vw, 3.5rem);
+  max-width: 13ch;
+}
+
+.heroBoard {
+  padding: clamp(0.85rem, 2vw, 1.25rem);
+}
+
+.heroPhoto {
+  position: relative;
+  min-height: 14rem;
+}
+
+/* Problem: three sources converging into one view. */
+.converge {
+  justify-content: center;
+  gap: 0;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  background-image: radial-gradient(
+    var(--ben-grid-line) 1px,
+    transparent 1.2px
+  );
+  background-size: 18px 18px;
+}
+
+.sources {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.source {
+  display: grid;
+  place-items: center;
+  min-height: 4.5rem;
+  padding: 0.75rem;
+  border: 1px dashed var(--jk-input);
+  border-radius: 0.75rem;
+  background: var(--jk-card);
+  color: var(--jk-muted-foreground);
+  font-weight: 650;
+  text-align: center;
+}
+
+.connector {
+  display: block;
+  width: 100%;
+  height: clamp(2.5rem, 6vw, 4rem);
+  overflow: visible;
+}
+
+.connector path {
+  fill: none;
+  stroke: var(--jk-primary);
+  stroke-width: 2;
+  stroke-dasharray: 4 5;
+  vector-effect: non-scaling-stroke;
+}
+
+.destination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 4.5rem;
+  margin: 0;
+  border-radius: 0.9rem;
+  background: var(--ben-tile-evergreen);
+  color: var(--ben-tile-evergreen-foreground);
+  font-weight: 750;
+  letter-spacing: 0.08em;
+}
+
+.destination svg rect:first-child {
+  fill: currentColor;
+  opacity: 0.9;
+}
+
+.problemPhoto {
+  position: relative;
+  min-height: 18rem;
+}
+
+/* Benefits. */
+.benefit {
+  gap: 0.6rem;
+}
+
+.benefitToday {
+  min-height: 22rem;
+}
+
+.benefitQuestion {
+  margin: 0;
+  font-size: clamp(1.25rem, 1.05rem + 0.6vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.benefitAnswer {
+  margin: 0;
+  max-width: 38ch;
+  color: var(--jk-muted-foreground);
+}
+
+.material {
+  position: relative;
+  flex: 1;
+  min-height: 9rem;
+  margin: 0.5rem calc(var(--ben-pad) * -1) 0;
+  overflow: hidden;
+  border-block: 1px solid var(--jk-border);
+}
+
+.material img {
+  border-radius: 0;
+}
+
+/* Drill-down. */
+.drillTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-size: 1.1875rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.drillTitle svg {
+  color: var(--jk-primary);
+}
+
+/* Who it's for. */
+.whoHead {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+}
+
+.banner {
+  position: relative;
+  aspect-ratio: 21 / 9;
+}
+
+@media (min-width: 768px) {
+  .whoHead {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}

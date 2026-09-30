@@ -1,0 +1,121 @@
+/* Reports page. Chart tile spans 8 columns and three rows; the summary tiles stack beside it. */
+
+.weekForm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.weekField {
+  flex: 1 1 12rem;
+}
+
+@media (min-width: 640px) {
+  .weekForm {
+    width: auto;
+  }
+
+  .weekField {
+    min-width: 12rem;
+  }
+}
+
+.chartHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+.chartHead h2 {
+  margin: 0;
+}
+
+.chartHead h2:focus {
+  outline: none;
+}
+
+.chartHead h2:focus-visible {
+  outline: 2px solid var(--jk-ring);
+  outline-offset: 4px;
+  border-radius: 0.25rem;
+}
+
+.weekLabel {
+  margin: 0;
+  color: var(--jk-muted-foreground);
+  font-family: var(--jk-font-label);
+  font-size: var(--jk-text-label);
+  font-weight: 650;
+}
+
+.chart {
+  gap: 1.25rem;
+}
+
+.chart table {
+  margin-top: 0;
+}
+
+.chartSkeleton {
+  padding-top: 0.25rem;
+}
+
+.chartSkeleton > [data-slot="skeleton"] {
+  height: 1.25rem;
+}
+
+.chartSkeleton > [data-slot="skeleton"]:first-of-type {
+  height: 12rem;
+  width: 100%;
+}
+
+.summary {
+  min-height: 8.5rem;
+}
+
+.stat {
+  display: grid;
+  align-content: space-between;
+  gap: 0.75rem;
+  height: 100%;
+  margin: 0;
+}
+
+.statLabel {
+  color: var(--jk-muted-foreground);
+  font-family: var(--jk-font-label);
+  font-size: var(--jk-text-label);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.statValue {
+  overflow-wrap: anywhere;
+}
+
+.statSkeleton {
+  display: grid;
+  align-content: space-between;
+  gap: 1rem;
+  height: 100%;
+}
+
+.footnote {
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid > .summary {
+    grid-column: span 4;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid > .chartTile {
+    grid-row: span 3;
+  }
+}

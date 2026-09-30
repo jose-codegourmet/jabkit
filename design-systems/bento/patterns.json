@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "bento",
+  "patterns": [
+    {
+      "id": "product-overview",
+      "purpose": "Show the product idea in one glance and get a business owner to request a walkthrough.",
+      "sections": [
+        "Light header with Request a walkthrough",
+        "Hero promise beside a coded mini dashboard and one small photo tile",
+        "The problem: three sources converging into one tile",
+        "Benefits bento where each tile answers one question",
+        "Drill-down proof: linked cards with coded previews of the calendar, table, and board",
+        "Roles teaser with a wide team banner",
+        "Shared CTA band"
+      ],
+      "desktop": "12-column grid inside 80rem. Primary tiles span 6–8 columns, secondary 4, compact 3. Photos sit inside tiles at card radius. Benefits: Today 7, Bookings 5, Follow-ups 4, Team 4, Performance 4.",
+      "mobile": "One column in DOM order, which is the reading order. The coded dashboard stays before supporting photos; the CTA image moves below its copy and swaps to the 4:5 crop.",
+      "conversion": "Request a walkthrough stays in the header and CTA band. See a sample dashboard is the secondary path into the portal.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "portal-overview",
+      "purpose": "Prove the bento works as a useful daily overview in which every tile leads to a full view.",
+      "sections": [
+        "Demo-portal strip and breadcrumbs",
+        "Greeting heading with Add visit",
+        "Today tile with the next three visits",
+        "Confirmation tile in the warning state",
+        "Follow-ups, Team, and Weekly trend tiles",
+        "Overlap alert row",
+        "Demo-data footnote"
+      ],
+      "desktop": "Today spans 8 with Confirmation at 4; Follow-ups, Team, and Weekly trend at 4 each; the alert spans 12. Grouped sidebar on the left.",
+      "mobile": "Today, Confirmation, Follow-ups, Team, Weekly trend, Alert, exactly as in the DOM. The sidebar collapses behind a Menu button and breadcrumbs truncate to the parent link.",
+      "conversion": "Each tile's action opens its detail view: View day, Review bookings, Open follow-ups, View roster, View report.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "card-state-reference",
+      "purpose": "Document the tile states and layout rules so every page uses the same honest affordances.",
+      "sections": [
+        "Card states heading and one-line rule",
+        "Loading, empty, warning, actionable, selected, error, and static tiles, each captioned with its state name",
+        "Spans, gaps, and order diagram built in code",
+        "Show mobile order toggle with numbered badges"
+      ],
+      "desktop": "State tiles in rows of 4/4/4 and 8/4. The layout diagram shows span 8/4 and 4/4/4 rows on the 12-column grid.",
+      "mobile": "States stack in the listed order. The diagram renders the stacked DOM order with numbered badges.",
+      "conversion": "No commercial action. Only the actionable tile looks and behaves like a link.",
+      "imageryGuide": "imagery.md"
+    }
+  ]
+}

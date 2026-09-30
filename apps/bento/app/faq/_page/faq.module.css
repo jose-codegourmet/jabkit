@@ -1,0 +1,142 @@
+/* FAQ (/faq): header tiles, grouped accordions. */
+
+.header {
+  padding-block: clamp(1.25rem, 3vw, 2.5rem) 0;
+}
+
+.intro {
+  justify-content: center;
+  gap: 1rem;
+  padding: clamp(1.5rem, 3.5vw, 2.75rem);
+}
+
+.intro h1.title {
+  margin: 0;
+  font-size: clamp(2.35rem, 1.6rem + 2.4vw, 3.5rem);
+  max-width: 14ch;
+}
+
+.topics {
+  justify-content: center;
+}
+
+.topics nav {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.topicList {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topicList li + li {
+  border-top: 1px solid
+    color-mix(in oklab, var(--jk-foreground) 12%, transparent);
+}
+
+.topicLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  color: var(--jk-foreground);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.topicLink svg {
+  flex: none;
+  color: var(--jk-primary);
+  transition: transform 160ms ease;
+}
+
+.topicLink:hover {
+  color: var(--jk-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.topicLink:hover svg {
+  transform: translateY(2px) rotate(90deg);
+}
+
+/* Groups. */
+.groups {
+  padding-block: calc(var(--jk-space-section) / 2);
+  padding-bottom: 0;
+}
+
+.group {
+  gap: 0.5rem;
+  scroll-margin-top: 5.5rem;
+}
+
+.group h2.groupTitle {
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: clamp(1.375rem, 1.15rem + 0.6vw, 1.625rem);
+  font-weight: 720;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.accordion {
+  gap: 0;
+}
+
+.item {
+  border-bottom: 1px solid var(--jk-border);
+}
+
+.item:last-child {
+  border-bottom: 0;
+}
+
+.trigger {
+  align-items: center;
+  gap: 1rem;
+  min-height: 3rem;
+  padding-block: 0.75rem;
+  color: var(--jk-foreground);
+  font-family: var(--jk-font-body);
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.4;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.trigger:hover {
+  color: var(--jk-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.trigger svg {
+  flex: none;
+  color: var(--jk-primary);
+}
+
+.answer {
+  padding-bottom: 1rem;
+  color: var(--jk-muted-foreground);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.answer p {
+  margin: 0;
+  max-width: 62ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topicLink svg,
+  .topicLink:hover svg {
+    transform: none;
+    transition: none;
+  }
+}

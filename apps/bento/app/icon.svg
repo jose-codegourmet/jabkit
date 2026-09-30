@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-labelledby="daymark-icon-title">
+  <title id="daymark-icon-title">DAYMARK</title>
+  <style>
+    .line { fill: none; stroke: #26332f; }
+    @media (prefers-color-scheme: dark) { .line { stroke: #eef1ec; } }
+  </style>
+  <rect x="3" y="3" width="26" height="9" rx="2.5" fill="#386a57"/>
+  <rect class="line" x="4" y="15.5" width="10" height="5" rx="1.75" stroke-width="2.25"/>
+  <rect class="line" x="4" y="23.5" width="10" height="5" rx="1.75" stroke-width="2.25"/>
+  <rect class="line" x="17" y="15.5" width="11" height="13" rx="1.75" stroke-width="2.25"/>
+</svg>

@@ -1,0 +1,246 @@
+/* /demo/bookings: filter toolbar and the bookings table. */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  margin-bottom: var(--ben-gap);
+}
+
+.search {
+  flex: 1 1 16rem;
+  max-width: 22rem;
+}
+
+.searchControl {
+  position: relative;
+}
+
+.searchControl > svg {
+  position: absolute;
+  top: 50%;
+  left: 0.85rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--jk-muted-foreground);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.searchControl .searchInput {
+  padding-left: 2.4rem;
+  padding-right: 0.85rem;
+  font-size: 1rem;
+}
+
+/* ---------- Table tile ---------- */
+
+.tableTile {
+  gap: 0;
+}
+
+.stateTile {
+  justify-content: center;
+  min-height: 20rem;
+}
+
+.loadingMessage {
+  padding: var(--ben-pad) var(--ben-pad) 0.25rem;
+  color: var(--jk-muted-foreground);
+  font-family: var(--jk-font-label);
+  font-size: var(--jk-text-label);
+  font-weight: 650;
+}
+
+/* Only the table scrolls sideways on narrow screens, never the page. */
+.scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  border-radius: inherit;
+}
+
+.scroll:focus-visible {
+  outline: 2px solid var(--jk-ring);
+  outline-offset: -3px;
+}
+
+.table {
+  width: 100%;
+  min-width: 46rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.table th,
+.table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.table thead th {
+  padding-block: 0.85rem;
+  border-bottom: 1px solid var(--jk-border);
+  background: var(--jk-background);
+  color: var(--jk-muted-foreground);
+  font-family: var(--jk-font-label);
+  font-size: 0.8125rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.table thead th:first-child,
+.table tbody > tr > :first-child {
+  padding-left: var(--ben-pad);
+}
+
+.table thead th:last-child,
+.table tbody > tr > :last-child {
+  padding-right: var(--ben-pad);
+}
+
+.table thead th[aria-sort] {
+  color: var(--jk-foreground);
+}
+
+.table tbody tr + tr > * {
+  border-top: 1px solid var(--jk-border);
+}
+
+.table tbody th {
+  color: var(--jk-foreground);
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+/* Needs-reply rows carry a warning edge; the badge text still names the status. */
+.table tbody tr[data-status="needs-reply"] > :first-child {
+  box-shadow: inset 4px 0 0 var(--ben-warning-edge);
+}
+
+.table tbody tr[data-status="cancelled"] > th,
+.table tbody tr[data-status="cancelled"] > td:not(:last-child) {
+  color: var(--jk-muted-foreground);
+}
+
+.when {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.staff {
+  color: var(--jk-muted-foreground);
+}
+
+.actionCell {
+  text-align: right;
+}
+
+.table thead th.actionCell {
+  text-align: right;
+}
+
+.sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  margin: -0.45rem -0.55rem;
+  padding: 0 0.55rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+
+.sort:hover {
+  background: var(--jk-muted);
+}
+
+.sort svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--jk-primary);
+}
+
+.review {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2.5rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--jk-border);
+  border-radius: var(--jk-radius);
+  background: var(--jk-card);
+  color: var(--jk-foreground);
+  font-size: 0.875rem;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.review:hover {
+  border-color: var(--jk-primary);
+  color: var(--jk-primary);
+}
+
+.review svg {
+  color: var(--jk-primary);
+}
+
+.cellSkeleton {
+  width: 70%;
+  height: 0.9rem;
+  border-radius: 0.4rem;
+}
+
+.table tbody td:nth-child(2) .cellSkeleton {
+  width: 85%;
+}
+
+.table tbody td:nth-child(3) .cellSkeleton {
+  width: 90%;
+}
+
+.table tbody td:nth-child(4) .cellSkeleton {
+  width: 45%;
+}
+
+.table tbody td:nth-child(5) .cellSkeleton {
+  width: 5.5rem;
+  height: 1.5rem;
+  border-radius: 999px;
+}
+
+.table tbody td:last-child .cellSkeleton {
+  width: 5rem;
+  height: 2.5rem;
+  margin-left: auto;
+  border-radius: var(--jk-radius);
+}
+
+@media (max-width: 767px) {
+  .search {
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review {
+    transition: none;
+  }
+
+  .cellSkeleton {
+    animation: none;
+  }
+}
