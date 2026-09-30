@@ -1,0 +1,44 @@
+.section {
+  padding-block: var(--jk-space-section);
+  border-top: 1px solid var(--jk-border);
+}
+.pillar {
+  height: 100%;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--jk-foreground);
+}
+.pillar > span {
+  color: var(--swi-signal);
+  font-weight: 700;
+}
+.pillar h2 {
+  margin: 2rem 0 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -0.045em;
+}
+.pillar p {
+  min-height: 5rem;
+  font-size: var(--jk-text-lead);
+  line-height: 1.4;
+}
+.pillar figure,
+.pillar > div {
+  margin-top: 2rem;
+}
+.bigCopy {
+  padding-block: clamp(2rem, 6vw, 6rem);
+}
+.bigCopy h2 {
+  max-width: 15ch;
+  margin: 0;
+  font-size: clamp(2.75rem, 7vw, 6rem);
+  letter-spacing: -0.055em;
+  line-height: 0.92;
+}
+.bigCopy p {
+  max-width: 45ch;
+  margin: 1.5rem 0 0;
+  font-size: var(--jk-text-lead);
+  line-height: 1.45;
+}
