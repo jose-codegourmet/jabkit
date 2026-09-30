@@ -1,0 +1,69 @@
+.venues {
+  border-top: 1px solid var(--jk-border);
+}
+.venue {
+  scroll-margin-top: calc(var(--swi-header-height) + 1rem);
+  padding-block: var(--jk-space-section);
+  border-bottom: 1px solid var(--jk-border);
+}
+.copy {
+  padding-block: 2rem;
+}
+.index {
+  margin: 0;
+  color: var(--swi-signal);
+  font-weight: 700;
+}
+.copy h2,
+.arrival h2 {
+  margin: 1rem 0 0;
+  font-size: clamp(2.75rem, 7vw, 6rem);
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+}
+.copy dl {
+  margin: 2rem 0;
+}
+.copy dl div {
+  padding-block: 0.75rem;
+  border-top: 1px solid var(--jk-border);
+}
+.copy dt {
+  color: var(--jk-muted-foreground);
+  font-size: var(--jk-text-caption);
+  text-transform: uppercase;
+}
+.copy dd {
+  margin: 0.35rem 0 0;
+}
+.copy h3 {
+  font-size: var(--jk-text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.copy ul {
+  margin: 1rem 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+.copy li {
+  padding-block: 0.5rem;
+  border-bottom: 1px solid var(--jk-border);
+}
+.arrival {
+  padding-block: var(--jk-space-section);
+}
+.arrival p {
+  max-width: 44ch;
+  font-size: var(--jk-text-lead);
+  line-height: 1.4;
+}
+.arrival a {
+  font-weight: 650;
+  text-underline-offset: 0.25em;
+}
+@media (min-width: 768px) {
+  .copy {
+    padding-block: 0;
+  }
+}
