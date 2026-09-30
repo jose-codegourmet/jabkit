@@ -1,0 +1,21 @@
+.legal {
+  min-height: 65vh;
+  padding-block: var(--jk-space-section);
+}
+.legal > div > div > p {
+  color: var(--swi-signal);
+  font-size: var(--jk-text-label);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.legal h1 {
+  margin: 2rem 0;
+  font-size: var(--jk-text-display);
+  letter-spacing: var(--jk-tracking-display);
+  line-height: var(--jk-leading-display);
+}
+.legal > div > div > div {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--jk-foreground);
+  font-size: var(--jk-text-lead);
+}
