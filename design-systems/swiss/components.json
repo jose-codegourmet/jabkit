@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "swiss",
+  "components": {
+    "button": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/button/Button.tsx"],
+      "adaptation": "Square, high-contrast controls with one filled signal-red action per region and immediate pressed feedback.",
+      "notes": "Remove decorative shadows and preserve a 44px target, visible focus, and single-line labels."
+    },
+    "navigation-menu": {
+      "category": "atoms",
+      "existingCandidates": [
+        "packages/ui/src/atoms/navigation-menu/NavigationMenu.tsx"
+      ],
+      "adaptation": "Align the wordmark, four destinations, and Tickets action to the twelve-column grid.",
+      "notes": "Active routes use weight plus a 2px rule and aria-current. Mobile uses a focus-trapped full-height sheet."
+    },
+    "card": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/card/Card.tsx"],
+      "adaptation": "A flat film record with a consistent still crop, title, compact facts, and one clear link.",
+      "notes": "Use space and rules instead of elevation. No critic scores, laurels, or image overlays."
+    },
+    "badge": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/badge/Badge.tsx"],
+      "adaptation": "Compact category and state labels with square geometry and redundant text cues.",
+      "notes": "Ticket status always includes a word and glyph; red alone never signals availability."
+    },
+    "data-table": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/data-table/DataTable.tsx"],
+      "adaptation": "The source-of-truth schedule with caption, header cells, day groups, sortable facts, and keyboard-selectable rows.",
+      "notes": "Below 768px render scannable day lists instead of forcing horizontal table scrolling."
+    },
+    "combobox": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/combobox/Combobox.tsx"],
+      "adaptation": "Plain venue, category, and sort filters with persistent labels and URL-backed values.",
+      "notes": "The popup and trigger inherit the same semantic tokens and visible focus treatment."
+    },
+    "filter-group": {
+      "category": "atoms",
+      "existingCandidates": [
+        "packages/ui/src/atoms/button-group/ButtonGroup.tsx"
+      ],
+      "adaptation": "Category and day options use aria-pressed with a check glyph and weight change for selection.",
+      "notes": "Do not rely on a red fill as the sole selected-state cue."
+    },
+    "calendar": {
+      "category": "atoms",
+      "existingCandidates": [
+        "packages/ui/src/atoms/calendar-03/Calendar03.tsx"
+      ],
+      "adaptation": "A secondary schedule view limited to the fixed festival days, with a marked count and the list retained beneath it.",
+      "notes": "The table or list remains the source of truth. Do not imply live ticket inventory."
+    },
+    "pricing": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/pricing28/Pricing28.tsx"
+      ],
+      "adaptation": "Compare single screening, day pass, and festival pass without a fabricated featured plan.",
+      "notes": "All prices and policies remain visibly marked placeholders until confirmed."
+    },
+    "accordion": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/accordion/Accordion.tsx"],
+      "adaptation": "Numbered FAQ groups with direct questions, plain answers, and anchored headings.",
+      "notes": "Preserve native heading order, keyboard behavior, and expanded-state text."
+    },
+    "footer": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/footer-column/FooterColumn.tsx"
+      ],
+      "adaptation": "A near-black four-column footer for identity, festival navigation, visit details, and placeholder contacts.",
+      "notes": "No sponsor logos or implied partnerships. Repeat the demo notice in the legal line."
+    },
+    "form": {
+      "category": "atoms",
+      "existingCandidates": [
+        "packages/ui/src/atoms/input/Input.tsx",
+        "packages/ui/src/atoms/label/Label.tsx",
+        "packages/ui/src/atoms/textarea/Textarea.tsx"
+      ],
+      "adaptation": "A demo checkout form with persistent labels, explicit required markers, and local-only review state.",
+      "notes": "Retain entered values after validation errors and never request or imply payment."
+    }
+  }
+}

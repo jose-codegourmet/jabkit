@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "swiss",
+  "families": {
+    "display": "\"Inter Tight\", \"Arial Narrow\", Arial, sans-serif",
+    "body": "\"Inter Tight\", Arial, Helvetica, sans-serif",
+    "label": "\"Inter Tight\", Arial, Helvetica, sans-serif"
+  },
+  "roles": {
+    "display": {
+      "family": "display",
+      "fontSize": "clamp(3.5rem, 1.8rem + 7vw, 9rem)",
+      "lineHeight": 0.9,
+      "fontWeight": 700,
+      "letterSpacing": "-0.055em",
+      "maxWidth": "11ch"
+    },
+    "heading": {
+      "family": "display",
+      "fontSize": "clamp(2rem, 1.2rem + 3vw, 4.5rem)",
+      "lineHeight": 0.98,
+      "fontWeight": 650,
+      "letterSpacing": "-0.04em",
+      "maxWidth": "20ch"
+    },
+    "body": {
+      "family": "body",
+      "fontSize": "1rem",
+      "lineHeight": 1.5,
+      "fontWeight": 450,
+      "letterSpacing": "-0.01em",
+      "maxWidth": "65ch"
+    },
+    "lead": {
+      "family": "body",
+      "fontSize": "clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem)",
+      "lineHeight": 1.25,
+      "fontWeight": 500,
+      "letterSpacing": "-0.025em",
+      "maxWidth": "38ch"
+    },
+    "label": {
+      "family": "label",
+      "fontSize": ".875rem",
+      "lineHeight": 1.25,
+      "fontWeight": 650,
+      "letterSpacing": ".03em",
+      "maxWidth": "none"
+    },
+    "caption": {
+      "family": "label",
+      "fontSize": ".875rem",
+      "lineHeight": 1.4,
+      "fontWeight": 500,
+      "letterSpacing": "0em",
+      "maxWidth": "60ch"
+    }
+  },
+  "implementation": {
+    "status": "Inter Tight is the intended family; self-host it with its OFL license in the FRAME/01 app.",
+    "loading": "Use self-hosted woff2 files with font-display: swap and the fallback stacks above.",
+    "wrapping": "Keep display lines short and aligned to the grid. Metadata wraps by field, never into an unreadable compressed strip.",
+    "metrics": "Review numeral widths, slash alignment, and layout shift after the brand font loads.",
+    "responsive": "Use clamp for display roles, keep metadata at 14px or larger, and verify 200% text zoom."
+  }
+}

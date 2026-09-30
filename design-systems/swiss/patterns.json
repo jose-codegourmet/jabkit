@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "swiss",
+  "patterns": [
+    {
+      "id": "festival-home",
+      "purpose": "State what the festival is, then lead into program discovery and passes.",
+      "sections": [
+        "Typographic hero with festival facts and one city still",
+        "Three featured films",
+        "Schedule preview table",
+        "Two venue records",
+        "Talks note",
+        "Tickets call to action"
+      ],
+      "desktop": "A twelve-column field uses asymmetric spans, stable still crops, and rules that align real facts.",
+      "mobile": "A four-column stack keeps the action visible, previews one next film card, and replaces schedule tables with day lists.",
+      "conversion": "Program discovery is primary; pass comparison remains one direct link away.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "program-index",
+      "purpose": "Let visitors compare films before opening one detail record.",
+      "sections": [
+        "Indexed page header",
+        "Category and sort controls",
+        "Film records with factual metadata",
+        "Loading, empty, and error states",
+        "Tickets call to action"
+      ],
+      "desktop": "Each film still occupies three columns and the facts occupy nine, aligned to one repeated baseline.",
+      "mobile": "Film records stack image, title, facts, status, and action in that order.",
+      "conversion": "A visitor opens one film with its language, access, and screening facts preserved.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "schedule-and-selection",
+      "purpose": "Filter a dense program and select an eligible screening without losing context.",
+      "sections": [
+        "Indexed schedule header",
+        "URL-backed filters and view switch",
+        "Status legend",
+        "Grouped screening table or mobile day list",
+        "Selection summary",
+        "Demo notice"
+      ],
+      "desktop": "The table is the source of truth; day headers and columns share the twelve-column rhythm.",
+      "mobile": "A sticky day jump bar precedes readable screening rows and a selected-item action bar.",
+      "conversion": "Only available demo screenings advance to the nonfunctional checkout summary.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "film-detail",
+      "purpose": "Present every decision fact, then offer a screening selection.",
+      "sections": [
+        "Breadcrumb and indexed title",
+        "Wide lead still and facts definition list",
+        "Screening selection",
+        "Portrait companion still",
+        "Related films",
+        "Tickets call to action"
+      ],
+      "desktop": "A nine-column still and three-column fact rail establish hierarchy before the selection rows.",
+      "mobile": "Title, still, facts, screening, companion still, and related films remain in reading order.",
+      "conversion": "The selected screening and its demo status carry into checkout.",
+      "imageryGuide": "imagery.md"
+    }
+  ]
+}
