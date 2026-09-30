@@ -1,0 +1,72 @@
+.notice {
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--jk-border);
+  font-size: var(--jk-text-caption);
+}
+.plans,
+.section {
+  padding-block: var(--jk-space-section);
+}
+.plans {
+  border-bottom: 1px solid var(--jk-border);
+}
+.plan {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  border: 1px solid var(--jk-foreground);
+  border-radius: 0;
+  background: transparent;
+  padding: 1.5rem;
+  box-shadow: none;
+}
+.index {
+  margin: 0;
+  color: var(--swi-signal);
+  font-weight: 700;
+}
+.plan h2 {
+  margin: 2rem 0 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -0.045em;
+}
+.price {
+  margin: 1.5rem 0 0;
+  font-size: var(--jk-text-lead);
+  font-weight: 700;
+}
+.plan ul {
+  flex: 1;
+  margin: 2rem 0;
+  padding: 0;
+  list-style: none;
+}
+.plan li {
+  padding-block: 0.6rem;
+  border-top: 1px solid var(--jk-border);
+}
+.unavailable {
+  padding: 0.75rem;
+  border: 1px solid var(--jk-border);
+  font-size: var(--jk-text-caption);
+}
+.concession {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--jk-foreground);
+  font-size: var(--jk-text-lead);
+}
+.heading {
+  margin: 0 0 2rem;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+.allQuestions {
+  display: block;
+  width: fit-content;
+  margin-top: 1.5rem;
+  font-weight: 650;
+  text-underline-offset: 0.25em;
+}
