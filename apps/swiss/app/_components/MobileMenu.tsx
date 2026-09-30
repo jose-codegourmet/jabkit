@@ -37,6 +37,7 @@ export function MobileMenu() {
             return (
               <DialogClose
                 key={item.href}
+                nativeButton={false}
                 render={
                   <Link
                     href={item.href as Route}
