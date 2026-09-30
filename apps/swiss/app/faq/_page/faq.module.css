@@ -1,0 +1,40 @@
+.faq {
+  padding-bottom: var(--jk-space-section);
+}
+.group {
+  display: grid;
+  scroll-margin-top: calc(var(--swi-header-height) + 1rem);
+  gap: 2rem;
+  padding-block: 3rem;
+  border-top: 1px solid var(--jk-foreground);
+}
+.heading {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+.heading span {
+  color: var(--swi-signal);
+  font-weight: 700;
+}
+.heading h2 {
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+.items {
+  min-width: 0;
+}
+@media (min-width: 768px) {
+  .group {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: var(--jk-space-grid);
+  }
+  .heading {
+    grid-column: 1 / span 3;
+  }
+  .items {
+    grid-column: 4 / span 5;
+  }
+}
