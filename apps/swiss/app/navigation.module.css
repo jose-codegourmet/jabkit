@@ -1,1 +1,192 @@
-/* Owned by the Foundation ticket. */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: var(--swi-header-height);
+  border-bottom: var(--swi-rule);
+  background: color-mix(in srgb, var(--jk-background) 96%, transparent);
+  backdrop-filter: blur(12px);
+}
+.headerGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--jk-space-grid);
+  align-items: center;
+  width: min(100%, var(--jk-content-max));
+  height: 100%;
+  margin-inline: auto;
+  padding-inline: var(--jk-space-gutter);
+}
+.logoWordmark {
+  display: none;
+}
+.logoSymbol {
+  grid-column: 1;
+  width: 2.5rem;
+}
+.desktopNav {
+  display: none !important;
+}
+.ticketButton {
+  grid-column: 3;
+  justify-self: end;
+  min-height: 2.5rem !important;
+  padding-inline: 0.9rem !important;
+}
+.mobileMenu {
+  grid-column: 4;
+  justify-self: end;
+}
+.menuTrigger {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0.75rem 0;
+  cursor: pointer;
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+.menuPanel {
+  display: flex !important;
+  flex-direction: column;
+  width: 100vw !important;
+  max-width: none !important;
+  height: 100dvh;
+  gap: 0 !important;
+  overflow-y: auto;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--jk-background) !important;
+  padding: 0 var(--jk-space-gutter) 2rem !important;
+  color: var(--jk-foreground) !important;
+}
+.menuTop {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: var(--swi-header-height);
+  border-bottom: var(--swi-rule);
+  width: 100%;
+}
+.menuLogo {
+  width: 2.5rem;
+}
+.menuTitle {
+  font-size: var(--jk-text-label);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.closeButton {
+  justify-self: end;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0.75rem 0;
+  cursor: pointer;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+.menuLinks {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.menuLink {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  align-items: baseline;
+  min-height: 5.5rem;
+  border-bottom: var(--swi-rule);
+  color: inherit;
+  text-decoration: none;
+  font-size: clamp(2rem, 9vw, 4rem);
+  font-weight: 640;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.menuLink[aria-current="page"] {
+  box-shadow: inset 0 -2px var(--swi-signal);
+  font-weight: 760;
+}
+.menuLinkIndex {
+  color: var(--swi-signal);
+  font-size: var(--jk-text-label);
+  letter-spacing: 0;
+}
+.menuLinkArrow {
+  font-size: 0.5em;
+}
+.menuMeta {
+  margin: auto 0 0;
+  padding-top: 2rem;
+  font-size: var(--jk-text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+}
+.navLink {
+  position: relative;
+  min-height: 2.75rem;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding-inline: 0.75rem !important;
+  text-decoration: none;
+}
+.navLink[aria-current="page"] {
+  font-weight: 760;
+}
+.navLink[aria-current="page"]::after {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0;
+  left: 0.75rem;
+  height: 2px;
+  background: var(--swi-signal);
+  content: "";
+}
+@media (min-width: 480px) {
+  .logoWordmark {
+    display: block;
+    grid-column: 1 / span 2;
+    width: 10.5rem;
+  }
+  .logoSymbol {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .headerGrid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+  .logoWordmark {
+    grid-column: 1 / span 2;
+  }
+  .desktopNav {
+    display: flex !important;
+    grid-column: 3 / span 4;
+    justify-self: center;
+  }
+  .ticketButton {
+    grid-column: 7 / span 2;
+  }
+  .mobileMenu {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  .headerGrid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .logoWordmark {
+    grid-column: 1 / span 3;
+  }
+  .desktopNav {
+    grid-column: 5 / span 6;
+  }
+  .ticketButton {
+    grid-column: 11 / span 2;
+  }
+}
