@@ -1,7 +1,7 @@
 "use client";
 
-import { DEFAULT_SITE_DOMAIN } from "common/base";
 import { useState } from "react";
+import { installPlanCurl } from "../../lib/agent-prompt";
 import { CommandBox, type CommandOption } from "../CommandBox";
 import { installOptions } from "../InstallCommand";
 
@@ -13,7 +13,7 @@ function agentOptions(name: string): CommandOption[] {
     {
       id: "mcp",
       label: "POST /mcp",
-      command: `curl -X POST https://${DEFAULT_SITE_DOMAIN}/mcp -d '{"tool":"get_install_plan","arguments":{"names":["${name}"]}}'`,
+      command: installPlanCurl(name),
     },
   ];
 }

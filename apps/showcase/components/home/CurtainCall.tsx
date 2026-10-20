@@ -42,7 +42,7 @@ export function CurtainCall() {
             </Link>
           </div>
           <p className="mt-7 font-mono text-[13px] opacity-80">
-            $ npx jabkit init
+            $ npx @jabkit/cli init
           </p>
         </div>
       </div>

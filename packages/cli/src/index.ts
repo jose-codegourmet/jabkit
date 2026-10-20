@@ -86,7 +86,7 @@ async function init() {
   });
   await writeFile(
     path.join(root, ".github/skills/jabkit-component/SKILL.md"),
-    `---\nname: jabkit-component\ndescription: Add UI components from the JabKit library when the user asks for a hero, pricing section, button, dashboard panel, or another reusable UI component.\n---\n\n# JabKit component\n\nSearch the JabKit MCP catalogue first. Show the install plan before writing. Install verbatim with \`npx jabkit add <name>\`, then apply requested modifications separately. Use semantic tokens rather than hardcoded colors.\n`,
+    `---\nname: jabkit-component\ndescription: Add UI components from the JabKit library when the user asks for a hero, pricing section, button, dashboard panel, or another reusable UI component.\n---\n\n# JabKit component\n\nSearch the JabKit MCP catalogue first. Show the install plan before writing. Install verbatim with \`npx @jabkit/cli add <name>\`, then apply requested modifications separately. Use semantic tokens rather than hardcoded colors.\n`,
   );
   const agentsPath = path.join(root, "AGENTS.md");
   const snippet =
@@ -97,7 +97,7 @@ async function init() {
   if (!currentAgents.includes("UI components (JabKit)"))
     await writeFile(agentsPath, `${currentAgents}${snippet}`);
   console.log(
-    "JabKit initialized. Configure your MCP client to use your deployed /mcp endpoint.",
+    `JabKit initialized. Connect your MCP client using Streamable HTTP: ${config.registry.replace(/\/$/, "")}/mcp`,
   );
 }
 async function add(

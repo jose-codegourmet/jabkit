@@ -9,7 +9,12 @@ export function skillCommand(name: string) {
 }
 
 export function installPlanCurl(name: string) {
+  return mcpToolCurl("get_install_plan", { names: [name] });
+}
+
+export function mcpToolCurl(name: string, args: Record<string, unknown>) {
   return `curl -X POST https://${DEFAULT_SITE_DOMAIN}/mcp \\
   -H "Content-Type: application/json" \\
-  -d '{"tool":"get_install_plan","arguments":{"names":["${name}"]}}'`;
+  -H "Accept: application/json, text/event-stream" \\
+  -d '${JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name, arguments: args } })}'`;
 }

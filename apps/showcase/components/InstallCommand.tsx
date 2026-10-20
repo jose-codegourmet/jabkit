@@ -4,9 +4,13 @@ import { CommandBox, type CommandOption } from "./CommandBox";
 
 export function installOptions(name: string): CommandOption[] {
   return [
-    { id: "npx", label: "npx", command: `npx jabkit add ${name}` },
-    { id: "pnpm", label: "pnpm dlx", command: `pnpm dlx jabkit add ${name}` },
-    { id: "bunx", label: "bunx", command: `bunx jabkit add ${name}` },
+    { id: "npx", label: "npx", command: `npx @jabkit/cli add ${name}` },
+    {
+      id: "pnpm",
+      label: "pnpm dlx",
+      command: `pnpm dlx @jabkit/cli add ${name}`,
+    },
+    { id: "bunx", label: "bunx", command: `bunx @jabkit/cli add ${name}` },
   ];
 }
 

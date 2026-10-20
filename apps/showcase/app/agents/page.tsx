@@ -2,6 +2,7 @@ import { DEFAULT_SITE_DOMAIN } from "common/base";
 import type { Metadata, Route } from "next";
 import Link from "next/link";
 import { AgentsAside } from "../../components/agents/AgentsAside";
+import { CommandBox } from "../../components/CommandBox";
 import { mcpTools } from "../../lib/mcp-tools";
 
 export const metadata: Metadata = {
@@ -37,7 +38,7 @@ export default function AgentsOverviewPage() {
         <p className="vd-script text-2xl">wired for robots</p>
         <h1 className="vd-h1 mt-1 desk:text-5xl">Agents &amp; MCP</h1>
         <p className="mt-3.5 max-w-[40rem] text-[17px] leading-7 text-muted-foreground">
-          A read-only JSON endpoint on this site. Agents resolve a component the
+          A read-only MCP server on this site. Agents resolve a component the
           same way a person would: search, plan, then install with the CLI.
         </p>
 
@@ -45,6 +46,11 @@ export default function AgentsOverviewPage() {
           Protocol
         </h2>
         <ul className="mt-3 space-y-2 leading-7">
+          <li>
+            Connect your MCP client to the URL below using Streamable HTTP. It
+            supports initialization, tool discovery, and tool calls over
+            JSON-RPC. No API key is required.
+          </li>
           <li>
             <code className="vd-code px-1.5 py-0.5 text-[13px]">GET /mcp</code>{" "}
             returns{" "}
@@ -55,15 +61,22 @@ export default function AgentsOverviewPage() {
           </li>
           <li>
             <code className="vd-code px-1.5 py-0.5 text-[13px]">POST /mcp</code>{" "}
-            takes{" "}
+            also accepts the original HTTP API body{" "}
             <code className="font-mono text-sm">{"{ tool, arguments }"}</code>{" "}
             and returns JSON.
           </li>
           <li className="text-muted-foreground">
-            This is not the Model Context Protocol wire format and not JSON-RPC.
-            A standard MCP client needs an adapter.
+            The tool reference pages show direct HTTP examples. MCP clients
+            discover the same tools and their argument schemas automatically.
           </li>
         </ul>
+        <CommandBox
+          className="mt-4"
+          label="MCP endpoint"
+          options={[
+            { id: "endpoint", label: "Streamable HTTP", command: endpoint },
+          ]}
+        />
 
         <h2
           id="data-source"
@@ -100,7 +113,7 @@ export default function AgentsOverviewPage() {
                   </Link>
                 ) : (
                   <span className="font-mono text-sm font-bold">
-                    npx jabkit add
+                    npx @jabkit/cli add
                   </span>
                 )}
                 <span className="mt-1 block text-sm text-muted-foreground">
@@ -119,7 +132,9 @@ export default function AgentsOverviewPage() {
         </h2>
         <ul className="mt-3 list-disc space-y-1.5 pl-5 leading-7 text-muted-foreground">
           <li>Read-only by design. The CLI is the writer.</li>
-          <li>Not MCP-native.</li>
+          <li>
+            Stateless requests; no persistent sessions or notification stream.
+          </li>
           <li>
             <code className="font-mono text-sm">search_components</code> caps at
             eight results;{" "}

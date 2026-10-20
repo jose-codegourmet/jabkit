@@ -42,7 +42,8 @@ function Terminal({ sample }: { sample: StepperSample }) {
       </div>
       <pre className="overflow-x-auto p-[18px] text-[13px] leading-[1.7]">
         <code>
-          <span className="opacity-60">$</span> npx jabkit add {sample.name}
+          <span className="opacity-60">$</span> npx @jabkit/cli add{" "}
+          {sample.name}
           {"\n"}
           {sample.files.map((file) => (
             <span key={file}>

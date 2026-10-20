@@ -8,7 +8,7 @@ description: Add UI components from the JabKit library when the user asks for a 
 1. Read `jabkit.config.json`.
 2. Search the component catalogue by intent.
 3. Request an install plan and show overwrite risks.
-4. Run `npx jabkit add <name>` to install the pristine source.
+4. Run `npx @jabkit/cli add <name>` to install the pristine source.
 5. Apply requested modifications only after install, using semantic JabKit tokens.
 6. Run a type check.
 

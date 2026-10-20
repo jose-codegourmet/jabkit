@@ -39,9 +39,9 @@ The five complete design-system sites now live in `apps/minimal`, `apps/neo-brut
 | `/design-systems` | `app/design-systems/page.tsx` | Five-tab switcher (`components/DesignSystemSwitcher.tsx`): a text "playbill" panel, the site's route list from `catalog.ts` `routes`, and a link out. No catalogue cover is rendered. Static so it is not captured by `/[category]`. |
 | `/how-it-works` | `app/how-it-works/page.tsx` | Describe → Add → Own stepper. "Try it with" components are resolved server-side with `lib/install-plan.ts` (same walk as the CLI), so the terminal lists real files and npm deps. |
 | `/agents` | `app/agents/page.tsx`, `app/agents/layout.tsx` | MCP reference overview: protocol, data source, agent flow, limitations. Three-column shell with a filterable tool rail. |
-| `/agents/[tool]` | `app/agents/[tool]/page.tsx` | One page per tool from `lib/mcp-tools.ts` (arguments, curl / fetch / prompt request, response, errors). Keep `lib/mcp-tools.ts` in step with `app/mcp/route.ts`. Unknown tool → 404. |
+| `/agents/[tool]` | `app/agents/[tool]/page.tsx` | One page per tool from `lib/mcp-tools.ts` (arguments, curl / fetch / prompt request, response, errors). Keep `lib/mcp-tools.ts` in step with `packages/mcp/src/index.ts` and `lib/catalogue-tools.ts`. Unknown tool → 404. |
 | any unmatched URL / `notFound()` | `app/not-found.tsx` | 404 with the puzzled mascot, catalogue search prefilled from the path, and the three closest registry names. |
-| `/mcp` | `app/mcp/route.ts` | Read-only JSON endpoint. See [mcp.md](mcp.md). |
+| `/mcp` | `app/mcp/route.ts` | Read-only MCP Streamable HTTP server plus the original JSON API. See [mcp.md](mcp.md). |
 
 SH-01 dated gate, SH-07 full-site review template, and catalogue-cover rules: [qa/design-system-showcases.md](qa/design-system-showcases.md). Every `-12` release PR copies that template. Whole-site shots are not `pnpm previews:build` output.
 
@@ -80,7 +80,7 @@ Reference preview module: `packages/ui/src/atoms/button/Button.preview.tsx`.
 | UI | Source |
 | --- | --- |
 | Title, version, description | `displayName`, `version`, `description` |
-| `InstallCommand` | `npx jabkit add {name}` (and pnpm dlx / bunx). See [cli.md](cli.md) for what that command actually does today. |
+| `InstallCommand` | `npx @jabkit/cli add {name}` (and pnpm dlx / bunx). See [cli.md](cli.md) for what that command actually does today. |
 | `CopyPromptButton` | Prompt that fetches `https://{DEFAULT_SITE_DOMAIN}/r/{name}.json`. Domain is `apps/showcase/common/base.ts` (`jabkit.joseadrianbuctuanon.dev`). Skill command `/jabkit-component {name}`. |
 | `ComponentPreview` | iframe + `files[]` for the code tab |
 | `ComponentData` | `name`, `category`, `version`, `addedAt`, `a11y`, `tags`. Type is `"component"` for atoms, `"block"` otherwise. In local development only, an `Inspo` row links to the metadata's `inspoUrl` reference. |

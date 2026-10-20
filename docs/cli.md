@@ -11,6 +11,7 @@ Published package: `@jabkit/cli`. The `bin` name is `jabkit`, so after install t
 ```bash
 npx @jabkit/cli init
 npx @jabkit/cli add button
+# Alternatives: pnpm dlx @jabkit/cli, bunx @jabkit/cli, yarn dlx @jabkit/cli
 ```
 
 The in-repo invocation `apps/verify` uses is still the TypeScript source:
@@ -23,7 +24,7 @@ tsx packages/cli/src/index.ts add --all --force
 
 `apps/verify/package.json` `sync` is `tsx ../../packages/cli/src/index.ts add --all --force`.
 
-`packages/cli` compiles with `pnpm --filter @jabkit/cli build` (`tsc -p tsconfig.build.json`) to `dist/index.js`. `bin.jabkit` points at that file.
+`packages/cli` compiles with `pnpm --filter @jabkit/cli build` (`tsc -p tsconfig.build.json`) to `dist/index.js`. `bin.jabkit` points at that file. The `prepack` hook builds before packing or publishing so the tarball contains current executable code. `packages/cli/README.md` ships with the package and explains that component source is fetched from the registry.
 
 ## Commands
 
@@ -65,7 +66,7 @@ The CLI always fetches over HTTP (`{registry}/r/{name}.json` and `{registry}/r/i
 1. Writes `jabkit.config.json` with the defaults above.
 2. Writes `.github/skills/jabkit-component/SKILL.md` (hardcoded string; not read from `templates/SKILL.md`).
 3. Appends a `## UI components (JabKit)` section to `AGENTS.md` if that substring is not already present (creates the file if needed). The text is hardcoded; it is not read from `templates/AGENTS.snippet.md`.
-4. Logs: configure your MCP client against the deployed `/mcp` endpoint. That overstates today's protocol — see [mcp.md](mcp.md).
+4. Logs the configured registry’s `/mcp` URL and Streamable HTTP transport for connecting an MCP client. See [mcp.md](mcp.md).
 
 `templates/SKILL.md` and `templates/AGENTS.snippet.md` exist in this repo as reference boilerplate with similar but not identical wording. Nothing reads them. Treat them as stale copies, not as the source `init` uses.
 

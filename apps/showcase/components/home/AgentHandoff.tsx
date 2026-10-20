@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { mcpToolCurl } from "../../lib/agent-prompt";
 import { Rays } from "../Rays";
 
 const tools = [
@@ -66,9 +67,7 @@ export function AgentHandoff() {
               ))}
             </ol>
             <pre className="vd-code overflow-x-auto rounded-none px-5 py-[18px] text-[13px] leading-[1.7]">
-              <code>{`curl -X POST /mcp \\
-  -d '{ "tool": "search_components",
-        "arguments": { "query": "hero" } }'`}</code>
+              <code>{mcpToolCurl("search_components", { query: "hero" })}</code>
             </pre>
           </div>
           <Link href="/agents" className="vd-btn mt-7">

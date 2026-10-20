@@ -64,7 +64,7 @@ export function SiteFooter({
               them forever.
             </p>
             <p className="vd-code mt-6 inline-flex px-3.5 py-2.5 text-[13px]">
-              $ npx jabkit init
+              $ npx @jabkit/cli init
             </p>
           </div>
           {columns.map((column) => (

@@ -18,7 +18,7 @@ Root `design-systems/` contains authored specifications for five website styles,
 | `packages/tokens` | `@jabkit/tokens` | `--jk-*` design tokens. Exports `./tokens.css`, `./scopes.css`, and `./tokens`. See [theming.md](theming.md). |
 | `packages/build-registry` | `@jabkit/build-registry` | Registry generator (`src/build.ts`) and type contract (`src/index.ts`). See [registry.md](registry.md). |
 | `packages/cli` | `@jabkit/cli` | Consumer installer: `jabkit init \| add \| upgrade`. See [cli.md](cli.md). |
-| `packages/mcp` | `@jabkit/mcp` | Tool-name tuple only. The HTTP endpoint lives in the showcase. See [mcp.md](mcp.md). |
+| `packages/mcp` | `@jabkit/mcp` | Tool schemas, MCP server factory, and stateless Streamable HTTP transport. Catalogue operations and the HTTP route live in the showcase. See [mcp.md](mcp.md). |
 | `apps/showcase` | `@jabkit/showcase` | Next.js 16 catalogue, previews, samples, and `/mcp`. Hosts generated JSON at `public/r/`. See [showcase.md](showcase.md). |
 | `apps/verify` | `@jabkit/verify` | External-consumer harness. `pnpm --filter @jabkit/verify sync` runs the CLI `add --all --force` against a local registry. Installed files under `src/components/jabkit` are gitignored. |
 | `apps/minimal`, `apps/neo-brutalism`, `apps/editorial`, `apps/luxury`, `apps/retro` | `@jabkit/<system>` | Independent websites, Tailwind v4 configuration, app-local tokens and public imagery. See [standalone apps](standalone-design-systems.md). |

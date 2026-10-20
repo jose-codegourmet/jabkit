@@ -90,7 +90,7 @@ export function HeroArt({ tag = "#hero" }: { tag?: string }) {
         data-px="-0.3"
         className="absolute top-[34%] right-0 translate-y-(--px) rotate-[5deg] rounded-lg border-2 border-ink bg-code px-3 py-1.5 font-mono text-[13px] text-code-foreground shadow-[3px_3px_0_var(--vd-tomato)]"
       >
-        npx jabkit add
+        npx @jabkit/cli add
       </span>
       <span
         aria-hidden="true"

@@ -23,7 +23,7 @@ Durable architectural decisions, when they need a record, may be added under `do
 | [showcase.md](showcase.md) | Routes, previews, samples, showcase-only vs library | Changing catalogue UI, preview, or samples |
 | [qa/design-system-showcases.md](qa/design-system-showcases.md) | SH-07 full-site review template and SH-01 dated gate baseline | Releasing a sample, capturing catalogue covers, or distinguishing pre-existing vs new gate failures |
 | [cli.md](cli.md) | `init` / `add` / `upgrade`, config, consumer files | Changing consumer install behavior |
-| [mcp.md](mcp.md) | Read-only catalogue HTTP tools | Changing agent-facing catalogue endpoints |
+| [mcp.md](mcp.md) | Read-only MCP server and catalogue HTTP API | Changing agent-facing catalogue endpoints |
 | [previews.md](previews.md) | Preview capture, hosted images, Higgsfield sample assets | Changing preview assets, vendored library images, or design-system photography |
 
 ## Task routing
@@ -50,7 +50,7 @@ Durable architectural decisions, when they need a record, may be added under `do
 | `packages/tokens` (`@jabkit/tokens`) | `--jk-*` values and Tailwind mapping | [theming.md](theming.md) |
 | `packages/build-registry` (`@jabkit/build-registry`) | Registry types and `pnpm registry:build` | [registry.md](registry.md) |
 | `packages/cli` (`@jabkit/cli`) | Consumer `init` / `add` / `upgrade` | [cli.md](cli.md) |
-| `packages/mcp` (`@jabkit/mcp`) | Tool-name tuple only | [mcp.md](mcp.md) |
+| `packages/mcp` (`@jabkit/mcp`) | Tool schemas and MCP server / transport | [mcp.md](mcp.md) |
 | `apps/showcase` (`@jabkit/showcase`) | Catalogue, previews, samples, `POST /mcp` | [showcase.md](showcase.md), [mcp.md](mcp.md) |
 | `apps/verify` (`@jabkit/verify`) | External-consumer install harness | [cli.md](cli.md) |
 

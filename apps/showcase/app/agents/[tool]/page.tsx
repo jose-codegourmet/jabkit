@@ -105,7 +105,12 @@ export default async function AgentToolPage({
           <p className="text-sm text-muted-foreground">No arguments.</p>
         )}
 
-        <h2 className="mt-8 mb-3 text-sm font-semibold">Request</h2>
+        <h2 className="mt-8 mb-3 text-sm font-semibold">Direct HTTP request</h2>
+        <p className="mb-3 text-sm text-muted-foreground">
+          These examples use the original JSON API. Connected MCP clients call
+          this tool through tools/call; results arrive as JSON text in content.
+          Invalid arguments return a tool error in MCP or HTTP 400 in this API.
+        </p>
         <CommandBox
           label="Request"
           options={[
@@ -138,7 +143,7 @@ export default async function AgentToolPage({
           <ul className="space-y-2">
             {tool.errors.map((error) => (
               <li
-                key={error.status}
+                key={`${error.status}-${error.body}`}
                 className="vd-card flex flex-wrap items-center gap-4 px-4 py-3"
               >
                 <span className="rounded-md border border-ink bg-tomato px-2 py-0.5 font-mono text-xs text-primary-foreground">

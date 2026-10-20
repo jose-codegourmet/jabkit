@@ -1,25 +1,28 @@
-# MCP (catalogue HTTP endpoint)
+# MCP and catalogue HTTP API
 
-JabKit's agent-facing catalogue is a **read-only JSON HTTP endpoint** on the showcase: `apps/showcase/app/mcp/route.ts`.
+JabKit serves a **read-only Model Context Protocol server** at `https://jabkit.joseadrianbuctuanon.dev/mcp`, using the official TypeScript SDK and Streamable HTTP. Connect a remote MCP client with that URL and transport; no API key or local npm MCP package is required.
 
-This is not Higgsfield MCP. Sample-showcase photography uses the Higgsfield tool namespace documented in [previews.md](previews.md).
-
-`packages/mcp` (`@jabkit/mcp`) currently exports one thing: the `jabkitTools` string tuple and the `JabkitTool` type in `packages/mcp/src/index.ts`. It has no server and no handlers. The live dispatch table is the showcase route, which duplicates the name list rather than importing the package.
+`packages/mcp` (`@jabkit/mcp`) owns tool names, strict argument schemas, MCP server registration, and the stateless transport. It is a private workspace package used by the showcase, not a published npm command. `apps/showcase/lib/catalogue-tools.ts` implements the six catalogue operations. `apps/showcase/app/mcp/route.ts` routes both native MCP and the original HTTP API to those operations.
 
 ## Protocol
 
-This is **not** the Model Context Protocol wire format and not JSON-RPC.
+- MCP clients use JSON-RPC `initialize`, `notifications/initialized`, `tools/list`, and `tools/call` over `POST /mcp`. The SDK handles protocol negotiation, notifications, and errors.
+- Requests use `Content-Type: application/json` and `Accept: application/json, text/event-stream`. Clients send the negotiated `MCP-Protocol-Version` on subsequent requests.
+- Responses are JSON. Tool results contain a `content` text block with JSON-encoded catalogue data. Validation and tool failures use MCP tool errors (`isError: true`).
+- Each request creates and closes a fresh server and transport. There are no session IDs, persistent sessions, server-initiated streams, or shared connection state.
+- `GET /mcp` with `Accept: text/event-stream` returns 405 because standalone SSE is unsupported. Ordinary GET requests retain `{ name: "JabKit MCP", tools: string[] }` for HTTP discovery.
 
-- `GET /mcp` → `{ name: "JabKit MCP", tools: string[] }`.
-- `POST /mcp` with body `{ tool?: string, arguments?: Record<string, unknown> }`.
-
-A standard MCP client cannot speak to this endpoint without an adapter. `jabkit init` still logs "Configure your MCP client to use your deployed /mcp endpoint", which overstates compatibility.
+The original API remains compatible: `POST /mcp` with `{ tool, arguments }` returns the plain result. It now rejects missing required arguments, unknown argument keys, incorrect types, invalid categories, and empty install plans with HTTP 400. Malformed JSON returns a JSON-RPC parse error with HTTP 400. Unknown component lookup returns HTTP 404; an unknown component in an install plan returns HTTP 400.
 
 All tools are read-only. The CLI writes files; this endpoint does not. See [cli.md](cli.md).
 
+### Origin validation
+
+Requests without an Origin header are accepted for native clients. If Origin is supplied, it must match the production site, a comma-separated `MCP_ALLOWED_ORIGINS` entry, or the current localhost origin in development. Other origins receive HTTP 403. Add explicit origins for alternate deployments or browser-based clients. The endpoint has no authentication or rate limiting; it serves public registry data only.
+
 ## Data source
 
-Every handler calls `registryIndex()` / `registryEntry()` from `apps/showcase/lib/registry.ts`, which reads `apps/showcase/public/r`. The endpoint is exactly as fresh as the last committed `pnpm registry:build`. See [registry.md](registry.md).
+Catalogue operations call `registryIndex()` / `registryEntry()` from `apps/showcase/lib/registry.ts`, which reads `apps/showcase/public/r`. The endpoint is exactly as fresh as the last committed `pnpm registry:build`. See [registry.md](registry.md).
 
 There is no authentication and no rate limiting in the route.
 
@@ -39,13 +42,13 @@ Concatenates `name`, `displayName`, `description`, and `tags`, lowercases, and `
 
 ### `get_component`
 
-Arguments: `name` (string), optional `withExamples` (if `false`, `examples` is replaced with `[]`).
+Arguments: `name` (required component-name string, letters/digits separated by hyphens), optional `withExamples` (if `false`, `examples` is replaced with `[]`).
 
 Returns the full `{name}.json` document, or `{ error: "Not found" }` with HTTP 404.
 
 ### `get_install_plan`
 
-Arguments: `names` (string array), optional `targetDir` (default `"src/components/jabkit"`).
+Arguments: `names` (required non-empty array of component-name strings), optional `targetDir` (default `"src/components/jabkit"`).
 
 Walks `registryDependencies` depth-first (same order as the CLI). Unknown name → HTTP 400 `{ error: "Unknown component: …" }`.
 
@@ -77,14 +80,14 @@ No arguments. Returns a static object, not derived from `docs/`:
 
 ### `get_category_overview`
 
-Arguments: `category`.
+Arguments: `category` (`atoms` | `marketing` | `dashboard`, required).
 
 Returns `{ category, rules, components }` where `components` is the index filtered to that category. `rules` is a hardcoded string:
 
-- `atoms` → `"Atoms do not depend on other JabKit components."`
-- anything else → `"May compose atoms and components from the same category, never the other feature category."`
+- `atoms` → `"Atoms may depend on other atoms, never marketing or dashboard."`
+- `marketing` / `dashboard` → `"May compose atoms and components from the same category, never the other feature category."`
 
-The atoms sentence disagrees with the rest of the repo: atoms **may** depend on other atoms via `registryDependencies` ([adding-a-component.md](adding-a-component.md), root `AGENTS.md`). Documented here as current endpoint behavior, not as the library rule.
+Composition rules match [adding-a-component.md](adding-a-component.md) and root `AGENTS.md`.
 
 ## Agent use
 
@@ -98,7 +101,7 @@ The flow the showcase home page advertises, and the one `jabkit init` writes int
 ## Limitations
 
 - Read-only by design.
-- Not MCP-native.
+- No persistent sessions or server-initiated notifications.
 - `search_components` hard-caps at 8; `list_components` has no pagination.
 - `filesToOverwrite` is always `[]`.
-- `packages/mcp` is not wired to the route; renaming a tool in one place does not update the other.
+- `lib/mcp-tools.ts` maintains human-facing reference examples; keep it in step with the schemas and operations.

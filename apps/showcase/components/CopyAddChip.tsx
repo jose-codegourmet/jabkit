@@ -4,12 +4,12 @@ import { CheckIcon, CopyIcon } from "@radix-ui/react-icons";
 import { useCopyFeedback } from "./CommandBox";
 
 /**
- * Dark "npx jabkit add {name}" chip that appears over a catalogue card on
+ * Dark "npx @jabkit/cli add {name}" chip that appears over a catalogue card on
  * hover or keyboard focus. Sits above the card's stretched link.
  */
 export function CopyAddChip({ name }: { name: string }) {
   const { copied, copy } = useCopyFeedback();
-  const command = `npx jabkit add ${name}`;
+  const command = `npx @jabkit/cli add ${name}`;
   return (
     <button
       type="button"

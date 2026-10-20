@@ -1,6 +1,6 @@
 /**
  * Reference copy for the `/agents` pages. Mirrors the behaviour of
- * `app/mcp/route.ts`; keep both in step (see docs/mcp.md).
+ * `packages/mcp` schemas and `lib/catalogue-tools.ts`; keep them in step (see docs/mcp.md).
  */
 export type McpArgument = {
   name: string;
@@ -83,7 +83,11 @@ export const mcpTools: McpTool[] = [
     description:
       "Walks registryDependencies depth-first, in the same order as the CLI. This is a plan, not an install.",
     arguments: [
-      { name: "names", type: "string[]", notes: "Required" },
+      {
+        name: "names",
+        type: "string[]",
+        notes: "Required. At least one component name; use names, not name.",
+      },
       {
         name: "targetDir",
         type: "string",
@@ -97,7 +101,13 @@ export const mcpTools: McpTool[] = [
   "npmDeps": [ "clsx", "tailwind-merge" ],
   "cssVars": { "light": {}, "dark": {} }
 }`,
-    errors: [{ status: 400, body: '{ "error": "Unknown component: …" }' }],
+    errors: [
+      {
+        status: 400,
+        body: '{ "error": "names: names is required and must be a non-empty array of component names; …" }',
+      },
+      { status: 400, body: '{ "error": "Unknown component: …" }' },
+    ],
     flowStep: "Step 2 of 4, after search_components.",
   },
   {

@@ -25,7 +25,7 @@ export function AgentsAside({
           </span>
           <span>
             <span className="font-bold text-tomato-text">POST</span> /mcp{" "}
-            <span className="text-muted-foreground">→ call a tool</span>
+            <span className="text-muted-foreground">→ MCP / HTTP API</span>
           </span>
         </p>
         <button
@@ -40,8 +40,8 @@ export function AgentsAside({
       <section className="vd-card bg-mustard/25 p-[18px]">
         <h2 className="text-sm font-semibold">Heads up</h2>
         <p className="mt-2 text-[13px] leading-5">
-          Not the MCP wire format or JSON-RPC. Standard MCP clients need an
-          adapter. No auth or rate limiting.
+          Connect with Streamable HTTP. Tools only read the public catalogue. No
+          API key is required; there is no rate limiting.
         </p>
       </section>
       <section className="vd-card p-[18px]">

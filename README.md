@@ -1,6 +1,6 @@
 # JabKit
 
-JabKit is a React component library distributed as source. Browse components in the showcase, query the registry through the catalogue HTTP endpoint, or copy files into your own project with the CLI.
+JabKit is a React component library distributed as source. Browse components in the showcase, query the registry through its MCP server, or copy files into your own project with the CLI.
 
 Engineering docs: [docs/README.md](docs/README.md). Agent entry point: [AGENTS.md](AGENTS.md).
 
@@ -22,4 +22,13 @@ Infrastructure is wired: source-distributed registry files include shared `lib` 
 
 The registry currently holds 39 components across `atoms`, `marketing`, and `dashboard`. A shadcn conversion pass has been run (`scripts/convert-shadcn.ts`); `.shadcn-src/` is a committed vendored snapshot used as conversion input, not as runtime source.
 
-The published-CLI story (`npx jabkit add`) is ahead of packaging: the working in-repo invocation is `tsx packages/cli/src/index.ts`. See [docs/cli.md](docs/cli.md).
+The published npm package is `@jabkit/cli`. It contains the installer; component source is fetched from the hosted registry and copied into your project:
+
+```bash
+npx @jabkit/cli init
+npx @jabkit/cli add button
+```
+
+The executable is named `jabkit`, but package runners need the scoped package name. See [docs/cli.md](docs/cli.md).
+
+Connect an MCP client using Streamable HTTP at `https://jabkit.joseadrianbuctuanon.dev/mcp` to search components, inspect source, and request install plans. The server is read-only; the CLI writes files. See [docs/mcp.md](docs/mcp.md).

@@ -8,9 +8,13 @@ const meta = {
   args: {
     label: "Install command",
     options: [
-      { id: "npx", label: "npx", command: "npx jabkit add button" },
-      { id: "pnpm", label: "pnpm dlx", command: "pnpm dlx jabkit add button" },
-      { id: "bunx", label: "bunx", command: "bunx jabkit add button" },
+      { id: "npx", label: "npx", command: "npx @jabkit/cli add button" },
+      {
+        id: "pnpm",
+        label: "pnpm dlx",
+        command: "pnpm dlx @jabkit/cli add button",
+      },
+      { id: "bunx", label: "bunx", command: "bunx @jabkit/cli add button" },
     ],
   },
   parameters: { layout: "padded" },
@@ -25,13 +29,13 @@ export const SwitchRunner: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button", { name: "bunx" }));
-    await expect(canvas.getByText("bunx jabkit add button")).toBeVisible();
+    await expect(canvas.getByText("bunx @jabkit/cli add button")).toBeVisible();
   },
 };
 
 export const SingleCommand: Story = {
   args: {
     size: "sm",
-    options: [{ id: "init", label: "init", command: "npx jabkit init" }],
+    options: [{ id: "init", label: "init", command: "npx @jabkit/cli init" }],
   },
 };
