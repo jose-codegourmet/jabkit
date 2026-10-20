@@ -43,6 +43,7 @@ Rules, including the ones that are *not* edges:
 - Atoms may depend on other atoms through `registryDependencies`. Atoms never depend on marketing or dashboard.
 - Marketing and dashboard never depend on each other. Either may list atoms in `registryDependencies`.
 - The CLI never reads the registry from disk. It always fetches `{registry}/r/{name}.json` over HTTP.
+- `packages/cli/templates/` owns the consumer skill and managed AGENTS snippet. These authored files ship in the CLI package and are read by `init`; there are no separate root template copies.
 
 ## Source to consumer
 

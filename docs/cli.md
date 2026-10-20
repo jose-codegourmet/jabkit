@@ -63,12 +63,16 @@ The CLI always fetches over HTTP (`{registry}/r/{name}.json` and `{registry}/r/i
 
 ## `init`
 
-1. Writes `jabkit.config.json` with the defaults above.
-2. Writes `.github/skills/jabkit-component/SKILL.md` (hardcoded string; not read from `templates/SKILL.md`).
-3. Appends a `## UI components (JabKit)` section to `AGENTS.md` if that substring is not already present (creates the file if needed). The text is hardcoded; it is not read from `templates/AGENTS.snippet.md`.
+1. Creates `jabkit.config.json` with the defaults above, or preserves an existing config.
+2. Writes `.github/skills/jabkit-component/SKILL.md` from the packaged `packages/cli/templates/SKILL.md`.
+3. Creates or refreshes the `<!-- jabkit:begin -->` / `<!-- jabkit:end -->` managed `AGENTS.md` section from `packages/cli/templates/AGENTS.snippet.md`. Also migrates the exact legacy CLI-generated section. A customized unmarked JabKit section is preserved with a message pointing to the refreshed skill; unrelated sections are preserved.
 4. Logs the configured registry’s `/mcp` URL and Streamable HTTP transport for connecting an MCP client. See [mcp.md](mcp.md).
 
-`templates/SKILL.md` and `templates/AGENTS.snippet.md` exist in this repo as reference boilerplate with similar but not identical wording. Nothing reads them. Treat them as stale copies, not as the source `init` uses.
+The packaged templates are the source of truth, read relative to the CLI module in both source and compiled execution. The consumer skill requires a brand direction and candidate comparison using `tone`, `bestFor`, `avoidFor`, `visualWeight`, layout, and capabilities before installing a branded page. Pristine installation is followed by local adaptation, brand token definitions, demo-content replacement, and visual review.
+
+The skill also tells the agent to answer the catalogue's two discovery questions (intent and visual direction) from existing context, ask the user only about material gaps, and reuse both answers as `brief` on every tool call. Missing answers yield `needs_brief` before catalogue data. The CLI itself stays noninteractive; this handshake happens during agent selection through MCP/HTTP.
+
+After publishing the updated CLI, existing consumers can run `npx @jabkit/cli@latest init` to refresh this guidance without resetting config or installed components. This overwrites the generated skill; preserve any consumer edits to that file first. A customized unmarked `AGENTS.md` section needs manual reconciliation. Updating the hosted MCP alone updates search and conventions but does not rewrite consumer files.
 
 ## `add`
 

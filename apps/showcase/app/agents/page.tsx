@@ -13,20 +13,20 @@ export const metadata: Metadata = {
 
 const flow = [
   {
+    tool: "get_conventions",
+    copy: "Answer JabKit's two discovery questions: what the page must accomplish and what it should look and feel like. Reuse the answers in brief on every call.",
+  },
+  {
     tool: "search_components",
-    copy: "Search by intent, tag, or name.",
+    copy: "Compare candidates using tone, bestFor, avoidFor, visualWeight, layout, and capabilities. Inspect shortlisted source with get_component.",
   },
   {
     tool: "get_install_plan",
     copy: "See files, npm deps, and registry deps (or get_component for the full document).",
   },
   {
-    tool: "get_conventions",
-    copy: "Read the ruleset before generating classes.",
-  },
-  {
     tool: null,
-    copy: "Install with the CLI, or write files[] from the JSON. Modify only after the pristine copy is on disk.",
+    copy: "Install pristine source, then adapt composition, typography, brand tokens, and content. Replace demo branding and review desktop/mobile and supported themes.",
   },
 ] as const;
 
@@ -39,7 +39,8 @@ export default function AgentsOverviewPage() {
         <h1 className="vd-h1 mt-1 desk:text-5xl">Agents &amp; MCP</h1>
         <p className="mt-3.5 max-w-[40rem] text-[17px] leading-7 text-muted-foreground">
           A read-only MCP server on this site. Agents resolve a component the
-          same way a person would: search, plan, then install with the CLI.
+          same way a person would: define the brand direction, compare
+          candidates, install with the CLI, then adapt the source.
         </p>
 
         <h2 id="protocol" className="mt-10 scroll-mt-28 font-display text-2xl">
@@ -123,6 +124,13 @@ export default function AgentsOverviewPage() {
             </li>
           ))}
         </ol>
+        <p className="mt-3 max-w-[44rem] leading-7 text-muted-foreground">
+          Every tool returns{" "}
+          <code className="font-mono text-sm">needs_brief</code> until the agent
+          supplies both discovery answers. The agent answers from the existing
+          conversation and asks the user only for missing details that affect
+          selection. Calls with a complete brief return catalogue data.
+        </p>
 
         <h2
           id="limitations"
@@ -136,10 +144,15 @@ export default function AgentsOverviewPage() {
             Stateless requests; no persistent sessions or notification stream.
           </li>
           <li>
-            <code className="font-mono text-sm">search_components</code> caps at
-            eight results;{" "}
+            <code className="font-mono text-sm">search_components</code> returns
+            eight results by default, with limit (up to 50) and offset;{" "}
             <code className="font-mono text-sm">list_components</code> has no
             pagination.
+          </li>
+          <li>
+            Search scores use lexical metadata matches. They do not judge visual
+            quality or detect every semantic conflict; inspect source and
+            previews.
           </li>
           <li>
             <code className="font-mono text-sm">filesToOverwrite</code> is

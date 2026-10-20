@@ -23,9 +23,11 @@ The npm package is **`@jabkit/cli`** and its executable is **`jabkit`**. Use the
 
 ## What gets installed
 
-This package contains the compiled CLI in `dist/index.js`. The CLI downloads component source from the hosted JabKit registry, resolves component dependencies, and writes files to `src/components/jabkit`. It installs npm dependencies using `pnpm add`.
+This package contains the compiled CLI in `dist/index.js` and consumer guidance in `templates/`. The CLI downloads component source from the hosted JabKit registry, resolves component dependencies, and writes files to `src/components/jabkit`. It installs npm dependencies using `pnpm add`.
 
 `init` creates `jabkit.config.json`, a component skill, and an `AGENTS.md` snippet. `add button --dry-run` previews an install; `add button --force` replaces existing files.
+
+The skill guides agents to define a brand direction, compare component metadata and source, then adapt installed components and semantic theme values. Re-running `npx @jabkit/cli@latest init` refreshes the generated skill and managed AGENTS section while preserving existing config and installed components. Save any local edits to the generated skill first; customized unmarked AGENTS sections are preserved for manual reconciliation.
 
 JabKit components are distributed through the registry, not bundled as an npm UI library. You own and edit the copied files.
 

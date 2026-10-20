@@ -13,6 +13,26 @@ export type RegistryIndexItem = {
   description: string;
   inspoUrl?: string;
   sectionCategory?: string;
+  purpose?: string;
+  bestFor?: string[];
+  avoidFor?: string[];
+  tone?: string[];
+  industries?: string[];
+  visualWeight?: "low" | "medium" | "high";
+  contentDensity?: "low" | "medium" | "high";
+  layout?: {
+    type: string;
+    alignment?: "left" | "center" | "right" | "mixed";
+    columns?: number;
+  };
+  slots?: string[];
+  capabilities?: {
+    supportsImage?: boolean;
+    supportsVideo?: boolean;
+    supportsForm?: boolean;
+    supportsCTA?: boolean;
+    supportsDarkMode?: boolean;
+  };
   tags: string[];
   addedAt: string;
   dependencies: string[];

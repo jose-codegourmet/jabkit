@@ -72,30 +72,61 @@ function tokenBlock(vars?: {
   return `\n\n/* JabKit component variables */\n:root {\n${render(vars.light)}\n}\n\n.dark {\n${render(vars.dark)}\n}\n`;
 }
 async function init() {
-  const config: Config = {
-    componentsDir: "src/components/jabkit",
-    alias: "@/components/jabkit",
-    registry:
-      process.env.JABKIT_REGISTRY ?? "https://jabkit.joseadrianbuctuanon.dev",
-    formatter: "biome",
-    theme: { mode: "class", provider: "next-themes" },
-  };
+  const config: Config = existsSync(configPath)
+    ? await loadConfig()
+    : {
+        componentsDir: "src/components/jabkit",
+        alias: "@/components/jabkit",
+        registry:
+          process.env.JABKIT_REGISTRY ??
+          "https://jabkit.joseadrianbuctuanon.dev",
+        formatter: "biome",
+        theme: { mode: "class", provider: "next-themes" },
+      };
   await writeFile(configPath, `${JSON.stringify(config, null, 2)}\n`);
   await mkdir(path.join(root, ".github/skills/jabkit-component"), {
     recursive: true,
   });
   await writeFile(
     path.join(root, ".github/skills/jabkit-component/SKILL.md"),
-    `---\nname: jabkit-component\ndescription: Add UI components from the JabKit library when the user asks for a hero, pricing section, button, dashboard panel, or another reusable UI component.\n---\n\n# JabKit component\n\nSearch the JabKit MCP catalogue first. Show the install plan before writing. Install verbatim with \`npx @jabkit/cli add <name>\`, then apply requested modifications separately. Use semantic tokens rather than hardcoded colors.\n`,
+    await readFile(new URL("../templates/SKILL.md", import.meta.url), "utf8"),
   );
   const agentsPath = path.join(root, "AGENTS.md");
-  const snippet =
-    "\n## UI components (JabKit)\n\nThis project uses JabKit. Search its MCP catalogue before hand-writing a reusable UI component. Installed files live in `src/components/jabkit/`; use semantic token classes, never hardcoded colors.\n";
+  const snippet = await readFile(
+    new URL("../templates/AGENTS.snippet.md", import.meta.url),
+    "utf8",
+  );
   const currentAgents = existsSync(agentsPath)
     ? await readFile(agentsPath, "utf8")
     : "";
-  if (!currentAgents.includes("UI components (JabKit)"))
-    await writeFile(agentsPath, `${currentAgents}${snippet}`);
+  const managedSection = /<!-- jabkit:begin -->[\s\S]*?<!-- jabkit:end -->\n?/;
+  const legacySection =
+    "## UI components (JabKit)\n\nThis project uses JabKit. Search its MCP catalogue before hand-writing a reusable UI component. Installed files live in `src/components/jabkit/`; use semantic token classes, never hardcoded colors.";
+  if (managedSection.test(currentAgents))
+    await writeFile(
+      agentsPath,
+      currentAgents.replace(managedSection, () => snippet),
+    );
+  else if (currentAgents.includes(legacySection)) {
+    const start = currentAgents.indexOf(legacySection);
+    const end = start + legacySection.length;
+    // Only replace the exact old generated section; preserve consumer additions.
+    const rest = currentAgents.slice(end);
+    if (!rest.trim() || /^\s*\n## /.test(rest))
+      await writeFile(
+        agentsPath,
+        currentAgents.slice(0, start) + snippet.trimEnd() + rest,
+      );
+    else
+      console.log(
+        "Custom JabKit AGENTS section preserved. Follow the refreshed .github/skills/jabkit-component/SKILL.md.",
+      );
+  } else if (!currentAgents.includes("UI components (JabKit)"))
+    await writeFile(agentsPath, `${currentAgents.trimEnd()}\n\n${snippet}`);
+  else
+    console.log(
+      "Custom JabKit AGENTS section preserved. Follow the refreshed .github/skills/jabkit-component/SKILL.md.",
+    );
   console.log(
     `JabKit initialized. Connect your MCP client using Streamable HTTP: ${config.registry.replace(/\/$/, "")}/mcp`,
   );

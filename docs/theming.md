@@ -4,6 +4,10 @@ JabKit themes through semantic CSS custom properties, not through per-component 
 
 There is a separate open issue about preview-iframe theme behavior. This document describes the intended contract and the current implementation. It does not claim the iframe bug is solved.
 
+## Consumer brand adaptation
+
+Semantic tokens define roles, not a fixed palette. Consumers can set brand-specific raw color values in their own `--jk-*` light/dark definitions and keep semantic component classes. Shared defaults and sample presets are optional starting points. Typography, layout, spacing, imagery, borders, radii, and motion can also be adapted in installed consumer source; changing tokens alone is not a complete brand treatment. A pristine CLI install is the checkpoint before these requested local edits. See [CLI guidance](cli.md) and [MCP selection](mcp.md).
+
 ## Independent website themes
 
 The five `apps/<system>` websites own `app/globals.css` and `app/theme.css`. They do not import showcase styles or the shared five-style scope sheet. Their Tailwind v4 configuration scans their own app/components and shared UI source, and uses app-local semantic values. The original `packages/tokens/scopes.css` remains available for the catalogue reference surface and library stories. See [standalone apps](standalone-design-systems.md).

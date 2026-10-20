@@ -2,6 +2,9 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { z } from "zod";
+import { briefSchema, discoveryInstructions } from "./discovery";
+
+export { getDiscoveryRequest } from "./discovery";
 
 const category = z.enum(["atoms", "marketing", "dashboard"]);
 const componentName = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
@@ -11,17 +14,31 @@ const componentName = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
 export const jabkitToolDefinitions = {
   list_components: {
     description: "List JabKit components, optionally filtered by category.",
-    inputSchema: z.strictObject({ category: category.optional() }),
+    inputSchema: z.strictObject({
+      brief: briefSchema,
+      category: category.optional(),
+    }),
   },
   search_components: {
     description:
-      "Search component names, descriptions, and tags. Returns at most eight matches.",
-    inputSchema: z.strictObject({ query: z.string().default("") }),
+      "Rank candidates by section intent and brand fit. Search metadata as well as names; pass tone, useCase, and visualWeight from the brand brief. Inspect match reasons and avoidFor conflicts, compare source/layout before selecting, and paginate with offset. Scores are lexical evidence, not design verdicts.",
+    inputSchema: z.strictObject({
+      brief: briefSchema,
+      query: z.string().default(""),
+      category: category.optional(),
+      sectionCategory: z.string().trim().min(1).optional(),
+      tone: z.array(z.string().trim().min(1)).default([]),
+      useCase: z.string().trim().min(1).optional(),
+      visualWeight: z.enum(["low", "medium", "high"]).optional(),
+      limit: z.number().int().min(1).max(50).default(8),
+      offset: z.number().int().min(0).default(0),
+    }),
   },
   get_component: {
     description:
-      "Read a component's source files, dependencies, metadata, and examples.",
+      "Read source, examples, layout, slots, capabilities, and brand-fit metadata. Compare shortlisted candidates before installing; demo brands, copy, and media must be adapted to the user's brief.",
     inputSchema: z.strictObject({
+      brief: briefSchema,
       name: componentName,
       withExamples: z.boolean().optional(),
     }),
@@ -30,6 +47,7 @@ export const jabkitToolDefinitions = {
     description:
       "Plan source files and npm dependencies for one or more components. Does not write files.",
     inputSchema: z.strictObject({
+      brief: briefSchema,
       names: z
         .array(componentName, {
           error:
@@ -41,12 +59,12 @@ export const jabkitToolDefinitions = {
   },
   get_conventions: {
     description:
-      "Read JabKit's semantic token, theme, import, and naming conventions.",
-    inputSchema: z.strictObject({}),
+      "Start here for brand-led selection, source adaptation, semantic theme customization, and naming conventions. Read before selecting components for a branded website.",
+    inputSchema: z.strictObject({ brief: briefSchema }),
   },
   get_category_overview: {
     description: "Read the composition rules and components for a category.",
-    inputSchema: z.strictObject({ category }),
+    inputSchema: z.strictObject({ brief: briefSchema, category }),
   },
 };
 
@@ -90,7 +108,7 @@ export function createJabkitServer(executeTool: ExecuteTool) {
     server.registerTool(
       name,
       {
-        description: definition.description,
+        description: `${definition.description} ${discoveryInstructions}`,
         inputSchema: definition.inputSchema,
         annotations: {
           readOnlyHint: true,

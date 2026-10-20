@@ -37,6 +37,7 @@ Durable architectural decisions, when they need a record, may be added under `do
 | Recording or re-running the SH-01 correctness baseline | [qa/design-system-showcases.md](qa/design-system-showcases.md) |
 | Full-site sample review, catalogue covers, or release evidence | [qa/design-system-showcases.md](qa/design-system-showcases.md), then [previews.md](previews.md) |
 | Changing consumer install behavior | [cli.md](cli.md) |
+| Improving brand selection and generated consumer guidance | [mcp.md](mcp.md), [cli.md](cli.md); authored guidance lives in `packages/cli/templates/` |
 | Changing agent-facing catalogue endpoints | [mcp.md](mcp.md) |
 | Changing preview assets, vendored library images, or design-system photography | [previews.md](previews.md) |
 | Understanding the whole system first | [architecture.md](architecture.md) |

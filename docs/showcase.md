@@ -148,3 +148,9 @@ Chrome stories (`components/**/*.stories.tsx`) and `.storybook/` are excluded fr
 Run them with `pnpm storybook:showcase` (port 6007, `@storybook/nextjs-vite`). The preview decorator loads the same fonts as the root layout and wraps every story in `.vd`; set `parameters.vaudeville: false` to render on library tokens. Stories use fixtures from `.storybook/fixtures.ts` and static files from `public/`, so every new chrome component takes plain data props rather than reading the registry itself.
 
 Preview routes do not render the header; they are a blank document for the iframe.
+
+## Agent guidance
+
+The `/agents` overview, tool reference in `lib/mcp-tools.ts`, and homepage agent handoff describe brand direction → candidate comparison → install plan → local adaptation. Search arguments and ranking are documented in [mcp.md](mcp.md). Keep these surfaces aligned with the MCP schemas and CLI consumer skill.
+
+The initial brand direction now uses two discovery questions. Tool examples carry `brief.intent` and `brief.visualDirection`; calls without both answers return `needs_brief` instead of the documented catalogue result.

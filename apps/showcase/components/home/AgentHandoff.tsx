@@ -5,11 +5,19 @@ import { Rays } from "../Rays";
 const tools = [
   {
     step: "01",
-    name: "search_components",
-    copy: "by name, tag, or description",
+    name: "get_conventions",
+    copy: "answer two discovery questions",
   },
-  { step: "02", name: "get_install_plan", copy: "walks registryDependencies" },
-  { step: "03", name: "get_conventions", copy: "returns the project ruleset" },
+  {
+    step: "02",
+    name: "search_components",
+    copy: "compare intent and brand fit",
+  },
+  {
+    step: "03",
+    name: "get_install_plan",
+    copy: "plan the selected components",
+  },
 ] as const;
 
 /** "Built for agent handoff": the MCP endpoint as a telegram. */

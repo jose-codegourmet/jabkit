@@ -19,7 +19,7 @@ export type McpTool = {
   flowStep?: string;
 };
 
-export const mcpTools: McpTool[] = [
+const toolReference: McpTool[] = [
   {
     name: "list_components",
     summary: "The registry index, optionally by category.",
@@ -42,17 +42,63 @@ export const mcpTools: McpTool[] = [
   },
   {
     name: "search_components",
-    summary: "Search by name, tag, or description.",
+    summary: "Rank candidates by section intent and brand fit.",
     description:
-      "Lowercases name, displayName, description, and tags, then matches the query as a substring. Returns at most eight hits.",
-    arguments: [{ name: "query", type: "string", notes: 'Default ""' }],
-    exampleArguments: { query: "hero" },
+      "Searches names, tags, descriptions, purpose, and design metadata. Returns ranked index entries with match scores, evidence, conflicts, and missing metadata. Scores are lexical hints; compare source, layout, and all avoidFor warnings before selecting.",
+    arguments: [
+      {
+        name: "query",
+        type: "string",
+        notes: 'Section intent or name. Default "".',
+      },
+      {
+        name: "category",
+        type: "string",
+        notes: "Optional. atoms | marketing | dashboard.",
+      },
+      {
+        name: "sectionCategory",
+        type: "string",
+        notes: "Optional exact section role, such as hero.",
+      },
+      {
+        name: "tone",
+        type: "string[]",
+        notes: "Preferred tones; boosts metadata matches.",
+      },
+      {
+        name: "useCase",
+        type: "string",
+        notes: "Desired use case; matches bestFor and checks avoidFor.",
+      },
+      {
+        name: "visualWeight",
+        type: "string",
+        notes: "Optional preference: low | medium | high.",
+      },
+      { name: "limit", type: "integer", notes: "1–50, default 8." },
+      {
+        name: "offset",
+        type: "integer",
+        notes: "Non-negative, default 0. Advance by limit for later results.",
+      },
+    ],
+    exampleArguments: {
+      query: "hero",
+      category: "marketing",
+      tone: ["editorial", "restrained"],
+      useCase: "creative portfolios",
+      visualWeight: "medium",
+      limit: 12,
+    },
     response: `[
-  { "name": "hero307", "displayName": "Hero 307", … },
-  …  // at most 8
+  { "name": "…", "tone": [ … ], "bestFor": [ … ], "avoidFor": [ … ],
+    "match": { "score": 24, "matches": [ … ], "conflicts": [ … ],
+      "missingMetadata": [ … ] }, … },
+  …  // up to limit; [] when exhausted
 ]`,
     errors: [],
-    flowStep: "Step 1 of 4. Start here.",
+    flowStep: "Step 2 of 4. Compare candidates against the brand direction.",
   },
   {
     name: "get_component",
@@ -75,7 +121,7 @@ export const mcpTools: McpTool[] = [
   "examples": [ … ]
 }`,
     errors: [{ status: 404, body: '{ "error": "Not found" }' }],
-    flowStep: "Step 2 of 4, after search_components.",
+    flowStep: "Step 2 of 4. Inspect shortlisted source and examples.",
   },
   {
     name: "get_install_plan",
@@ -108,23 +154,25 @@ export const mcpTools: McpTool[] = [
       },
       { status: 400, body: '{ "error": "Unknown component: …" }' },
     ],
-    flowStep: "Step 2 of 4, after search_components.",
+    flowStep: "Step 3 of 4, after candidate comparison.",
   },
   {
     name: "get_conventions",
-    summary: "The static project ruleset.",
+    summary: "Brand selection, adaptation, and project conventions.",
     description:
-      "Returns a fixed object describing tokens, theming, the import alias, and file naming. Read it before generating classes.",
+      "Start here. Returns token, theme, alias, and naming conventions plus selection and customization guidance. Define a brand direction, compare candidates, install pristine source, then adapt it.",
     arguments: [],
     exampleArguments: {},
     response: `{
   "tailwind": "Tailwind CSS v4 with semantic --jk-* tokens",
   "theme": "Class-based .dark mode. …",
   "alias": "@/components/jabkit",
-  "naming": "kebab-case folders with PascalCase-prefixed files"
+  "naming": "kebab-case folders with PascalCase-prefixed files",
+  "selection": [ "Establish the brand's audience, …", … ],
+  "customization": [ "Show get_install_plan, …", … ]
 }`,
     errors: [],
-    flowStep: "Step 3 of 4, before writing classes.",
+    flowStep: "Step 1 of 4. Establish the brand direction.",
   },
   {
     name: "get_category_overview",
@@ -141,6 +189,29 @@ export const mcpTools: McpTool[] = [
     errors: [],
   },
 ];
+
+export const mcpTools: McpTool[] = toolReference.map((tool) => ({
+  ...tool,
+  description: `${tool.description} Without both brief answers, returns status: "needs_brief" and discovery questions instead of this result. Answer from existing context, ask the user only for material gaps, and retry with the same brief on every call.`,
+  arguments: [
+    {
+      name: "brief",
+      type: "{ intent?: string; visualDirection?: string }",
+      notes:
+        "Both answers are needed for catalogue data: what you are building, for whom, and the desired action; then the brand's tone, references, assets, and styles to avoid. Missing/blank answers return questions. Reuse across this task.",
+    },
+    ...tool.arguments,
+  ],
+  exampleArguments: {
+    brief: {
+      intent:
+        "Photography portfolio for art directors; show projects and invite enquiries.",
+      visualDirection:
+        "Restrained editorial layout with supplied photography; avoid dashboard chrome.",
+    },
+    ...tool.exampleArguments,
+  },
+}));
 
 export const mcpToolNames = mcpTools.map((tool) => tool.name);
 
