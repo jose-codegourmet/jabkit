@@ -1,0 +1,794 @@
+/*
+ * /tickets — the calmest page. The header is a solid cream ticket stub with
+ * one decorative sticker in its margin; everything below is transactional:
+ * quiet surfaces, Inter, high contrast, nothing overlapping copy or controls.
+ */
+
+/* ---------- 1. Page header (ticket stub) ---------- */
+.hero {
+  --stub: clamp(4.5rem, 20vw, 6rem);
+  --notch: 0.9rem;
+  /* The hard offset follows the notched ticket shape. */
+  filter: drop-shadow(6px 6px 0 var(--max-shadow-color));
+}
+
+.heroTicket {
+  --max-placeholder: #5a2a82;
+  --max-focus-outer: var(--max-ink);
+  display: grid;
+  grid-template-rows: auto var(--stub);
+  border: 3px solid var(--max-ink);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-cream);
+  color: var(--max-ink);
+  mask:
+    radial-gradient(
+      circle at 0 calc(100% - var(--stub)),
+      transparent var(--notch),
+      #000 calc(var(--notch) + 0.5px)
+    ),
+    radial-gradient(
+      circle at 100% calc(100% - var(--stub)),
+      transparent var(--notch),
+      #000 calc(var(--notch) + 0.5px)
+    );
+  mask-composite: intersect;
+}
+
+.heroCopy {
+  display: grid;
+  align-content: center;
+  gap: clamp(1rem, 2vw, 1.4rem);
+  padding: clamp(1.5rem, 5vw, 3.5rem);
+}
+
+.heroCopy > * {
+  margin: 0;
+}
+
+.heroTitle {
+  color: var(--max-ink);
+  font-size: clamp(3rem, 1.2rem + 7.5vw, 7.75rem);
+}
+
+.heroBody {
+  color: var(--max-ink);
+}
+
+.heroNotice {
+  max-width: 46rem;
+}
+
+.heroStub {
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-top: 3px dashed var(--max-ink);
+  background-color: var(--max-cream);
+  /* Fixed ink dots: the header stays cream in both themes. */
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--max-ink) 24%, transparent) 1.2px,
+    transparent 1.6px
+  );
+  background-size: 10px 10px;
+}
+
+.heroSticker {
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    --stub: clamp(8rem, 17vw, 13rem);
+    --notch: 1.1rem;
+  }
+
+  .heroTicket {
+    grid-template-columns: minmax(0, 1fr) var(--stub);
+    grid-template-rows: none;
+    mask:
+      radial-gradient(
+        circle at calc(100% - var(--stub)) 0,
+        transparent var(--notch),
+        #000 calc(var(--notch) + 0.5px)
+      ),
+      radial-gradient(
+        circle at calc(100% - var(--stub)) 100%,
+        transparent var(--notch),
+        #000 calc(var(--notch) + 0.5px)
+      );
+    mask-composite: intersect;
+  }
+
+  .heroStub {
+    border-top: 0;
+    border-left: 3px dashed var(--max-ink);
+    border-radius: 0 calc(var(--jk-radius-surface) - 3px)
+      calc(var(--jk-radius-surface) - 3px) 0;
+  }
+}
+
+/* ---------- Builder layout (sections 2–6) ---------- */
+.builder {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.builderMain {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  min-width: 0;
+}
+
+.block {
+  min-width: 0;
+}
+
+.blockHeading {
+  display: block;
+  margin: 0 0 1.1rem;
+  font-family: var(--jk-font-display);
+  font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+@media (min-width: 900px) {
+  .builder {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 23rem);
+    align-items: start;
+  }
+}
+
+/* ---------- 2. Ticket options (radio cards) ---------- */
+.passGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: var(--jk-space-grid);
+}
+
+.pass {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.25rem;
+  border: 2px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--jk-card);
+  color: var(--jk-card-foreground);
+  box-shadow: 4px 4px 0 var(--max-shadow-color);
+}
+
+.passSelected {
+  /* Ink border goes to 3px; padding absorbs the extra pixel so nothing jumps. */
+  padding: calc(1.25rem - 1px);
+  border-width: 3px;
+  box-shadow: 7px 7px 0 var(--max-shadow-color);
+}
+
+.passSoldOut {
+  border-style: dashed;
+  background: var(--jk-muted);
+  color: var(--jk-foreground);
+  box-shadow: none;
+}
+
+.pass:has(.passInput:focus-visible) {
+  outline: 3px solid var(--max-focus-outer);
+  outline-offset: 4px;
+  box-shadow:
+    0 0 0 4px var(--max-focus-inner),
+    4px 4px 0 var(--max-shadow-color);
+}
+
+.passHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.passName {
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.passCheck {
+  display: inline-grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 2px solid var(--max-ink);
+  border-radius: 50%;
+  background: var(--max-lime);
+  box-shadow: 2px 2px 0 var(--max-ink);
+}
+
+.passCheck svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  fill: none;
+  stroke: var(--max-ink);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3.2;
+}
+
+.passDesc {
+  margin: 0;
+  font-weight: 550;
+  line-height: 1.5;
+}
+
+.passFacts {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding-block: 0.85rem;
+  border-block: 2px solid var(--jk-border);
+}
+
+.passFact {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.passFact dt {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.passFact dd {
+  margin: 0;
+}
+
+.passPrice {
+  font-size: 1.125rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.passAvailability {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-weight: 800;
+}
+
+.passAvailabilityMark {
+  font-size: 0.85em;
+}
+
+.passDemo {
+  width: fit-content;
+}
+
+.passHelper {
+  margin: 0;
+  padding: 0.6rem 0.8rem;
+  border-left: 4px solid var(--jk-foreground);
+  background: var(--jk-background);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.passAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: var(--jk-control-height);
+  margin-top: auto;
+  padding-inline: 1.25rem;
+  border: 2px solid var(--max-ink);
+  border-radius: 999px;
+  background: var(--max-cream);
+  color: var(--max-ink);
+  font-weight: 800;
+  box-shadow: var(--max-shadow-sticker);
+  cursor: pointer;
+}
+
+/* The whole card is the hit area for its radio. */
+.passAction::after {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--jk-radius-surface);
+  content: "";
+}
+
+.passInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pass:hover .passAction {
+  box-shadow: 5px 5px 0 var(--max-shadow-color);
+}
+
+.passSelected .passAction {
+  background: var(--max-lime);
+}
+
+.passActionMark {
+  font-weight: 900;
+}
+
+.passSoldOut .passAction,
+.passSoldOut:hover .passAction {
+  border-style: dashed;
+  border-color: currentColor;
+  background: transparent;
+  color: var(--jk-foreground);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ---------- 3. What's included ---------- */
+.included {
+  display: grid;
+  gap: 1.5rem;
+  margin: 0;
+}
+
+.includedGroup {
+  display: grid;
+  align-content: start;
+}
+
+.includedTerm {
+  margin-bottom: 0.35rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 2px solid currentColor;
+  font-size: 0.8rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.includedItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin: 0;
+  padding-block: 0.5rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.includedMark {
+  display: inline-grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid var(--max-ink);
+  border-radius: 50%;
+  background: var(--max-lime);
+  color: var(--max-ink);
+  font-size: 0.75rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.includedMarkNo {
+  border-color: currentColor;
+  background: transparent;
+  color: inherit;
+}
+
+@media (min-width: 640px) {
+  .included {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ---------- 4. Quantity stepper ---------- */
+.stepper {
+  display: inline-flex;
+  align-items: stretch;
+  border: 2px solid var(--jk-foreground);
+  border-radius: 999px;
+  background: var(--jk-card);
+  color: var(--jk-card-foreground);
+  box-shadow: 3px 3px 0 var(--max-shadow-color);
+}
+
+.stepper:has([aria-invalid="true"]) {
+  border-style: dashed;
+  border-color: var(--jk-destructive);
+}
+
+.stepButton {
+  display: inline-grid;
+  place-items: center;
+  width: 3.25rem;
+  min-height: 3.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.stepButton:hover {
+  background: var(--max-lime);
+  color: var(--max-ink);
+}
+
+.stepInput {
+  width: 4.25rem;
+  padding: 0;
+  border: 0;
+  border-inline: 2px solid var(--jk-foreground);
+  background: transparent;
+  color: inherit;
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  text-align: center;
+}
+
+.stepHelp {
+  margin: 0.85rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 550;
+}
+
+.stepError {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0.5rem 0 0;
+  color: var(--jk-destructive);
+  font-weight: 750;
+}
+
+.stepError:empty {
+  margin: 0;
+}
+
+.stepErrorMark {
+  display: inline-grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  background: var(--jk-destructive);
+  color: var(--jk-destructive-foreground);
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+/* ---------- Checkout demo-state control ---------- */
+.demoControl {
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0.85rem 1.15rem 1rem;
+  border: 2px dashed var(--jk-foreground);
+  border-radius: var(--jk-radius);
+}
+
+.demoLegend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.65rem;
+  padding-inline: 0.4rem;
+  font-weight: 800;
+}
+
+.demoOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.demoOption {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.demoOption input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0;
+  accent-color: var(--max-pink);
+}
+
+.demoReset {
+  min-height: 2.75rem;
+  margin-top: 0.25rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+  cursor: pointer;
+}
+
+/* ---------- 5. Order summary: bottom sheet on mobile, sticky on desktop ---------- */
+.summary {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  display: grid;
+  gap: 0.75rem;
+  max-height: 85dvh;
+  margin-inline: calc(-1 * var(--jk-space-gutter));
+  padding: 1rem var(--jk-space-gutter)
+    calc(1rem + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  border-top: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface) var(--jk-radius-surface) 0 0;
+  background: var(--max-surface-quiet);
+  color: var(--max-surface-quiet-foreground);
+  box-shadow: 0 -5px 0 var(--max-shadow-color);
+}
+
+.summaryHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+
+.summaryHeading {
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.summaryToggle {
+  min-height: 2.5rem;
+  padding: 0.3rem 0.9rem;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 0.9rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.summaryToggle:hover {
+  background: var(--max-lime);
+  color: var(--max-ink);
+}
+
+.summaryLine {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.summaryRows {
+  display: none;
+  margin: 0;
+}
+
+.summary[data-details="open"] .summaryRows {
+  display: grid;
+}
+
+.summaryRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.2rem 1rem;
+  padding-block: 0.6rem;
+  border-bottom: 1px solid var(--jk-border);
+}
+
+.summaryRow dt {
+  font-weight: 650;
+}
+
+.summaryRow dd {
+  margin: 0;
+  font-weight: 800;
+  text-align: right;
+}
+
+.summaryTotal {
+  margin-top: 0.25rem;
+  padding-top: 0.8rem;
+  border-top: 3px solid var(--jk-foreground);
+  border-bottom: 0;
+  font-size: 1.1rem;
+}
+
+.summaryEmpty {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 2px dashed var(--jk-foreground);
+  border-radius: var(--jk-radius);
+  font-weight: 650;
+}
+
+.summaryButton {
+  width: 100%;
+}
+
+/* ---------- 6. Checkout states ---------- */
+.checking {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-weight: 750;
+}
+
+/* Keep the live region mounted (so it announces) without adding a grid gap. */
+.checking:empty {
+  position: absolute;
+}
+
+.checkingDots {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.checkingDots span {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.checkingDots span:nth-child(2) {
+  opacity: 0.6;
+}
+
+.checkingDots span:nth-child(3) {
+  opacity: 0.3;
+}
+
+html[data-motion="playing"] .checkingDots span {
+  animation: checkingPulse 1.2s ease-in-out infinite;
+}
+
+html[data-motion="playing"] .checkingDots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+html[data-motion="playing"] .checkingDots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes checkingPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.summaryAlert {
+  gap: 0.75rem;
+  border-left-width: 6px;
+  background: var(--max-surface-quiet);
+  color: var(--max-surface-quiet-foreground);
+}
+
+.summaryAlert [data-slot="alert-description"] {
+  font-weight: 650;
+  text-wrap: pretty;
+}
+
+.dialog {
+  --max-placeholder: #5a2a82;
+  --max-focus-outer: var(--max-ink);
+  gap: 1.15rem;
+  width: min(34rem, calc(100% - 2rem));
+  max-width: min(34rem, calc(100% - 2rem));
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  border: 3px solid var(--max-ink);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-cream);
+  color: var(--max-ink);
+  font-size: 1rem;
+  box-shadow: 8px 8px 0 var(--max-pink);
+}
+
+html:not([data-motion="playing"]) .dialog {
+  animation: none;
+}
+
+.dialog .dialogTitle {
+  margin: 0;
+  color: var(--max-ink);
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+  line-height: 0.95;
+}
+
+.dialog .dialogBody {
+  margin: 0;
+  color: var(--max-ink);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+@media (min-width: 900px) {
+  .summary {
+    top: calc(var(--max-header-height) + 1.5rem);
+    bottom: auto;
+    z-index: auto;
+    max-height: none;
+    margin-inline: 0;
+    padding: var(--jk-space-card);
+    overflow: visible;
+    border: 3px solid var(--jk-foreground);
+    border-radius: var(--jk-radius-surface);
+    box-shadow: var(--max-shadow-hard);
+  }
+
+  .summaryToggle,
+  .summaryLine {
+    display: none;
+  }
+
+  .summaryRows {
+    display: grid;
+  }
+}
+
+/* ---------- 7. Access and policies ---------- */
+.sectionTitle {
+  margin: 0;
+}
+
+.policyPanel {
+  padding-block: 0.5rem;
+}
+
+.policyText {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 550;
+}
+
+.policyLink {
+  margin: 1.25rem 0 0;
+  font-size: 1.0625rem;
+}

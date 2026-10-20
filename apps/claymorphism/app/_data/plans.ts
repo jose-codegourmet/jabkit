@@ -4,10 +4,12 @@ export const plans: Plan[] = [
   {
     id: "free",
     name: "Free",
+    badge: "Start here",
     homeSummary: "For one family getting started.",
     homeDetail: "[Free plan limits — client to confirm]",
     summary: "Everything a family needs to start.",
-    price: "Free",
+    price: { amount: "Free", note: "For one family getting started" },
+    includesTitle: "What's included",
     includes: [
       "Shared family board [Number of boards — client to confirm]",
       "Child view with next-step tiles",
@@ -19,14 +21,19 @@ export const plans: Plan[] = [
   {
     id: "plus",
     name: "Plus",
+    badge: "More room to grow",
+    featured: true,
     homeSummary: "More boards and more ways to make them yours.",
     homeDetail: "[Price — client to confirm]",
     summary: "More boards and more ways to make them yours.",
-    price: "[Price — client to confirm] / [Billing period — client to confirm]",
+    price: {
+      amount: "[Price — client to confirm]",
+      note: "Per [Billing period — client to confirm]",
+    },
+    includesTitle: "Everything in Free, plus",
     includes: [
       "Additional boards [Limit — client to confirm]",
       "Customization [Specific options — client to confirm]",
-      "Everything in Free",
     ],
     cta: { label: "Start with Free, upgrade anytime", href: "/start" },
   },

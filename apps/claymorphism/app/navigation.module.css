@@ -41,6 +41,18 @@
   object-fit: contain;
 }
 
+.wordmarkTyped {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+/* Display is left to the `dark:` utilities in SiteHeader. */
+.wordmarkThemed {
+  align-items: center;
+  gap: 0.55rem;
+}
+
 .wordmarkType {
   font-family: var(--jk-font-display);
   font-size: 1.65rem;

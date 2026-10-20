@@ -57,10 +57,14 @@ export type PlanId = "free" | "plus";
 export type Plan = {
   id: PlanId;
   name: string;
+  /** Short label shown as a chip on the pricing card. */
+  badge: string;
+  featured?: boolean;
   homeSummary: string;
   homeDetail: string;
   summary: string;
-  price: string;
+  price: { amount: string; note: string };
+  includesTitle: string;
   includes: string[];
   cta: NavLink;
 };

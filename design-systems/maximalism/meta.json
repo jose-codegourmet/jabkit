@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "maximalism",
+  "name": "Maximalism",
+  "status": "draft-specification",
+  "intent": "Make a festival feel loud, layered, and inclusive in its campaign moments while keeping tickets, schedules, and visitor information calm, high-contrast, and easy to use.",
+  "keywords": ["layered", "collage", "exuberant", "kinetic", "inclusive"],
+  "bestFor": [
+    "Music, arts, and multi-stage cultural festivals",
+    "Campaign sites that pair expressive art with a real ticket or schedule task",
+    "Brands whose energy comes from many voices, genres, and communities"
+  ],
+  "avoidFor": [
+    "Products whose every screen is a dense transactional task",
+    "Brands that cannot separate decoration from essential information",
+    "Audiences or contexts where kinetic imagery cannot be paused"
+  ],
+  "referenceReviewDate": "2026-09-30",
+  "files": {
+    "system.md": "system.md",
+    "rules.md": "rules.md",
+    "tokens.json": "tokens.json",
+    "typography.json": "typography.json",
+    "components.json": "components.json",
+    "patterns.json": "patterns.json",
+    "motion.json": "motion.json",
+    "motion.md": "motion.md",
+    "migration.md": "migration.md",
+    "imagery.md": "imagery.md",
+    "references.md": "references.md"
+  },
+  "compatibility": {
+    "runtime": "Documentation only; manual application required.",
+    "tokenSource": "../../packages/tokens/tokens.css",
+    "modes": ["light", "dark"],
+    "categories": ["atoms", "marketing", "dashboard"],
+    "automaticInstall": false,
+    "foundationVariables": "Proposed additions, not existing runtime variables."
+  }
+}

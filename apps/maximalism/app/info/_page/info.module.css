@@ -1,0 +1,616 @@
+/*
+ * Practical info (/info). Campaign styling lives in the header band only;
+ * every section below is the quiet, transactional register: Inter body copy,
+ * ink/cream rules, plain lists, no stickers and nothing over text.
+ */
+
+.page {
+  display: block;
+}
+
+/* ---------- Header band ---------- */
+@media (min-width: 900px) {
+  .page .band {
+    min-height: clamp(22rem, 30vw, 27rem);
+  }
+}
+
+.onPageList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.onPageLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.35rem 0.95rem;
+  border: 2px solid var(--max-cream);
+  border-radius: 999px;
+  color: var(--max-cream);
+  font-size: 0.95rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.onPageLink:hover {
+  border-color: var(--max-lime);
+  background: var(--max-lime);
+  color: var(--max-ink);
+}
+
+/* ---------- Section frame ---------- */
+.block {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: clamp(3.5rem, 7vw, 6rem);
+  padding-top: clamp(1.25rem, 2.5vw, 2rem);
+  border-top: var(--max-rule-heavy);
+  scroll-margin-top: calc(var(--max-header-height) + 1rem);
+}
+
+.blockHead {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+}
+
+.blockIndex {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.15rem 0.6rem;
+  border: 2px solid var(--jk-foreground);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+}
+
+.blockTitle {
+  margin: 0;
+  font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.75rem);
+}
+
+.blockBody {
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+  min-width: 0;
+}
+
+.blockBody > * {
+  margin: 0;
+}
+
+.blockLead {
+  margin: 0;
+}
+
+.blockActions {
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 900px) {
+  .block {
+    grid-template-columns: minmax(14rem, 1fr) minmax(0, 2.2fr);
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+
+  .block:not(.blockWide) .blockHead {
+    position: sticky;
+    top: calc(var(--max-header-height) + 1.5rem);
+    align-self: start;
+  }
+
+  .blockWide {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.subheading {
+  margin: 0;
+  font-family: var(--jk-font-body);
+  font-size: 1.25rem;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+/* ---------- Plain lists and definition rows ---------- */
+.factList {
+  margin: 0;
+}
+
+.factRow,
+.plainItem {
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--jk-border);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+.factRow:first-child,
+.plainItem:first-child {
+  padding-top: 0.25rem;
+}
+
+.factRow {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.factTerm,
+.itemLead {
+  font-weight: 800;
+}
+
+.factDetail {
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .factRow {
+    grid-template-columns: minmax(10rem, 13rem) minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.plainList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plainItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.plainItem[data-marker] {
+  align-items: center;
+}
+
+.motionNote {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  padding: 1rem 1.15rem;
+  border: 2px dashed var(--jk-foreground);
+  border-radius: var(--jk-radius);
+}
+
+.motionNote p {
+  flex: 1 1 18rem;
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* ---------- Venue map ---------- */
+.skipToList {
+  margin: 0;
+}
+
+.venueGrid {
+  display: grid;
+  gap: 2rem;
+  min-width: 0;
+}
+
+.venueMapColumn {
+  display: grid;
+  gap: 1.75rem;
+  align-content: start;
+  min-width: 0;
+}
+
+@media (min-width: 1100px) {
+  .venueGrid {
+    grid-template-columns: minmax(0, 1.75fr) minmax(18rem, 1fr);
+    align-items: start;
+  }
+}
+
+.mapFigure {
+  display: grid;
+  gap: 0.85rem;
+  min-width: 0;
+  margin: 0;
+}
+
+.mapToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.zoomGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.zoomButton svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.zoomStatus {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.mapViewport {
+  aspect-ratio: 800 / 520;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background-color: var(--max-surface-quiet);
+  background-image: var(--max-halftone);
+  background-size: 10px 10px;
+  box-shadow: 4px 4px 0 var(--max-shadow-color);
+}
+
+.mapSvg {
+  display: block;
+  width: calc(var(--map-scale, 1) * 100%);
+  max-width: none;
+  height: auto;
+}
+
+.mapCaption {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.mapGround {
+  fill: var(--jk-muted);
+  stroke: var(--jk-foreground);
+  stroke-width: 4;
+}
+
+.mapStamp {
+  fill: var(--max-pink);
+  font-family: var(--jk-font-display);
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mapCompass path {
+  fill: var(--jk-foreground);
+}
+
+.mapCompass text {
+  fill: var(--jk-foreground);
+  font-family: var(--jk-font-body);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.route {
+  fill: none;
+  stroke: var(--jk-secondary);
+  stroke-dasharray: 0.5 13;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 7;
+}
+
+.mapStage {
+  stroke: var(--jk-foreground);
+  stroke-width: 3;
+}
+
+.stageLoud {
+  fill: var(--max-pink);
+}
+
+.stageGlow {
+  fill: var(--max-tangerine);
+}
+
+.stageLowEnd {
+  fill: var(--max-cobalt);
+}
+
+.stageOpenAir {
+  fill: var(--max-lime);
+  stroke-dasharray: 10 6;
+}
+
+.stageLabel {
+  fill: var(--max-ink);
+  font-family: var(--jk-font-display);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.stageLabelLight {
+  fill: var(--max-cream);
+}
+
+.marker {
+  stroke: var(--jk-foreground);
+  stroke-width: 3;
+}
+
+.markerEntrance {
+  fill: var(--jk-foreground);
+  stroke: var(--jk-background);
+}
+
+.markerToilets {
+  fill: var(--max-cream);
+}
+
+.markerWater {
+  fill: var(--max-cobalt);
+}
+
+.markerWelfare {
+  fill: var(--max-lime);
+}
+
+.markerFirstAid {
+  fill: var(--max-pink);
+}
+
+.glyphOnForeground {
+  fill: var(--jk-background);
+}
+
+.glyphCream {
+  fill: var(--max-cream);
+}
+
+.glyphInk {
+  fill: var(--max-ink);
+}
+
+.markerText {
+  fill: var(--max-ink);
+  font-family: var(--jk-font-body);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.legendSymbol {
+  flex-shrink: 0;
+  width: 1.9rem;
+  height: 1.9rem;
+  overflow: visible;
+}
+
+.legend {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.legendHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.legendList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 0.6rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.mapList {
+  display: grid;
+  gap: 0.75rem;
+  padding: var(--jk-space-card);
+  border: 2px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-surface-quiet);
+  color: var(--max-surface-quiet-foreground);
+  scroll-margin-top: calc(var(--max-header-height) + 1rem);
+}
+
+.mapListNote {
+  margin: 0;
+  color: var(--jk-muted-foreground);
+  font-size: 0.9rem;
+  font-weight: 550;
+}
+
+.mapListItems {
+  margin: 0;
+}
+
+.mapListRow {
+  padding-block: 0.8rem;
+  border-top: 1px solid var(--jk-border);
+}
+
+.mapListTerm {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 800;
+}
+
+.mapListDetail {
+  margin: 0.2rem 0 0 2.45rem;
+  line-height: 1.5;
+}
+
+/* ---------- Policies ---------- */
+.policies {
+  padding-block: 0.5rem;
+}
+
+.policies p {
+  margin: 0;
+}
+
+/* ---------- FAQ (adapted from faq12) ---------- */
+.faqPanelWrap {
+  padding-block: 0.5rem;
+}
+
+.faqRow + .faqRow {
+  border-top: 1px solid var(--jk-border);
+}
+
+.faqQuestion {
+  margin: 0;
+  font-size: inherit;
+}
+
+.faqTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.85rem 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-size: 1.0625rem;
+  font-weight: 750;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faqTrigger:hover span {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
+}
+
+.faqChevron {
+  flex-shrink: 0;
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.faqTrigger[aria-expanded="true"] .faqChevron {
+  transform: rotate(180deg);
+}
+
+html[data-motion="playing"] .faqChevron {
+  transition: transform 180ms ease;
+}
+
+.faqPanel {
+  padding-bottom: 1.1rem;
+}
+
+.faqPanel[data-open="false"] {
+  display: none;
+}
+
+.faqPanel p {
+  max-width: 65ch;
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.answerLink {
+  color: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+}
+
+.answerLink:hover {
+  text-decoration-color: var(--max-pink);
+  text-decoration-thickness: 4px;
+}
+
+/* ---------- Contact nudge ---------- */
+.nudge {
+  margin: clamp(3.5rem, 7vw, 6rem) 0 0;
+  padding-top: clamp(1.25rem, 2.5vw, 2rem);
+  border-top: var(--max-rule-heavy);
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.nudgeLink {
+  text-decoration-thickness: 3px;
+}
+
+/* ---------- Print: expand every answer, drop the controls ---------- */
+/* Policy panels are hidden="until-found", so they stay in the DOM closed. */
+@media print {
+  .policies [data-slot="accordion-content"] {
+    display: block;
+    height: auto;
+    overflow: visible;
+    content-visibility: visible;
+  }
+
+  .policies [data-slot="accordion-content"] > div {
+    height: auto;
+  }
+
+  .faqPanel[data-open] {
+    display: block;
+  }
+
+  .policies [data-slot="accordion-trigger-icon"],
+  .faqChevron,
+  .mapToolbar,
+  .skipToList,
+  .onPageList {
+    display: none;
+  }
+
+  .faqList .faqRow,
+  .policies [data-slot="accordion-item"] {
+    break-inside: avoid;
+  }
+
+  .block:not(.blockWide) .blockHead {
+    position: static;
+  }
+
+  .mapViewport {
+    aspect-ratio: auto;
+    overflow: visible;
+    box-shadow: none;
+  }
+
+  .mapSvg {
+    width: 100%;
+  }
+}

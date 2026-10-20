@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "maximalism",
+  "families": {
+    "display": "Anton, Impact, \"Arial Narrow\", sans-serif",
+    "body": "Inter, system-ui, Arial, Helvetica, sans-serif",
+    "label": "Inter, system-ui, Arial, Helvetica, sans-serif"
+  },
+  "roles": {
+    "display": {
+      "family": "display",
+      "fontSize": "clamp(3.25rem, 1.6rem + 7vw, 9rem)",
+      "lineHeight": 0.95,
+      "fontWeight": 400,
+      "letterSpacing": "0.01em",
+      "maxWidth": "12ch"
+    },
+    "heading": {
+      "family": "display",
+      "fontSize": "clamp(2rem, 1.2rem + 3.2vw, 4.25rem)",
+      "lineHeight": 1,
+      "fontWeight": 400,
+      "letterSpacing": "0.01em",
+      "maxWidth": "18ch"
+    },
+    "body": {
+      "family": "body",
+      "fontSize": "1rem",
+      "lineHeight": 1.55,
+      "fontWeight": 400,
+      "letterSpacing": "0em",
+      "maxWidth": "65ch"
+    },
+    "lead": {
+      "family": "body",
+      "fontSize": "clamp(1.125rem, 1rem + 0.6vw, 1.5rem)",
+      "lineHeight": 1.4,
+      "fontWeight": 500,
+      "letterSpacing": "-0.01em",
+      "maxWidth": "42ch"
+    },
+    "label": {
+      "family": "label",
+      "fontSize": ".9375rem",
+      "lineHeight": 1.3,
+      "fontWeight": 600,
+      "letterSpacing": ".01em",
+      "maxWidth": "none"
+    },
+    "caption": {
+      "family": "label",
+      "fontSize": ".875rem",
+      "lineHeight": 1.45,
+      "fontWeight": 400,
+      "letterSpacing": "0em",
+      "maxWidth": "60ch"
+    }
+  },
+  "implementation": {
+    "status": "Anton (display) and Inter (UI, body, and transactional text) are the intended families; self-host both with their SIL OFL license files in the FULL VOLUME app. The stacks above are fallbacks.",
+    "loading": "Declare self-hosted files with @font-face and font-display: swap. No runtime Google Fonts requests. If the generated wordmark lettering fails, set FULL VOLUME in Anton in code.",
+    "wrapping": "Anton is restricted to short campaign phrases: H1 and H2, the CTA band headline, and the expanding campaign wordmark. Navigation, tables, ticket options, prices, forms, and policies always use Inter. Never force desktop line breaks on mobile.",
+    "metrics": "Use font-variant-numeric: tabular-nums for set times, set lengths, prices, quantities, and totals so columns align. Check Anton fallback width and layout shift after the font loads; condensed fallbacks run wider.",
+    "responsive": "Use clamp for display roles, keep body text at 1rem or larger and captions at 14px or larger, and verify 320px reflow and 200% text zoom with the longest act names and placeholders."
+  }
+}

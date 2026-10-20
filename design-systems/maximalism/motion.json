@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "maximalism",
+  "durationMs": {
+    "feedback": 120,
+    "transition": 220,
+    "reveal": 420,
+    "stagger": 60,
+    "drift": 9000
+  },
+  "easing": {
+    "standard": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+    "drift": "ease-in-out"
+  },
+  "behaviors": {
+    "hover": {
+      "trigger": "pointer enters an enabled control or link",
+      "effect": "Show or thicken the lime underline on ink chrome, or darken the action surface, without shifting layout.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "Show the final underline and surface immediately."
+    },
+    "press": {
+      "trigger": "pointer or keyboard activation",
+      "effect": "Change the surface immediately; no bounce or large scale.",
+      "duration": "feedback",
+      "easing": "standard",
+      "reducedMotion": "Show the final surface immediately."
+    },
+    "tilt": {
+      "trigger": "pointer hover or keyboard focus on an act card",
+      "effect": "Tilt the card a few degrees; the act name, badges, time, and focus ring stay fully visible and uncovered.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "No tilt. The card stays flat with the same focus ring and content, and tilt is also off whenever motion is paused."
+    },
+    "drift": {
+      "trigger": "Home hero and campaign bands render while motion is playing",
+      "effect": "Decorative stickers drift slowly within their margins; they never move over text, controls, or focus rings and never flash.",
+      "duration": "drift",
+      "easing": "drift",
+      "reducedMotion": "Stickers are still in their resting positions. The same state applies when the Pause motion toggle is on."
+    },
+    "wordmark": {
+      "trigger": "the campaign wordmark enters the Home campaign layout while motion is playing",
+      "effect": "The expanding campaign wordmark widens its letters with type and CSS transforms, once; the header and ticket wordmark stays fixed.",
+      "duration": "reveal",
+      "easing": "standard",
+      "reducedMotion": "Render the final expanded wordmark statically, with no transform animation."
+    },
+    "reveal": {
+      "trigger": "a secondary campaign section first enters the viewport",
+      "effect": "Reveal once with opacity and a short vertical travel; transactional sections do not reveal.",
+      "duration": "reveal",
+      "easing": "standard",
+      "reducedMotion": "Render the final state immediately with no translation or stagger."
+    },
+    "menu": {
+      "trigger": "the mobile Menu or Close button",
+      "effect": "Slide the full-height ink sheet in as one group; focus moves into the sheet when it is ready.",
+      "duration": "transition",
+      "easing": "standard",
+      "reducedMotion": "Open and close without the slide while preserving focus trap, Esc, scroll lock, and focus return."
+    },
+    "skeleton": {
+      "trigger": "lineup, schedule, or availability data is loading",
+      "effect": "Skeleton cards or rows may shimmer gently.",
+      "duration": "reveal",
+      "easing": "standard",
+      "reducedMotion": "Static skeletons with the loading text; no shimmer, including when motion is paused."
+    }
+  },
+  "global": {
+    "autoplay": false,
+    "audioAutoplay": false,
+    "maxStaggerItems": 3,
+    "replayOnScroll": false,
+    "reducedMotionMedia": "(prefers-reduced-motion: reduce)",
+    "contentBeforeEnhancement": "Visible, usable, and in reading order.",
+    "colorTransition": "Nothing flashes. Color changes are brief state feedback only; no strobing, blinking, or rapidly alternating fills. A persistent Pause motion / Play motion toggle sets one data-motion attribute that all kinetic CSS reads, defaults to paused under reduced motion, and is stored per browser."
+  }
+}

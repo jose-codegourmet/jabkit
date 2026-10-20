@@ -1,0 +1,252 @@
+/*
+ * /lineup: quiet controls (transactional register) above a loud poster wall
+ * of act cards (campaign register), with a plain table as the list view.
+ * Stickers only sit in the wall header's own space: never on cards, copy,
+ * controls or focus rings.
+ */
+
+.browse {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  scroll-margin-top: calc(var(--max-header-height) + 1rem);
+}
+
+.explorer {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* ---------- Controls (quiet) ---------- */
+.toolbar {
+  min-inline-size: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.75rem;
+}
+
+.field {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.fieldLabel {
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+
+/* Two classes so the chevron beats the global select background shorthand. */
+.field .select {
+  min-width: 12.5rem;
+  max-width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 0.9rem;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.15rem) 50%,
+    calc(100% - 0.8rem) 50%;
+  background-repeat: no-repeat;
+  background-size:
+    0.35rem 0.35rem,
+    0.35rem 0.35rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.viewToggle {
+  margin-inline-start: auto;
+}
+
+/* ---------- Demo state preview (clearly labelled) ---------- */
+.demoStates {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem 1.5rem;
+  padding: 0.9rem 1.1rem;
+  border: 2px dashed var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  font-size: 0.9375rem;
+}
+
+.demoStatesCopy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  max-width: 46rem;
+}
+
+.demoStatesCopy p {
+  margin: 0;
+  color: var(--jk-muted-foreground);
+  font-weight: 550;
+}
+
+/* ---------- Poster wall (loud) ---------- */
+.wall {
+  position: relative;
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  padding: clamp(1rem, 2.5vw, 2rem);
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background-color: var(--jk-muted);
+  background-image: var(--max-halftone);
+  background-size: 10px 10px;
+  box-shadow: var(--max-shadow-hard);
+}
+
+.wallHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  min-height: 3.5rem;
+}
+
+.count {
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: clamp(1.9rem, 1.2rem + 2.6vw, 3.25rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.countNumber {
+  display: inline-block;
+  min-width: 1.4em;
+  margin-inline: 0.08em;
+  padding: 0.06em 0.22em 0;
+  border: 3px solid var(--max-ink);
+  border-radius: 0.3em;
+  background: var(--max-pink);
+  color: var(--max-ink);
+  text-align: center;
+  box-shadow: var(--max-shadow-sticker);
+  transform: rotate(-3deg);
+}
+
+.wallBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.wallStickers {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-inline-start: auto;
+}
+
+/* Card grid: 1 → 2 → 4 columns, staggered like pasted posters. */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--jk-space-grid);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gridItem {
+  min-width: 0;
+}
+
+@media (min-width: 560px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-bottom: 1.5rem;
+  }
+
+  .gridItem:nth-child(even) {
+    transform: translateY(1.5rem);
+  }
+}
+
+@media (min-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding-bottom: 2.25rem;
+  }
+
+  .gridItem:nth-child(even) {
+    transform: none;
+  }
+
+  .gridItem:nth-child(4n + 2),
+  .gridItem:nth-child(4n + 4) {
+    transform: translateY(2.25rem);
+  }
+}
+
+/* ---------- List view (quiet table) ---------- */
+.tableScroll {
+  overflow-x: auto;
+  border: 2px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-surface-quiet);
+  color: var(--max-surface-quiet-foreground);
+}
+
+.table {
+  width: 100%;
+  min-width: 42rem;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.table th,
+.table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--jk-border);
+  text-align: start;
+  vertical-align: middle;
+}
+
+.table thead th {
+  border-bottom: 2px solid currentColor;
+  font-size: 0.875rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.table tbody tr:hover > * {
+  background: var(--jk-muted);
+}
+
+/* The act column stays put while the rest of the row scrolls on small screens. */
+.actCell {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 11rem;
+  background: var(--max-surface-quiet);
+  font-weight: 800;
+}
+
+.tablePlanBadge {
+  display: flex;
+  width: fit-content;
+  margin-top: 0.4rem;
+}
+
+.numeric {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  white-space: nowrap;
+}

@@ -1,0 +1,686 @@
+/*
+ * Schedule (/schedule): a short campaign band, then a calm plan-maker.
+ * Everything below the band is the transactional register: quiet surface,
+ * Inter, high contrast, no decoration over copy, controls or focus rings.
+ */
+
+/* ---------- Short campaign band ---------- */
+.band h1 {
+  max-width: 14ch;
+  font-size: clamp(2.75rem, 1.5rem + 4.4vw, 5.5rem);
+}
+
+@media (min-width: 900px) {
+  section.band {
+    min-height: clamp(20rem, 30vw, 25rem);
+  }
+}
+
+/* ---------- Tool layout ---------- */
+.tool {
+  position: relative;
+}
+
+/* Stickers sit in the empty gap between the band and the tool. */
+.toolStickerA,
+.toolStickerB {
+  position: absolute;
+  top: calc(var(--jk-space-section) / -2 - var(--max-sticker-size) / 2);
+}
+
+.toolStickerA {
+  left: 6%;
+}
+
+.toolStickerB {
+  right: 8%;
+}
+
+.layout {
+  display: grid;
+  gap: var(--jk-space-grid);
+}
+
+.main,
+.planner,
+.results {
+  display: grid;
+  min-width: 0;
+  gap: 1.25rem;
+}
+
+.results {
+  gap: 1rem;
+}
+
+@media (min-width: 70rem) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) clamp(17rem, 24vw, 21rem);
+    align-items: start;
+  }
+
+  .side {
+    position: sticky;
+    top: calc(var(--max-header-height) + 1.25rem);
+  }
+}
+
+/* ---------- Controls ---------- */
+.controls {
+  display: grid;
+  gap: 1.1rem 1.25rem;
+  padding: var(--jk-space-card);
+  border: 2px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-surface-quiet);
+  color: var(--max-surface-quiet-foreground);
+}
+
+.controlDay,
+.field {
+  display: grid;
+  align-content: start;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.fieldLabel {
+  margin: 0;
+  color: inherit;
+}
+
+.dayTabs {
+  display: flex;
+}
+
+.select {
+  width: 100%;
+  padding-inline: 0.85rem 0.6rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.switchRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: var(--jk-control-height);
+}
+
+.switchRow .switchControl[data-slot="switch"] {
+  width: 3.4rem;
+  height: 1.95rem;
+  padding: 0 0.2rem;
+  border: 2px solid var(--jk-foreground);
+  background: var(--jk-card);
+  box-shadow: 2px 2px 0 var(--max-shadow-color);
+}
+
+.switchRow .switchControl[data-slot="switch"][data-checked] {
+  background: var(--max-pink);
+}
+
+.switchRow .switchControl [data-slot="switch-thumb"] {
+  width: 1.3rem;
+  height: 1.3rem;
+  border: 2px solid var(--jk-foreground);
+  background: var(--jk-background);
+  translate: 0 0;
+  transition: none;
+}
+
+.switchRow .switchControl [data-slot="switch-thumb"][data-checked] {
+  border-color: var(--max-ink);
+  background: var(--max-ink);
+  translate: 1.35rem 0;
+}
+
+html[data-motion="playing"]
+  .switchRow
+  .switchControl
+  [data-slot="switch-thumb"] {
+  transition: translate 160ms ease;
+}
+
+.switchLabel {
+  font-weight: 750;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+@media (min-width: 40rem) {
+  .controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 62rem) {
+  .controls {
+    grid-template-columns: auto minmax(9rem, 1fr) minmax(9rem, 1fr) auto;
+    align-items: end;
+  }
+}
+
+/* ---------- Result line ---------- */
+.result {
+  min-height: 1.5em;
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Schedule table (quiet surface) ---------- */
+.tableSurface {
+  border: 2px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-surface-quiet);
+  color: var(--max-surface-quiet-foreground);
+}
+
+.tableWide {
+  display: none;
+  padding: 0.35rem 0.5rem;
+}
+
+.table {
+  font-size: 1rem;
+  border-collapse: collapse;
+}
+
+.table .headRow {
+  border-bottom: 2px solid var(--jk-foreground);
+}
+
+.table .headRow:hover {
+  background: transparent;
+}
+
+.th {
+  height: auto;
+  padding: 0.85rem 0.75rem;
+  color: inherit;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.thText {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+}
+
+.thPlan {
+  text-align: right;
+}
+
+.sortButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  margin-inline: -0.5rem;
+  padding: 0.25rem 0.65rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+.sortButton:hover {
+  border-color: currentColor;
+}
+
+.sortButton[data-active="true"] {
+  background: var(--jk-foreground);
+  color: var(--jk-background);
+}
+
+.sortIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.row {
+  border-bottom: 1px solid var(--jk-border);
+}
+
+.row:has(:focus-visible) {
+  background: color-mix(in srgb, var(--max-lime) 22%, transparent);
+}
+
+.td {
+  padding: 0.9rem 0.75rem;
+  white-space: normal;
+}
+
+.tdTime {
+  font-size: 1.35rem;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Row focus is also marked by a bar, not colour alone. */
+.row:has(:focus-visible) .tdTime {
+  box-shadow: inset 6px 0 0 var(--jk-foreground);
+}
+
+.tdLength {
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.tdPlan {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.act {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.actLink {
+  width: fit-content;
+  color: inherit;
+  font-size: 1.075rem;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+.actLink:hover {
+  text-decoration-color: var(--max-pink);
+  text-decoration-thickness: 4px;
+}
+
+.actGenre {
+  color: var(--jk-muted-foreground);
+  font-size: 0.9rem;
+}
+
+/* Stacked rows below 48rem: time big, act, stage badge, length, button. */
+.stack {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stackRow {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.1rem 1.15rem;
+  border-bottom: 2px solid var(--jk-border);
+}
+
+.stackRow:last-child {
+  border-bottom: 0;
+}
+
+.stackRow:has(:focus-visible) {
+  background: color-mix(in srgb, var(--max-lime) 22%, transparent);
+  box-shadow: inset 6px 0 0 var(--jk-foreground);
+}
+
+.stackRow:first-child {
+  border-radius: calc(var(--jk-radius-surface) - 2px)
+    calc(var(--jk-radius-surface) - 2px) 0 0;
+}
+
+.stackRow:last-child {
+  border-radius: 0 0 calc(var(--jk-radius-surface) - 2px)
+    calc(var(--jk-radius-surface) - 2px);
+}
+
+.stackTime {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.stackBody {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.stackAct .actLink {
+  font-size: 1.2rem;
+}
+
+.stackMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.stackLength {
+  font-weight: 700;
+}
+
+.stackPlan {
+  padding-top: 0.2rem;
+}
+
+@media (min-width: 48rem) {
+  .tableWide {
+    display: block;
+  }
+
+  .stack {
+    display: none;
+  }
+}
+
+/* ---------- Clash notice (warning, not error) ---------- */
+.results .clash[data-slot="alert"] {
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: start;
+  padding: 1rem 1.15rem;
+  border: 2px solid var(--jk-foreground);
+  border-left: 10px solid var(--max-tangerine);
+  background: color-mix(
+    in srgb,
+    var(--max-tangerine) 14%,
+    var(--max-surface-quiet)
+  );
+  color: var(--max-surface-quiet-foreground);
+}
+
+.clashIcon {
+  display: inline-grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 2px solid var(--max-ink);
+  border-radius: 0.5rem;
+  background: var(--max-tangerine);
+  color: var(--max-ink);
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.clashBody {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.clashDemo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.clashDemoNote {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.clashMessage {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.clashActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.75rem;
+  margin-top: 0.75rem;
+}
+
+/* ---------- Change notice + demo states ---------- */
+.main .changeNotice[data-slot="alert"] {
+  border-style: dashed;
+  background: var(--max-surface-quiet);
+  color: var(--max-surface-quiet-foreground);
+  font-weight: 600;
+}
+
+.demoStates fieldset {
+  border-radius: var(--jk-radius);
+}
+
+.demoStates {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 2px dashed var(--jk-foreground);
+  border-radius: var(--jk-radius);
+}
+
+/* ---------- Plan summary ---------- */
+.plan {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  padding: var(--jk-space-card);
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-surface-quiet);
+  color: var(--max-surface-quiet-foreground);
+  box-shadow: var(--max-shadow-hard);
+}
+
+/* Only on the side panel, where the header leaves the corner empty. */
+.planSticker {
+  position: absolute;
+  top: -1.5rem;
+  right: -1.1rem;
+  display: none;
+}
+
+.planHead {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.planHeading {
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: clamp(2rem, 1.6rem + 1.2vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.planToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+.planCount,
+.planCountWide {
+  font-family: var(--jk-font-body);
+  font-size: 0.875rem;
+  font-weight: 750;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.planCount {
+  margin-left: auto;
+  padding: 0.2rem 0.65rem;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.planChevron {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.planToggle[aria-expanded="true"] .planChevron {
+  rotate: 180deg;
+}
+
+.planHeadingText,
+.planCountWide {
+  display: none;
+}
+
+.planBody {
+  display: grid;
+  gap: 1rem;
+}
+
+.planBody[hidden] {
+  display: none;
+}
+
+.planDay {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.planDayHeading {
+  margin: 0;
+  font-size: inherit;
+}
+
+.planList {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.planItem {
+  display: grid;
+  grid-template-columns: 3.4rem minmax(0, 1fr);
+  column-gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border: 2px solid var(--jk-foreground);
+  border-radius: var(--jk-radius);
+  background: var(--jk-card);
+  color: var(--jk-card-foreground);
+}
+
+.planTime {
+  grid-row: span 2;
+  font-size: 1.1rem;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+}
+
+.planAct {
+  font-weight: 800;
+}
+
+.planStage {
+  color: var(--jk-muted-foreground);
+  font-size: 0.875rem;
+}
+
+.planEmpty {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.planNote {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.planClear {
+  justify-self: start;
+}
+
+@media (min-width: 70rem) {
+  .planSticker {
+    display: block;
+  }
+
+  .planHead {
+    padding-right: 2rem;
+  }
+
+  .planToggle {
+    display: none;
+  }
+
+  .planHeadingText,
+  .planCountWide {
+    display: block;
+  }
+
+  .planCountWide {
+    margin: 0;
+  }
+
+  .planBody[hidden] {
+    display: grid;
+  }
+}
+
+/* ---------- Clear-plan confirmation ---------- */
+.confirm[data-slot="alert-dialog-content"] {
+  gap: 0.75rem;
+  width: min(26rem, calc(100% - 2rem));
+  max-width: none;
+  padding: 1.5rem;
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--jk-popover);
+  color: var(--jk-popover-foreground);
+  box-shadow: 8px 8px 0 var(--max-shadow-color);
+}
+
+.confirmTitle {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 850;
+  line-height: 1.2;
+}
+
+.confirmBody {
+  margin: 0;
+  color: inherit;
+  font-size: 1rem;
+}
+
+.confirmActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}

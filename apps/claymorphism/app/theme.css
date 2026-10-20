@@ -140,6 +140,20 @@
     3px 4px 8px color-mix(in oklab, #332b3e 16%, transparent),
     inset 1px 1px 0 color-mix(in oklab, white 70%, transparent);
   --jk-shadow-control: var(--jk-shadow-raised);
+  --jk-shadow-button:
+    inset 0 2px 1px color-mix(in oklab, white 55%, transparent),
+    inset 0 -5px 10px color-mix(in oklab, #332b3e 14%, transparent),
+    0 2px 0 color-mix(in oklab, #332b3e 10%, transparent),
+    6px 10px 18px color-mix(in oklab, #332b3e 18%, transparent);
+  --jk-shadow-button-hover:
+    inset 0 2px 1px color-mix(in oklab, white 60%, transparent),
+    inset 0 -5px 10px color-mix(in oklab, #332b3e 12%, transparent),
+    0 3px 0 color-mix(in oklab, #332b3e 10%, transparent),
+    8px 14px 24px color-mix(in oklab, #332b3e 22%, transparent);
+  --jk-shadow-button-pressed:
+    inset 2px 4px 8px color-mix(in oklab, #332b3e 22%, transparent),
+    inset 0 -1px 0 color-mix(in oklab, white 30%, transparent),
+    1px 2px 4px color-mix(in oklab, #332b3e 12%, transparent);
   --jk-font-display: "Nunito", ui-rounded, sans-serif;
   --jk-font-body: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
   --jk-font-label: "Nunito", ui-rounded, sans-serif;
@@ -228,6 +242,20 @@
     3px 4px 10px color-mix(in oklab, black 40%, transparent),
     inset 1px 1px 0 color-mix(in oklab, white 16%, transparent);
   --jk-shadow-control: var(--jk-shadow-raised);
+  --jk-shadow-button:
+    inset 0 2px 1px color-mix(in oklab, white 32%, transparent),
+    inset 0 -5px 10px color-mix(in oklab, black 18%, transparent),
+    0 2px 0 color-mix(in oklab, black 30%, transparent),
+    6px 10px 20px color-mix(in oklab, black 45%, transparent);
+  --jk-shadow-button-hover:
+    inset 0 2px 1px color-mix(in oklab, white 38%, transparent),
+    inset 0 -5px 10px color-mix(in oklab, black 16%, transparent),
+    0 3px 0 color-mix(in oklab, black 30%, transparent),
+    8px 14px 26px color-mix(in oklab, black 52%, transparent);
+  --jk-shadow-button-pressed:
+    inset 2px 4px 8px color-mix(in oklab, black 30%, transparent),
+    inset 0 -1px 0 color-mix(in oklab, white 14%, transparent),
+    1px 2px 4px color-mix(in oklab, black 40%, transparent);
 }
 
 /* PillStateStyles: clay press, lift, focus, disabled, and loading. */
@@ -263,6 +291,119 @@
 [data-jk-design-system="claymorphism"] .jk-clay-focus {
   outline: 3px solid var(--jk-ring);
   outline-offset: 3px;
+}
+
+/* Clay pill buttons: rounded label type, puffy highlight, and a soft sheen. */
+[data-jk-design-system="claymorphism"] [data-slot="button"] {
+  gap: 0.55rem;
+  padding-inline: 1.4rem;
+  border-width: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+  text-decoration: none;
+  box-shadow: var(--jk-shadow-button);
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="button"].h-9 {
+  padding-inline: 1rem;
+  font-size: 0.9rem;
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="button"].h-12 {
+  min-height: 3.25rem;
+  padding-inline: 1.75rem;
+  font-size: 1.0625rem;
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="button"].bg-primary,
+[data-jk-design-system="claymorphism"] [data-slot="button"].bg-secondary,
+[data-jk-design-system="claymorphism"] [data-slot="button"].bg-destructive {
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in oklab, white 26%, transparent) 0%,
+    transparent 55%,
+    color-mix(in oklab, black 4%, transparent) 100%
+  );
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="button"].bg-secondary:hover {
+  background-color: var(--jk-secondary);
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="button"]:hover {
+  filter: saturate(1.06) brightness(1.03);
+  box-shadow: var(--jk-shadow-button-hover);
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="button"]:active {
+  filter: none;
+  box-shadow: var(--jk-shadow-button-pressed);
+}
+
+/* Clay accordion rows: roomy label type and a puffy chevron chip. */
+[data-jk-design-system="claymorphism"] [data-slot="accordion-item"] {
+  border-color: color-mix(in oklab, var(--jk-clay-plum) 12%, transparent);
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="accordion-trigger"] {
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.5rem;
+  padding-block: 0.85rem;
+  border-color: transparent;
+  border-radius: 1rem;
+  color: inherit;
+  font-family: var(--jk-font-label);
+  font-size: 1.0625rem;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+[data-jk-design-system="claymorphism"]
+  [data-slot="accordion-trigger"]
+  [data-slot="accordion-trigger-icon"] {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0.55rem;
+  border-radius: 999px;
+  background: var(--jk-card);
+  color: var(--jk-card-foreground);
+  box-shadow: var(--jk-shadow-chip);
+  transition:
+    transform 200ms ease,
+    background-color 200ms ease;
+}
+
+[data-jk-design-system="claymorphism"]
+  [data-slot="accordion-trigger"]:hover
+  [data-slot="accordion-trigger-icon"] {
+  transform: translateY(-1px);
+  background: var(--jk-clay-butter);
+  color: var(--jk-clay-ink);
+}
+
+[data-jk-design-system="claymorphism"]
+  [data-slot="accordion-trigger"][aria-expanded="true"]
+  [data-slot="accordion-trigger-icon"] {
+  background: var(--jk-primary);
+  color: var(--jk-primary-foreground);
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="accordion-content"] {
+  color: inherit;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+[data-jk-design-system="claymorphism"] [data-slot="accordion-content"] > div {
+  padding-right: 3.25rem;
+  padding-bottom: 1.1rem;
+  opacity: 0.86;
 }
 
 [data-jk-design-system="claymorphism"] [data-slot="button"]:disabled,

@@ -1,0 +1,872 @@
+/*
+ * Home (/) only. Loud campaign bands (hero, lineup, stages, arts) and quiet
+ * transactional panels (schedule table, tickets, practical info).
+ * Stickers sit on image edges or band corners, never over copy or controls,
+ * and only move while html[data-motion="playing"].
+ */
+
+/* ---------- 1. Hero ---------- */
+.hero {
+  --max-focus-outer: var(--max-cream);
+  --max-shadow-color: var(--max-ink);
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-areas:
+    "copy"
+    "facts"
+    "actions"
+    "collage";
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+  padding: clamp(1.25rem, 4vw, 3rem);
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background-color: var(--max-cobalt);
+  color: var(--max-cream);
+  box-shadow: 8px 8px 0 var(--max-pink);
+}
+
+.hero::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--max-ink) 28%, transparent) 1.3px,
+    transparent 1.7px
+  );
+  background-size: 11px 11px;
+  content: "";
+  mask-image: linear-gradient(115deg, #000 0%, transparent 55%);
+}
+
+.heroCopy {
+  grid-area: copy;
+  display: grid;
+  gap: 1.1rem;
+  align-content: start;
+}
+
+.heroCopy > * {
+  margin: 0;
+}
+
+.heroKicker {
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.4rem 0.8rem;
+  border: 2px solid var(--max-ink);
+  border-radius: 0.5rem;
+  background: var(--max-lime);
+  color: var(--max-ink);
+  box-shadow: 3px 3px 0 var(--max-ink);
+  font-size: clamp(0.8rem, 0.75rem + 0.3vw, 0.95rem);
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  transform: rotate(-1.5deg);
+}
+
+.heroTitle {
+  max-width: 11ch;
+  color: var(--max-cream);
+  font-size: clamp(3.2rem, 1.2rem + 6.5vw, 7.25rem);
+  text-shadow:
+    3px 3px 0 var(--max-ink),
+    6px 6px 0 var(--max-pink);
+}
+
+.heroSub {
+  color: var(--max-cream);
+  font-weight: 700;
+}
+
+.facts {
+  --max-placeholder: #5a2a82;
+  grid-area: facts;
+  display: grid;
+  gap: 0.75rem;
+  align-self: start;
+  width: min(100%, 30rem);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border: 3px solid var(--max-ink);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-cream);
+  color: var(--max-ink);
+  box-shadow: 6px 6px 0 var(--max-ink);
+}
+
+.factsLabel {
+  width: fit-content;
+  margin: 0;
+  padding: 0.15rem 0.55rem;
+  border: 2px dashed var(--max-ink);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.factsList {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.factsRow {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding-top: 0.6rem;
+  border-top: 2px solid var(--max-ink);
+}
+
+.factsRow dt {
+  font-weight: 850;
+}
+
+.factsRow dd {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.heroActions {
+  grid-area: actions;
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.heroButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1rem;
+}
+
+.collage {
+  grid-area: collage;
+  position: relative;
+  min-width: 0;
+  margin-top: 0.5rem;
+}
+
+.collageArt {
+  position: relative;
+  border: 3px solid var(--max-ink);
+  border-radius: var(--jk-radius-surface);
+  box-shadow: 6px 6px 0 var(--max-ink);
+}
+
+.collageArt .collageImage {
+  border-radius: calc(var(--jk-radius-surface) - 3px);
+}
+
+.heroStickerStar,
+.heroStickerBurst,
+.heroStickerKnob {
+  position: absolute;
+  z-index: 3;
+}
+
+.heroStickerStar {
+  top: -1rem;
+  left: -0.75rem;
+}
+
+.heroStickerBurst {
+  top: -1.25rem;
+  right: -0.75rem;
+}
+
+.heroStickerKnob {
+  top: 38%;
+  left: -0.85rem;
+}
+
+.heroCards {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: -22% 0 0;
+  padding: 0 0.25rem;
+  list-style: none;
+}
+
+.heroCard {
+  position: relative;
+  z-index: 2;
+  flex: 0 1 31%;
+  min-width: 0;
+  transform: rotate(var(--card-rotate, 0deg)) translateY(var(--card-drop, 0));
+}
+
+.heroCard[data-position="0"] {
+  --card-rotate: -5deg;
+}
+
+.heroCard[data-position="1"] {
+  --card-rotate: 2deg;
+  --card-drop: 1.25rem;
+  z-index: 1;
+}
+
+.heroCard[data-position="2"] {
+  --card-rotate: 6deg;
+}
+
+.heroCard:focus-within {
+  z-index: 4;
+}
+
+.heroCardLink {
+  display: grid;
+  overflow: clip;
+  border: 3px solid var(--max-ink);
+  border-radius: var(--jk-radius);
+  background: var(--max-cream);
+  color: var(--max-ink);
+  box-shadow: 5px 5px 0 var(--max-ink);
+  text-decoration: none;
+}
+
+.heroCardLink .heroCardArt {
+  border-bottom: 3px solid var(--max-ink);
+  border-radius: 0;
+}
+
+.heroCardName {
+  padding: 0.4rem 0.45rem 0.5rem;
+  font-family: var(--jk-font-display);
+  font-size: clamp(0.8rem, 0.6rem + 1vw, 1.3rem);
+  line-height: 1.05;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.heroCardLink:hover .heroCardName {
+  background: var(--max-lime);
+}
+
+html[data-motion="playing"] .heroCard {
+  transition: transform 260ms ease;
+}
+
+html[data-motion="playing"] .heroCard:is(:hover, :focus-within) {
+  transform: rotate(0deg) translateY(calc(var(--card-drop, 0px) - 0.5rem));
+}
+
+.heroNotice {
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      "copy collage"
+      "facts collage"
+      "actions collage";
+    column-gap: clamp(2rem, 4vw, 4rem);
+  }
+
+  .collage {
+    align-self: center;
+    margin-top: 0;
+    padding-bottom: 2.5rem;
+  }
+
+  .heroCards {
+    justify-content: center;
+    gap: 0;
+    margin-top: -26%;
+  }
+
+  .heroCard {
+    flex-basis: 34%;
+  }
+
+  .heroCard[data-position="1"] {
+    --card-drop: 3rem;
+    margin-inline: -1.25rem;
+  }
+}
+
+/* ---------- 3. Lineup preview ---------- */
+.lineup {
+  --max-focus-outer: var(--max-cream);
+  --max-shadow-color: var(--max-pink);
+  --max-placeholder: #e7c6ff;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1rem, 3.5vw, 2.75rem);
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-ink);
+  color: var(--max-cream);
+}
+
+.lineupBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: clip;
+  border-radius: calc(var(--jk-radius-surface) - 3px);
+}
+
+.lineupBackdrop::after {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--max-ink) 38%, transparent);
+  content: "";
+}
+
+.lineupBackdrop .lineupBackdropImage {
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+
+.lineupSticker {
+  position: absolute;
+  top: -1.4rem;
+  right: clamp(1rem, 4vw, 3rem);
+  z-index: 2;
+}
+
+.lineupHead {
+  display: grid;
+  gap: 0.9rem;
+  width: min(100%, 44rem);
+  padding: clamp(1.1rem, 3vw, 2rem);
+  border: 3px solid var(--max-cream);
+  border-radius: calc(var(--jk-radius-surface) - 0.25rem);
+  background: var(--max-ink);
+  color: var(--max-cream);
+  box-shadow: 6px 6px 0 var(--max-pink);
+}
+
+.lineupHead > * {
+  margin: 0;
+}
+
+.carousel {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.carouselBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--max-cream);
+  border-radius: var(--jk-radius);
+  background: var(--max-ink);
+  color: var(--max-cream);
+}
+
+.carouselButtons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 0.75rem;
+}
+
+.carouselCount {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.carouselTrack {
+  position: relative;
+  display: flex;
+  gap: var(--jk-space-grid);
+  margin: 0 -0.25rem;
+  padding: 0.85rem 0.85rem 1.5rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-padding-inline: 0.85rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--max-lime) transparent;
+  list-style: none;
+}
+
+html[data-motion="playing"] .carouselTrack {
+  scroll-behavior: smooth;
+}
+
+.carouselItem {
+  flex: 0 0 min(19rem, 80%);
+  scroll-snap-align: start;
+}
+
+.lineupFoot {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* ---------- 4. Stages ---------- */
+.stages {
+  --max-shadow-color: var(--jk-foreground);
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+  padding: 2.25rem clamp(1rem, 3.5vw, 2.75rem) clamp(1.25rem, 3.5vw, 2.75rem);
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background-color: var(--jk-muted);
+  background-image: var(--max-halftone);
+  background-size: 10px 10px;
+}
+
+.stagesTexture {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: clip;
+  border-radius: calc(var(--jk-radius-surface) - 3px);
+  opacity: 0.55;
+}
+
+.stagesTexture .stagesTextureImage {
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+
+.stagesSticker {
+  position: absolute;
+  top: -1.6rem;
+  right: clamp(1rem, 4vw, 3rem);
+  z-index: 2;
+}
+
+.stagesHead {
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius);
+  background: var(--jk-background);
+  color: var(--jk-foreground);
+  box-shadow: 5px 5px 0 var(--max-pink);
+}
+
+.stagesHead h2 {
+  margin: 0;
+}
+
+.stageGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--jk-space-grid);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stageCard {
+  --stage-color: var(--max-pink);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--jk-card);
+  color: var(--jk-card-foreground);
+  box-shadow: 6px 6px 0 var(--stage-color);
+}
+
+.stageCard[data-stage="glow-tent"] {
+  --stage-color: var(--max-tangerine);
+}
+
+.stageCard[data-stage="low-end-room"] {
+  --stage-color: var(--max-cobalt);
+}
+
+.stageCard[data-stage="open-air-deck"] {
+  --stage-color: var(--max-lime);
+}
+
+.stageCard .stageArt {
+  border-bottom: 3px solid var(--jk-foreground);
+  border-radius: calc(var(--jk-radius-surface) - 3px)
+    calc(var(--jk-radius-surface) - 3px) 0 0;
+}
+
+.stageBody {
+  display: grid;
+  align-content: start;
+  gap: 0.65rem;
+  padding: 1rem 1.15rem 1.25rem;
+}
+
+.stageBody > * {
+  margin: 0;
+}
+
+.stageName {
+  font-family: var(--jk-font-display);
+  font-size: clamp(1.6rem, 1.3rem + 0.9vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.stageText {
+  line-height: 1.5;
+}
+
+@media (min-width: 640px) {
+  .stageGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .stageGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ---------- 5. Schedule teaser (transactional) ---------- */
+.split {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+.splitText {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.splitText > * {
+  margin: 0;
+}
+
+.tablePanel {
+  min-width: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.tableCaption {
+  padding: 0 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.table thead th {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 2px solid currentColor;
+  font-size: 0.8rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.table tbody :is(td, th) {
+  padding: 0.85rem 0.5rem;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.table tbody tr:last-child :is(td, th) {
+  border-bottom: 0;
+}
+
+.tableTime {
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.tableAct {
+  font-weight: 750;
+}
+
+.tableLength {
+  white-space: nowrap;
+}
+
+.tableLink {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.tableLink:hover {
+  text-decoration-thickness: 3px;
+}
+
+@media (min-width: 900px) {
+  .split {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    align-items: center;
+  }
+}
+
+/* ---------- 6. Visual arts ---------- */
+.arts {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.artsText {
+  display: grid;
+  gap: 1.1rem;
+  justify-items: start;
+}
+
+.artsText > * {
+  margin: 0;
+}
+
+.artsArt {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 36rem);
+  justify-self: center;
+  padding: 0 1.5rem 1.5rem 0;
+}
+
+.artsPaper {
+  position: absolute;
+  inset: 1.5rem 0 0 1.5rem;
+  z-index: -1;
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background-color: var(--max-pink);
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--max-ink) 30%, transparent) 1.3px,
+    transparent 1.7px
+  );
+  background-size: 10px 10px;
+  transform: rotate(2deg);
+}
+
+.artsArt .artsImage {
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  box-shadow: var(--max-shadow-hard);
+  transform: rotate(-1.5deg);
+}
+
+.artsStickerStar,
+.artsStickerSquiggle {
+  position: absolute;
+  z-index: 2;
+}
+
+.artsStickerStar {
+  top: -1.25rem;
+  right: 0;
+}
+
+.artsStickerSquiggle {
+  bottom: 0;
+  left: 0.5rem;
+}
+
+@media (min-width: 900px) {
+  .arts {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .artsArt {
+    justify-self: end;
+  }
+}
+
+/* ---------- 7. Tickets teaser (transactional) ---------- */
+.tickets {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.ticketsIntro {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  justify-items: start;
+}
+
+.ticketsIntro > * {
+  margin: 0;
+}
+
+.ticketsIntro h2 {
+  font-size: clamp(2.2rem, 1.5rem + 2.6vw, 3.75rem);
+}
+
+.ticketsNote {
+  max-width: 36ch;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.passList {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.passRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.3rem 1.5rem;
+  padding-block: 1.1rem;
+  border-top: 2px solid currentColor;
+}
+
+.passRow:last-child {
+  border-bottom: 2px solid currentColor;
+}
+
+.passRow > * {
+  margin: 0;
+}
+
+.passName {
+  font-size: 1.25rem;
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.passTeaser {
+  line-height: 1.5;
+}
+
+.passPrice {
+  font-size: 1.0625rem;
+  font-weight: 750;
+}
+
+@media (min-width: 640px) {
+  .passRow {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "name price"
+      "teaser price";
+    align-items: center;
+  }
+
+  .passName {
+    grid-area: name;
+  }
+
+  .passTeaser {
+    grid-area: teaser;
+  }
+
+  .passPrice {
+    grid-area: price;
+    max-width: 14rem;
+    text-align: right;
+  }
+}
+
+@media (min-width: 900px) {
+  .tickets {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: start;
+  }
+}
+
+/* ---------- 8. Practical info (ink, plain) ---------- */
+.info {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+  border: 3px solid var(--jk-foreground);
+}
+
+.infoTitle {
+  margin: 0;
+  color: var(--max-cream);
+}
+
+.infoList {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0 var(--jk-space-grid);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.infoLink {
+  display: grid;
+  gap: 0.35rem;
+  height: 100%;
+  padding: 1rem 0.25rem 1.15rem;
+  border-top: 3px solid var(--max-cream);
+  color: var(--max-cream);
+  text-decoration: none;
+}
+
+.infoLabel {
+  font-size: 1.25rem;
+  font-weight: 850;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+}
+
+.infoBlurb {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.infoLink:hover,
+.infoLink:focus-visible {
+  color: var(--max-lime);
+}
+
+.infoLink:hover .infoLabel {
+  text-decoration-thickness: 4px;
+}
+
+@media (min-width: 640px) {
+  .infoList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .infoList {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,539 @@
+/*
+ * Contact (/contact).
+ * Campaign register: the short cream header (Anton, pink offset, volume meter,
+ * one arrow sticker) and the ink direct-contact card.
+ * Transactional register: the form, its states and its demo control sit on a
+ * quiet, high-contrast surface with nothing layered over them.
+ */
+
+/* ---------- Header ---------- */
+.header {
+  --max-focus-outer: var(--max-ink);
+  --max-placeholder: #5a2a82;
+  position: relative;
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 3px solid var(--max-ink);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-cream);
+  color: var(--max-ink);
+  box-shadow: 8px 8px 0 var(--max-pink);
+}
+
+.headerCopy {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.headerCopy > * {
+  margin: 0;
+}
+
+.title {
+  color: var(--max-ink);
+  font-size: clamp(3.25rem, 1.8rem + 6vw, 7.5rem);
+  text-shadow: 0.055em 0.055em 0 var(--max-pink);
+}
+
+.lead {
+  color: var(--max-ink);
+}
+
+.notice {
+  width: 100%;
+  max-width: 34rem;
+}
+
+/* Decorative volume meter: ink dots on paper, chunky bars. Still unless motion plays. */
+.meter {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(0.35rem, 1vw, 0.6rem);
+  height: 5.5rem;
+  padding: 0.75rem;
+  border: 3px solid var(--max-ink);
+  border-radius: var(--jk-radius);
+  background-color: var(--max-paper);
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--max-ink) 26%, transparent) 1.2px,
+    transparent 1.6px
+  );
+  background-size: 10px 10px;
+  box-shadow: 4px 4px 0 var(--max-ink);
+}
+
+.meterBar {
+  flex: 1;
+  height: 60%;
+  border: 3px solid var(--max-ink);
+  border-radius: 0.45rem 0.45rem 0.2rem 0.2rem;
+  background: var(--max-pink);
+  transform-origin: 50% 100%;
+}
+
+.meterBar[data-tone="lime"] {
+  background: var(--max-lime);
+}
+
+.meterBar[data-tone="cobalt"] {
+  background: var(--max-cobalt);
+}
+
+.meterBar[data-tone="tangerine"] {
+  background: var(--max-tangerine);
+}
+
+.meterBar:nth-child(1) {
+  height: 42%;
+}
+.meterBar:nth-child(2) {
+  height: 68%;
+}
+.meterBar:nth-child(3) {
+  height: 100%;
+}
+.meterBar:nth-child(4) {
+  height: 78%;
+}
+.meterBar:nth-child(5) {
+  height: 92%;
+}
+.meterBar:nth-child(6) {
+  height: 56%;
+}
+.meterBar:nth-child(7) {
+  height: 34%;
+}
+
+html[data-motion="playing"] .meterBar {
+  animation: level 1.9s ease-in-out infinite alternate;
+}
+
+html[data-motion="playing"] .meterBar:nth-child(2n) {
+  animation-delay: -0.7s;
+}
+
+html[data-motion="playing"] .meterBar:nth-child(3n) {
+  animation-delay: -1.3s;
+}
+
+@keyframes level {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0.62);
+  }
+}
+
+/* The one arrow sticker hangs off the header's bottom edge, pointing at the form. */
+.arrow {
+  position: absolute;
+  right: clamp(1.25rem, 6vw, 5rem);
+  bottom: -2.25rem;
+  z-index: 2;
+}
+
+@media (min-width: 900px) {
+  .header {
+    grid-template-columns: minmax(0, 1fr) minmax(13rem, 19rem);
+    align-items: stretch;
+    column-gap: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .meter {
+    height: auto;
+    min-height: 13rem;
+    padding: 1rem;
+  }
+
+  .arrow {
+    bottom: -2.75rem;
+  }
+}
+
+/* ---------- Layout ---------- */
+.layout {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 3.5rem);
+  margin-top: clamp(3.75rem, 7vw, 5rem);
+}
+
+.formColumn {
+  min-width: 0;
+}
+
+@media (min-width: 960px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 21rem);
+    align-items: start;
+  }
+}
+
+/* ---------- Direct contact ---------- */
+.direct {
+  --max-focus-outer: var(--max-cream);
+  --max-placeholder: #e7c6ff;
+  position: relative;
+  overflow: clip;
+  padding: calc(var(--jk-space-card) + 1.5rem) var(--jk-space-card)
+    var(--jk-space-card);
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-surface-loud);
+  color: var(--max-surface-loud-foreground);
+  box-shadow: 6px 6px 0 var(--max-lime);
+}
+
+/* Halftone tape across the top edge, above the copy rather than behind it. */
+.direct::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1.5rem;
+  border-bottom: 3px solid var(--max-lime);
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--max-cream) 38%, transparent) 1.3px,
+    transparent 1.7px
+  );
+  background-size: 9px 9px;
+  content: "";
+}
+
+.directCopy {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.directLead {
+  color: var(--max-lime);
+  font-family: var(--jk-font-display);
+  font-size: clamp(2.25rem, 1.7rem + 2.2vw, 3.25rem);
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.directLine {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 960px) {
+  .direct {
+    position: sticky;
+    top: calc(var(--max-header-height) + 1.5rem);
+  }
+}
+
+/* ---------- Form surface ---------- */
+.panel {
+  display: grid;
+  gap: 1.75rem;
+  padding: clamp(1.25rem, 3.5vw, 2.5rem);
+  border: 2px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-surface-quiet);
+  color: var(--max-surface-quiet-foreground);
+}
+
+.form {
+  container: contact-form / inline-size;
+}
+
+.pair {
+  display: grid;
+  gap: 1.75rem;
+}
+
+@container contact-form (min-width: 38rem) {
+  .pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.field {
+  display: grid;
+  align-content: start;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.fieldInvalid {
+  padding-left: 1rem;
+  border-left: 4px solid var(--jk-destructive);
+}
+
+.label {
+  display: block;
+  width: fit-content;
+  font-size: 1.0625rem;
+  font-weight: 800;
+  line-height: 1.3;
+  user-select: auto;
+}
+
+.help {
+  margin: 0;
+  color: var(--jk-muted-foreground);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.error {
+  margin: 0;
+  color: var(--jk-destructive);
+  font-size: 0.95rem;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.form .field .control {
+  width: 100%;
+  padding-inline: 0.85rem;
+}
+
+.form .field .control[aria-invalid="true"] {
+  border-color: var(--jk-destructive);
+  border-width: 3px;
+}
+
+.selectWrap {
+  position: relative;
+  display: block;
+}
+
+.selectWrap::after {
+  position: absolute;
+  top: 50%;
+  right: 1.1rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-right: 3px solid currentColor;
+  border-bottom: 3px solid currentColor;
+  content: "";
+  pointer-events: none;
+  transform: translateY(-70%) rotate(45deg);
+}
+
+.form .field .select {
+  appearance: none;
+  padding-right: 3rem;
+  cursor: pointer;
+}
+
+.select option {
+  background: var(--jk-card);
+  color: var(--jk-card-foreground);
+}
+
+.form .field .message {
+  min-height: 10rem;
+  padding-block: 0.75rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+/* ---------- Checkbox ---------- */
+.checkRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.checkbox {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.05rem;
+  border: 2px solid var(--jk-input);
+  border-radius: 0.4rem;
+  background: var(--jk-card);
+  color: var(--max-ink);
+  cursor: pointer;
+}
+
+.checkbox[data-checked] {
+  border-color: var(--jk-input);
+  background: var(--max-pink);
+}
+
+.checkbox svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke-width: 3.5;
+}
+
+.checkLabel {
+  display: block;
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.45;
+  cursor: pointer;
+  user-select: auto;
+}
+
+/* ---------- Error summary ---------- */
+.summary {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.1rem 1.25rem;
+  border: 3px solid var(--jk-destructive);
+  border-left-width: 10px;
+  border-radius: var(--jk-radius);
+  background: var(--jk-card);
+  color: var(--jk-card-foreground);
+}
+
+.summaryTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.summaryList {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.summaryLink {
+  color: var(--jk-destructive);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+.summaryLink:hover {
+  text-decoration-thickness: 4px;
+}
+
+/* ---------- Send states ---------- */
+.sendError {
+  border-radius: var(--jk-radius);
+}
+
+.form .sendError [data-slot="alert"] {
+  border-left: 10px solid var(--jk-destructive);
+  font-weight: 650;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.submit {
+  min-width: 12rem;
+}
+
+@container contact-form (max-width: 26rem) {
+  .submit {
+    width: 100%;
+  }
+}
+
+/* Labelled demo control: kept apart from the real form actions. */
+.demoControls {
+  min-inline-size: 0;
+  margin: 0;
+  padding: 1.25rem 0 0;
+  border: 0;
+  border-top: 2px dashed var(--jk-border);
+}
+
+.demoLegend {
+  float: left;
+  margin: 0.55rem 1rem 0.5rem 0;
+  padding: 0;
+}
+
+.demoToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 1rem 0.35rem 0.55rem;
+  border: 2px solid var(--jk-foreground);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 0.95rem;
+  font-weight: 750;
+  text-align: left;
+  cursor: pointer;
+}
+
+.demoToggle:hover {
+  background: var(--jk-muted);
+}
+
+.demoToggleTrack {
+  position: relative;
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 1.4rem;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+}
+
+.demoToggleTrack::after {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(1.4rem - 8px);
+  height: calc(1.4rem - 8px);
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+}
+
+.demoToggle[aria-pressed="true"] .demoToggleTrack {
+  border-color: var(--max-ink);
+  background: var(--max-pink);
+}
+
+.demoToggle[aria-pressed="true"] .demoToggleTrack::after {
+  left: auto;
+  right: 2px;
+  background: var(--max-ink);
+}
+
+/* ---------- Success ---------- */
+.success {
+  justify-items: start;
+  gap: 1.25rem;
+  border-width: 3px;
+  box-shadow: 8px 8px 0 var(--max-pink);
+}
+
+.successTitle {
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.98;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.successBody {
+  margin: 0;
+}
+
+.successEmail {
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}

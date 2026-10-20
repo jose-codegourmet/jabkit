@@ -5,19 +5,28 @@
 
 .intro h1,
 .intro p,
-.details h2 {
+.sectionHead h2,
+.sectionHead p,
+.faqAside h2,
+.faqAside p {
   margin: 0;
 }
 
 .section {
   display: grid;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
   margin-top: var(--jk-space-section);
   min-width: 0;
 }
 
+.sectionHead {
+  display: grid;
+  gap: 0.6rem;
+}
+
 .plans {
   display: grid;
-  gap: var(--jk-space-grid);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -33,19 +42,162 @@
   min-width: 0;
 }
 
-.plan a {
-  max-width: 100%;
-  height: auto;
-  min-height: 2.75rem;
-  white-space: normal;
-  text-align: center;
+/* On every plan */
+.everyGrid {
+  display: grid;
+  gap: var(--jk-space-grid);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.everyItem {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 1.35rem;
+  border-radius: var(--jk-radius-surface);
+  box-shadow: var(--jk-shadow-raised);
+}
+
+.everyIcon {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 0.25rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, white 55%, transparent);
+  color: var(--jk-clay-ink);
+  box-shadow: var(--jk-shadow-chip);
+}
+
+.everyIcon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.everyTitle {
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.everyBody {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Compare plans */
+.compare {
+  min-width: 0;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.table th,
+.table td {
+  padding: 0.85rem 0.6rem;
+  text-align: left;
+  vertical-align: middle;
+  line-height: 1.45;
+}
+
+.table thead th {
+  padding-block: 0.75rem 1rem;
+}
+
+.table tbody tr + tr > * {
+  border-top: 1px solid
+    color-mix(in oklab, var(--jk-clay-plum) 12%, transparent);
+}
+
+.table tbody th {
+  width: 40%;
+  font-family: var(--jk-font-label);
+  font-weight: 800;
+}
+
+.table td {
+  width: 30%;
+}
+
+.table [data-featured="true"] {
+  background: color-mix(in oklab, var(--jk-clay-lavender) 22%, transparent);
+}
+
+.table thead [data-featured="true"] {
+  border-radius: 1.1rem 1.1rem 0 0;
+}
+
+.table tbody tr:last-child [data-featured="true"] {
+  border-radius: 0 0 1.1rem 1.1rem;
+}
+
+.columnName {
+  font-family: var(--jk-font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.included {
+  display: inline-grid;
+  place-items: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 999px;
+  background: var(--jk-clay-mint);
+  color: var(--jk-clay-ink);
+  box-shadow: var(--jk-shadow-chip);
+}
+
+.included svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.excluded {
+  color: var(--jk-muted-foreground);
+  font-weight: 800;
+}
+
+/* Good to know */
+.faqLayout {
+  display: grid;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.faqAside {
+  display: grid;
+  align-content: start;
+  gap: 0.85rem;
+}
+
+.faqActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: 0.5rem;
 }
 
 .details {
-  display: grid;
-  gap: 1rem;
   min-width: 0;
-  padding: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(0.5rem, 2vw, 1rem) clamp(1rem, 3vw, 1.75rem);
 }
 
 .cta {
@@ -55,6 +207,26 @@
   padding-bottom: 0;
 }
 
+@media (min-width: 640px) {
+  .table {
+    font-size: 1rem;
+    overflow-wrap: normal;
+  }
+
+  .table th,
+  .table td {
+    padding: 1rem clamp(0.75rem, 2vw, 1.25rem);
+  }
+
+  .columnName {
+    font-size: 1.35rem;
+  }
+
+  .everyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (min-width: 768px) {
   .plans {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -62,9 +234,36 @@
   }
 }
 
+@media (min-width: 960px) {
+  .sectionHead {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: end;
+    gap: 2rem;
+  }
+
+  .sectionHead p {
+    justify-self: end;
+    max-width: 42ch;
+  }
+
+  .everyGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .faqLayout {
+    grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.2fr);
+    align-items: start;
+    gap: 3rem;
+  }
+
+  .faqAside {
+    position: sticky;
+    top: 6.5rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .plan,
-  .plan a,
   .details button {
     transition: none;
   }

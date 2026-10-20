@@ -1,1 +1,861 @@
-/* Owned by the Foundation ticket. */
+/*
+ * FULL VOLUME shared styles.
+ *
+ * Page utilities (import this module in pages):
+ *   .section .sectionHead .eyebrow .buttonRow .textLink .textLinkOnDark
+ *   .quietPanel .inkPanel .halftone
+ * Two registers: campaign (stickers, Anton, hard offsets, collage) and
+ * transactional (quietPanel: plain surface, Inter, high contrast, no overlap).
+ */
+
+/* ---------- Page frame ---------- */
+.site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--jk-background);
+  color: var(--jk-foreground);
+}
+
+.skipLink {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1.1rem;
+  border: 3px solid var(--max-ink);
+  border-radius: 999px;
+  background: var(--max-lime);
+  color: var(--max-ink);
+  font-weight: 800;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skipLink:focus {
+  transform: none;
+}
+
+.main {
+  flex: 1;
+  width: min(100%, calc(var(--jk-content-max) + 2 * var(--jk-space-gutter)));
+  margin-inline: auto;
+  padding: clamp(1.25rem, 3vw, 2.5rem) var(--jk-space-gutter)
+    var(--jk-space-section);
+}
+
+.main:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* ---------- Page utilities ---------- */
+.section {
+  margin-top: var(--jk-space-section);
+  scroll-margin-top: calc(var(--max-header-height) + 1rem);
+}
+
+.sectionHead {
+  display: grid;
+  gap: 0.85rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.sectionHead > * {
+  margin: 0;
+}
+
+.eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  margin: 0;
+  padding: 0.3rem 0.75rem;
+  border: 2px solid var(--max-ink);
+  border-radius: 999px;
+  background: var(--max-lime);
+  color: var(--max-ink);
+  font-size: 0.8rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+}
+
+.buttonRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem 1.25rem;
+}
+
+.textLink,
+.textLinkOnDark {
+  color: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+}
+
+.textLink:hover {
+  text-decoration-color: var(--max-pink);
+  text-decoration-thickness: 4px;
+}
+
+.textLinkOnDark:hover,
+.textLinkOnDark:focus-visible {
+  color: var(--max-lime);
+}
+
+.quietPanel {
+  padding: var(--jk-space-card);
+  border: 2px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-surface-quiet);
+  color: var(--max-surface-quiet-foreground);
+}
+
+.inkPanel {
+  --max-focus-outer: var(--max-cream);
+  --max-shadow-color: var(--max-lime);
+  --max-placeholder: #e7c6ff;
+  padding: var(--jk-space-card);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-surface-loud);
+  color: var(--max-surface-loud-foreground);
+}
+
+.halftone {
+  background-image: var(--max-halftone);
+  background-size: 10px 10px;
+}
+
+/* ---------- Placeholder ---------- */
+.placeholder {
+  padding: 0 0.2em;
+  border-bottom: 2px dashed currentColor;
+  border-radius: 0.2em;
+  background: color-mix(in srgb, var(--max-placeholder) 10%, transparent);
+  color: var(--max-placeholder);
+  font-weight: 650;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* ---------- Images ---------- */
+.imageFrame {
+  position: relative;
+  overflow: clip;
+  border-radius: inherit;
+}
+
+.imageRatio {
+  aspect-ratio: var(--max-ratio-mobile, var(--max-ratio));
+}
+
+.imageFill {
+  object-fit: cover;
+}
+
+.imageNatural {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.imageMissing {
+  aspect-ratio: var(--max-ratio-mobile, var(--max-ratio, 4 / 3));
+  background-color: var(--jk-muted);
+  background-image: var(--max-halftone);
+  background-size: 10px 10px;
+}
+
+@media (min-width: 768px) {
+  .imageRatio,
+  .imageMissing {
+    aspect-ratio: var(--max-ratio, 4 / 3);
+  }
+}
+
+/* ---------- Stickers ---------- */
+.sticker {
+  --sticker-fill: var(--max-pink);
+  display: block;
+  flex-shrink: 0;
+  width: var(--max-sticker-size);
+  height: var(--max-sticker-size);
+  overflow: visible;
+  fill: var(--sticker-fill);
+  stroke: var(--max-ink);
+  stroke-width: 4;
+  stroke-linejoin: round;
+  paint-order: stroke;
+  pointer-events: none;
+  filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff)
+    drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
+    drop-shadow(3px 3px 0 var(--max-ink));
+  transform: rotate(var(--max-rotate, 0deg));
+}
+
+.stickerStroke {
+  fill: none;
+  stroke: var(--sticker-fill);
+  stroke-width: 11;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.stickerAccentStroke {
+  fill: none;
+  stroke: var(--max-pink);
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+
+.stickerPink {
+  --sticker-fill: var(--max-pink);
+}
+.stickerLime {
+  --sticker-fill: var(--max-lime);
+}
+.stickerCobalt {
+  --sticker-fill: var(--max-cobalt);
+}
+.stickerTangerine {
+  --sticker-fill: var(--max-tangerine);
+}
+.stickerCream {
+  --sticker-fill: var(--max-cream);
+}
+.stickerInk {
+  --sticker-fill: var(--max-ink);
+}
+
+html[data-motion="playing"] .sticker[data-motion="drift"] {
+  animation: max-drift 6.5s ease-in-out infinite;
+}
+
+html[data-motion="playing"] .sticker[data-motion="spin"] {
+  animation: max-spin 22s linear infinite;
+}
+
+/* ---------- Wordmark ---------- */
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+}
+
+.wordmarkImage {
+  display: block;
+  width: auto;
+  height: var(--max-wordmark-height, 2rem);
+}
+
+.wordmarkType {
+  color: var(--max-ink);
+  font-family: var(--jk-font-display);
+  font-size: var(--max-wordmark-size, 1.65rem);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.wordmarkOnDark {
+  padding: var(--max-wordmark-pad, 0.3rem 0.65rem);
+  border-radius: 0.55rem;
+  background: var(--max-cream);
+  box-shadow: 3px 3px 0 var(--max-pink);
+}
+
+.logoSymbol {
+  display: block;
+  width: 3.25rem;
+  height: auto;
+}
+
+.campaignWordmark {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0 0.25em;
+  font-family: var(--jk-font-display);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.campaignWord {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.campaignLetter {
+  display: inline-block;
+  transform-origin: 50% 100%;
+}
+
+html[data-motion="playing"] .campaignLetter {
+  animation: stretch 2.8s ease-in-out infinite;
+  animation-delay: calc(var(--max-i) * 110ms);
+}
+
+@keyframes stretch {
+  0%,
+  70%,
+  100% {
+    transform: scaleY(1);
+  }
+  35% {
+    transform: scaleY(1.18);
+  }
+}
+
+/* ---------- Motion toggle ---------- */
+.motionToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  padding: 0.35rem 0.9rem;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 0.9rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.motionToggle:hover {
+  color: var(--max-lime);
+}
+
+.motionToggleHero {
+  border-color: var(--max-ink);
+  background: var(--max-cream);
+  color: var(--max-ink);
+  box-shadow: 3px 3px 0 var(--max-ink);
+}
+
+.motionToggleHero:hover {
+  color: var(--max-ink);
+  background: var(--max-lime);
+}
+
+.motionIcon {
+  width: 0.95rem;
+  height: 0.95rem;
+  fill: currentColor;
+}
+
+/* ---------- Demo notice ---------- */
+.demoNotice {
+  --max-placeholder: #5a2a82;
+  background: var(--max-cream);
+  color: var(--max-ink);
+}
+
+.demoNoticeInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.85rem;
+}
+
+.demoNoticeInner p {
+  flex: 1 1 18rem;
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 550;
+  line-height: 1.5;
+}
+
+.demoTag {
+  flex-shrink: 0;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--max-ink);
+  color: var(--max-lime);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.demoNoticeFull {
+  border-block: 3px solid var(--max-ink);
+}
+
+.demoNoticeFull .demoNoticeInner {
+  width: min(100%, calc(var(--jk-content-max) + 2 * var(--jk-space-gutter)));
+  margin-inline: auto;
+  padding: 1rem var(--jk-space-gutter);
+}
+
+.demoNoticeInline {
+  padding: 0.85rem 1rem;
+  border: 2px solid var(--max-ink);
+  border-radius: var(--jk-radius);
+  box-shadow: 3px 3px 0 var(--max-ink);
+}
+
+.demoShort {
+  margin: 0;
+  font-size: 0.875rem;
+  opacity: 0.85;
+}
+
+/* ---------- Badges ---------- */
+.badge {
+  gap: 0.35rem;
+  border-color: var(--max-ink);
+}
+
+.badgeDay1 {
+  background: var(--max-cream);
+  color: var(--max-ink);
+}
+
+.badgeDay2 {
+  background: var(--max-ink);
+  color: var(--max-cream);
+  border-color: var(--max-cream);
+}
+
+.badgeLoud {
+  background: var(--max-pink);
+  color: var(--max-ink);
+}
+
+.badgeGlow {
+  background: var(--max-tangerine);
+  color: var(--max-ink);
+}
+
+.badgeLowEnd {
+  background: var(--max-cobalt);
+  color: var(--max-cream);
+}
+
+.badgeOpenAir {
+  background: var(--max-lime);
+  color: var(--max-ink);
+}
+
+.badgePlan {
+  background: var(--max-ink);
+  color: var(--max-lime);
+  border-color: var(--max-lime);
+}
+
+.badgeDemo {
+  border-style: dashed;
+  border-color: currentColor;
+  background: transparent;
+  color: inherit;
+}
+
+/* ---------- Act card ---------- */
+.actCard {
+  --tilt: 1;
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--jk-card);
+  color: var(--jk-card-foreground);
+  box-shadow: var(--max-shadow-hard);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.actCard[data-tilt="-1"] {
+  --tilt: -1;
+}
+
+.actCard:has(.actLink:focus-visible) {
+  outline: 3px solid var(--max-focus-outer);
+  outline-offset: 4px;
+  box-shadow:
+    0 0 0 4px var(--max-focus-inner),
+    var(--max-shadow-hard);
+}
+
+html[data-motion="playing"] .actCard:is(:hover, :focus-within) {
+  transform: rotate(calc(var(--tilt) * -1.6deg)) translateY(-4px);
+  box-shadow: 9px 9px 0 var(--max-shadow-color);
+}
+
+.actArt {
+  position: relative;
+  overflow: clip;
+  border-bottom: 3px solid var(--jk-foreground);
+  border-radius: calc(var(--jk-radius-surface) - 3px)
+    calc(var(--jk-radius-surface) - 3px) 0 0;
+}
+
+.actPlanBadge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+}
+
+.actBody {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  padding: 1rem 1.1rem 1.15rem;
+}
+
+.actName {
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: clamp(1.7rem, 1.3rem + 1vw, 2.15rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.actGenre {
+  margin: 0;
+  font-weight: 650;
+}
+
+.actBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.actTime {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.actLink {
+  width: fit-content;
+  margin-top: 0.15rem;
+  color: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+}
+
+.actLink::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  content: "";
+}
+
+.actLink:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.actCard:hover .actLink {
+  text-decoration-color: var(--max-pink);
+  text-decoration-thickness: 4px;
+}
+
+.actCardSm {
+  grid-template-columns: minmax(5.5rem, 34%) 1fr;
+  grid-template-rows: auto;
+  box-shadow: 4px 4px 0 var(--max-shadow-color);
+}
+
+.actCardSm .actArt {
+  border-right: 3px solid var(--jk-foreground);
+  border-bottom: 0;
+  border-radius: calc(var(--jk-radius-surface) - 3px) 0 0
+    calc(var(--jk-radius-surface) - 3px);
+}
+
+.actCardSm .actBody {
+  gap: 0.4rem;
+  padding: 0.8rem 0.9rem;
+}
+
+.actCardSm .actName {
+  font-size: 1.35rem;
+}
+
+/* ---------- Plan button ---------- */
+.planButton svg {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.planButtonCompact {
+  min-width: 6.25rem;
+}
+
+/* ---------- State panel ---------- */
+.statePanel {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 2px dashed var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+}
+
+.stateEmpty {
+  justify-items: start;
+  background: var(--max-surface-quiet);
+  color: var(--max-surface-quiet-foreground);
+}
+
+.stateTitle {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.stateMessage {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.stateActions {
+  margin-top: 0.5rem;
+}
+
+.stateAlert {
+  background: var(--max-surface-quiet);
+  color: var(--max-surface-quiet-foreground);
+}
+
+.skeletonCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: var(--jk-space-grid);
+}
+
+.skeletonCard {
+  height: 24rem;
+}
+
+.skeletonRows {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.skeletonRow {
+  height: 3.25rem;
+}
+
+/* ---------- Segmented (tabs / toggle group) ---------- */
+.segmentedWrap {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.segmentedLabel {
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+
+.segmented {
+  display: inline-flex;
+  min-inline-size: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: 2px solid var(--jk-foreground);
+  border-radius: 999px;
+  background: var(--jk-card);
+}
+
+.segment {
+  min-height: 2.5rem;
+  padding: 0.4rem 1rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--jk-card-foreground);
+  font-size: 0.95rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.segment:hover {
+  background: var(--jk-muted);
+}
+
+.segment[data-selected="true"] {
+  background: var(--jk-foreground);
+  color: var(--jk-background);
+}
+
+/* ---------- Campaign band (page headers) ---------- */
+.campaignBand {
+  position: relative;
+  display: grid;
+  overflow: clip;
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-ink);
+}
+
+.campaignArt {
+  position: relative;
+  height: clamp(9rem, 38vw, 14rem);
+}
+
+.campaignArtFrame {
+  height: 100%;
+  border-radius: 0;
+}
+
+.campaignArt .campaignArtFrame {
+  aspect-ratio: auto;
+}
+
+.campaignPanel {
+  --max-focus-outer: var(--max-cream);
+  --max-shadow-color: var(--max-lime);
+  --max-placeholder: #e7c6ff;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1rem;
+  margin: -2.5rem 0.75rem 0.75rem;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border: 3px solid var(--max-cream);
+  border-radius: calc(var(--jk-radius-surface) - 0.25rem);
+  background: var(--max-ink);
+  color: var(--max-cream);
+  box-shadow: 6px 6px 0 var(--max-pink);
+}
+
+.campaignPanel > * {
+  margin: 0;
+}
+
+.campaignTitle {
+  font-size: clamp(3rem, 1.6rem + 6vw, 7rem);
+}
+
+.campaignBody {
+  color: var(--max-cream);
+}
+
+.campaignExtra {
+  display: grid;
+  gap: 1rem;
+}
+
+.campaignStickerA,
+.campaignStickerB {
+  position: absolute;
+  z-index: 2;
+}
+
+.campaignStickerA {
+  top: 0.75rem;
+  right: 1rem;
+}
+
+.campaignStickerB {
+  top: 1.5rem;
+  left: 1rem;
+}
+
+@media (min-width: 900px) {
+  .campaignBand {
+    min-height: clamp(26rem, 38vw, 32rem);
+    align-items: center;
+  }
+
+  .campaignArt {
+    position: absolute;
+    inset: 0;
+    height: auto;
+  }
+
+  .campaignPanel {
+    width: min(44rem, 62%);
+    margin: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .campaignStickerA {
+    top: 2rem;
+    right: 2.5rem;
+  }
+
+  .campaignStickerB {
+    top: auto;
+    right: 12%;
+    bottom: 2rem;
+    left: auto;
+  }
+}
+
+/* ---------- CTA band ---------- */
+.cta {
+  --max-focus-outer: var(--max-cream);
+  --max-shadow-color: var(--max-lime);
+  display: grid;
+  margin-top: var(--jk-space-section);
+  overflow: clip;
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-ink);
+  color: var(--max-cream);
+}
+
+.ctaArt {
+  position: relative;
+  border-bottom: 3px solid var(--max-cream);
+}
+
+.ctaSticker {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+}
+
+.ctaPanel {
+  display: grid;
+  align-content: center;
+  gap: 1.1rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.ctaHeading {
+  margin: 0;
+  color: var(--max-cream);
+}
+
+.ctaBody {
+  max-width: 44ch;
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.55;
+}
+
+@media (min-width: 900px) {
+  .cta {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+
+  .ctaArt {
+    border-right: 3px solid var(--max-cream);
+    border-bottom: 0;
+  }
+
+  .ctaArt > div {
+    height: 100%;
+  }
+}

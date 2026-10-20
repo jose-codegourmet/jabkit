@@ -2,27 +2,16 @@
 
 import { usePathname } from "next/navigation";
 import { Button } from "@/atoms/button";
+import { cn } from "@/lib/cn";
 import { assets } from "../_data/assets";
 import { navLinks, primaryCta } from "../_data/site";
 import styles from "../navigation.module.css";
 import { ClayImage } from "./ClayImage";
 import { MobileMenu } from "./MobileMenu";
 
-function Wordmark() {
-  if (assets["cla-logo-wordmark"]) {
-    return (
-      <ClayImage
-        alt=""
-        className={styles.wordmarkImage}
-        decorative
-        id="cla-logo-wordmark"
-        priority
-      />
-    );
-  }
-
+function TypedWordmark({ className }: { className?: string }) {
   return (
-    <>
+    <span className={className ?? styles.wordmarkTyped}>
       <ClayImage
         alt=""
         className={styles.symbol}
@@ -31,8 +20,32 @@ function Wordmark() {
         priority
       />
       <span className={styles.wordmarkType}>pillo</span>
-    </>
+    </span>
   );
+}
+
+function Wordmark() {
+  if (assets["cla-logo-wordmark"]) {
+    // The wordmark art is plum ink, so dark mode swaps to the typed wordmark.
+    return (
+      <>
+        <span className={cn(styles.wordmarkThemed, "inline-flex dark:hidden")}>
+          <ClayImage
+            alt=""
+            className={styles.wordmarkImage}
+            decorative
+            id="cla-logo-wordmark"
+            priority
+          />
+        </span>
+        <TypedWordmark
+          className={cn(styles.wordmarkThemed, "hidden dark:inline-flex")}
+        />
+      </>
+    );
+  }
+
+  return <TypedWordmark />;
 }
 
 export function SiteHeader() {

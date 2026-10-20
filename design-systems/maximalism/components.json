@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "maximalism",
+  "components": {
+    "navbar": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/shop-top-nav/ShopTopNav.tsx",
+        "packages/ui/src/atoms/navigation-menu/NavigationMenu.tsx"
+      ],
+      "adaptation": "A sticky ink bar with cream text: the fixed readable wordmark linking home, Lineup, Schedule, and Info, and a hot pink Tickets button that stays visible at every width.",
+      "notes": "Restyle the storefront chrome. The current page uses a lime underline plus aria-current=\"page\". Below 900px, a Menu/Close button opens a full-height ink sheet with focus trap, Esc, scroll lock, and focus return. The header wordmark is never expanded or animated."
+    },
+    "button": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/button/Button.tsx"],
+      "adaptation": "Hot pink fill with ink text for ticket actions; cream or ink outline for secondary actions. Labels are plain Inter, never display lettering.",
+      "notes": "Keep at least a 44px target and a visible lime focus ring with an ink offset. No sticker, tilt, or kinetic accent may cover a button or its focus ring."
+    },
+    "hero": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/hero231/Hero231.tsx",
+        "packages/ui/src/marketing/hero230/Hero230.tsx"
+      ],
+      "adaptation": "Hero231 layered portrait cards stacked over the campaign collage, beside a fixed solid cream facts card with dates, venue, and the Explore tickets action.",
+      "notes": "Replace portrait mocks with the approved artist assets. Dates, venue, and CTAs stay readable without animation and are never overlapped. Hero230's moving filmstrip is the alternative named in the brief; any movement must pause with the motion toggle."
+    },
+    "act-card": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/tilted-card/TiltedCard.tsx",
+        "packages/ui/src/marketing/carousel-cards/CarouselCards.tsx",
+        "packages/ui/src/atoms/badge/Badge.tsx"
+      ],
+      "adaptation": "A tilted artist card: 4:5 original artwork, act name as visible H3 text, genre line, Day and Stage badges, start time, and a link to set details.",
+      "notes": "Act names never depend on hover or animation. Tilt only on hover or focus and never when motion is paused. Carousel Prev/Next buttons are labelled \"Previous acts\" and \"Next acts\" and a View as list link provides the stable fallback."
+    },
+    "badge": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/badge/Badge.tsx"],
+      "adaptation": "Day, stage, In your plan, Demo act, and availability labels with a per-stage color plus the stage name as text.",
+      "notes": "Meaning is never color-only. Badges keep ink or cream text at readable contrast on their fill."
+    },
+    "segmented-control": {
+      "category": "atoms",
+      "existingCandidates": [],
+      "adaptation": "Day tabs (Both days, Day 1, Day 2) and the Cards/List view switch as an accessible tablist or toggle group with roving tabindex and arrow keys.",
+      "notes": "No tabs or toggle-group atom exists in packages/ui; compose semantic HTML with Button. Selected state uses weight, an underline or border, and aria-selected or aria-pressed, not fill color alone."
+    },
+    "filters": {
+      "category": "atoms",
+      "existingCandidates": [
+        "packages/ui/src/atoms/combobox/Combobox.tsx",
+        "packages/ui/src/atoms/switch/Switch.tsx"
+      ],
+      "adaptation": "Stage filter labelled \"Stage\", schedule Sort by control, and the Show my plan only switch on quiet cream or ink surfaces with persistent labels.",
+      "notes": "Filter state is kept in the URL. Result counts are announced in a polite live region. No decoration sits over controls or their popups."
+    },
+    "data-table": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/data-table/DataTable.tsx"],
+      "adaptation": "The calm source of truth for set times: Start, Act, Stage, Length, and Plan columns on cream, with sort buttons carrying aria-sort and Add/Added plan buttons carrying aria-pressed.",
+      "notes": "Also used for the Home schedule teaser and the Lineup list view. Tabular numerals for times and lengths. On mobile, render stacked rows (time, act, stage badge, length, button) instead of horizontal scrolling. No decoration over the table."
+    },
+    "calendar": {
+      "category": "atoms",
+      "existingCandidates": [
+        "packages/ui/src/atoms/calendar-03/Calendar03.tsx"
+      ],
+      "adaptation": "Optional desktop-only day picker for the two festival days.",
+      "notes": "The list stays primary. Dates remain client-to-confirm placeholders."
+    },
+    "pricing": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/pricing28/Pricing28.tsx",
+        "packages/ui/src/atoms/radio-group/RadioGroup.tsx"
+      ],
+      "adaptation": "Weekend, Day 1, and Day 2 passes only, as a radio-card group with plain-text inclusions, placeholder prices, and availability as a word.",
+      "notes": "Selected uses a 3px ink border plus a lime check and the word Selected. Sold out is a muted card with a disabled Sold out button and helper text; never a strikethrough price. No countdowns, most-popular badges, only-N-left copy, or availability meters."
+    },
+    "quantity-stepper": {
+      "category": "atoms",
+      "existingCandidates": [
+        "packages/ui/src/atoms/input/Input.tsx",
+        "packages/ui/src/atoms/button/Button.tsx"
+      ],
+      "adaptation": "A number field labelled \"How many tickets?\" with minus and plus buttons labelled \"Fewer tickets\" and \"More tickets\".",
+      "notes": "No number-input atom exists; compose Input and Button. The maximum per order stays a client-to-confirm placeholder and the range error is linked to the field."
+    },
+    "alert": {
+      "category": "atoms",
+      "existingCandidates": [
+        "packages/ui/src/atoms/alert/Alert.tsx",
+        "packages/ui/src/atoms/skeleton/Skeleton.tsx"
+      ],
+      "adaptation": "Loading, empty, error, clash, and checkout state panels with role=\"status\" or role=\"alert\" and a text action such as Try again or Clear filters.",
+      "notes": "Clash notices use the warning (tangerine) treatment, not the error color. Skeletons do not shimmer when motion is paused."
+    },
+    "dialog": {
+      "category": "atoms",
+      "existingCandidates": [
+        "packages/ui/src/atoms/dialog/Dialog.tsx",
+        "packages/ui/src/atoms/alert-dialog/AlertDialog.tsx"
+      ],
+      "adaptation": "The demo checkout end state and the Clear plan confirmation on a solid cream or ink surface.",
+      "notes": "Portals receive the same tokens. Focus moves into the dialog and returns to the trigger. The demo end state states that nothing has been charged."
+    },
+    "breadcrumb": {
+      "category": "atoms",
+      "existingCandidates": ["packages/ui/src/atoms/breadcrumb/Breadcrumb.tsx"],
+      "adaptation": "Lineup / [Act name] on the artist page in Inter.",
+      "notes": "Keep the current item as plain text with aria-current."
+    },
+    "accordion": {
+      "category": "atoms",
+      "existingCandidates": [
+        "packages/ui/src/atoms/accordion/Accordion.tsx",
+        "packages/ui/src/marketing/faq12/Faq12.tsx"
+      ],
+      "adaptation": "Policies, ticket access and refund items, and the FAQ as plain, high-contrast text with every item closed by default.",
+      "notes": "Printable. Placeholder policy text stays visibly marked. No stickers or collage inside practical-info sections."
+    },
+    "form": {
+      "category": "atoms",
+      "existingCandidates": [
+        "packages/ui/src/atoms/input/Input.tsx",
+        "packages/ui/src/atoms/label/Label.tsx",
+        "packages/ui/src/atoms/textarea/Textarea.tsx",
+        "packages/ui/src/atoms/checkbox/Checkbox.tsx"
+      ],
+      "adaptation": "Contact and access-request form with Name, Email, Topic, Message, and an optional on-behalf checkbox; labels always visible and help text under each field.",
+      "notes": "No select atom exists; use a native select for Topic. Errors link with aria-describedby, the error summary receives focus on submit, values are kept after errors, and the form never sends data in the demo."
+    },
+    "footer": {
+      "category": "marketing",
+      "existingCandidates": [
+        "packages/ui/src/marketing/footer-section/FooterSection.tsx",
+        "packages/ui/src/marketing/footer-column/FooterColumn.tsx"
+      ],
+      "adaptation": "An ink footer with the symbol and wordmark, the kicker line, Festival, Visit, Talk to us, and Legal columns, the Pause motion toggle, the placeholder legal line, and the short demo notice.",
+      "notes": "Cream text with lime links on hover and focus. No sponsor row and no social icons unless client-supplied links are confirmed."
+    }
+  }
+}

@@ -1,1 +1,370 @@
-/* Owned by the Foundation ticket. */
+/* Header, mobile menu, and footer: always ink chrome with cream text. */
+
+.header {
+  --max-focus-outer: var(--max-cream);
+  --max-shadow-color: var(--max-lime);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 4px solid var(--max-pink);
+  background: var(--max-ink);
+  color: var(--max-cream);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 2rem);
+  width: min(100%, calc(var(--jk-content-max) + 2 * var(--jk-space-gutter)));
+  min-height: var(--max-header-height);
+  margin-inline: auto;
+  padding: 0.6rem var(--jk-space-gutter);
+}
+
+.home {
+  display: inline-flex;
+  flex-shrink: 0;
+  margin-right: auto;
+  border-radius: 0.6rem;
+  text-decoration: none;
+}
+
+.desktopNav {
+  display: none;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2.25rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  border-bottom: 4px solid transparent;
+  color: var(--max-cream);
+  font-size: 1.0625rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  color: var(--max-lime);
+}
+
+.navLink[aria-current="page"] {
+  border-bottom-color: var(--max-lime);
+}
+
+.actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tickets {
+  flex-shrink: 0;
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.85rem;
+  border: 2px solid var(--max-cream);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--max-cream);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.menuButton:hover {
+  border-color: var(--max-lime);
+  color: var(--max-lime);
+}
+
+.menuIcon {
+  display: inline-grid;
+  gap: 4px;
+  width: 1rem;
+}
+
+.menuIcon > span {
+  display: block;
+  height: 2.5px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 200ms ease;
+}
+
+.menuIcon[data-open="true"] > span:first-child {
+  transform: translateY(3.25px) rotate(45deg);
+}
+
+.menuIcon[data-open="true"] > span:last-child {
+  transform: translateY(-3.25px) rotate(-45deg);
+}
+
+.sheet {
+  --max-focus-outer: var(--max-cream);
+  position: fixed;
+  inset: calc(var(--max-header-height) + 4px) 0 0 0;
+  z-index: 45;
+  display: grid;
+  align-content: start;
+  gap: 2rem;
+  overflow-y: auto;
+  padding: 2rem var(--jk-space-gutter) 3rem;
+  background: var(--max-ink);
+  color: var(--max-cream);
+}
+
+.sheet[hidden] {
+  display: none;
+}
+
+html[data-motion="playing"] .sheet[data-open="true"] {
+  animation: sheet-in 240ms ease-out;
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(-1.5rem);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.sheetNav {
+  position: relative;
+  z-index: 1;
+}
+
+.sheetList {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sheetLink {
+  display: inline-block;
+  padding-block: 0.15rem;
+  border-bottom: 5px solid transparent;
+  color: var(--max-cream);
+  font-family: var(--jk-font-display);
+  font-size: clamp(2.6rem, 12vw, 3.75rem);
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.sheetLink:hover {
+  color: var(--max-lime);
+}
+
+.sheetLink[aria-current="page"] {
+  border-bottom-color: var(--max-lime);
+}
+
+.sheetTagline {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.sheetStickerA,
+.sheetStickerB {
+  position: absolute;
+}
+
+.sheetStickerA {
+  right: 1.25rem;
+  bottom: 1.5rem;
+}
+
+.sheetStickerB {
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .desktopNav {
+    display: block;
+  }
+
+  .menuButton,
+  .sheet {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    --max-wordmark-size: 1.3rem;
+    --max-wordmark-height: 1.5rem;
+    --max-wordmark-pad: 0.25rem 0.5rem;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .bar {
+    gap: 0.4rem;
+    padding-inline: 0.75rem;
+  }
+
+  .menuIcon {
+    display: none;
+  }
+
+  .actions {
+    gap: 0.35rem;
+  }
+
+  .tickets {
+    padding-inline: 0.85rem;
+  }
+
+  .menuButton {
+    padding-inline: 0.65rem;
+  }
+}
+
+/* ---------- Footer ---------- */
+.footerDemo {
+  margin-top: 0;
+}
+
+.footer {
+  --max-focus-outer: var(--max-cream);
+  --max-placeholder: #e7c6ff;
+  border-top: 4px solid var(--max-lime);
+  background: var(--max-ink);
+  color: var(--max-cream);
+}
+
+.footerInner {
+  display: grid;
+  gap: 2.5rem;
+  width: min(100%, calc(var(--jk-content-max) + 2 * var(--jk-space-gutter)));
+  margin-inline: auto;
+  padding: clamp(2.5rem, 6vw, 4.5rem) var(--jk-space-gutter) 2.5rem;
+}
+
+.footerBrand {
+  display: grid;
+  gap: 1rem;
+}
+
+.footerLockup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.footerSymbol {
+  width: 3.5rem;
+}
+
+.footerKicker {
+  max-width: 22ch;
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.footerColumns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 1.5rem;
+}
+
+.footerColumn {
+  min-width: 0;
+}
+
+.footerHeading {
+  margin: 0 0 0.9rem;
+  color: var(--max-lime);
+  font-size: 0.8rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.footerList {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footerLink {
+  color: var(--max-cream);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--max-cream) 40%, transparent);
+  text-underline-offset: 0.2em;
+}
+
+.footerLink:hover,
+.footerLink:focus-visible {
+  color: var(--max-lime);
+  text-decoration-color: currentColor;
+}
+
+.footerNote {
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.footerBase {
+  display: grid;
+  gap: 0.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--max-cream) 25%, transparent);
+}
+
+.footerLegal {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.footerShort {
+  color: var(--max-cream);
+}
+
+@media (min-width: 900px) {
+  .footerInner {
+    grid-template-columns: minmax(16rem, 0.9fr) 2fr;
+    gap: 3rem;
+  }
+
+  .footerColumns {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .footerBase {
+    grid-column: 1 / -1;
+  }
+}

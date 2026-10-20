@@ -1,0 +1,556 @@
+/*
+ * Artist page (/lineup/[slug]).
+ * Campaign register: the stage-coloured act header, artwork collage, stage strip.
+ * Transactional register: the cream facts card and the related-sets fallback.
+ * Stickers sit on image edges only; every kinetic accent is keyed off
+ * html[data-motion="playing"] by the shared Sticker styles.
+ */
+
+/* ---------- Stage tones (fixed brand colours, same in light and dark) ---------- */
+.header,
+.stageStrip {
+  --stage-bg: var(--max-pink);
+  --stage-fg: var(--max-ink);
+  --stage-echo: var(--max-cream);
+}
+
+.header[data-stage="glow-tent"],
+.stageStrip[data-stage="glow-tent"] {
+  --stage-bg: var(--max-tangerine);
+}
+
+.header[data-stage="low-end-room"],
+.stageStrip[data-stage="low-end-room"] {
+  --stage-bg: var(--max-cobalt);
+  --stage-fg: var(--max-cream);
+  --stage-echo: var(--max-ink);
+}
+
+.header[data-stage="open-air-deck"],
+.stageStrip[data-stage="open-air-deck"] {
+  --stage-bg: var(--max-lime);
+}
+
+/* ---------- Breadcrumb ---------- */
+.breadcrumb {
+  margin-bottom: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.breadcrumbList {
+  gap: 0.6rem;
+  color: var(--jk-foreground);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.breadcrumbLink {
+  color: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+}
+
+.breadcrumbLink:hover {
+  color: inherit;
+  text-decoration-color: var(--max-pink);
+  text-decoration-thickness: 4px;
+}
+
+.breadcrumbSeparator {
+  font-weight: 800;
+}
+
+.breadcrumbPage {
+  color: var(--jk-foreground);
+  font-weight: 650;
+}
+
+/* ---------- Act header ---------- */
+.header {
+  --max-focus-outer: var(--max-ink);
+  position: relative;
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  padding: clamp(1.25rem, 4vw, 3.5rem);
+  overflow: clip;
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background-color: var(--stage-bg);
+  color: var(--stage-fg);
+  box-shadow: var(--max-shadow-hard);
+}
+
+.header[data-stage="low-end-room"] {
+  --max-focus-outer: var(--max-cream);
+}
+
+.headerCopy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: center;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  min-width: 0;
+}
+
+.titleBlock {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+}
+
+.title {
+  max-width: 100%;
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: clamp(3rem, 1.4rem + 6.5vw, 7.5rem);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 0.88;
+  text-transform: uppercase;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  text-shadow: 0.045em 0.045em 0 var(--stage-echo);
+}
+
+.genre {
+  margin: 0;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.45rem;
+  background: var(--max-ink);
+  color: var(--max-cream);
+  font-size: var(--jk-text-lead);
+  font-weight: 750;
+  line-height: 1.3;
+  box-shadow: 4px 4px 0 var(--max-cream);
+  transform: rotate(-1.5deg);
+}
+
+/* Solid cream card: fixed ink-on-cream in both themes, no decoration on top. */
+.factsCard {
+  --max-focus-outer: var(--max-ink);
+  --max-shadow-color: var(--max-ink);
+  --max-placeholder: #5a2a82;
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 3px solid var(--max-ink);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-cream);
+  color: var(--max-ink);
+  box-shadow: 8px 8px 0 var(--max-ink);
+}
+
+.demoBadge {
+  justify-self: start;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  border-top: 2px solid var(--max-ink);
+}
+
+.fact {
+  min-width: 0;
+  padding: 0.85rem 1rem 0.85rem 0;
+  border-bottom: 2px solid var(--max-ink);
+}
+
+.fact:nth-child(even) {
+  padding-inline: 1rem 0;
+  border-left: 2px solid var(--max-ink);
+}
+
+.factTerm {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.factValue {
+  margin: 0.2rem 0 0;
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 850;
+  line-height: 1.15;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem 1rem;
+}
+
+.demoNotice {
+  max-width: 44rem;
+}
+
+/* Artwork collage: torn ink backing, halftone scrap, tilted frame, edge stickers. */
+.art {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 30rem);
+  margin-inline: auto;
+  padding: 1.5rem 1.75rem 2.25rem 1rem;
+}
+
+.artBacking {
+  position: absolute;
+  inset: 2.25rem 0.25rem 0.75rem 2.5rem;
+  z-index: -1;
+  background: var(--max-ink);
+  clip-path: polygon(
+    2% 3%,
+    18% 0%,
+    34% 4%,
+    52% 1%,
+    71% 3%,
+    88% 0%,
+    100% 5%,
+    98% 24%,
+    100% 47%,
+    97% 69%,
+    100% 91%,
+    94% 100%,
+    73% 97%,
+    51% 100%,
+    30% 96%,
+    9% 100%,
+    0% 93%,
+    3% 71%,
+    0% 48%,
+    2% 26%
+  );
+  transform: rotate(3deg);
+}
+
+.artBackingHalftone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 62%;
+  height: 46%;
+  border-radius: 0.5rem;
+  background-color: var(--stage-echo);
+  background-image: radial-gradient(
+    circle,
+    var(--stage-bg) 1.6px,
+    transparent 2.1px
+  );
+  background-size: 9px 9px;
+  transform: rotate(-4deg);
+}
+
+.artFrame {
+  position: relative;
+  overflow: clip;
+  border: 3px solid var(--max-ink);
+  border-radius: 1rem;
+  background: var(--max-cream);
+  box-shadow: 8px 8px 0 var(--stage-echo);
+  transform: rotate(-2deg);
+}
+
+.artSticker {
+  position: absolute;
+  z-index: 2;
+}
+
+.artStickerStar {
+  top: -0.25rem;
+  right: -0.25rem;
+}
+
+.artStickerKnob {
+  bottom: 0.25rem;
+  left: -0.5rem;
+}
+
+.artStickerArrow {
+  right: 0.75rem;
+  bottom: 18%;
+}
+
+@media (max-width: 22.5rem) {
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fact,
+  .fact:nth-child(even) {
+    padding-inline: 0;
+    border-left: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .header {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    grid-template-areas: "art copy";
+    align-items: center;
+  }
+
+  .headerCopy {
+    grid-area: copy;
+  }
+
+  .art {
+    grid-area: art;
+    width: 100%;
+    max-width: 34rem;
+  }
+}
+
+/* ---------- About ---------- */
+.about {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.aboutHead {
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem;
+}
+
+.aboutHeading {
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.aboutProse {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 65ch;
+  padding-left: clamp(1rem, 2.5vw, 1.75rem);
+  border-left: 6px solid var(--max-pink);
+}
+
+.aboutBio {
+  max-width: 65ch;
+  margin: 0;
+}
+
+.aboutLinks {
+  margin: 0;
+}
+
+@media (min-width: 900px) {
+  .about {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: start;
+  }
+
+  .aboutProse {
+    margin-top: 0.5rem;
+  }
+}
+
+/* ---------- Same stage, same day ---------- */
+.relatedHeading {
+  overflow-wrap: break-word;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: var(--jk-space-grid);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.relatedEmpty {
+  max-width: 48rem;
+}
+
+.relatedEmptyText {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+/* ---------- Stage strip ---------- */
+.stageStrip {
+  --max-focus-outer: var(--max-cream);
+  --max-shadow-color: var(--max-lime);
+  --max-placeholder: #e7c6ff;
+  display: grid;
+  overflow: clip;
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-surface-loud);
+  color: var(--max-surface-loud-foreground);
+}
+
+.stageArt {
+  position: relative;
+  border-bottom: 3px solid var(--max-cream);
+  background: var(--stage-bg);
+}
+
+.stageSticker {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+}
+
+.stagePanel {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 1rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.stageSwatch {
+  display: block;
+  width: 4.5rem;
+  height: 0.7rem;
+  border: 2px solid var(--max-cream);
+  border-radius: 999px;
+  background: var(--stage-bg);
+}
+
+.stageHeading {
+  margin: 0;
+  color: var(--max-cream);
+}
+
+.stageDescription {
+  max-width: 44ch;
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.55;
+}
+
+.stageLink {
+  font-size: 1.0625rem;
+}
+
+@media (min-width: 900px) {
+  .stageStrip {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+
+  .stageArt {
+    border-right: 3px solid var(--max-cream);
+    border-bottom: 0;
+  }
+
+  .stageArt > div {
+    height: 100%;
+  }
+}
+
+/* ---------- Not found ---------- */
+.missing {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+}
+
+.missingPanel {
+  --max-focus-outer: var(--max-cream);
+  --max-shadow-color: var(--max-lime);
+  --max-placeholder: #e7c6ff;
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 4vw, 2.75rem);
+  border: 3px solid var(--jk-foreground);
+  border-radius: var(--jk-radius-surface);
+  background: var(--max-surface-loud);
+  color: var(--max-surface-loud-foreground);
+  box-shadow: 8px 8px 0 var(--max-pink);
+}
+
+.missingTitle {
+  max-width: 14ch;
+  margin: 0;
+  font-family: var(--jk-font-display);
+  font-size: clamp(2.6rem, 1.4rem + 4.5vw, 5.5rem);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.missingBody {
+  margin: 0;
+  color: var(--max-cream);
+}
+
+.missingList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.missingChip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.35rem 0.9rem;
+  border: 2px solid var(--max-ink);
+  border-radius: 999px;
+  background: var(--max-cream);
+  color: var(--max-ink);
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 3px 3px 0 var(--max-lime);
+}
+
+.missingChip:hover {
+  background: var(--max-lime);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+.missingArt {
+  position: relative;
+  width: min(100%, 28rem);
+  margin-inline: auto;
+  padding: 1.25rem 1.25rem 1.75rem;
+}
+
+.missingArtFrame {
+  overflow: clip;
+  border: 3px solid var(--jk-foreground);
+  border-radius: 1rem;
+  box-shadow: var(--max-shadow-hard);
+  transform: rotate(2deg);
+}
+
+.missingSticker {
+  position: absolute;
+  z-index: 1;
+}
+
+.missingStickerA {
+  top: 0;
+  left: 0;
+}
+
+.missingStickerB {
+  right: 0;
+  bottom: 0.5rem;
+}
+
+@media (min-width: 900px) {
+  .missing {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+}

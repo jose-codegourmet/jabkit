@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0.0",
+  "system": "maximalism",
+  "patterns": [
+    {
+      "id": "festival-home",
+      "purpose": "Make the weekend feel huge while dates, venue, and the ticket path stay instantly readable.",
+      "sections": [
+        "Campaign hero with layered artist cards over the collage and a fixed cream facts card",
+        "Inline demo notice",
+        "Lineup preview carousel with a list fallback",
+        "Four stage cards on a halftone texture",
+        "Read-only schedule teaser table",
+        "Visual arts prose beside the process collage",
+        "Quiet ticket teaser rows with placeholder prices",
+        "Practical info link list on ink",
+        "Shared CTA band"
+      ],
+      "desktop": "The page runs loud to quiet in bands. Collage fills one side of a section or a bounded band and never sits behind reading text, prices, tables, or forms.",
+      "mobile": "Headline, facts, and CTAs come first with the portrait hero collage below; stage cards stack with a 3:2 image above text; expressive art is restacked rather than hidden.",
+      "conversion": "Explore tickets is visible at first paint beside the facts card and repeated in the ticket teaser and CTA band.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "lineup-browse",
+      "purpose": "Explore every act by day and stage; names never depend on hover or animation.",
+      "sections": [
+        "Campaign band header on the poster wall with copy on a solid ink panel and inline demo notice",
+        "Day tabs, Stage filter, Cards/List view switch, and live result count",
+        "Act card grid",
+        "Semantic table list view",
+        "Loading, empty, and error states",
+        "Shared CTA band"
+      ],
+      "desktop": "A consistent card grid holds 4:5 artwork, visible names, badges, and start times; tilt appears only on hover or focus.",
+      "mobile": "Cards stack one or two across; the list view is the stable fallback and may be the default on narrow screens.",
+      "conversion": "Each card links to its set details with the day, stage, and start time already visible.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "artist-detail",
+      "purpose": "Give every set fact in plain text with one tap to add the set to a plan or choose a ticket.",
+      "sections": [
+        "Breadcrumb",
+        "Act header with 4:5 artwork and a solid cream facts card",
+        "About the act",
+        "Other sets on the same stage and day",
+        "Stage strip with emblem and schedule link",
+        "Shared CTA band"
+      ],
+      "desktop": "Artwork on the left, facts and plan button on a cream card on the right.",
+      "mobile": "Facts come first, then artwork, prose, related sets, and the stage strip.",
+      "conversion": "Add to my plan toggles and announces its state; Choose your ticket is the secondary action.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "schedule-planner",
+      "purpose": "A calm, sortable plan-maker that works on mobile and with assistive tech.",
+      "sections": [
+        "Short campaign band on the halftone texture with inline demo notice",
+        "Day tabs, Stage filter, Sort by, and Show my plan only",
+        "Schedule table with sortable headers and Add/Added plan buttons",
+        "Dismissible clash notice",
+        "Your plan summary saved in this browser",
+        "Loading, empty, error, and set-time change states",
+        "Shared CTA band"
+      ],
+      "desktop": "The table is the source of truth on cream with the plan summary as a side panel; an optional calendar day picker sits above.",
+      "mobile": "Stacked rows show the time large, then act, stage badge, length, and plan button; the plan summary becomes a collapsible section.",
+      "conversion": "Saving sets and resolving clashes leads to Choose your ticket in the CTA band.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "ticket-selection",
+      "purpose": "The calmest page on the site: readable pricing, plain inclusions and fees, and no fake scarcity.",
+      "sections": [
+        "Solid cream header with demo ticket notice and one margin sticker",
+        "Weekend, Day 1, and Day 2 pass radio cards with availability as a word",
+        "What is included and not included",
+        "Quantity stepper",
+        "Order summary",
+        "Checkout loading, error, sold-out, and demo end states",
+        "Access, refunds, and transfers accordion"
+      ],
+      "desktop": "Pass cards on the left with a sticky order summary on the right.",
+      "mobile": "A bottom summary that never covers the focused control.",
+      "conversion": "Continue to checkout is disabled until a pass is selected and ends in a demo dialog that states nothing has been charged.",
+      "imageryGuide": "imagery.md"
+    },
+    {
+      "id": "practical-info",
+      "purpose": "Essential visitor instructions, visually quiet and scannable, with lively styling only in the header.",
+      "sections": [
+        "Campaign band header with on-page navigation",
+        "Getting there",
+        "Coded venue map with a list alternative",
+        "Accessibility with an access request action",
+        "Safety and welfare",
+        "Policies accordion",
+        "FAQ",
+        "Contact nudge and shared CTA band"
+      ],
+      "desktop": "A single readable column of cream and ink text sections below the header band; the venue map is inline SVG with labelled regions and zoom buttons.",
+      "mobile": "The same order with the on-page navigation first and the map list alternative one link away.",
+      "conversion": "Make an access request and Contact us lead to the contact form.",
+      "imageryGuide": "imagery.md"
+    }
+  ]
+}

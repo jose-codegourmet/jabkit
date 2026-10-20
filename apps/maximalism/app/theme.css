@@ -1,1 +1,154 @@
-/* Owned by the Foundation ticket. */
+/* FULL VOLUME: loud campaign collage over calm, high-contrast transactional UI. */
+[data-jk-design-system="maximalism"] {
+  --max-ink: #171327;
+  --max-pink: #f647a4;
+  --max-lime: #d5f150;
+  --max-cobalt: #3958e8;
+  --max-tangerine: #ff8d4c;
+  --max-cream: #fff6e4;
+  --max-paper: #fffbf1;
+
+  --jk-background: #fff6e4;
+  --jk-foreground: #171327;
+  --jk-card: #fffbf1;
+  --jk-card-foreground: #171327;
+  --jk-popover: #fffbf1;
+  --jk-popover-foreground: #171327;
+  --jk-primary: #f647a4;
+  --jk-primary-foreground: #171327;
+  --jk-secondary: #3958e8;
+  --jk-secondary-foreground: #fff6e4;
+  --jk-accent: #d5f150;
+  --jk-accent-foreground: #171327;
+  --jk-muted: #f4e7cc;
+  --jk-muted-foreground: #4a4258;
+  --jk-destructive: #b0125f;
+  --jk-destructive-foreground: #fff6e4;
+  --jk-success: #1f6b3a;
+  --jk-success-foreground: #fff6e4;
+  --jk-warning: #ff8d4c;
+  --jk-warning-foreground: #171327;
+  --jk-border: color-mix(in srgb, #171327 22%, #fff6e4);
+  --jk-input: #171327;
+  --jk-ring: #171327;
+  --jk-chart-1: #f647a4;
+  --jk-chart-2: #d5f150;
+  --jk-chart-3: #3958e8;
+  --jk-chart-4: #ff8d4c;
+  --jk-chart-5: #171327;
+  --jk-radius: 0.75rem;
+  --jk-radius-surface: 1.25rem;
+  --jk-border-width: 2px;
+  --jk-control-height: 2.875rem;
+  --jk-shadow-control: 4px 4px 0 var(--max-shadow-color);
+  --jk-space-xs: 0.25rem;
+  --jk-space-sm: 0.5rem;
+  --jk-space-md: 1rem;
+  --jk-space-lg: 2rem;
+  --jk-space-card: clamp(1.25rem, 2.5vw, 2rem);
+  --jk-space-grid: clamp(1rem, 2vw, 1.75rem);
+  --jk-space-gutter: clamp(1rem, 3.5vw, 3.5rem);
+  --jk-space-section: clamp(3.5rem, 8vw, 7.5rem);
+  --jk-content-max: 80rem;
+
+  --jk-font-display: "Anton", "Impact", "Haettenschweiler", sans-serif;
+  --jk-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --jk-font-label: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --jk-role-font-display: var(--jk-font-display);
+  --jk-role-font-heading: var(--jk-font-display);
+  --jk-role-font-body: var(--jk-font-body);
+  --jk-role-font-lead: var(--jk-font-body);
+  --jk-role-font-label: var(--jk-font-label);
+  --jk-role-font-caption: var(--jk-font-body);
+  --jk-text-display: clamp(3.5rem, 1.6rem + 8vw, 9.5rem);
+  --jk-leading-display: 0.88;
+  --jk-weight-display: 400;
+  --jk-tracking-display: 0.005em;
+  --jk-measure-display: 12ch;
+  --jk-text-heading: clamp(2.4rem, 1.4rem + 3.8vw, 5rem);
+  --jk-leading-heading: 0.94;
+  --jk-weight-heading: 400;
+  --jk-tracking-heading: 0.01em;
+  --jk-measure-heading: 18ch;
+  --jk-text-body: 1.0625rem;
+  --jk-leading-body: 1.6;
+  --jk-weight-body: 450;
+  --jk-tracking-body: 0;
+  --jk-measure-body: 65ch;
+  --jk-text-lead: clamp(1.15rem, 1rem + 0.55vw, 1.45rem);
+  --jk-leading-lead: 1.45;
+  --jk-weight-lead: 550;
+  --jk-tracking-lead: -0.01em;
+  --jk-measure-lead: 44ch;
+  --jk-text-label: 0.875rem;
+  --jk-leading-label: 1.25;
+  --jk-weight-label: 750;
+  --jk-tracking-label: 0.04em;
+  --jk-text-caption: 0.875rem;
+  --jk-leading-caption: 1.45;
+  --jk-weight-caption: 500;
+  --jk-tracking-caption: 0;
+
+  /* Campaign register: stickers, hard offsets, thick rules. */
+  --max-shadow-color: #171327;
+  --max-shadow-hard: 6px 6px 0 var(--max-shadow-color);
+  --max-shadow-sticker: 3px 3px 0 var(--max-shadow-color);
+  --max-rule: 2px solid var(--jk-foreground);
+  --max-rule-heavy: 3px solid var(--jk-foreground);
+  --max-surface-quiet: #fffbf1;
+  --max-surface-quiet-foreground: #171327;
+  --max-surface-loud: #171327;
+  --max-surface-loud-foreground: #fff6e4;
+  --max-header-height: 4.5rem;
+  --max-focus-inner: #d5f150;
+  --max-focus-outer: #171327;
+  --max-placeholder: #5a2a82;
+  --max-halftone: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--max-ink) 22%, transparent) 1.2px,
+    transparent 1.6px
+  );
+}
+
+.dark [data-jk-design-system="maximalism"]:not([data-jk-color-mode="light"]),
+[data-jk-design-system="maximalism"].dark,
+[data-jk-design-system="maximalism"][data-jk-color-mode="dark"] {
+  --jk-background: #171327;
+  --jk-foreground: #fff6e4;
+  --jk-card: #221c36;
+  --jk-card-foreground: #fff6e4;
+  --jk-popover: #221c36;
+  --jk-popover-foreground: #fff6e4;
+  --jk-primary: #f647a4;
+  --jk-primary-foreground: #171327;
+  --jk-secondary: #6b85ff;
+  --jk-secondary-foreground: #171327;
+  --jk-accent: #d5f150;
+  --jk-accent-foreground: #171327;
+  --jk-muted: #2b2442;
+  --jk-muted-foreground: #dcd2e6;
+  --jk-destructive: #ff8ec4;
+  --jk-destructive-foreground: #171327;
+  --jk-success: #b5e26a;
+  --jk-success-foreground: #171327;
+  --jk-warning: #ff8d4c;
+  --jk-warning-foreground: #171327;
+  --jk-border: color-mix(in srgb, #fff6e4 26%, #171327);
+  --jk-input: #fff6e4;
+  --jk-ring: #d5f150;
+  --jk-chart-5: #fff6e4;
+
+  --max-shadow-color: #f647a4;
+  --max-surface-quiet: #221c36;
+  --max-surface-quiet-foreground: #fff6e4;
+  --max-surface-loud: #0e0b1a;
+  --max-surface-loud-foreground: #fff6e4;
+  --max-focus-inner: #d5f150;
+  --max-focus-outer: #fff6e4;
+  --max-placeholder: #e7c6ff;
+  --max-halftone: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--max-cream) 16%, transparent) 1.2px,
+    transparent 1.6px
+  );
+}
